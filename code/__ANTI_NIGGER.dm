@@ -1,6 +1,8 @@
-//the ultimate anti nigger
-//thats funny yo
 #define CHECK_IP_TIMES 3
+
+/*
+anti nigger system
+*/
 var/list/client/Player_CID_list = list()
 
 client/proc/check_ip_if_local()
@@ -30,5 +32,3 @@ client/New()
 					del(src)
 				else
 					Player_CID_list[key] = null //don't bring that message up
-
-#undef CHECK_IP_TIMES
