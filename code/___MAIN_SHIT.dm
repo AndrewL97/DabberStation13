@@ -159,11 +159,12 @@ obj
 			return
 
 
-/mob/living/carbon/human/kryfrac
+/mob/living/carbon/human/kryfrac //forever known as the nigger
 	species = "shark"
 	species_icon = 'shark.dmi'
 	species_color = rgb(10,10,10)
 	tail = "shark"
+	hair_icon_state = "hair_kleeia"
 	tail_color = rgb(10,10,10)
 	r_hair = 255
 	g_hair = 20
