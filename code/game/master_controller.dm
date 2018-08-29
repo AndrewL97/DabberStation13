@@ -71,7 +71,7 @@ datum/controller/game_controller
 	setup() //this takes way too long
 		if(master_controller && (master_controller != src))
 			del(src)
-			//There can be only one master.
+			//There can be only one master. SHUT THE FUCK UP FURTARD
 		var/RLstart_time = world.timeofday
 
 		if(!air_master)
