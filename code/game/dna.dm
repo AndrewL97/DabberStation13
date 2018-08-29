@@ -310,9 +310,7 @@
 		M << "\red You twitch."
 	if (isblockon(getblock(M.dna.struc_enzymes, XRAYBLOCK,3),8))
 		if(inj || prob(30))
-			M << "\blue The walls suddenly disappear."
-			if(M.sight || SEE_BLACKNESS)
-				M.sight &= ~SEE_BLACKNESS
+			M << "\blue The walls disappear.. but something is quite wrong."
 			M.see_in_dark = 8
 			M.see_invisible = 2
 			M.mutations |= 4

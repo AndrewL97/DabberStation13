@@ -1,9 +1,8 @@
 /mob/dead/observer
 	var/delayed_world_time = 0
+
 /mob/dead/observer/New(mob/corpse)
 	..()
-
-	src.sight = SEE_BLACKNESS
 	src.see_in_dark = 1
 	src.verbs += /mob/dead/observer/proc/dead_tele
 

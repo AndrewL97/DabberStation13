@@ -47,7 +47,7 @@ atom
 	mymob.client.screen += mymob.space_parallax_list_2
 
 mob
-	sight = (SEE_MOBS|SEE_OBJS|SEE_TURFS|SEE_BLACKNESS|SEE_SELF)
+	sight = (SEE_PIXELS|SEE_SELF)
 
 /obj/hud/proc/instantiate()
 

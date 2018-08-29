@@ -45,8 +45,6 @@
 			client.pixel_z = 0
 			client.pixel_w = 0
 	src.next_move = 1
-	if(sight || SEE_SELF)
-		src.sight |= SEE_SELF
 	src.logged_in = 1
 
 	..()

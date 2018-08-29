@@ -452,15 +452,9 @@
 		handle_regular_hud_updates()
 
 			if (src.stat == 2 || src.mutations & 4)
-				src.sight |= SEE_TURFS
-				src.sight |= SEE_MOBS
-				src.sight |= SEE_OBJS
 				src.see_in_dark = 8
 				src.see_invisible = 2
 			else if (src.stat != 2)
-				src.sight &= ~SEE_TURFS
-				src.sight &= ~SEE_MOBS
-				src.sight &= ~SEE_OBJS
 				src.see_in_dark = 2
 				src.see_invisible = 0
 

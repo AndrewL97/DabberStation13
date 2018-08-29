@@ -582,23 +582,17 @@
 		handle_regular_hud_updates()
 
 			if (src.stat == 2 || src.mutations & 4)
-				src.sight |= SEE_TURFS
-				src.sight |= SEE_MOBS
-				src.sight |= SEE_OBJS
 				src.see_in_dark = 8
 				src.see_invisible = 2
 			else if (istype(src.glasses, /obj/item/clothing/glasses/meson))
-				src.sight |= SEE_TURFS
+
 				src.see_in_dark = 3
 				src.see_invisible = 0
 			else if (istype(src.glasses, /obj/item/clothing/glasses/thermal))
-				src.sight |= SEE_MOBS
+
 				src.see_in_dark = 4
 				src.see_invisible = 2
 			else if (src.stat != 2)
-				src.sight &= ~SEE_TURFS
-				src.sight &= ~SEE_MOBS
-				src.sight &= ~SEE_OBJS
 				if (src.mutantrace == "lizard")
 					src.see_in_dark = 3
 					src.see_invisible = 1

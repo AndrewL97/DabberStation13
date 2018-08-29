@@ -16,7 +16,7 @@ mob/new_player
 	canmove = 0
 
 	anchored = 1	//  don't get pushed around
-
+	sight = (SEE_THRU|SEE_INFRA|SEE_SELF|SEE_MOBS|SEE_OBJS|SEE_TURFS)
 	Login()
 		..()
 
@@ -30,7 +30,6 @@ mob/new_player
 
 		new_player_panel()
 
-		src.sight |= SEE_TURFS
 		loc = locate(230,91,1)
 
 		if(!preferences.savefile_load(src, 0))
