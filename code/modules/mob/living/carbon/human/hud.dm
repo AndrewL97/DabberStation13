@@ -57,6 +57,7 @@ mob
 	if(!mymob.client)
 		return
 	mymob.client.screen = list()
+
 	//world << "<font color='red'>Parallax time."
 
 	//world << "<font color='red'>init"

@@ -83,6 +83,8 @@ mob
 			Move(get_step(mob,dirAA),dirAA)
 		if(j)
 			mob.Jump()
+		if(mouse_position && eye)
+			mob.dir = get_dir(mob.loc,locate((mouse_position.WorldX()/32)+1,(mouse_position.WorldY()/32)+1,mob.z))
 /client/Move(n, direct)
 	if (!( src.mob ))
 		return

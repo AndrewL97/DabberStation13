@@ -12,6 +12,11 @@ client/proc/ProcessClient()
 		Get_Number_Time()
 		if(ticker && ticker.mode && ticker.mode.name == "Dab Station 13 Battle Royale" && !istype(mob,/mob/dead))
 			Get_Players()
+		if(mouse_position)
+			if(!(mouse_position.MouseCatcher in screen))
+				screen += mouse_position.MouseCatcher
+		else
+			mouse_position =  new(src)
 		var/A_S = 0
 		for(var/sound/i in list(amb_sound,amb_sound_ext,amb_sound_area,radio_sound))
 			if(i.status != SOUND_UPDATE)
@@ -145,7 +150,6 @@ client
 
 
 
-
 	var/sound/amb_sound = sound('music/interior.ogg')
 	var/vol = 0 //Ambient sound vol
 	var/sound/amb_sound_ext = sound('music/exterior.ogg')
@@ -155,9 +159,10 @@ client
 	var/vol_area = 0 //Ambient sound vol
 	var/sound/radio_sound = sound('music/silence.ogg')
 	var/old_radio_sound = null
-
 	var/music_pitch = 1
 	var/music_pitch_new = 1
+
+
 /obj/screen23/heightCalc
 	plane = 10
 	icon = 'screen1.dmi'
