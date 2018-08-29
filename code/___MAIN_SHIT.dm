@@ -165,6 +165,7 @@ obj
 	species_color = rgb(10,10,10)
 	tail = "shark"
 	hair_icon_state = "hair_kleeia"
+	h_style = "Kleeia"
 	tail_color = rgb(10,10,10)
 	r_hair = 255
 	g_hair = 20
