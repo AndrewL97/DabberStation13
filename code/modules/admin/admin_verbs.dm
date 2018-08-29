@@ -4,7 +4,6 @@
 //hey bro might wanna calm down there :O
 var/AdministrationTeam = list(
 "Unixian" = "Dab13 Administrator",
-"Borksin" = "Dab13 Administrator",
 "LuigiBoi" = "Dab13 Administrator"
 )
 /client/New()
