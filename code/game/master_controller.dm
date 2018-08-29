@@ -51,7 +51,7 @@ proc/CHECK_TICK_ATMOS() //epic optimizer (ATMOS EDITION)
 proc/CHECK_TICK() //epic optimizer
 	master_Processed += 1
 	actions_per_tick += 1
-	if(actions_per_tick > max_actions)
+	if(actions_per_tick > max_actions - (((max(0,min(world.cpu,100))/100)*(max_actions/2))*CPU_warning))
 		sleep(world.tick_lag)
 		actions_per_tick = 0
 
