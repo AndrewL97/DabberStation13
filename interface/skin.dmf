@@ -1,0 +1,393 @@
+macro "macro"
+	elem 
+		name = "Space"
+		command = "KeyDownM \"jump\""
+	elem 
+		name = "Space+UP"
+		command = "KeyUpM \"jump\""
+	elem 
+		name = "West"
+		command = "KeyDownM \"west\""
+	elem 
+		name = "West+UP"
+		command = "KeyUpM \"west\""
+	elem 
+		name = "North"
+		command = "KeyDownM \"north\""
+	elem 
+		name = "North+UP"
+		command = "KeyUpM \"north\""
+	elem 
+		name = "East"
+		command = "KeyDownM \"east\""
+	elem 
+		name = "East+UP"
+		command = "KeyUpM \"east\""
+	elem 
+		name = "South"
+		command = "KeyDownM \"south\""
+	elem 
+		name = "South+UP"
+		command = "KeyUpM \"south\""
+	elem 
+		name = "1"
+		command = "switch_intent \"help\""
+	elem 
+		name = "2"
+		command = "switch_intent \"hurt\""
+	elem 
+		name = "3"
+		command = "switch_intent \"grab\""
+	elem 
+		name = "4"
+		command = "switch_intent \"disarm\""
+	elem 
+		name = "A"
+		command = "KeyDownM \"west\""
+	elem 
+		name = "A+UP"
+		command = "KeyUpM \"west\""
+	elem 
+		name = "D"
+		command = "KeyDownM \"east\""
+	elem 
+		name = "D+UP"
+		command = "KeyUpM \"east\""
+	elem 
+		name = "E"
+		command = "Pod-Enter/Exit"
+	elem 
+		name = "M"
+		command = "Use_Vehicle_Item"
+	elem 
+		name = "O"
+		command = "OOC"
+	elem 
+		name = "Q"
+		command = "dropitem"
+	elem 
+		name = "S"
+		command = "KeyDownM \"south\""
+	elem 
+		name = "S+UP"
+		command = "KeyUpM \"south\""
+	elem 
+		name = "T"
+		command = "Say"
+	elem 
+		name = "W"
+		command = "KeyDownM \"north\""
+	elem 
+		name = "W+UP"
+		command = "KeyUpM \"north\""
+	elem 
+		name = "X"
+		command = "swaphand"
+	elem 
+		name = "F1"
+		command = "adminhelp"
+	elem 
+		name = "SHIFT"
+		command = "sprint1"
+	elem 
+		name = "SHIFT+UP"
+		command = "sprint2"
+
+
+menu "menu"
+	elem 
+		name = "&Options"
+		command = ""
+		saved-params = "is-checked"
+	elem 
+		name = "&Quick screenshot\tF2"
+		command = ".screenshot auto"
+		category = "&Options"
+		saved-params = "is-checked"
+	elem 
+		name = "&Save screenshot as...\tShift+F2"
+		command = ".screenshot"
+		category = "&Options"
+		saved-params = "is-checked"
+	elem 
+		name = "&Quit"
+		command = ".quit"
+		category = "&Options"
+		saved-params = "is-checked"
+	elem 
+		name = "&Resolution"
+		command = ""
+		saved-params = "is-checked"
+	elem "stretch"
+		name = "&Stretch icons to fit"
+		command = ".winset \"mapwindow.map.icon-size=0\""
+		category = "&Resolution"
+		is-checked = true
+		can-check = true
+		group = "size"
+		saved-params = "is-checked"
+	elem 
+		name = "&Change resolution"
+		command = "Resolution"
+		category = "&Resolution"
+		saved-params = "is-checked"
+	elem "icon128"
+		name = "&128x128 Icon Size"
+		command = ".winset \"mapwindow.map.icon-size=128\""
+		category = "&Resolution"
+		can-check = true
+		group = "size"
+		saved-params = "is-checked"
+	elem "icon96"
+		name = "&96x96 Icon Size"
+		command = ".winset \"mapwindow.map.icon-size=96\""
+		category = "&Resolution"
+		can-check = true
+		group = "size"
+		saved-params = "is-checked"
+	elem "icon64"
+		name = "&64x64 Icon Size"
+		command = ".winset \"mapwindow.map.icon-size=64\""
+		category = "&Resolution"
+		can-check = true
+		group = "size"
+		saved-params = "is-checked"
+	elem "icon32"
+		name = "&32x32 Icon Size"
+		command = ".winset \"mapwindow.map.icon-size=32\""
+		category = "&Resolution"
+		can-check = true
+		group = "size"
+		saved-params = "is-checked"
+	elem 
+		name = "&Help/Administration"
+		command = ""
+		saved-params = "is-checked"
+	elem 
+		name = "&Admin help\tF1"
+		command = "adminhelp"
+		category = "&Help/Administration"
+		saved-params = "is-checked"
+
+
+window "mainwindow"
+	elem "mainwindow"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #000000
+		is-default = true
+		saved-params = "pos;size;is-minimized;is-maximized"
+		statusbar = false
+		icon = 'html_assets\\fortniteclient_win64_shipping_123-8.png'
+		macro = "macro"
+		menu = "menu"
+	elem "mainvsplit"
+		type = CHILD
+		pos = 0,0
+		size = 640x460
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #000000
+		saved-params = "splitter"
+		left = "mapwindow"
+		right = "rpane"
+		is-vert = true
+		splitter = 70
+	elem "input"
+		type = INPUT
+		pos = 0,460
+		size = 601x20
+		anchor1 = 0,100
+		anchor2 = 100,100
+		text-color = #ffffff
+		background-color = #000000
+		is-default = true
+		border = line
+		saved-params = "command"
+	elem "saybutton"
+		type = BUTTON
+		pos = 600,460
+		size = 40x20
+		anchor1 = 100,100
+		anchor2 = none
+		text-color = #ffffff
+		background-color = #000000
+		border = line
+		saved-params = "is-checked"
+		text = "Chat"
+		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
+		button-type = pushbox
+
+window "mapwindow"
+	elem "mapwindow"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #000000
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "map"
+		type = MAP
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		text-color = #000000
+		is-default = true
+		saved-params = "icon-size"
+		on-show = ".winset\"mainwindow.mainvsplit.left=mapwindow\""
+		on-hide = ".winset\"mainwindow.mainvsplit.left=\""
+
+window "outputwindow"
+	elem "outputwindow"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #000000
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "output"
+		type = OUTPUT
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		font-family = "@MS PGothic"
+		font-size = 11
+		text-color = #ffffff
+		background-color = #000000
+		is-default = true
+		saved-params = "max-lines"
+		style = ".system {color:#ff0000;}"
+
+window "rpane"
+	elem "rpane"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #000000
+		saved-params = "pos;size;is-minimized;is-maximized"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "child1"
+		type = CHILD
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #000000
+		is-default = true
+		saved-params = "splitter"
+		left = "infowindow"
+		right = "outputwindow"
+		is-vert = false
+
+window "browserwindow"
+	elem "browserwindow"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #000000
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Browser"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "browser"
+		type = BROWSER
+		pos = 0,0
+		size = 640x480
+		anchor1 = 0,0
+		anchor2 = 100,100
+		background-color = #000000
+		is-default = true
+		saved-params = ""
+		on-show = ".winset\"rpane.infob.is-visible=true?rpane.infob.pos=130,0;rpane.textb.is-visible=true;rpane.browseb.is-visible=true;rpane.browseb.is-checked=true;rpane.rpanewindow.pos=0,30;rpane.rpanewindow.size=0x0;rpane.rpanewindow.left=browserwindow\""
+		on-hide = ".winset\"rpane.browseb.is-visible=false;rpane.infob.is-visible=true?rpane.infob.is-checked=true rpane.infob.pos=65,0 rpane.rpanewindow.left=infowindow:rpane.rpanewindow.left=textwindow rpane.textb.is-visible=false rpane.rpanewindow.pos=0,0 rpane.rpanewindow.size=0x0\""
+
+window "infowindow"
+	elem "infowindow"
+		type = MAIN
+		pos = 281,0
+		size = 640x480
+		anchor1 = none
+		anchor2 = none
+		background-color = #000000
+		saved-params = "pos;size;is-minimized;is-maximized"
+		title = "Info"
+		titlebar = false
+		statusbar = false
+		can-close = false
+		can-minimize = false
+		can-resize = false
+		is-pane = true
+	elem "button2"
+		type = BUTTON
+		pos = 320,8
+		size = 312x24
+		anchor1 = 50,0
+		anchor2 = 100,0
+		text-color = #ffff00
+		background-color = #1e1e1e
+		saved-params = "is-checked"
+		text = "Sandbox Panel"
+		command = "Sandbox-Panel"
+	elem "button1"
+		type = BUTTON
+		pos = 8,8
+		size = 312x24
+		anchor1 = 0,0
+		anchor2 = 50,0
+		text-color = #8080ff
+		background-color = #1e1e1e
+		saved-params = "is-checked"
+		text = "Discord"
+		command = "discord"
+	elem "info"
+		type = INFO
+		pos = 0,40
+		size = 640x440
+		anchor1 = 0,0
+		anchor2 = 100,100
+		text-color = #ffffff
+		background-color = #000000
+		is-default = true
+		drop-zone = false
+		saved-params = ""
+		highlight-color = #ff0080
+		tab-text-color = #ffffff
+		tab-background-color = #000000
+		allow-html = false
+		on-show = ".winset\"rpane.infob.is-visible=true;rpane.browseb.is-visible=true?rpane.infob.pos=130,0:rpane.infob.pos=65,0 rpane.textb.is-visible=true rpane.infob.is-checked=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=infowindow\""
+		on-hide = ".winset\"rpane.infob.is-visible=false;rpane.browseb.is-visible=true?rpane.browseb.is-checked=true rpane.rpanewindow.left=browserwindow:rpane.textb.is-visible=false rpane.rpanewindow.pos=0,0 rpane.rpanewindow.size=0x0 rpane.rpanewindow.left=\""
+		prefix-color = #ff8000
+		suffix-color = #ffff00
+

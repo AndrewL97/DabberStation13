@@ -1,0 +1,12 @@
+
+*.dmb
+*.lk
+*.rsc
+*.dme
+*.int
+*.log
+
+data/
+SavedPlayerResolutions/
+config/webhook.txt
+config/webhookAdmin.txt
