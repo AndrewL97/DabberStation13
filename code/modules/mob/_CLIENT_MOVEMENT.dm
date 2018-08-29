@@ -213,7 +213,7 @@ mob
 			if (src.mob.restrained())
 				for(var/mob/M in range(src.mob, 1))
 					if (((M.pulling == src.mob && (!( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, src.mob.grabbed_by.len)))
-						src << "\blue You're restrained! You can't move!"
+						src << "\blue You're restrained! You can't move!" //gay
 						return 0
 
 			src.moving = 1
