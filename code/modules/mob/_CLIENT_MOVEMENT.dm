@@ -49,6 +49,7 @@ mob
 	var/e = 0
 	var/w = 0
 	var/j = 0
+	var/mousedown
 	verb/KeyDownM(a as text)
 		set instant = 1
 		set hidden = 1
@@ -77,13 +78,19 @@ mob
 				n = 0
 			if("jump")
 				j = 0
+	MouseDown()
+		..()
+		mousedown = 1
+	MouseUp()
+		..()
+		mousedown = 0
 	proc/GetDirection()
 		var/dirAA = (s*SOUTH)+(n*NORTH)+(e*EAST)+(w*WEST)
 		if(dirAA != 0)
 			Move(get_step(mob,dirAA),dirAA)
 		if(j)
 			mob.Jump()
-		if(mouse_position && eye)
+		if(mouse_position && eye && mousedown)
 			mob.dir = get_dir(mob.loc,locate((mouse_position.WorldX()/32)+1,(mouse_position.WorldY()/32)+1,mob.z))
 /client/Move(n, direct)
 	if (!( src.mob ))
