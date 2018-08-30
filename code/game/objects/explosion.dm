@@ -73,8 +73,8 @@ obj
 		icon = 'extra images/explosion.dmi'
 		var/exSize = 0
 		alpha = 200
-		pixel_x = -48
-		pixel_y = -48
+		pixel_x = -496
+		pixel_y = -496
 		New()
 			..()
 			var/matrix/M = matrix()
