@@ -84,8 +84,8 @@ obj
 		proc/DoShit()
 			var/matrix/M = matrix()
 			M.Scale(exSize/25)
-			animate(src, transform = M, alpha = 0, time = exSize*2)
-			spawn(exSize*2)
+			animate(src, transform = M, alpha = 0, time = exSize)
+			spawn(exSize)
 				del src
 		ex_act()
 			return
