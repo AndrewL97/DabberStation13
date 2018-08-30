@@ -84,7 +84,7 @@ obj
 			var/matrix/M = matrix()
 			M.Scale((exSize*3)/5)
 			animate(src, transform = M, alpha = 0, time = exSize*2)
-			spawn(10)
+			spawn(exSize*2)
 				del src
 		ex_act()
 			return
