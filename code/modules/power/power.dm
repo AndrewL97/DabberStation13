@@ -62,13 +62,16 @@
 	powernets = list()
 
 	for(var/obj/cable/PC in world)
+		CHECK_TICK()
 		PC.netnum = 0
 	for(var/obj/machinery/power/M in machines)
+		CHECK_TICK()
 		if(M.netnum >=0)
 			M.netnum = 0
 
 
 	for(var/obj/cable/PC in world)
+		CHECK_TICK()
 		if(!PC.netnum)
 			PC.netnum = ++netcount
 
@@ -78,6 +81,7 @@
 	if(Debug) world.log << "[netcount] powernets found"
 
 	for(var/L = 1 to netcount)
+		CHECK_TICK()
 		var/datum/powernet/PN = new()
 		//PN.tag = "powernet #[L]"
 		powernets += PN
@@ -85,10 +89,12 @@
 
 
 	for(var/obj/cable/C in world)
+		CHECK_TICK()
 		var/datum/powernet/PN = powernets[C.netnum]
 		PN.cables += C
 
 	for(var/obj/machinery/power/M in machines)
+		CHECK_TICK()
 		if(M.netnum<=0)		// APCs have netnum=-1 so they don't count as network nodes directly
 			continue
 

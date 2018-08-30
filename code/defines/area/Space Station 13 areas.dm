@@ -26,7 +26,7 @@
 	layer = 10
 	mouse_opacity = 0
 	var/lightswitch = 1
-
+	var/parallax_type = 0
 	var/eject = null
 
 	var/song = null
@@ -691,6 +691,7 @@
 	name = "Abandoned Ship In The Sky"
 	icon_state = "yellow"
 	forced_lighting = 0
+	parallax_type = 1
 	requires_power = 0
 	CAN_GRIFE = 0
 	song = 'music/sky.ogg'

@@ -3,8 +3,9 @@
 #define ALARM_PLANE 2
 #define CABLE_PLANE 1
 #define TOP_PLANE 7
-#define SHADING_PLANE 8
-#define SPECIAL_PLANE 9
+#define BELOW_SHADING 8
+#define SHADING_PLANE 9
+#define SPECIAL_PLANE 10
 #define AIRLOCK_PLANE 5
 #define MOB_PLANE 4 //ive never used these so its time to put a use to them?
 #define MOB_PLANE_ALT 6
@@ -170,6 +171,10 @@ obj
 	r_hair = 255
 	g_hair = 20
 	b_hair = 147
+	Life()
+		..()
+		if(src.stat != 2)
+			Disco_Fever()
 
 client
 	New()

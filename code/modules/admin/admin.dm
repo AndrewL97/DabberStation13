@@ -2,8 +2,8 @@ var/showadminmessages = 1
 ////////////////////////////////
 /proc/message_admins(var/text, var/admin_ref = 0)
 	if(!showadminmessages) return
-	var/rendered = "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[text]</span></span>"
-	for (var/mob/M in world)
+	var/rendered = "<span class=\"admin\"><span class=\"prefix\">LOG:</span> <span class=\"message\">[text]</span></span>"
+	for (var/mob/M in Mobs)
 		if (M && M.client && M.client.holder && M.client.authenticated)
 			if (admin_ref)
 				M << dd_replaceText(rendered, "%admin_ref%", "\ref[M]")

@@ -1,4 +1,10 @@
-/*Functions :
+/*
+this is _A_MASTER
+the ultimate master controller except it sucks
+
+it's supposed to run in a 2.9 ghz/3.4 ghz core, k?
+
+Functions :
 CHECK_TICK() - Do actions, but give the game a moment if we have done too much. So the CPU doesnt have a stroke, Use before procs, Works really weird. I think it could be done better.
 CHECK_TICK_ATMOS() (only use in atmospherics code) - Do actions, but give the game a moment if we have done way too much.
 */
@@ -10,6 +16,8 @@ var/clients = list()
 var/special_processing = list()
 
 #define LIGHTINGFPS (1/20)*10 //change 30
+#define CPU_WARN 75
+#define CPU_CHECK_MAX 50 //if cpu goes higher than this, some things will do sleep(world.tick_lag)
 
 client
 	New()
@@ -184,7 +192,7 @@ datum/controller/game_controller
 			world << "<font color='red'><b><font size=5>Due to extreme lag (world CPU was %[world.cpu]), server is rebooting to prevent a crash."
 			world.Reboot()
 			return
-		if(world.cpu > 75 && CPU_warning == 0)
+		if(world.cpu > CPU_WARN && CPU_warning == 0)
 			if(world.port != 9999)
 				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server is having high stress, CPU too high (%[world.cpu] > 75), will attempt to throttle actions.**\" } ", "Content-Type: application/json")
 			world << "<font color='red'><b><font size=5>Server CPU is (%[world.cpu] > 75), server might lag."

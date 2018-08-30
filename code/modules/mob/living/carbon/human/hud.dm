@@ -114,16 +114,19 @@ mob
 		var/cando = 0
 		if(T)
 			A = T.loc
-
-		if(istype(A,/area) && A.name == "Abandoned Ship In The Sky")
-			cando = 1
-		if(cando == 1)
-			ParallaxLayer(space_parallax_list_1,1,"layer1alt",0,0)
-			ParallaxLayer(space_parallax_list_2,2,"layer2alt",(world.time),(world.time/2))
-		else
-			ParallaxLayer(space_parallax_list_1,0.25,"layer1",0,0)
-			ParallaxLayer(space_parallax_list_2,0.5,"layer2",0,0)
-	proc/ParallaxLayer(var/list/space_list,var/mult,var/iconA,var/offsetX,var/offsetY)
+		if(istype(A,/area))
+			cando = A.parallax_type
+		switch(cando)
+			if(2)
+				ParallaxLayer(space_parallax_list_1,0.25,0.25,"layer1",0,0,-98)
+				ParallaxLayer(space_parallax_list_2,2,2,"layer2alt",(world.time),(world.time/2),BELOW_SHADING)
+			if(1)
+				ParallaxLayer(space_parallax_list_1,1,0,"layer1alt",(world.time),0,-98)
+				ParallaxLayer(space_parallax_list_2,2,2,"layer2alt",(world.time),(world.time/2),-98)
+			if(0)
+				ParallaxLayer(space_parallax_list_1,0.25,0.25,"layer1",0,0,-98)
+				ParallaxLayer(space_parallax_list_2,0.5,0.5,"layer2",0,0,-98)
+	proc/ParallaxLayer(var/list/space_list,var/mult_1,var/mult_2,var/iconA,var/offsetX,var/offsetY,var/plane_new)
 		if(!client)
 			return //don't do this.
 		if(!client.eye)
@@ -133,9 +136,10 @@ mob
 		var/yoffset = client.pixel_z + client.pixel_y
 		var/xoffset = client.pixel_x + client.pixel_w
 		var/atom/eye = client.eye
-		var/xAxis = round((((eye.x+(xoffset/32))*mult) + offsetX)) % 480
-		var/yAxis = round((((eye.y+(yoffset/32))*mult) + offsetY)) % 480
+		var/xAxis = round((((eye.x+(xoffset/32))*mult_1) + offsetX)) % 480
+		var/yAxis = round((((eye.y+(yoffset/32))*mult_2) + offsetY)) % 480
 		for(var/obj/screen23/spaceParallax/g in space_list)
+			g.plane = plane_new
 			if(g.icon_state != iconA)
 				g.icon_state = iconA
 			if(iconA != "")
