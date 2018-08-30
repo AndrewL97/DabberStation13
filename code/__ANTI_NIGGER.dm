@@ -20,7 +20,7 @@ client/proc/check_ip_if_local()
 client/New()
 	..()
 	spawn(10)
-		if(key != world.host || !check_ip_if_local())
+		if(!(key == world.host || check_ip_if_local()))
 			if(!(key in Player_CID_list))
 				if(Player_CID_list[key] != "Checked")
 					Player_CID_list[key] = computer_id
