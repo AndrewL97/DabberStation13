@@ -73,6 +73,7 @@ obj
 		icon = 'extra images/explosion.dmi'
 		var/exSize = 0
 		alpha = 200
+		plane = BELOW_SHADING
 		pixel_x = -496
 		pixel_y = -496
 		New()
@@ -82,7 +83,7 @@ obj
 			src.transform = M
 		proc/DoShit()
 			var/matrix/M = matrix()
-			M.Scale((exSize*3)/5)
+			M.Scale(exSize/25)
 			animate(src, transform = M, alpha = 0, time = exSize*2)
 			spawn(exSize*2)
 				del src
