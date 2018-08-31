@@ -187,11 +187,11 @@ obj
 	real_name = "Alcaro"
 	desc = "Looks like it hates it's life."
 	gender = FEMALE
-	species_color = rgb(0,255,255)
+	species_color = rgb(0,206,209)
 	tail = "vulptail1"
 	hair_icon_state = "hair_kleeia"
 	h_style = "Kleeia"
-	tail_color = rgb(0,255,0)
+	tail_color = rgb(60,179,113)
 	zangoose = "Yes"
 	r_hair = 255
 	g_hair = 20
