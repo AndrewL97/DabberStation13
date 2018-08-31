@@ -1,4 +1,4 @@
- #define WALL_PLANE 1
+#define WALL_PLANE 1
 #define LIGHT_PLANE 3
 #define ALARM_PLANE 2
 #define CABLE_PLANE 1
@@ -160,11 +160,15 @@ obj
 			return
 
 
-/mob/living/carbon/human/kryfrac //forever known as the nigger
+/mob/living/carbon/human/kryfrac //RIS
 	species = "shark"
 	species_icon = 'shark.dmi'
 	species_color = rgb(10,10,10)
+	gender = FEMALE
 	tail = "shark"
+	desc = "Dances to get rid of her PTSD."
+	name = "Kryfrac"
+	real_name = "Kryfrac"
 	hair_icon_state = "hair_kleeia"
 	h_style = "Kleeia"
 	tail_color = rgb(10,10,10)
@@ -175,6 +179,24 @@ obj
 		..()
 		if(src.stat != 2)
 			Disco_Fever()
+
+/mob/living/carbon/human/alcaro //RS4
+	species = "vulpkanin"
+	species_icon = 'vulpkanin.dmi'
+	name = "Alcaro"
+	real_name = "Alcaro"
+	desc = "Looks like it hates it's life."
+	gender = FEMALE
+	species_color = rgb(0,255,255)
+	tail = "vulptail1"
+	hair_icon_state = "hair_kleeia"
+	h_style = "Kleeia"
+	tail_color = rgb(0,255,0)
+	zangoose = "Yes"
+	r_hair = 255
+	g_hair = 20
+	b_hair = 147
+	dir = NORTH
 
 client
 	New()
