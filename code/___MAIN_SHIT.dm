@@ -163,7 +163,7 @@ obj
 /mob/living/carbon/human/kryfrac //RIS
 	species = "shark"
 	species_icon = 'shark.dmi'
-	species_color = rgb(10,10,10)
+	species_color = rgb(40,40,40)
 	gender = FEMALE
 	tail = "shark"
 	desc = "Dances to get rid of her PTSD."
@@ -171,14 +171,14 @@ obj
 	real_name = "Kryfrac"
 	hair_icon_state = "hair_kleeia"
 	h_style = "Kleeia"
-	tail_color = rgb(10,10,10)
+	tail_color = rgb(40,40,40)
 	r_hair = 255
 	g_hair = 20
 	b_hair = 147
 	Life()
 		..()
 		if(src.stat != 2)
-			Disco_Fever()
+			Disco_Fever() //hey guys remember when this was actually funny LOL
 
 /mob/living/carbon/human/alcaro //RS4
 	species = "vulpkanin"

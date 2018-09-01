@@ -40,8 +40,9 @@ datum/controller/game_controller
 
 mob
 	New()
-		..()
 		Mobs += src
+		..()
+
 obj
 	shadow
 		anchored = 1
