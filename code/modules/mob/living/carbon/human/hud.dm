@@ -122,7 +122,7 @@ mob
 				ParallaxLayer(space_parallax_list_2,2,2,"layer2alt",(world.time),(world.time/2),BELOW_SHADING)
 			if(1)
 				ParallaxLayer(space_parallax_list_1,1,0,"layer1alt",(world.time),0,-98)
-				ParallaxLayer(space_parallax_list_2,2,2,"layer2alt",(world.time),(world.time/2),-98)
+				ParallaxLayer(space_parallax_list_2,2,2,"layer2alt",(world.time/2),(world.time/4),-98)
 			if(0)
 				ParallaxLayer(space_parallax_list_1,0.25,0.25,"layer1",0,0,-98)
 				ParallaxLayer(space_parallax_list_2,0.5,0.5,"layer2",0,0,-98)
