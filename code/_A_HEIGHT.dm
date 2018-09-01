@@ -10,7 +10,10 @@ var/Mobs = list()
 datum/controller/game_controller
 	proc
 		do_gravity_loop() //Gravity loop, Call in a loop that runs at world.fps.
-
+			for(var/mob/M in Mobs)
+				if(!(M in HeightMobs))
+					if(!istype(M,/mob/new_player) && !istype(M,/mob/dead))
+						HeightMobs += M
 			for(var/mob/M in HeightMobs) //Get all mobs which can be processed.
 				M.ProcessDirection() //Process buckled (no delays)
 				M.ProcessHeight() //Process their Y Speed and height.
@@ -26,23 +29,12 @@ datum/controller/game_controller
 		mobs_process() //Process mobs.
 			for(var/mob/M in Mobs) //Get all mobs in world
 				CHECK_TICK()
-
 				M.Life() //Life process
-
-				/*
-
-				Now, we check if the mobs arent in HeightMobs and add them.
-
-				*/
-				if(!(M in HeightMobs))
-					if(!istype(M,/mob/new_player))
-						HeightMobs += M
 
 mob
 	New()
-		Mobs += src
 		..()
-
+		Mobs += src
 obj
 	shadow
 		anchored = 1

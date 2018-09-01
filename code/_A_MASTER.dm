@@ -152,7 +152,6 @@ datum/controller/game_controller
 			i.special_process()
 		particle_process()
 		do_gravity_loop()
-
 		for(var/client/i in clients)
 			i.ProcessClient()
 		spawn(world.tick_lag)
