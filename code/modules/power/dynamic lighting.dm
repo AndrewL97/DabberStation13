@@ -99,9 +99,11 @@ obj/light
 	blend_mode = BLEND_ADD
 	appearance_flags = RESET_COLOR
 
-	icon = 'RGBlights.dmi'
-	icon_state = "light"
+	icon = 'spotlight.dmi'
+	//icon_state = "light"
 	mouse_opacity = 0
+	pixel_x = -32
+	pixel_y = -32
 
 	layer = LIGHT_LAYER + 1
 	Move()
@@ -166,8 +168,8 @@ obj/light
 			if(changed)
 				//world << "<font color='yellow'>received light change"
 				var/matrix/M = matrix()
-				M.Scale((radius*on)*2)
-				animate(src,alpha=round(255*intensity),transform = M,time = 5)
+				M.Scale((abs(radius)*on)*0.75)
+				animate(src,alpha=round(255*intensity)*on,transform = M,time = LIGHTINGFPS)
 				changed = 0
 
 

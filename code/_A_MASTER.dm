@@ -15,7 +15,7 @@ var/listofitems = ""
 var/clients = list()
 var/special_processing = list()
 
-#define LIGHTINGFPS (1/5)*10 //change 30
+#define LIGHTINGFPS (1/20)*10 //change 30
 #define CPU_WARN 75
 #define CPU_CHECK_MAX 50 //if cpu goes higher than this, some things will do sleep(world.tick_lag)
 
