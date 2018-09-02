@@ -117,10 +117,6 @@ obj/light
 		radius = 0
 		intensity = 1
 
-		// the coordinates of the light source - these can be decimal values
-		__x = 0
-		__y = 0
-
 		// whether the light is turned on or off.
 		on = 1
 
@@ -159,24 +155,12 @@ obj/light
 		// the light object, but now there is a single infinite loop in
 		// the global lighting object that calls this proc.
 		loop()
-			anchored = 1
-
 			// if the light is mobile (if it was attached to an atom of
 			// type /atom/movable), check to see if the owner has moved
 			if(mobile)
-
-				// compute the owner's coordinates
-				var/opx = owner.x
-				var/opy = owner.y
-
-				// if pixel movement is enabled we need to take step_x
-				// and step_y into account
-
-
-				// see if the owner's coordinates match
-				if(opx != __x || opy != __y)
-					x = opx
-					y = opy
+				if(x != owner.x || x != owner.y)
+					x = owner.x
+					y = owner.y
 					changed = 1
 
 			if(changed)
