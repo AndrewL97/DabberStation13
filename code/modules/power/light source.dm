@@ -8,9 +8,6 @@ atom
 		sd_lumcount = 0
 	Del()
 		if(light)
-			light.radius(0)
-			light.intensity(0)
-			light.off()
 			del light
 		..()
 	proc
@@ -21,7 +18,6 @@ atom
 			if(!light)
 				//world << "<font color='yellow'>Creating new light."
 				light = new(src, round(amount))
-				light.intensity(0.5)
 			light.radius(round(amount))
 			light.intensity(0.5)
 

@@ -163,12 +163,13 @@ obj/light
 				if(x != owner.x || x != owner.y)
 					x = owner.x
 					y = owner.y
-					changed = 1
+					//changed = 1
 
 			if(changed)
+				//world << "<font color='yellow'>received light change"
 				var/matrix/M = matrix()
-				M.Scale((radius*on)/0.5)
-				animate(src,alpha=255*intensity,transform = M,time = 5)
+				M.Scale((radius*on)*2)
+				animate(src,alpha=round(255*intensity),transform = M,time = 5)
 				changed = 0
 
 
@@ -196,14 +197,14 @@ obj/light
 				on()
 
 		radius(r)
-			if(round(radius) == round(r))
+			if(radius == r)
 				return
 
 			radius = r
 			changed = 1
 
 		intensity(i)
-			if(round(intensity) == round(i))
+			if(intensity == i)
 				return
 
 			intensity = i
