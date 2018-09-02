@@ -36,20 +36,14 @@
 	alpha = 0
 	del_lights()
 
-
 /turf/proc/del_lights()
 	if(lighting_inited)
 		for(var/obj/shading/g in src)
 			del g
 
 /turf/proc/init_light()
-	for(var/obj/shading/g in src)
-		shading = g
-	if(!shading)
-		src.shading = new(src, 'extra images/RGBlights.dmi', 0)
-		shading.init()
-		shading.changed = 1
-		lighting.changed += shading
+	del_lights()
+	src.shading = new(locate(x,y,z))
 
 /turf/simulated
 	name = "station"

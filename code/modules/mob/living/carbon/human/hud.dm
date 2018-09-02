@@ -7,6 +7,7 @@ atom
 
 /mob
 	var/obj/screen23/plane_master_turf2/plane_master_turf = null
+	var/obj/screen23/plane_master_turf3/lighting_master = null
 
 /obj/screen23/plane_master_turf2
 	plane = WALL_PLANE
@@ -15,6 +16,13 @@ atom
 	appearance_flags = PIXEL_SCALE | KEEP_TOGETHER | PLANE_MASTER
 
 
+/obj/screen23/plane_master_turf3
+	plane = SHADING_PLANE
+	screen_loc = "1,1"
+	//filters = filter(type="drop_shadow", x=0, y=0,size=5, offset=2, color=rgb(0,0,0))
+	appearance_flags = PIXEL_SCALE | KEEP_TOGETHER | PLANE_MASTER
+	blend_mode = BLEND_MULTIPLY
+
 /obj/screen
 	plane = 10
 	layer = 1
@@ -22,7 +30,10 @@ atom
 /obj/hud/proc/instantiate_plane_master()
 	if(!mymob.plane_master_turf)
 		mymob.plane_master_turf = new
+	if(!mymob.lighting_master)
+		mymob.lighting_master = new
 	mymob.client.screen += mymob.plane_master_turf
+	mymob.client.screen += mymob.lighting_master
 	return //I Will readd the plane master once I find out what's wrong with the "PLANE_MASTER" behaviour.
 
 /obj/hud/proc/parallax()

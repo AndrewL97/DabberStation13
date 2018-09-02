@@ -15,7 +15,7 @@ var/listofitems = ""
 var/clients = list()
 var/special_processing = list()
 
-#define LIGHTINGFPS (1/20)*10 //change 30
+#define LIGHTINGFPS (1/5)*10 //change 30
 #define CPU_WARN 75
 #define CPU_CHECK_MAX 50 //if cpu goes higher than this, some things will do sleep(world.tick_lag)
 
@@ -35,12 +35,12 @@ obj
 		return
 
 var/actions_per_tick = 0
-var/max_actions = 70 //Max actions per tick, Really fast. of course this can be loewr!!!!!!!!!!!
+var/max_actions = 50 //Max actions per tick, Really fast. of course this can be loewr!!!!!!!!!!!
 
 var/CPU_warning = 0
 
 var/actions_per_tick_atmos = 0
-var/max_actions_atmos = 90 //Max actions per tick (FOR ATMOS), also fast. i definitely think this could be higher if optimized.
+var/max_actions_atmos = 70 //Max actions per tick (FOR ATMOS), also fast. i definitely think this could be higher if optimized.
 
 var/master_Processed = 0
 var/atmos_processed = 0

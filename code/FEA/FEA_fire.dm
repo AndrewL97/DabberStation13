@@ -139,7 +139,6 @@ obj
 
 		Del()
 			loc:active_hotspot = null
-			src.sd_SetLuminosity(0)
 			loc = null
 
 

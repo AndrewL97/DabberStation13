@@ -36,6 +36,7 @@ atom
 	icon_state = "area"
 	forced_lighting = 0
 	CAN_GRIFE = 0
+
 /area/New()
 
 	src.icon = 'alert.dmi'
