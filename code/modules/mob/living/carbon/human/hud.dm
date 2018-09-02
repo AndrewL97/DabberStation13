@@ -120,6 +120,8 @@ mob
 	//var/obj/screen23/plane_master_turf2/plane_master_turf = null
 
 	proc/ParallaxMove()
+		if(!client)
+			return
 		var/turf/T = loc
 		var/area/A = null
 		var/cando = 0

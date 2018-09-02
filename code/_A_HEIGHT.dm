@@ -11,26 +11,24 @@ datum/controller/game_controller
 	proc
 		do_gravity_loop() //Gravity loop, Call in a loop that runs at world.fps.
 			for(var/mob/M in Mobs)
+				M.ParallaxMove()
 				if(!(M in HeightMobs))
-					if(!istype(M,/mob/new_player) && !istype(M,/mob/dead))
+					if(!istype(M,/mob/new_player))
 						HeightMobs += M
-			for(var/mob/M in HeightMobs) //Get all mobs which can be processed.
-				M.ProcessDirection() //Process buckled (no delays)
-				M.ProcessHeight() //Process their Y Speed and height.
-				if(M.client && istype(M,/mob/living/carbon/human))
-					M:handle_regular_status_updates()
-					M:handle_regular_hud_updates()
-				if(M.ANIMATION_RUNNING)
-					M.dir = 2
-					if(M.danc)
-						M.danc.Update_Y()
-
-
-		mobs_process() //Process mobs.
-			for(var/mob/M in Mobs) //Get all mobs in world
+				else
+					M.ProcessDirection() //Process buckled (no delays)
+					M.ProcessHeight() //Process their Y Speed and height.
+					if(M.client && istype(M,/mob/living/carbon/human))
+						M:handle_regular_status_updates()
+						M:handle_regular_hud_updates()
+					if(M.ANIMATION_RUNNING)
+						M.dir = 2
+						if(M.danc)
+							M.danc.Update_Y()
+		mobs_process()
+			for(var/mob/M in Mobs)
 				CHECK_TICK()
-				M.Life() //Life process
-
+				M.Life()
 mob
 	New()
 		..()
@@ -137,7 +135,6 @@ mob
 	proc/ProcessHeight()
 		if(!MyShadow)
 			MyShadow = new
-		ParallaxMove() //Can we handle parallax already
 
 		onFloor = 0
 		var/turf/T = locate(x,y,z) //Gets turf player is stepping on.
