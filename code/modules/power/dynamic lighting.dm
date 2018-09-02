@@ -168,7 +168,7 @@ obj/light
 			if(changed)
 				//world << "<font color='yellow'>received light change"
 				var/matrix/M = matrix()
-				M.Scale((abs(radius)*on)*0.75)
+				M.Scale((max(0,radius)*on)*0.75)
 				animate(src,alpha=round(255*intensity)*on,transform = M,time = LIGHTINGFPS)
 				changed = 0
 
