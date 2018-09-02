@@ -160,6 +160,7 @@ obj/light
 			// if the light is mobile (if it was attached to an atom of
 			// type /atom/movable), check to see if the owner has moved
 			if(mobile && ownerF)
+				glide_size = ownerF:glide_size
 				if(x != ownerF.x || x != ownerF.y)
 					x = ownerF.x
 					y = ownerF.y

@@ -47,20 +47,12 @@
 /obj/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(istype(mover, /obj/beam))
 		return 1
-	if (src.dir == SOUTHWEST || src.dir == SOUTHEAST || src.dir == NORTHWEST || src.dir == NORTHEAST)
-		return 0 //full tile window, you can't move into it!
-	if(get_dir(loc, target) == dir)
-
-		return !density
-	else
-		return 1
+	return 0
 
 /obj/window/CheckExit(atom/movable/O as mob|obj, target as turf)
 	if(istype(O, /obj/beam))
 		return 1
-	if (get_dir(O.loc, target) == src.dir)
-		return 0
-	return 1
+	return 0
 
 /obj/window/meteorhit()
 
