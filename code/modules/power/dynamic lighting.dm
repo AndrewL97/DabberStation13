@@ -94,17 +94,15 @@ obj/shading
 
 obj/light
 
-	ex_act()
-		return 0
-
 	anchored = 1
 	plane = SHADING_PLANE
 	blend_mode = BLEND_ADD
-	appearance_flags= RESET_COLOR
+	appearance_flags = RESET_COLOR
 
 	icon = 'RGBlights.dmi'
 	icon_state = "light"
 	mouse_opacity = 0
+
 	layer = LIGHT_LAYER + 1
 	Move()
 		//Do Nothing
@@ -112,7 +110,7 @@ obj/light
 		return
 	var
 		// the atom the light source is attached to
-		atom/owner
+		atom/ownerF
 
 		// the radius, intensity, and ambient value control how large of
 		// an area the light illuminates and how brightly it's illuminated.
@@ -134,13 +132,13 @@ obj/light
 		if(!a || !istype(a))
 			CRASH("The first argument to the light object's constructor must be the atom that is the light source. Expected atom, received '[a]' instead.")
 
-		owner = a
+		ownerF = a
 
-		if(istype(owner, /atom/movable))
-			loc = owner.loc
+		if(istype(ownerF, /atom/movable))
+			loc = ownerF.loc
 			mobile = 1
 		else
-			loc = owner
+			loc = ownerF
 			mobile = 0
 
 		src.radius = radius
@@ -159,10 +157,10 @@ obj/light
 		loop()
 			// if the light is mobile (if it was attached to an atom of
 			// type /atom/movable), check to see if the owner has moved
-			if(mobile)
-				if(x != owner.x || x != owner.y)
-					x = owner.x
-					y = owner.y
+			if(mobile && ownerF)
+				if(x != ownerF.x || x != ownerF.y)
+					x = ownerF.x
+					y = ownerF.y
 					//changed = 1
 
 			if(changed)

@@ -17,9 +17,10 @@ atom
 			//world << "<font color='yellow'>Received light call to [amount] (FROM [src])"
 			if(!light)
 				//world << "<font color='yellow'>Creating new light."
-				light = new(src, round(amount))
-			light.radius(round(amount))
-			light.intensity(0.5)
+				light = new(src, round(amount),0.5)
+			else
+				light.radius(round(amount))
+				light.intensity(0.5)
 
 		sd_SetOpacity(var/newOpacity)
 			opacity = newOpacity
