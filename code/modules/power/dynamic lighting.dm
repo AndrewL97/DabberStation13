@@ -108,6 +108,8 @@ obj/light
 	layer = LIGHT_LAYER + 1
 	Move()
 		//Do Nothing
+	ex_act()
+		return
 	var
 		// the atom the light source is attached to
 		atom/owner
@@ -172,14 +174,16 @@ obj/light
 
 		// turn the light source on
 		on()
-			if(on) return
+			if(on)
+				return
 
 			on = 1
 			changed = 1
 
 		// turn the light source off
 		off()
-			if(!on) return
+			if(!on)
+				return
 
 			on = 0
 			changed = 1
@@ -192,13 +196,15 @@ obj/light
 				on()
 
 		radius(r)
-			if(radius == r) return
+			if(round(radius) == round(r))
+				return
 
 			radius = r
 			changed = 1
 
 		intensity(i)
-			if(intensity == i) return
+			if(round(intensity) == round(i))
+				return
 
 			intensity = i
 			changed = 1
