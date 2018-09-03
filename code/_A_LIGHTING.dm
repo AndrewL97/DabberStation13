@@ -65,8 +65,7 @@ turf
 			if(!shading)
 				shading = new(locate(x,y,z))
 				shading.icon_state = "noAlpha"
-				shading.blend_mode = BLEND_MULTIPLY
-				layer = LIGHT_LAYER + 2 //lol
+				layer = LIGHT_LAYER
 
 turf
 	var
