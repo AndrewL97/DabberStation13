@@ -197,19 +197,3 @@ obj
 	g_hair = 20
 	b_hair = 147
 	dir = NORTH
-
-client
-	New()
-		..()
-		if(byond_version < 512)
-			spawn(20)
-				src << "<font size=6><font color='red'><b>Your byond is too outdated. Please update to BYOND [world.byond_version] or higher if you want to see the game properly, you won't see effects."
-		src << browse_rsc('html_assets/back.png',"back.png")
-		if(world.port != 9999)
-			call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**[key]** joined (BYOND Version [byond_version].[byond_build]).\" } ", "Content-Type: application/json")
-			world << "<font color='yellow'>[key] joined."
-	Del()
-		if(world.port != 9999)
-			call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**[key]** left.\" } ", "Content-Type: application/json")
-			world << "<font color='yellow'>[key] left."
-		..()
