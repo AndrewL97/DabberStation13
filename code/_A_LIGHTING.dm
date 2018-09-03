@@ -1,3 +1,8 @@
+/*
+lighting based off forum_account's library.
+except i got tired of tile by tile so instead we use a overlay, see RGBlights.dmi and spotlight.dmi
+*/
+
 atom
 	var
 		obj/light/light
@@ -5,77 +10,68 @@ atom
 
 Lighting
 	var
-
-		// the list of z levels that have been initialized
-		list/initialized = list()
-
 		// the list of all light sources
 		list/lights = list()
-
-
 	New()
 		spawn(1)
 			loop()
 
 	proc
 		loop()
-
 			for(var/obj/light/l in lights)
 				l.loop()
 		init()
-
-			var/list/z_levels = list()
-
-			for(var/a in args)
-				if(isnum(a))
-					z_levels += a
-				else if(isicon(a))
-					world << "The lighting's icon should now be set by setting the lighting.icon var directly, not by passing an icon to init()."
-
-			// if you didn't specify any z levels, initialize all z levels
-			if(z_levels.len == 0)
-				for(var/i = 1 to world.maxz)
-					z_levels += i
-
-			var/list/light_objects = list()
-
-			// initialize each z level
-			for(var/z in z_levels)
-
-				// if it's already been initialized, skip it
-				if(z in initialized)
-					continue
-
-				// keep track of which z levels have been initialized
-				initialized += z
-
+			for(var/z in 1 to world.maxz)
 				// to intialize a z level, we create a /shading object
 				// on every turf of that level
 				for(var/x = 1 to world.maxx)
 					for(var/y = 1 to world.maxy)
-
 						var/turf/t = locate(x, y, z)
 						var/area/a = t.loc
 						if(a)
 							if(a.forced_lighting == 1)
 								if(a.sd_lighting == 1)
-
 									// create the shading object for this tile
-									t.shading = new(locate(x,y,z))
-									light_objects += t.shading
+									t.init_light(1)
 								else
 									if(!istype(t,/turf/space))
 										// create the shading object for this tile
-										t.shading = new(locate(x,y,z))
-										light_objects += t.shading
+										t.init_light(1)
+									else
+										t.init_space(1)
+
+/turf/space/New()
+	alpha = 0
+	init_space()
+
+turf
+	proc
+		del_lights()
+			if(lighting_inited)
+				for(var/obj/shading/g in src)
+					del g
+		init_light(force = 0)
+			if(lighting_inited || force)
+				del_lights()
+				create_shading()
+		init_space(force = 0)
+			if(lighting_inited || force)
+				del_lights()
+				create_space()
+		create_shading()
+			if(!shading)
+				shading = new(locate(x,y,z))
+		create_space()
+			if(!shading)
+				shading = new(locate(x,y,z))
+				shading.icon_state = "noAlpha"
+				shading.blend_mode = BLEND_MULTIPLY
+				layer = LIGHT_LAYER + 2 //lol
 
 turf
 	var
 		obj/shading/shading
 
-// shading objects are a type of /obj placed in each
-// turf that are used to graphically show the darkness
-// as a result of dynamic lighting.
 obj/shading
 	mouse_opacity = 0
 	anchored = 1
@@ -83,22 +79,15 @@ obj/shading
 	layer = LIGHT_LAYER
 	icon_state = "black"
 	icon = 'RGBlights.dmi'
-
-	pixel_x = 0
-	pixel_y = 0
-
-	//layer = LIGHT_LAYER
 	ex_act()
 		return 0
 
 
 obj/light
-
 	anchored = 1
 	plane = SHADING_PLANE
 	blend_mode = BLEND_ADD
 	appearance_flags = RESET_COLOR
-
 	icon = 'spotlight.dmi'
 	//icon_state = "light"
 	mouse_opacity = 0
@@ -210,3 +199,76 @@ obj/light
 
 			intensity = i
 			changed = 1
+
+
+/*
+
+light source.dm
+
+*/
+
+area
+	var
+		sd_lighting = 0
+		forced_lighting = 1
+
+atom
+	var
+		sd_lumcount = 0
+	Del()
+		if(light)
+			del light
+		..()
+	proc
+		sd_SetLuminosity(var/amount)
+			if(lighting_inited == 0)
+				return
+			//world << "<font color='yellow'>Received light call to [amount] (FROM [src])"
+			if(!light)
+				//world << "<font color='yellow'>Creating new light."
+				light = new(src, round(amount),0.5)
+			else
+				light.radius(round(amount))
+				light.intensity(0.5)
+
+		sd_SetOpacity(var/newOpacity)
+			opacity = newOpacity
+		sd_NewOpacity(var/newOpacity)
+			opacity = newOpacity
+
+
+/area/racing
+	icon = 'racing.dmi'
+	icon_state = "area"
+	forced_lighting = 0
+	CAN_GRIFE = 0
+
+/area/New()
+
+	src.icon = 'alert.dmi'
+	spawn(1)
+	//world.log << "New: [src] [tag]"
+
+		master = src
+		related = list(src)
+
+		src.icon = 'alert.dmi'
+		src.layer = 10
+
+		if(name == "Space")			// override defaults for space
+			requires_power = 0
+
+		if(!requires_power)
+			power_light = 1
+			power_equip = 1
+			power_environ = 1
+			luminosity = 1
+			if(indestructible_by_explosions == 1)
+				sd_lighting = 1
+			else
+				sd_lighting = 0			// *DAL*
+		else
+			sd_lighting = 1
+			luminosity = 1
+	spawn(15)
+		src.power_change()		// all machines set to current power level, also updates lighting icon

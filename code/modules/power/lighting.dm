@@ -87,6 +87,8 @@
 
 	//luminosity = on * brightness
 	sd_SetLuminosity(on * brightness)		// *DAL*
+	if(light)
+		light.color = "#ffffcc"
 
 	// if the state changed, inc the switching counter
 	if(oldlum != luminosity)

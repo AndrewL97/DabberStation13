@@ -32,19 +32,6 @@
 	heat_capacity = 700000
 	plane = -99
 
-/turf/space/New()
-	alpha = 0
-	del_lights()
-
-/turf/proc/del_lights()
-	if(lighting_inited)
-		for(var/obj/shading/g in src)
-			del g
-
-/turf/proc/init_light()
-	del_lights()
-	src.shading = new(locate(x,y,z))
-
 /turf/simulated
 	name = "station"
 	var/wet = 0
