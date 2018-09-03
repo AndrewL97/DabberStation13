@@ -12,7 +12,7 @@ CHECK_TICK_ATMOS() (only use in atmospherics code) - Do actions, but give the ga
 var/global/datum/controller/game_controller/master_controller //Set in world.New()
 var/lighting_inited = 0
 var/listofitems = ""
-var/clients = list()
+var/list/clients = list()
 var/special_processing = list()
 
 #define LIGHTINGFPS (1/20)*10 //change 30
