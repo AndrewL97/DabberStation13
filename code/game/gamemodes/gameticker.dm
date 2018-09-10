@@ -45,7 +45,7 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 				ticker.votes += 1
 	while(ticker.votes < 1)
 		sleep(1) //gotta wait till atleast 1 person has voted smh
-	if(world.port != 9999)
+	if(!(world.port in PORTS_NOT_ALLOWED))
 		for(var/i in 0 to 10)
 			world << "[10-i] seconds left to vote"
 			sleep(10)
@@ -64,7 +64,7 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 	//Create and announce mode
 	while(clients.len < 1) //Gotta wait till a player joins.
 		sleep(1)
-	if(world.port != 9999)
+	if(!(world.port in PORTS_NOT_ALLOWED))
 		for(var/i in 0 to 6)
 			world << "[6-i] seconds left till vote"
 			sleep(10)

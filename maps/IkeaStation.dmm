@@ -47,7 +47,7 @@
 "aU" = (/obj/deskclutter,/turf/simulated/floor{fully_cover = 1; icon_state = "table2"; TurfHeight = 4},/area/hallway/primary/port)
 "aV" = (/obj/stool/chair{dir = 4},/turf/simulated/floor{fully_cover = 1; icon_state = "floorraised2"; TurfHeight = 16},/area/hallway/primary/starboard)
 "aW" = (/turf/simulated/floor{fully_cover = 1; icon_state = "table2"; TurfHeight = 4},/area/hallway/primary/central)
-"aX" = (/obj/structure/forest/deco1,/turf/unsimulated/grass,/area/hallway/primary/central)
+"aX" = (/obj/structure/forest/deco1,/obj/structure/forest/Tree1,/turf/unsimulated/grass,/area/hallway/primary/central)
 "aY" = (/turf/simulated/floor{icon_state = "table"; TurfHeight = 4},/area/hallway/primary/central)
 "aZ" = (/obj/deskclutter,/turf/simulated/floor{fully_cover = 1; icon_state = "table2"; TurfHeight = 4},/area/hallway/primary/starboard)
 "ba" = (/turf/simulated/floor{icon_state = "table"; TurfHeight = 4},/area/start)

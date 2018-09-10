@@ -186,13 +186,13 @@ datum/controller/game_controller
 			return 0
 
 		if(world.cpu > 500)
-			if(world.port != 9999)
+			if(!(world.port in PORTS_NOT_ALLOWED))
 				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server has rebooted due to high processor usage, (%[world.cpu])**\" } ", "Content-Type: application/json")
 			world << "<font color='red'><b><font size=5>Due to extreme lag (world CPU was %[world.cpu]), server is rebooting to prevent a crash."
 			world.Reboot()
 			return
 		if(world.cpu > CPU_WARN && CPU_warning == 0)
-			if(world.port != 9999)
+			if(!(world.port in PORTS_NOT_ALLOWED))
 				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server is having high stress, CPU too high (%[world.cpu] > 75), will attempt to throttle actions.**\" } ", "Content-Type: application/json")
 			world << "<font color='red'><b><font size=5>Server CPU is (%[world.cpu] > 75), server might lag."
 			CPU_warning = 1
