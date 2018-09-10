@@ -56,7 +56,7 @@
 	set category = "Special Verbs"
 	set name = "Subtle Message"
 
-	if (!src.authenticated || !src.holder)
+	if (!src.holder)
 		src << "Only administrators may use this command."
 		return
 
@@ -286,7 +286,7 @@
 	set category = "Debug"
 	set name = "Delete"
 
-	if (!src.authenticated || !src.holder)
+	if (!src.holder)
 		src << "Only administrators may use this command."
 		return
 
@@ -299,7 +299,7 @@
 	set category = "Debug"
 	set name = "List OOC"
 
-	if (!src.authenticated || !src.holder)
+	if (!src.holder)
 		src << "Only administrators may use this command."
 		return
 
@@ -310,7 +310,7 @@
 	set category = "Special Verbs"
 	set name = "Gib"
 
-	if (!src.authenticated || !src.holder)
+	if (!src.holder)
 		src << "Only administrators may use this command."
 		return
 

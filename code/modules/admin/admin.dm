@@ -4,7 +4,7 @@ var/showadminmessages = 1
 	if(!showadminmessages) return
 	var/rendered = "<span class=\"admin\"><span class=\"prefix\">LOG:</span> <span class=\"message\">[text]</span></span>"
 	for (var/mob/M in Mobs)
-		if (M && M.client && M.client.holder && M.client.authenticated)
+		if (M && M.client && M.client.holder)
 			if (admin_ref)
 				M << dd_replaceText(rendered, "%admin_ref%", "\ref[M]")
 			else
@@ -510,10 +510,7 @@ var/showadminmessages = 1
 		var/dat = "<html><head><title>Options for [M.key]</title></head>"
 		var/foo = "\[ "
 		if (ismob(M) && M.client)
-			if(!M.client.authenticated && !M.client.authenticating)
-				foo += text("<A HREF='?src=\ref[src];adminauth=\ref[M]'>Authorize</A> | ")
-			else
-				foo += text("<B>Authorized</B> | ")
+			foo += text("<B>Authorized</B> | ")
 			foo += text("<A HREF='?src=\ref[src];prom_demot=\ref[M.client]'>Promote/Demote</A> | ")
 			if(!istype(M, /mob/new_player))
 				if(!istype(M, /mob/living/carbon/monkey))
@@ -1186,7 +1183,7 @@ var/showadminmessages = 1
 				dat += "<td>Monkey</td>"
 			if(istype(M, /mob/living/carbon/alien))
 				dat += "<td>Alien</td>"
-			dat += {"<td>[(M.client ? "[(M.client.Dabber ? "<font color=red>" : "<font>")][M.client]</font>" : "No client")]</td>
+			dat += {"<td>[(M.client ? "[(M.client ? "<font color=red>" : "<font>")][M.client]</font>" : "No client")]</td>
 			<td align=center><A HREF='?src=\ref[src];adminplayeropts=\ref[M]'>X</A></td>
 			<td align=center><A href='?src=\ref[usr];priv_msg=\ref[M]'>PM</A></td>
 			<td align=center><A HREF='?src=\ref[src];traitor=\ref[M]'>[checktraitor(M) ? "<font color=red>" : "<font>"]Traitor?</font></A></td></tr>
@@ -1383,14 +1380,14 @@ var/showadminmessages = 1
 
 	for(var/mob/CM in world)
 		if(CM.client)
-			if(config.vote_no_default || (config.vote_no_dead && CM.stat == 2) || !CM.client.authenticated)
+			if(config.vote_no_default || (config.vote_no_dead && CM.stat == 2))
 				CM.client.vote = "none"
 			else
 				CM.client.vote = "default"
 
 	for(var/mob/CM in world)
 		if(CM.client)
-			if(config.vote_no_default || (config.vote_no_dead && CM.stat == 2) || !CM.client.authenticated)
+			if(config.vote_no_default || (config.vote_no_dead && CM.stat == 2))
 				CM.client.vote = "none"
 			else
 				CM.client.vote = "default"
@@ -1785,7 +1782,7 @@ var/showadminmessages = 1
 	set category = "Music (Admin)"
 	set name = "Play Music"
 
-	if (!src.authenticated || !src.holder)
+	if (!src.holder)
 		src << "Only administrators may use this command."
 		return
 	world << sound(g,channel=MUSIC_CHANNEL)
@@ -1794,7 +1791,7 @@ var/showadminmessages = 1
 	set category = "Music (Admin)"
 	set name = "Stop All Playing Sounds"
 
-	if (!src.authenticated || !src.holder)
+	if (!src.holder)
 		src << "Only administrators may use this command."
 		return
 	current_radio_song = null
@@ -1805,7 +1802,7 @@ var/sandbox = 1
 	set category = "Sandbox"
 	set name = "Toggle Sandbox"
 
-	if (!src.authenticated || !src.holder)
+	if (!src.holder)
 		src << "Only administrators may use this command."
 		return
 

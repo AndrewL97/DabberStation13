@@ -9,9 +9,6 @@
 			src << "\blue You are no longer listening to messages on the OOC channel."
 
 /mob/verb/ooc(msg as text)
-	if (!src.client.authenticated)
-		src << "You are not authorized to communicate over these channels."
-		return
 	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
 	if(!msg)
 		return
@@ -33,29 +30,3 @@
 		if (C.listen_ooc)
 			C << "<font color='#D9FFE3'>OOC: <b>[src.key]</b>: [msg]"
 	call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"OOC: **[src.key]**: [msg]\" } ", "Content-Type: application/json")
-
-/mob/verb/Dabbersay(msg as text)
-	if (!src.client.authenticated || !src.client.Dabber)
-		src << "You are not authorized to communicate over these channels."
-		return
-	msg = copytext(sanitize(msg), 1, MAX_MESSAGE_LEN)
-	if (!msg)
-		return
-	else if (!src.client.listen_ooc)
-		return
-	else if (!Dabbersay_allowed && !src.client.holder)
-		return
-	else if (src.muted)
-		return
-
-	log_ooc("Dabber : [key_name(src)] : [msg]")
-
-	for (var/client/C)
-		if (C.Dabber)
-			if(src.client.holder && (!src.client.stealth || C.holder))
-				if (src.client.holder.rank == "Goat Fart")
-					C << "<span class=\"gfartDabbersay\"><span class=\"prefix\">DabberSAY:</span> <span class=\"name\">[src.key][src.client.stealth ? "/([src.client.fakekey])" : ""]:</span> <span class=\"message\">[msg]</span></span>"
-				else
-					C << "<span class=\"adminDabbersay\"><span class=\"prefix\">DabberSAY:</span> <span class=\"name\">[src.key][src.client.stealth ? "/([src.client.fakekey])" : ""]:</span> <span class=\"message\">[msg]</span></span>"
-			else if(C.listen_ooc)
-				C << "<span class=\"Dabbersay\"><span class=\"prefix\">DabberSAY:</span> <span class=\"name\">[src.client.stealth ? src.client.fakekey : src.key]:</span> <span class=\"message\">[msg]</span></span>"
