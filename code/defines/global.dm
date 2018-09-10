@@ -107,10 +107,6 @@ var
 
 	shuttlecoming = 0
 
-	join_motd = null
-	auth_motd = null
-	rules = null
-	no_auth_motd = null
 	forceblob = 0
 
 	//airlockWireColorToIndex takes a number representing the wire color, e.g. the orange wire is always 1, the dark red wire is always 2, etc. It returns the index for whatever that wire does.
@@ -124,7 +120,7 @@ var
 	list/APCIndexToFlag
 	list/APCIndexToWireColor
 	list/APCWireColorToIndex
-
+	join_motd = null
 	const/SPEED_OF_LIGHT = 3e8 //not exact but hey!
 	const/SPEED_OF_LIGHT_SQ = 9e+16
 	const/FIRE_DAMAGE_MODIFIER = 0.0215 //Higher values result in more external fire damage to the skin (default 0.0215)
