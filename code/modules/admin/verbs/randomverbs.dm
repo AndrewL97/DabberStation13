@@ -1,7 +1,7 @@
 /client/proc/cmd_admin_drop_everything(mob/M as mob in world)
 	set category = null
 	set name = "Drop Everything"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	for(var/obj/item/W in M)
@@ -21,7 +21,7 @@
 /client/proc/cmd_admin_prison(mob/M as mob in world)
 	set category = "Special Verbs"
 	set name = "Prison"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	if (ismob(M))
@@ -73,7 +73,7 @@
 /client/proc/cmd_admin_pm(mob/M as mob in world)
 	set category = "Special Verbs"
 	set name = "Admin PM"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	if(M)
@@ -106,7 +106,7 @@
 /client/proc/cmd_admin_godmode(mob/M as mob in world)
 	set category = "Special Verbs"
 	set name = "Toggle Godmode"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	if (M.nodamage == 1)
@@ -122,7 +122,7 @@
 /client/proc/cmd_admin_mute(mob/M as mob in world)
 	set category = null
 	set name = "Toggle Mute"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	if (M.client && M.client.holder && (M.client.holder.level >= src.holder.level))
@@ -139,7 +139,7 @@
 /client/proc/cmd_admin_add_random_ai_law()
 	set category = "Debug"
 	set name = "Add Random AI Law"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 
@@ -198,7 +198,7 @@
 /client/proc/cmd_admin_add_freeform_ai_law()
 	set category = "Debug"
 	set name = "Add AI law"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	var/input = input(usr, "Please enter anything you want the AI to do. Anything. Serious.", "What?", "")
@@ -221,7 +221,7 @@
 	set category = "Special Verbs"
 	set name = "Rejuvenate"
     //    All admins should be authenticated, but... what if?
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	if(!src.mob)
@@ -263,7 +263,7 @@
 /client/proc/cmd_admin_create_centcom_report()
 	set category = "Special Verbs"
 	set name = "Create Command Report"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	var/input = input(usr, "Please enter anything you want. Anything. Serious.", "What?", "")
@@ -336,7 +336,7 @@
 /client/proc/cmd_manual_ban()
 	set name = "Manual Ban"
 	set category = "Special Verbs"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	var/mob/M = null
@@ -407,7 +407,7 @@
 /client/proc/cmd_admin_remove_plasma()
 	set category = "Debug"
 	set name = "Stabilize Atmos."
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 // DEFERRED

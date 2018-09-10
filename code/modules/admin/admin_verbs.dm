@@ -412,11 +412,6 @@ var/AdministrationTeam = list(
 		if(src.holder.level > 1)
 			src.verbs += /client/proc/stealth
 
-		if(( src.holder.state == 2 ) || ( src.holder.level > 3 ))
-			src.verbs += /client/proc/secrets
-			src.verbs += /client/proc/Dabbers
-			src.verbs += /client/proc/beta_testers
-
 /client/proc/clear_admin_verbs()
 	src.deadchat = 0
 	src.verbs -= /obj/admins/proc/toggleDabbersay
@@ -474,8 +469,7 @@ var/AdministrationTeam = list(
 	src.verbs -= /client/proc/unban_panel
 	src.verbs -= /client/proc/secrets
 	src.verbs -= /client/proc/voting
-	src.verbs -= /client/proc/Dabbers
-	src.verbs -= /client/proc/beta_testers
+
 	src.verbs -= /client/proc/admin_play
 	src.verbs -= /client/proc/admin_observe
 	src.verbs -= /client/proc/stealth
@@ -574,7 +568,7 @@ var/AdministrationTeam = list(
 /client/proc/funbutton()
 	set category = "Debug"
 	set name = "Boom Boom Boom Shake The Room"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 
@@ -588,7 +582,7 @@ var/AdministrationTeam = list(
 /client/proc/stealth()
 	set category = "Admin"
 	set name = "Stealth Mode"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	src.stealth = !src.stealth
@@ -611,7 +605,7 @@ var/AdministrationTeam = list(
 	set category = "Special Verbs"
 	set name = "Warn"
 	set desc = "Warn a player"
-	if(!src.authenticated || !src.holder)
+	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
 	if(M.client && M.client.holder && (M.client.holder.level >= src.holder.level))
