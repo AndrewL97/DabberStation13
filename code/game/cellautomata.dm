@@ -1,58 +1,5 @@
-/world/proc/load_mode()
-	var/text = file2text("data/mode.txt")
-	if (text)
-		var/list/lines = dd_text2list(text, "\n")
-		if (lines[1])
-			master_mode = lines[1]
-			diary << "Saved mode is '[master_mode]'"
-
-/world/proc/save_mode(var/the_mode)
-	var/F = file("data/mode.txt")
-	fdel(F)
-	F << the_mode
-
 /world/proc/load_motd()
 	join_motd = file2text("config/motd.txt")
-
-
-/world/proc/load_admins()
-	var/text = file2text("config/admins.txt")
-	if (!text)
-		diary << "Failed to load config/admins.txt\n"
-	else
-		var/list/lines = dd_text2list(text, "\n")
-		for(var/line in lines)
-			if (!line)
-				continue
-
-			if (copytext(line, 1, 2) == ";")
-				continue
-
-			var/pos = findtext(line, " - ", 1, null)
-			if (pos)
-				var/m_key = copytext(line, 1, pos)
-				var/a_lev = copytext(line, pos + 3, length(line) + 1)
-				admins[m_key] = a_lev
-				diary << ("ADMIN: [m_key] = [a_lev]")
-
-/world/proc/load_testers()
-	var/text = file2text("config/testers.txt")
-	if (!text)
-		diary << "Failed to load config/testers.txt\n"
-	else
-		var/list/lines = dd_text2list(text, "\n")
-		for(var/line in lines)
-			if (!line)
-				continue
-
-			if (copytext(line, 1, 2) == ";")
-				continue
-
-			var/pos = findtext(line, " - ", 1, null)
-			if (pos)
-				var/m_key = copytext(line, 1, pos)
-				var/a_lev = copytext(line, pos + 3, length(line) + 1)
-				admins[m_key] = a_lev
 
 
 /world/proc/load_configuration()
@@ -68,10 +15,7 @@
 		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
 
-	src.load_mode()
 	src.load_motd()
-
-	src.load_admins()
 
 	makepowernets()
 

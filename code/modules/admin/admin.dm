@@ -264,47 +264,7 @@ var/showadminmessages = 1
 
 	if (href_list["c_mode2"])
 		if ((src.rank in list( "Secondary Administrator", "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
-			if (ticker && ticker.mode)
-				return alert(usr, "The game has already started.", null, null, null, null)
-			switch(href_list["c_mode2"])
-				if("secret")
-					master_mode = "secret"
-				if("random")
-					master_mode = "random"
-				if("traitor")
-					master_mode = "traitor"
-				if("meteor")
-					master_mode = "meteor"
-				if("extended")
-					master_mode = "extended"
-				if("monkey")
-					master_mode = "monkey"
-				if("nuclear")
-					master_mode = "nuclear"
-				if("blob")
-					master_mode = "blob"
-				if("sandbox")
-					master_mode = "sandbox"
-				if("restructuring")
-					master_mode = "restructuring"
-				if("wizard")
-					master_mode = "wizard"
-				if("revolution")
-					master_mode = "revolution"
-				if("malfunction")
-					master_mode = "malfunction"
-				if("deathmatch")
-					master_mode = "deathmatch"
-				if("confliction")
-					master_mode = "confliction"
-				if("ctf")
-					master_mode = "ctf"
-				else
-			log_admin("[key_name(usr)] set the mode as [master_mode].")
-			message_admins("\blue [key_name_admin(usr)] set the mode as [master_mode].", 1)
-			world << "\blue <b>The mode is now: [master_mode]</b>"
-
-			world.save_mode(master_mode)
+			src << "No"
 
 	if (href_list["monkeyone"])
 		if ((src.rank in list( "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))

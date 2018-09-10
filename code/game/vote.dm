@@ -45,58 +45,9 @@
 	if(!voting)		// means that voting was aborted by an admin
 		return
 
-	world << "\red <B>***Voting has closed.</B>"
+	world << "\red <B>***Voting has closed. Result is [winner]. Nothing happens I guess.</B>"
 
 	log_vote("Voting closed, result was [winner]")
-	voting = 0
-	nextvotetime = world.timeofday + 10*config.vote_delay
-
-	for(var/mob/M in world)		// clear vote window from all clients
-		if(M.client)
-			M << browse(null, "window=vote")
-			M.client.showvote = 0
-
-	calcwin()
-
-	if(mode)
-		if(!ticker)
-			if(!going)
-				world << "<B>The game will start soon.</B>"
-				going = 1
-		var/wintext = capitalize(winner)
-		if(winner=="default")
-			world << "Result is \red No change."
-			return
-
-		// otherwise change mode
-
-
-		world << "Result is change to \red [wintext]"
-		world.save_mode(winner)
-
-		if(ticker)
-			world <<"\red <B>World will reboot in 10 seconds</B>"
-
-			sleep(100)
-			log_game("Rebooting due to mode vote")
-			world.Reboot()
-		else
-			master_mode = winner
-
-	else
-
-		if(winner=="default")
-			world << "Result is \red No restart."
-			return
-
-		world << "Result is \red Restart round."
-
-		world <<"\red <B>World will reboot in 5 seconds</B>"
-
-		sleep(50)
-		log_game("Rebooting due to restart vote")
-		world.Reboot()
-	return
 
 
 /datum/vote/proc/calcwin()
