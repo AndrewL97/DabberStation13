@@ -8,6 +8,7 @@
 	directwired = 1
 	var/temp = 0
 	var/procc = 1
+	var/melt_down_alert = 0
 	layer = 3
 	var/list/particles = list()
 
@@ -30,8 +31,15 @@
 	temp = temp + 0.5
 	if(temp < 0)
 		temp = 0
-	if(temp > 3000)
-		explosion(locate(x,y,z), 2, 4, 6, 4,1)
+	if(temp > 3500 && melt_down_alert == 0)
+		for(var/mob/living/carbon/human/M in Mobs)
+			if(istype(M.ears,/obj/item/device/radio/headset))
+				M << "<font color='red'><b>Alert! Core temperature is higher than 3500 C*, meltdown possible."
+		melt_down_alert = 1
+	if(temp < 3500 && melt_down_alert == 1)
+		melt_down_alert = 0
+	if(temp > 5000)
+		explosion(locate(x,y,z), 6, 10, 20, 4,1) //deadly ass explosion, it's your fault it blew up
 		del(src)
 		return
 
@@ -53,15 +61,16 @@
 	icon = 'power.dmi'
 	icon_state = "core_cooler9"
 	procc = 0
-	var/coolant_left = 4000
+	var/coolant_left = 999999
+	var/max_coolant = 8000
 
 
 /obj/machinery/power/core/coolant/process()
 	if(!(stat & (NOPOWER|BROKEN)) )
 		use_power(250)
-	if(coolant_left > 4000)
-		coolant_left = 4000 //cap
-	icon_state = "core_cooler[round((coolant_left/4000)*9)]"
+	if(coolant_left > max_coolant)
+		coolant_left = max_coolant //cap
+	icon_state = "core_cooler[round((coolant_left/max_coolant)*9)]"
 	if(coolant_left > 0)
 		for(var/obj/machinery/power/core/e in orange(1,src))
 			e.temp = e.temp - 2
@@ -71,4 +80,4 @@
 
 /obj/machinery/power/core/coolant/examine()
 	set src in view()
-	usr << "This is a coolant tank, the amount left is : [coolant_left]/2000"
+	usr << "This is a coolant tank, the amount left is : [coolant_left]/[max_coolant]"
