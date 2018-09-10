@@ -3,6 +3,20 @@ var/AdminhelpWebhook = ""
 var/Station_Name = ""
 var/Game_Version = ""
 var/discordLink = ""
+
+var/list/ai_names = null
+var/list/commando_names = null
+var/list/first_names_male = null
+var/list/first_names_female = null
+var/list/last_names = null
+
+proc/Init_Names()
+	ai_names = dd_file2list("config/names/ai.txt")
+	commando_names = dd_file2list("config/names/death_commando.txt")
+	first_names_male = dd_file2list("config/names/first_male.txt")
+	first_names_female = dd_file2list("config/names/first_female.txt")
+	last_names = dd_file2list("config/names/last.txt")
+
 world
 	mob = /mob/new_player
 	turf = /turf/space
@@ -13,13 +27,19 @@ world
 
 	New()
 		..()
-		Station_Name = "[file2text("config/stationname.txt")]"
-		Game_Version = "[file2text("config/gameversion.txt")]"
+		if(!(port in PORTS_NOT_ALLOWED))
+			Station_Name = "[file2text("config/stationname.txt")]"
+			Game_Version = "[file2text("config/gameversion.txt")]"
+			discordLink = "[file2text("config/discordinvite.txt")]"
+			AdminhelpWebhook = file2text("config/webhookAdmin.txt")
+			WebhookURL = file2text("config/webhook.txt")
+			Init_Names()
+			update_status()
+		else
+			Station_Name = "Dabber Station 13"
+			Game_Version = "Testing Mode"
 		name = "[Station_Name] ([Game_Version])"
-		discordLink = "[file2text("config/discordinvite.txt")]"
-		AdminhelpWebhook = file2text("config/webhookAdmin.txt")
-		WebhookURL = file2text("config/webhook.txt")
-		update_status()
+
 		if(!(port in PORTS_NOT_ALLOWED))
 			spawn(50)
 				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Server [name] is up.\" } ", "Content-Type: application/json")

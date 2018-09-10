@@ -565,20 +565,6 @@ var/AdministrationTeam = list(
 		src.holder.Secrets()
 	return
 
-/client/proc/Dabbers()
-	set name = "Dabbers"
-	set category = "Admin"
-	if (src.holder)
-		src.holder.Dabbers()
-	return
-
-/client/proc/beta_testers()
-	set name = "Testers"
-	set category = "Admin"
-	if (src.holder)
-		src.holder.beta_testers()
-	return
-
 /client/proc/voting()
 	set name = "Voting"
 	set category = "Admin"

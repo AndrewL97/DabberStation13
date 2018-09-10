@@ -1295,9 +1295,6 @@
 	if (join_motd)
 		src << "<div class=\"motd\">[join_motd]</div>"
 
-	src.authorize()
-	src.Dabberauth()
-	src.beta_tester_auth()
 
 	src.update_world()
 

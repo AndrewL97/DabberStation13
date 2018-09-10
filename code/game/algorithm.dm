@@ -1,17 +1,19 @@
 /world/New()
 	..()
-
-	diary = file("data/logs/[time2text(world.realtime, "YYYY/MM-Month/DD-Day")].log")
-	diary << ""
-	diary << ""
-	diary << "Starting up. [time2text(world.timeofday, "hh:mm.ss")]"
-	diary << "---------------------"
-	diary << ""
+	if(!(port in PORTS_NOT_ALLOWED))
+		diary = file("data/logs/[time2text(world.realtime, "YYYY/MM-Month/DD-Day")].log")
+		diary << ""
+		diary << ""
+		diary << "Starting up. [time2text(world.timeofday, "hh:mm.ss")]"
+		diary << "---------------------"
+		diary << ""
+	else
+		diary = world
+		diary << "Staring up test"
 
 	jobban_loadbanfile()
 	jobban_updatelegacybans()
-	Dabber_loadfile()
-	beta_tester_loadfile()
+
 	LoadBans()
 
 
