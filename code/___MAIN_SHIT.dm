@@ -25,6 +25,11 @@
 #define MUSIC_CHANNEL_ALT 769
 #define MOTOR_CHANNEL 900
 #define PORTS_NOT_ALLOWED list(0,9999)
+
+#if DM_VERSION < 512
+#error Your BYOND is too outdated, please use 512 or higher. Dab13 is only supposed to compile on 512, because 511 doesn't support filters and stuff like that.
+#endif
+
 /*
 THE JOBS CAN BE FOUND HERE!!!!!!!!! CHANGE MAX SLOTS AS REQUIRED
 */
