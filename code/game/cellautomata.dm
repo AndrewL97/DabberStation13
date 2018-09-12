@@ -4,8 +4,6 @@
 
 /world/proc/load_configuration()
 	config = new /datum/configuration()
-	config.load("config/config.txt")
-	// apply some settings from config..
 	abandon_allowed = config.respawn
 
 /world/New()
