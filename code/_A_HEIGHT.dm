@@ -47,17 +47,17 @@ obj
 		appearance_flags = PIXEL_SCALE | LONG_GLIDE
 
 turf
-	var/TurfGravity = 96/256 //Obvious variable names
+	var/TurfGravity = 48/256 //Obvious variable names
 	var/TurfStepSound = list('footstep1.ogg','footstep2.ogg','footstep3.ogg','footstep4.ogg')
 	var/TurfHeight = 0
 	mouse_opacity = 2 //Fixes RCD shit
 	space
 		TurfStepSound = null
-		TurfGravity = 48/256
+		TurfGravity = 24/256
 		TurfHeight = 0
 	unsimulated
 		space2
-			TurfGravity = 48/256
+			TurfGravity = 24/256
 			alpha = 0
 			TurfHeight = -416
 /turf/simulated/floor/plating/water
@@ -113,7 +113,7 @@ mob
 				var/obj/item/weapon/tank/jetpack/J = src.back
 				j_pack = J.allow_thrust(0.01, src)
 			if(j_pack)
-				ySpeed = ySpeed + 0.07
+				ySpeed = ySpeed + (36/256)
 
 	proc/ProcessDirection()
 		if(buckled)
