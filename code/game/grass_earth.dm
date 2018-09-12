@@ -17,8 +17,10 @@
 		icon_state = "tree1"
 		name = "Tree"
 		pixel_x = -36
-		layer = MOB_LAYER+1
-		plane = TOP_PLANE
+		plane = MOB_PLANE_ALT
+		New()
+			..()
+			Get_Layer_Y(0.1)
 	deco1
 		icon = 'grasstiles.dmi'
 		icon_state = "2"

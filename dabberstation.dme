@@ -41,6 +41,7 @@
 #include "code\__DAMAGE_OVERRIDE.dm"
 #include "code\_A_ANIMATION.dm"
 #include "code\_A_HEIGHT.dm"
+#include "code\_A_LAYERING.dm"
 #include "code\_A_LIGHTING.dm"
 #include "code\_A_MASTER.dm"
 #include "code\_A_PARTICLE.dm"

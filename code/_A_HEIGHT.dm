@@ -136,6 +136,8 @@ mob
 		if(!MyShadow)
 			MyShadow = new
 
+		Get_Layer_Y()
+
 		onFloor = 0
 		var/turf/T = locate(x,y,z) //Gets turf player is stepping on.
 		if(!loc || !istype(T,/turf) || veh)
