@@ -20,5 +20,6 @@
 	var/fakekey = null
 	var/warned = 0
 
-	// comment out the line below when debugging locally to enable the options & messages menu
-	control_freak = 1
+	New()
+		winset(src, null, "command=\".configure graphics-hwmode on\"")
+		..()

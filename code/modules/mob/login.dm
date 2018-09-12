@@ -21,6 +21,7 @@
 		h.mymob = src
 		src.hud_used = h
 		h.instantiate()
+
 	if (client)
 		if(veh)
 			client.perspective = EYE_PERSPECTIVE

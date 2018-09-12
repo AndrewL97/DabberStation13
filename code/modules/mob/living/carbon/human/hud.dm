@@ -26,13 +26,13 @@ atom
 		mymob.lighting_master = new
 	mymob.client.screen += mymob.plane_master_turf
 	mymob.client.screen += mymob.lighting_master
-	return //I Will readd the plane master once I find out what's wrong with the "PLANE_MASTER" behaviour.
+	return
 
 /obj/hud/proc/parallax()
 	if(!mymob)
 		return
 	for(var/obj/screen_alt/spaceParallax/g in mymob.space_parallax_list_1 + mymob.space_parallax_list_2)
-		del g //be Gone Shit Garbage Colleciton
+		del g
 	mymob.space_parallax_list_1 = list()
 	mymob.space_parallax_list_2 = list()
 	for(var/xA in 0 to 2)

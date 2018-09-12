@@ -4,7 +4,8 @@ client/proc/ProcessClient()
 	pixel_y = round(pixel_y1 + pixel_y2 + pixel_y3 + pixel_y4 + pixel_y5)
 	GetDirection()
 	if(mob)
-		for(var/obj/screen_alt/g in screen)
+
+		for(var/obj/screen_alt/g in delete_me)
 			screen -= g
 			del g
 		if(istype(mob,/mob/living))
@@ -84,6 +85,7 @@ client/proc/ProcessClient()
 	numbG2.screen_loc = "WEST,NORTH"
 	numbG2.icon_state = "%"
 	screen += numbG2
+	delete_me += numbG2
 	var/plrText = "[round(max(0,mob.health))]"
 	for(var/i in 1 to length(plrText))
 		var/obj/screen_alt/numbG = new()
@@ -92,6 +94,7 @@ client/proc/ProcessClient()
 		numbG.screen_loc = "WEST:[(i*4)-4+((3-length(plrText))*4)],NORTH"
 		//numbG.alpha = 149
 		screen += numbG
+		delete_me += numbG
 
 client/proc/Get_Players()
 	var/obj/screen_alt/numbG2 = new()
@@ -99,6 +102,7 @@ client/proc/Get_Players()
 	numbG2.screen_loc = "WEST,NORTH-1"
 	numbG2.icon_state = "player_amount_icon"
 	screen += numbG2
+	delete_me += numbG2
 
 	var/plrText = "[plrs]"
 	for(var/i in 1 to length(plrText))
@@ -107,6 +111,7 @@ client/proc/Get_Players()
 		numbG.screen_loc = "WEST+1:[(i*16)-16],NORTH-1"
 		numbG.alpha = 149
 		screen += numbG
+		delete_me += numbG
 
 client/proc/dec_volume(var/am_i)
 
@@ -149,8 +154,7 @@ client
 	var/pixel_y4 = 0 //misc shit i think
 	var/pixel_y5 = 0 //height system
 
-
-
+	var/list/delete_me = list() //List of stuff to be deleted next tick
 	var/sound/amb_sound = sound('music/interior.ogg')
 	var/vol = 0 //Ambient sound vol
 	var/sound/amb_sound_ext = sound('music/exterior.ogg')
