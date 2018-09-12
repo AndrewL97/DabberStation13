@@ -4,10 +4,8 @@ client/proc/ProcessClient()
 	pixel_y = round(pixel_y1 + pixel_y2 + pixel_y3 + pixel_y4 + pixel_y5)
 	GetDirection()
 	if(mob)
-
-		for(var/obj/screen_alt/g in delete_me)
-			screen -= g
-			del g
+		screen -= delete_me
+		delete_me = list()
 		if(istype(mob,/mob/living))
 			create_health()
 		Get_Number_Time()
@@ -78,13 +76,13 @@ client/proc/ProcessClient()
 		else
 			radio_sound.volume = 0
 		src << radio_sound
+		screen += delete_me
 
 /client/proc/create_health()
 	var/obj/screen_alt/numbG2 = new()
 	numbG2.icon = 'screen1.dmi'
 	numbG2.screen_loc = "WEST,NORTH"
 	numbG2.icon_state = "%"
-	screen += numbG2
 	delete_me += numbG2
 	var/plrText = "[round(max(0,mob.health))]"
 	for(var/i in 1 to length(plrText))
@@ -92,8 +90,6 @@ client/proc/ProcessClient()
 		numbG.icon_state = "healthnum[copytext(plrText,i,i+1)]" //Get every digit
 		numbG.icon = 'screen1.dmi'
 		numbG.screen_loc = "WEST:[(i*4)-4+((3-length(plrText))*4)],NORTH"
-		//numbG.alpha = 149
-		screen += numbG
 		delete_me += numbG
 
 client/proc/Get_Players()
@@ -101,7 +97,6 @@ client/proc/Get_Players()
 	numbG2.icon = 'screen1.dmi'
 	numbG2.screen_loc = "WEST,NORTH-1"
 	numbG2.icon_state = "player_amount_icon"
-	screen += numbG2
 	delete_me += numbG2
 
 	var/plrText = "[plrs]"
@@ -110,7 +105,6 @@ client/proc/Get_Players()
 		numbG.icon_state = copytext(plrText,i,i+1) //Get every digit
 		numbG.screen_loc = "WEST+1:[(i*16)-16],NORTH-1"
 		numbG.alpha = 149
-		screen += numbG
 		delete_me += numbG
 
 client/proc/dec_volume(var/am_i)
