@@ -309,16 +309,20 @@
 /obj/machinery/shuttle/engine/propulsion
 	name = "propulsion"
 	icon_state = "propulsion"
-	opacity = 1
+	//opacity = 1
+	var/cycle = 0
 	New()
 		..()
+		cycle += rand(1,4)
 		special_processing += src
 	Del()
 		special_processing -= src
 		..()
 	special_process()
-		var/obj/Particle/Spark/Heat/S = new()
-		S.loc = loc
+		cycle += 1
+		if(cycle % 3 == 1)
+			var/obj/Particle/Spark/Heat/S = new()
+			S.loc = loc
 
 /obj/machinery/shuttle/engine/propulsion/burst
 	name = "burst"
