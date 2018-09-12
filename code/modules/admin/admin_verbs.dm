@@ -43,8 +43,7 @@ var/AdministrationTeam = list(
 			src.verbs += /proc/givetestverbs
 			src.verbs += /obj/admins/proc/toggleDabbersay
 			src.verbs += /client/proc/debug_variables
-			src.verbs += /client/proc/cmd_modify_object_variables
-			src.verbs += /client/proc/cmd_modify_ticker_variables
+
 			src.verbs += /client/proc/cmd_admin_pm
 			src.verbs += /client/proc/cmd_admin_say
 			src.verbs += /client/proc/dsay
@@ -123,8 +122,7 @@ var/AdministrationTeam = list(
 			src.verbs += /obj/admins/proc/toggleDabbersay
 			src.verbs += /client/proc/debug_variables
 			src.verbs += /client/proc/cmd_debug_tog_aliens
-			src.verbs += /client/proc/cmd_modify_object_variables
-			src.verbs += /client/proc/cmd_modify_ticker_variables
+
 			src.verbs += /client/proc/cmd_admin_pm
 			src.verbs += /client/proc/cmd_admin_say
 			src.verbs += /client/proc/dsay
