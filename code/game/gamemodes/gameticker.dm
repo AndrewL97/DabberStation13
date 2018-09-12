@@ -94,9 +94,6 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 
 		return 0
 
-	//Distribute jobs
-	distribute_jobs()
-
 	//Create player characters and transfer them
 	create_characters()
 
@@ -129,8 +126,6 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 	spawn master_controller.start_processing()
 
 /datum/controller/gameticker
-	proc/distribute_jobs()
-		DivideOccupations()
 
 	proc/create_characters()
 		for(var/mob/new_player/player in world)

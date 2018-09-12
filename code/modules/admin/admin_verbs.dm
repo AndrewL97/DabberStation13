@@ -75,7 +75,7 @@ var/AdministrationTeam = list(
 			src.verbs += /proc/togglebuildmode
 			src.verbs += /client/proc/jumptokey
 			src.verbs += /client/proc/Getmob
-			src.verbs += /client/proc/jobbans
+
 			src.verbs += /client/proc/sendmob
 			src.verbs += /client/proc/Debug2					//debug toggle switch
 			src.verbs += /client/proc/callproc
@@ -155,7 +155,7 @@ var/AdministrationTeam = list(
 			src.verbs += /client/proc/cmd_admin_list_occ
 			src.verbs += /client/proc/jumptokey
 			src.verbs += /client/proc/Getmob
-			src.verbs += /client/proc/jobbans
+
 			src.verbs += /client/proc/sendmob
 			src.verbs += /client/proc/Debug2					//debug toggle switch
 			src.verbs += /client/proc/callproc
@@ -251,12 +251,6 @@ var/AdministrationTeam = list(
 	set category = "Admin"
 	if (src.holder)
 		src.holder.player()
-	return
-
-/client/proc/jobbans()
-	set category = "Debug"
-	if(src.holder)
-		src.holder.Jobbans()
 	return
 
 

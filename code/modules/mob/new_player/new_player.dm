@@ -167,7 +167,7 @@ mob/new_player
 			new_player_panel()
 
 	proc/IsJobAvailable(rank, maxAllowed)
-		if(countJob(rank) < maxAllowed && !jobban_isbanned(src,rank))
+		if(countJob(rank) < maxAllowed)
 			return 1
 		else
 			return 0
@@ -256,11 +256,7 @@ mob/new_player
 
 
 
-//		if (IsJobAvailable("Hydroponist",hydroponicsMax))
-//			dat += "<a href='byond://?src=\ref[src];SelectedJob=22'>Hydroponist</a><br>"
-
-		if (!jobban_isbanned(src,"Assistant"))
-			dat += "<a href='byond://?src=\ref[src];SelectedJob=18'>Assistant</a><br>"
+		dat += "<a href='byond://?src=\ref[src];SelectedJob=18'>Assistant</a><br>"
 
 		src << browse(cssStyleSheetKaden + dat, "window=latechoices;size=300x640;can_close=0")
 

@@ -11,9 +11,6 @@
 		diary = world
 		diary << "Staring up test"
 
-	jobban_loadbanfile()
-	jobban_updatelegacybans()
-
 
 
 

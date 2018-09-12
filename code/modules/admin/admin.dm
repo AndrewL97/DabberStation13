@@ -330,7 +330,6 @@ var/showadminmessages = 1
 				foo += text("<B>Hasn't Entered Game</B> | ")
 			foo += text("<A HREF='?src=\ref[src];forcespeech=\ref[M]'>Say</A> | ")
 			foo += text("<A href='?src=\ref[src];mute2=\ref[M]'>Mute: [(M.muted ? "Muted" : "Voiced")]</A> | ")
-			foo += text("<A href='?src=\ref[src];jobban2=\ref[M]'>Jobban</A> | ")
 			foo += text("<A href='?src=\ref[src];boot2=\ref[M]'>Boot</A> | ")
 		foo += text("<A href='?src=\ref[src];jumpto=\ref[M]'>Jump to</A> | ")
 		foo += text("<A href='?src=\ref[src];newban=\ref[M]'>Ban</A> \]")
@@ -975,15 +974,6 @@ var/showadminmessages = 1
 
 	usr << browse(cssStyleSheetKaden + dat, "window=players;size=540x480")
 
-
-/obj/admins/proc/Jobbans()
-
-	if ((src.rank in admin_ranks)) //ADMINlist( "Dab13 Administrator", "Host"  )))
-		var/dat = "<B>Job Bans!</B><HR><table>"
-		for(var/t in jobban_keylist)
-			dat += text("<tr><td><A href='?src=\ref[src];removejobban=[t]'>[t]</A></td></tr>")
-		dat += "</table>"
-		usr << browse(cssStyleSheetKaden + dat, "window=ban;size=400x400")
 
 /obj/admins/proc/Game()
 
