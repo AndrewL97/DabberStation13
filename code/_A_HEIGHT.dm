@@ -172,7 +172,10 @@ mob
 		if(heightZ > T.TurfHeight)
 			plane = MOB_PLANE_ALT
 		else
-			plane = MOB_PLANE //this is to fix the "lol airlocks are above me even tho im jumping"
+			if(heightZ > 0)
+				plane = MOB_PLANE_ALT
+			else
+				plane = MOB_PLANE //this is to fix the "lol airlocks are above me even tho im jumping"
 		if(heightZ < -415 && !istype(src,/mob/dead))
 			src << "<b><font color='red'>You fall off!"
 			do_teleport(src,locate(108,107,1),0)

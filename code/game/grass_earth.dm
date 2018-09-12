@@ -17,7 +17,7 @@
 		icon_state = "tree1"
 		name = "Tree"
 		pixel_x = -36
-		plane = MOB_PLANE
+		plane = MOB_PLANE_ALT
 		New()
 			..()
 			Get_Layer_Y(0.1)
