@@ -205,7 +205,7 @@
 				if(istype(C,/obj/item/weapon/card))
 					if(C.credit)
 						if(C.credit.Spend_DabCoins(R.product_cost))
-							src << "\green Spent [R.product_cost]DC. Your new DC balance is : [C.credit.dabcoins]"
+							usr << "\green Spent [R.product_cost]DC. Your new DC balance is : [C.credit.dabcoins]"
 							R.amount--
 							spawn()
 								src.speak(src.vend_reply)
