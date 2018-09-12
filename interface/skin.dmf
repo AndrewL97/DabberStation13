@@ -96,23 +96,18 @@ macro "macro"
 
 menu "menu"
 	elem 
-		name = "&Options"
+		name = "&File"
 		command = ""
 		saved-params = "is-checked"
 	elem 
 		name = "&Quick screenshot\tF2"
 		command = ".screenshot auto"
-		category = "&Options"
-		saved-params = "is-checked"
-	elem 
-		name = "&Save screenshot as...\tShift+F2"
-		command = ".screenshot"
-		category = "&Options"
+		category = "&File"
 		saved-params = "is-checked"
 	elem 
 		name = "&Quit"
 		command = ".quit"
-		category = "&Options"
+		category = "&File"
 		saved-params = "is-checked"
 	elem 
 		name = "&Resolution"
@@ -269,8 +264,7 @@ window "outputwindow"
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		font-family = "@MS PGothic"
-		font-size = 11
+		font-family = "System"
 		text-color = #ffffff
 		background-color = #000000
 		is-default = true
