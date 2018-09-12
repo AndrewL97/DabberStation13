@@ -100,7 +100,7 @@
 
 		M.powernet = powernets[M.netnum]
 		M.powernet.nodes += M
-
+	diary << "Powernets rebuilt"
 
 // returns a list of all power-related objects (nodes, cable, junctions) in turf,
 // excluding source, that match the direction d
@@ -349,7 +349,7 @@
 	var/numapc = 0
 
 	for(var/obj/machinery/power/terminal/term in nodes)
-		CHECK_TICK()
+		//CHECK_TICK()
 		if( istype( term.master, /obj/machinery/power/apc ) )
 			numapc++
 
@@ -360,7 +360,7 @@
 
 	if( netexcess > 100)		// if there was excess power last cycle
 		for(var/obj/machinery/power/smes/S in nodes)	// find the SMESes in the network
-			CHECK_TICK()
+			//CHECK_TICK()
 			S.restore()				// and restore some of the power that was used
 
 
