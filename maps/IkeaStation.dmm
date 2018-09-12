@@ -325,7 +325,7 @@
 "gm" = (/obj/cable,/obj/machinery/power/terminal,/obj/cable{icon_state = "1-2"; d1 = 1; d2 = 2},/turf/simulated/floor/plating,/area/hallway/primary/fore)
 "gn" = (/obj/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/hallway/primary/fore)
 "go" = (/obj/cable{icon_state = "2-8"; d1 = 2; d2 = 8},/obj/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/cable{icon_state = "1-2"; d1 = 1; d2 = 2},/turf/simulated/floor/plating,/area/hallway/primary/fore)
-"gp" = (/obj/machinery/power/smes,/turf/simulated/floor/plating,/area/hallway/primary/fore)
+"gp" = (/obj/machinery/power/smes,/obj/cable{icon_state = "0-4"; d2 = 4},/turf/simulated/floor/plating,/area/hallway/primary/fore)
 "gq" = (/obj/cable{icon_state = "4-8"; d1 = 4; d2 = 8},/obj/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/cable{d1 = 1; d2 = 4; icon_state = "1-4"},/turf/simulated/floor/plating,/area/hallway/primary/fore)
 "gC" = (/obj/item/weapon/storage/firstaid/regular,/turf/simulated/floor{icon_state = "table"; TurfHeight = 4},/area/shuttle/escape/centcom)
 "gR" = (/obj/window_spawner,/turf/simulated/floor/plating,/area/secretplaceXD)
