@@ -107,7 +107,7 @@ client
 			debug_variables(locate(href_list["Vars"]))
 		else if (href_list["VarsEdit"])
 			if(href_list["Ass"])
-				edit_variable(href_list["VarsEdit"],href_list["Ass"])
+				edit_variable(href_list["VarsEdit"],locate(href_list["Ass"]))
 		else
 			..()
 
@@ -120,7 +120,8 @@ client
 			log_admin("[usr.key] deleted [A.name] at ([A.x],[A.y],[A.z])")
 
 /client/proc/edit_variable(var/variable,var/atom/O)
-	if(!variable)
+	if(!variable || !istype(O,/atom))
+		src << "Error in editing [O]."
 		return
 	var/default
 	var/var_value = O.vars[variable]
