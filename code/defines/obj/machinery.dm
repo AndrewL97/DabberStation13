@@ -310,6 +310,15 @@
 	name = "propulsion"
 	icon_state = "propulsion"
 	opacity = 1
+	New()
+		..()
+		special_processing += src
+	Del()
+		special_processing -= src
+		..()
+	special_process()
+		var/obj/Particle/Spark/Heat/S = new()
+		S.loc = loc
 
 /obj/machinery/shuttle/engine/propulsion/burst
 	name = "burst"

@@ -54,6 +54,14 @@ datum/controller/game_controller/proc/particle_process()
 		offset_x = -3
 		offset_y = -3
 		color = "#FFFF00"
+		Heat
+			color = "#FFA500"
+			Particle_Init()
+				//var/rand_angle = rand(0,360)
+				y_spd = rand()*-5
+				x_pos = rand(-1,33)
+				y_pos = -3
+				icon_state = "spark[rand(1,3)]"
 		Alternate
 			animate_movement = 2
 			color = "#00FFFF"
