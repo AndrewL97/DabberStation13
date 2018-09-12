@@ -15,14 +15,6 @@ atom
 	filters = filter(type="drop_shadow", x=0, y=0,size=5, offset=2, color=rgb(0,0,0))
 	appearance_flags = PIXEL_SCALE | KEEP_TOGETHER | PLANE_MASTER
 
-
-/obj/screen_alt/plane_master_turf3
-	plane = SHADING_PLANE
-	screen_loc = "1,1"
-	//filters = filter(type="drop_shadow", x=0, y=0,size=5, offset=2, color=rgb(0,0,0))
-	appearance_flags = PIXEL_SCALE | KEEP_TOGETHER | PLANE_MASTER
-	blend_mode = BLEND_MULTIPLY
-
 /obj/screen
 	plane = 10
 	layer = 1

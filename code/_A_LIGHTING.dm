@@ -44,6 +44,12 @@ Lighting
 	alpha = 0
 	init_space()
 
+/obj/screen_alt/plane_master_turf3
+	plane = SHADING_PLANE
+	screen_loc = "1,1"
+	appearance_flags = PIXEL_SCALE | KEEP_TOGETHER | PLANE_MASTER
+	blend_mode = BLEND_MULTIPLY
+
 turf
 	proc
 		del_lights()
