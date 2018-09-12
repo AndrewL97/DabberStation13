@@ -61,8 +61,6 @@ vy = v * sin(angle)
 	name = "Vehicle Pod"
 	icon = 'escapepod.dmi'
 	icon_state = "recon"
-
-	flags = FPRINT
 	anchored = 1.0
 	animate_movement = 0 //set it
 	var/forcedloc = null
