@@ -323,6 +323,7 @@
 		if(cycle % 3 == 1)
 			var/obj/Particle/Spark/Heat/S = new()
 			S.loc = loc
+			S.y = y-1
 
 /obj/machinery/shuttle/engine/propulsion/burst
 	name = "burst"

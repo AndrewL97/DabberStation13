@@ -60,7 +60,7 @@ datum/controller/game_controller/proc/particle_process()
 				//var/rand_angle = rand(0,360)
 				y_spd = rand()*-5
 				x_pos = rand(-1,33)
-				y_pos = -3
+				y_pos = 32
 				icon_state = "spark[rand(1,3)]"
 		Alternate
 			animate_movement = 2
