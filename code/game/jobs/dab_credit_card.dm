@@ -20,11 +20,15 @@ var/list_dab_cards = list()
 			return 0
 	proc/InitCard(var/key = "AlcaroIsAFrick")
 		owner = key
-		var/savefile/F = new("data/dabcoins/[owner]Card.sav")
-		ReadSaveRes(F)
+		if(world.port in PORTS_NOT_ALLOWED)
+			dabcoins = 999999
+		else
+			var/savefile/F = new("data/dabcoins/[owner]Card.sav")
+			ReadSaveRes(F)
 	proc/Save()
-		var/savefile/F = new("data/dabcoins/[owner]Card.sav")
-		WriteSaveRes(F)
+		if(!(world.port in PORTS_NOT_ALLOWED))
+			var/savefile/F = new("data/dabcoins/[owner]Card.sav")
+			WriteSaveRes(F)
 	proc/WriteSaveRes(savefile/F)
 		F["dabcoins"] << dabcoins
 	proc/ReadSaveRes(savefile/F)

@@ -38,7 +38,7 @@ world
 		else
 			Station_Name = "Dabber Station 13"
 			Game_Version = "Testing Mode"
-			if(port == 0)
+			if(port in PORTS_NOT_ALLOWED)
 				Game_Version = "Local Testing Mode"
 		name = "[Station_Name] ([Game_Version])"
 
