@@ -49,6 +49,7 @@ mob
 	var/e = 0
 	var/w = 0
 	var/j = 0
+	//fps = 60
 	var/mousedown
 	verb/KeyDownM(a as text)
 		set instant = 1

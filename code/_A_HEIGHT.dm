@@ -47,17 +47,17 @@ obj
 		appearance_flags = PIXEL_SCALE | LONG_GLIDE
 
 turf
-	var/TurfGravity = 0.1125175808720113 //Obvious variable names
+	var/TurfGravity = 96/256 //Obvious variable names
 	var/TurfStepSound = list('footstep1.ogg','footstep2.ogg','footstep3.ogg','footstep4.ogg')
 	var/TurfHeight = 0
 	mouse_opacity = 2 //Fixes RCD shit
 	space
 		TurfStepSound = null
-		TurfGravity = 0.0562587904360057
+		TurfGravity = 48/256
 		TurfHeight = 0
 	unsimulated
 		space2
-			TurfGravity = 0.0562587904360057
+			TurfGravity = 48/256
 			alpha = 0
 			TurfHeight = -416
 /turf/simulated/floor/plating/water
@@ -100,7 +100,7 @@ mob
 		if(canmove == 1 && lying == 0 && !src.restrained() && !ANIMATION_RUNNING ) //If on floor/space and not restrained...
 			if( !istype(src.loc, /turf/space) && !istype(src.loc, /turf/unsimulated/space2) )
 				if(onFloor == 1)
-					ySpeed = 4
+					ySpeed = 1320/256
 					view(15,src) << 'jump.ogg'
 				else
 					flyPack()

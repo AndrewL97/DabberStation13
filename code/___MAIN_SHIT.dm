@@ -84,7 +84,7 @@ var
 	Lighting/lighting = new()
 
 world
-	fps = 100
+	fps = 60
 	hub = "Exadv1.spacestation13"
 	hub_password = "kMZy3U5jJHSiBQjr"
 

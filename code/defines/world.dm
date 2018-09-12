@@ -40,7 +40,6 @@ world
 			Game_Version = "Testing Mode"
 			if(port == 0)
 				Game_Version = "Local Testing Mode"
-				fps = 60 //fix to a byond bug
 		name = "[Station_Name] ([Game_Version])"
 
 		if(!(port in PORTS_NOT_ALLOWED))
