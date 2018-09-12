@@ -912,7 +912,7 @@
 
 	// Gloves
 	if (src.gloves)
-		src.overlays += image("icon" = 'hands.dmi', "icon_state" = text("[]", src.gloves.icon_state), "layer" = MOB_LAYER)
+		src.overlays += image("icon" = 'hands.dmi', "icon_state" = text("[]", src.gloves.icon_state)) //, "layer" = MOB_LAYER)
 		if (src.gloves.blood_DNA)
 			var/icon/stain_icon = icon('blood.dmi', "bloodyhands")
 			src.overlays += stain_icon
@@ -921,14 +921,14 @@
 		src.overlays += stain_icon
 	// Glasses
 	if (src.glasses)
-		src.overlays += image("icon" = 'eyes.dmi', "icon_state" = text("[]", src.glasses.icon_state), "layer" = MOB_LAYER)
+		src.overlays += image("icon" = 'eyes.dmi', "icon_state" = text("[]", src.glasses.icon_state)) //, "layer" = MOB_LAYER)
 	// Ears
 	if (src.ears)
-		src.overlays += image("icon" = 'ears.dmi', "icon_state" = text("[]", src.ears.icon_state), "layer" = MOB_LAYER)
+		src.overlays += image("icon" = 'ears.dmi', "icon_state" = text("[]", src.ears.icon_state)) //, "layer" = MOB_LAYER)
 	// Shoes
 	if (src.shoes)
 
-		src.overlays += image("icon" = 'feet.dmi', "icon_state" = text("[]", src.shoes.icon_state), "layer" = MOB_LAYER)
+		src.overlays += image("icon" = 'feet.dmi', "icon_state" = text("[]", src.shoes.icon_state)) //, "layer" = MOB_LAYER)
 		if (src.shoes.blood_DNA)
 			var/icon/stain_icon = icon('blood.dmi', "shoesblood")
 			src.overlays += stain_icon
@@ -941,7 +941,7 @@
 	if (src.wear_mask)
 		if (istype(src.wear_mask, /obj/item/clothing/mask))
 
-			src.overlays += image("icon" = 'mask.dmi', "icon_state" = text("[]", src.wear_mask.icon_state), "layer" = MOB_LAYER)
+			src.overlays += image("icon" = 'mask.dmi', "icon_state" = text("[]", src.wear_mask.icon_state)) //, "layer" = MOB_LAYER)
 
 			if (!istype(src.wear_mask, /obj/item/clothing/mask/cigarette))
 				if (src.wear_mask.blood_DNA)
@@ -985,7 +985,7 @@
 				c:layer = initial(c:layer)
 		if (istype(src.wear_suit, /obj/item/clothing/suit))
 
-			src.overlays += image("icon" = 'suit.dmi', "icon_state" = text("[]", src.wear_suit.icon_state), "layer" = MOB_LAYER)
+			src.overlays += image("icon" = 'suit.dmi', "icon_state" = text("[]", src.wear_suit.icon_state)) //, "layer" = MOB_LAYER)
 
 		if (src.wear_suit.blood_DNA)
 			var/icon/stain_icon = null
@@ -1012,7 +1012,7 @@
 
 	// Head
 	if (src.head)
-		src.overlays += image("icon" = 'head.dmi', "icon_state" = text("[]", src.head.icon_state), "layer" = MOB_LAYER)
+		src.overlays += image("icon" = 'head.dmi', "icon_state" = text("[]", src.head.icon_state)) //, "layer" = MOB_LAYER)
 		if (src.head.blood_DNA)
 			var/stain_icon = icon('blood.dmi', "helmetblood")
 			src.overlays += stain_icon
@@ -1020,7 +1020,7 @@
 
 	// Belt
 	if (src.belt)
-		src.overlays += image("icon" = 'belt.dmi', "icon_state" = text("[]", src.belt.icon_state), "layer" = MOB_LAYER)
+		src.overlays += image("icon" = 'belt.dmi', "icon_state" = text("[]", src.belt.icon_state)) //, "layer" = MOB_LAYER)
 		src.belt.screen_loc = ui_belt
 
 	if ((src.wear_mask && !(src.wear_mask.see_face)) || (src.head && !(src.head.see_face))) // can't see the face
@@ -1044,7 +1044,7 @@
 		src.r_store.screen_loc = ui_storage2
 
 	if (src.back)
-		src.overlays += image("icon" = 'back.dmi', "icon_state" = text("[]", src.back.icon_state), "layer" = MOB_LAYER)
+		src.overlays += image("icon" = 'back.dmi', "icon_state" = text("[]", src.back.icon_state)) //, "layer" = MOB_LAYER)
 		src.back.screen_loc = ui_back
 
 	if (src.handcuffed)
@@ -1057,18 +1057,17 @@
 		src.client.screen += src.contents
 
 	if (src.r_hand)
-		src.overlays += image("icon" = 'items_righthand.dmi', "icon_state" = src.r_hand.icon_state, "layer" = MOB_LAYER+1)
+		src.overlays += image("icon" = 'items_righthand.dmi', "icon_state" = src.r_hand.icon_state) //, "layer" = MOB_LAYER+1)
 
 		src.r_hand.screen_loc = ui_rhand
 
 	if (src.l_hand)
-		src.overlays += image("icon" = 'items_lefthand.dmi', "icon_state" = src.l_hand.icon_state, "layer" = MOB_LAYER+1)
+		src.overlays += image("icon" = 'items_lefthand.dmi', "icon_state" = src.l_hand.icon_state) //, "layer" = MOB_LAYER+1)
 
 		src.l_hand.screen_loc = ui_lhand
 
 
-	var/image/taile = image("icon" = 'icons/mob/mob_acc.dmi', "icon_state" = "[tail]", "layer" = MOB_LAYER+0.9
-	)
+	var/image/taile = image("icon" = 'icons/mob/mob_acc.dmi', "icon_state" = "[tail]") //, "layer" = MOB_LAYER+0.9)
 	taile.icon += tail_color
 	src.overlays += taile
 
