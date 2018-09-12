@@ -6,17 +6,17 @@ atom
 	plane = 10
 
 /mob
-	var/obj/screen23/plane_master_turf2/plane_master_turf = null
-	var/obj/screen23/plane_master_turf3/lighting_master = null
+	var/obj/screen_alt/plane_master_turf2/plane_master_turf = null
+	var/obj/screen_alt/plane_master_turf3/lighting_master = null
 
-/obj/screen23/plane_master_turf2
+/obj/screen_alt/plane_master_turf2
 	plane = WALL_PLANE
 	screen_loc = "1,1"
 	filters = filter(type="drop_shadow", x=0, y=0,size=5, offset=2, color=rgb(0,0,0))
 	appearance_flags = PIXEL_SCALE | KEEP_TOGETHER | PLANE_MASTER
 
 
-/obj/screen23/plane_master_turf3
+/obj/screen_alt/plane_master_turf3
 	plane = SHADING_PLANE
 	screen_loc = "1,1"
 	//filters = filter(type="drop_shadow", x=0, y=0,size=5, offset=2, color=rgb(0,0,0))
@@ -39,17 +39,17 @@ atom
 /obj/hud/proc/parallax()
 	if(!mymob)
 		return
-	for(var/obj/screen23/spaceParallax/g in mymob.space_parallax_list_1 + mymob.space_parallax_list_2)
+	for(var/obj/screen_alt/spaceParallax/g in mymob.space_parallax_list_1 + mymob.space_parallax_list_2)
 		del g //be Gone Shit Garbage Colleciton
 	mymob.space_parallax_list_1 = list()
 	mymob.space_parallax_list_2 = list()
 	for(var/xA in 0 to 2)
 		for(var/yA in 0 to 2)
-			var/obj/screen23/spaceParallax/g = new()
+			var/obj/screen_alt/spaceParallax/g = new()
 			g.xF = xA
 			g.yF = yA
 			mymob.space_parallax_list_1 += g
-			var/obj/screen23/spaceParallax/g2 = new()
+			var/obj/screen_alt/spaceParallax/g2 = new()
 			g2.xF = xA
 			g2.yF = yA
 			mymob.space_parallax_list_2 += g2
@@ -98,10 +98,10 @@ mob
 				src.ghost_hud()
 				//return
 
-/obj/screen23
+/obj/screen_alt
 	appearance_flags = PIXEL_SCALE | NO_CLIENT_COLOR
 
-/obj/screen23/spaceParallax
+/obj/screen_alt/spaceParallax
 	icon = 'extra images/parallax.dmi'
 	name = "space parallax image"
 	screen_loc = "1,1"
@@ -117,7 +117,7 @@ mob
 	var/list/space_parallax_list_1 = list()
 	var/list/space_parallax_list_2 = list()
 
-	//var/obj/screen23/plane_master_turf2/plane_master_turf = null
+	//var/obj/screen_alt/plane_master_turf2/plane_master_turf = null
 
 	proc/ParallaxMove()
 		if(!client)
@@ -151,14 +151,14 @@ mob
 		var/atom/eye = client.eye
 		var/xAxis = round((((eye.x+(xoffset/32))*mult_1) + offsetX)) % 480
 		var/yAxis = round((((eye.y+(yoffset/32))*mult_2) + offsetY)) % 480
-		for(var/obj/screen23/spaceParallax/g in space_list)
+		for(var/obj/screen_alt/spaceParallax/g in space_list)
 			g.plane = plane_new
 			if(g.icon_state != iconA)
 				g.icon_state = iconA
 			if(iconA != "")
 				ParallaxHandle(g,xAxis,yAxis,g.xF*480,g.yF*480)
 
-	proc/ParallaxHandle(var/obj/screen23/spaceParallax/space1,var/xAxis,var/yAxis,var/xOff,var/yOff)
+	proc/ParallaxHandle(var/obj/screen_alt/spaceParallax/space1,var/xAxis,var/yAxis,var/xOff,var/yOff)
 		var/matrix/space1e = matrix()
 		space1e.Translate(xOff-xAxis  ,  yOff-yAxis) //This is actually retarded
 		space1.transform = space1e

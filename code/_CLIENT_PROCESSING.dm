@@ -4,7 +4,7 @@ client/proc/ProcessClient()
 	pixel_y = round(pixel_y1 + pixel_y2 + pixel_y3 + pixel_y4 + pixel_y5)
 	GetDirection()
 	if(mob)
-		for(var/obj/screen_number/g in screen)
+		for(var/obj/screen_alt/g in screen)
 			screen -= g
 			del g
 		if(istype(mob,/mob/living))
@@ -79,14 +79,14 @@ client/proc/ProcessClient()
 		src << radio_sound
 
 /client/proc/create_health()
-	var/obj/screen_number/numbG2 = new()
+	var/obj/screen_alt/numbG2 = new()
 	numbG2.icon = 'screen1.dmi'
 	numbG2.screen_loc = "WEST,NORTH"
 	numbG2.icon_state = "%"
 	screen += numbG2
 	var/plrText = "[round(max(0,mob.health))]"
 	for(var/i in 1 to length(plrText))
-		var/obj/screen_number/numbG = new()
+		var/obj/screen_alt/numbG = new()
 		numbG.icon_state = "healthnum[copytext(plrText,i,i+1)]" //Get every digit
 		numbG.icon = 'screen1.dmi'
 		numbG.screen_loc = "WEST:[(i*4)-4+((3-length(plrText))*4)],NORTH"
@@ -94,7 +94,7 @@ client/proc/ProcessClient()
 		screen += numbG
 
 client/proc/Get_Players()
-	var/obj/screen_number/numbG2 = new()
+	var/obj/screen_alt/numbG2 = new()
 	numbG2.icon = 'screen1.dmi'
 	numbG2.screen_loc = "WEST,NORTH-1"
 	numbG2.icon_state = "player_amount_icon"
@@ -102,7 +102,7 @@ client/proc/Get_Players()
 
 	var/plrText = "[plrs]"
 	for(var/i in 1 to length(plrText))
-		var/obj/screen_number/numbG = new()
+		var/obj/screen_alt/numbG = new()
 		numbG.icon_state = copytext(plrText,i,i+1) //Get every digit
 		numbG.screen_loc = "WEST+1:[(i*16)-16],NORTH-1"
 		numbG.alpha = 149
@@ -164,7 +164,7 @@ client
 	var/music_pitch_new = 1
 
 
-/obj/screen23/heightCalc
+/obj/screen_alt/heightCalc
 	plane = 10
 	icon = 'screen1.dmi'
 	icon_state = "plr"
@@ -173,8 +173,8 @@ client
 		icon_state = "height"
 
 /mob
-	var/obj/screen23/heightCalc/c1 = null
-	var/obj/screen23/heightCalc/heightG/c2 = null
+	var/obj/screen_alt/heightCalc/c1 = null
+	var/obj/screen_alt/heightCalc/heightG/c2 = null
 
 /obj/hud/proc/instantiate_height_calculator()
 	if(!mymob.c1)

@@ -67,17 +67,17 @@ client/proc/Get_Number_Time()
 		if(secs < 10)
 			secs_in_text = "0[secs]"
 		var/nuke_timer_text = "[mins]:[secs_in_text]"
-		var/obj/screen_number/numbG2 = new()
+		var/obj/screen_alt/numbG2 = new()
 		numbG2.screen_loc = "CENTER-1:-8,NORTH"
 		numbG2.icon_state = "timer"
 		screen += numbG2
 		for(var/i in 1 to length(nuke_timer_text))
-			var/obj/screen_number/numbG = new()
+			var/obj/screen_alt/numbG = new()
 			numbG.icon_state = copytext(nuke_timer_text,i,i+1) //Get every digit
 			numbG.screen_loc = "CENTER:[round(((-length(nuke_timer_text)*16)/2)+(i*16))],NORTH"
 			screen += numbG
 
-/obj/screen_number
+/obj/screen_alt
 	icon = 'number_font.dmi'
 	appearance_flags = PIXEL_SCALE | NO_CLIENT_COLOR
 	plane = 10
