@@ -39,7 +39,7 @@ datum/controller/game_controller/proc/particle_process()
 		pixel_w = x_pos + offset_x
 		pixel_z = y_pos + offset_y
 		timer = timer + world.tick_lag
-		if(movible) //not that optimized sorry
+		if(movible) //Sadly This NEeds Optimization Soon
 			while(x_pos > world.icon_size)
 				x_pos -= world.icon_size
 				x += 1
