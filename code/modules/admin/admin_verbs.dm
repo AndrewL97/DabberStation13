@@ -11,9 +11,6 @@ var/AdministrationTeam = list(
 	if(key in AdministrationTeam)
 		update_admins("[AdministrationTeam[key]]")
 
-/client/proc/uhh() //Learn 2 hack
-	world.SetMedal("Banned",src)
-
 /client/proc/update_admins(var/rank)
 	src << "<b>\green You are a [rank]!"
 	if(!src.holder)
@@ -46,7 +43,6 @@ var/AdministrationTeam = list(
 			src.verbs += /proc/givetestverbs
 			src.verbs += /obj/admins/proc/toggleDabbersay
 			src.verbs += /client/proc/debug_variables
-			src.verbs += /client/proc/uhh
 			src.verbs += /client/proc/cmd_modify_object_variables
 			src.verbs += /client/proc/cmd_modify_ticker_variables
 			src.verbs += /client/proc/cmd_admin_pm
@@ -115,7 +111,7 @@ var/AdministrationTeam = list(
 
 			src.verbs += /client/proc/toggle_view_range
 			src.verbs += /obj/admins/proc/toggle_aliens
-			src.verbs += /client/proc/warn
+
 		if ("Dab13 Administrator")
 			src.deadchat = 1
 			src.holder.level = 5
@@ -198,7 +194,6 @@ var/AdministrationTeam = list(
 
 			src.verbs += /client/proc/toggle_view_range
 			src.verbs += /obj/admins/proc/toggle_aliens
-			src.verbs += /client/proc/warn
 
 		if ("Primary Administrator")
 			src.deadchat = 1
@@ -278,7 +273,6 @@ var/AdministrationTeam = list(
 
 			src.verbs += /client/proc/toggle_view_range
 			src.verbs += /obj/admins/proc/toggle_aliens
-			src.verbs += /client/proc/warn
 
 		if ("Administrator")
 
@@ -322,7 +316,7 @@ var/AdministrationTeam = list(
 			src.verbs += /obj/admins/proc/unprison
 			src.verbs += /client/proc/cmd_admin_create_centcom_report
 			src.verbs += /client/proc/cmd_admin_subtle_message
-			src.verbs += /client/proc/warn
+
 
 		if ("Secondary Administrator")
 			src.holder.level = 1
@@ -356,7 +350,7 @@ var/AdministrationTeam = list(
 			src.verbs += /obj/admins/proc/unprison
 			src.verbs += /client/proc/cmd_admin_create_centcom_report
 			src.verbs += /client/proc/cmd_admin_subtle_message
-			src.verbs += /client/proc/warn
+
 
 		if ("Moderator")
 			src.holder.level = 0
@@ -384,7 +378,6 @@ var/AdministrationTeam = list(
 //				src.verbs += /obj/admins/proc/adjump				//toggle admin jumping
 			src.verbs += /obj/admins/proc/unprison
 			src.verbs += /client/proc/cmd_admin_subtle_message
-			src.verbs += /client/proc/warn
 
 		if ("Goat Fart")
 			src.holder.level = -1
@@ -406,7 +399,6 @@ var/AdministrationTeam = list(
 			src.verbs += /client/proc/admin_observe
 			src.verbs += /client/proc/voting
 			src.verbs += /client/proc/game_panel
-			src.verbs += /client/proc/unban_panel
 			src.verbs += /client/proc/player_panel
 
 		if(src.holder.level > 1)
@@ -466,7 +458,6 @@ var/AdministrationTeam = list(
 	src.verbs -= /client/proc/cmd_admin_create_centcom_report
 	src.verbs -= /client/proc/game_panel
 	src.verbs -= /client/proc/player_panel
-	src.verbs -= /client/proc/unban_panel
 	src.verbs -= /client/proc/secrets
 	src.verbs -= /client/proc/voting
 
@@ -538,12 +529,6 @@ var/AdministrationTeam = list(
 		src.holder.Jobbans()
 	return
 
-/client/proc/unban_panel()
-	set name = "Unban Panel"
-	set category = "Admin"
-	if (src.holder)
-		src.holder.unbanpanel()
-	return
 
 /client/proc/game_panel()
 	set name = "Game Panel"
@@ -599,28 +584,3 @@ var/AdministrationTeam = list(
 		src.fakekey = null
 	log_admin("[key_name(usr)] has turned stealth mode [src.stealth ? "ON" : "OFF"]")
 	message_admins("[key_name_admin(usr)] has turned stealth mode [src.stealth ? "ON" : "OFF"]", 1)
-
-
-/client/proc/warn(var/mob/M in world)
-	set category = "Special Verbs"
-	set name = "Warn"
-	set desc = "Warn a player"
-	if(!src.holder)
-		src << "Only administrators may use this command."
-		return
-	if(M.client && M.client.holder && (M.client.holder.level >= src.holder.level))
-		alert("You cannot perform this action. You must be of a higher administrative rank!", null, null, null, null, null)
-		return
-	if(!M.client.warned)
-		M << "\red <B>You have been warned by an administrator. This is the only warning you will recieve.</B>"
-		M.client.warned = 1
-		message_admins("\blue [src.ckey] warned [M.ckey].")
-	else
-		AddBan(M.ckey, M.computer_id, "Autobanning due to previous warn", src.ckey, 1, 10)
-		M << "\red<BIG><B>You have been autobanned by [src.ckey]. This is what we in the biz like to call a \"second warning\".</B></BIG>"
-		M << "\red This is a temporary ban; it will automatically be removed in 10 minutes."
-		log_admin("[src.ckey] warned [M.ckey], resulting in a 10 minute autoban.")
-		message_admins("\blue [src.ckey] warned [M.ckey], resulting in a 10 minute autoban.")
-
-		del(M.client)
-		del(M)

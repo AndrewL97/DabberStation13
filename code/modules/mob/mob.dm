@@ -1278,13 +1278,6 @@
 	if(findtextEx(src.key, "Telnet @"))
 		src << "Sorry, this game does not support Telnet."
 		del(src)
-	var/isbanned = CheckBan(src)
-	if (isbanned)
-		log_access("Failed Login: [src] - Banned")
-		message_admins("\blue Failed Login: [src] - Banned")
-		alert(src,"You have been banned.\nReason : [isbanned]","Ban","Ok")
-		del(src)
-
 
 	if (((world.address == src.address || !(src.address)) && !(host)))
 		host = src.key

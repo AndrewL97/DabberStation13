@@ -14,7 +14,6 @@
 	jobban_loadbanfile()
 	jobban_updatelegacybans()
 
-	LoadBans()
 
 
 
