@@ -219,7 +219,8 @@ mob
 			src.moving = 1
 
 			var/RLMove = src.move_delay - world.time
-			mob.glide_size = (64/RLMove)*world.tick_lag
+			mob.glide_size = (world.icon_size/RLMove)*world.tick_lag
+			//TILE_HEIGHT / move_delay * TICK_LAG
 			glide_size = mob.glide_size
 			if(mob.MyShadow)
 				mob.MyShadow.glide_size = mob.glide_size
