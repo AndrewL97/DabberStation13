@@ -142,6 +142,7 @@ area
 	var/ambi = 1
 
 client
+	control_freak = CONTROL_FREAK_ALL | CONTROL_FREAK_MACROS
 	var/pixel_y1 = 0 //normal shit
 	var/pixel_y2 = 0 //kart shit
 	var/pixel_y3 = 0 //effects
