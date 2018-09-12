@@ -12,6 +12,12 @@ var/list_dab_cards = list()
 	New()
 		..()
 		list_dab_cards += src
+	proc/Spend_DabCoins(var/amount)
+		if(dabcoins >= amount)
+			dabcoins -= amount
+			return 1
+		else
+			return 0
 	proc/InitCard(var/key = "AlcaroIsAFrick")
 		owner = key
 		var/savefile/F = new("data/dabcoins/[owner]Card.sav")

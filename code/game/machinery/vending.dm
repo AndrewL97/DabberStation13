@@ -10,6 +10,7 @@
 	var/product_path = null
 	var/amount = 0
 	var/display_color = "blue"
+	var/product_cost = 100
 
 /obj/machinery/vending/New()
 	..()
@@ -155,7 +156,7 @@
 			dat += "<FONT color = '[R.display_color]'><B>[R.product_name]</B>:"
 			dat += " [R.amount] </font>"
 			if (R.amount > 0)
-				dat += "<a href='byond://?src=\ref[src];vend=\ref[R]'>Vend</A>"
+				dat += "<a href='byond://?src=\ref[src];vend=\ref[R]'>Buy for [R.product_cost] Dabcoins</A>"
 			else
 				dat += "<font color = 'red'>SOLD OUT</font>"
 			dat += "<br>"
@@ -171,11 +172,10 @@
 		return
 	if(usr.stat || usr.restrained())
 		return
-
-	if(istype(usr,/mob/living/silicon))
+	var/mob/living/carbon/human/H = usr
+	if(!istype(usr,/mob/living/carbon/human))
 		usr << "\red The vending machine refuses to interface with you, as you are not in its target demographic!"
 		return
-
 	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
 		usr.machine = src
 		if ((href_list["vend"]) && (src.vend_ready))
@@ -191,6 +191,7 @@
 			if (!R || !istype(R))
 				src.vend_ready = 1
 				return
+
 			var/product_path = text2path(R.product_path)
 			if (!product_path)
 				src.vend_ready = 1
@@ -199,24 +200,29 @@
 			if (R.amount <= 0)
 				src.vend_ready = 1
 				return
+			if(H.wear_id)
+				var/obj/item/weapon/card/C = H.wear_id
+				if(istype(C,/obj/item/weapon/card))
+					if(C.credit)
+						if(C.credit.Spend_DabCoins(R.product_cost))
+							R.amount--
+							spawn()
+								src.speak(src.vend_reply)
+								src.last_reply = world.time
+							use_power(5)
 
-			R.amount--
+							if (src.icon_vend) //Show the vending animation if needed
+								flick(src.icon_vend,src)
+							spawn(src.vend_delay)
+								new product_path(get_turf(src))
+								src.vend_ready = 1
 
-			if(((src.last_reply + (src.vend_delay + 200)) <= world.time) && src.vend_reply)
-				spawn(0)
-					src.speak(src.vend_reply)
-					src.last_reply = world.time
-
-			use_power(5)
-			if (src.icon_vend) //Show the vending animation if needed
-				flick(src.icon_vend,src)
-			spawn(src.vend_delay)
-				new product_path(get_turf(src))
-				src.vend_ready = 1
-				return
-
-			src.updateUsrDialog()
-			return
+							src.updateUsrDialog()
+							return
+						else
+							usr << "\red Not enough dabcoins."
+							src.vend_ready = 1
+							return
 
 		else if ((href_list["cutwire"]) && (src.panel_open))
 			var/twire = text2num(href_list["cutwire"])
