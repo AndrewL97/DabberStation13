@@ -97,7 +97,7 @@ client
 		else
 			html += "[name] = <span class='value'>[value]</span>"
 
-		html += "<a href='?src=\ref[src];VarsEdit=[name];Ass=[E]'>Edit Value</a></li>"
+		html += "<a href='?src=\ref[src];VarsEdit=[name];Ass=\ref[E]'>Edit Value</a></li>"
 
 		return html
 
