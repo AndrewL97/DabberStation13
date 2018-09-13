@@ -559,6 +559,7 @@ turf/simulated/floor/proc/update_icon()
 			return
 
 /turf/simulated/floor/proc/to_plating()
+	if(TurfHeight > 0) return
 	if(istype(src,/turf/simulated/floor/engine)) return
 	if(!intact) return
 	if(!icon_old) icon_old = icon_state
@@ -573,17 +574,15 @@ turf/simulated/floor/proc/update_icon()
 	if(intact) to_plating()
 	break_tile()
 
+/image/crack
+	icon = 'floors.dmi'
+	icon_state = "crack"
+
 /turf/simulated/floor/proc/break_tile()
 	if(istype(src,/turf/simulated/floor/engine)) return
 	if(broken) return
 	if(!icon_old) icon_old = icon_state
-	/*if(intact)
-		src.icon_state = "damaged[pick(1,2,3,4,5)]"
-		broken = 1
-	else
-		src.icon_state = "platingdmg[pick(1,2,3)]"
-		broken = 1*/
-
+	overlays += new /image/crack()
 	broken = 1
 
 /turf/simulated/floor/proc/burn_tile()
@@ -591,10 +590,6 @@ turf/simulated/floor/proc/update_icon()
 	if(broken || burnt) return
 	if(!icon_old) icon_old = icon_state
 	color = "#808080"
-	/*if(intact)
-		src.icon_state = "floorscorched[pick(1,2)]"
-	else
-		src.icon_state = "panelscorched"*/
 	burnt = 1
 
 /turf/simulated/floor/proc/restore_tile()

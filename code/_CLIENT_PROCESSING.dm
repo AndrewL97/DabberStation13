@@ -81,13 +81,15 @@ client/proc/ProcessClient()
 		numbG2.icon = 'screen1.dmi'
 		numbG2.screen_loc = "WEST,NORTH"
 		numbG2.icon_state = "%"
-		screen += numbG2
+		//screen += numbG2
 		for(var/i in 1 to 3)
 			var/obj/screen_num/numbG = new()
 			numbG.icon = 'screen1.dmi'
 			numbG.screen_loc = "WEST:[((i-1)*4)],NORTH"
-			screen += numbG
+			//screen += numbG
 			health += numbG
+	if(!(health in screen))
+		screen += health
 	var/plrText = "[round(max(0,(mob.health/mob.maxhealth)*100))]"
 	if(length(plrText) == 2) //Can't be 50, must be something like _50
 		plrText = " [plrText]"
