@@ -136,7 +136,7 @@
 		var/prizeselect = pick(1,2,4)
 		switch(prizeselect)
 			if(1)
-				prize = new /obj/item/weapon/spacecash(src.loc)
+				prize = new /obj/item/weapon/dabdollar(src.loc)
 				prize.name = "space ticket"
 				prize.desc = "It's almost like actual currency!"
 			if(2)

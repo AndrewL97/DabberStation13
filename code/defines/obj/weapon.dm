@@ -37,8 +37,8 @@
 	m_amt = 30000
 	g_amt = 15000
 
-/obj/item/weapon/spacecash
-	name = "Space Cash"
+/obj/item/weapon/dabdollar
+	name = "Dab Dolla"
 	desc = "You're rich, bitch!"
 	icon = 'items.dmi'
 	icon_state = "spacecash"

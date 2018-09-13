@@ -106,7 +106,7 @@
 "cb" = (/turf/unsimulated/asteroid_sand,/area/secretplaceXD/special_music)
 "cc" = (/obj/machinery/computer/communications,/turf/simulated/floor{icon_state = "table"; TurfHeight = 4},/area/secretplaceXD/special_music)
 "cd" = (/obj/machinery/computer/general_alert,/turf/simulated/floor,/area/bridge)
-"ce" = (/obj/item/weapon/dabdollar,/turf/simulated/floor{icon_state = "table"; TurfHeight = 4},/area/hallway/primary/dorms)
+"ce" = (/obj/item/weapon/spacecash,/turf/simulated/floor{icon_state = "table"; TurfHeight = 4},/area/hallway/primary/dorms)
 "cf" = (/obj/item/weapon/game_kit,/turf/simulated/floor{icon_state = "table"; TurfHeight = 4},/area/hallway/primary/dorms)
 "cg" = (/obj/machinery/door/airlock/command,/turf/simulated/floor{fully_cover = 1; icon_state = "floorwhiter"; name = "floor"; TurfHeight = 0},/area/hallway/primary/fore)
 "ch" = (/obj/machinery/light{tag = "icon-tube1 (EAST)"; icon_state = "tube1"; dir = 4},/turf/simulated/floor/plating,/area/hallway/primary/central)
