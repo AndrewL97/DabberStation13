@@ -15,7 +15,6 @@ datum/controller/game_controller/proc/particle_process()
 	var/x_spd = 0
 	var/y_spd = 0 //For movable particles!!
 	var/timer = 0 //Timer
-	var/movible = 0
 	var/offset_x = -5
 	var/offset_y = -5
 	var/time_to_disappear = 1 //Disappear In A Second
@@ -39,19 +38,6 @@ datum/controller/game_controller/proc/particle_process()
 		pixel_w = x_pos + offset_x
 		pixel_z = y_pos + offset_y
 		timer = timer + world.tick_lag
-		if(movible) //Sadly This NEeds Optimization Soon
-			while(x_pos > world.icon_size)
-				x_pos -= world.icon_size
-				x += 1
-			while(x_pos < -world.icon_size)
-				x_pos += world.icon_size
-				x -= 1
-			while(y_pos > world.icon_size)
-				y_pos -= world.icon_size
-				y += 1
-			while(y_pos < -world.icon_size)
-				y_pos += world.icon_size
-				y -= 1
 
 		if(time_to_disappear != -1)
 			if(timer > time_to_disappear)
@@ -72,7 +58,6 @@ default particles
 		color = "#FFFF00"
 		Heat
 			color = "#FFA500"
-			movible = 1
 			Particle_Init()
 				//var/rand_angle = rand(0,360)
 				y_spd = rand()*-5
