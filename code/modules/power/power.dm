@@ -62,16 +62,16 @@
 	powernets = list()
 
 	for(var/obj/cable/PC in world)
-		//CHECK_TICK()
+		CHECK_TICK()
 		PC.netnum = 0
 	for(var/obj/machinery/power/M in machines)
-		//CHECK_TICK()
+		CHECK_TICK()
 		if(M.netnum >=0)
 			M.netnum = 0
 
 
 	for(var/obj/cable/PC in world)
-		//CHECK_TICK()
+		CHECK_TICK()
 		if(!PC.netnum)
 			PC.netnum = ++netcount
 
@@ -81,7 +81,7 @@
 	if(Debug) world.log << "[netcount] powernets found"
 
 	for(var/L = 1 to netcount)
-		//CHECK_TICK()
+		CHECK_TICK()
 		var/datum/powernet/PN = new()
 		//PN.tag = "powernet #[L]"
 		powernets += PN
@@ -89,12 +89,12 @@
 
 
 	for(var/obj/cable/C in world)
-		//CHECK_TICK()
+		CHECK_TICK()
 		var/datum/powernet/PN = powernets[C.netnum]
 		PN.cables += C
 
 	for(var/obj/machinery/power/M in machines)
-		//CHECK_TICK()
+		CHECK_TICK()
 		if(M.netnum<=0)		// APCs have netnum=-1 so they don't count as network nodes directly
 			continue
 
@@ -349,7 +349,7 @@
 	var/numapc = 0
 
 	for(var/obj/machinery/power/terminal/term in nodes)
-		//CHECK_TICK()
+		CHECK_TICK()
 		if( istype( term.master, /obj/machinery/power/apc ) )
 			numapc++
 
@@ -360,7 +360,7 @@
 
 	if( netexcess > 100)		// if there was excess power last cycle
 		for(var/obj/machinery/power/smes/S in nodes)	// find the SMESes in the network
-			//CHECK_TICK()
+			CHECK_TICK()
 			S.restore()				// and restore some of the power that was used
 
 

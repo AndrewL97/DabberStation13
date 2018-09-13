@@ -84,9 +84,8 @@ client/proc/ProcessClient()
 		screen += numbG2
 		for(var/i in 1 to 3)
 			var/obj/screen_num/numbG = new()
-			numbG.icon_state = "healthnum[copytext(plrText,i,i+1)]" //Get every digit
 			numbG.icon = 'screen1.dmi'
-			numbG.screen_loc = "WEST:[(i*4)],NORTH"
+			numbG.screen_loc = "WEST:[((i-1)*4)],NORTH"
 			screen += numbG
 			health += numbG
 	var/plrText = "[round(max(0,(mob.health/mob.maxhealth)*100))]"
