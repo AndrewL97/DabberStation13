@@ -81,7 +81,7 @@ client/proc/ProcessClient()
 		numbG2.icon = 'screen1.dmi'
 		numbG2.screen_loc = "WEST,NORTH"
 		numbG2.icon_state = "%"
-		//screen += numbG2
+		health += numbG2
 		for(var/i in 1 to 3)
 			var/obj/screen_num/numbG = new()
 			numbG.icon = 'screen1.dmi'
@@ -96,7 +96,7 @@ client/proc/ProcessClient()
 	if(length(plrText) == 1)
 		plrText = "  [plrText]"
 	for(var/i in 1 to 3)
-		var/obj/screen_num/numbG = health[i]
+		var/obj/screen_num/numbG = health[i+1]
 		if(numbG)
 			numbG.icon_state = "healthnum[copytext(plrText,i,i+1)]" //Get every digit
 
