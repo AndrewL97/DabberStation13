@@ -21,7 +21,7 @@ var/list_dab_cards = list()
 	proc/InitCard(var/key = "AlcaroIsAFrick")
 		owner = key
 		if(world.port in PORTS_NOT_ALLOWED)
-			dabcoins = 999999
+			dabcoins = 50000 //lotsa starter money for tests.
 		else
 			var/savefile/F = new("data/dabcoins/[owner]Card.sav")
 			ReadSaveRes(F)

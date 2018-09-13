@@ -1,3 +1,5 @@
+//THese are special variables used for The Game.
+
 #define WALL_PLANE 1
 #define LIGHT_PLANE 3
 #define ALARM_PLANE 2
@@ -57,14 +59,6 @@ var
 	roboticsMax = 0
 	cargoMax = 0
 	hydroponicsMax = 0
-
-/*
-
-hi welcome to the main shit file, i wouldn't touch the shit on here if i were you (unless your a tgcoder and you know how to make your CPU spike to %75 with atmospherics), thank you.
-
--alcaro the frick
-
-*/
 
 obj
 	item
