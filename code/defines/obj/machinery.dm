@@ -320,7 +320,7 @@
 		..()
 	special_process()
 		cycle += 1
-		if(cycle % 3 == 1)
+		if(cycle % 6 == 1)
 			var/obj/Particle/Spark/Heat/S = new()
 			S.loc = loc
 			S.y = y-1
