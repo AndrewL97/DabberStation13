@@ -99,7 +99,7 @@ mob
 	screen_loc = "1,1"
 	icon_state = "layer1"
 	layer = 1
-	plane = -98
+	plane = SPACE_PLANE
 	mouse_opacity = 0
 	var/xF = 0
 	var/yF = 0
@@ -131,7 +131,7 @@ mob
 			if(0)
 				ParallaxLayer(space_parallax_list_1,0.25,0.25,"layer1",0,0,-98)
 				ParallaxLayer(space_parallax_list_2,0.5,0.5,"layer2",0,0,-98)
-	proc/ParallaxLayer(var/list/space_list,var/mult_1,var/mult_2,var/iconA,var/offsetX,var/offsetY,var/plane_new)
+	proc/ParallaxLayer(var/list/space_list,var/mult_1,var/mult_2,var/iconA,var/offsetX,var/offsetY,var/plane_new) //Tbh this honestly could be redone to use a master plane, and throw all parallax layers there.
 		if(!client)
 			return //don't do this.
 		if(!client.eye)
