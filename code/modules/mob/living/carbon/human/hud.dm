@@ -172,6 +172,7 @@ mob
 
 /mob/verb/switch_intent(ass as num)
 	set hidden = 1
+	set name = "switch_intent" //LOL
 	switch(ass)
 		if("disarm")
 			usr.a_intent = "disarm"
