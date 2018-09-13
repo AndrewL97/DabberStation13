@@ -4,14 +4,10 @@ client/proc/ProcessClient()
 	pixel_y = round(pixel_y1 + pixel_y2 + pixel_y3 + pixel_y4 + pixel_y5)
 	GetDirection()
 	if(mob)
-		for(var/obj/screen_num/a in screen)
-			screen -= a
-			del a
 		if(istype(mob,/mob/living))
 			create_health()
 		Get_Number_Time()
-		if(ticker && ticker.mode && ticker.mode.name == "Dab Station 13 Battle Royale" && !istype(mob,/mob/dead))
-			Get_Players()
+
 		if(mouse_position)
 			if(!(mouse_position.MouseCatcher in screen))
 				screen += mouse_position.MouseCatcher
@@ -80,33 +76,28 @@ client/proc/ProcessClient()
 
 
 /client/proc/create_health()
-	var/obj/screen_num/numbG2 = new()
-	numbG2.icon = 'screen1.dmi'
-	numbG2.screen_loc = "WEST,NORTH"
-	numbG2.icon_state = "%"
-	delete_me += numbG2
-	var/plrText = "[round(max(0,mob.health))]"
+	if(health.len == 0)
+		var/obj/screen_num/numbG2 = new()
+		numbG2.icon = 'screen1.dmi'
+		numbG2.screen_loc = "WEST,NORTH"
+		numbG2.icon_state = "%"
+		screen += numbG2
+		for(var/i in 1 to 3)
+			var/obj/screen_num/numbG = new()
+			numbG.icon_state = "healthnum[copytext(plrText,i,i+1)]" //Get every digit
+			numbG.icon = 'screen1.dmi'
+			numbG.screen_loc = "WEST:[(i*4)],NORTH"
+			screen += numbG
+			health += numbG
+	var/plrText = "[round(max(0,(mob.health/mob.maxhealth)*100))]"
+	if(length(plrText) == 2) //Can't be 50, must be something like _50
+		plrText = " [plrText]"
+	if(length(plrText) == 1)
+		plrText = "  [plrText]"
 	for(var/i in 1 to length(plrText))
-		var/obj/screen_num/numbG = new()
-		numbG.icon_state = "healthnum[copytext(plrText,i,i+1)]" //Get every digit
-		numbG.icon = 'screen1.dmi'
-		numbG.screen_loc = "WEST:[(i*4)-4+((3-length(plrText))*4)],NORTH"
-		delete_me += numbG
-
-client/proc/Get_Players()
-	var/obj/screen_num/numbG2 = new()
-	numbG2.icon = 'screen1.dmi'
-	numbG2.screen_loc = "WEST,NORTH-1"
-	numbG2.icon_state = "player_amount_icon"
-	delete_me += numbG2
-
-	var/plrText = "[plrs]"
-	for(var/i in 1 to length(plrText))
-		var/obj/screen_num/numbG = new()
-		numbG.icon_state = copytext(plrText,i,i+1) //Get every digit
-		numbG.screen_loc = "WEST+1:[(i*16)-16],NORTH-1"
-		numbG.alpha = 149
-		delete_me += numbG
+		var/obj/screen_num/numbG = health[i]
+		if(numbG)
+			numbG.icon_state = "healthnum[copytext(plrText,i,i+1)]" //Get every digit
 
 client/proc/dec_volume(var/am_i)
 
@@ -149,7 +140,7 @@ client
 	var/pixel_y4 = 0 //misc shit i think
 	var/pixel_y5 = 0 //height system
 
-	var/list/delete_me = list() //List of stuff to be deleted next tick
+	var/list/health = list() //Health hud stuff
 	var/sound/amb_sound = sound('music/interior.ogg')
 	var/vol = 0 //Ambient sound vol
 	var/sound/amb_sound_ext = sound('music/exterior.ogg')
@@ -164,6 +155,7 @@ client
 
 /obj/screen_num
 	plane = 10
+
 /obj/screen_alt/heightCalc
 	plane = 10
 	icon = 'screen1.dmi'
