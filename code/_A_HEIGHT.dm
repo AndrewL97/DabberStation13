@@ -60,6 +60,13 @@ turf
 			TurfGravity = 24/256
 			alpha = 0
 			TurfHeight = -416
+	simulated
+		floor
+			New()
+				..()
+				if(TurfHeight >= 32)
+					plane = MOB_PLANE_ALT
+					Get_Layer_Y(-1)
 /turf/simulated/floor/plating/water
 	TurfHeight = 0
 
