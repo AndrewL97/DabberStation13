@@ -2,7 +2,7 @@
 this is _A_MASTER
 the ultimate master controller except it sucks
 
-it's supposed to run in a 2.9 ghz/3.4 ghz core, k?
+there's no limitation on this.
 
 Functions :
 CHECK_TICK() - Do actions, but give the game a moment if we have done too much. So the CPU doesnt have a stroke, Use before procs, Works really weird. I think it could be done better.
@@ -15,9 +15,9 @@ var/listofitems = ""
 var/list/clients = list()
 var/special_processing = list()
 
-#define LIGHTINGFPS (1/15)*10 //change 30
+#define LIGHTINGFPS (1/10)*10 //change 30
 #define CPU_WARN 75
-#define CPU_CHECK_MAX 50 //if cpu goes higher than this, some things will do sleep(world.tick_lag)
+#define CPU_CHECK_MAX 40 //if cpu goes higher than this, some things will do sleep(world.tick_lag) and throttle, this is done in CHECK_TICK()
 
 client
 	New()
@@ -35,7 +35,7 @@ obj
 		return
 
 var/actions_per_tick = 0
-var/max_actions = 60 //Max actions per tick, Really fast. of course this can be loewr!!!!!!!!!!!
+var/max_actions = 50 //Max actions per tick, Really fast. of course this can be loewr!!!!!!!!!!!
 
 var/CPU_warning = 0
 
@@ -59,7 +59,7 @@ proc/CHECK_TICK_ATMOS() //epic optimizer (ATMOS EDITION)
 proc/CHECK_TICK() //epic optimizer
 	master_Processed += 1
 	actions_per_tick += 1
-	if(actions_per_tick > max_actions - (((max(0,min(world.cpu,100))/100)*(max_actions/2))*CPU_warning))
+	if(actions_per_tick > max_actions - ((max(0,min(world.cpu,100))/100)*(max_actions/2)*(world.cpu > CPU_CHECK_MAX)) )
 		sleep(world.tick_lag)
 		actions_per_tick = 0
 
