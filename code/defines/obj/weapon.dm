@@ -39,7 +39,6 @@
 
 /obj/item/weapon/dabdollar
 	name = "Dab Dolla"
-	desc = "You're rich, bitch!"
 	icon = 'items.dmi'
 	icon_state = "spacecash"
 	opacity = 0
@@ -50,6 +49,18 @@
 	throw2_speed = 1
 	throw2_range = 2
 	w_class = 1.0
+	var/worth = 10
+	New()
+		..()
+		desc = "It's worth [worth] DC."
+	c100
+		worth = 100
+	c500
+		worth = 500
+	c1000
+		worth = 1000
+	c2000
+		worth = 2000
 
 /obj/item/weapon/ammo
 	name = "ammo"

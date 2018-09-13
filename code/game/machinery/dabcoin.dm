@@ -8,13 +8,24 @@
 		user << browse(cssStyleSheetKaden + return_text(),"window=computer")
 		user.machine = src
 		onclose(user, "computer")
-
+	attackby(I as obj, user as mob)
+		if(istype(I,/obj/item/weapon/dabdollar))
+			var/obj/item/weapon/dabdollar/E = I
+			if(Cred)
+				Cred.dabcoins += E.worth
+				user << "\green You add [E.worth] dab coins to the machine!"
+				del I
+			else
+				user << "\red Error, not logged in."
+		else
+			..()
 
 	proc/return_text()
 		var/output
 		if(Cred)
 			output = {"Logged in : [Cred.owner]'s card<br>
 			Current Dabcoins : [Cred.dabcoins]<br>
+			To add more dabcoins, get a dab dollar and insert it into the machine, examine your dollar to find out it's value.<br>
 			<A href='?src=\ref[src];logout=1'>Log out</A>"}
 		else
 			output = {"Welcome to the dabcoins bank service.<br><br>
