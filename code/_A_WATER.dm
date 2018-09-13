@@ -10,7 +10,7 @@ turf
 	proc/Render_Water_Icon()
 		if(!gW1)
 			gW1 = new(locate(x,y,z))
-			gW1.layer = MOB_LAYER + 1
+			gW1.Get_Layer_Y(0)
 			gW1.plane = MOB_PLANE_ALT
 		if(!gW2)
 			gW2 = new(locate(x,y,z))

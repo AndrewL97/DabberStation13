@@ -93,7 +93,7 @@ client/proc/ProcessClient()
 		plrText = " [plrText]"
 	if(length(plrText) == 1)
 		plrText = "  [plrText]"
-	for(var/i in 1 to length(plrText))
+	for(var/i in 1 to 3)
 		var/obj/screen_num/numbG = health[i]
 		if(numbG)
 			numbG.icon_state = "healthnum[copytext(plrText,i,i+1)]" //Get every digit
