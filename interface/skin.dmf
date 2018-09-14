@@ -237,11 +237,10 @@ window "mapwindow"
 		size = 640x480
 		anchor1 = 0,0
 		anchor2 = 100,100
-		text-color = #000000
 		is-default = true
-		saved-params = "icon-size"
-		on-show = ".winset\"mainwindow.mainvsplit.left=mapwindow\""
-		on-hide = ".winset\"mainwindow.mainvsplit.left=\""
+		saved-params = "zoom;letterbox;zoom-mode"
+		icon-size = 64
+		zoom = 2
 
 window "outputwindow"
 	elem "outputwindow"
