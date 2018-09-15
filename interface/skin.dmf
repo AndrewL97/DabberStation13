@@ -342,12 +342,23 @@ window "infowindow"
 		can-minimize = false
 		can-resize = false
 		is-pane = true
+	elem "button4"
+		type = BUTTON
+		pos = 424,8
+		size = 208x24
+		anchor1 = 66,2
+		anchor2 = 99,7
+		text-color = #00ff00
+		background-color = #1e1e1e
+		saved-params = "is-checked"
+		text = "Ping Alternate Server"
+		command = "pingserv"
 	elem "button2"
 		type = BUTTON
-		pos = 320,8
-		size = 312x24
-		anchor1 = 50,0
-		anchor2 = 100,0
+		pos = 216,8
+		size = 208x24
+		anchor1 = 34,2
+		anchor2 = 66,7
 		text-color = #ffff00
 		background-color = #1e1e1e
 		saved-params = "is-checked"
@@ -356,9 +367,9 @@ window "infowindow"
 	elem "button1"
 		type = BUTTON
 		pos = 8,8
-		size = 312x24
-		anchor1 = 0,0
-		anchor2 = 50,0
+		size = 208x24
+		anchor1 = 1,2
+		anchor2 = 34,7
 		text-color = #8080ff
 		background-color = #1e1e1e
 		saved-params = "is-checked"
@@ -368,7 +379,7 @@ window "infowindow"
 		type = INFO
 		pos = 0,40
 		size = 640x440
-		anchor1 = 0,0
+		anchor1 = 0,8
 		anchor2 = 100,100
 		text-color = #ffffff
 		background-color = #000000

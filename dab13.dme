@@ -45,6 +45,7 @@
 #include "code\_A_LIGHTING.dm"
 #include "code\_A_MASTER.dm"
 #include "code\_A_PARTICLE.dm"
+#include "code\_A_PING.dm"
 #include "code\_A_VEHICLE.dm"
 #include "code\_A_WATER.dm"
 #include "code\_CLIENT_PROCESSING.dm"
