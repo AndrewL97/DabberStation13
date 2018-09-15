@@ -351,7 +351,7 @@ window "infowindow"
 		text-color = #00ff00
 		background-color = #1e1e1e
 		saved-params = "is-checked"
-		text = "Ping Alternate Server"
+		text = "Join Alternate Server"
 		command = "pingserv"
 	elem "button2"
 		type = BUTTON
