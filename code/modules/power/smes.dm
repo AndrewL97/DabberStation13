@@ -192,7 +192,7 @@
 	t += "<BR></PRE><HR><A href='?src=\ref[src];close=1'>Close</A>"
 
 	t += "</TT>"
-	user << browse(cssStyleSheetKaden + t, "window=smes;size=460x300")
+	user << browse(cssStyleSheetDab13 + t, "window=smes;size=460x300")
 	onclose(user, "smes")
 	return
 

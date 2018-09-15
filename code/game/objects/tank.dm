@@ -27,7 +27,7 @@
 <b>Mask Release Pressure:</b> <A href='?src=\ref[src];dist_p=-10'>-</A> <A href='?src=\ref[src];dist_p=-1'>-</A> [distribute_pressure] <A href='?src=\ref[src];dist_p=1'>+</A> <A href='?src=\ref[src];dist_p=10'>+</A><BR>
 <b>Mask Release Valve:</b> <A href='?src=\ref[src];stat=1'>[using_internal?("Open"):("Closed")]</A>
 "}
-	user << browse(cssStyleSheetKaden + message, "window=tank;size=600x300")
+	user << browse(cssStyleSheetDab13 + message, "window=tank;size=600x300")
 	onclose(user, "tank")
 	return
 

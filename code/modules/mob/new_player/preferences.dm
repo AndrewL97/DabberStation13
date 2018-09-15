@@ -256,7 +256,7 @@ datum/preferences
 		dat += "<a href='byond://?src=\ref[user];preferences=1;reset_all=1'>Reset Setup</a><br>"
 		dat += "</body></html>"
 
-		user << browse(cssStyleSheetKaden + dat, "window=preferences;size=300x640")
+		user << browse(cssStyleSheetDab13 + dat, "window=preferences;size=300x640")
 
 	proc/SetChoices(mob/user, occ=1)
 		var/HTML = "<body>"
@@ -280,7 +280,7 @@ datum/preferences
 		HTML += "</center></tt>"
 
 		user << browse(null, "window=preferences")
-		user << browse(cssStyleSheetKaden + HTML, "window=mob_occupation;size=320x500")
+		user << browse(cssStyleSheetDab13 + HTML, "window=mob_occupation;size=320x500")
 		return
 
 	proc/SetJob(mob/user, occ=1, job="Captain")

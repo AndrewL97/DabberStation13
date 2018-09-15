@@ -42,7 +42,7 @@ Frequency:
 <A href='byond://?src=\ref[src];freq=10'>+</A><BR>
 [t1]
 </TT>"}
-	user << browse(cssStyleSheetKaden + dat, "window=radio")
+	user << browse(cssStyleSheetDab13 + dat, "window=radio")
 	onclose(user, "radio")
 	return
 

@@ -225,7 +225,7 @@
 		t += "Demand : [SMESC.loaddemand]<br>"
 		t += "Charge : [SMESC.charge]/[SMESC.capacity]<br>"
 
-	user << browse(cssStyleSheetKaden + t, "window=solcon")
+	user << browse(cssStyleSheetDab13 + t, "window=solcon")
 	onclose(user, "solcon")
 	return
 

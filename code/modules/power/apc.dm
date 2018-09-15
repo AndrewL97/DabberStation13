@@ -304,7 +304,7 @@
 			t1 += "<br>"
 		t1 += text("<br>\n[(src.locked ? "The APC is locked." : "The APC is unlocked.")]<br>\n[(src.shorted ? "The APCs power has been shorted." : "The APC is working properly!")]<br>\n[(src.aidisabled ? "The 'AI control allowed' light is off." : "The 'AI control allowed' light is on.")]")
 		t1 += text("<p><a href='?src=\ref[src];close2=1'>Close</a></p>\n")
-		user << browse(cssStyleSheetKaden + t1, "window=apcwires")
+		user << browse(cssStyleSheetDab13 + t1, "window=apcwires")
 		onclose(user, "apcwires")
 
 	user.machine = src
@@ -396,7 +396,7 @@
 	t += "<BR><HR><A href='?src=\ref[src];close=1'>Close</A>"
 
 	t += "</TT>"
-	user << browse(cssStyleSheetKaden + t, "window=apc")
+	user << browse(cssStyleSheetDab13 + t, "window=apc")
 	onclose(user, "apc")
 	return
 

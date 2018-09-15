@@ -99,7 +99,7 @@ var/showadminmessages = 1
 			<A href='?src=\ref[src];c_mode2=confliction'>Confliction (TESTING)</A><br>
 			<A href='?src=\ref[src];c_mode2=ctf'>Capture The Flag (Beta)</A><br><br>
 			Now: [master_mode]\n"})
-			usr << browse(cssStyleSheetKaden + dat, "window=c_mode")
+			usr << browse(cssStyleSheetDab13 + dat, "window=c_mode")
 
 	if (href_list["c_mode2"])
 		if ((src.rank in admin_ranks)) //ADMINlist( "Secondary Administrator", "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
@@ -298,7 +298,7 @@ var/showadminmessages = 1
 				foo += text("<A HREF='?src=\ref[];forcespeech=\ref[]'>Say</A> \]", src, M)
 			dat += text("N: [] R: [] (K: []) (IP: []) []<BR>", M.name, M.real_name, (M.client ? M.client : "No client"), M.lastKnownIP, foo)
 
-		usr << browse(cssStyleSheetKaden + dat, "window=players;size=900x480")
+		usr << browse(cssStyleSheetDab13 + dat, "window=players;size=900x480")
 
 *****************AFTER******************/
 
@@ -334,7 +334,7 @@ var/showadminmessages = 1
 		foo += text("<A href='?src=\ref[src];jumpto=\ref[M]'>Jump to</A> | ")
 		foo += text("<A href='?src=\ref[src];newban=\ref[M]'>Ban</A> \]")
 		dat += text("<body>[foo]</body></html>")
-		usr << browse(cssStyleSheetKaden + dat, "window=adminplayeropts;size=480x100")
+		usr << browse(cssStyleSheetDab13 + dat, "window=adminplayeropts;size=480x100")
 
 	if (href_list["jumpto"])
 		if(( src.level in list(6, 5, 4) ) || ((src.level in list(3, 2)) && (src.state == 2)))
@@ -464,7 +464,7 @@ var/showadminmessages = 1
 			else
 				alert("This cannot happen")
 				return
-			usr << browse(cssStyleSheetKaden + dat, "window=prom_demot;size=480x300")
+			usr << browse(cssStyleSheetDab13 + dat, "window=prom_demot;size=480x300")
 
 
 	if (href_list["object_list"])
@@ -797,12 +797,12 @@ var/showadminmessages = 1
 					var/dat = "<B>Bombing List<HR>"
 					for(var/l in bombers)
 						dat += text("[l]<BR>")
-					usr << browse(cssStyleSheetKaden + dat, "window=bombers")
+					usr << browse(cssStyleSheetDab13 + dat, "window=bombers")
 				if("list_signalers")
 					var/dat = "<B>Showing last [length(lastsignalers)] signalers.</B><HR>"
 					for(var/sig in lastsignalers)
 						dat += "[sig]<BR>"
-					usr << browse(cssStyleSheetKaden + dat, "window=lastsignalers;size=800x500")
+					usr << browse(cssStyleSheetDab13 + dat, "window=lastsignalers;size=800x500")
 				if("check_antagonist")
 					if (ticker && ticker.current_state >= GAME_STATE_PLAYING)
 						var/dat = "<html><head><title>Round Status</title></head><body><h1><B>Round Status</B></h1>"
@@ -873,7 +873,7 @@ var/showadminmessages = 1
 								else
 									dat += "There are no traitors."
 						dat += "</body></html>"
-						usr << browse(cssStyleSheetKaden + dat, "window=roundstatus;size=400x500")
+						usr << browse(cssStyleSheetDab13 + dat, "window=roundstatus;size=400x500")
 					else
 						alert("The game hasn't started yet!")
 				if("showailaws")
@@ -895,7 +895,7 @@ var/showadminmessages = 1
 						if(H.ckey)
 							dat += text("<tr><td>[]</td><td>[]</td></tr>", H.name, (istype(H.wear_id, /obj/item/weapon/card/id) ? text("[]", H.wear_id.assignment) : "Unknown Position"))
 					dat += "</table>"
-					usr << browse(cssStyleSheetKaden + dat, "window=manifest;size=440x410")
+					usr << browse(cssStyleSheetDab13 + dat, "window=manifest;size=440x410")
 				if("DNA")
 					var/dat = "<B>Showing DNA from blood.</B><HR>"
 					dat += "<table cellspacing=5><tr><th>Name</th><th>DNA</th><th>Blood Type</th></tr>"
@@ -903,7 +903,7 @@ var/showadminmessages = 1
 						if(H.dna && H.ckey)
 							dat += "<tr><td>[H]</td><td>[H.dna.unique_enzymes]</td><td>[H.b_type]</td></tr>"
 					dat += "</table>"
-					usr << browse(cssStyleSheetKaden + dat, "window=DNA;size=440x410")
+					usr << browse(cssStyleSheetDab13 + dat, "window=DNA;size=440x410")
 				if("fingerprints")
 					var/dat = "<B>Showing Fingerprints.</B><HR>"
 					dat += "<table cellspacing=5><tr><th>Name</th><th>Fingerprints</th></tr>"
@@ -916,7 +916,7 @@ var/showadminmessages = 1
 							else if(!H.dna)
 								dat += "<tr><td>[H]</td><td>H.dna = null</td></tr>"
 					dat += "</table>"
-					usr << browse(cssStyleSheetKaden + dat, "window=fingerprints;size=440x410")
+					usr << browse(cssStyleSheetDab13 + dat, "window=fingerprints;size=440x410")
 				else
 			if (usr)
 				log_admin("[key_name(usr)] used secret [href_list["secretsadmin"]]")
@@ -932,7 +932,7 @@ var/showadminmessages = 1
 						dat += "<li>[l]</li>"
 					if(!admin_log.len)
 						dat += "No-one has done anything this round!"
-					usr << browse(cssStyleSheetKaden + dat, "window=admin_log")
+					usr << browse(cssStyleSheetDab13 + dat, "window=admin_log")
 		return
 		//hahaha
 
@@ -972,7 +972,7 @@ var/showadminmessages = 1
 
 	dat += "</table></body></html>"
 
-	usr << browse(cssStyleSheetKaden + dat, "window=players;size=540x480")
+	usr << browse(cssStyleSheetDab13 + dat, "window=players;size=540x480")
 
 
 /obj/admins/proc/Game()
@@ -1010,7 +1010,7 @@ var/showadminmessages = 1
 	if(lvl >= 5)
 		dat += "<A href='?src=\ref[src];create_mob=1'>Create Mob</A><br>"
 //			if(lvl == 6 )
-	usr << browse(cssStyleSheetKaden + dat, "window=admin2;size=210x180")
+	usr << browse(cssStyleSheetDab13 + dat, "window=admin2;size=210x180")
 	return
 
 /obj/admins/proc/Secrets()
@@ -1076,7 +1076,7 @@ var/showadminmessages = 1
 <BR>
 <A href='?src=\ref[src];secretscoder=spawn_objects'>Admin Log</A><BR>
 "}
-	usr << browse(cssStyleSheetKaden + dat, "window=secrets")
+	usr << browse(cssStyleSheetDab13 + dat, "window=secrets")
 	return
 
 /obj/admins/proc/Voting()
@@ -1114,7 +1114,7 @@ var/showadminmessages = 1
 //			if(lvl >= 5)
 //			if(lvl == 6 )
 
-	usr << browse(cssStyleSheetKaden + dat, "window=admin2;size=210x160")
+	usr << browse(cssStyleSheetDab13 + dat, "window=admin2;size=210x160")
 	return
 
 
@@ -1592,7 +1592,7 @@ var/sandbox = 1
 
 	var/output = "<h1>Sandbox Panel</h1><br>"
 	output += "[listofitems]"
-	src << browse(cssStyleSheetKaden + output,"window=sandboxwindow;size=800x600;can_close=1")
+	src << browse(cssStyleSheetDab13 + output,"window=sandboxwindow;size=800x600;can_close=1")
 
 
 /client/Topic(href)

@@ -59,7 +59,7 @@
 
 	t += "<BR><HR><A href='?src=\ref[src];close=1'>Close</A></TT>"
 
-	user << browse(cssStyleSheetKaden + t, "window=powcomp;size=420x700")
+	user << browse(cssStyleSheetDab13 + t, "window=powcomp;size=420x700")
 	onclose(user, "powcomp")
 
 

@@ -222,7 +222,7 @@ Pod/Blast Doors computer
 		else
 			body = "<a href='?src=\ref[src];auth=1'>{Log in}</a>"
 		dat = "<tt>[header][body]<hr><a href='?src=\ref[src];mode=1'>Access Crew Manifest</a><br></tt>"
-	user << browse(cssStyleSheetKaden + dat, "window=id_com;size=700x375")
+	user << browse(cssStyleSheetDab13 + dat, "window=id_com;size=700x375")
 	onclose(user, "id_com")
 	return
 
@@ -508,7 +508,7 @@ Pod/Blast Doors computer
 		dat += text("<BR>\n<A href = '?src=\ref[];door=1'>Toggle Outer Door</A><BR>", src)
 	//*****
 	dat += text("<BR><BR><A href='?src=\ref[];mach_close=computer'>Close</A></TT></BODY></HTML>", user)
-	user << browse(cssStyleSheetKaden + dat, "window=computer;size=400x500")
+	user << browse(cssStyleSheetDab13 + dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return
 

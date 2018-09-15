@@ -63,7 +63,7 @@
 		else
 			dat += "The sleeper is empty."
 		dat += text("<BR><BR><A href='?src=\ref[];mach_close=sleeper'>Close</A>", user)
-		user << browse(cssStyleSheetKaden + dat, "window=sleeper;size=400x500")
+		user << browse(cssStyleSheetDab13 + dat, "window=sleeper;size=400x500")
 		onclose(user, "sleeper")
 	return
 

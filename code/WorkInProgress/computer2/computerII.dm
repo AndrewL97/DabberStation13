@@ -179,7 +179,7 @@
 
 		dat += "</TT>"
 
-	user << browse(cssStyleSheetKaden + dat,"window=comp2")
+	user << browse(cssStyleSheetDab13 + dat,"window=comp2")
 	onclose(user,"comp2")
 	return
 

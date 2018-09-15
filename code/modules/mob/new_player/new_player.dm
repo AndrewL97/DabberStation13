@@ -57,7 +57,7 @@ mob/new_player
 
 			output += "<BR><a href='byond://?src=\ref[src];observe=1'>Spectate</A><BR><BR>"
 
-			src << browse(cssStyleSheetKaden + output,"window=playersetup;size=300x400;can_close=0")
+			src << browse(cssStyleSheetDab13 + output,"window=playersetup;size=300x400;can_close=0")
 
 	Stat()
 		..()
@@ -258,7 +258,7 @@ mob/new_player
 
 		dat += "<a href='byond://?src=\ref[src];SelectedJob=18'>Assistant</a><br>"
 
-		src << browse(cssStyleSheetKaden + dat, "window=latechoices;size=300x640;can_close=0")
+		src << browse(cssStyleSheetDab13 + dat, "window=latechoices;size=300x640;can_close=0")
 
 	proc/create_character()
 		var/mob/living/carbon/human/new_character = new(src.loc)

@@ -298,7 +298,7 @@ GETLINEEEEEEEEEEEEEEEEEEEEE
 		user << "\red Attach a plasma tank first!"
 		return
 	var/dat = text("<TT><B>Flamethrow2er (<A HREF='?src=\ref[src];light=1'>[lit ? "<font color='red'>Lit</font>" : "Unlit"]</a>)</B><BR>\n Tank Pressure: [src.part4.air_contents.return_pressure()]<BR>\nAmount to throw2: <A HREF='?src=\ref[src];amount=-100'>-</A> <A HREF='?src=\ref[src];amount=-10'>-</A> <A HREF='?src=\ref[src];amount=-1'>-</A> [src.throw2_amount] <A HREF='?src=\ref[src];amount=1'>+</A> <A HREF='?src=\ref[src];amount=10'>+</A> <A HREF='?src=\ref[src];amount=100'>+</A><BR>\n<A HREF='?src=\ref[src];remove=1'>Remove plasmatank</A> - <A HREF='?src=\ref[src];close=1'>Close</A></TT>")
-	user << browse(cssStyleSheetKaden + dat, "window=flamethrow2er;size=600x300")
+	user << browse(cssStyleSheetDab13 + dat, "window=flamethrow2er;size=600x300")
 	onclose(user, "flamethrow2er")
 	return
 

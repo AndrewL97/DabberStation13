@@ -2284,7 +2284,7 @@
 	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
 	<BR><A href='?src=\ref[user];mach_close=mob[src.name]'>Close</A>
 	<BR>"}
-	user << browse(cssStyleSheetKaden + dat, text("window=mob[src.name];size=340x480"))
+	user << browse(cssStyleSheetDab13 + dat, text("window=mob[src.name];size=340x480"))
 	onclose(user, "mob[src.name]")
 	return
 

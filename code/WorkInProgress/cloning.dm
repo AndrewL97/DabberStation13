@@ -190,7 +190,7 @@
 			dat += "<b><a href='byond://?src=\ref[src];menu=3'>No</a></b>"
 
 
-	user << browse(cssStyleSheetKaden + dat, "window=cloning")
+	user << browse(cssStyleSheetDab13 + dat, "window=cloning")
 	onclose(user, "cloning")
 	return
 

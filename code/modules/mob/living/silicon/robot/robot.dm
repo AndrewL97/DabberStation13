@@ -60,7 +60,7 @@
 		dat += "<BR>\n"
 
 	src.viewalerts = 1
-	src << browse(cssStyleSheetKaden + dat, "window=robotalerts&can_close=0")
+	src << browse(cssStyleSheetDab13 + dat, "window=robotalerts&can_close=0")
 
 /mob/living/silicon/robot/blob_act()
 	if (src.stat != 2)
@@ -458,7 +458,7 @@
 			dat += text("[obj]: \[<B>Activated</B> | <A HREF=?src=\ref[src];deact=\ref[obj]>Deactivate</A>\]<BR>")
 		else
 			dat += text("[obj]: \[<A HREF=?src=\ref[src];act=\ref[obj]>Activate</A> | <B>Deactivated</B>\]<BR>")
-	src << browse(cssStyleSheetKaden + dat, "window=robotmod&can_close=0")
+	src << browse(cssStyleSheetDab13 + dat, "window=robotmod&can_close=0")
 
 
 /mob/living/silicon/robot/Topic(href, href_list)
@@ -544,7 +544,7 @@ Frequency:
 <A href='byond://?src=\ref[R];freq=10'>+</A><BR>
 -------
 </TT>"}
-	src << browse(cssStyleSheetKaden + dat, "window=radio")
+	src << browse(cssStyleSheetDab13 + dat, "window=radio")
 	onclose(src, "radio")
 	return
 

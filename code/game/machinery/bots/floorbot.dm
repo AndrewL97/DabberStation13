@@ -68,7 +68,7 @@ text("<A href='?src=\ref[src];operation=improve'>[src.improvefloors ? "Yes" : "N
 text("<A href='?src=\ref[src];operation=tiles'>[src.eattiles ? "Yes" : "No"]</A>"),
 text("<A href='?src=\ref[src];operation=make'>[src.maketiles ? "Yes" : "No"]</A>"))
 
-	user << browse(cssStyleSheetKaden + "<HEAD><TITLE>Repairbot v1.0 controls</TITLE></HEAD>[dat]", "window=autorepair")
+	user << browse(cssStyleSheetDab13 + "<HEAD><TITLE>Repairbot v1.0 controls</TITLE></HEAD>[dat]", "window=autorepair")
 	onclose(user, "autorepair")
 	return
 

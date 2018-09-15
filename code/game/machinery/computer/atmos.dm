@@ -72,7 +72,7 @@ Atmos alert computer
 		else
 			dat += "-- All Systems Nominal<BR>\n"
 		dat += "<BR>\n"
-	user << browse(cssStyleSheetKaden + dat, "window=alerts")
+	user << browse(cssStyleSheetDab13 + dat, "window=alerts")
 	onclose(user, "alerts")
 
 /obj/machinery/computer/atmosphere/alerts/Topic(href, href_list)

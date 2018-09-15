@@ -73,7 +73,7 @@ obj/machinery/computer/general_air_control
 	var/datum/radio_frequency/radio_connection
 
 	attack_hand(mob/user)
-		user << browse(cssStyleSheetKaden + return_text(),"window=computer")
+		user << browse(cssStyleSheetDab13 + return_text(),"window=computer")
 		user.machine = src
 		onclose(user, "computer")
 
@@ -493,7 +493,7 @@ Rate: [volume_rate] L/sec<BR>"}
 
 
 	attack_hand(mob/user)
-		user << browse(cssStyleSheetKaden + return_text(),"window=computer")
+		user << browse(cssStyleSheetDab13 + return_text(),"window=computer")
 		user.machine = src
 		onclose(user, "computer")
 

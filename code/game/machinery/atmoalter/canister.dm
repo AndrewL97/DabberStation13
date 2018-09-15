@@ -171,7 +171,7 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-100'>-</A> <A href='?src
 <A href='?src=\ref[user];mach_close=canister'>Close</A><BR>
 "}
 
-	user << browse(cssStyleSheetKaden + output_text, "window=canister;size=600x300")
+	user << browse(cssStyleSheetDab13 + output_text, "window=canister;size=600x300")
 	onclose(user, "canister")
 	return
 

@@ -140,7 +140,7 @@
 		pdat += "The green light is [src.extended_inventory ? "on" : "off"].<BR>"
 		pdat += "The [(src.wires & WIRE_SCANID) ? "purple" : "yellow"] light is on.<BR>"
 
-		user << browse(cssStyleSheetKaden + pdat, "window=vendwires")
+		user << browse(cssStyleSheetDab13 + pdat, "window=vendwires")
 		onclose(user, "vendwires")
 
 	var/dat = "<TT><b>Select an item:</b><br>"
@@ -163,7 +163,7 @@
 
 		dat += "</TT>"
 
-	user << browse(cssStyleSheetKaden + dat, "window=vending")
+	user << browse(cssStyleSheetDab13 + dat, "window=vending")
 	onclose(user, "vending")
 	return
 

@@ -98,7 +98,7 @@ Target Pressure: <A href='?src=\ref[src];volume_adj=-10'>-</A> <A href='?src=\re
 <A href='?src=\ref[user];mach_close=scrubber'>Close</A><BR>
 "}
 
-	user << browse(cssStyleSheetKaden + output_text, "window=scrubber;size=600x300")
+	user << browse(cssStyleSheetDab13 + output_text, "window=scrubber;size=600x300")
 	onclose(user, "scrubber")
 	return
 

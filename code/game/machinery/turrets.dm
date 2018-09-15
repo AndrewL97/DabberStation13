@@ -269,7 +269,7 @@
 		t += text("Turrets [] - <A href='?src=\ref[];toggleOn=1'>[]?</a><br>\n", src.enabled?"activated":"deactivated", src, src.enabled?"Disable":"Enable")
 		t += text("Currently set for [] - <A href='?src=\ref[];toggleLethal=1'>Change to []?</a><br>\n", src.lethal?"lethal":"stun repeatedly", src,  src.lethal?"Stun repeatedly":"Lethal")
 
-	user << browse(cssStyleSheetKaden + t, "window=turretid")
+	user << browse(cssStyleSheetDab13 + t, "window=turretid")
 	onclose(user, "turretid")
 
 /obj/machinery/turretid/Topic(href, href_list)

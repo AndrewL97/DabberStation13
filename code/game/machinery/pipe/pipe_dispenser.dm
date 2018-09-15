@@ -26,7 +26,7 @@
 //<A href='?src=\ref[src];make=10'>Filter Inlet<BR>
 
 
-	user << browse(cssStyleSheetKaden + "<HEAD><TITLE>Pipe Dispenser</TITLE></HEAD><TT>[dat]</TT>", "window=pipedispenser")
+	user << browse(cssStyleSheetDab13 + "<HEAD><TITLE>Pipe Dispenser</TITLE></HEAD><TT>[dat]</TT>", "window=pipedispenser")
 	onclose(user, "pipedispenser")
 	return
 
@@ -70,7 +70,7 @@
 <A href='?src=\ref[src];dmake=4'>Trunk</A><BR>
 "}
 
-	user << browse(cssStyleSheetKaden + "<HEAD><TITLE>Disposal Pipe Dispenser</TITLE></HEAD><TT>[dat]</TT>", "window=pipedispenser")
+	user << browse(cssStyleSheetDab13 + "<HEAD><TITLE>Disposal Pipe Dispenser</TITLE></HEAD><TT>[dat]</TT>", "window=pipedispenser")
 	return
 
 // 0=straight, 1=bent, 2=junction-j1, 3=junction-j2, 4=junction-y, 5=trunk

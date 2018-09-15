@@ -83,7 +83,7 @@
 		dat += "<BR>\n<small>Error codes: 0x0000001E 0x0000007B</small><BR>\n"
 
 	dat += "<BR>\n<A href='?src=\ref[src];close=1'>Close</A><BR>\n"
-	user << browse(cssStyleSheetKaden + dat, "window=filter_control;size=300x225")
+	user << browse(cssStyleSheetDab13 + dat, "window=filter_control;size=300x225")
 	onclose(user, "filter_control")
 /obj/machinery/filter_control/Topic(href, href_list)
 	if (href_list["close"])

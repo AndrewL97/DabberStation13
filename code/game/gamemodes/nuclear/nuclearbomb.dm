@@ -6,7 +6,7 @@
 	var/dat = "<TT><B>Nuclear Fission Explosive</B><BR><center>\nNuke controls. Do not use without dabber permission. Be careful, no going back once you do it!"
 	dat += "<br><br><b><a href='byond://?src=\ref[src];timer=1'>Enable</a></b>"
 
-	user << browse(cssStyleSheetKaden + dat, "window=nuclearbomb;size=300x400")
+	user << browse(cssStyleSheetDab13 + dat, "window=nuclearbomb;size=300x400")
 	onclose(user, "nuclearbomb")
 	return
 

@@ -50,7 +50,7 @@
 <BR>
 <B>No Patient Detected</B>
 "}
-	user << browse(cssStyleSheetKaden + dat, "window=op")
+	user << browse(cssStyleSheetDab13 + dat, "window=op")
 	onclose(user, "op")
 
 /obj/machinery/computer/operating/Topic(href, href_list)

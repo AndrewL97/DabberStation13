@@ -118,7 +118,7 @@
 					//To-do: System recovery shit (maybe have a dedicated computer for this kind of thing)
 
 
-	user << browse(cssStyleSheetKaden + dat,"window=pda2")
+	user << browse(cssStyleSheetDab13 + dat,"window=pda2")
 	onclose(user,"pda2")
 	return
 

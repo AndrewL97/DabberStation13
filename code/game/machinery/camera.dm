@@ -277,13 +277,13 @@
 		for(var/mob/living/silicon/ai/O in world)
 			//if (O.current == src)
 			O << "[user] holds a paper up to one of your cameras ..."
-			O << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", X.name, X.info), text("window=[]", X.name))
+			O << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", X.name, X.info), text("window=[]", X.name))
 		for(var/mob/O in world)
 			if (istype(O.machine, /obj/machinery/computer/security))
 				var/obj/machinery/computer/security/S = O.machine
 				if (S.current == src)
 					O << "[user] holds a paper up to one of the cameras ..."
-					O << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", X.name, X.info), text("window=[]", X.name))
+					O << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", X.name, X.info), text("window=[]", X.name))
 	else if (istype(W, /obj/item/weapon/camera_bug))
 		if (!src.status)
 			user << "\blue Camera non-functional"

@@ -33,4 +33,4 @@ datum/mind
 				output += "<B>Objective #[obj_count]</B>: [objective.explanation_text]"
 				obj_count++
 
-		recipient << browse(cssStyleSheetKaden + output,"window=memory")
+		recipient << browse(cssStyleSheetDab13 + output,"window=memory")

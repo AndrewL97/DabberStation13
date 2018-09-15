@@ -69,7 +69,7 @@
 		dat += text("The red light is [src.disabled ? "off" : "on"].<BR>")
 		dat += text("The green light is [src.shocked ? "off" : "on"].<BR>")
 		dat += text("The blue light is [src.hacked ? "off" : "on"].<BR>")
-		user << browse(cssStyleSheetKaden + "<HEAD><TITLE>Autolathe Hacking</TITLE></HEAD>[dat]","window=autolathe_hack")
+		user << browse(cssStyleSheetDab13 + "<HEAD><TITLE>Autolathe Hacking</TITLE></HEAD>[dat]","window=autolathe_hack")
 		onclose(user, "autolathe_hack")
 		return
 	if (src.disabled)
@@ -85,7 +85,7 @@
 			objs += src.LL
 		for(var/obj/t in objs)
 			dat += text("<A href='?src=\ref[src];make=\ref[t]'>[t.name] ([t.m_amt] cc metal/[t.g_amt] cc glass)<BR>")
-	user << browse(cssStyleSheetKaden + "<HEAD><TITLE>Autolathe Control Panel</TITLE></HEAD><TT>[dat]</TT>", "window=autolathe_regular")
+	user << browse(cssStyleSheetDab13 + "<HEAD><TITLE>Autolathe Control Panel</TITLE></HEAD><TT>[dat]</TT>", "window=autolathe_regular")
 	onclose(user, "autolathe_regular")
 	return
 

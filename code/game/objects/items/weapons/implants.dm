@@ -160,7 +160,7 @@ No Implant Specifics"}
 			dat += "The implant casing is empty."
 	else
 		dat += "Please insert an implant casing!"
-	user << browse(cssStyleSheetKaden + dat, "window=implantpad")
+	user << browse(cssStyleSheetDab13 + dat, "window=implantpad")
 	onclose(user, "implantpad")
 	return
 

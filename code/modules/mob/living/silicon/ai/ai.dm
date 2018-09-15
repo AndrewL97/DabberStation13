@@ -32,7 +32,7 @@
 		dat += "<BR>\n"
 
 	src.viewalerts = 1
-	src << browse(cssStyleSheetKaden + dat, "window=aialerts&can_close=0")
+	src << browse(cssStyleSheetDab13 + dat, "window=aialerts&can_close=0")
 
 /mob/living/silicon/ai/proc/ai_cancel_call()
 	set category = "AI Commands"

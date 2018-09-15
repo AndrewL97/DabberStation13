@@ -46,7 +46,7 @@ client
 			html += body
 			html += "</body></html>"
 
-			usr << browse(cssStyleSheetKaden + html, "window=variables\ref[D]")
+			usr << browse(cssStyleSheetDab13 + html, "window=variables\ref[D]")
 
 			return
 

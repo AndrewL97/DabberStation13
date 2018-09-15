@@ -201,7 +201,7 @@
 		var/dat2 = src.interact_ai(user) // give the AI a different interact proc to limit its access
 		if(dat2)
 			dat +=  dat2
-			user << browse(cssStyleSheetKaden + dat, "window=communications;size=400x500")
+			user << browse(cssStyleSheetDab13 + dat, "window=communications;size=400x500")
 			onclose(user, "communications")
 		return
 
@@ -260,7 +260,7 @@
 
 
 	dat += "<BR>\[ [(src.state != STATE_DEFAULT) ? "<A HREF='?src=\ref[src];operation=main'>Main Menu</A> | " : ""]<A HREF='?src=\ref[user];mach_close=communications'>Close</A> \]"
-	user << browse(cssStyleSheetKaden + dat, "window=communications;size=400x500")
+	user << browse(cssStyleSheetDab13 + dat, "window=communications;size=400x500")
 	onclose(user, "communications")
 
 /obj/machinery/computer/communications/proc/interact_ai(var/mob/living/silicon/ai/user as mob)

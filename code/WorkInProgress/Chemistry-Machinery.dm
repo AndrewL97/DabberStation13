@@ -51,7 +51,7 @@
 		if (href_list["dispense"])
 			if(!energy)
 				var/dat = "Not enough energy.<BR><A href='?src=\ref[src];ok=1'>OK</A>"
-				usr << browse(cssStyleSheetKaden + "<TITLE>Chemical Dispenser</TITLE>Chemical dispenser:<BR>Energy = [energy]/[max_energy]<BR><BR>[dat]", "window=chem_dispenser")
+				usr << browse(cssStyleSheetDab13 + "<TITLE>Chemical Dispenser</TITLE>Chemical dispenser:<BR>Energy = [energy]/[max_energy]<BR><BR>[dat]", "window=chem_dispenser")
 				return
 			var/id = href_list["dispense"]
 			var/obj/item/weapon/reagent_containers/glass/dispenser/G = new/obj/item/weapon/reagent_containers/glass/dispenser(src.loc)
@@ -91,7 +91,7 @@
 				if(temp.id == re)
 					dat += "<A href='?src=\ref[src];dispense=[temp.id];state=[temp.reagent_state];name=[temp.name]'>[temp.name]</A><BR>"
 					dat += "[temp.description]<BR><BR>"
-		user << browse(cssStyleSheetKaden + "<TITLE>Chemical Dispenser</TITLE>Chemical dispenser:<BR>Energy = [energy]/[max_energy]<BR><BR>[dat]", "window=chem_dispenser")
+		user << browse(cssStyleSheetDab13 + "<TITLE>Chemical Dispenser</TITLE>Chemical dispenser:<BR>Energy = [energy]/[max_energy]<BR><BR>[dat]", "window=chem_dispenser")
 
 		onclose(user, "chem_dispenser")
 		return
@@ -167,7 +167,7 @@
 			return
 		else if (href_list["analyze"])
 			var/dat = "<TITLE>Chemmaster 3000</TITLE>Chemical infos:<BR><BR>Name:<BR>[href_list["name"]]<BR><BR>Description:<BR>[href_list["desc"]]<BR><BR><BR><A href='?src=\ref[src];main=1'>(Back)</A>"
-			usr << browse(cssStyleSheetKaden + dat, "window=chem_master;size=575x400")
+			usr << browse(cssStyleSheetDab13 + dat, "window=chem_master;size=575x400")
 			return
 		else if (href_list["main"])
 			attack_hand(usr)
@@ -226,6 +226,6 @@
 					dat += "[G.name] , [G.volume] Units - <A href='?src=\ref[src];isolate=[G.id]'>(Isolate)</A> <A href='?src=\ref[src];remove=[G.id]'>(Remove all)</A> <A href='?src=\ref[src];remove5=[G.id]'>(Remove 5)</A> <A href='?src=\ref[src];remove1=[G.id]'>(Remove 1)</A> <A href='?src=\ref[src];analyze=1;desc=[G.description];name=[G.name]'>(Analyze)</A><BR>"
 				dat += "<BR><A href='?src=\ref[src];createpill=1'>Create pill</A><BR>"
 				dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (30 units max)</A>"
-		user << browse(cssStyleSheetKaden + "<TITLE>Chemmaster 3000</TITLE>Chemmaster menu:<BR><BR>[dat]", "window=chem_master;size=575x400")
+		user << browse(cssStyleSheetDab13 + "<TITLE>Chemmaster 3000</TITLE>Chemmaster menu:<BR><BR>[dat]", "window=chem_master;size=575x400")
 		onclose(user, "chem_master")
 		return

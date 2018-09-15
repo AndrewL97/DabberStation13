@@ -169,7 +169,7 @@ LATTICE
 			counter = 1
 		t1 += "<BR>"
 	t1 += "</TT></HTML>"
-	user << browse(cssStyleSheetKaden + t1, "window=met_sheet")
+	user << browse(cssStyleSheetDab13 + t1, "window=met_sheet")
 	onclose(user, "met_sheet")
 	return
 
@@ -346,7 +346,7 @@ LATTICE
 			counter = 1
 		t1 += "<BR>"
 	t1 += "</TT></HTML>"
-	user << browse(cssStyleSheetKaden + t1, "window=met_sheet")
+	user << browse(cssStyleSheetDab13 + t1, "window=met_sheet")
 	onclose(user, "met_sheet")
 	return
 

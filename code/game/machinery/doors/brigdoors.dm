@@ -47,7 +47,7 @@
 	dat += text("<br><A href='?src=\ref[src];openall=1'>Open All</A><br>")
 	dat += text("<A href='?src=\ref[src];closeall=1'>Close All</A><br>")
 	dat += text("<BR><BR><A href='?src=\ref[user];mach_close=computer'>Close</A></TT></BODY></HTML>")
-	user << browse(cssStyleSheetKaden + dat, "window=computer;size=400x500")
+	user << browse(cssStyleSheetDab13 + dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return
 
@@ -157,7 +157,7 @@
 			else
 				dat += text("<BR><BR><A href='?src=\ref[];fc=1'>Flash Cell</A>", src)
 	dat += text("<BR><BR><A href='?src=\ref[];mach_close=computer'>Close</A></TT></BODY></HTML>", user)
-	user << browse(cssStyleSheetKaden + dat, "window=computer;size=400x500")
+	user << browse(cssStyleSheetDab13 + dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return
 

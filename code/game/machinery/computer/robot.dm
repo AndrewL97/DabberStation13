@@ -91,7 +91,7 @@
 			\n<BR>
 			\n<A href='?src=\ref[user];mach_close=computer'>Close</A>"}
 
-	user << browse(cssStyleSheetKaden + dat, "window=computer;size=400x500")
+	user << browse(cssStyleSheetDab13 + dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return
 

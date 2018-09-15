@@ -58,7 +58,7 @@ FINGERPRINT CARD
 	var/dat = "<B>Clipboard</B><BR>"
 	for(var/obj/item/weapon/f_card/P in src)
 		dat += text("<A href='?src=\ref[];read=\ref[]'>[]</A> <A href='?src=\ref[];remove=\ref[]'>Remove</A><BR>", src, P, P.name, src, P)
-	user << browse(cssStyleSheetKaden + dat, "window=fcardholder")
+	user << browse(cssStyleSheetDab13 + dat, "window=fcardholder")
 	onclose(user, "fcardholder")
 	return
 
@@ -89,10 +89,10 @@ FINGERPRINT CARD
 			var/obj/item/weapon/f_card/P = locate(href_list["read"])
 			if ((P && P.loc == src))
 				if (!( istype(usr, /mob/living/carbon/human) ))
-					usr << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", P.name, P.display()), text("window=[]", P.name))
+					usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", P.name, P.display()), text("window=[]", P.name))
 					onclose(usr, "[P.name]")
 				else
-					usr << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", P.name, P.display()), text("window=[]", P.name))
+					usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", P.name, P.display()), text("window=[]", P.name))
 					onclose(usr, "[P.name]")
 			src.add_fingerprint(usr)
 		if (ismob(src.loc))
@@ -165,7 +165,7 @@ FINGERPRINT CARD
 
 	..()
 	usr << text("\blue There are [] on the stack!", src.amount)
-	usr << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, display()), text("window=[]", src.name))
+	usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, display()), text("window=[]", src.name))
 	onclose(usr, "[src.name]")
 	return
 

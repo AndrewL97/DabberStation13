@@ -26,10 +26,10 @@ CLIPBOARDS
 
 	..()
 	if (!( istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon) ))
-		usr << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, stars(src.info)), text("window=[]", src.name))
+		usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, stars(src.info)), text("window=[]", src.name))
 		onclose(usr, "[src.name]")
 	else
-		usr << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, src.info), text("window=[]", src.name))
+		usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, src.info), text("window=[]", src.name))
 		onclose(usr, "[src.name]")
 	return
 
@@ -41,10 +41,10 @@ CLIPBOARDS
 
 	usr << browse_rsc(map_graphic)
 	if (!( istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon) ))
-		usr << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, stars(src.info)), text("window=[]", src.name))
+		usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, stars(src.info)), text("window=[]", src.name))
 		onclose(usr, "[src.name]")
 	else
-		usr << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, src.info), text("window=[]", src.name))
+		usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, src.info), text("window=[]", src.name))
 		onclose(usr, "[src.name]")
 	return
 
@@ -63,10 +63,10 @@ CLIPBOARDS
 
 /obj/item/weapon/paper/attack_ai(var/mob/living/silicon/ai/user as mob)
 	if (get_dist(src, user.current) < 2)
-		usr << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, src.info), text("window=[]", src.name))
+		usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, src.info), text("window=[]", src.name))
 		onclose(usr, "[src.name]")
 	else
-		usr << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, stars(src.info)), text("window=[]", src.name))
+		usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, stars(src.info)), text("window=[]", src.name))
 		onclose(usr, "[src.name]")
 	return
 
@@ -458,7 +458,7 @@ CLIPBOARDS
 		dat += text("<A href='?src=\ref[];pen=1'>Remove Pen</A><BR><HR>", src)
 	for(var/obj/item/weapon/paper/P in src)
 		dat += text("<A href='?src=\ref[];read=\ref[]'>[]</A> <A href='?src=\ref[];write=\ref[]'>Write</A> <A href='?src=\ref[];remove=\ref[]'>Remove</A><BR>", src, P, P.name, src, P, src, P)
-	user << browse(cssStyleSheetKaden + dat, "window=clipboard")
+	user << browse(cssStyleSheetDab13 + dat, "window=clipboard")
 	onclose(user, "clipboard")
 	return
 
@@ -518,10 +518,10 @@ CLIPBOARDS
 			var/obj/item/weapon/paper/P = locate(href_list["read"])
 			if ((P && P.loc == src))
 				if (!( istype(usr, /mob/living/carbon/human) ))
-					usr << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", P.name, stars(P.info)), text("window=[]", P.name))
+					usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", P.name, stars(P.info)), text("window=[]", P.name))
 					onclose(usr, "[P.name]")
 				else
-					usr << browse(cssStyleSheetKaden + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", P.name, P.info), text("window=[]", P.name))
+					usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", P.name, P.info), text("window=[]", P.name))
 					onclose(usr, "[P.name]")
 		if (ismob(src.loc))
 			var/mob/M = src.loc

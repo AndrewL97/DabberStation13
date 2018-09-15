@@ -18,7 +18,7 @@
 <B># of Mobs:</B> [mobs]<BR>
 "}
 
-		usr << browse(cssStyleSheetKaden + output,"window=generalreport")
+		usr << browse(cssStyleSheetDab13 + output,"window=generalreport")
 
 	air_report()
 		set category = "Diagnostics"
@@ -59,7 +59,7 @@
 <B>Tile Update:</B> [air_master.tiles_to_update.len]<BR>
 "}
 
-		usr << browse(cssStyleSheetKaden + output,"window=airreport")
+		usr << browse(cssStyleSheetDab13 + output,"window=airreport")
 
 	air_status(turf/target as turf)
 		set category = "Diagnostics"

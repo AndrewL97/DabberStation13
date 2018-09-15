@@ -98,7 +98,7 @@ Target Pressure: <A href='?src=\ref[src];pressure_adj=-10'>-</A> <A href='?src=\
 <A href='?src=\ref[user];mach_close=pump'>Close</A><BR>
 "}
 
-	user << browse(cssStyleSheetKaden + output_text, "window=pump;size=600x300")
+	user << browse(cssStyleSheetDab13 + output_text, "window=pump;size=600x300")
 	onclose(user, "pump")
 
 	return

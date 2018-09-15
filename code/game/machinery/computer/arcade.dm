@@ -69,7 +69,7 @@
 
 	dat += "</b></center>"
 
-	user << browse(cssStyleSheetKaden + dat, "window=arcade")
+	user << browse(cssStyleSheetDab13 + dat, "window=arcade")
 	onclose(user, "arcade")
 	return
 

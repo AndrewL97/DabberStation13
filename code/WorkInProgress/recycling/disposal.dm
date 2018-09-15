@@ -163,7 +163,7 @@
 
 
 		user.machine = src
-		user << browse(cssStyleSheetKaden + dat, "window=disposal;size=360x170")
+		user << browse(cssStyleSheetDab13 + dat, "window=disposal;size=360x170")
 		onclose(user, "disposal")
 
 	// handle machine interaction

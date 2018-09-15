@@ -106,7 +106,7 @@
 		var/dat = text("<TT><B>Proximity Sensor</B>\n[] []:[]\n<A href='?src=\ref[];tp=-30'>-</A> <A href='?src=\ref[];tp=-1'>-</A> <A href='?src=\ref[];tp=1'>+</A> <A href='?src=\ref[];tp=30'>+</A>\n</TT>", (src.timing ? text("<A href='?src=\ref[];time=0'>Arming</A>", src) : text("<A href='?src=\ref[];time=1'>Not Arming</A>", src)), minute, second, src, src, src, src)
 		dat += "<BR><A href='?src=\ref[src];state=1'>[state?"Armed":"Unarmed"]</A> (Movement sensor active when armed!)"
 		dat += "<BR><BR><A href='?src=\ref[src];close=1'>Close</A>"
-		user << browse(cssStyleSheetKaden + dat, "window=prox")
+		user << browse(cssStyleSheetDab13 + dat, "window=prox")
 		onclose(user, "prox")
 	else
 		user << browse(null, "window=prox")

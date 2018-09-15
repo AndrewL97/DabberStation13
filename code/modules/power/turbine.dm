@@ -179,7 +179,7 @@
 	t += "</PRE><HR><A href='?src=\ref[src];close=1'>Close</A>"
 
 	t += "</TT>"
-	user << browse(cssStyleSheetKaden + t, "window=turbine")
+	user << browse(cssStyleSheetDab13 + t, "window=turbine")
 	onclose(user, "turbine")
 
 	return
@@ -288,7 +288,7 @@
 	else
 		dat += "\red<B>No compatible attached compressor found."
 
-	user << browse(cssStyleSheetKaden + dat, "window=computer;size=400x500")
+	user << browse(cssStyleSheetDab13 + dat, "window=computer;size=400x500")
 	onclose(user, "computer")
 	return
 

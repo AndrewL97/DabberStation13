@@ -95,7 +95,7 @@
 			dat += "<A href='?src=\ref[src];op=temp;val=5'>+</A><BR>"
 
 			user.machine = src
-			user << browse(cssStyleSheetKaden + "<HEAD><TITLE>Space Heater Control Panel</TITLE></HEAD><TT>[dat]</TT>", "window=spaceheater")
+			user << browse(cssStyleSheetDab13 + "<HEAD><TITLE>Space Heater Control Panel</TITLE></HEAD><TT>[dat]</TT>", "window=spaceheater")
 			onclose(user, "spaceheater")
 
 

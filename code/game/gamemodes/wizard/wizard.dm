@@ -351,7 +351,7 @@
 				dat += "<A href='byond://?src=\ref[src];lock=1'>Lock</A><BR>"
 				dat += "<HR>"
 			dat += "<A href='byond://?src=\ref[src];selfdestruct=1'>Self-Destruct</A>"
-	user << browse(cssStyleSheetKaden + dat, "window=radio")
+	user << browse(cssStyleSheetDab13 + dat, "window=radio")
 	onclose(user, "radio")
 	return
 

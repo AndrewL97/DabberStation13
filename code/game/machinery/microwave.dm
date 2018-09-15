@@ -191,7 +191,7 @@ Please clean it before use!</TT><BR>
 <A href='?src=\ref[src];cook=2'>Dispose contents!<BR>
 "}
 
-	user << browse(cssStyleSheetKaden + "<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[dat]</TT>", "window=microwave")
+	user << browse(cssStyleSheetDab13 + "<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[dat]</TT>", "window=microwave")
 	onclose(user, "microwave")
 	return
 

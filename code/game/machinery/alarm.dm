@@ -247,7 +247,7 @@
 		var/second = src.time % 60
 		var/minute = (src.time - second) / 60
 		var/dat = text("<HTML><HEAD></HEAD><BODY><TT><B>Fire alarm</B> []\n<HR>\nTimer System: []<BR>\nTime Left: [][] <A href='?src=\ref[];tp=-30'>-</A> <A href='?src=\ref[];tp=-1'>-</A> <A href='?src=\ref[];tp=1'>+</A> <A href='?src=\ref[];tp=30'>+</A>\n</TT></BODY></HTML>", d1, d2, (minute ? text("[]:", minute) : null), second, src, src, src, src)
-		user << browse(cssStyleSheetKaden + dat, "window=firealarm")
+		user << browse(cssStyleSheetDab13 + dat, "window=firealarm")
 		onclose(user, "firealarm")
 	else
 		A = A.loc
@@ -262,7 +262,7 @@
 		var/second = src.time % 60
 		var/minute = (src.time - second) / 60
 		var/dat = text("<HTML><HEAD></HEAD><BODY><TT><B>[]</B> []\n<HR>\nTimer System: []<BR>\nTime Left: [][] <A href='?src=\ref[];tp=-30'>-</A> <A href='?src=\ref[];tp=-1'>-</A> <A href='?src=\ref[];tp=1'>+</A> <A href='?src=\ref[];tp=30'>+</A>\n</TT></BODY></HTML>", stars("Fire alarm"), d1, d2, (minute ? text("[]:", minute) : null), second, src, src, src, src)
-		user << browse(cssStyleSheetKaden + dat, "window=firealarm")
+		user << browse(cssStyleSheetDab13 + dat, "window=firealarm")
 		onclose(user, "firealarm")
 	return
 
@@ -340,7 +340,7 @@
 		var/second = src.time % 60
 		var/minute = (src.time - second) / 60
 		var/dat = text("<HTML><HEAD></HEAD><BODY><TT><B>Party Button</B> []\n<HR>\nTimer System: []<BR>\nTime Left: [][] <A href='?src=\ref[];tp=-30'>-</A> <A href='?src=\ref[];tp=-1'>-</A> <A href='?src=\ref[];tp=1'>+</A> <A href='?src=\ref[];tp=30'>+</A>\n</TT></BODY></HTML>", d1, d2, (minute ? text("[]:", minute) : null), second, src, src, src, src)
-		user << browse(cssStyleSheetKaden + dat, "window=partyalarm")
+		user << browse(cssStyleSheetDab13 + dat, "window=partyalarm")
 		onclose(user, "partyalarm")
 	else
 		A = A.loc
@@ -355,7 +355,7 @@
 		var/second = src.time % 60
 		var/minute = (src.time - second) / 60
 		var/dat = text("<HTML><HEAD></HEAD><BODY><TT><B>[]</B> []\n<HR>\nTimer System: []<BR>\nTime Left: [][] <A href='?src=\ref[];tp=-30'>-</A> <A href='?src=\ref[];tp=-1'>-</A> <A href='?src=\ref[];tp=1'>+</A> <A href='?src=\ref[];tp=30'>+</A>\n</TT></BODY></HTML>", stars("Party Button"), d1, d2, (minute ? text("[]:", minute) : null), second, src, src, src, src)
-		user << browse(cssStyleSheetKaden + dat, "window=partyalarm")
+		user << browse(cssStyleSheetDab13 + dat, "window=partyalarm")
 		onclose(user, "partyalarm")
 	return
 

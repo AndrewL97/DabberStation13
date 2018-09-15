@@ -183,7 +183,7 @@
 		dat += "<BR>Gas Levels: <BR>\nPressure: 0%<BR>\nNitrogen: 0%<BR>\nOxygen: 0%<BR>\nPlasma: 0%<BR>\nCO2: 0%<BR>\nN2O: 0%<BR>\n"
 	dat += "<BR>\n<A href='?src=\ref[src];close=1'>Close</A><BR>\n"
 
-	user << browse(cssStyleSheetKaden + dat, "window=pipefilter;size=300x365")*/ //TODO: FIX
+	user << browse(cssStyleSheetDab13 + dat, "window=pipefilter;size=300x365")*/ //TODO: FIX
 	//onclose(user, "pipefilter")
 
 /obj/machinery/pipefilter/Topic(href, href_list)

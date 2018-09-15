@@ -960,7 +960,7 @@ Code:
 						dat += "<HR><A href='byond://?src=\ref[SC];op=botlist'>Return to bot list</A>"
 
 	dat += "</body></html>"
-	user << browse(cssStyleSheetKaden + dat, "window=pda")
+	user << browse(cssStyleSheetDab13 + dat, "window=pda")
 	onclose(user, "pda", src)
 
 /obj/item/device/pda/Topic(href, href_list)
