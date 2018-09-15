@@ -152,7 +152,7 @@ mob
 
 	proc/ParallaxHandle(var/obj/screen_alt/spaceParallax/space1,var/xAxis,var/yAxis,var/xOff,var/yOff)
 		var/matrix/space1e = matrix()
-		space1e.Translate(xOff-xAxis  ,  yOff-yAxis) //This is actually retarded
+		space1e.Translate(xOff-xAxis  ,  yOff-yAxis) //This is actually kryfrac level retarded
 		space1.transform = space1e
 
 

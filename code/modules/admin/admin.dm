@@ -743,13 +743,13 @@ var/showadminmessages = 1
 					else
 						alert("You cannot perform this action. You must be of a higher administrative rank!", null, null, null, null, null)
 						return
-				if("retardify")
+				if("kryfrac level retardify")
 					if (src.rank in list("Shit Guy", "Dab13 Administrator", "Host"))
 						for(var/mob/living/carbon/human/H in world)
 							if(H.client)
 								H << "\red <B>You suddenly feel stupid.</B>"
 							H.brainloss = 60
-						message_admins("[key_name_admin(usr)] made everybody retarded")
+						message_admins("[key_name_admin(usr)] made everybody kryfrac level retarded")
 					else
 						alert("You cannot perform this action. You must be of a higher administrative rank!")
 						return
@@ -1065,7 +1065,7 @@ var/showadminmessages = 1
 <A href='?src=\ref[src];secretsfun=wave'>Spawn a wave of meteors</A><BR>
 <A href='?src=\ref[src];secretsfun=flicklights'>Ghost Mode</A><BR>
 <A href='?src=\ref[src];secretsfun=cleanexcrement'>Remove all urine/poo from station</A><BR>
-<A href='?src=\ref[src];secretsfun=retardify'>Make all players retarded</A><BR>
+<A href='?src=\ref[src];secretsfun=kryfrac level retardify'>Make all players kryfrac level retarded</A><BR>
 <A href='?src=\ref[src];secretsfun=fakeguns'>Make all items look like guns</A><BR>
 <A href='?src=\ref[src];secretsfun=schoolgirl'>Japanese Animes Mode</A><BR><BR>"}
 //<A href='?src=\ref[src];secretsfun=shockwave'>Station Shockwave</A><BR>

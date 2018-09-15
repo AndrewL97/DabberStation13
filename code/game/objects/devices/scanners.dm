@@ -167,7 +167,7 @@ GAS ANALYZER
 	if (M.brainloss >= 100 || istype(M, /mob/living/carbon/human) && M:brain_op_stage == 4.0)
 		user.show_message(text("\red Subject is brain dead."), 1)
 	else if (M.brainloss >= 60)
-		user.show_message(text("\red Severe brain damage detected. Subject likely to have mental retardation."), 1)
+		user.show_message(text("\red Severe brain damage detected. Subject likely to have mental kryfrac level retardation."), 1)
 	else if (M.brainloss >= 10)
 		user.show_message(text("\red Significant brain damage detected. Subject may have had a concussion."), 1)
 	src.add_fingerprint(user)

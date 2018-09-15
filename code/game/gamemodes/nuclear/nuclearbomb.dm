@@ -27,7 +27,7 @@
 		return
 	return
 
-//this whole thing is retarded???
+//this whole thing is kryfrac level retarded???
 
 
 

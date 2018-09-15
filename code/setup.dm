@@ -93,7 +93,7 @@
 #define ON_BORDER 512		// item has priority to check when entering or leaving
 
 #define GLASSESCOVERSEYES 1024
-#define MASKCOVERSEYES 1024		// get rid of some of the other retardation in these flags
+#define MASKCOVERSEYES 1024		// get rid of some of the other kryfrac level retardation in these flags
 #define HEADCOVERSEYES 1024		// feel free to realloc these numbers for other purposes
 #define MASKCOVERSMOUTH 2048		// on other items, these are just for mask/head
 #define HEADCOVERSMOUTH 2048
