@@ -124,7 +124,7 @@ datum/controller/game_controller
 		slow_process()
 		fast_process()
 		process()
-		lighting_process()
+
 	setup_objects()
 
 		var/start_time = world.timeofday
@@ -148,6 +148,8 @@ datum/controller/game_controller
 			ticker.process_timer()
 		for(var/obj/i in special_processing)
 			i.special_process()
+		if(lighting_inited)
+			lighting.loop()
 		particle_process()
 		do_gravity_loop()
 		for(var/client/i in clients)
@@ -155,11 +157,6 @@ datum/controller/game_controller
 			i.ProcessClient()
 		spawn(world.tick_lag)
 			fast_process()
-	lighting_process()
-		if(lighting_inited)
-			lighting.loop()
-		spawn(LIGHTINGFPS) //this must be slow due to shitty profiler results (https://pastebin.com/raw/cFznQYLT)
-			lighting_process()
 	slow_process()
 		atmos_processed = 0
 		air_master.process()
