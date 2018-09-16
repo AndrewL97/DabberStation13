@@ -6,7 +6,7 @@ client/proc/ProcessClient()
 	if(mob)
 		if(istype(mob,/mob/living))
 			create_health()
-		Get_Number_Time()
+		//Get_Number_Time()
 
 		if(mouse_position)
 			if(!(mouse_position.MouseCatcher in screen))
