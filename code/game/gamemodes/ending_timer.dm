@@ -57,6 +57,7 @@ proc/timer_enable()
 	ticker.nuke_enable()
 
 client/Stat()
+	..()
 	if(nuke_enabled == 1)
 		stat("Seconds Left Till Explosion",round(nuke_timer))
 
