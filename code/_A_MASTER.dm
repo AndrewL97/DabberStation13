@@ -15,7 +15,7 @@ var/listofitems = ""
 var/list/clients = list()
 var/special_processing = list()
 
-#define LIGHTINGFPS (1/10)*10 //change 30
+#define LIGHTINGFPS (1/30)*10 //change 30
 #define CPU_WARN 75
 #define CPU_CHECK_MAX 40 //if cpu goes higher than this, some things will do sleep(world.tick_lag) and throttle, this is done in CHECK_TICK()
 
@@ -146,13 +146,12 @@ datum/controller/game_controller
 	fast_process()
 		if(ticker)
 			ticker.process_timer()
-		if(lighting_inited)
-			lighting.loop()
 		for(var/obj/i in special_processing)
 			i.special_process()
 		particle_process()
 		do_gravity_loop()
 		for(var/client/i in clients)
+			i.InactivityLoop()
 			i.ProcessClient()
 		spawn(world.tick_lag)
 			fast_process()
