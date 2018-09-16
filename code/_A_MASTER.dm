@@ -14,8 +14,6 @@ var/lighting_inited = 0
 var/listofitems = ""
 var/list/clients = list()
 var/special_processing = list()
-
-#define LIGHTINGFPS (1/60)*10 //change 30
 #define CPU_WARN 75
 #define CPU_CHECK_MAX 40 //if cpu goes higher than this, some things will do sleep(world.tick_lag) and throttle, this is done in CHECK_TICK()
 
