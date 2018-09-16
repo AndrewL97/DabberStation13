@@ -169,6 +169,17 @@ mob
 	if(usr.hud_used)
 		if(usr.hud_used.move_intent)
 			usr.hud_used.move_intent.icon_state = "walking"
+/mob/verb/use_hotkey()
+	set hidden = 1
+	set name = "use_hotkey"
+	var/obj/item/G = null
+	//attack_self(mob/user)
+	if (!( src.hand ))
+		G = r_hand
+	else
+		G = l_hand
+	if(G)
+		G.attack_self(src)
 
 /mob/verb/switch_intent(ass as text)
 	set hidden = 1

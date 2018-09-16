@@ -84,6 +84,9 @@ macro "macro"
 		name = "X"
 		command = "swaphand"
 	elem 
+		name = "Z"
+		command = "use_hotkey"
+	elem 
 		name = "F1"
 		command = "adminhelp"
 	elem 
