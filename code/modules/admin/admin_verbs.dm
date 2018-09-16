@@ -198,7 +198,6 @@ var/AdministrationTeam = list(
 		if (src.holder.level > -1)
 			src.verbs += /client/proc/admin_play
 			src.verbs += /client/proc/admin_observe
-			src.verbs += /client/proc/voting
 			src.verbs += /client/proc/game_panel
 			src.verbs += /client/proc/player_panel
 
@@ -268,11 +267,6 @@ var/AdministrationTeam = list(
 		src.holder.Secrets()
 	return
 
-/client/proc/voting()
-	set name = "Voting"
-	set category = "Admin"
-	if (src.holder)
-		src.holder.Voting()
 
 /client/proc/funbutton()
 	set category = "Debug"

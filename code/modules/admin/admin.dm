@@ -15,14 +15,13 @@ var/showadminmessages = 1
 
 /obj/admins/Topic(href, href_list)
 	..()
-
 	if (usr.client != src.owner)
 		world << "\blue [usr.key] has attempted to override the admin panel!"
 		log_admin("[key_name(usr)] tried to use the admin panel without authorization.")
 		return
 
 	if(href_list["call_shuttle"])
-		if (src.rank in list("Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"))
+		if (src.rank in admin_ranks) //list("Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"))
 			if( ticker.mode.name == "blob" )
 				alert("You can't call the shuttle during blob!")
 				return
@@ -56,7 +55,7 @@ var/showadminmessages = 1
 			return
 
 	if(href_list["edit_shuttle_time"])
-		if (src.rank in list("Shit Guy", "Dab13 Administrator", "Host"))
+		if (src.rank in admin_ranks) //list("Shit Guy", "Dab13 Administrator", "Host"))
 			emergency_shuttle.settimeleft( input("Enter new shuttle duration (seconds):","Edit Shuttle Timeleft", emergency_shuttle.timeleft() ) as num )
 			log_admin("[key_name(usr)] edited the Emergency Shuttle's timeleft to [emergency_shuttle.timeleft()]")
 			message_admins("\blue [key_name_admin(usr)] edited the Emergency Shuttle's timeleft to [emergency_shuttle.timeleft()]", 1)
@@ -66,7 +65,7 @@ var/showadminmessages = 1
 			return
 
 	if (href_list["mute2"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Moderator", "Secondary Administrator", "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+		if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Moderator", "Secondary Administrator", "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 			var/mob/M = locate(href_list["mute2"])
 			if (ismob(M))
 				if ((M.client && M.client.holder && (M.client.holder.level >= src.level)))
@@ -77,36 +76,8 @@ var/showadminmessages = 1
 				message_admins("\blue [key_name_admin(usr)] has [(M.muted ? "muted" : "voiced")] [key_name_admin(M)].", 1)
 				M << "You have been [(M.muted ? "muted" : "voiced")]."
 
-	if (href_list["c_mode"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Secondary Administrator", "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
-			if (ticker && ticker.mode)
-				return alert(usr, "The game has already started.", null, null, null, null)
-			var/dat = text({"<B>What mode do you wish to play?</B><HR>
-			<A href='?src=\ref[src];c_mode2=secret'>Secret</A><br>
-			<A href='?src=\ref[src];c_mode2=wizard'>Wizard</A><br>
-			<A href='?src=\ref[src];c_mode2=restructuring'>Corporate Restructuring</A><br>
-			<A href='?src=\ref[src];c_mode2=random'>Random</A><br>
-			<A href='?src=\ref[src];c_mode2=traitor'>Traitor</A><br>
-			<A href='?src=\ref[src];c_mode2=meteor'>Meteor</A><br>
-			<A href='?src=\ref[src];c_mode2=extended'>Extended</A><br>
-			<A href='?src=\ref[src];c_mode2=monkey'>Monkey</A><br>
-			<A href='?src=\ref[src];c_mode2=nuclear'>Nuclear Emergency</A><br>
-			<A href='?src=\ref[src];c_mode2=blob'>Blob</A><br>
-			<A href='?src=\ref[src];c_mode2=sandbox'>Sandbox</A><br>
-			<A href='?src=\ref[src];c_mode2=revolution'>Revolution</A><br>
-			<A href='?src=\ref[src];c_mode2=malfunction'>AI Malfunction</A><br>
-			<A href='?src=\ref[src];c_mode2=deathmatch'>Death Commando Deathmatch</A><br>
-			<A href='?src=\ref[src];c_mode2=confliction'>Confliction (TESTING)</A><br>
-			<A href='?src=\ref[src];c_mode2=ctf'>Capture The Flag (Beta)</A><br><br>
-			Now: [master_mode]\n"})
-			usr << browse(cssStyleSheetDab13 + dat, "window=c_mode")
-
-	if (href_list["c_mode2"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Secondary Administrator", "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
-			src << "No"
-
 	if (href_list["monkeyone"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+		if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 			var/mob/M = locate(href_list["monkeyone"])
 			if(!ismob(M))
 				return
@@ -120,7 +91,7 @@ var/showadminmessages = 1
 				return
 
 	if (href_list["forcespeech"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+		if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 			var/mob/M = locate(href_list["forcespeech"])
 			if (ismob(M))
 				var/speech = input("What will [key_name(M)] say?.", "Force speech", "")
@@ -134,77 +105,8 @@ var/showadminmessages = 1
 			alert("You cannot perform this action. You must be of a higher administrative rank!", null, null, null, null, null)
 			return
 
-	if (href_list["sendtoprison"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Moderator", "Administrator", "Secondary Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
-			var/mob/M = locate(href_list["sendtoprison"])
-			if (ismob(M))
-				if(istype(M, /mob/living/silicon/ai))
-					alert("The AI can't be sent to prison you jerk!", null, null, null, null, null)
-					return
-				//strip their stuff before they teleport into a cell :downs:
-				for(var/obj/item/weapon/W in M)
-					if(istype(W, /datum/organ/external))
-						continue
-	//don't strip organs
-					M.u_equip(W)
-					if (M.client)
-						M.client.screen -= W
-					if (W)
-						W.loc = M.loc
-						W.dropped(M)
-						W.plane = ITEM_PLANE
-						W.layer = initial(W.layer)
-				//teleport person to cell
-				M.paralysis += 5
-				sleep(5) //so they black out before warping
-				M.loc = pick(prisonwarp)
-				if(istype(M, /mob/living/carbon/human))
-					var/mob/living/carbon/human/prisoner = M
-					prisoner.equip_if_possible(new /obj/item/clothing/under/color/orange(prisoner), prisoner.slot_w_uniform)
-					prisoner.equip_if_possible(new /obj/item/clothing/shoes/orange(prisoner), prisoner.slot_shoes)
-				spawn(50)
-					M << "\red You have been sent to the prison station!"
-				log_admin("[key_name(usr)] sent [key_name(M)] to the prison station.")
-				message_admins("\blue [key_name_admin(usr)] sent [key_name_admin(M)] to the prison station.", 1)
-		else
-			alert("You cannot perform this action. You must be of a higher administrative rank!", null, null, null, null, null)
-			return
-
-	if (href_list["sendtomaze"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Administrator", "Secondary Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
-			var/mob/M = locate(href_list["sendtomaze"])
-			if (ismob(M))
-				if(istype(M, /mob/living/silicon/ai))
-					alert("The AI can't be sent to the maze you jerk!", null, null, null, null, null)
-					return
-				//strip their stuff before they teleport into a cell :downs:
-				for(var/obj/item/weapon/W in M)
-					if(istype(W, /datum/organ/external))
-						continue
-	//don't strip organs
-					M.u_equip(W)
-					if (M.client)
-						M.client.screen -= W
-					if (W)
-						W.loc = M.loc
-						W.dropped(M)
-						W.plane = ITEM_PLANE
-						W.layer = initial(W.layer)
-				//teleport person to cell
-				M.paralysis += 5
-				sleep(5)
-	//so they black out before warping
-				M.loc = pick(mazewarp)
-				spawn(50)
-					M << "\red You have been sent to the maze! Try and get out alive. In the maze everyone is free game. Kill or be killed."
-				log_admin("[key_name(usr)] sent [key_name(M)] to the maze.")
-				message_admins("\blue [key_name_admin(usr)] sent [key_name_admin(M)] to the maze.", 1)
-		else
-			alert("You cannot perform this action. You must be of a higher administrative rank!", null, null, null, null, null)
-			return
-
 	if (href_list["tdome1"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Administrator", "Secondary Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+		if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Administrator", "Secondary Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 			var/mob/M = locate(href_list["tdome1"])
 			// M.revive()
 			M.loc = pick(tdome1)
@@ -213,7 +115,7 @@ var/showadminmessages = 1
 			M << "\blue You have been sent to the Thunderdome."
 
 	if (href_list["tdome2"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Administrator", "Secondary Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+		if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Administrator", "Secondary Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 			var/mob/M = locate(href_list["tdome2"])
 			// M.revive()
 			M.loc = pick(tdome2)
@@ -222,7 +124,7 @@ var/showadminmessages = 1
 			M << "\blue You have been sent to the Thunderdome."
 
 	if (href_list["revive"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+		if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 			var/mob/M = locate(href_list["revive"])
 			if (ismob(M))
 				if(istype(M, /mob/dead/observer))
@@ -240,7 +142,7 @@ var/showadminmessages = 1
 			return
 
 	if (href_list["makeai"]) //Yes, im fucking lazy, so what? it works ... hopefully
-		if ((src.rank in admin_ranks)) //ADMINlist( "Primary Administrator", "Dab13 Administrator", "Host", "Administrator", "Shit Guy"  )))
+		if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Primary Administrator", "Dab13 Administrator", "Host", "Administrator", "Shit Guy"  )))
 			var/mob/M = locate(href_list["makeai"])
 			if(istype(M, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = M
@@ -396,18 +298,18 @@ var/showadminmessages = 1
 		else
 			alert("Cannot make this mob a traitor")
 	if (href_list["create_object"])
-		if (src.rank in list("Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"))
+		if (src.rank in admin_ranks) //list("Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"))
 			return create_object(usr)
 		else
 			alert("You are not a high enough administrator! Sorry!!!!")
 
 	if (href_list["create_turf"])
-		if (src.rank in list("Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"))
+		if (src.rank in admin_ranks) //list("Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"))
 			return create_turf(usr)
 		else
 			alert("You are not a high enough administrator! Sorry!!!!")
 	if (href_list["create_mob"])
-		if (src.rank in list("Shit Guy", "Dab13 Administrator", "Host"))
+		if (src.rank in admin_ranks) //list("Shit Guy", "Dab13 Administrator", "Host"))
 			return create_mob(usr)
 		else
 			alert("You are not a high enough administrator! Sorry!!!!")
@@ -421,7 +323,7 @@ var/showadminmessages = 1
 		voteres()
 
 	if (href_list["prom_demot"])
-		if ((src.rank in admin_ranks)) //ADMINlist("Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+		if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist("Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 			var/client/C = locate(href_list["prom_demot"])
 			if(C.holder && (C.holder.level >= src.level))
 				alert("This cannot be done as [C] is a [C.holder.rank]")
@@ -467,80 +369,9 @@ var/showadminmessages = 1
 			usr << browse(cssStyleSheetDab13 + dat, "window=prom_demot;size=480x300")
 
 
-	if (href_list["object_list"])
-		if (src.rank in list("Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"))
-			if (config.allow_admin_spawning && ((src.state == 2) || (src.rank in list("Shit Guy", "Dab13 Administrator", "Host"))))
-				var/atom/loc = usr.loc
-
-				var/dirty_paths
-				if (istext(href_list["object_list"]))
-					dirty_paths = list(href_list["object_list"])
-				else if (istype(href_list["object_list"], /list))
-					dirty_paths = href_list["object_list"]
-
-				var/paths = list()
-				var/removed_paths = list()
-				for (var/dirty_path in dirty_paths)
-					var/path = text2path(dirty_path)
-					if (!path)
-						removed_paths += dirty_path
-					else if (!ispath(path, /obj) && !ispath(path, /turf) && !ispath(path, /mob))
-						removed_paths += dirty_path
-					else if (ispath(path, /obj/item/weapon/gun/energy/pulse_rifle))
-						removed_paths += dirty_path
-					else if (ispath(path, /obj/bhole) && !(src.rank in list("Dab13 Administrator", "Host")))
-						removed_paths += dirty_path
-					else if (ispath(path, /mob) && !(src.rank in list("Shit Guy", "Dab13 Administrator", "Host")))
-						removed_paths += dirty_path
-					else
-						paths += path
-
-				if (!paths)
-					return
-				else if (length(paths) > 5)
-					alert("Select less object types, jerko.")
-					return
-				else if (length(removed_paths))
-					alert("Removed:\n" + dd_list2text(removed_paths, "\n"))
-
-				var/list/offset = dd_text2list(href_list["offset"],",")
-				var/number = dd_range(1, 100, text2num(href_list["object_count"]))
-				var/X = offset.len > 0 ? text2num(offset[1]) : 0
-				var/Y = offset.len > 1 ? text2num(offset[2]) : 0
-				var/Z = offset.len > 2 ? text2num(offset[3]) : 0
-
-				for (var/i = 1 to number)
-					switch (href_list["offset_type"])
-						if ("absolute")
-							for (var/path in paths)
-								new path(locate(0 + X,0 + Y,0 + Z))
-
-						if ("relative")
-							if (loc)
-								for (var/path in paths)
-									new path(locate(loc.x + X,loc.y + Y,loc.z + Z))
-							else
-								return
-
-				if (number == 1)
-					log_admin("[key_name(usr)] created a [english_list(paths)]")
-					for(var/path in paths)
-						if(ispath(path, /mob))
-							message_admins("[key_name_admin(usr)] created a [english_list(paths)]", 1)
-							break
-				else
-					log_admin("[key_name(usr)] created [number]ea [english_list(paths)]")
-					for(var/path in paths)
-						if(ispath(path, /mob))
-							message_admins("[key_name_admin(usr)] created [number]ea [english_list(paths)]", 1)
-							break
-				return
-			else
-				alert("You cannot spawn items right now.")
-				return
 
 	if (href_list["secretsfun"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+		if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 			var/ok = 0
 			switch(href_list["secretsfun"])
 				if("sec_clothes")
@@ -646,7 +477,7 @@ var/showadminmessages = 1
 							H.loc = pick(prisonsecuritywarp)
 						prisonwarped += H
 				if("traitor_all")
-					if ((src.rank in admin_ranks)) //ADMINlist( "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+					if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 						if(!ticker)
 							alert("The game hasn't started yet!")
 							return
@@ -737,14 +568,14 @@ var/showadminmessages = 1
 							sleep(rand(30,400))
 							Wall.ex_act(rand(2,1)) */
 				if("wave")
-					if ((src.rank in admin_ranks)) //ADMINlist("Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+					if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist("Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 						meteor_wave()
 						message_admins("[key_name_admin(usr)] has spawned meteors", 1)
 					else
 						alert("You cannot perform this action. You must be of a higher administrative rank!", null, null, null, null, null)
 						return
 				if("kryfrac level retardify")
-					if (src.rank in list("Shit Guy", "Dab13 Administrator", "Host"))
+					if (src.rank in admin_ranks) //list("Shit Guy", "Dab13 Administrator", "Host"))
 						for(var/mob/living/carbon/human/H in world)
 							if(H.client)
 								H << "\red <B>You suddenly feel stupid.</B>"
@@ -754,7 +585,7 @@ var/showadminmessages = 1
 						alert("You cannot perform this action. You must be of a higher administrative rank!")
 						return
 				if("fakeguns")
-					if (src.rank in list("Shit Guy", "Dab13 Administrator", "Host"))
+					if (src.rank in admin_ranks) //list("Shit Guy", "Dab13 Administrator", "Host"))
 						for(var/obj/item/W in world)
 							if(istype(W, /obj/item/clothing) || istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/weapon/disk) || istype(W, /obj/item/weapon/tank))
 								continue
@@ -766,7 +597,7 @@ var/showadminmessages = 1
 						alert("You cannot perform this action. You must be of a higher administrative rank!")
 						return
 				if("schoolgirl")
-					if (src.rank in list("Shit Guy", "Dab13 Administrator", "Host"))
+					if (src.rank in admin_ranks) //list("Shit Guy", "Dab13 Administrator", "Host"))
 						for(var/obj/item/clothing/under/W in world)
 							W.icon_state = "schoolgirl"
 							W.item_state = "w_suit"
@@ -782,7 +613,7 @@ var/showadminmessages = 1
 		return
 
 	if (href_list["secretsadmin"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Moderator", "Secondary Administrator", "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+		if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Moderator", "Secondary Administrator", "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 			var/ok = 0
 			switch(href_list["secretsadmin"])
 				if("clear_bombs")
@@ -924,7 +755,7 @@ var/showadminmessages = 1
 					world << text("<B>A secret has been activated by []!</B>", usr.key)
 		return
 	if (href_list["secretscoder"])
-		if ((src.rank in admin_ranks)) //ADMINlist( "Shit Guy", "Dab13 Administrator", "Host" )))
+		if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Shit Guy", "Dab13 Administrator", "Host" )))
 			switch(href_list["secretscoder"])
 				if("spawn_objects")
 					var/dat = "<B>Admin Log<HR></B>"
@@ -1078,46 +909,6 @@ var/showadminmessages = 1
 "}
 	usr << browse(cssStyleSheetDab13 + dat, "window=secrets")
 	return
-
-/obj/admins/proc/Voting()
-
-	var/dat
-	var/lvl = 0
-	switch(src.rank)
-		if("Moderator")
-			lvl = 1
-		if("Secondary Administrator")
-			lvl = 2
-		if("Administrator")
-			lvl = 3
-		if("Primary Administrator")
-			lvl = 4
-		if("Shit Guy")
-			lvl = 5
-		if("Dab13 Administrator")
-			lvl = 6
-		if("Host")
-			lvl = 7
-
-
-	dat += "<center><B>Voting</B></center><hr>\n"
-
-	if(lvl > 0)
-//			if(lvl >= 2 )
-		dat += {"
-<A href='?src=\ref[src];votekill=1'>Abort Vote</A><br>
-<A href='?src=\ref[src];vmode=1'>Start Vote</A><br>
-<A href='?src=\ref[src];voteres=1'>Toggle Voting</A><br>
-"}
-
-//			if(lvl >= 3 )
-//			if(lvl >= 5)
-//			if(lvl == 6 )
-
-	usr << browse(cssStyleSheetDab13 + dat, "window=admin2;size=210x160")
-	return
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////admins2.dm merge
 //i.e. buttons/verbs
@@ -1444,7 +1235,7 @@ var/showadminmessages = 1
 
 /obj/admins/proc/traitorize(mob/M as mob, var/objective, var/mode)
 	//mode = 1 for normal traitorise, mode = 0 for traitor_all
-	if ((src.rank in admin_ranks)) //ADMINlist( "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
+	if (src.rank in admin_ranks) //admin_ranks)) //ADMINlist( "Administrator", "Primary Administrator", "Shit Guy", "Dab13 Administrator", "Host"  )))
 		if(M.stat == 2 || !(M.client))
 			alert("Person is dead or not logged in or hasn't started yet. Be nice")
 			return
