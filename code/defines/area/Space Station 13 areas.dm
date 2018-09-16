@@ -34,7 +34,7 @@
 	var/power_equip = 1
 	var/power_light = 1
 	var/power_environ = 1
-	var/music = null
+
 	var/used_equip = 0
 	var/used_light = 0
 	var/used_environ = 0
@@ -92,7 +92,6 @@
 
 /area/shuttle/escape
 	name = "Emergency Shuttle"
-	music = "music/escape.ogg"
 
 /area/shuttle/escape/station
 	icon_state = "shuttle2"
@@ -322,7 +321,6 @@
 /area/bridge
 	name = "Bridge"
 	icon_state = "bridge"
-	music = "signal"
 
 
 /area/crew_quarters/locker
@@ -402,7 +400,6 @@
 /area/engine/combustion
 	name = "Engine Combustion Chamber"
 	icon_state = "engine"
-	music = "signal"
 
 
 /area/engine/engine_control
@@ -417,13 +414,13 @@
 /area/teleporter
 	name = "Teleporter"
 	icon_state = "teleporter"
-	music = "signal"
+
 
 
 /area/AIreactor
 	name = "AI Energy Reactor Teleporter Room"
 	icon_state = "teleporter"
-	music = "signal"
+
 
 
 /area/tdome
@@ -446,7 +443,6 @@
 /area/medical/medbay
 	name = "Medbay"
 	icon_state = "medbay"
-	music = 'signal.ogg'
 
 
 /area/medical/research

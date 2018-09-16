@@ -121,7 +121,6 @@
 	var/inertia_dir = 0
 	var/footstep = 1
 
-	var/music_lastplayed = "null"
 
 	var/job = null
 

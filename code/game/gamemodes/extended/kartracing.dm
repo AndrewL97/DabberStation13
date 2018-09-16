@@ -87,7 +87,7 @@ var/SpawnKartY = 221
 	spawn(60+15)
 		world << "<font size=6><b>Get a rank better than [max(1,round(KartPlayers/2))] to win!</b>"
 		race_started = 1
-		world << sound("kart[rand(1,7)].ogg",channel=MUSIC_CHANNEL,repeat=1)
+		world << sound('kart1.ogg',channel=MUSIC_CHANNEL,repeat=1)
 
 
 /datum/game_mode/greytide_racing/ending()

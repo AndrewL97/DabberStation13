@@ -44,7 +44,7 @@ mob/new_player
 	verb
 		new_player_panel()
 			set src = usr
-			src << sound("SpaceNigger.ogg",channel=LOBBY_CHANNEL,volume=100, repeat = 1)
+			src << sound('titlesong.ogg',channel=LOBBY_CHANNEL,volume=100, repeat = 1)
 			var/output = "<HR><B>Lobby</B><BR>"
 			output += "<HR><br><a href='byond://?src=\ref[src];show_preferences=1'>Character Creator</A><BR><BR>"
 			//if(istester(src.key))

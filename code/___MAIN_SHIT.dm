@@ -75,7 +75,6 @@ mob
 	plane = MOB_PLANE
 	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 
-var/titlemusic = 'title1.ogg'
 
 var
 	const
