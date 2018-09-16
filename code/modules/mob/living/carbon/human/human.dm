@@ -1053,7 +1053,7 @@
 
 	if (src.client)
 		for(var/atom/e in src.contents)
-			e.plane = 11
+			e.plane = HUD_PLANE_2
 		src.client.screen += src.contents
 
 	if (src.r_hand)

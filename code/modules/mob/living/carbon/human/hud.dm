@@ -3,7 +3,7 @@ atom
 	appearance_flags = PIXEL_SCALE
 
 /obj/hud
-	plane = 10
+	plane = HUD_PLANE
 
 /mob
 	var/obj/screen_alt/plane_master_turf2/plane_master_turf = null
@@ -16,7 +16,7 @@ atom
 	appearance_flags = PIXEL_SCALE | KEEP_TOGETHER | PLANE_MASTER
 
 /obj/screen
-	plane = 10
+	plane = HUD_PLANE
 	layer = 1
 
 /obj/hud/proc/instantiate_plane_master()
@@ -170,7 +170,7 @@ mob
 		if(usr.hud_used.move_intent)
 			usr.hud_used.move_intent.icon_state = "walking"
 
-/mob/verb/switch_intent(ass as num)
+/mob/verb/switch_intent(ass as text)
 	set hidden = 1
 	set name = "switch_intent" //LOL
 	switch(ass)
