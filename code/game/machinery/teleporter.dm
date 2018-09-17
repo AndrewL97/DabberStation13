@@ -205,18 +205,6 @@
 	else
 		icon_state = "controller"
 
-
-/obj/laser/Bump()
-	src.range--
-	return
-
-/obj/laser/Move()
-	src.range--
-	return
-
-/atom/proc/laserhit(L as obj)
-	return 1
-
 /obj/machinery/computer/data/weapon/log/New()
 	..()
 	src.topics["Super-heater"] = "This turns a can of semi-liquid plasma into a super-heated ball of plasma."

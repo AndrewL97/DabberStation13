@@ -110,19 +110,6 @@
 	icon_state = "begin"
 	anchored = 1.0
 
-/obj/bullet
-	name = "bullet"
-	icon = 'projectiles.dmi'
-	icon_state = "bullet"
-	density = 1
-	var/yo = null
-	var/xo = null
-	var/current = null
-	anchored = 1.0
-	flags = TABLEPASS
-
-/obj/bullet/weakbullet
-
 
 /obj/bullet/electrode
 	name = "electrode"
@@ -356,12 +343,6 @@
 
 /obj/landmark/alterations
 	name = "alterations"
-
-/obj/laser
-	name = "laser"
-	icon = 'projectiles.dmi'
-	var/damage = 0.0
-	var/range = 10.0
 
 /obj/lattice
 	desc = "A lightweight support lattice."
