@@ -63,7 +63,7 @@ var/ban_list = list()
 
 /client/proc/ban_user()
 	set category = "Admin"
-	set name = "(ADMIN) Kick User"
+	set name = "(ADMIN) Ban User"
 	var/client/C = input(src,"Which user?","Ban user") as null|anything in clients
 	var/reason = input(src,"Reason?","Ban user") as null|text
 	if(C && reason)
