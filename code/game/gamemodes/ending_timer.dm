@@ -1,5 +1,5 @@
 var/nuke_enabled = 0
-var/nuke_timer = 10
+var/nuke_timer = 150
 var/sinewave = 1
 var/sinemult = 0.5
 /*

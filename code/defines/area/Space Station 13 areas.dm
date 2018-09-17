@@ -26,6 +26,7 @@
 	layer = 10
 	mouse_opacity = 0
 	var/lightswitch = 1
+	var/HARM_MOBS = 1
 	var/parallax_type = 0
 	var/eject = null
 
@@ -44,7 +45,8 @@
 	var/area/master				// master area used for power calcluations
 								// (original area before splitting due to sd_DAL)
 	var/list/related			// the other areas of the same type as this
-
+	start
+		HARM_MOBS = 0
 /area/secretplaceXD
 	name = "Unknown area"
 	CAN_GRIFE = 0 //grife
