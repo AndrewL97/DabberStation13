@@ -16,3 +16,6 @@ Use dream daemon to host, Don't use port 9999 or 0, because it enables local tes
 You need to edit admin_verbs.dm to change admins. And you need to create a webhook.txt file and webhookAdmin.txt file in the config folder, These are used for the discord webhooks. webhook.txt is a webhook that logs player chat, and webhookAdmin.txt is a adminhelp webhook.
 
 Gamemodes cannot be configured yet.
+
+# Admin Tools / Commands
+Admin tools aren't that big. But you may suggest new ones to me. Currently we have main admin features like banning, kicking, sounds, teleporting. etc
