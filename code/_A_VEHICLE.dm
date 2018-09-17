@@ -118,11 +118,11 @@ vy = v * sin(angle)
 		if(AngleA_Speed > 4)
 			AngleA_Speed -= 0.2
 		if(AngleA_Speed > 0)
-			AngleA_Speed -= 0.005
+			AngleA_Speed -= 0.01
 			if(AngleA_Speed < 0)
 				AngleA_Speed = 0
 		if(AngleA_Speed < 0)
-			AngleA_Speed += 0.005
+			AngleA_Speed += 0.01
 			if(AngleA_Speed > 0)
 				AngleA_Speed = 0
 
@@ -189,9 +189,9 @@ vy = v * sin(angle)
 
 	if ((user in src))
 		if(direction & SOUTH)
-			AngleA_Speed = AngleA_Speed - 0.05
+			AngleA_Speed = AngleA_Speed - 0.1
 		if(direction & NORTH)
-			AngleA_Speed = AngleA_Speed + 0.05
+			AngleA_Speed = AngleA_Speed + 0.1
 		if(direction & EAST)
 			AngleA = AngleA - 1
 		if(direction & WEST)

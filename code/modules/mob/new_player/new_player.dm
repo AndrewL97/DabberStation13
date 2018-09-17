@@ -59,25 +59,6 @@ mob/new_player
 
 			src << browse(cssStyleSheetDab13 + output,"window=playersetup;size=300x400;can_close=0")
 
-	Stat()
-		..()
-
-		statpanel("Game")
-		if(client.statpanel=="Game" && ticker)
-			if(ticker.hide_mode)
-				stat("Game Mode:", "Secret")
-			else
-				stat("Game Mode:", "[master_mode]")
-
-			if(ticker.current_state == GAME_STATE_PREGAME)
-				stat("Time To Start:", ticker.pregame_timeleft)
-
-		statpanel("Lobby")
-		if(client.statpanel=="Lobby" && ticker)
-			if(ticker.current_state == GAME_STATE_PREGAME)
-				for(var/mob/new_player/player in world)
-					stat("[player.key]", (player.ready)?("(Playing)"):(null))
-
 	Topic(href, href_list[])
 		if(href_list["show_preferences"])
 			preferences.ShowChoices(src)

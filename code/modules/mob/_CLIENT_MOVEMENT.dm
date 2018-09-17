@@ -41,7 +41,8 @@ mob
 					var/sound/S = sound(pick(T.TurfStepSound))
 					S.frequency = rand(99,101)/100
 					view() << S
-
+/proc/Get_Glide_Size(var/time)
+	return (world.icon_size/time)*world.tick_lag
 /client
 	//animate_movement = 2
 	var/s = 0
@@ -220,7 +221,7 @@ mob
 			src.moving = 1
 
 			var/RLMove = src.move_delay - world.time
-			mob.glide_size = (world.icon_size/RLMove)*world.tick_lag
+			mob.glide_size = Get_Glide_Size(RLMove)
 			//TILE_HEIGHT / move_delay * TICK_LAG
 			glide_size = mob.glide_size
 			if(mob.MyShadow)
