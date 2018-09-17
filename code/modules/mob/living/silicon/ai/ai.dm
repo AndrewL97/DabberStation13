@@ -105,31 +105,6 @@
 		src.updatehealth()
 	return
 
-/mob/living/silicon/ai/bullet_act(flag)
-	src << "<b>\red You get hit by a projecile!"
-	if (flag == PROJECTILE_BULLET)
-		if (src.stat != 2)
-			src.bruteloss += 60
-			src.updatehealth()
-			src.weakened = 10
-	else if (flag == PROJECTILE_TASER)
-		if (prob(75))
-			src.stunned = 15
-		else
-			src.weakened = 15
-	else if(flag == PROJECTILE_LASER)
-		if (src.stat != 2)
-			src.bruteloss += 20
-			src.updatehealth()
-			if (prob(25))
-				src.stunned = 1
-	else if(flag == PROJECTILE_PULSE)
-		if (src.stat != 2)
-			src.bruteloss += 40
-			src.updatehealth()
-			if (prob(50))
-				src.stunned = min(5, src.stunned)
-	return
 
 /mob/living/silicon/ai/proc/show_laws_verb()
 	set category = "AI Commands"

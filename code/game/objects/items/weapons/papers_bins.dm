@@ -337,31 +337,9 @@ CLIPBOARDS
 
 
 /obj/item/weapon/a_gift/attack_self(mob/M as mob)
-	switch(pick("flash", "t_gun", "l_gun", "shield", "sword", "axe"))
+	switch(pick("flash", "shield", "sword", "axe"))
 		if("flash")
 			var/obj/item/device/flash/W = new /obj/item/device/flash( M )
-			if (M.hand)
-				M.l_hand = W
-			else
-				M.r_hand = W
-			W.layer = 20
-			W.add_fingerprint(M)
-			//SN src = null
-			del(src)
-			return
-		if("l_gun")
-			var/obj/item/weapon/gun/energy/laser_gun/W = new /obj/item/weapon/gun/energy/laser_gun( M )
-			if (M.hand)
-				M.l_hand = W
-			else
-				M.r_hand = W
-			W.layer = 20
-			W.add_fingerprint(M)
-			//SN src = null
-			del(src)
-			return
-		if("t_gun")
-			var/obj/item/weapon/gun/energy/taser_gun/W = new /obj/item/weapon/gun/energy/taser_gun( M )
 			if (M.hand)
 				M.l_hand = W
 			else

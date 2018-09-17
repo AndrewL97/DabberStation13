@@ -308,8 +308,7 @@
 	return
 
 /obj/item/assembly/rad_prox/HasProximity(atom/movable/AM as mob|obj)
-	if (istype(AM, /obj/beam))
-		return
+
 	if (AM.move_speed < 12)
 		src.part2.sense()
 	return
@@ -427,22 +426,18 @@
 	var/t = src.dir
 	..()
 	src.dir = t
-	//src.part2.first = null
-	del(src.part2.first)
+
 	return
 
 /obj/item/assembly/rad_infra/attack_paw(mob/user as mob)
 	return src.attack_hand(user)
 
 /obj/item/assembly/rad_infra/attack_hand(M)
-	del(src.part2.first)
 	..()
 	return
 
 /obj/item/assembly/prox_ignite/HasProximity(atom/movable/AM as mob|obj)
 
-	if (istype(AM, /obj/beam))
-		return
 	if (AM.move_speed < 12 && src.part1)
 		src.part1.sense()
 	return
@@ -551,8 +546,6 @@
 	return
 
 /obj/item/assembly/m_i_ptank/HasProximity(atom/movable/AM as mob|obj)
-	if (istype(AM, /obj/beam))
-		return
 	if (AM.move_speed < 12 && src.part1)
 		src.part1.sense()
 	return
@@ -905,293 +898,11 @@
 			src.part3.release()
 	return
 
-/obj/bullet/Bump(atom/A as mob|obj|turf|area)
-	var/BPen = 0
-	spawn(0)
-		if(A)
-			if(A.can_bullet_act())
-				A.bullet_act(PROJECTILE_BULLET, src)
-				BPen = 1
-			else
-				loc = locate(A.x,A.y,A.z)
-			if(istype(A,/turf))
-				if(A.density)
-					BPen = 1
-				for(var/obj/O in A)
-					O.bullet_act(PROJECTILE_BULLET, src)
-		if(BPen == 1)
-			del(src)
-	return
-
-/obj/bullet/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-
-	if(istype(mover, /obj/bullet))
-		return prob(95)
-	else
-		return 1
-
-/obj/bullet/weakbullet/Bump(atom/A as mob|obj|turf|area)
-	var/BPen = 0
-	spawn(0)
-		if(A)
-			if(A.can_bullet_act())
-				A.bullet_act(PROJECTILE_WEAKBULLET, src)
-				BPen = 1
-			else
-				loc = locate(A.x,A.y,A.z)
-			if(istype(A,/turf))
-				if(A.density)
-					BPen = 1
-				for(var/obj/O in A)
-					O.bullet_act(PROJECTILE_WEAKBULLET, src)
-		if(BPen == 1)
-			del(src)
-	return
-
-/obj/bullet/electrode/Bump(atom/A as mob|obj|turf|area)
-	var/BPen = 0
-	spawn(0)
-		if(A)
-			if(A.can_bullet_act())
-				A.bullet_act(PROJECTILE_TASER)
-				BPen = 1
-			else
-				loc = locate(A.x,A.y,A.z)
-			if(istype(A,/turf))
-				if(A.density)
-					BPen = 1
-				for(var/obj/O in A)
-					O.bullet_act(PROJECTILE_TASER, src)
-		if(BPen == 1)
-			del(src)
-	return
-
-/obj/bullet/cbbolt/Bump(atom/A as mob|obj|turf|area)
-	var/BPen = 0
-	spawn(0)
-		if(A)
-			if(A.can_bullet_act())
-				A.bullet_act(PROJECTILE_BOLT)
-				BPen = 1
-			else
-				loc = locate(A.x,A.y,A.z)
-			if(istype(A,/turf))
-				if(A.density)
-					BPen = 1
-				for(var/obj/O in A)
-					O.bullet_act(PROJECTILE_BOLT, src)
-		if(BPen == 1)
-			del(src)
-	return
-
-/obj/bullet/teleshot/Bump(atom/A as mob|obj|turf|area)
-	if (src.target == null)
-		var/list/turfs = list(	)
-		for(var/turf/T in orange(10, src))
-			if(T.x>world.maxx-4 || T.x<4)	continue	//putting them at the edge is dumb
-			if(T.y>world.maxy-4 || T.y<4)	continue
-			turfs += T
-		if(turfs)
-			src.target = pick(turfs)
-	if (!src.target)
-		del(src)
-		return
-	spawn(0)
-		if(A)
-			var/turf/T = get_turf(A)
-			for(var/atom/movable/M in T)
-				if(istype(M, /obj/effects)) //sparks don't teleport
-					continue
-				if (M.anchored)
-					continue
-				if (istype(M, /atom/movable))
-					var/datum/effects/system/spark_spread/s = new /datum/effects/system/spark_spread
-					s.set_up(5, 1, M)
-					s.start()
-					if(prob(src.failchance)) //oh dear a problem, put em in deep space
-						do_teleport(M, locate(rand(5, world.maxx - 5), rand(5, world.maxy -5), 3), 0)
-					else
-						do_teleport(M, src.target, 2)
-		del(src)
-	return
-
-/obj/bullet/proc/process()
-	if ((!( src.current ) || src.loc == src.current))
-		src.current = locate(min(max(src.x + src.xo, 1), world.maxx), min(max(src.y + src.yo, 1), world.maxy), src.z)
-	if ((src.x == 1 || src.x == world.maxx || src.y == 1 || src.y == world.maxy))
-		//SN src = null
-		del(src)
-		return
-	step_towards(src, src.current)
-	spawn( 1 )
-		process()
-		return
-	return
-
-/obj/beam/a_laser/Bump(atom/A as mob|obj|turf|area)
-	spawn(0)
-		if(A)
-			if(A.can_bullet_act()) if(A.can_bullet_act()) A.bullet_act(PROJECTILE_LASER, src)
-		del(src)
-
-/obj/beam/a_laser/proc/process()
-	//world << text("laser at [] []:[], target is [] []:[]", src.loc, src.x, src.y, src:current, src.current:x, src.current:y)
-	if ((!( src.current ) || src.loc == src.current))
-		src.current = locate(min(max(src.x + src.xo, 1), world.maxx), min(max(src.y + src.yo, 1), world.maxy), src.z)
-		//world << text("current changed: target is now []. location was [],[], added [],[]", src.current, src.x, src.y, src.xo, src.yo)
-	if ((src.x == 1 || src.x == world.maxx || src.y == 1 || src.y == world.maxy))
-		//world << text("off-world, deleting")
-		//SN src = null
-		del(src)
-		return
-	step_towards(src, src.current)
-	// make it able to hit lying-down folk
-	var/list/dudes = list()
-	for(var/mob/M in src.loc)
-		dudes += M
-	if(dudes.len)
-		src.Bump(pick(dudes))
-	//world << text("laser stepped, now [] []:[], target is [] []:[]", src.loc, src.x, src.y, src.current, src.current:x, src.current:y)
-	src.life--
-	if (src.life <= 0)
-		//SN src = null
-		del(src)
-		return
-
-	spawn(1)
-		src.process()
-		return
-	return
-
-/obj/beam/i_beam/proc/hit()
-	//world << "beam \ref[src]: hit"
-	if (src.master)
-		//world << "beam hit \ref[src]: calling master \ref[master].hit"
-		src.master.hit()
-	//SN src = null
-	del(src)
-	return
-
-/obj/beam/i_beam/proc/vis_spread(v)
-	//world << "i_beam \ref[src] : vis_spread"
-	src.visible = v
-	spawn( 0 )
-		if (src.next)
-			//world << "i_beam \ref[src] : is next [next.type] \ref[next], calling spread"
-			src.next.vis_spread(v)
-		return
-	return
-
-/obj/beam/i_beam/proc/process()
-	//world << "i_beam \ref[src] : process"
-
-	if ((src.loc.density || !( src.master )))
-		//SN src = null
-	//	world << "beam hit loc [loc] or no master [master], deleting"
-		del(src)
-		return
-	//world << "proccess: [src.left] left"
-
-	if (src.left > 0)
-		src.left--
-	if (src.left < 1)
-		if (!( src.visible ))
-			src.invisibility = 101
-		else
-			src.invisibility = 0
-	else
-		src.invisibility = 0
-
-
-	//world << "now [src.left] left"
-	var/obj/beam/i_beam/I = new /obj/beam/i_beam( src.loc )
-	I.master = src.master
-	I.density = 1
-	I.dir = src.dir
-	//world << "created new beam \ref[I] at [I.x] [I.y] [I.z]"
-	step(I, I.dir)
-
-	if (I)
-		//world << "step worked, now at [I.x] [I.y] [I.z]"
-		if (!( src.next ))
-			//world << "no src.next"
-			I.density = 0
-			//world << "spreading"
-			I.vis_spread(src.visible)
-			src.next = I
-			spawn( 0 )
-				//world << "limit = [src.limit] "
-				if ((I && src.limit > 0))
-					I.limit = src.limit - 1
-					//world << "calling next process"
-					I.process()
-				return
-		else
-			//world << "is a next: \ref[next], deleting beam \ref[I]"
-			//I = null
-			del(I)
-	else
-		//src.next = null
-		//world << "step failed, deleting \ref[src.next]"
-		del(src.next)
-	spawn( 10 )
-		src.process()
-		return
-	return
-
-/obj/beam/i_beam/Bump()
-	del(src)
-	return
-
-/obj/beam/i_beam/Bumped()
-	src.hit()
-	return
-
-/obj/beam/i_beam/HasEntered(atom/movable/AM as mob|obj)
-	if (istype(AM, /obj/beam))
-		return
-	spawn( 0 )
-		src.hit()
-		return
-	return
-
-/obj/beam/i_beam/Del()
-	del(src.next)
-	..()
-	return
-
 /atom/proc/ex_act()
 	return
 
 /atom/proc/blob_act()
 	return
-
-// bullet_act called when anything is hit buy a projectile (bullet, tazer shot, laser, etc.)
-// flag is projectile type, can be:
-//PROJECTILE_TASER = 1   		taser gun
-//PROJECTILE_LASER = 2			laser gun
-//PROJECTILE_BULLET = 3			traitor pistol
-//PROJECTILE_PULSE = 4			pulse rifle
-//PROJECTILE_BOLT = 5			crossbow
-//PROJECTILE_WEAKBULLET = 6		detective's revolver
-
-/atom/proc/bullet_act(flag)
-	if(flag == PROJECTILE_PULSE)
-		src.ex_act(2)
-	return
-
-
-/turf/Entered(atom/A as mob|obj)
-	..()
-	if ((A && A.density && !( istype(A, /obj/beam) )))
-		for(var/obj/beam/i_beam/I in src)
-			spawn( 0 )
-				if (I)
-					I.hit()
-				return
-	return
-
 /obj/item/weapon/mousetrap/examine()
 	set src in oview(12)
 	..()

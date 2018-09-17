@@ -182,8 +182,6 @@
 /obj/machinery/firealarm/attack_ai(mob/user as mob)
 	return src.attack_hand(user)
 
-/obj/machinery/firealarm/bullet_act(BLAH)
-	return src.alarm()
 
 /obj/machinery/firealarm/attack_paw(mob/user as mob)
 	return src.attack_hand(user)

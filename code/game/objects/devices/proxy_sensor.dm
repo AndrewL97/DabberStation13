@@ -61,8 +61,6 @@
 	return
 
 /obj/item/device/prox_sensor/HasProximity(atom/movable/AM as mob|obj)
-	if (istype(AM, /obj/beam))
-		return
 	if (AM.move_speed < 12)
 		src.sense()
 	return

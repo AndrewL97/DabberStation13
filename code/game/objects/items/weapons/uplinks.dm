@@ -29,9 +29,7 @@ SYNDICATE UPLINK
 			dat += "<HR>"
 			dat += "<B>Request item:</B><BR>"
 			dat += "<I>Each item costs a number of tele-crystals as indicated by the number following their name.</I><BR>"
-			dat += "<A href='byond://?src=\ref[src];item_revolver=1'>Revolver</A> (7)<BR>"
 			dat += "<A href='byond://?src=\ref[src];item_revolver_ammo=1'>Ammo-357</A> for use with Revolver (2)<BR>"
-			dat += "<A href='byond://?src=\ref[src];item_xbow=1'>Energy Crossbow</A> (5)<BR>"
 			dat += "<A href='byond://?src=\ref[src];item_empbox=1'>5 EMP Grenades</A> (4)<BR>"
 			dat += "<A href='byond://?src=\ref[src];item_voice=1'>Voice-Changer</A> (4)<BR>"
 			dat += "<A href='byond://?src=\ref[src];item_jump=1'>Chameleon Jumpsuit</A> (3)<BR>"
@@ -78,15 +76,6 @@ SYNDICATE UPLINK
 			if (src.uses >= 4)
 				src.uses -= 4
 				new /obj/item/weapon/cloaking_device( H.loc )
-		else if (href_list["item_revolver"])
-			if (src.uses >= 7)
-				src.uses -= 7
-				var/obj/item/weapon/gun/revolver/O = new /obj/item/weapon/gun/revolver(H.loc)
-				O.bullets = 7
-		else if (href_list["item_xbow"])
-			if (src.uses >= 5)
-				src.uses -= 5
-				new /obj/item/weapon/gun/energy/crossbow( H.loc )
 		else if (href_list["item_revolver_ammo"])
 			if (src.uses >= 2)
 				src.uses -= 2

@@ -62,7 +62,6 @@
 	src.modules += new /obj/item/weapon/baton(src)
 
 	src.modules += new /obj/item/weapon/handcuffs(src)
-	src.modules += new /obj/item/weapon/gun/energy/taser_gun(src)
 	src.modules += new /obj/item/device/flash(src)
 
 /obj/item/weapon/robot_module/janitor/New()

@@ -100,27 +100,6 @@
 					A.ex_act(severity)
 				del(src)
 
-/obj/closet/bullet_act(flag)
-
-/* Just in case someone gives closets health
-	if (flag == PROJECTILE_BULLET)
-		src.health -= 1
-		src.healthcheck()
-		return
-	if (flag != PROJECTILE_LASER)
-		src.health -= 3
-		src.healthcheck()
-		return
-	else
-		src.health -= 5
-		src.healthcheck()
-		return
-*/
-	if(prob(4))
-		for (var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
-		del(src)
-	return
 
 // this should probably use dump_contents()
 /obj/closet/blob_act()

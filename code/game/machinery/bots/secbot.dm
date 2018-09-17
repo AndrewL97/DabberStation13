@@ -599,17 +599,8 @@ Auto Patrol: []"},
 			if(src.allowed(perp)) //Corrupt cops cannot exist beep boop
 				return 0
 
-			if(istype(perp.l_hand, /obj/item/weapon/gun) || istype(perp.l_hand, /obj/item/weapon/baton))
-				threatcount += 4
-
-			if(istype(perp.r_hand, /obj/item/weapon/gun) || istype(perp.r_hand, /obj/item/weapon/baton))
-				threatcount += 4
-
-			if(istype(perp:belt, /obj/item/weapon/gun) || istype(perp:belt, /obj/item/weapon/baton))
-				threatcount += 2
-
 			if(istype(perp:wear_suit, /obj/item/clothing/suit/wizrobe))
-				threatcount += 2
+				threatcount += 8
 
 			if(perp.mutantrace != "none")
 				threatcount += 2
@@ -650,19 +641,6 @@ Auto Patrol: []"},
 			var/turf/T = get_turf(src)
 			M:loc = T
 
-	bullet_act(flag, A as obj)
-		if (flag == PROJECTILE_BULLET)
-			src.health -= 20
-
-	//	else if (flag == PROJECTILE_WEAKBULLET || PROJECTILE_BEANBAG) //Detective's revolver fires marshmallows
-	//		src.health -= 2
-
-		else if (flag == PROJECTILE_LASER)
-			src.health -= 10
-
-
-		if (src.health <= 0)
-			src.explode()
 
 	proc/speak(var/message)
 		for(var/mob/O in hearers(src, null))

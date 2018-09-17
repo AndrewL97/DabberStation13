@@ -93,5 +93,3 @@
 
 /obj/dummy/spell_invis/ex_act(blah)
 	return
-/obj/dummy/spell_invis/bullet_act(blah,blah)
-	return

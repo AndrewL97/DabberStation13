@@ -118,9 +118,6 @@
 	synd_mob.equip_if_possible(new /obj/item/weapon/storage/backpack(synd_mob), synd_mob.slot_back)
 	synd_mob.equip_if_possible(new /obj/item/weapon/ammo/a357(synd_mob), synd_mob.slot_in_backpack)
 	synd_mob.equip_if_possible(new /obj/item/weapon/reagent_containers/pill/tox(synd_mob), synd_mob.slot_in_backpack)
-	var/obj/item/weapon/gun/revolver/G = new /obj/item/weapon/gun/revolver(synd_mob)
-	G.bullets = 7
-	synd_mob.equip_if_possible(G, synd_mob.slot_belt)
 
 /datum/game_mode/nuclear/check_win()
 	if (src.nuke_detonated)

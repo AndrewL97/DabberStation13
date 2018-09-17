@@ -205,13 +205,6 @@ Release Pressure: <A href='?src=\ref[src];pressure_adj=-100'>-</A> <A href='?src
 		return
 	return
 
-/obj/machinery/portable_atmospherics/canister/bullet_act(flag)
-	if (flag == PROJECTILE_BULLET)
-		src.health = 0
-		spawn( 0 )
-			healthcheck()
-			return
-	return
 
 /obj/machinery/portable_atmospherics/canister/toxins/New()
 

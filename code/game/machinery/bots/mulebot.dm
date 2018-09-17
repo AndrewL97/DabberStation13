@@ -169,17 +169,7 @@
 
 		return
 
-	bullet_act()
-		if(prob(50))
-			load.bullet_act()
-			unload(0)
-		if(prob(25))
-			src.visible_message("Something shorts out inside [src]!")
-			var/index = 1<< (rand(0,9))
-			if(wires & index)
-				wires &= ~index
-			else
-				wires |= index
+
 
 
 	attack_ai(var/mob/user)

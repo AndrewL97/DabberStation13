@@ -91,12 +91,6 @@ FLASHBANG
 			for(var/obj/item/weapon/cloaking_device/S in M)
 				S.active = 0
 				S.icon_state = "shield0"
-
-		if (locate(/obj/item/weapon/gun/energy, M))
-			for(var/obj/item/weapon/gun/energy/G in M)
-				G.charges = 0
-				G.update_icon()
-
 		if ((istype(M, /mob/living/carbon/human)) && (istype(M:glasses, /obj/item/clothing/glasses/thermal)))
 			M << "\red <B>Your thermals malfunction.</B>"
 			M.eye_blind = 3
@@ -146,11 +140,6 @@ FLASHBANG
 
 		spawn(10)
 			del(pulse2)
-
-		if(istype(A, /obj/machinery/turret))
-			A:enabled = 0
-			A:lasers = 0
-			A:power_change()
 
 		if(istype(A, /obj/machinery/computer) && prob(20))
 			A:set_broken()

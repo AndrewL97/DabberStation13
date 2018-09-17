@@ -761,9 +761,6 @@ steam.start() -- spawns the effect
 	blob_act()
 		del(src)
 
-	bullet_act()
-		if(metal==1 || prob(50))
-			del(src)
 
 	attack_paw(var/mob/user)
 		attack_hand(user)

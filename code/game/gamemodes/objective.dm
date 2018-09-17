@@ -108,12 +108,10 @@ datum
 			var/obj/item/steal_target
 			var/target_name
 			proc/find_target()
-				var/list/items = list("captain's antique laser gun", "hand teleporter", "RCD", "jetpack", "captains jumpsuit")
+				var/list/items = list("hand teleporter", "RCD", "jetpack", "captains jumpsuit")
 
 				target_name = pick(items)
 				switch(target_name)
-					if("captain's antique laser gun")
-						steal_target = /obj/item/weapon/gun/energy/laser_gun/captain
 					if("hand teleporter")
 						steal_target = /obj/item/weapon/hand_tele
 					if("RCD")

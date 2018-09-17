@@ -96,33 +96,6 @@
 		del(src)
 
 
-/obj/beam
-	name = "beam"
-
-/obj/beam/a_laser
-	name = "a laser"
-	icon = 'projectiles.dmi'
-	icon_state = "laser"
-	density = 1
-	var/yo = null
-	var/xo = null
-	var/current = null
-	var/life = 50.0
-	anchored = 1.0
-	flags = TABLEPASS
-
-/obj/beam/i_beam
-	name = "i beam"
-	icon = 'projectiles.dmi'
-	icon_state = "ibeam"
-	var/obj/beam/i_beam/next = null
-	var/obj/item/device/infra/master = null
-	var/limit = null
-	var/visible = 0.0
-	var/left = null
-	anchored = 1.0
-	flags = TABLEPASS
-
 /obj/bedsheetbin
 	name = "linen bin"
 	desc = "A bin for containing bedsheets."

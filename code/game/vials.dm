@@ -256,8 +256,6 @@
 
 /obj/dummy/liquid/ex_act(blah)
 	return
-/obj/dummy/liquid/bullet_act(blah,blah)
-	return
 
 
 ///atom/relaymove - change to obj to restore

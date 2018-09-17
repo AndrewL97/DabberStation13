@@ -72,7 +72,6 @@
 	W.dropped(user)
 	W.plane = ITEM_PLANE
 	add_fingerprint(user)
-	if (istype(W, /obj/item/weapon/gun/energy/crossbow)) return //STEALTHY
 	for(var/mob/O in viewers(user, null))
 		O.show_message(text("\blue [] has added [] to []!", user, W, src), 1)
 		//Foreach goto(139)

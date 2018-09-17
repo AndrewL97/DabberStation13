@@ -1530,9 +1530,6 @@ Code:
 	src.menu_message += "<B>Request item:</B><BR>"
 	src.menu_message += "<I>Each item costs a number of tele-crystals as indicated by the number following their name.</I><BR>"
 	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=projector'>Chameleon-projector</A> (4)<BR>"
-	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=revolver'>Revolver</A> (7)<BR>"
-	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=revolver_ammo'>Ammo-357</A> for use with Revolver (2)<BR>"
-	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=xbow'>Energy Crossbow</A> (5)<BR>"
 	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=empbox'>5 EMP Grenades</A> (4)<BR>"
 	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=voice'>Voice-Changer</A> (4)<BR>"
 	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=jump'>Chameleon Jumpsuit</A> (3)<BR>"
@@ -1569,19 +1566,6 @@ Code:
 
 	if (href_list["buy_item"])
 		switch(href_list["buy_item"])
-			if("revolver")
-				if (src.uses >= 7)
-					src.uses -= 7
-					var/obj/item/weapon/gun/revolver/O = new /obj/item/weapon/gun/revolver(get_turf(src.hostpda))
-					O.bullets = 7
-			if("revolver_ammo")
-				if (src.uses >= 2)
-					src.uses -= 2
-					new /obj/item/weapon/ammo/a357(get_turf(src.hostpda))
-			if("xbow")
-				if (src.uses >= 5)
-					src.uses -= 5
-					new /obj/item/weapon/gun/energy/crossbow(get_turf(src.hostpda))
 			if("empbox")
 				if (src.uses >= 4)
 					src.uses -= 4

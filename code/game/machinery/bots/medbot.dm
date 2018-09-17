@@ -452,21 +452,7 @@
 		O.show_message("<span class='game say'><span class='name'>[src]</span> beeps, \"[message]\"",2)
 	return
 
-/obj/machinery/bot/medbot/bullet_act(flag, A as obj)
-	if (flag == PROJECTILE_BULLET)
-		src.health -= 18
 
-	else if (flag == PROJECTILE_TASER)
-		src.stunned += 10
-		if(src.stunned > 20)
-			src.stunned = 20
-
-	else if (flag == PROJECTILE_LASER)
-		src.health -= 8
-
-
-	if (src.health <= 0)
-		src.explode()
 
 /obj/machinery/bot/medbot/ex_act(severity)
 	switch(severity)
