@@ -10,7 +10,8 @@ var/list/admin_verbs = list(
 /client/proc/jumptokey,
 /client/proc/debug_variables,
 /client/proc/kick_user,
-/client/proc/ban_user
+/client/proc/ban_user,
+/client/proc/boom
 )
 var/ban_list = list()
 
@@ -55,6 +56,9 @@ var/ban_list = list()
 /client/proc/kick_user()
 	set category = "Admin"
 	set name = "(ADMIN) Kick User"
+	if (!src.holder)
+		src << "Only administrators may use this command."
+		return
 	var/client/C = input(src,"Which user?","Kick user") as null|anything in clients
 	if(C)
 		if(!C.holder)
@@ -64,6 +68,9 @@ var/ban_list = list()
 /client/proc/ban_user()
 	set category = "Admin"
 	set name = "(ADMIN) Ban User"
+	if (!src.holder)
+		src << "Only administrators may use this command."
+		return
 	var/client/C = input(src,"Which user?","Ban user") as null|anything in clients
 	var/reason = input(src,"Reason?","Ban user") as null|text
 	if(C && reason)
@@ -73,7 +80,15 @@ var/ban_list = list()
 			C << "\red <b>You have been banned by [key] for this round. Reason : [reason], You might appeal at [discordLink]."
 			del C
 
-
+/client/proc/boom()
+	set category = "Admin"
+	set name = "(ADMIN) Boom Boom Shake The Room"
+	if (!src.holder)
+		src << "Only administrators may use this command."
+		return
+	message_admins("[key] has used Boom Boom Shake The Room")
+	if(mob)
+		explosion(mob.loc, 5, 7, 11, 18)
 /client/proc/yomusic(var/g as sound)
 	set category = "Admin"
 	set name = "(ADMIN) Play Music"
