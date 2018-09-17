@@ -39,7 +39,7 @@
 	if(temp < 3500 && melt_down_alert == 1)
 		melt_down_alert = 0
 	if(temp > 5000)
-		explosion(locate(x,y,z), 6, 10, 20, 4,1) //deadly ass explosion, it's your fault it blew up
+		explosion(locate(x,y,z), 11, 15, 20, 30,1) //deadly ass explosion, it's your fault it blew up
 		del(src)
 		return
 
