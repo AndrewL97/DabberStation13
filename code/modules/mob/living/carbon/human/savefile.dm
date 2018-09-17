@@ -30,6 +30,7 @@ datum/preferences/proc/savefile_save(mob/user)
 	F["eyes_blue"] << src.b_eyes
 	F["blood_type"] << src.b_type
 	F["be_syndicate"] << src.be_syndicate
+	F["tts_extra_pitch"] << src.tts_extra_pitch
 
 	F["zangoose_markings"] << src.zangoose_markings
 /*
@@ -97,6 +98,7 @@ datum/preferences/proc/savefile_load(mob/user, var/silent = 1)
 	F["species_color"] >> src.species_color
 	F["tail"] >> src.tail
 	F["tail_color"] >> src.tail_color
+	F["tts_extra_pitch"] >> src.tts_extra_pitch
 	F["name_is_always_random"] >> src.be_random_name
 	F["zangoose_markings"] >> src.zangoose_markings
 	return 1

@@ -1,4 +1,4 @@
-/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num)
+/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, extrapitch as num)
 
 	//Frequency stuff only works with 45kbps oggs.
 
@@ -19,6 +19,9 @@
 		S.x = source.x-i.x
 		S.z = source.y-i.y
 		S.y = 1
+		S.frequency = 1 + extrapitch
+		if(vol > 100)
+			i << S
 		i << S
 
 /mob/proc/playsound_local(var/atom/source, soundin, vol as num, vary, extrarange as num)

@@ -50,6 +50,7 @@
 #include "code\_CLIENT_PROCESSING.dm"
 #include "code\_INACTIVE_KICKER.dm"
 #include "code\_K_CSS.dm"
+#include "code\_TTS_IMPLEMENTATION.dm"
 #include "code\setup.dm"
 #include "code\stylesheet.dm"
 #include "code\ATMOSPHERICS\atmospherics.dm"

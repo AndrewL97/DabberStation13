@@ -37,6 +37,7 @@ datum/preferences
 	var/g_hair = 0.0
 	var/b_hair = 0.0
 
+	var/tts_extra_pitch = 0
 	var/r_facial = 0.0
 	var/g_facial = 0.0
 	var/b_facial = 0.0
@@ -212,6 +213,8 @@ datum/preferences
 		dat += "<hr><table><tr><td><b>Body</b><br>"
 		dat += "Blood Type: <a href='byond://?src=\ref[user];preferences=1;b_type=input'>[src.b_type]</a><br>"
 		dat += "Color: <a href='byond://?src=\ref[user];preferences=1;s_tone=input'>Change</a><br>"
+		dat += "Voice pitch: <a href='byond://?src=\ref[user];preferences=1;tts_pitch=input'>Change</a><br>"
+
 
 		if(iscool(user))
 			dat += "Furry Markings: <a href='byond://?src=\ref[user];preferences=1;s_zangoose_markings=input'>Change</a><br>"
@@ -379,6 +382,13 @@ datum/preferences
 
 			return 1
 
+		if (link_tags["tts_pitch"])
+			tts_extra_pitch = input(user,"TTS voice pitch ( -50 to 50 )","Character Generation") as num
+			tts_extra_pitch = tts_extra_pitch/10
+			if(tts_extra_pitch > 0.5)
+				tts_extra_pitch = 0.5
+			if(tts_extra_pitch < -0.5)
+				tts_extra_pitch = -0.5
 		if (link_tags["species_change"])
 			species = input(user, "Please select a species:", "Character Generation") in list("human","vulpkanin","shark")
 
@@ -603,6 +613,8 @@ datum/preferences
 		character.r_facial = r_facial
 		character.g_facial = g_facial
 		character.b_facial = b_facial
+
+		character.tts_extra_pitch = tts_extra_pitch
 
 		character.zangoose = zangoose_markings
 		character.s_tone = s_tone

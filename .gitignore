@@ -12,3 +12,4 @@ data/player_saves
 SavedPlayerResolutions/
 config/webhook.txt
 config/webhookAdmin.txt
+sound/playervoices/*.wav

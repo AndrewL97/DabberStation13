@@ -19,6 +19,7 @@
 	// emotes
 	if (copytext(message, 1, 2) == "*" && !src.stat)
 		return src.emote(copytext(message, 2))
+	texttospeech(message)
 
 	var/alt_name = ""
 	if (istype(src, /mob/living/carbon/human) && src.name != src.real_name)

@@ -10,7 +10,7 @@
 
 /mob/verb/ooc(msg as text)
 	log_ooc("[src.name]/[src.key] : [msg]")
-	replacetext("[msg]", "@", "not funny")
+	msg = replacetext("[msg]", "@", "not funny")
 	for (var/client/C)
 		if (C.listen_ooc)
 			C << "<font color='#D9FFE3'>OOC: <b>[src.key]</b>: [msg]"
