@@ -44,7 +44,6 @@ mob
 			usr << "\red The pulse rifle blows up in your face."
 			usr.fireloss += 20
 			usr.drop_item()
-			del(src)
 			return
 		if (flag)
 			return
