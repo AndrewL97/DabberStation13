@@ -10,19 +10,26 @@ proc/Get_Position_Y(atom/a)
 
 atom/movable
 	var
-		real_pixel_x = 0 //variables for the real pixel_x
-		real_pixel_y = 0 //variables for shit
+		real_pixel_x = 0
+		real_pixel_y = 0
 		pixel_collision_size_x = 32
 		pixel_collision_size_y = 32
 
 	proc
+		GetCollisionSizes()
+			var/icon/I = new(icon)
+			pixel_collision_size_x = I.Width()
+			pixel_collision_size_y = I.Height()
+			del I
 		PixelCollision(atom/a)
 			var/st1 = Get_Position_X(src)+pixel_collision_size_x > Get_Position_X(a)
 			var/st2 = Get_Position_X(src) < Get_Position_X(a)+world.icon_size
+
 			var/st3 = Get_Position_Y(src)+pixel_collision_size_y > Get_Position_Y(a)
 			var/st4 = Get_Position_Y(src) < Get_Position_Y(a)+world.icon_size
+
 			return st1 || st2 || st3 || st4
-		PixelMove(var/x_to_move,var/y_to_move) //FOR THIS TO LOOK SMOOTH, ANIMATE_MOVEMENT needs to be 0!
+		PixelMove(var/x_to_move,var/y_to_move)
 			var/old_real_x = real_pixel_x
 			var/old_real_y = real_pixel_y
 			var/old_x = x
@@ -31,16 +38,28 @@ atom/movable
 			real_pixel_x = real_pixel_x + x_to_move
 			real_pixel_y = real_pixel_y + y_to_move
 
-			var/pixel_x_to_move = round(real_pixel_x, 32)
+			/*var/pixel_x_to_move = round(real_pixel_x, 32)
 			real_pixel_x -= pixel_x_to_move
 			x += pixel_x_to_move / 32
 
 			var/pixel_y_to_move = round(real_pixel_y, 32)
 			real_pixel_y -= pixel_y_to_move
-			y += pixel_y_to_move / 32
+			y += pixel_y_to_move / 32*/
+			while(real_pixel_x > 32) //Modulo doesn't work with this kind of stuff, don't know if there's a better method.
+				real_pixel_x = real_pixel_x - 32
+				x = x + 1
+			while(real_pixel_x < -32)
+				real_pixel_x = real_pixel_x + 32
+				x = x - 1
+			while(real_pixel_y > 32) //Modulo doesn't work with this kind of stuff, don't know if there's a better method.
+				real_pixel_y = real_pixel_y - 32
+				y = y + 1
+			while(real_pixel_y < -32)
+				real_pixel_y = real_pixel_y + 32
+				y = y - 1
 
 			var/bumpedwalls = 0
-			for(var/atom/e in range(1,src))//Basic block collision
+			for(var/atom/e in range(1,src))
 				if(e.density == 1 && !istype(e,/mob))
 					if(PixelCollision(e))
 						bumpedwalls += 1

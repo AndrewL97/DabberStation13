@@ -1,6 +1,6 @@
 proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impact_range, flash_range,cap = 1)
 	if(!epicenter)
-		return 0 //Why are we blowing up a null turf?
+		return 0 //Why are we blowing up a null location?
 	spawn()
 		message_admins("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z])")
 
