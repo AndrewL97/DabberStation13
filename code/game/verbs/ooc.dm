@@ -14,4 +14,5 @@
 	for (var/client/C)
 		if (C.listen_ooc)
 			C << "<font color='#D9FFE3'>OOC: <b>[src.key]</b>: [msg]"
-	call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"OOC: **[src.key]**: [msg]\" } ", "Content-Type: application/json")
+	spawn()
+		call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"OOC: **[src.key]**: [msg]\" } ", "Content-Type: application/json")

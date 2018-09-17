@@ -47,10 +47,12 @@ client
 			spawn(20)
 				src << "<font size=6><font color='red'><b>Your byond is too outdated. Please update to BYOND [world.byond_version] or higher if you want to see the game properly, you won't see effects."
 		if(!(world.port in PORTS_NOT_ALLOWED))
-			call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**[key]** joined (BYOND Version [byond_version].[byond_build]).\" } ", "Content-Type: application/json")
+			spawn()
+				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**[key]** joined (BYOND Version [byond_version].[byond_build]).\" } ", "Content-Type: application/json")
 			world << "<font color='yellow'>[key] joined."
 	Del()
 		if(!(world.port in PORTS_NOT_ALLOWED) && check_cid == 0)
-			call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**[key]** left.\" } ", "Content-Type: application/json")
+			spawn()
+				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**[key]** left.\" } ", "Content-Type: application/json")
 			world << "<font color='yellow'>[key] left."
 		..()

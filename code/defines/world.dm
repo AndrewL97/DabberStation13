@@ -53,7 +53,8 @@ world
 		..()
 //<@&464594497901166613>
 /proc/discord_relay(var/content,var/webhook_url)
-	call("ByondPOST.dll", "send_post_request")("[webhook_url]", " { \"content\" : \"[content]\" } ", "Content-Type: application/json")
+	spawn()
+		call("ByondPOST.dll", "send_post_request")("[webhook_url]", " { \"content\" : \"[content]\" } ", "Content-Type: application/json")
 
 /world/proc/update_Status_of_Hub()
 	update_status()
