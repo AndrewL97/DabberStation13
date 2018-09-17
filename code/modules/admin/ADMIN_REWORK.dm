@@ -11,7 +11,8 @@ var/list/admin_verbs = list(
 /client/proc/debug_variables,
 /client/proc/kick_user,
 /client/proc/ban_user,
-/client/proc/boom
+/client/proc/boom,
+/client/proc/admin_observe
 )
 var/ban_list = list()
 
@@ -129,19 +130,29 @@ var/ban_list = list()
 		src << "Only administrators may use this command."
 		return
 
-	if(config.allow_admin_jump)
-		var/list/keys = list()
-		for(var/mob/M in world)
-			keys += M.client
-		var/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in keys
-		if(!selection)
-			return
-		var/mob/M = selection:mob
-		log_admin("[key_name(usr)] jumped to [key_name(M)]")
-		message_admins("[key_name_admin(usr)] jumped to [key_name_admin(M)]", 1)
-		usr.loc = M.loc
+	var/list/keys = list()
+	for(var/mob/M in world)
+		keys += M.client
+	var/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in keys
+	if(!selection)
+		return
+	var/mob/M = selection:mob
+	log_admin("[key_name(usr)] jumped to [key_name(M)]")
+	message_admins("[key_name_admin(usr)] jumped to [key_name_admin(M)]", 1)
+	usr.loc = M.loc
+
+/client/proc/admin_observe()
+	set category = "Admin"
+	set name = "(ADMIN) Admin-Ghost"
+	if(!src.holder)
+		src << "Only administrators may use this command."
+		return
+	if(!istype(src.mob, /mob/dead/observer))
+		src.mob.ghostize()
+		src << "\blue You are now observing"
 	else
-		alert("Admin jumping disabled")
+		src.mob:reenter_corpse()
+		src << "\blue You are now playing"
 
 /mob/verb/adminhelp(msg as text)
 	set category = "Commands"
