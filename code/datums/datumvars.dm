@@ -1,7 +1,7 @@
 client
 	proc/debug_variables(datum/D in world)
-		set category = "Debug"
-		set name = "Modify And View Variables"
+		set category = "Admin"
+		set name = "(ADMIN) Modify And View Variables"
 
 
 		var/title = ""

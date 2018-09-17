@@ -1288,21 +1288,6 @@
 	if (join_motd)
 		src << "<div class=\"motd\">[join_motd]</div>"
 
-
-	src.update_world()
-
-//new admin bit - Nannek
-
-	if (admins.Find(src.ckey))
-		src.holder = new /obj/admins(src)
-		src.holder.rank = admins[src.ckey]
-		update_admins(admins[src.ckey])
-
-	if (ticker && ticker.mode && ticker.mode.name =="sandbox")
-		mob.CanBuild()
-		if(src.holder  && (src.holder.level >= 3))
-			src.verbs += /mob/proc/Delete
-
 /client/Del()
 	spawn(0)
 		if(src.holder)

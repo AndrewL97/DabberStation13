@@ -330,7 +330,7 @@
 /proc/call_prison_shuttle(var/mob/usr)
 	if ((!( ticker ) || emergency_shuttle.location == 1))
 		return
-	if(ticker.mode.name == "blob" || ticker.mode.name == "Corporate Restructuring" || ticker.mode.name == "sandbox")
+	if(ticker.mode.name == "blob" || ticker.mode.name == "Corporate Restructuring")
 		usr << "Under directive 7-10, [station_name()] is quarantined until further notice."
 		return
 	if(ticker.mode.name == "revolution")

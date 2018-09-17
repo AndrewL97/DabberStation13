@@ -1,5 +1,4 @@
 /client
-	var/obj/admins/holder = null
 
 	var/listen_ooc = 1
 	var/move_delay = 1
