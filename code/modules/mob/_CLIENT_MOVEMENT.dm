@@ -85,8 +85,13 @@ mob
 		..()
 		mousedown = 0
 	proc/GetDirection()
+		var/obj/item/weapon/gun/G = null
+		if (!( mob.hand ))
+			G = mob.r_hand
+		else
+			G = mob.l_hand
 		var/dirAA = (s*SOUTH)+(n*NORTH)+(e*EAST)+(w*WEST)
-		if(dirAA != 0)
+		if(dirAA != 0 && !istype(G,/obj/item/weapon/gun))
 			Move(get_step(mob,dirAA),dirAA)
 		if(j)
 			mob.Jump()
@@ -94,11 +99,7 @@ mob
 			var/mos_x = mouse_position.WorldX()
 			var/mos_y = mouse_position.WorldY()
 			mob.dir = get_dir(mob.loc,locate((mos_x/32)+1,(mos_y/32)+1,mob.z))
-			var/obj/item/weapon/gun/G = null
-			if (!( mob.hand ))
-				G = mob.r_hand
-			else
-				G = mob.l_hand
+
 			if(istype(G,/obj/item/weapon/gun))
 				G.fire(locate((mos_x/32)+1,(mos_y/32)+1,mob.z),mob)
 	Stat()
