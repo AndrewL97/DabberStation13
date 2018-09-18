@@ -22,6 +22,7 @@ proc/atan2(x, y)
 				var/obj/projectile/G = new(user.loc)
 				//xoff-(G.x+G.real_pixel_x)
 				G.real_pixel_y = 15+user.heightZ
+				G.pixel_y = G.real_pixel_y
 				var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+32)-((G.y*32)+G.real_pixel_y))
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
