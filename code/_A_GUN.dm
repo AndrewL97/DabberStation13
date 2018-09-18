@@ -18,7 +18,6 @@ proc/atan2(x, y)
 			if(frm_counter % fire_rate == 1)
 				ammo -= 1
 				var/obj/projectile/G = new(user.loc)
-				G.PixelMove(G.X_SPEED,G.Y_SPEED)
 				var/angle = atan2(A.x-user.x,A.y-user.y)
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
@@ -31,8 +30,10 @@ proc/atan2(x, y)
 	var/Y_SPEED = 0
 	pixel_collision_size_x = 2
 	pixel_collision_size_y = 2
-	real_pixel_x = 16
-	real_pixel_y = 16
+	real_pixel_x = 15
+	real_pixel_y = 15
+	pixel_x = 15
+	pixel_y = 15
 	animate_movement = 0
 	density = 0
 	New()
@@ -43,8 +44,4 @@ proc/atan2(x, y)
 		..()
 	special_process()
 		..()
-		PixelMove(X_SPEED,0)
-		PixelMove(0,Y_SPEED)
-		/*if(PixelMove(X_SPEED,0))
-			//del src
-			return*/
+		PixelMove(X_SPEED,Y_SPEED)
