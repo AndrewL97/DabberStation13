@@ -387,6 +387,7 @@
 #include "code\game\verbs\suicide.dm"
 #include "code\game\verbs\who.dm"
 #include "code\lib\MousePosition.dm"
+#include "code\lib\Vector2.dm"
 #include "code\modules\admin\ADMIN_REWORK.dm"
 #include "code\modules\mob\_CLIENT_MOVEMENT.dm"
 #include "code\modules\mob\_STAT.dm"

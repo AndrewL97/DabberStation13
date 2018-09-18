@@ -22,19 +22,19 @@ proc/atan2(x, y)
 	machine_gun
 		icon_state = "gun"
 		automatic = 1
-		ammo = 100
-		ammo_max = 100
+		ammo = 50
+		ammo_max = 50
 		fire_rate = 5
 		reload_rate = 15
 		gun_sound = 'shot.ogg'
 		bullet_speed = 16
-		bullet_damage = 5
+		bullet_damage = 2
 		automatic_reload = 1
 	pistol
 		icon_state = "pistol"
 		automatic = 0
-		ammo = 12
-		ammo_max = 12
+		ammo = 24
+		ammo_max = 24
 		gun_sound = 'shot2.ogg'
 		bullet_speed = 20
 		bullet_damage = 10
