@@ -34,7 +34,7 @@ atom/movable
 			var/st3 = Get_Position_Y()+pixel_collision_size_y >= a.Get_Position_Y()
 			var/st4 = Get_Position_Y() <= a.Get_Position_Y()+world.icon_size
 
-			return (st1 || st2 || st3 || st4)*a.density
+			return ((st1 || st2) || (st3 || st4))*a.density
 		PixelMove(var/x_to_move,var/y_to_move)
 			var/old_real_x = real_pixel_x
 			var/old_real_y = real_pixel_y
