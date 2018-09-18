@@ -18,13 +18,14 @@ datum/controller/game_controller
 				else
 					M.ProcessDirection() //Process buckled (no delays)
 					M.ProcessHeight() //Process their Y Speed and height.
-					if(M.client && istype(M,/mob/living/carbon/human))
-						M:handle_regular_status_updates()
-						M:handle_regular_hud_updates()
-					if(M.ANIMATION_RUNNING)
-						M.dir = 2
-						if(M.danc)
-							M.danc.Update_Y()
+					if(M)
+						if(M.client && istype(M,/mob/living/carbon/human))
+							M:handle_regular_status_updates()
+							M:handle_regular_hud_updates()
+						if(M.ANIMATION_RUNNING)
+							M.dir = 2
+							if(M.danc)
+								M.danc.Update_Y()
 		mobs_process()
 			for(var/mob/M in Mobs)
 				CHECK_TICK()
