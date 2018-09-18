@@ -35,8 +35,8 @@ atom/movable
 			var/old_x = x
 			var/old_y = y
 
-			real_pixel_x = real_pixel_x + x_to_move
-			real_pixel_y = real_pixel_y + y_to_move
+			real_pixel_x += x_to_move
+			real_pixel_y += y_to_move
 
 			/*var/pixel_x_to_move = round(real_pixel_x, 32)
 			real_pixel_x -= pixel_x_to_move
@@ -46,23 +46,24 @@ atom/movable
 			real_pixel_y -= pixel_y_to_move
 			y += pixel_y_to_move / 32*/
 			while(real_pixel_x > 32) //Modulo doesn't work with this kind of stuff, don't know if there's a better method.
-				real_pixel_x = real_pixel_x - 32
-				x = x + 1
+				real_pixel_x -= 32
+				x += 1
 			while(real_pixel_x < -32)
-				real_pixel_x = real_pixel_x + 32
-				x = x - 1
+				real_pixel_x += 32
+				x -= 1
 			while(real_pixel_y > 32) //Modulo doesn't work with this kind of stuff, don't know if there's a better method.
-				real_pixel_y = real_pixel_y - 32
-				y = y + 1
+				real_pixel_y -= 32
+				y += 1
 			while(real_pixel_y < -32)
-				real_pixel_y = real_pixel_y + 32
-				y = y - 1
+				real_pixel_y += 32
+				y -= 1
 
 			var/bumpedwalls = 0
 			for(var/atom/e in range(1,src))
 				if(e.density == 1 && !istype(e,/mob))
 					if(PixelCollision(e))
 						bumpedwalls += 1
+
 			if(bumpedwalls > 0)
 				x = old_x
 				y = old_y
