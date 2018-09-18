@@ -115,7 +115,7 @@ mob
 			var/mos_y = mouse_position.WorldY()
 			mob.dir = get_dir(mob.loc,locate((mos_x/32)+1,(mos_y/32)+1,mob.z))
 
-			if(istype(G,/obj/item/weapon/gun))
+			if(istype(G,/obj/item/weapon/gun) && G.automatic)
 				G.fire(mob,mos_x,mos_y)
 	Stat()
 		..()
