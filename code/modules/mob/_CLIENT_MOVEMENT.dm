@@ -81,6 +81,17 @@ mob
 	MouseDown()
 		..()
 		mousedown = 1
+		var/obj/item/weapon/gun/G = null
+		if (!( mob.hand ))
+			G = mob.r_hand
+		else
+			G = mob.l_hand
+		if(istype(G,/obj/item/weapon/gun))
+			if(!G.automatic)
+				if(mouse_position && eye && mousedown)
+					var/mos_x = mouse_position.WorldX()
+					var/mos_y = mouse_position.WorldY()
+					G.fire(mob,mos_x,mos_y)
 	MouseUp()
 		..()
 		mousedown = 0
