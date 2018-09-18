@@ -31,214 +31,217 @@ ok thank you for reading this now you can freely do whatever you want
 mob
 	var/obj/dance_displayer/danc
 	var/ANIMATION_RUNNING = 0 //You might want to make it so you can't move when this is true. (or 1)
-	verb
-		Fart()
-			set category = "Animations"
-			set name = {""The Fart""}
-			spawn()
-				if(!ANIMATION_RUNNING)
-					dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
+	living
+		carbon
+			human
+				verb
+					Fart()
+						set category = "Animations"
+						set name = {""The Fart""}
+						spawn()
+							if(!ANIMATION_RUNNING)
+								dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
 
-					view() << "<b>[name]</b> farts."
-					view() << 'fart.ogg' //hilarity %100
+								view() << "<b>[name]</b> farts."
+								view() << 'fart.ogg' //hilarity %100
 
-					danc = new(locate(x,y,z),src)
-					ANIMATION_RUNNING = 1 //This part initializes the animation.
+								danc = new(locate(x,y,z),src)
+								ANIMATION_RUNNING = 1 //This part initializes the animation.
 
-					var/matrix/RightLeg = matrix()
-					var/matrix/LeftLeg = matrix() //You can create as much matrixes, then control them, as seen below.
+								var/matrix/RightLeg = matrix()
+								var/matrix/LeftLeg = matrix() //You can create as much matrixes, then control them, as seen below.
 
-					RightLeg.Turn(-5)
-					//RightLeg.Translate(-1,10)
-					LeftLeg.Turn(5)
-					//LeftLeg.Translate(-8,0)
+								RightLeg.Turn(-5)
+								//RightLeg.Translate(-1,10)
+								LeftLeg.Turn(5)
+								//LeftLeg.Translate(-8,0)
 
-					animate(danc.Limb5,transform = LeftLeg, time = 2)
-					animate(danc.Limb6,transform = RightLeg, time = 2) //This is what causes the magic.
+								animate(danc.Limb5,transform = LeftLeg, time = 2)
+								animate(danc.Limb6,transform = RightLeg, time = 2) //This is what causes the magic.
 
-					sleep(5)
+								sleep(5)
 
-					danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
+								danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
 
-					danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
-					ANIMATION_RUNNING = 0
+								danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
+								ANIMATION_RUNNING = 0
 
-		Dab()
-			set category = "Animations"
-			set name = {""Dab""}
-			spawn()
-				if(!ANIMATION_RUNNING)
-					dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
+					Dab()
+						set category = "Animations"
+						set name = {""Dab""}
+						spawn()
+							if(!ANIMATION_RUNNING)
+								dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
 
-					view() << "<b>[name]</b> dabs!"
+								view() << "<b>[name]</b> dabs!"
 
-					danc = new(locate(x,y,z),src)
-					ANIMATION_RUNNING = 1 //This part initializes the animation.
+								danc = new(locate(x,y,z),src)
+								ANIMATION_RUNNING = 1 //This part initializes the animation.
 
-					var/matrix/RightArm = matrix()
-					var/matrix/LeftArm = matrix() //You can create as much matrixes, then control them, as seen below.
+								var/matrix/RightArm = matrix()
+								var/matrix/LeftArm = matrix() //You can create as much matrixes, then control them, as seen below.
 
-					RightArm.Turn(90)
-					RightArm.Translate(-1,10)
-					LeftArm.Turn(90)
-					LeftArm.Translate(-8,0)
+								RightArm.Turn(90)
+								RightArm.Translate(-1,10)
+								LeftArm.Turn(90)
+								LeftArm.Translate(-8,0)
 
-					animate(danc.Limb3,transform = LeftArm, time = 2)
-					animate(danc.Limb4,transform = RightArm, time = 2) //This is what causes the magic.
+								animate(danc.Limb3,transform = LeftArm, time = 2)
+								animate(danc.Limb4,transform = RightArm, time = 2) //This is what causes the magic.
 
-					sleep(5)
+								sleep(5)
 
-					danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
+								danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
 
-					danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
-					ANIMATION_RUNNING = 0
-		Clap()
-			set category = "Animations"
-			set name = {""The Clap""}
-			spawn()
-				if(!ANIMATION_RUNNING)
-					dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
+								danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
+								ANIMATION_RUNNING = 0
+					Clap()
+						set category = "Animations"
+						set name = {""The Clap""}
+						spawn()
+							if(!ANIMATION_RUNNING)
+								dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
 
-					view() << "<b>[name]</b> claps."
+								view() << "<b>[name]</b> claps."
 
-					danc = new(locate(x,y,z),src)
-					ANIMATION_RUNNING = 1 //This part initializes the animation.
+								danc = new(locate(x,y,z),src)
+								ANIMATION_RUNNING = 1 //This part initializes the animation.
 
-					var/matrix/Reset = matrix()
-					var/matrix/RightArm = matrix()
-					var/matrix/LeftArm = matrix() //You can create as much matrixes, then control them, as seen below.
+								var/matrix/Reset = matrix()
+								var/matrix/RightArm = matrix()
+								var/matrix/LeftArm = matrix() //You can create as much matrixes, then control them, as seen below.
 
-					RightArm.Turn(45)
-					RightArm.Translate(-1,5)
-					LeftArm.Turn(-45)
-					LeftArm.Translate(1,5)
-					for(var/i in 1 to 20)
-						animate(danc.Limb3,transform = LeftArm, time = 1)
-						animate(danc.Limb4,transform = RightArm, time = 1) //This is what causes the magic.
-						sleep(1)
-						view() << 'clap.ogg'
-						animate(danc.Limb3,transform = Reset, time = 1)
-						animate(danc.Limb4,transform = Reset, time = 1)
-						sleep(1)
+								RightArm.Turn(45)
+								RightArm.Translate(-1,5)
+								LeftArm.Turn(-45)
+								LeftArm.Translate(1,5)
+								for(var/i in 1 to 20)
+									animate(danc.Limb3,transform = LeftArm, time = 1)
+									animate(danc.Limb4,transform = RightArm, time = 1) //This is what causes the magic.
+									sleep(1)
+									view() << 'clap.ogg'
+									animate(danc.Limb3,transform = Reset, time = 1)
+									animate(danc.Limb4,transform = Reset, time = 1)
+									sleep(1)
 
 
-					danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
+								danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
 
-					danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
-					ANIMATION_RUNNING = 0
-		Disco_Fever()
-			set category = "Animations"
-			set name = {""Disco Fever""}
-			spawn()
-				if(!ANIMATION_RUNNING)
-					dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
+								danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
+								ANIMATION_RUNNING = 0
+					Disco_Fever()
+						set category = "Animations"
+						set name = {""Disco Fever""}
+						spawn()
+							if(!ANIMATION_RUNNING)
+								dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
 
-					view() << 'disco fever.ogg'
+								view() << 'disco fever.ogg'
 
-					danc = new(locate(x,y,z),src)
-					ANIMATION_RUNNING = 1 //This part initializes the animation.
+								danc = new(locate(x,y,z),src)
+								ANIMATION_RUNNING = 1 //This part initializes the animation.
 
-					var/matrix/RightArm = matrix()
-					var/matrix/RightArm2 = matrix()
-					var/matrix/LeftArm = matrix() //You can create as much matrixes, then control them, as seen below.
-					var/matrix/LeftArm2 = matrix()
-					var/matrix/RightLeg = matrix()
-					var/matrix/LeftLeg = matrix()
-					var/matrix/RightLeg2 = matrix()
-					var/matrix/LeftLeg2 = matrix()
-					var/matrix/Head = matrix()
+								var/matrix/RightArm = matrix()
+								var/matrix/RightArm2 = matrix()
+								var/matrix/LeftArm = matrix() //You can create as much matrixes, then control them, as seen below.
+								var/matrix/LeftArm2 = matrix()
+								var/matrix/RightLeg = matrix()
+								var/matrix/LeftLeg = matrix()
+								var/matrix/RightLeg2 = matrix()
+								var/matrix/LeftLeg2 = matrix()
+								var/matrix/Head = matrix()
 
-					RightArm.Turn(10)
-					RightArm.Translate(0,0)
-					RightArm2.Turn(-10)
-					RightArm2.Translate(0,0)
+								RightArm.Turn(10)
+								RightArm.Translate(0,0)
+								RightArm2.Turn(-10)
+								RightArm2.Translate(0,0)
 
-					LeftArm.Turn(-45)
-					LeftArm.Translate(3,6)
-					LeftArm2.Turn(90)
-					LeftArm2.Translate(-6,-3)
+								LeftArm.Turn(-45)
+								LeftArm.Translate(3,6)
+								LeftArm2.Turn(90)
+								LeftArm2.Translate(-6,-3)
 
-					RightLeg.Turn(-10)
-					RightLeg.Translate(1,0)
-					RightLeg2.Turn(-10)
-					RightLeg2.Translate(-1,0)
-					//RightLeg.Translate(-6,-8)
-					LeftLeg.Turn(10)
-					LeftLeg2.Translate(1,0)
-					LeftLeg2.Turn(10)
-					LeftLeg2.Translate(-1,0)
-					//LeftLeg.Translate(5,-9)
-					//Head.Turn(-10)
+								RightLeg.Turn(-10)
+								RightLeg.Translate(1,0)
+								RightLeg2.Turn(-10)
+								RightLeg2.Translate(-1,0)
+								//RightLeg.Translate(-6,-8)
+								LeftLeg.Turn(10)
+								LeftLeg2.Translate(1,0)
+								LeftLeg2.Turn(10)
+								LeftLeg2.Translate(-1,0)
+								//LeftLeg.Translate(5,-9)
+								//Head.Turn(-10)
 
-					animate(danc.Limb1,transform = Head, time = 2)
+								animate(danc.Limb1,transform = Head, time = 2)
 
-					animate(danc.Limb6,transform = RightLeg, time = 2)
-					animate(danc.Limb5,transform = LeftLeg, time = 2)
+								animate(danc.Limb6,transform = RightLeg, time = 2)
+								animate(danc.Limb5,transform = LeftLeg, time = 2)
 
-					animate(danc.Limb3,transform = LeftArm, time = 2)
-					spawn()
-						for(var/i in 1 to 15) //This would be 4 seconds.
-							animate(danc.Limb4,transform = RightArm, time = 2) //This is what causes the magic.
-							sleep(2)
-							animate(danc.Limb4,transform = RightArm2, time = 2)
-							sleep(2)
-					spawn()
-						for(var/i in 1 to 7)
-							animate(danc.Limb5,transform = LeftLeg2, time = 4)
-							animate(danc.Limb6,transform = RightLeg2, time = 4)
-							animate(danc.Limb3,transform = LeftArm, time = 3)
-							sleep(4)
-							animate(danc.Limb5,transform = LeftLeg, time = 4)
-							animate(danc.Limb6,transform = RightLeg, time = 4)
-							animate(danc.Limb3,transform = LeftArm2, time = 3)
-							sleep(4)
-					sleep(60)
-					danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
+								animate(danc.Limb3,transform = LeftArm, time = 2)
+								spawn()
+									for(var/i in 1 to 15) //This would be 4 seconds.
+										animate(danc.Limb4,transform = RightArm, time = 2) //This is what causes the magic.
+										sleep(2)
+										animate(danc.Limb4,transform = RightArm2, time = 2)
+										sleep(2)
+								spawn()
+									for(var/i in 1 to 7)
+										animate(danc.Limb5,transform = LeftLeg2, time = 4)
+										animate(danc.Limb6,transform = RightLeg2, time = 4)
+										animate(danc.Limb3,transform = LeftArm, time = 3)
+										sleep(4)
+										animate(danc.Limb5,transform = LeftLeg, time = 4)
+										animate(danc.Limb6,transform = RightLeg, time = 4)
+										animate(danc.Limb3,transform = LeftArm2, time = 3)
+										sleep(4)
+								sleep(60)
+								danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
 
-					danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
-					ANIMATION_RUNNING = 0
-		Hate_Niggers()
-			set category = "Animations"
-			set name = {""I hate niggers""}
-			spawn()
-				if(!ANIMATION_RUNNING)
-					dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
+								danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
+								ANIMATION_RUNNING = 0
+					Hate_Niggers()
+						set category = "Animations"
+						set name = {""I hate niggers""}
+						spawn()
+							if(!ANIMATION_RUNNING)
+								dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
 
-					view() << 'hate niggers.ogg'
+								view() << 'hate niggers.ogg'
 
-					danc = new(locate(x,y,z),src)
-					ANIMATION_RUNNING = 1 //This part initializes the animation.
+								danc = new(locate(x,y,z),src)
+								ANIMATION_RUNNING = 1 //This part initializes the animation.
 
-					var/matrix/Reset = matrix()
-					var/matrix/RightArm = matrix()
-					var/matrix/LeftArm = matrix() //You can create as much matrixes, then control them, as seen below.
-					var/matrix/Torso = matrix()
-					var/matrix/Head = matrix()
+								var/matrix/Reset = matrix()
+								var/matrix/RightArm = matrix()
+								var/matrix/LeftArm = matrix() //You can create as much matrixes, then control them, as seen below.
+								var/matrix/Torso = matrix()
+								var/matrix/Head = matrix()
 
-					RightArm.Scale(1,-1)
-					RightArm.Translate(0,7)
-					LeftArm.Scale(1,-1)
-					LeftArm.Translate(0,7)
-					Torso.Translate(0,-1)
-					Head.Translate(0,-1)
-					sleep(4.5)
-					for(var/i in 1 to 8)
-						animate(danc.Limb1,transform = Head,time=2)
-						animate(danc.Limb2,transform = Torso,time=2)
-						animate(danc.Limb3,transform = LeftArm, time = 1)
-						animate(danc.Limb4,transform = Reset, time = 1)
-						sleep(3)
-						animate(danc.Limb1,transform = Reset,time=2)
-						animate(danc.Limb2,transform = Reset,time=2)
-						animate(danc.Limb3,transform = Reset, time = 1)
-						animate(danc.Limb4,transform = RightArm, time = 1) //This is what causes the magic.
-						sleep(3)
+								RightArm.Scale(1,-1)
+								RightArm.Translate(0,7)
+								LeftArm.Scale(1,-1)
+								LeftArm.Translate(0,7)
+								Torso.Translate(0,-1)
+								Head.Translate(0,-1)
+								sleep(4.5)
+								for(var/i in 1 to 8)
+									animate(danc.Limb1,transform = Head,time=2)
+									animate(danc.Limb2,transform = Torso,time=2)
+									animate(danc.Limb3,transform = LeftArm, time = 1)
+									animate(danc.Limb4,transform = Reset, time = 1)
+									sleep(3)
+									animate(danc.Limb1,transform = Reset,time=2)
+									animate(danc.Limb2,transform = Reset,time=2)
+									animate(danc.Limb3,transform = Reset, time = 1)
+									animate(danc.Limb4,transform = RightArm, time = 1) //This is what causes the magic.
+									sleep(3)
 
-					sleep(1)
-					danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
+								sleep(1)
+								danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
 
-					danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
-					ANIMATION_RUNNING = 0
+								danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
+								ANIMATION_RUNNING = 0
 
 obj
 	limb_dance
