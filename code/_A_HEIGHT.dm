@@ -54,7 +54,7 @@ turf
 	space
 		TurfStepSound = null
 		TurfGravity = 48/256
-		TurfHeight = 0
+		TurfHeight = -415
 	unsimulated
 		space2
 			TurfGravity = 48/256
@@ -194,7 +194,7 @@ mob
 			layer = 1.9
 		if(heightZ < -415 && !istype(src,/mob/dead))
 			src << "<b><font color='red'>You fall off!"
-			do_teleport(src,locate(108,107,1),0)
+			do_teleport(src,locate(73,103,1),0)
 		else
 			if(heightZ < 0 && istype(src,/mob/dead))
 				heightZ = 0
