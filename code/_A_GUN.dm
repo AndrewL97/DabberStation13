@@ -22,6 +22,7 @@ proc/atan2(x, y)
 				var/angle = atan2(A.x-user.x,A.y-user.y)
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
+				G.owner = src
 				playsound(user, gun_sound, 100, 1, 15, 0)
 	New()
 		..()
@@ -40,6 +41,7 @@ proc/atan2(x, y)
 	icon_state = "bullet"
 	var/X_SPEED = 0
 	var/Y_SPEED = 0
+	var/mob/owner = null
 	pixel_collision_size_x = 2
 	pixel_collision_size_y = 2
 	real_pixel_x = 15
@@ -57,7 +59,8 @@ proc/atan2(x, y)
 	special_process()
 		..()
 		for(var/mob/e in orange(1,src))
-			if(PixelCollision(e))
-				e.bruteloss += 5
+			if(e != owner)
+				if(PixelCollision(e))
+					e.bruteloss += 5
 		if(!PixelMove(X_SPEED,Y_SPEED))
 			del src
