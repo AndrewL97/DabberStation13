@@ -43,11 +43,11 @@ client/proc/ProcessClient()
 						amb_sound_area.file = A.song
 				dec_volume(A.song != null)
 		if(music_pitch < music_pitch_new)
-			music_pitch = music_pitch + 0.0025
+			music_pitch += 0.0025
 			if(music_pitch > music_pitch_new)
 				music_pitch = music_pitch_new
 		if(music_pitch > music_pitch_new)
-			music_pitch = music_pitch - 0.0025
+			music_pitch -= 0.0025
 			if(music_pitch < music_pitch_new)
 				music_pitch = music_pitch_new
 		amb_sound.volume = vol
