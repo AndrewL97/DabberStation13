@@ -54,7 +54,7 @@ turf
 	space
 		TurfStepSound = null
 		TurfGravity = 48/256
-		TurfHeight = -415
+		TurfHeight = -416
 	unsimulated
 		space2
 			TurfGravity = 48/256
@@ -89,7 +89,7 @@ mob
 		#if defined(GRAVDEBUG)
 		world << "[FONTCOLOR]removing [src] from heightmobs"
 		#endif
-
+		ghostize(0)
 		if(src in HeightMobs)
 			HeightMobs -= src
 		if(src in Mobs)
@@ -193,8 +193,8 @@ mob
 			plane = FLOOR_PLANE
 			layer = 1.9
 		if(heightZ < -415 && !istype(src,/mob/dead))
-			src << "<b><font color='red'>You fall off!"
-			do_teleport(src,locate(73,103,1),0)
+			src << "<b><font color='red'>You were never seen again.."
+			del src
 		else
 			if(heightZ < 0 && istype(src,/mob/dead))
 				heightZ = 0
