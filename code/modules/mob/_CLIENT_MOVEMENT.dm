@@ -105,7 +105,7 @@ mob
 			mob.dir = get_dir(mob.loc,locate((mos_x/32)+1,(mos_y/32)+1,mob.z))
 
 			if(istype(G,/obj/item/weapon/gun))
-				G.fire(locate((mos_x/32)+1,(mos_y/32)+1,mob.z),mob)
+				G.fire(locate((mos_x/32)+1,(mos_y/32)+1,mob.z),mob,(mos_x + 16) % 32,(mos_y + 16) % 32)
 	Stat()
 		..()
 		if(mob)

@@ -867,7 +867,7 @@ About the new airlock wires panel:
 	else if (istype(C, /obj/item/weapon/crowbar))
 		if ((src.density) && (!( src.welded ) && !( src.operating ) && ((!src.arePowerSystemsOn()) || (stat & NOPOWER)) && !( src.locked )))
 			spawn( 0 )
-				playsound(src, 'door.ogg', 100, 0, 6, 0)
+				playsound(src.loc, 'door.ogg', 100, 1, 6, 0)
 				src.operating = 1
 				animate2("opening")
 

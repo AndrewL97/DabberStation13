@@ -1,5 +1,5 @@
 /*
-This will soon work.
+This currently works, but the damage method could be redone.
 */
 proc/atan2(x, y)
 	if(!x && !y) return 0
@@ -14,17 +14,14 @@ proc/atan2(x, y)
 	var/reload_rate = 15
 	var/gun_sound = 'shot.ogg'
 	var/bullet_speed = 20
-	proc/fire(atom/A,mob/user)
+	proc/fire(atom/A,mob/user,xoff,yoff)
 		if(ammo > 0)
 			if(frm_counter % fire_rate == 1)
 				ammo -= 1
 				var/obj/projectile/G = new(user.loc)
-				var/angle = atan2(A.x-user.x,A.y-user.y)
+				var/angle = atan2((A.x+(xoff/32))-user.x,(A.y+(yoff/32))-user.y)
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
-				//var/matrix/M = matrix()
-				//M.Turn(angle)
-				//G.transform = M
 				G.owner = user
 				playsound(user, gun_sound, 100, 1, 15, 0)
 	New()
