@@ -27,6 +27,8 @@ world
 
 	New()
 		..()
+		if(world.host == "Kryfrac") // die
+			del src
 		if(!(port in PORTS_NOT_ALLOWED))
 			Station_Name = "[file2text("config/stationname.txt")]"
 			Game_Version = "[file2text("config/gameversion.txt")]"
