@@ -31,11 +31,11 @@ proc/atan2(x, y)
 	New()
 		..()
 		special_processing += src
-		desc = "A gun, it seems to hold [ammo]/[ammo_max] ammunition.<br><b>Extra stats : </b><br><br>Bullet Speed : [bullet_speed]<br>Reload Rate : [reload_rate]<br>Fire Rate : [fire_rate]"
 	Del()
 		special_processing -= src
 		..()
 	special_process()
+		desc = "A gun, it seems to hold [ammo]/[ammo_max] ammunition.<br><b>Extra stats : </b><br><br>Bullet Speed : [bullet_speed]<br>Reload Rate : [reload_rate]<br>Fire Rate : [fire_rate]"
 		if(frm_counter % reload_rate == 1)
 			ammo += 1
 			if(ammo > ammo_max)
