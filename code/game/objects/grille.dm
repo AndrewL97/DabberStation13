@@ -1,5 +1,7 @@
 //returns the netnum of a stub cable at this grille loc, or 0 if none
 
+/obj/grille
+	density = 1
 /obj/grille/proc/get_connection()
 	var/turf/T = src.loc
 	if(!istype(T, /turf/simulated/floor))
@@ -75,15 +77,7 @@
 		src.health -= 1
 
 /obj/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	if(air_group || (height==0)) return 1
-
-	if ((istype(mover, /obj/effects) || istype(mover, /obj/item/weapon/dummy) || istype(mover, /obj/meteor/small)))
-		return 1
-	else
-		if (istype(mover, /obj/bullet))
-			return prob(30)
-		else
-			return !src.density
+	return src.density
 
 /obj/grille/attackby(obj/item/weapon/W, mob/user)
 	if (istype(W, /obj/item/weapon/wirecutters))

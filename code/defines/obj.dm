@@ -110,21 +110,6 @@
 	icon_state = "begin"
 	anchored = 1.0
 
-
-/obj/bullet/electrode
-	name = "electrode"
-	icon_state = "spark"
-
-/obj/bullet/teleshot
-	name = "teleshot"
-	icon_state = "spark"
-	var/failchance = 5
-	var/obj/item/target = null
-
-/obj/bullet/cbbolt
-	name = "crossbow bolt"
-	icon_state = "cbbolt"
-
 /obj/datacore
 	name = "datacore"
 	var/list/medical = list(  )
