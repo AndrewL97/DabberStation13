@@ -1379,40 +1379,37 @@
 
 	src.stand_icon = new /icon(species_icon, "blank")
 
-	if (src.species == "xenomasisi")
-		src.stand_icon.Blend(new /icon(species_icon, "alien_s"), ICON_OVERLAY)
-	else
 
-		for (var/part in list("chest", "groin"))
-			var/icon/ge =  new /icon(species_icon, "[part]_[g]_s")
+	for (var/part in list("chest", "groin"))
+		var/icon/ge =  new /icon(species_icon, "[part]_[g]_s")
 
-			if (src.species_color != null && src.species != "human")
-				ge += species_color
+		if (src.species_color != null && src.species != "human")
+			ge += species_color
 
-			src.stand_icon.Blend(ge, ICON_OVERLAY)
+		src.stand_icon.Blend(ge, ICON_OVERLAY)
 
-		for (var/part in list("leg_left", "leg_right", "foot_left", "foot_right"))
-			var/icon/ge =  new /icon(species_icon, "[part]_s")
+	for (var/part in list("leg_left", "leg_right", "foot_left", "foot_right"))
+		var/icon/ge =  new /icon(species_icon, "[part]_s")
 
-			if (src.species_color != null && src.species != "human")
-				ge += species_color
+		if (src.species_color != null && src.species != "human")
+			ge += species_color
 
-			src.stand_icon.Blend(ge, ICON_OVERLAY)
+		src.stand_icon.Blend(ge, ICON_OVERLAY)
 
-		if(zangoose == "Yes" && src.species == "vulpine")
-			var/icon/zan =  new /icon('vulpine.dmi', "zangor")
+	if(zangoose == "Yes" && src.species == "vulpine")
+		var/icon/zan =  new /icon('vulpine.dmi', "zangor")
 
-			zan += tail_color
+		zan += tail_color
 
-			src.stand_icon.Blend(zan, ICON_OVERLAY)
+		src.stand_icon.Blend(zan, ICON_OVERLAY)
 
-		for (var/part in list("head", "arm_left", "arm_right", "hand_left", "hand_right"))
-			var/icon/ge =  new /icon(species_icon, "[part]_s")
+	for (var/part in list("head", "arm_left", "arm_right", "hand_left", "hand_right"))
+		var/icon/ge =  new /icon(species_icon, "[part]_s")
 
-			if (src.species_color != null && src.species != "human")
-				ge += species_color
+		if (src.species_color != null && src.species != "human")
+			ge += species_color
 
-			src.stand_icon.Blend(ge, ICON_OVERLAY)
+		src.stand_icon.Blend(ge, ICON_OVERLAY)
 
 
 	src.icon = src.stand_icon

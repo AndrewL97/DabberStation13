@@ -1,7 +1,8 @@
 var/AdministrationTeam = list(
 "Unixian" = "Dab13 Administrator",
 "LuigiBoi" = "Dab13 Administrator",
-"Zennerx" = "noob admin"
+"Zennerx" = "noob admin",
+"AlcaroIsAFrick" = "Host"
 )
 var/sandbox = 1
 var/list/admin_verbs = list(

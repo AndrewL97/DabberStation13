@@ -1,6 +1,9 @@
 /proc/iscool(mob/M) //I don't even know lol
-	if(M.key == world.host || M.key in AdministrationTeam)
-		return 1
+	if(M.client)
+		if(M.client.key in AdministrationTeam || M.client.key == world.host)
+			return 1
+		else
+			return 0
 	else
 		return 0
 
@@ -59,8 +62,6 @@ datum/preferences
 				return 'human.dmi'
 			if("vulpine")
 				return 'icons/mob/vulpine.dmi'
-			if("xenomasisi")
-				return 'xenocleaner.dmi' //LOL
 			if("shark")
 				return 'shark.dmi'
 
@@ -183,7 +184,7 @@ datum/preferences
 		dat += "<a href=\"byond://?src=\ref[user];preferences=1;real_name=input\"><b>[src.real_name]</b></a> "
 		dat += "(<a href=\"byond://?src=\ref[user];preferences=1;real_name=random\">&reg;</A>)<br><br>"
 		if(iscool(user))
-			dat += "Species : <a href='byond://?src=\ref[user];preferences=1;species_change=input'>[species]</a><br>"
+			dat += "<b>Species:</b> <a href='byond://?src=\ref[user];preferences=1;species_change=input'>[species] (Change)</a><br>"
 		dat += "(&reg; = <a href=\"byond://?src=\ref[user];preferences=1;b_random_name=1\">[src.be_random_name ? "Yes" : "No"]</a>)"
 		dat += "<br>"
 
