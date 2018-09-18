@@ -34,13 +34,13 @@ macro "macro"
 		command = "switch_intent \"help\""
 	elem 
 		name = "2"
-		command = "switch_intent \"hurt\""
+		command = "switch_intent \"disarm\""
 	elem 
 		name = "3"
 		command = "switch_intent \"grab\""
 	elem 
 		name = "4"
-		command = "switch_intent \"disarm\""
+		command = "switch_intent \"hurt\""
 	elem 
 		name = "A"
 		command = "KeyDownM \"west\""
