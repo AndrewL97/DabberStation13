@@ -65,7 +65,7 @@ atom/movable
 				y -= 1
 
 			var/bumpedwalls = 0
-			for(var/atom/e in range(1,src))
+			for(var/atom/e in orange(1,src))
 				if(!istype(e,/mob))
 					if(PixelCollision(e))
 						bumpedwalls += 1
