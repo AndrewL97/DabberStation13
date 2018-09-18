@@ -18,6 +18,16 @@ proc
 			t /= x
 			return x * sqrt(1 + t * t)
 		return 0
+var vector2
+	Vector2_Zero = new(0, 0)
+	Vector2_North = new(0, 1)
+	Vector2_South = new(0, -1)
+	Vector2_East = new(1, 0)
+	Vector2_West = new(-1, 0)
+	Vector2_Northeast = new(sqrt(1/2), sqrt(1/2))
+	Vector2_Northwest = new(-sqrt(1/2), sqrt(1/2))
+	Vector2_Southeast = new(sqrt(1/2), -sqrt(1/2))
+	Vector2_Southwest = new(-sqrt(1/2), sqrt(1/2))
 
 vector2
 	var
@@ -29,6 +39,22 @@ vector2
 		src.y = y
 
 	proc
+		ToRotation(zero_dir = NORTH)
+			var
+				unit_x = x
+				unit_y = y
+				magnitude = Magnitude()
+			if(magnitude != 1)
+				unit_x /= magnitude
+				unit_y /= magnitude
+			switch(zero_dir)
+				if(NORTH)
+					return matrix(unit_y, unit_x, 0, -unit_x, unit_y, 0)
+				if(EAST)
+					return matrix(unit_x, -unit_y, 0, unit_x, unit_y, 0)
+				else
+					CRASH("Unsupported zero_dir.")
+
 		// Equality checking.
 		operator~=(vector2/v)
 			return v && x == v.x && y == v.y

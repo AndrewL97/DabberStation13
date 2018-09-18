@@ -54,7 +54,6 @@ var/list/karts = list()
 		client.pixel_x = 0
 	veh = a
 	a.CanMove = 1
-	a.AngleA_Speed = 0
 	loc = a
 
 	spawn(15)
@@ -153,12 +152,12 @@ var/SpawnKartY = 221
 
 /obj/machinery/vehicle/proc/check_point()
 	if(race_won)
-		AngleA_Speed = 4
 		return
 	var/turf/unsimulated/floor/racing/T = locate(x,y,z)
 	if(T && istype(T,/turf/space))
 		loc = locate(lastx,lasty,1)
-		AngleA_Speed = 0
+		forward = Vector2_North // Initialize direction to north.
+		velocity = Vector2_Zero // Initialize velocity to zero.
 		for(var/mob/A as mob in src)
 			A << "<font size=5><b>\red You fell from the map!"
 			A << 'warn.ogg'
@@ -233,7 +232,7 @@ var/SpawnKartY = 221
 				spawn()
 					for(var/i in 1 to 75)
 						sleep(world.tick_lag)
-						AngleA_Speed = AngleA_Speed + 0.3 //dang
+						velocity += forward * (Acceleration() * world.tick_lag)
 				for(var/mob/A as mob in src)
 					A << 'boost.wav'
 		current_item = "none"

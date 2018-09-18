@@ -89,14 +89,22 @@ vy = v * sin(angle)
 	animate_movement = 0 //set it
 	var/forcedloc = null
 	var
-		AngleA = 90
-		AngleA_Speed = 0
+		vector2
+			forward // Forward directional unit vector.
+			velocity // Velocity of the ship in pixels per decisecond (p/ds).
+		turning = 0
+		accelerating = 0
+		Spinning = 0
 		CanMove = 0
-		Processing = 0
-		Spinning = 0 ///obj/item/weapon/bananapeel
-
+	proc
+		TurnRate() return 15
+		// How fast you accelerate, in pixels per decisecond... per decisecond. (p/ds^2)
+		Acceleration() return 5
 	New()
 		..()
+		forward = Vector2_North // Initialize direction to north.
+		velocity = Vector2_Zero // Initialize velocity to zero.
+
 		special_processing += src
 		var/icon/E = icon('escapepod.dmi',"recon")
 		var/icon/I = icon('escapepod.dmi',"overlay")
@@ -116,16 +124,12 @@ vy = v * sin(angle)
 	if(CanMove == 1)
 		if(Kart == 1)
 			if(race_started == 0)
-				AngleA = 90
-				AngleA_Speed = 0
-		var/matrix/M = matrix() //create matrix
-		M.Turn(-AngleA - 90) //reverse angle
-		src.transform = M
+				forward = Vector2_North // Initialize direction to north.
+				velocity = Vector2_Zero // Initialize velocity to zero.
 
 		if(Kart == 1)
 			if(Spinning > 0)
-				AngleA_Speed = 0
-				AngleA = AngleA + 20
+				forward.Turn(20)
 				Spinning = Spinning - world.tick_lag
 			var/peels = 0
 			for(var/obj/item/weapon/bananapeel/g in loc)
@@ -137,33 +141,28 @@ vy = v * sin(angle)
 					A << 'cpuspin.wav'
 				Spinning = 5
 
-		if(AngleA_Speed < -4)
-			AngleA_Speed = -4
-		if(AngleA_Speed > 4)
-			AngleA_Speed -= 0.2
-		if(AngleA_Speed > 0)
-			AngleA_Speed -= 0.01
-			if(AngleA_Speed < 0)
-				AngleA_Speed = 0
-		if(AngleA_Speed < 0)
-			AngleA_Speed += 0.01
-			if(AngleA_Speed > 0)
-				AngleA_Speed = 0
+		if(turning)
+			// Turn the forward direction and keep it normalized.
+			forward = forward.Turn(turning * TurnRate() * world.tick_lag).Normalized()
+			transform = initial(transform) * forward.ToRotation()
 
-		var/vx = AngleA_Speed * cos(AngleA)
-		var/vy = AngleA_Speed * sin(AngleA)
+		if(accelerating)
+			// Accelerate!
+			velocity += forward * (Acceleration() * world.tick_lag)
 
-		if(PixelMove(vx,vy)==0)
-			AngleA_Speed = AngleA_Speed * -1
-
-
+		if(velocity.SquareMagnitude() > 1)
+			if(PixelMove(velocity.x*world.tick_lag,velocity.y*world.tick_lag)==0)
+				velocity *= -1
+		else
+			if(!accelerating)
+				velocity = Vector2_Zero
 
 		for(var/mob/A as mob in src)
 			if(Kart == 1)
 				if(!race_won)
 					var/sound/AS = sound('engine.ogg')
 					AS.repeat = 1
-					AS.frequency = abs(AngleA_Speed + 1)
+					AS.frequency = abs(velocity.SquareMagnitude()*0.5 + 1)
 					AS.channel = MOTOR_CHANNEL //Channel 900 is used for epic sound effects
 					A << AS
 
@@ -202,25 +201,13 @@ vy = v * sin(angle)
 		A.loc = src.loc
 	del(src)
 
-/obj/machinery/vehicle/Bump(var/atom/A)
-	//world << "[src] bumped into [A]"
-	spawn()
-		AngleA_Speed = 0
-
 /obj/machinery/vehicle/relaymove(mob/user as mob, direction)
 	if (user.stat)
 		return
 
 	if ((user in src))
-		if(direction & SOUTH)
-			AngleA_Speed = AngleA_Speed - 0.1
-		if(direction & NORTH)
-			AngleA_Speed = AngleA_Speed + 0.1
-		if(direction & EAST)
-			AngleA = AngleA - 1
-		if(direction & WEST)
-			AngleA = AngleA + 1
-
+		turning = (direction & EAST) - (direction & WEST) // 0, 1, or -1.
+		accelerating = direction & NORTH // 0 or 1.
 
 
 
@@ -248,7 +235,8 @@ vy = v * sin(angle)
 			M.client.pixel_y2 = 0
 			M.client.pixel_x = 0
 		src << sound(null, channel=MOTOR_CHANNEL)
-		veh.AngleA_Speed = 0
+		veh.forward = Vector2_North // Initialize direction to north.
+		veh.velocity = Vector2_Zero // Initialize velocity to zero.
 		veh = null
 		changingPOD = 0
 	else
@@ -269,5 +257,5 @@ vy = v * sin(angle)
 				M.client.pixel_x = 0
 			M.veh = a
 			a.CanMove = 1
-			a.AngleA_Speed = 0
+			a.velocity = Vector2_Zero // Initialize velocity to zero.
 			M.loc = a
