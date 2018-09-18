@@ -47,17 +47,17 @@ obj
 		appearance_flags = PIXEL_SCALE | LONG_GLIDE
 
 turf
-	var/TurfGravity = 48/256 //Obvious variable names
+	var/TurfGravity = 96/256 //Obvious variable names
 	var/TurfStepSound = list('footstep1.ogg','footstep2.ogg','footstep3.ogg','footstep4.ogg')
 	var/TurfHeight = 0
 	mouse_opacity = 2 //Fixes RCD shit
 	space
 		TurfStepSound = null
-		TurfGravity = 24/256
+		TurfGravity = 48/256
 		TurfHeight = 0
 	unsimulated
 		space2
-			TurfGravity = 24/256
+			TurfGravity = 48/256
 			alpha = 0
 			TurfHeight = -416
 	simulated
@@ -151,7 +151,13 @@ mob
 			MyShadow.alpha = 0
 			return //We cannot process height, either player is on a vehicle, or player is deleted (null) or what we are stepping on doesn't even have a turf.
 
-		ySpeed = ySpeed - T.TurfGravity //Adds gravity.
+		if(client)
+			if(client.j)
+				ySpeed = ySpeed - (T.TurfGravity/2) //Adds gravity.
+			else
+				ySpeed = ySpeed - T.TurfGravity //Adds gravity.
+		else
+			ySpeed = ySpeed - T.TurfGravity //Adds gravity.
 
 		if(heightZ > 416) heightZ = 416
 
