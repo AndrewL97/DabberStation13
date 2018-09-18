@@ -36,6 +36,7 @@ proc/atan2(x, y)
 	pixel_collision_size_y = 2
 	real_pixel_x = 16
 	real_pixel_y = 16
+	animate_movement = 0
 	density = 0
 	New()
 		..()
