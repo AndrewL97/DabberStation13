@@ -1,5 +1,5 @@
 //THese are special variables used for The Game.
-
+#define FLOOR_PLANE 0
 #define WALL_PLANE 1
 #define LIGHT_PLANE 3
 #define ALARM_PLANE 2
