@@ -91,7 +91,16 @@ mob
 		if(j)
 			mob.Jump()
 		if(mouse_position && eye && mousedown)
-			mob.dir = get_dir(mob.loc,locate((mouse_position.WorldX()/32)+1,(mouse_position.WorldY()/32)+1,mob.z))
+			var/mos_x = mouse_position.WorldX()
+			var/mos_y = mouse_position.WorldY()
+			mob.dir = get_dir(mob.loc,locate((mos_x/32)+1,(mos_y/32)+1,mob.z))
+			var/obj/item/weapon/gun/G = null
+			if (!( mob.hand ))
+				G = mob.r_hand
+			else
+				G = mob.l_hand
+			if(istype(G,/obj/item/weapon/gun))
+				G.fire(locate((mos_x/32)+1,(mos_y/32)+1,mob.z),mob)
 /client/Move(n, direct)
 	if (!( src.mob ))
 		return

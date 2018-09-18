@@ -11,6 +11,7 @@ CHECK_TICK_ATMOS() (only use in atmospherics code) - Do actions, but give the ga
 
 var/global/datum/controller/game_controller/master_controller //Set in world.New()
 var/lighting_inited = 0
+var/frm_counter = 0
 var/listofitems = ""
 var/list/clients = list()
 var/special_processing = list()
@@ -142,6 +143,7 @@ datum/controller/game_controller
 			machine.build_network()
 		world << "\green \b Initialized pipe networks system in [world.timeofday-start_time] seconds!"
 	fast_process()
+		frm_counter += 1
 		if(ticker)
 			ticker.process_timer()
 		for(var/obj/i in special_processing)
