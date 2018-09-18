@@ -56,5 +56,8 @@ proc/atan2(x, y)
 		..()
 	special_process()
 		..()
+		for(var/mob/e in orange(1,src))
+			if(PixelCollision(e))
+				e.bruteloss += 5
 		if(!PixelMove(X_SPEED,Y_SPEED))
 			del src
