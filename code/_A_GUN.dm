@@ -44,4 +44,5 @@ proc/atan2(x, y)
 		..()
 	special_process()
 		..()
-		PixelMove(X_SPEED,Y_SPEED)
+		if(!PixelMove(X_SPEED,0) || !PixelMove(0,Y_SPEED))
+			del src
