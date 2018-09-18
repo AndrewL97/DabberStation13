@@ -59,11 +59,10 @@ atom/movable
 
 
 			var/bumpedwalls = 0
-			for(var/atom/e in orange(1,src))
+			for(var/atom/e in loc)
 				if(!istype(e,/mob))
-					if(abs(src.x-e.x)-abs(src.y-e.y)) //doesn't count diagonal walls
-						if(PixelCollision(e))
-							bumpedwalls += 1
+					if(PixelCollision(e))
+						bumpedwalls += 1
 
 			if(bumpedwalls > 0)
 				x = old_x
