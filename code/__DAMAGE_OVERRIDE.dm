@@ -45,11 +45,11 @@
 			var/updatematrix = 0
 
 			var/matrix/MAT = null
-			if(src.lying != src.old_lying)
+			if((src.lying || src.rest) != src.old_lying)
 				updatematrix = 1
 				MAT = matrix()
-				old_lying = lying
-			if (src.lying && updatematrix)
+				old_lying = lying || rest
+			if ((src.lying || src.rest) && updatematrix)
 				MAT.Turn(90)
 				MAT.Translate(0,-10)
 			if(animating == 0 && updatematrix)

@@ -601,7 +601,7 @@
 					src.see_invisible = 0
 
 			if (src.sleep) src.sleep.icon_state = text("sleep[]", src.sleeping)
-			if (src.rest) src.rest.icon_state = text("rest[]", src.resting)
+			if (src.rest || src.lying) src.rest.icon_state = text("rest[]", src.resting)
 
 
 			if(src.pullin)	src.pullin.icon_state = "pull[src.pulling ? 1 : 0]"

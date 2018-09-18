@@ -233,7 +233,8 @@ mob
 
 
 			src.move_delay += src.mob.movement_delay()
-
+			if (src.mob.rest || src.mob.lying)
+				return 0
 			if (src.mob.restrained())
 				for(var/mob/M in range(src.mob, 1))
 					if (((M.pulling == src.mob && (!( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, src.mob.grabbed_by.len)))
