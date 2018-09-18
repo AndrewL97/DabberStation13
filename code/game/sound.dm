@@ -11,19 +11,18 @@
 		if ("clownstep") soundin = pick('clownstep1.ogg','clownstep2.ogg')
 		if ("swing_hit") soundin = pick('genhit1.ogg', 'genhit2.ogg', 'genhit3.ogg')
 
-
-	for(var/mob/i in range(abs(extrarange)*12,source))
+	for(var/mob/i in Mobs)
 		var/sound/S = sound(soundin)
 		S.wait = 0 //No queue
 		S.volume = vol
-		S.x = source.x-i.x
-		S.z = source.y-i.y
+		S.x = (source.x-i.x)/extrarange
+		S.z = (source.y-i.y)/extrarange
 		S.y = 1
 		S.frequency = 1 + extrapitch
-		if(vol > 100)
+		if(get_dist_alt(i,source) < extrarange*20)
+			if(vol > 100)
+				i << S
 			i << S
-			i << S
-		i << S
 
 /mob/proc/playsound_local(var/atom/source, soundin, vol as num, vary, extrarange as num)
 	if(!src.client)
