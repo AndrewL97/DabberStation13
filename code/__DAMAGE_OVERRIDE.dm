@@ -43,13 +43,14 @@
 			old_new_health = new_health
 
 			var/updatematrix = 0
+			src.rest.icon_state = "rest[src.resting || src.lying]"
 
 			var/matrix/MAT = null
-			if((src.lying || src.rest) != src.old_lying)
+			if((src.lying || src.resting) != src.old_lying)
 				updatematrix = 1
 				MAT = matrix()
-				old_lying = lying || rest
-			if ((src.lying || src.rest) && updatematrix)
+				old_lying = lying || resting
+			if ((src.lying || src.resting) && updatematrix)
 				MAT.Turn(90)
 				MAT.Translate(0,-10)
 			if(animating == 0 && updatematrix)

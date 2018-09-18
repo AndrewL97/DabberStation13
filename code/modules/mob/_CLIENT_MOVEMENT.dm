@@ -233,7 +233,7 @@ mob
 
 
 			src.move_delay += src.mob.movement_delay()
-			if (src.mob.rest || src.mob.lying)
+			if (src.mob.resting || src.mob.lying)
 				return 0
 			if (src.mob.restrained())
 				for(var/mob/M in range(src.mob, 1))
