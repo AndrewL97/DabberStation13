@@ -52,6 +52,8 @@
 	return
 
 /obj/machinery/door/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
+	if(!mover)
+		return
 	if(!mover.density)
 		return 1
 	if(get_dir(loc, target) == dir) //Make sure looking at appropriate border
