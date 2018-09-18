@@ -12,16 +12,13 @@ proc/atan2(x, y)
 	var/ammo_max = 100
 	var/fire_rate = 20
 	var/gun_sound = 'shot.ogg'
-	var/bullet_speed = 10
+	var/bullet_speed = 7
 	proc/fire(atom/A,mob/user)
 		if(ammo > 0)
 			if(frm_counter % fire_rate == 1)
 				ammo -= 1
 				var/obj/projectile/G = new(user.loc)
-				G.real_pixel_x = 16
-				G.real_pixel_y = 16
-				G.pixel_x = G.real_pixel_x
-				G.pixel_y = G.real_pixel_y //wow great job
+				G.PixelMove(G.X_SPEED,G.Y_SPEED)
 				var/angle = atan2(A.x-user.x,A.y-user.y)
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
@@ -47,4 +44,5 @@ proc/atan2(x, y)
 	special_process()
 		..()
 		if(!PixelMove(X_SPEED,Y_SPEED))
-			del src
+			//del src
+			return

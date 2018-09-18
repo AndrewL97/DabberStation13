@@ -28,12 +28,12 @@ atom/movable
 			pixel_collision_size_y = I.Height()
 			del I
 		PixelCollision(atom/a)
-			var/st1 = Get_Position_X()+pixel_collision_size_x > a.Get_Position_X()
-			var/st2 = Get_Position_X() < a.Get_Position_X()+world.icon_size
+			var/st1 = Get_Position_X()+pixel_collision_size_x >= a.Get_Position_X()
+			var/st2 = Get_Position_X() <= a.Get_Position_X()+world.icon_size
 
-			var/st3 = Get_Position_Y()+pixel_collision_size_y > a.Get_Position_Y()
-			var/st4 = Get_Position_Y() < a.Get_Position_Y()+world.icon_size
-			//world << "[a]'s collision list - [st1],[st2],[st3],[st4],<b>[a.density]"
+			var/st3 = Get_Position_Y()+pixel_collision_size_y >= a.Get_Position_Y()
+			var/st4 = Get_Position_Y() <= a.Get_Position_Y()+world.icon_size
+
 			return (st1 || st2 || st3 || st4)*a.density
 		PixelMove(var/x_to_move,var/y_to_move)
 			var/old_real_x = real_pixel_x
@@ -75,14 +75,11 @@ atom/movable
 				y = old_y
 				real_pixel_y = old_real_y
 				real_pixel_x = old_real_x
-
-				pixel_x = real_pixel_x
-				pixel_y = real_pixel_y
-				return 0
+				return 0 //Didn't move
 			else
 				pixel_x = real_pixel_x
 				pixel_y = real_pixel_y
-				return 1
+				return 1 //Did move.
 /*
 Basic trigonometry
 
