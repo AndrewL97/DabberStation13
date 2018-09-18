@@ -3,32 +3,38 @@
 VEHICLES
 
 */
-proc/Get_Position_X(atom/a)
-	return (a.x*world.icon_size) + a.pixel_x + a.pixel_w
-proc/Get_Position_Y(atom/a)
-	return (a.y*world.icon_size) + a.pixel_y + a.pixel_z
 
+atom
+	proc
+		Get_Position_X()
+			return (x*world.icon_size) + pixel_x + pixel_w
+		Get_Position_Y()
+			return (y*world.icon_size) + pixel_y + pixel_z
 atom/movable
 	var
 		real_pixel_x = 0
 		real_pixel_y = 0
 		pixel_collision_size_x = 32
 		pixel_collision_size_y = 32
-
+	Get_Position_X()
+		return (x*world.icon_size) + real_pixel_x
+	Get_Position_Y()
+		return (y*world.icon_size) + real_pixel_y
 	proc
+
 		GetCollisionSizes()
 			var/icon/I = new(icon)
 			pixel_collision_size_x = I.Width()
 			pixel_collision_size_y = I.Height()
 			del I
 		PixelCollision(atom/a)
-			var/st1 = Get_Position_X(src)+pixel_collision_size_x > Get_Position_X(a)
-			var/st2 = Get_Position_X(src) < Get_Position_X(a)+world.icon_size
+			var/st1 = Get_Position_X()+pixel_collision_size_x > a.Get_Position_X()
+			var/st2 = Get_Position_X() < a.Get_Position_X()+world.icon_size
 
-			var/st3 = Get_Position_Y(src)+pixel_collision_size_y > Get_Position_Y(a)
-			var/st4 = Get_Position_Y(src) < Get_Position_Y(a)+world.icon_size
-
-			return st1 || st2 || st3 || st4
+			var/st3 = Get_Position_Y()+pixel_collision_size_y > a.Get_Position_Y()
+			var/st4 = Get_Position_Y() < a.Get_Position_Y()+world.icon_size
+			//world << "[a]'s collision list - [st1],[st2],[st3],[st4],<b>[a.density]"
+			return (st1 || st2 || st3 || st4)*a.density
 		PixelMove(var/x_to_move,var/y_to_move)
 			var/old_real_x = real_pixel_x
 			var/old_real_y = real_pixel_y
@@ -60,7 +66,7 @@ atom/movable
 
 			var/bumpedwalls = 0
 			for(var/atom/e in range(1,src))
-				if(e.density == 1 && !istype(e,/mob))
+				if(!istype(e,/mob))
 					if(PixelCollision(e))
 						bumpedwalls += 1
 
