@@ -22,6 +22,9 @@ proc/atan2(x, y)
 				var/angle = atan2(A.x-user.x,A.y-user.y)
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
+				var/matrix/M = matrix()
+				M.Turn(angle)
+				G.transform = M
 				G.owner = user
 				playsound(user, gun_sound, 100, 1, 15, 0)
 	New()
@@ -46,6 +49,8 @@ proc/atan2(x, y)
 	pixel_collision_size_y = 2
 	real_pixel_x = 15
 	real_pixel_y = 15
+	pixel_w = -16
+	pixel_z = -16
 	pixel_x = 15
 	pixel_y = 15
 	animate_movement = 0
