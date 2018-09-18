@@ -22,7 +22,7 @@ proc/atan2(x, y)
 				var/angle = atan2(A.x-user.x,A.y-user.y)
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
-				G.owner = src
+				G.owner = user
 				playsound(user, gun_sound, 100, 1, 15, 0)
 	New()
 		..()
