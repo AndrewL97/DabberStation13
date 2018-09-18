@@ -14,12 +14,13 @@ proc/atan2(x, y)
 	var/reload_rate = 15
 	var/gun_sound = 'shot.ogg'
 	var/bullet_speed = 20
-	proc/fire(atom/A,mob/user,xoff,yoff)
+	proc/fire(mob/user,xoff,yoff)
 		if(ammo > 0)
 			if(frm_counter % fire_rate == 1)
 				ammo -= 1
 				var/obj/projectile/G = new(user.loc)
-				var/angle = atan2((A.x+(xoff/32))-user.x,(A.y+(yoff/32))-user.y)
+				//xoff-(G.x+G.real_pixel_x)
+				var/angle = atan2(xoff-(G.x+G.real_pixel_x),yoff-(G.y+G.real_pixel_y))
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
 				G.owner = user
