@@ -19,7 +19,7 @@ proc/atan2(x, y)
 			if(frm_counter % fire_rate == 1)
 				ammo -= 1
 				var/obj/projectile/G = new(user.loc)
-				var/angle = atan2((A.x+(xoff/32))-user.x,(A.y+(yoff/32))-user.y)
+				var/angle = atan2((A.x+((real_pixel_x+xoff)/32))-user.x,(A.y+((real_pixel_y+yoff)/32))-user.y)
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
 				G.owner = user

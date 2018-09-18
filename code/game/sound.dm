@@ -1,5 +1,6 @@
-/proc/playsound(var/atom/source, soundin, vol as num, vary, extrarange as num, extrapitch as num)
-
+/proc/playsound(var/atom/source, soundin, vol, vary, extrarange, extrapitch)
+	if(!extrarange)
+		extrarange = 6
 	//Frequency stuff only works with 45kbps oggs.
 
 	switch(soundin)
@@ -19,7 +20,7 @@
 		S.z = (source.y-i.y)/extrarange
 		S.y = 1
 		S.frequency = 1 + extrapitch
-		if(get_dist_alt(i,source) < extrarange*20)
+		if(get_dist_alt(i,source) < extrarange*2)
 			if(vol > 100)
 				i << S
 			i << S
