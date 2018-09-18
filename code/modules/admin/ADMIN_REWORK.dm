@@ -12,7 +12,8 @@ var/list/admin_verbs = list(
 /client/proc/kick_user,
 /client/proc/ban_user,
 /client/proc/boom,
-/client/proc/admin_observe
+/client/proc/admin_observe,
+/client/proc/delete
 )
 var/ban_list = list()
 
@@ -53,6 +54,13 @@ var/ban_list = list()
 				M << dd_replaceText(rendered, "%admin_ref%", "\ref[M]")
 			else
 				M << rendered
+
+client
+	proc/delete(datum/D in world)
+		set category = "Admin"
+		set name = "(ADMIN) Delete"
+		if(alert("Delete [D]?","Delete","Yes","No") == "Yes")
+			del D
 
 /client/proc/kick_user()
 	set category = "Admin"
