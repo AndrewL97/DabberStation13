@@ -204,8 +204,8 @@ obj
 			Disco_Fever() //hey guys remember when this was actually funny LOL
 
 /mob/living/carbon/human/alcaro //RS4
-	species = "vulpkanin"
-	species_icon = 'vulpkanin.dmi'
+	species = "vulpine"
+	species_icon = 'vulpine.dmi'
 	name = "Alcaro"
 	real_name = "Alcaro"
 	desc = "Looks like it hates it's life."

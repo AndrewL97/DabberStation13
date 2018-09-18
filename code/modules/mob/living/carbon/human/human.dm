@@ -1399,8 +1399,8 @@
 
 			src.stand_icon.Blend(ge, ICON_OVERLAY)
 
-		if(zangoose == "Yes" && src.species == "vulpkanin")
-			var/icon/zan =  new /icon('vulpkanin.dmi', "zangor")
+		if(zangoose == "Yes" && src.species == "vulpine")
+			var/icon/zan =  new /icon('vulpine.dmi', "zangor")
 
 			zan += tail_color
 

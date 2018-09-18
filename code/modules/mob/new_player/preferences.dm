@@ -57,8 +57,8 @@ datum/preferences
 		switch(species)
 			if("human")
 				return 'human.dmi'
-			if("vulpkanin")
-				return 'icons/mob/vulpkanin.dmi'
+			if("vulpine")
+				return 'icons/mob/vulpine.dmi'
 			if("xenomasisi")
 				return 'xenocleaner.dmi' //LOL
 			if("shark")
@@ -94,7 +94,7 @@ datum/preferences
 			src.preview_icon += species_color
 
 			if(zangoose_markings == "Yes")
-				var/icon/tail_c = new /icon('icons/mob/vulpkanin.dmi', "icon_state" = "zangor")
+				var/icon/tail_c = new /icon('icons/mob/vulpine.dmi', "icon_state" = "zangor")
 				tail_c += tail_color
 				src.preview_icon.Blend(tail_c, ICON_OVERLAY)
 		var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = "eyes_s")
@@ -390,7 +390,7 @@ datum/preferences
 			if(tts_extra_pitch < -0.5)
 				tts_extra_pitch = -0.5
 		if (link_tags["species_change"])
-			species = input(user, "Please select a species:", "Character Generation") in list("human","vulpkanin","shark")
+			species = input(user, "Please select a species:", "Character Generation") in list("human","vulpine","shark")
 
 		if (link_tags["real_name"])
 			var/new_name
