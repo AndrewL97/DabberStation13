@@ -90,8 +90,12 @@ mob
 			G = mob.r_hand
 		else
 			G = mob.l_hand
+		var/can_mo = 1
+		if(istype(G,/obj/item/weapon/gun))
+			if(mousedown)
+				can_mo = 0
 		var/dirAA = (s*SOUTH)+(n*NORTH)+(e*EAST)+(w*WEST)
-		if(dirAA != 0 && !istype(G,/obj/item/weapon/gun))
+		if(dirAA != 0 && can_mo)
 			Move(get_step(mob,dirAA),dirAA)
 		if(j)
 			mob.Jump()

@@ -24,7 +24,7 @@ proc/atan2(x, y)
 				G.Y_SPEED = sin(angle)*bullet_speed
 				//var/matrix/M = matrix()
 				//M.Turn(angle)
-				G.transform = M
+				//G.transform = M
 				G.owner = user
 				playsound(user, gun_sound, 100, 1, 15, 0)
 	New()
