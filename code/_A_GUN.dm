@@ -13,7 +13,7 @@ proc/atan2(x, y)
 	var/fire_rate = 5
 	var/reload_rate = 15
 	var/gun_sound = 'shot.ogg'
-	var/bullet_speed = 7
+	var/bullet_speed = 20
 	proc/fire(atom/A,mob/user)
 		if(ammo > 0)
 			if(frm_counter % fire_rate == 1)
