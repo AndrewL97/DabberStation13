@@ -10,7 +10,8 @@ proc/atan2(x, y)
 	icon_state = "caplaser"
 	var/ammo = 100
 	var/ammo_max = 100
-	var/fire_rate = 20
+	var/fire_rate = 5
+	var/reload_rate = 15
 	var/gun_sound = 'shot.ogg'
 	var/bullet_speed = 7
 	proc/fire(atom/A,mob/user)
@@ -22,6 +23,17 @@ proc/atan2(x, y)
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
 				playsound(user, gun_sound, 100, 1, 15, 0)
+	New()
+		..()
+		special_processing += src
+	Del()
+		special_processing -= src
+		..()
+	special_process()
+		if(frm_counter % reload_rate == 1)
+			ammo += 1
+			if(ammo > ammo_max)
+				ammo = ammo_max
 
 /obj/projectile
 	icon = 'guns.dmi'

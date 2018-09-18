@@ -101,6 +101,16 @@ mob
 				G = mob.l_hand
 			if(istype(G,/obj/item/weapon/gun))
 				G.fire(locate((mos_x/32)+1,(mos_y/32)+1,mob.z),mob)
+	Stat()
+		..()
+		if(mob)
+			var/obj/item/weapon/gun/G = null
+			if (!( mob.hand ))
+				G = mob.r_hand
+			else
+				G = mob.l_hand
+			if(istype(G,/obj/item/weapon/gun))
+				stat("Gun ammo :","[G.ammo]/[G.ammo_max]")
 /client/Move(n, direct)
 	if (!( src.mob ))
 		return
