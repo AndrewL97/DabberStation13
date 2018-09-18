@@ -1,5 +1,7 @@
 /*
 	Gives clients a Mouse Position datum and updates it when the mouse moves.
+
+	Credit to Kaiochao for this lib.
 */
 
 client

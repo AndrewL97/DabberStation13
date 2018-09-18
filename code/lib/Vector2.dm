@@ -1,5 +1,7 @@
 /*
 	A 2D vector datum with overloaded operators and other common functions.
+
+	Credit to Kaiochao and his Kaiocode lib.
 */
 
 proc
