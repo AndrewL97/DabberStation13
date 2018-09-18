@@ -61,6 +61,7 @@ client
 		set category = "Admin"
 		set name = "(ADMIN) Delete"
 		if(alert("Delete [D]?","Delete","Yes","No") == "Yes")
+			message_admins("[key] has deleted [D]")
 			del D
 
 /client/proc/kick_user()
@@ -72,6 +73,7 @@ client
 	var/client/C = input(src,"Which user?","Kick user") as null|anything in clients
 	if(C)
 		if(!C.holder)
+			message_admins("[key] has kicked [C.key]")
 			C << "\red <b>You have been kicked from the game server by [key]."
 			del C
 
@@ -87,6 +89,7 @@ client
 		if(!C.holder)
 			ban_list += C.key
 			ban_list += computer_id
+			message_admins("[key] has banned [C.key]")
 			C << "\red <b>You have been banned by [key] for this round. Reason : [reason], You might appeal at [discordLink]."
 			del C
 
@@ -106,6 +109,7 @@ client
 	if (!src.holder)
 		src << "Only administrators may use this command."
 		return
+	message_admins("[key] is playing [g]")
 	world << sound(g,channel=MUSIC_CHANNEL)
 
 /client/proc/yomusicNO()
@@ -115,6 +119,7 @@ client
 	if (!src.holder)
 		src << "Only administrators may use this command."
 		return
+	message_admins("[key] stopped all sounds")
 	current_radio_song = null
 	world << sound(null)
 
@@ -124,7 +129,7 @@ client
 	if (!src.holder)
 		src << "Only administrators may use this command."
 		return
-
+	message_admins("[key] toggled sandbox")
 	sandbox = sandbox * -1
 	if(sandbox ==1)
 		world << "<b>\green Sandbox is now enabled."
@@ -156,6 +161,7 @@ client
 	if(!src.holder)
 		src << "Only administrators may use this command."
 		return
+	message_admins("[key] aghosted")
 	if(!istype(src.mob, /mob/dead/observer))
 		src.mob.ghostize()
 		src << "\blue You are now observing"
