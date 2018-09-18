@@ -241,7 +241,7 @@
 	src.job = rank
 	src.mind.assigned_role = rank
 
-	src.equip_if_possible(new /obj/item/clothing/head/helmet/space(src), slot_head)
+	//src.equip_if_possible(new /obj/item/clothing/head/helmet/space(src), slot_head)
 	//if (!joined_late && rank != "Tourist")
 	var/list/rand_spawns = list()
 	for(var/obj/machinery/sleeper/spawner/e in world)
