@@ -7,7 +7,8 @@ proc/atan2(x, y)
 
 /obj/item/weapon/gun
 	icon = 'guns.dmi'
-	icon_state = "caplaser"
+	icon_state = "gun"
+	desc = "A gun"
 	var/ammo = 100
 	var/ammo_max = 100
 	var/fire_rate = 5
@@ -20,6 +21,7 @@ proc/atan2(x, y)
 				ammo -= 1
 				var/obj/projectile/G = new(user.loc)
 				//xoff-(G.x+G.real_pixel_x)
+				G.real_pixel_y = 15+user.heightZ
 				var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+32)-((G.y*32)+G.real_pixel_y))
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
@@ -28,6 +30,7 @@ proc/atan2(x, y)
 	New()
 		..()
 		special_processing += src
+		desc = "A gun, it seems to hold [ammo]/[ammo_max] ammunition.<br><b>Extra stats : </b><br><br>Bullet Speed : [bullet_speed]<br>Reload Rate : [reload_rate]<br>Fire Rate : [fire_rate]"
 	Del()
 		special_processing -= src
 		..()

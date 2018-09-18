@@ -72,7 +72,7 @@
 		dir = user.dir
 		spd = 25
 		ang = 0
-		h = 0
+		h = user.heightZ
 		y_speed = 3
 		nextmove = world.time
 
