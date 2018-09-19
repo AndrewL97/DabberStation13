@@ -86,6 +86,7 @@ vy = v * sin(angle)
 	icon = 'escapepod.dmi'
 	icon_state = "recon"
 	anchored = 1.0
+	plane = MOB_PLANE_ALT
 	animate_movement = 0 //set it
 	var/forcedloc = null
 	var
@@ -122,6 +123,7 @@ vy = v * sin(angle)
 	if(src.Kart == 1)
 		check_point()
 	if(CanMove == 1)
+		density = 0
 		if(Kart == 1)
 			if(race_started == 0)
 				forward = Vector2_North // Initialize direction to north.
@@ -140,6 +142,13 @@ vy = v * sin(angle)
 				for(var/mob/A as mob in src)
 					A << 'cpuspin.wav'
 				Spinning = 5
+		if(frm_counter % 5)
+			var/obj/Particle/Spark/Heat/S = new()
+			S.loc = loc
+			S.x_pos = pixel_x+rand(0,32)
+			S.y_pos = pixel_y+rand(0,32)
+			S.x_spd = 0
+			S.y_spd = 0
 
 		if(turning)
 			// Turn the forward direction and keep it normalized.
@@ -186,6 +195,7 @@ vy = v * sin(angle)
 		pixel_x = 0
 		pixel_y = 0
 		transform = initial(transform)
+		density = 1
 /obj/machinery/vehicle/meteorhit(var/obj/O as obj)
 	for(var/atom/movable/A as mob|obj in src)
 		A.loc = src.loc
