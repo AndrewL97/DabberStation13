@@ -54,11 +54,11 @@ turf
 	mouse_opacity = 2 //Fixes RCD shit
 	space
 		TurfStepSound = null
-		TurfGravity = 48/256
+		TurfGravity = 24/256
 		TurfHeight = -416
 	unsimulated
 		space2
-			TurfGravity = 48/256
+			TurfGravity = 24/256
 			alpha = 0
 			TurfHeight = -416
 	simulated
@@ -90,7 +90,7 @@ mob
 		#if defined(GRAVDEBUG)
 		world << "[FONTCOLOR]removing [src] from heightmobs"
 		#endif
-		ghostize(0)
+		ghostize(1)
 		if(src in HeightMobs)
 			HeightMobs -= src
 		if(src in Mobs)
