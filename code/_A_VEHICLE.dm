@@ -131,6 +131,7 @@ vy = v * sin(angle)
 	if(src.Kart == 1)
 		check_point()
 	if(CanMove == 1)
+
 		density = 0
 		if(Kart == 1)
 			if(race_started == 0)
@@ -176,7 +177,8 @@ vy = v * sin(angle)
 		else
 			if(!accelerating)
 				velocity = Vector2_Zero
-
+		pixel_x = real_pixel_x
+		pixel_y = real_pixel_y
 		for(var/mob/A as mob in src)
 			if(Kart == 1)
 				if(!race_won)
@@ -202,7 +204,6 @@ vy = v * sin(angle)
 	else
 		pixel_x = 0
 		pixel_y = 0
-		transform = initial(transform)
 		density = 1
 /obj/machinery/vehicle/meteorhit(var/obj/O as obj)
 	for(var/atom/movable/A as mob|obj in src)
