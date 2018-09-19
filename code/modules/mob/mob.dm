@@ -1171,7 +1171,8 @@
 	if (!( ass ))
 		return
 	ass << "This is \an [src.name]."
-	ass << src.desc
+	if(src.desc)
+		ass << src.desc
 	// *****RM
 	//usr << "[src.name]: Dn:[density] dir:[dir] cont:[contents] icon:[icon] is:[icon_state] loc:[loc]"
 	return
