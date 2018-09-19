@@ -202,8 +202,10 @@ vy = v * sin(angle)
 						A.client.eye = forcedloc
 						A << sound(null, channel = MOTOR_CHANNEL)
 	else
-		pixel_x = 0
-		pixel_y = 0
+		real_pixel_x = real_pixel_x * 0.98
+		real_pixel_y = real_pixel_y * 0.98
+		pixel_x = real_pixel_x
+		pixel_y = real_pixel_y
 		density = 1
 /obj/machinery/vehicle/meteorhit(var/obj/O as obj)
 	for(var/atom/movable/A as mob|obj in src)
