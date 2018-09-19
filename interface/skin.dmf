@@ -64,7 +64,7 @@ macro "macro"
 		command = "OOC"
 	elem 
 		name = "Q"
-		command = "dropitem"
+		command = "toggle_throw"
 	elem 
 		name = "S"
 		command = "KeyDownM \"south\""
@@ -91,10 +91,10 @@ macro "macro"
 		command = "adminhelp"
 	elem 
 		name = "SHIFT"
-		command = "sprint1"
+		command = "KeyDownM \"shift\""
 	elem 
 		name = "SHIFT+UP"
-		command = "sprint2"
+		command = "KeyUpM \"shift\""
 
 
 menu "menu"

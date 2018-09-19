@@ -1167,15 +1167,21 @@
 		usr.pulling = src
 	return
 
+/atom/proc/examineproc(ass)
+	if (!( ass ))
+		return
+	ass << "This is \an [src.name]."
+	ass << src.desc
+	// *****RM
+	//usr << "[src.name]: Dn:[density] dir:[dir] cont:[contents] icon:[icon] is:[icon_state] loc:[loc]"
+	return
+
 /atom/verb/examine()
 	set src in oview(12)	//make it work from farther away
 
 	if (!( usr ))
 		return
-	usr << "This is \an [src.name]."
-	usr << src.desc
-	// *****RM
-	//usr << "[src.name]: Dn:[density] dir:[dir] cont:[contents] icon:[icon] is:[icon_state] loc:[loc]"
+	examineproc(usr)
 	return
 
 /client/North()

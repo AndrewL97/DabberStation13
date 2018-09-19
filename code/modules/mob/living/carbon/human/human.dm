@@ -45,7 +45,7 @@
 
 		if(gender == FEMALE && species == "human") //cat girls more like bestiality, added ironically.
 			cat_ears = 1
-			src << "<b>You feel like pissing the carpet." //cats piss the carpet so what
+			src << "<b>Something's nya~t right." //cats piss the carpet so what
 
 		src.organs["chest"] = chest
 		src.organs["groin"] = groin

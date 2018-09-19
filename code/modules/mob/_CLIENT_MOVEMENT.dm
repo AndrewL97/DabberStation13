@@ -48,6 +48,7 @@ mob
 	var/e = 0
 	var/w = 0
 	var/j = 0
+	var/spri = 0
 	//fps = 60
 	var/mousedown
 	verb/KeyDownM(a as text)
@@ -64,6 +65,8 @@ mob
 				n = 1
 			if("jump")
 				j = 1
+			if("shift")
+				spri = 1
 	verb/KeyUpM(a as text)
 		set instant = 1
 		set hidden = 1
@@ -78,8 +81,12 @@ mob
 				n = 0
 			if("jump")
 				j = 0
-	MouseDown()
+			if("shift")
+				spri = 0
+	MouseDown(atom/object,location,control,params)
 		..()
+		if(spri && object)
+			object.examineproc(mob)
 		mousedown = 1
 		var/obj/item/weapon/gun/G = null
 		if (!( mob.hand ))
@@ -105,6 +112,17 @@ mob
 		if(istype(G,/obj/item/weapon/gun))
 			if(mousedown)
 				can_mo = 0
+		if(mob)
+			if(spri)
+				mob.m_intent = "run"
+				if(mob.hud_used)
+					if(mob.hud_used.move_intent)
+						mob.hud_used.move_intent.icon_state = "running"
+			else
+				mob.m_intent = "walk"
+				if(mob.hud_used)
+					if(mob.hud_used.move_intent)
+						mob.hud_used.move_intent.icon_state = "walking"
 		var/dirAA = (s*SOUTH)+(n*NORTH)+(e*EAST)+(w*WEST)
 		if(dirAA != 0 && can_mo)
 			Move(get_step(mob,dirAA),dirAA)

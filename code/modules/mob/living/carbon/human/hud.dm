@@ -152,20 +152,6 @@ mob
 		space1e.Translate(xOff-xAxis  ,  yOff-yAxis) //This is actually kryfrac level retarded
 		space1.transform = space1e
 
-
-/mob/verb/sprint1()
-	set hidden = 1
-	usr.m_intent = "run"
-	if(usr.hud_used)
-		if(usr.hud_used.move_intent)
-			usr.hud_used.move_intent.icon_state = "running"
-
-/mob/verb/sprint2()
-	set hidden = 1
-	usr.m_intent = "walk"
-	if(usr.hud_used)
-		if(usr.hud_used.move_intent)
-			usr.hud_used.move_intent.icon_state = "walking"
 /mob/verb/use_hotkey()
 	set hidden = 1
 	set name = "use_hotkey"
@@ -177,6 +163,11 @@ mob
 		G = l_hand
 	if(G)
 		G.attack_self(src)
+/mob/verb/toggle_throw()
+	set hidden = 1
+	set name = "toggle_throw"
+	if (!usr.stat && isturf(usr.loc) && !usr.restrained())
+		usr:toggle_throw2_mode()
 
 /mob/verb/switch_intent(ass as text)
 	set hidden = 1
