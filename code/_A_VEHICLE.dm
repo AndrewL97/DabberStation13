@@ -145,10 +145,10 @@ vy = v * sin(angle)
 		if(frm_counter % 5 && accelerating)
 			var/obj/Particle/Spark/Heat/S = new()
 			S.loc = loc
-			S.x_pos = pixel_x+16
-			S.y_pos = pixel_y+16
-			S.x_spd = forward.x*-2
-			S.y_spd = forward.y*-2
+			S.x_pos = pixel_x+rand(0,32)
+			S.y_pos = pixel_y+rand(0,32)
+			S.x_spd = forward.x*-5
+			S.y_spd = forward.y*-5
 
 		if(turning)
 			// Turn the forward direction and keep it normalized.
