@@ -2,6 +2,8 @@ var/current_radio_song = null
 
 client/proc/ProcessClient()
 	shake *= -0.9
+	if(shake < 0.65 && shake > -0.65)
+		shake = 0
 	pixel_y4 = shake
 	pixel_y = round(pixel_y1 + pixel_y2 + pixel_y3 + pixel_y4 + pixel_y5)
 	GetDirection()
