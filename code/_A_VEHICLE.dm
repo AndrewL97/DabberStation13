@@ -202,7 +202,7 @@ vy = v * sin(angle)
 						A.client.eye = forcedloc
 						A << sound(null, channel = MOTOR_CHANNEL)
 	else
-		animate(src,transform = initial(transform),time = 5)
+		//animate(src,transform = initial(transform),time = 5)
 		real_pixel_x = real_pixel_x * 0.9
 		real_pixel_y = real_pixel_y * 0.9
 		pixel_x = real_pixel_x
@@ -258,7 +258,7 @@ vy = v * sin(angle)
 			M.client.pixel_y2 = 0
 			M.client.pixel_x = 0
 		src << sound(null, channel=MOTOR_CHANNEL)
-		veh.forward = Vector2_North // Initialize direction to north.
+		//veh.forward = Vector2_North // Initialize direction to north.
 		veh.velocity = Vector2_Zero // Initialize velocity to zero.
 		veh = null
 		changingPOD = 0
