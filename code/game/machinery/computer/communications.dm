@@ -390,12 +390,7 @@
 	return
 
 /proc/cancel_call_proc(var/mob/user)
-	if ((!( ticker ) || emergency_shuttle.location || emergency_shuttle.direction == 0 || emergency_shuttle.timeleft() < 300))
-		return
-	if( ticker.mode.name == "blob" )
-		return
-
-	world << "\blue <B>Alert: The shuttle is going back!</B>" //marker4
+	world << "\blue <B>Alert: The shuttle has been recalled.</B>" //marker4
 
 	emergency_shuttle.recall()
 

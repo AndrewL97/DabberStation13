@@ -172,6 +172,7 @@
 
 /mob/living/carbon/human/ex_act(severity)
 	animate_flash("flash", src.flash)
+	shake_camera(src, 1, 10/severity)
 
 	if (src.stat == 2 && src.client)
 		src.gib(1)

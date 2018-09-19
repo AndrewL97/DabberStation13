@@ -53,6 +53,13 @@ X < 97
 		nuke_enabled = 1
 		call_shuttle_proc(src)
 
+/datum/controller/gameticker/proc/nuke_disable()
+	if(nuke_enabled == 1)
+		nuke_timer = 300
+		world << sound(null,channel=MUSIC_CHANNEL)
+		nuke_enabled = 0
+		cancel_call_proc()
+
 proc/timer_enable()
 	ticker.nuke_enable()
 

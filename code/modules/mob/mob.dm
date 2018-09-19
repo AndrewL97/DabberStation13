@@ -248,11 +248,7 @@
 	if(!M || !M.client || M.shakecamera)
 		return
 	spawn(1)
-		var/g = strength
-		for(var/i in 1 to duration*4)
-			g = g * -1
-			M.client.pixel_y4 = g
-			sleep(world.tick_lag) //LOL
+		M.client.shake = strength
 
 
 /proc/findname(msg)

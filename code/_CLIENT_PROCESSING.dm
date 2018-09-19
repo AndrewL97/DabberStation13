@@ -1,6 +1,8 @@
 var/current_radio_song = null
 
 client/proc/ProcessClient()
+	shake *= -0.9
+	pixel_y4 = shake
 	pixel_y = round(pixel_y1 + pixel_y2 + pixel_y3 + pixel_y4 + pixel_y5)
 	GetDirection()
 	if(mob)
@@ -140,6 +142,7 @@ client
 	var/pixel_y3 = 0 //effects
 	var/pixel_y4 = 0 //misc shit i think
 	var/pixel_y5 = 0 //height system
+	var/shake = 0
 
 	var/list/health = list() //Health hud stuff
 	var/sound/amb_sound = sound('music/interior.ogg')

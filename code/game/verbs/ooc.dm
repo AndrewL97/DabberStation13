@@ -7,7 +7,6 @@
 			src << "\blue You are now listening to messages on the OOC channel."
 		else
 			src << "\blue You are no longer listening to messages on the OOC channel."
-
 /mob/verb/ooc(msg as text)
 	//log_ooc("[src.name]/[src.key] : [msg]")
 	msg = replacetext("[msg]", "@", "not funny")
