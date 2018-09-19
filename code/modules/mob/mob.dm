@@ -245,10 +245,9 @@
 	return copytext(sanitize(t),1,MAX_MESSAGE_LEN)
 
 /proc/shake_camera(mob/M, duration, strength=1)
-	if(!M || !M.client || M.shakecamera)
+	if(!M || !M.client)
 		return
-	spawn(1)
-		M.client.shake = strength
+	M.client.shake = strength
 
 
 /proc/findname(msg)
