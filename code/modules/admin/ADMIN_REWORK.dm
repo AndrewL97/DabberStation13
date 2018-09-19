@@ -16,7 +16,8 @@ var/list/admin_verbs = list(
 /client/proc/boom,
 /client/proc/admin_observe,
 /client/proc/delete,
-/client/proc/delete_unused_mobs
+/client/proc/delete_unused_mobs,
+/client/proc/jump_to_turf
 )
 var/ban_list = list()
 
@@ -56,6 +57,10 @@ var/ban_list = list()
 			M << rendered
 
 client
+	proc/jump_to_turf(turf/D in world)
+		set category = "Admin"
+		set name = "(ADMIN) Jump To"
+		mob.loc = D.loc
 	proc/delete(datum/D in world)
 		set category = "Admin"
 		set name = "(ADMIN) Delete"
