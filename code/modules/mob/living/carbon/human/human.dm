@@ -925,6 +925,10 @@
 	if(cat_ears)
 		var/image/catear = image("icon" = 'icons/mob/mob_acc.dmi', "icon_state" = "cat_ear") //, "layer" = MOB_LAYER+0.9)
 		src.overlays += catear
+		var/image/catearOV = image("icon" = 'icons/mob/mob_acc.dmi', "icon_state" = "cat_ear_over") //, "layer" = MOB_LAYER+0.9)
+		catearOV.color = rgb(src.r_hair, src.g_hair, src.b_hair)
+		src.overlays += catearOV
+
 		var/image/tailcat = image("icon" = 'icons/mob/mob_acc.dmi', "icon_state" = "cat_tail") //, "layer" = MOB_LAYER+0.9)
 		src.overlays += tailcat
 	var/shielded = 0
