@@ -143,7 +143,7 @@ mob
 	proc/ProcessHeight()
 		if(!MyShadow)
 			MyShadow = new
-		Get_Layer_Y()
+		Get_Layer_Y((src.resting || src.lying/-10)) //People laying down are below you.
 
 		onFloor = 0
 		var/turf/T = locate(x,y,z) //Gets turf player is stepping on.
