@@ -1,6 +1,6 @@
 var/AdministrationTeam = list(
 "Unixian" = "Dab13 Administrator",
-"LuigiBoi" = "Dab13 Administrator",
+"LuigiBoiBY" = "Dab13 Administrator",
 "Zennerx" = "noob admin",
 "AlcaroIsAFrick" = "Host"
 )
