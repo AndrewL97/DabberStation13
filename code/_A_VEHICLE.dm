@@ -147,9 +147,8 @@ vy = v * sin(angle)
 			S.loc = loc
 			S.x_pos = pixel_x+16
 			S.y_pos = pixel_y+16
-			var/ang = atan2(forward.x, forward.y)
-			S.x_spd = cos(ang)*-2
-			S.y_spd = sin(ang)*-2
+			S.x_spd = forward.x*-2
+			S.y_spd = forward.y*-2
 
 		if(turning)
 			// Turn the forward direction and keep it normalized.
