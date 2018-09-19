@@ -46,6 +46,7 @@ proc/atan2(x, y)
 					ammo -= 1
 					var/obj/projectile/G = new(user.loc)
 					G.heightZ = user.heightZ+16
+					G.pixel_z = G.heightZ
 					var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+G.heightZ)-((G.y*32)+G.real_pixel_y))
 					G.X_SPEED = cos(angle)*bullet_speed
 					G.Y_SPEED = sin(angle)*bullet_speed
@@ -56,6 +57,7 @@ proc/atan2(x, y)
 				ammo -= 1
 				var/obj/projectile/G = new(user.loc)
 				G.heightZ = user.heightZ+16
+				G.pixel_z = G.heightZ
 				var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+G.heightZ)-((G.y*32)+G.real_pixel_y))
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
