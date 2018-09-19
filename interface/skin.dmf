@@ -64,7 +64,7 @@ macro "macro"
 		command = "OOC"
 	elem 
 		name = "Q"
-		command = "drop"
+		command = "dropitem"
 	elem 
 		name = "R"
 		command = "toggle_throw"

@@ -83,10 +83,12 @@ mob
 				j = 0
 			if("shift")
 				spri = 0
+	DblClick(atom/object,location,control,params)
+		..()
+		if(object)
+			object.examineproc(mob)
 	MouseDown(atom/object,location,control,params)
 		..()
-		if(spri && object)
-			object.examineproc(mob)
 		mousedown = 1
 		var/obj/item/weapon/gun/G = null
 		if (!( mob.hand ))
