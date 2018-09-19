@@ -152,7 +152,7 @@ vy = v * sin(angle)
 
 		if(turning)
 			// Turn the forward direction and keep it normalized.
-			forward = forward.Turn(turning * TurnRate() * world.tick_lag).Normalized()
+			forward = forward.Turn((turning * TurnRate()) * world.tick_lag).Normalized()
 			transform = initial(transform) * forward.ToRotation()
 
 		if(accelerating)
