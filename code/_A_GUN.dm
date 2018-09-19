@@ -100,7 +100,7 @@ proc/atan2(x, y)
 		MyShadow.icon = icon
 		MyShadow.icon_state = icon_state
 		MyShadow.color = "#808080"
-		MyShadow.alpha = 150
+		MyShadow.alpha = 75
 		MyShadow.animate_movement = 0
 		MyShadow.pixel_x = pixel_x+pixel_w
 		MyShadow.pixel_y = pixel_y
