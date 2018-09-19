@@ -142,13 +142,13 @@ vy = v * sin(angle)
 				for(var/mob/A as mob in src)
 					A << 'cpuspin.wav'
 				Spinning = 5
-		if(frm_counter % 5 && velocity.SquareMagnitude() > 20)
+		if(frm_counter % 5 && accelerating)
 			var/obj/Particle/Spark/Heat/S = new()
 			S.loc = loc
 			S.x_pos = pixel_x+rand(0,32)
 			S.y_pos = pixel_y+rand(0,32)
-			S.x_spd = 0
-			S.y_spd = 0
+			S.x_spd = cos(forward.ToRotation())*2.5
+			S.y_spd = sin(forward.ToRotation())*2.5
 
 		if(turning)
 			// Turn the forward direction and keep it normalized.
