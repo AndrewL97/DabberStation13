@@ -150,7 +150,7 @@ vy = v * sin(angle)
 			// Accelerate!
 			velocity += forward * (Acceleration() * world.tick_lag)
 		else
-			velocity *= 0.9 //slowly stop accelerating
+			velocity *= 0.99 //slowly stop accelerating
 		//world << velocity.SquareMagnitude()
 
 		if(velocity.SquareMagnitude() > 1)
