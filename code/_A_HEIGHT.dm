@@ -121,7 +121,7 @@ mob
 				var/obj/item/weapon/tank/jetpack/J = src.back
 				j_pack = J.allow_thrust(0.01, src)
 			if(j_pack)
-				ySpeed = ySpeed + (36/256)
+				ySpeed = ySpeed + (27/256)
 
 	proc/ProcessDirection()
 		if(buckled)
