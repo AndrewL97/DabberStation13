@@ -148,8 +148,8 @@ vy = v * sin(angle)
 			S.x_pos = pixel_x+rand(0,32)
 			S.y_pos = pixel_y+rand(0,32)
 			var/ang = atan2(forward.x, forward.y)
-			S.x_spd = cos(ang)*10
-			S.y_spd = sin(ang)*10
+			S.x_spd = cos(ang)*-10
+			S.y_spd = sin(ang)*-10
 
 		if(turning)
 			// Turn the forward direction and keep it normalized.
