@@ -180,11 +180,9 @@ vy = v * sin(angle)
 						A.client.eye = forcedloc
 						A << sound(null, channel = MOTOR_CHANNEL)
 	else
-		var/matrix/M = matrix()
-		M.Turn(90)
 		pixel_x = 0
 		pixel_y = 0
-		transform = M
+		transform = initial(transform)
 /obj/machinery/vehicle/meteorhit(var/obj/O as obj)
 	for(var/atom/movable/A as mob|obj in src)
 		A.loc = src.loc
