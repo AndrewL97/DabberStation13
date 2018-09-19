@@ -313,13 +313,13 @@
 	var/cycle = 0
 	New()
 		..()
-		cycle = rand(1,4)
+		cycle = rand(1,12)
 		special_processing += src
 	Del()
 		special_processing -= src
 		..()
 	special_process()
-		if((frm_counter + cycle) % 6)
+		if((frm_counter + cycle) % 12)
 			var/obj/Particle/Spark/Heat/S = new()
 			S.loc = loc
 			S.y = y-1
