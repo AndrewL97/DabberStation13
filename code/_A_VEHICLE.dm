@@ -97,9 +97,9 @@ vy = v * sin(angle)
 		Spinning = 0
 		CanMove = 0
 	proc
-		TurnRate() return 15
+		TurnRate() return 5
 		// How fast you accelerate, in pixels per decisecond... per decisecond. (p/ds^2)
-		Acceleration() return 5
+		Acceleration() return 1.6
 	New()
 		..()
 		forward = Vector2_North // Initialize direction to north.
