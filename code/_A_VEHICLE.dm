@@ -202,6 +202,7 @@ vy = v * sin(angle)
 						A.client.eye = forcedloc
 						A << sound(null, channel = MOTOR_CHANNEL)
 	else
+		animate(src,transform = initial(transform),time = 5)
 		real_pixel_x = real_pixel_x * 0.9
 		real_pixel_y = real_pixel_y * 0.9
 		pixel_x = real_pixel_x
