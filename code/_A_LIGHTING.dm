@@ -158,6 +158,8 @@ obj/light
 				if(x != ownerF.x || x != ownerF.y)
 					x = ownerF.x
 					y = ownerF.y
+				pixel_x = ownerF.pixel_x+ownerF.pixel_w
+				pixel_y = ownerF.pixel_y+ownerF.pixel_z
 					//changed = 1
 
 			if(changed)
