@@ -13,7 +13,7 @@
 	msg = replacetext("[msg]", "@", "not funny")
 	if(msg != "")
 		if(fexists("sound/oocvoice/[lower(msg)].ogg"))
-			world << sound("sound/oocvoice/[lower(msg)].ogg")
+			world << sound("sound/oocvoice/[lowertext(msg)].ogg")
 		for (var/client/C in clients)
 			if (C.listen_ooc)
 				C << "<font color='#D9FFE3'>OOC: <b>[src.key]</b>: [msg]"
