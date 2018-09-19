@@ -143,7 +143,6 @@ mob
 	proc/ProcessHeight()
 		if(!MyShadow)
 			MyShadow = new
-
 		Get_Layer_Y()
 
 		onFloor = 0
@@ -166,17 +165,18 @@ mob
 
 		for(var/mob/i in loc)
 			if(i != src)
-				if(heightZ > i.heightZ-heightSize && heightZ < i.heightZ+(round(i.heightSize/2))) //if below
-					heightZ = i.heightZ-heightSize
-					ySpeed = 0
-				if(heightZ < i.heightZ+i.heightSize && heightZ > i.heightZ+(round(i.heightSize/2))-1) //only stack if ontop or some bullshit
-					onFloor = 1
-					ySpeed = 0
-					heightZ = i.heightZ+i.heightSize
-					if(istype(src,/mob/living/carbon/human) && istype(src:shoes,/obj/item/clothing/shoes/brown/goomba_stomp))
-						i.specialloss += 15
-						view(10,src) << 'hitJump.ogg'
-						ySpeed = 3
+				if(i.density)
+					if(heightZ > i.heightZ-heightSize && heightZ < i.heightZ+(round(i.heightSize/2))) //if below
+						heightZ = i.heightZ-heightSize
+						ySpeed = 0
+					if(heightZ < i.heightZ+i.heightSize && heightZ > i.heightZ+(round(i.heightSize/2))-1) //only stack if ontop or some bullshit
+						onFloor = 1
+						ySpeed = 0
+						heightZ = i.heightZ+i.heightSize
+						if(istype(src,/mob/living/carbon/human) && istype(src:shoes,/obj/item/clothing/shoes/brown/goomba_stomp))
+							i.specialloss += 15
+							view(10,src) << 'hitJump.ogg'
+							ySpeed = 3
 
 		if(heightZ < T.TurfHeight) //Don't make players go under the floor. todo fix this bullshit because turfs aren't being picked up correctly
 			heightZ = T.TurfHeight
