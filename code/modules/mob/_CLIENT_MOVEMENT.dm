@@ -117,6 +117,10 @@ mob
 
 			if(istype(G,/obj/item/weapon/gun) && G.automatic)
 				G.fire(mob,mos_x,mos_y)
+		if (isobj(src.mob.loc) || ismob(src.mob.loc))
+			var/atom/O = src.mob.loc
+			if (src.mob.canmove)
+				return O.relaymove(src.mob, dirAA)
 	Stat()
 		..()
 		if(mob)
@@ -144,13 +148,11 @@ mob
 	if (src.moving)
 		return 0
 
-	if (isobj(src.mob.loc) || ismob(src.mob.loc))
-		var/atom/O = src.mob.loc
-		if (src.mob.canmove)
-			return O.relaymove(src.mob, direct)
-
 	if (src.mob.stat == 2)
 		return
+
+	if (isobj(src.mob.loc) || ismob(src.mob.loc))
+		return 0
 
 	if(mob)
 		if(mob.buckled)
