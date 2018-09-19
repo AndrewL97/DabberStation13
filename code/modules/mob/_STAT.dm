@@ -14,6 +14,7 @@ var
 	//stat(null, "Health : %[round(health)]")
 	//stat(null, "Shield : %[round(shield)]")
 	if(veh)
+		stat("Vehicle Speed","[round(veh.velocity.SquareMagnitude()/10)] km/h")
 		if(veh.Kart)
 			stat("Racing status",null)
 			stat(null, "Lap : [veh.lap]")

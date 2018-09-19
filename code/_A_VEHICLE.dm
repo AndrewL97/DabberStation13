@@ -151,7 +151,7 @@ vy = v * sin(angle)
 			velocity += forward * (Acceleration() * world.tick_lag)
 		else
 			velocity *= 0.9 //slowly stop accelerating
-		world << velocity.SquareMagnitude()
+		//world << velocity.SquareMagnitude()
 
 		if(velocity.SquareMagnitude() > 1)
 			if(PixelMove(velocity.x*world.tick_lag,velocity.y*world.tick_lag)==0)

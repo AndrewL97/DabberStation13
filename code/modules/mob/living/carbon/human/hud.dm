@@ -129,8 +129,8 @@ mob
 				ParallaxLayer(space_parallax_list_1,1,0,"layer1alt",(world.time),0,-98)
 				ParallaxLayer(space_parallax_list_2,2,2,"layer2alt",(world.time/2),(world.time/4),-98)
 			if(0)
-				ParallaxLayer(space_parallax_list_1,0.25,0.25,"layer1",0,0,-98)
-				ParallaxLayer(space_parallax_list_2,0.5,0.5,"layer2",0,0,-98)
+				ParallaxLayer(space_parallax_list_1,0.5,0.5,"layer1",0,0,-98)
+				ParallaxLayer(space_parallax_list_2,1,1,"layer2",0,0,-98)
 	proc/ParallaxLayer(var/list/space_list,var/mult_1,var/mult_2,var/iconA,var/offsetX,var/offsetY,var/plane_new) //Tbh this honestly could be redone to use a master plane, and throw all parallax layers there.
 		if(!client)
 			return //don't do this.
