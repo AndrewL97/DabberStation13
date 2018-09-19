@@ -11,7 +11,7 @@
 
 /mob/living/carbon/human/New()
 	..()
-	if(gender == FEMALE && species == "human") //cat girls more like bestiality, added ironically.
+	if(gender == "female" && species == "human") //cat girls more like bestiality, added ironically.
 		cat_ears = 1
 		src << "<b>You feel like pissing the carpet." //cats piss the carpet so what
 	var/datum/reagents/R = new/datum/reagents(1000)
