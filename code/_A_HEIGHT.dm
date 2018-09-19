@@ -210,6 +210,10 @@ mob
 		pixel_z = round(heightZ)+round(pixel_y_2) //Set pixel_z.
 		if(buckled)
 			buckled.pixel_z = round(heightZ)
-
+		if(c2)
+			if(T.TurfHeight < 0)
+				c2.icon_state = "heightNOFL"
+			else
+				c2.icon_state = "height"
 		if(c1)
 			c1.screen_loc = "WEST+3, NORTH:[max(1,min(round((heightZ/416)*32)+1,30))]"
