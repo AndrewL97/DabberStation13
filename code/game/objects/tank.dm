@@ -265,26 +265,18 @@
 
 /obj/item/weapon/tank/jetpack/New()
 	..()
-	src.ion_trail = new /datum/effects/system/ion_trail_follow()
-	src.ion_trail.set_up(src)
 	src.air_contents.oxygen = (25*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C)
 	return
 
 /obj/item/weapon/tank/jetpack/verb/toggle()
 	src.on = !( src.on )
 	src.icon_state = text("jetpack[]", src.on)
-	if(src.on)
-		src.ion_trail.start()
-	else
-		src.ion_trail.stop()
 	return
 
 /obj/item/weapon/tank/jetpack/proc/allow_thrust(num, mob/user as mob)
-	src.ion_trail.py = user.heightZ
 	if (!( src.on ))
 		return 0
 	if ((num < 0.01 || src.air_contents.total_moles() < num))
-		src.ion_trail.stop()
 		return 0
 
 	var/datum/gas_mixture/G = src.air_contents.remove(num)

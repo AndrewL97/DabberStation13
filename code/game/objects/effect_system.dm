@@ -464,67 +464,6 @@ steam.start() -- spawns the effect
 
 
 
-
-
-/////////////////////////////////////////////
-//////// Attach an Ion trail to any object, that spawns when it moves (like for the jetpack)
-/// just pass in the object to attach it to in set_up
-/// Then do start() to start it and stop() to stop it, obviously
-/// and don't call start() in a loop that will be repeated otherwise it'll get spammed!
-/////////////////////////////////////////////
-
-/obj/effects/ion_trails
-	name = "ion trails"
-	icon_state = "ion_trails"
-	anchored = 1.0
-
-/datum/effects/system/ion_trail_follow
-	var/atom/holder
-	var/turf/oldposition
-	var/processing = 1
-	var/on = 1
-	var/py = 0
-
-/datum/effects/system/ion_trail_follow/proc/set_up(atom/atom)
-	holder = atom
-	oldposition = get_turf(atom)
-
-/datum/effects/system/ion_trail_follow/proc/start()
-	if(!src.on)
-		src.on = 1
-		src.processing = 1
-	if(src.processing)
-		src.processing = 0
-		spawn(0)
-			var/turf/T = get_turf(src.holder)
-			if(T != src.oldposition)
-				if(istype(T, /turf/space))
-					var/obj/effects/ion_trails/I = new /obj/effects/ion_trails(src.oldposition)
-					src.oldposition = T
-					I.pixel_y = py
-					I.dir = src.holder.dir
-					flick("ion_fade", I)
-					I.icon_state = "blank"
-					spawn( 20 )
-						del(I)
-				spawn(2)
-					if(src.on)
-						src.processing = 1
-						src.start()
-			else
-				spawn(2)
-					if(src.on)
-						src.processing = 1
-						src.start()
-
-/datum/effects/system/ion_trail_follow/proc/stop()
-	src.processing = 0
-	src.on = 0
-
-
-
-
-
 /////////////////////////////////////////////
 //////// Attach a steam trail to an object (eg. a reacting beaker) that will follow it
 // even if it's carried of throw2n.
