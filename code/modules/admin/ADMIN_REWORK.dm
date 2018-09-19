@@ -15,7 +15,8 @@ var/list/admin_verbs = list(
 /client/proc/ban_user,
 /client/proc/boom,
 /client/proc/admin_observe,
-/client/proc/delete
+/client/proc/delete,
+/client/proc/delete_unused_mobs
 )
 var/ban_list = list()
 
@@ -61,6 +62,14 @@ client
 		if(alert("Delete [D]?","Delete","Yes","No") == "Yes")
 			message_admins("[key] has deleted [D]")
 			del D
+	proc/delete_unused_mobs()
+		set category = "Admin"
+		set name = "(ADMIN) Delete Dead Mobs"
+		if(alert("Delete all dead mobs? It will fix lag in some cases.","Delete","Yes","No") == "Yes")
+			message_admins("[key] deleted all dead mobs.")
+			for(var/mob/i in Mobs)
+				if(i.health < 1 && !i.client)
+					del i
 
 /client/proc/kick_user()
 	set category = "Admin"
