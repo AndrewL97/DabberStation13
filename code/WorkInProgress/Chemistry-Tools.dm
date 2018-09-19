@@ -1160,6 +1160,17 @@
 		R.my_atom = src
 		R.add_reagent("cola", 30)
 
+/obj/item/weapon/reagent_containers/food/drinks/slurp_juice
+	name = "slurp juice"
+	desc = "Heals you!"
+	icon_state = "slurp"
+	heal_amt = 1
+	New()
+		var/datum/reagents/R = new/datum/reagents(50)
+		reagents = R
+		R.my_atom = src
+		R.add_reagent("slurpjuice", 30)
+
 /obj/item/weapon/reagent_containers/food/drinks/beer
 	name = "Space Beer"
 	desc = "Beer. in space."

@@ -319,7 +319,7 @@
 		special_processing -= src
 		..()
 	special_process()
-		if(frm_counter + cycle % 6 == 1)
+		if((frm_counter + cycle) % 6)
 			var/obj/Particle/Spark/Heat/S = new()
 			S.loc = loc
 			S.y = y-1

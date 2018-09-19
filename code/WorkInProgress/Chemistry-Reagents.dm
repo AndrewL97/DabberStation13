@@ -603,7 +603,6 @@ datum
 			id = "cola"
 			description = "A refreshing beverage."
 			reagent_state = LIQUID
-			var/shield_left = 10
 			var/F = 0
 			var/ag = 0
 			on_mob_life(var/mob/M)
@@ -619,6 +618,22 @@ datum
 					da2.ang = 180 + ag
 
 				M:shield = max(0,min(100,M:shield + 5))
+				..()
+
+		slurp_juice
+			name = "Slurp Juice"
+			id = "slurpjuice"
+			description = "A refreshing beverage."
+			reagent_state = LIQUID
+			var/F = 0
+			var/ag = 0
+			on_mob_life(var/mob/M)
+				M:shield = max(0,min(100,M:shield + 5))
+				M.oxyloss = max(0,M.oxyloss-1)
+				M.toxloss = max(0,M.toxloss-1)
+				M.fireloss = max(0,M.fireloss-1)
+				M.bruteloss = max(0,M.bruteloss-1)
+				M.specialloss = max(0,M.specialloss-1)
 				..()
 
 		plasma
