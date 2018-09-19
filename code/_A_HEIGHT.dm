@@ -79,6 +79,9 @@ mob
 	var/onFloor = 0 //Am I on floor?
 	var/heightSize = 28
 	var/pixel_y_2 = 0
+	real_pixel_x = 11
+	pixel_collision_size_x = 8
+	pixel_collision_size_y = 29
 	var/obj/shadow/MyShadow = null //Shadow. This is handled in master controller.
 
 	#if defined(GRAVDEBUG)

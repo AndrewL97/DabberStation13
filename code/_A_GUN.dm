@@ -27,7 +27,7 @@ proc/atan2(x, y)
 		fire_rate = 5
 		reload_rate = 15
 		gun_sound = 'shot.ogg'
-		bullet_speed = 16
+		bullet_speed = 15
 		bullet_damage = 2
 		automatic_reload = 1
 	pistol
@@ -45,9 +45,8 @@ proc/atan2(x, y)
 				if(frm_counter % fire_rate == 1)
 					ammo -= 1
 					var/obj/projectile/G = new(user.loc)
-					G.real_pixel_y = 15+user.heightZ
-					G.pixel_y = G.real_pixel_y
-					var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+32)-((G.y*32)+G.real_pixel_y))
+					G.heightZ = user.heightZ+16
+					var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+G.heightZ)-((G.y*32)+G.real_pixel_y))
 					G.X_SPEED = cos(angle)*bullet_speed
 					G.Y_SPEED = sin(angle)*bullet_speed
 					G.damage = bullet_damage
@@ -56,9 +55,8 @@ proc/atan2(x, y)
 			else
 				ammo -= 1
 				var/obj/projectile/G = new(user.loc)
-				G.real_pixel_y = 15+user.heightZ
-				G.pixel_y = G.real_pixel_y
-				var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+32)-((G.y*32)+G.real_pixel_y))
+				G.heightZ = user.heightZ+16
+				var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+G.heightZ)-((G.y*32)+G.real_pixel_y))
 				G.X_SPEED = cos(angle)*bullet_speed
 				G.Y_SPEED = sin(angle)*bullet_speed
 				G.damage = bullet_damage
@@ -85,27 +83,45 @@ proc/atan2(x, y)
 	var/Y_SPEED = 0
 	var/mob/owner = null
 	var/damage = 5
+	var/heightZ = 0
+	var/obj/shadow/MyShadow = null //Shadow. This is handled in master controller.
 	pixel_collision_size_x = 2
 	pixel_collision_size_y = 2
 	real_pixel_x = 15
-	real_pixel_y = 15
-	pixel_w = -16
-	pixel_z = -16
+	real_pixel_y = 0
+	plane = MOB_PLANE_ALT
+	pixel_w = -1
 	pixel_x = 15
-	pixel_y = 15
 	animate_movement = 0
 	density = 0
 	New()
 		..()
+		MyShadow = new()
+		MyShadow.icon = icon
+		MyShadow.icon_state = icon_state
+		MyShadow.color = "#808080"
+		MyShadow.alpha = 150
+		MyShadow.animate_movement = 0
+		MyShadow.pixel_x = pixel_x+pixel_w
+		MyShadow.pixel_y = pixel_y
+		MyShadow.loc = loc
 		special_processing += src
 	Del()
+		if(MyShadow)
+			del MyShadow
 		special_processing -= src
 		..()
 	special_process()
 		..()
 		for(var/mob/e in orange(1,src))
 			if(e != owner)
-				if(PixelCollision(e))
-					e.bruteloss += damage
+				if(PixelCollision2(e))
+					if(heightZ >= e.heightZ && heightZ+2 <= e.heightZ+e.heightSize)
+						e.bruteloss += damage
+						del src
 		if(!PixelMove(X_SPEED,Y_SPEED))
 			del src
+		MyShadow.pixel_x = pixel_x+pixel_w
+		MyShadow.pixel_y = pixel_y
+		MyShadow.loc = loc
+		pixel_z = heightZ
