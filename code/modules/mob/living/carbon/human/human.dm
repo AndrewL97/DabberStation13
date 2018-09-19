@@ -11,9 +11,8 @@
 
 /mob/living/carbon/human/New()
 	..()
-	if(gender == "female" && species == "human") //cat girls more like bestiality, added ironically.
-		cat_ears = 1
-		src << "<b>You feel like pissing the carpet." //cats piss the carpet so what
+
+
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
@@ -43,6 +42,10 @@
 		l_foot.owner = src
 		var/datum/organ/external/r_foot/r_foot = new /datum/organ/external/r_foot( src )
 		r_foot.owner = src
+
+		if(gender == FEMALE && species == "human") //cat girls more like bestiality, added ironically.
+			cat_ears = 1
+			src << "<b>You feel like pissing the carpet." //cats piss the carpet so what
 
 		src.organs["chest"] = chest
 		src.organs["groin"] = groin
