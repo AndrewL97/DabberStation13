@@ -142,7 +142,7 @@ vy = v * sin(angle)
 				for(var/mob/A as mob in src)
 					A << 'cpuspin.wav'
 				Spinning = 5
-		if(frm_counter % 5)
+		if(frm_counter % 5 && velocity.SquareMagnitude() > 20)
 			var/obj/Particle/Spark/Heat/S = new()
 			S.loc = loc
 			S.x_pos = pixel_x+rand(0,32)
