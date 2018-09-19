@@ -12,7 +12,7 @@
 	//log_ooc("[src.name]/[src.key] : [msg]")
 	msg = replacetext("[msg]", "@", "not funny")
 	if(msg != "")
-		if(fexists("sound/oocvoice/[lower(msg)].ogg"))
+		if(fexists("sound/oocvoice/[lowertext(msg)].ogg"))
 			world << sound("sound/oocvoice/[lowertext(msg)].ogg")
 		for (var/client/C in clients)
 			if (C.listen_ooc)
