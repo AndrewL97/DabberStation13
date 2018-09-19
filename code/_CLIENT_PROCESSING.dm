@@ -153,9 +153,13 @@ client
 	var/old_radio_sound = null
 	var/music_pitch = 1
 	var/music_pitch_new = 1
-
+/obj/screen
+	appearance_flags = PIXEL_SCALE | TILE_BOUND | NO_CLIENT_COLOR
 /obj/screen_num
 	plane = 10
+	appearance_flags = PIXEL_SCALE | TILE_BOUND | NO_CLIENT_COLOR
+/obj/screen_alt
+	appearance_flags = PIXEL_SCALE | TILE_BOUND | NO_CLIENT_COLOR
 
 /obj/screen_alt/heightCalc
 	plane = 10

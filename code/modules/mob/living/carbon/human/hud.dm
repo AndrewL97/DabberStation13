@@ -90,9 +90,6 @@ mob
 				src.ghost_hud()
 				//return
 
-/obj/screen_alt
-	appearance_flags = PIXEL_SCALE | NO_CLIENT_COLOR
-
 /obj/screen_alt/spaceParallax
 	icon = 'extra images/parallax.dmi'
 	name = "space parallax image"

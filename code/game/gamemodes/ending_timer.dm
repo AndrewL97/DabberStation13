@@ -63,5 +63,4 @@ client/Stat()
 
 /obj/screen_number
 	icon = 'number_font.dmi'
-	appearance_flags = PIXEL_SCALE | NO_CLIENT_COLOR
 	plane = 10

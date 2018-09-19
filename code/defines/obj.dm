@@ -475,7 +475,7 @@
 	layer = 20.0
 	var/id = 0.0
 	var/obj/master
-	appearance_flags = PIXEL_SCALE | NO_CLIENT_COLOR
+
 
 /obj/screen/close
 	name = "close"
