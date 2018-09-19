@@ -7,9 +7,13 @@
 	var/tail = "none"
 	var/zangoose
 	var/tail_color = null
+	var/cat_ears = 0
 
 /mob/living/carbon/human/New()
 	..()
+	if(gender == FEMALE && species == "human") //cat girls more like bestiality, added ironically.
+		cat_ears = 1
+		src << "<b>You feel like pissing the carpet." //cats piss the carpet so what
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
@@ -915,6 +919,11 @@
 	taile.icon += tail_color
 	src.overlays += taile
 
+	if(cat_ears)
+		var/image/catear = image("icon" = 'icons/mob/mob_acc.dmi', "icon_state" = "cat_ear") //, "layer" = MOB_LAYER+0.9)
+		src.overlays += catear
+		var/image/tailcat = image("icon" = 'icons/mob/mob_acc.dmi', "icon_state" = "cat_tail") //, "layer" = MOB_LAYER+0.9)
+		src.overlays += tailcat
 	var/shielded = 0
 	for (var/obj/item/device/shield/S in src)
 		if (S.active)
