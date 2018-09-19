@@ -311,7 +311,7 @@
 "fY" = (/obj/machinery/light{tag = "icon-tube1 (WEST)"; icon_state = "tube1"; dir = 8},/turf/simulated/floor{fully_cover = 1; icon_state = "table2"; TurfHeight = 4},/area/secretplaceXD)
 "fZ" = (/obj/disco_ball,/turf/simulated/floor/plating,/area/secretplaceXD)
 "ga" = (/obj/item/weapon/reagent_containers/food/drinks/cola,/turf/simulated/floor{icon_state = "table"; TurfHeight = 4},/area/hallway/primary/port)
-"gb" = (/obj/item/weapon/reagent_containers/food/drinks/cola,/obj/item/weapon/reagent_containers/food/drinks/cola,/turf/simulated/floor{fully_cover = 1; icon_state = "table2"; TurfHeight = 4},/area/start)
+"gb" = (/obj/item/weapon/reagent_containers/food/drinks/slurp_juice,/obj/item/weapon/reagent_containers/food/drinks/slurp_juice,/obj/item/weapon/reagent_containers/food/drinks/slurp_juice,/turf/simulated/floor{fully_cover = 1; icon_state = "table2"; TurfHeight = 4},/area/start)
 "gc" = (/obj/machinery/vehicle,/turf/simulated/floor/plating,/area/hallway/primary/port)
 "gd" = (/obj/closet/emcloset,/turf/simulated/floor/plating,/area/hallway/primary/port)
 "ge" = (/obj/item/weapon/reagent_containers/food/drinks/cola,/turf/simulated/floor{icon_state = "table"; TurfHeight = 4},/area/start)
