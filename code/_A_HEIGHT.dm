@@ -94,6 +94,8 @@ mob
 		world << "[FONTCOLOR]removing [src] from heightmobs"
 		#endif
 		ghostize(1)
+		if(danc)
+			del danc
 		if(src in HeightMobs)
 			HeightMobs -= src
 		if(src in Mobs)
