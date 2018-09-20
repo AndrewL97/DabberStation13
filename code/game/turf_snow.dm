@@ -21,6 +21,11 @@
 	name = "grass"
 	icon_state = "1"
 
+/turf/unsimulated/dirt
+	icon = 'grasstiles.dmi'
+	name = "grass"
+	icon_state = "dirt"
+
 /obj/greenland
 	density = 1
 	layer = MOB_LAYER + 1

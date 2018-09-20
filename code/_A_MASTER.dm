@@ -15,6 +15,7 @@ var/frm_counter = 0
 var/listofitems = ""
 var/list/clients = list()
 var/special_processing = list()
+
 #define CPU_WARN 75
 #define CPU_CHECK_MAX 40 //if cpu goes higher than this, some things will do sleep(world.tick_lag) and throttle, this is done in CHECK_TICK()
 
@@ -181,7 +182,7 @@ datum/controller/game_controller
 		if(!processing)
 			return 0
 
-		if(world.cpu > 500)
+		if(world.cpu > 600)
 			if(!(world.port in PORTS_NOT_ALLOWED))
 				spawn()
 					call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server has rebooted due to high processor usage, (%[world.cpu])**\" } ", "Content-Type: application/json")
