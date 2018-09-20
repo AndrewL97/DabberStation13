@@ -28,7 +28,7 @@
 		..()
 
 /obj/machinery/power/core/special_process()
-	temp = temp + world.tick_lag/2
+	temp = temp + world.tick_lag/4
 	if(temp < 0)
 		temp = 0
 	if(temp > 3500 && melt_down_alert == 0)
@@ -76,10 +76,10 @@
 	icon_state = "core_cooler[round((coolant_left/max_coolant)*9)]"
 	if(coolant_left > 0 && on)
 		for(var/obj/machinery/power/core/e in orange(1,src))
-			e.temp -= world.tick_lag
-			coolant_left -= world.tick_lag
+			e.temp -= world.tick_lag/2
+			coolant_left -= world.tick_lag/2
 	if(!on)
-		coolant_left += world.tick_lag/2
+		coolant_left += world.tick_lag/3
 	if(coolant_left < 0)
 		coolant_left = 0
 
