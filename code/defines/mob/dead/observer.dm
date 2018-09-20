@@ -9,3 +9,5 @@
 	anchored = 1	//  don't get pushed around
 	var/mob/corpse = null	//	observer mode
 	var/datum/hud/living/carbon/hud = null // hud
+	ex_act(severity)
+		shake_camera(src, 1, 10/severity)
