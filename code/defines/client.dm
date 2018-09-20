@@ -22,3 +22,7 @@
 	New()
 		winset(src, null, "command=\".configure graphics-hwmode on\"")
 		..()
+	verb
+		github()
+			set hidden = 1
+			src << link("https://github.com/AlcaroIsAFrick/Dab13")

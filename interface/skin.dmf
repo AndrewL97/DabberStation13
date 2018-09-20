@@ -357,8 +357,8 @@ window "infowindow"
 		text-color = #00ff00
 		background-color = #2e3252
 		saved-params = "is-checked"
-		text = "Join Alternate Server"
-		command = "pingserv"
+		text = "Github"
+		command = "github"
 	elem "button2"
 		type = BUTTON
 		pos = 216,8
