@@ -65,7 +65,8 @@ client
 		set category = "Admin"
 		set name = "(ADMIN) Toggle MC throttling"
 		CPU_warning = !CPU_warning
-		src << "<b>MC Throttling is now [CPU_warning ? "enabled" : "false"]"
+		message_admins("[key] has [CPU_warning ? "enabled" : "disabled"] MC throttling.")
+		src << "<b>MC Throttling is now [CPU_warning ? "enabled" : "disabled"]."
 	proc/jump_to_turf(turf/D in world)
 		set category = "Admin"
 		set name = "(ADMIN) Jump To"
