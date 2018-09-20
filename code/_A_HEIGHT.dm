@@ -58,7 +58,6 @@ turf
 		TurfHeight = -416
 	unsimulated
 		space2
-			TurfGravity = 24/256
 			alpha = 0
 			TurfHeight = -416
 	simulated
