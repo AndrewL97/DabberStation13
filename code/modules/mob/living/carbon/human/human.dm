@@ -1108,7 +1108,7 @@
 				if (src.organs[def_zone])
 					affecting = src.organs[def_zone]
 				if ((istype(affecting, /datum/organ/external) && prob(90)))
-					playsound(src.loc, "punch", 25, 1, -1)
+					playsound(src.loc, "punch", 25, 0, 6)
 					for(var/mob/O in viewers(src, null))
 						O.show_message(text("\red <B>[] has slashed at []!</B>", M, src), 1)
 					if (def_zone == "head")

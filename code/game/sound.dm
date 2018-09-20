@@ -1,6 +1,8 @@
 /proc/playsound(var/atom/source, soundin, vol, vary, extrarange, extrapitch)
 	if(!extrarange)
 		extrarange = 6
+	if(extrarange < 0)
+		extrarange = abs(extrarange)*8
 	//Frequency stuff only works with 45kbps oggs.
 
 	switch(soundin)
