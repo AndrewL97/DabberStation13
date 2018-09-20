@@ -1,10 +1,14 @@
-# How to make access
-HOW TO MAKE A MAP USING THE ACCESS LEVEL SYSTEM
-1. Make a map as normal
-2. Select a door that you want to not be accessible to everybody
-3. Right click on it and edit its attributes
-4. Make the "req_access_txt" attribute be a semicolon-separated list of the permissions required to open the doors
-5. Repeat for all doors.
+# List of contents.
+1. HOW TO MAKE A MAP USING THE ACCESS LEVEL SYSTEM
+2. HOW DOES THE HEIGHT SYSTEM WORK
+3. ___MAIN_SHIT.dm
+
+# 1. HOW TO MAKE A MAP USING THE ACCESS LEVEL SYSTEM
+1- Make a map as normal
+2- Select a door that you want to not be accessible to everybody
+3- Right click on it and edit its attributes
+4- Make the "req_access_txt" attribute be a semicolon-separated list of the permissions required to open the doors
+5- Repeat for all doors.
 
 For example, a brig door would have it be "2" while a door that requires you have toxins and teleporter access (for whatever reason) would have it be "9;20"
 
@@ -40,3 +44,16 @@ Here is a list of the permissions and their numbers (this may be out of date, se
 	access_bar = 28
 	access_janitor = 29
 	access_disposal_units = 30
+
+# 2. HOW DOES THE HEIGHT SYSTEM WORK
+You can press space to jump, and you can stack ontop other players, stand on lattices (if falling too fast, you will break them and die.)
+
+The Calculations applied here are as follows :
+	Y Speed gets decremented by **0.375      (96/256)**   on the station (gravity)
+	Y Speed gets decremented by **0.09375    (24/256)**   on space (low gravity)
+	When flying with a jetpack, **0.10546875 (27/256)**   is added to the Y velocity every tick you are holding space.
+	Y Velocity is set to        **5.15625    (1320/256)** when you jump.
+The values mentioned here can be edited in _A_HEIGHT.dm
+
+# 3. MAIN SHIT
+This file holds most defines, and can be used to change job slot amounts. I wouldn't recommend changing any of the defines.
