@@ -8,7 +8,7 @@
 	src.jitteriness = 0
 	world << "<b><font color='#BF5FFF'>[name] died!"
 	world << 'dead.ogg'
-	if (!gibbed)
+	if (gibbed != 1)
 		emote("deathgasp") //let the world KNOW WE ARE DEAD
 
 		src.canmove = 0
@@ -28,8 +28,9 @@
 			if(A.status && prob(90))
 	//			world << "Bomb has ignited?"
 				A.part4.ignite()
-		spawn(5)
-			ghostize(2)
+		if(gibbed == 0)
+			spawn(5)
+				ghostize(2)
 
 	var/tod = time2text(world.realtime,"hh:mm:ss") //weasellos time of death patch
 	if(mind)

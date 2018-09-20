@@ -208,6 +208,7 @@ mob
 			layer = 1.9
 		if(heightZ < -415 && !istype(src,/mob/dead))
 			src << "<b><font color='red'>You were never seen again.."
+			death(2)
 			del src
 		else
 			if(heightZ < 0 && istype(src,/mob/dead))
