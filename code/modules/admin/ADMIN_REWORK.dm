@@ -107,111 +107,104 @@ client
 			for(var/mob/i in Mobs)
 				if(i.health < 1 && !i.client)
 					del i
+	proc/kick_user()
+		set category = "Admin"
+		set name = "(ADMIN) Kick User"
+		if (!src.holder)
+			src << "Only administrators may use this command."
+			return
+		var/client/C = input(src,"Which user?","Kick user") as null|anything in clients
+		if(C)
+			if(!C.holder)
+				message_admins("[key] has kicked [C.key]")
+				C << "\red <b>You have been kicked from the game server by [key]."
+				del C
+	proc/ban_user()
+		set category = "Admin"
+		set name = "(ADMIN) Ban User"
+		if (!src.holder)
+			src << "Only administrators may use this command."
+			return
+		var/client/C = input(src,"Which user?","Ban user") as null|anything in clients
+		var/reason = input(src,"Reason?","Ban user") as null|text
+		if(C && reason)
+			if(!C.holder)
+				ban_list += C.key
+				ban_list += computer_id
+				message_admins("[key] has banned [C.key]")
+				C << "\red <b>You have been banned by [key] for this round. Reason : [reason], You might appeal at [discordLink]."
+				del C
+	proc/boom()
+		set category = "Admin"
+		set name = "(ADMIN) Boom Boom Shake The Room"
+		if (!src.holder)
+			src << "Only administrators may use this command."
+			return
+		message_admins("[key] has used Boom Boom Shake The Room")
+		if(mob)
+			explosion(mob.loc, 3, 5, 7, 18)
+	proc/yomusic(var/g as sound)
+		set category = "Admin"
+		set name = "(ADMIN) Play Music"
 
-/client/proc/kick_user()
-	set category = "Admin"
-	set name = "(ADMIN) Kick User"
-	if (!src.holder)
-		src << "Only administrators may use this command."
-		return
-	var/client/C = input(src,"Which user?","Kick user") as null|anything in clients
-	if(C)
-		if(!C.holder)
-			message_admins("[key] has kicked [C.key]")
-			C << "\red <b>You have been kicked from the game server by [key]."
-			del C
+		if (!src.holder)
+			src << "Only administrators may use this command."
+			return
+		message_admins("[key] is playing [g]")
+		world << sound(g,channel=MUSIC_CHANNEL)
+	proc/yomusicNO()
+		set category = "Admin"
+		set name = "(ADMIN) Stop All Playing Sounds"
 
-/client/proc/ban_user()
-	set category = "Admin"
-	set name = "(ADMIN) Ban User"
-	if (!src.holder)
-		src << "Only administrators may use this command."
-		return
-	var/client/C = input(src,"Which user?","Ban user") as null|anything in clients
-	var/reason = input(src,"Reason?","Ban user") as null|text
-	if(C && reason)
-		if(!C.holder)
-			ban_list += C.key
-			ban_list += computer_id
-			message_admins("[key] has banned [C.key]")
-			C << "\red <b>You have been banned by [key] for this round. Reason : [reason], You might appeal at [discordLink]."
-			del C
+		if (!src.holder)
+			src << "Only administrators may use this command."
+			return
+		message_admins("[key] stopped all sounds")
+		current_radio_song = null
+		world << sound(null)
+	proc/SandboxToggle()
+		set category = "Admin"
+		set name = "(ADMIN) Toggle Sandbox"
+		if (!src.holder)
+			src << "Only administrators may use this command."
+			return
+		message_admins("[key] toggled sandbox")
+		sandbox = sandbox * -1
+		if(sandbox ==1)
+			world << "<b>\green Sandbox is now enabled."
+		else
+			world << "<b>\red Sandbox is now disabled."
+	proc/jumptokey()
+		set category = "Admin"
+		set name = "(ADMIN) Jump to Key"
 
-/client/proc/boom()
-	set category = "Admin"
-	set name = "(ADMIN) Boom Boom Shake The Room"
-	if (!src.holder)
-		src << "Only administrators may use this command."
-		return
-	message_admins("[key] has used Boom Boom Shake The Room")
-	if(mob)
-		explosion(mob.loc, 5, 7, 11, 18)
-/client/proc/yomusic(var/g as sound)
-	set category = "Admin"
-	set name = "(ADMIN) Play Music"
+		if(!src.holder)
+			src << "Only administrators may use this command."
+			return
 
-	if (!src.holder)
-		src << "Only administrators may use this command."
-		return
-	message_admins("[key] is playing [g]")
-	world << sound(g,channel=MUSIC_CHANNEL)
-
-/client/proc/yomusicNO()
-	set category = "Admin"
-	set name = "(ADMIN) Stop All Playing Sounds"
-
-	if (!src.holder)
-		src << "Only administrators may use this command."
-		return
-	message_admins("[key] stopped all sounds")
-	current_radio_song = null
-	world << sound(null)
-
-/client/proc/SandboxToggle()
-	set category = "Admin"
-	set name = "(ADMIN) Toggle Sandbox"
-	if (!src.holder)
-		src << "Only administrators may use this command."
-		return
-	message_admins("[key] toggled sandbox")
-	sandbox = sandbox * -1
-	if(sandbox ==1)
-		world << "<b>\green Sandbox is now enabled."
-	else
-		world << "<b>\red Sandbox is now disabled."
-
-/client/proc/jumptokey()
-	set category = "Admin"
-	set name = "(ADMIN) Jump to Key"
-
-	if(!src.holder)
-		src << "Only administrators may use this command."
-		return
-
-	var/list/keys = list()
-	for(var/mob/M in world)
-		keys += M.client
-	var/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in keys
-	if(!selection)
-		return
-	var/mob/M = selection:mob
-	log_admin("[key_name(usr)] jumped to [key_name(M)]")
-	message_admins("[key_name_admin(usr)] jumped to [key_name_admin(M)]", 1)
-	usr.loc = M.loc
-
-/client/proc/admin_observe()
-	set category = "Admin"
-	set name = "(ADMIN) Admin-Ghost"
-	if(!src.holder)
-		src << "Only administrators may use this command."
-		return
-	message_admins("[key] aghosted")
-	if(!istype(src.mob, /mob/dead/observer))
-		src.mob.ghostize()
-		src << "\blue You are now observing"
-	else
-		src.mob:reenter_corpse()
-		src << "\blue You are now playing"
+		var/list/keys = list()
+		for(var/mob/M in world)
+			keys += M.client
+		var/selection = input("Please, select a player!", "Admin Jumping", null, null) as null|anything in keys
+		if(!selection)
+			return
+		var/mob/M = selection:mob
+		log_admin("[key_name(usr)] jumped to [key_name(M)]")
+		message_admins("[key_name_admin(usr)] jumped to [key_name_admin(M)]", 1)
+		usr.loc = M.loc
+	proc/admin_observe()
+		set category = "Admin"
+		set name = "(ADMIN) Admin-Ghost"
+		if(!src.holder)
+			src << "Only administrators may use this command."
+			return
+		message_admins("[key] aghosted")
+		if(!istype(src.mob, /mob/dead/observer))
+			src.mob.ghostize()
+			src << "\blue You are now observing"
+		else
+			src.mob:reenter_corpse()
+			src << "\blue You are now playing"
 
 /mob/verb/adminhelp(msg as text)
 	set category = "Commands"

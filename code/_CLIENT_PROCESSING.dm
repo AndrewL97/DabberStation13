@@ -1,7 +1,7 @@
 var/current_radio_song = null
 
 client/proc/ProcessClient()
-	shake *= -0.9
+	shake *= -0.95
 	if(shake < 0.5 && shake > -0.5)
 		shake = 0
 	pixel_y4 = shake

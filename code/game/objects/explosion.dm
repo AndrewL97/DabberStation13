@@ -27,6 +27,9 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			Check_Explosion_tick() //i think we should do this more often
 			var/distance = round(abs(get_dist_alt(epicenter, T)))
 			var/turf/BE = locate(T.x,T.y,T.z)
+			if(ismob(T))
+				var/mob/G = T
+				shake_camera(G, 1, 15/(distance+1))
 			if(BE && istype(BE,/turf))
 				var/area/A = BE.loc
 				if(A && istype(A,/area))
