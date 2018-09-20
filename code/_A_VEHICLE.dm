@@ -269,16 +269,17 @@ vy = v * sin(angle)
 		for(var/obj/machinery/vehicle/fef in oview(1))
 			faf += fef
 		var/obj/machinery/vehicle/a = input("Which pod to board?","Board") in faf
-
-		if(a && istype(a,/obj/machinery/vehicle))
-			if (locate(/mob, a))
-				src << "<b>\red There is no room!"
-			if (M.client)
-				M.client.perspective = EYE_PERSPECTIVE
-				M.client.eye = veh
-				M.client.pixel_y2 = 0
-				M.client.pixel_x = 0
-			M.veh = a
-			a.CanMove = 1
-			a.velocity = Vector2_Zero // Initialize velocity to zero.
-			M.loc = a
+		var/turf/T = locate(x,y,z)
+		if(T)
+			if(a && istype(a,/obj/machinery/vehicle) && heightZ == T.TurfHeight)
+				if (locate(/mob, a))
+					src << "<b>\red There is no room!"
+				if (M.client)
+					M.client.perspective = EYE_PERSPECTIVE
+					M.client.eye = veh
+					M.client.pixel_y2 = 0
+					M.client.pixel_x = 0
+				M.veh = a
+				a.CanMove = 1
+				a.velocity = Vector2_Zero // Initialize velocity to zero.
+				M.loc = a
