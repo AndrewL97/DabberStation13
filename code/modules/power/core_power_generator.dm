@@ -45,7 +45,9 @@
 
 	if(stat & BROKEN)
 		return
-
+	var/obj/cable/C = locate(/obj/cable) in loc
+	if(C)
+		powernet = powernets[C.netnum]
 	var/sgen = 8000
 	add_avail(sgen)
 
@@ -62,7 +64,7 @@
 	icon_state = "core_cooler9"
 	procc = 0
 	var/coolant_left = 999999
-	var/max_coolant = 8000
+	var/max_coolant = 20000
 
 
 /obj/machinery/power/core/coolant/process()
