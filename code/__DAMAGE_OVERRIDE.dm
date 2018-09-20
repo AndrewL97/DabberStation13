@@ -22,7 +22,7 @@
 			if(shield > 0)
 				//world << "shield taking [new_health-health] damage"
 				if(new_health < old_new_health)
-					shield = max(0,shield+(new_health-old_new_health))
+					shield = max(0,shield+((new_health-old_new_health)*2))
 					reset_damage()
 				else
 					if(new_health > health)
