@@ -12,7 +12,7 @@ atom
 /obj/screen_alt/plane_master_turf2
 	plane = WALL_PLANE
 	screen_loc = "1,1"
-	filters = filter(type="drop_shadow", x=0, y=0,size=5, offset=2, color=rgb(0,0,0))
+	filters = filter(type="drop_shadow", x=0, y=0,size=5, offset=2, color=rgb(0,0,0,100))
 	appearance_flags = PIXEL_SCALE | KEEP_TOGETHER | PLANE_MASTER
 
 /obj/screen
