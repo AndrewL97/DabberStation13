@@ -7,14 +7,12 @@
 	density = 1
 	directwired = 1
 	var/temp = 0
-	var/procc = 1
 	var/melt_down_alert = 0
 	layer = 3
 	var/list/particles = list()
-
 	New()
 		..()
-		if(procc)
+		if(type == /obj/machinery/power/core)
 			var/rnd = rand(0,90)
 			for(var/i in 1 to 4)
 				var/obj/Particle/Core_Particle/P = new()
@@ -22,13 +20,15 @@
 				P.owner = src
 				P.timer = rnd+i*45
 				particles += P
+		special_processing += src
 	Del()
+		special_processing -= src
 		for(var/obj/Particle/G in particles)
 			del G
 		..()
 
-/obj/machinery/power/core/process()
-	temp = temp + 0.5
+/obj/machinery/power/core/special_process()
+	temp = temp + world.tick_lag/2
 	if(temp < 0)
 		temp = 0
 	if(temp > 3500 && melt_down_alert == 0)
@@ -45,10 +45,8 @@
 
 	if(stat & BROKEN)
 		return
-	var/obj/cable/C = locate(/obj/cable) in loc
-	if(C)
-		powernet = powernets[C.netnum]
-	var/sgen = 8000
+
+	var/sgen = 4000+(temp*2)
 	add_avail(sgen)
 
 /obj/machinery/power/core/examine()
@@ -59,24 +57,29 @@
 
 /obj/machinery/power/core/coolant
 	name = "Coolant tank"
-	desc = "Looks like it's used to cool the core."
+	desc = "Looks like it's used to cool the core. Click on it to toggle it!"
 	icon = 'power.dmi'
 	icon_state = "core_cooler9"
-	procc = 0
 	var/coolant_left = 999999
 	var/max_coolant = 20000
+	var/on = 1
 
+/obj/machinery/power/core/coolant/attack_hand(mob/user as mob)
+	on = !on
+	user << "You flip the coolant's switch to <b>[on ? "<font color='green'>ON</font>" : "<font color='red'>OFF (Recharge)</font>"]</b>!"
 
-/obj/machinery/power/core/coolant/process()
+/obj/machinery/power/core/coolant/special_process()
 	if(!(stat & (NOPOWER|BROKEN)) )
 		use_power(250)
 	if(coolant_left > max_coolant)
 		coolant_left = max_coolant //cap
 	icon_state = "core_cooler[round((coolant_left/max_coolant)*9)]"
-	if(coolant_left > 0)
+	if(coolant_left > 0 && on)
 		for(var/obj/machinery/power/core/e in orange(1,src))
-			e.temp = e.temp - 2
-			coolant_left = coolant_left - 2
+			e.temp -= world.tick_lag
+			coolant_left -= world.tick_lag
+	if(!on)
+		coolant_left += world.tick_lag/2
 	if(coolant_left < 0)
 		coolant_left = 0
 

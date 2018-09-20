@@ -110,12 +110,6 @@
 		broken()
 		src.density = 0
 
-
-
-
-
-
-
 /obj/machinery/power/solar_control/New()
 	..()
 	spawn(15)
