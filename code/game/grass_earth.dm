@@ -5,7 +5,6 @@
 	song = 'music/grass.ogg'
 	CAN_GRIFE = 0
 	name = "Forest Area"
-	parallax_type = 2 //fog type
 
 /obj/structure/forest
 	anchored = 1

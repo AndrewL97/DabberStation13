@@ -58,7 +58,7 @@ macro "macro"
 		command = "Pod-Enter/Exit"
 	elem 
 		name = "M"
-		command = "Use_Vehicle_Item"
+		command = "Mute-Music"
 	elem 
 		name = "O"
 		command = "OOC"

@@ -61,7 +61,7 @@ client/proc/ProcessClient()
 		radio_sound.frequency = music_pitch
 		if(amb_sound_area.file)
 			amb_sound_area.frequency = music_pitch
-			amb_sound_area.volume = vol_area
+			amb_sound_area.volume = vol_area*music_vol_mult
 			src << amb_sound_area
 		src << amb_sound
 		src << amb_sound_ext
@@ -145,6 +145,7 @@ client
 	var/pixel_y4 = 0 //misc shit i think
 	var/pixel_y5 = 0 //height system
 	var/shake = 0
+	var/music_vol_mult = 1
 
 	var/list/health = list() //Health hud stuff
 	var/sound/amb_sound = sound('music/interior.ogg')
@@ -158,6 +159,13 @@ client
 	var/old_radio_sound = null
 	var/music_pitch = 1
 	var/music_pitch_new = 1
+	verb
+		Mute_Music()
+			music_vol_mult = !music_vol_mult
+			if(music_vol_mult)
+				src << "<b>Music enabled."
+			else
+				src << "<b>Music disabled."
 /obj/screen
 	appearance_flags = PIXEL_SCALE | TILE_BOUND | NO_CLIENT_COLOR
 /obj/screen_num
