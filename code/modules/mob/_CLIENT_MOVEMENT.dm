@@ -85,7 +85,7 @@ mob
 				spri = 0
 	DblClick(atom/object,location,control,params)
 		..()
-		if(object)
+		if(object && spri)
 			object.examineproc(mob)
 	MouseDown(atom/object,location,control,params)
 		..()
