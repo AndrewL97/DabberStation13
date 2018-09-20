@@ -110,12 +110,9 @@ mob
 
 	proc/Jump()
 		if(canmove == 1 && lying == 0 && !src.restrained() && !ANIMATION_RUNNING ) //If on floor/space and not restrained...
-			if( !istype(src.loc, /turf/space) && !istype(src.loc, /turf/unsimulated/space2) )
-				if(onFloor == 1)
-					ySpeed = 1320/256
-					view(15,src) << 'jump.ogg'
-				else
-					flyPack()
+			if(onFloor == 1)
+				ySpeed = 1320/256
+				view(15,src) << 'jump.ogg'
 			else
 				flyPack()
 	proc/flyPack()
