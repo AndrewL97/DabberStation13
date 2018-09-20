@@ -7,7 +7,7 @@
 
 /obj/item/weapon/pickaxe/afterattack(atom/A, mob/user as mob)
 	if (istype(A, /turf/unsimulated/mineral))
-		new /turf/unsimulated/asteroid_sand(locate(A.x,A.y,A.z))
+		new /turf/simulated/asteroid_sand(locate(A.x,A.y,A.z))
 
 /turf/unsimulated/mineral
 	name = "rock"
@@ -20,6 +20,11 @@
 		icon_state = "rockiron"
 
 /turf/unsimulated/asteroid_sand
+	icon = 'floors.dmi'
+	icon_state = "sand1"
+	name = "sand"
+
+/turf/simulated/asteroid_sand
 	icon = 'floors.dmi'
 	icon_state = "sand1"
 	name = "sand"

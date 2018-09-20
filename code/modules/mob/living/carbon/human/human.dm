@@ -928,6 +928,7 @@
 		src.overlays += catearOV
 
 		var/image/tailcat = image("icon" = 'icons/mob/mob_acc.dmi', "icon_state" = "cat_tail") //, "layer" = MOB_LAYER+0.9)
+		tailcat.color = rgb(src.r_hair, src.g_hair, src.b_hair)
 		src.overlays += tailcat
 	var/shielded = 0
 	for (var/obj/item/device/shield/S in src)

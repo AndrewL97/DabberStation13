@@ -27,6 +27,7 @@
 #define FILE_DIR "sound/items"
 #define FILE_DIR "sound/machines"
 #define FILE_DIR "sound/misc"
+#define FILE_DIR "sound/oocvoice"
 #define FILE_DIR "sound/playervoices"
 #define FILE_DIR "sound/voice"
 #define FILE_DIR "sound/weapons"
