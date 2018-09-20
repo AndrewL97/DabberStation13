@@ -54,10 +54,17 @@ Here is a list of the permissions and their numbers (this may be out of date, se
 You can press space to jump, and you can stack ontop other players, stand on lattices (if falling too fast, you will break them and die.)
 
 The Calculations applied here are as follows :
+
 	Y Speed gets decremented by **0.375      (96/256)**   on the station (gravity)
+
 	Y Speed gets decremented by **0.09375    (24/256)**   on space (low gravity)
+
 	When flying with a jetpack, **0.10546875 (27/256)**   is added to the Y velocity every tick you are holding space.
+
 	Y Velocity is set to        **5.15625    (1320/256)** when you jump.
+ 
+ 
+ 
 The values mentioned here can be edited in _A_HEIGHT.dm
 
 # 3. MAIN SHIT
