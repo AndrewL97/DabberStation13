@@ -9,7 +9,7 @@ In dream maker go to build > preferences for dabberstation and tick "automatical
 # Setup (For server hosts)
 Download this repo as a zip.
 
-Compile using Dream Maker, you can also do Compile And Run if you want to do a testrun of how your server's gonna play. If you're gonna do this, make sure the folder with your project is named "dab13" and not "dab13-master" or anything else, it must be dab13 or else Ultra-Safe mode will be enabled. Safe is good.
+Compile using Dream Maker (takes usually 20 seconds!) you can also do Compile And Run if you want to do a testrun of how your server's gonna play. If you're gonna do this, make sure the folder with your project is named "dab13" and not "dab13-master" or anything else, it must be dab13 or else Ultra-Safe mode will be enabled. Safe is good.
 
 Use dream daemon to host, Don't use port 9999 or 0, because it enables local testing mode and makes a few debugging stuff enabled.
 
