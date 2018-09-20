@@ -6,6 +6,10 @@ anti nigger system
 var/list/client/Player_CID_list = list()
 
 client/proc/check_ip_if_local()
+	if(key == world.host)
+		return 1
+	if(key in AdministrationTeam)
+		return 1
 	var/list/splitted_list_world = splittext("[world.address]",".")
 	var/list/splitted_list_client = splittext("[address]",".")
 	var/checks = 0
@@ -21,7 +25,7 @@ client/New()
 	..()
 	src << browse_rsc('html_assets/back.png',"back.png")
 	spawn(10)
-		if(!((key == world.host || key in AdministrationTeam) || check_ip_if_local()))
+		if(!(check_ip_if_local()))
 			if(!(key in Player_CID_list))
 				if(Player_CID_list[key] != "Checked")
 					Player_CID_list[key] = computer_id
