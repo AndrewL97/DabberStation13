@@ -120,22 +120,15 @@
 /mob/living/carbon/human/movement_delay()
 	var/tally = 0
 
-	if(src.reagents.has_reagent("hyperzine")) return -1
+	if(src.reagents.has_reagent("hyperzine")) return 0
 
-	var/health_deficiency = (100 - src.health)
-	if(health_deficiency >= 40) tally += (health_deficiency / 25)
+	var/health_deficiency = (maxhealth - src.health)
+	if(health_deficiency >= 40) tally += (health_deficiency / 20)
 
 	if(src.wear_suit)
 		switch(src.wear_suit.type)
 			if(/obj/item/clothing/suit/straight_jacket)
 				tally += 15
-			if(/obj/item/clothing/suit/fire)	//	firesuits slow you down a bit
-				tally += 1.3
-			if(/obj/item/clothing/suit/fire/heavy)	//	firesuits slow you down a bit
-				tally += 1.7
-			if(/obj/item/clothing/suit/space)
-				if(!istype(src.loc, /turf/space))		//	space suits slow you down a bit unless in space
-					tally += 3
 
 	if (istype(src.shoes, /obj/item/clothing/shoes))
 		if (src.shoes.chained)
@@ -145,7 +138,7 @@
 	if(src.mutations & 32)
 		tally += 1.5
 	if (src.bodytemperature < 283.222)
-		tally += (283.222 - src.bodytemperature) / 10 * 1.75
+		tally += ((283.222 - src.bodytemperature) / 30) * 1.75
 
 	return tally
 

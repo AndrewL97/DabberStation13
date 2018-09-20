@@ -60,7 +60,8 @@ client
 	proc/jump_to_turf(turf/D in world)
 		set category = "Admin"
 		set name = "(ADMIN) Jump To"
-		mob.loc = D.loc
+		if(D)
+			mob.loc = D
 	proc/delete(datum/D in world)
 		set category = "Admin"
 		set name = "(ADMIN) Delete"
