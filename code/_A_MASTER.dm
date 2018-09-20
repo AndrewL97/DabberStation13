@@ -17,6 +17,7 @@ var/list/clients = list()
 var/special_processing = list()
 
 #define CPU_WARN 75
+#define CPU_STABLE_LEVEL 20
 #define CPU_CHECK_MAX 40 //if cpu goes higher than this, some things will do sleep(world.tick_lag) and throttle, this is done in CHECK_TICK()
 
 client
@@ -42,6 +43,8 @@ var/CPU_warning = 0
 var/actions_per_tick_atmos = 0
 var/max_actions_atmos = 70 //Max actions per tick (FOR ATMOS), also fast. i definitely think this could be higher if optimized.
 
+var/list/typepaths = list()
+
 var/master_Processed = 0
 var/atmos_processed = 0
 
@@ -59,7 +62,7 @@ proc/CHECK_TICK_ATMOS() //epic optimizer (ATMOS EDITION)
 proc/CHECK_TICK() //epic optimizer
 	master_Processed += 1
 	actions_per_tick += 1
-	if(actions_per_tick > max_actions - ((max(0,min(world.cpu,100))/100)*(max_actions/2)*(world.cpu > CPU_CHECK_MAX)) )
+	if(actions_per_tick > max_actions - ((max(0,min(world.cpu,100))/100)*(max_actions/2)*(CPU_warning)) )
 		sleep(world.tick_lag)
 		actions_per_tick = 0
 
@@ -116,6 +119,7 @@ datum/controller/game_controller
 		world << "\red \b Creating sandbox spawn list."
 		for(var/i in typesof(/obj)+typesof(/mob/living/carbon)-/mob/living/carbon-/mob/living/carbon/human-/mob/living/carbon/human/dummy-/mob/living/carbon/alien-/mob/living/carbon/alien/humanoid-/obj/item)
 			listofitems = "[listofitems]<br><a href=?[i]>[i]</a>"
+			typepaths += i
 		world << "\green \b Created sandbox spawn list in [world.timeofday-start_time] seconds!"
 
 		world << "\green \b Initializations complete in [world.timeofday-RLstart_time] seconds!"
@@ -192,8 +196,8 @@ datum/controller/game_controller
 		if(world.cpu > CPU_WARN && CPU_warning == 0)
 			if(!(world.port in PORTS_NOT_ALLOWED))
 				spawn()
-					call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server is having high stress, CPU too high (%[world.cpu] > 75), will attempt to throttle actions.**\" } ", "Content-Type: application/json")
-			world << "<font color='red'><b><font size=5>Server CPU is (%[world.cpu] > 75), server might lag."
+					call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server is having high stress, CPU too high (%[world.cpu] > [CPU_WARN]), will attempt to throttle actions.**\" } ", "Content-Type: application/json")
+			world << "<font color='red'><b><font size=5>Server CPU is (%[world.cpu] > [CPU_WARN]), Will attempt to throttle MC to lower CPU."
 			CPU_warning = 1
 		master_Processed = 0
 

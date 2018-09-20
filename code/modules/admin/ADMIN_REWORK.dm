@@ -20,7 +20,8 @@ var/list/admin_verbs = list(
 /client/proc/delete_unused_mobs,
 /client/proc/jump_to_turf,
 /client/proc/delete_non_player_mobs,
-/client/proc/delete_decals
+/client/proc/delete_all,
+/client/proc/Toggle_MC_Throttling
 )
 var/ban_list = list()
 
@@ -60,6 +61,11 @@ var/ban_list = list()
 			M << rendered
 
 client
+	proc/Toggle_MC_Throttling()
+		set category = "Admin"
+		set name = "(ADMIN) Toggle MC throttling"
+		CPU_warning = !CPU_warning
+		src << "<b>MC Throttling is now [CPU_warning ? "enabled" : "false"]"
 	proc/jump_to_turf(turf/D in world)
 		set category = "Admin"
 		set name = "(ADMIN) Jump To"
@@ -76,13 +82,14 @@ client
 		if(alert("Delete [D]?","Delete","Yes","No") == "Yes")
 			message_admins("[key] has deleted [D]")
 			del D
-	proc/delete_decals()
+	proc/delete_all(object in typepaths)
 		set category = "Admin"
-		set name = "(ADMIN) Delete decals"
-		if(alert("Delete all decals?","Delete","Yes","No") == "Yes")
-			message_admins("[key] deleted all decals")
-			for(var/obj/decal/i in world)
-				del i
+		set name = "(ADMIN) Del-all"
+		if(alert("Delete all objects of type [object]? Might lag the server!","Delete","Yes","No") == "Yes")
+			message_admins("[key] has deleted all instances of [object] in the game.")
+			var o
+			while((o = locate(object)))
+				del o
 	proc/delete_non_player_mobs()
 		set category = "Admin"
 		set name = "(ADMIN) Delete non player mobs"
@@ -91,7 +98,6 @@ client
 			for(var/mob/i in Mobs)
 				if(!i.client)
 					del i
-
 	proc/delete_unused_mobs()
 		set category = "Admin"
 		set name = "(ADMIN) Delete Dead Mobs"
