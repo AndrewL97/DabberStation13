@@ -2,7 +2,8 @@ var/AdministrationTeam = list(
 "Unixian" = "Dab13 Administrator",
 "LuigiBoiBY" = "Dab13 Administrator",
 "Zennerx" = "noob admin",
-"AlcaroIsAFrick" = "Host"
+"AlcaroIsAFrick" = "Host",
+"MACIEKBAKI" = "Dab13 Administrator"
 )
 var/sandbox = 1
 var/list/admin_verbs = list(
@@ -17,7 +18,9 @@ var/list/admin_verbs = list(
 /client/proc/admin_observe,
 /client/proc/delete,
 /client/proc/delete_unused_mobs,
-/client/proc/jump_to_turf
+/client/proc/jump_to_turf,
+/client/proc/delete_non_player_mobs,
+/client/proc/delete_decals
 )
 var/ban_list = list()
 
@@ -73,6 +76,22 @@ client
 		if(alert("Delete [D]?","Delete","Yes","No") == "Yes")
 			message_admins("[key] has deleted [D]")
 			del D
+	proc/delete_decals()
+		set category = "Admin"
+		set name = "(ADMIN) Delete decals"
+		if(alert("Delete all decals?","Delete","Yes","No") == "Yes")
+			message_admins("[key] deleted all decals")
+			for(var/obj/decal/i in world)
+				del i
+	proc/delete_non_player_mobs()
+		set category = "Admin"
+		set name = "(ADMIN) Delete non player mobs"
+		if(alert("Delete all mobs with no client? It will fix lag in some cases.","Delete","Yes","No") == "Yes")
+			message_admins("[key] deleted all non player mobs.")
+			for(var/mob/i in Mobs)
+				if(!i.client)
+					del i
+
 	proc/delete_unused_mobs()
 		set category = "Admin"
 		set name = "(ADMIN) Delete Dead Mobs"
