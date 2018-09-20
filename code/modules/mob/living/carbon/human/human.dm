@@ -135,6 +135,10 @@
 			tally += 15
 		else
 			tally += -1.0
+	var/obj/lattice/LAT = locate(/obj/lattice) in T
+	if(LAT)
+		if(heightZ == 0)
+			tally += 3
 	if(src.mutations & 32)
 		tally += 1.5
 	if (src.bodytemperature < 283.222)

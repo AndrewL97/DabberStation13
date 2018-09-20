@@ -189,6 +189,7 @@ mob
 					playsound(LAT, 'bang.ogg', 100, 0, 5, 0)
 					del LAT
 				else
+					onFloor = 1
 					ySpeed = 0
 					heightZ = 0
 		if(heightZ < T.TurfHeight) //Don't make players go under the floor. todo fix this bullshit because turfs aren't being picked up correctly
