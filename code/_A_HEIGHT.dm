@@ -182,7 +182,15 @@ mob
 							i.specialloss += 15
 							view(10,src) << 'hitJump.ogg'
 							ySpeed = 3
-
+		var/obj/lattice/LAT = locate(/obj/lattice) in T
+		if(LAT)
+			if(heightZ < 0 && heightZ > -8)
+				if(ySpeed < -3)
+					playsound(LAT, 'bang.ogg', 100, 0, 5, 0)
+					del LAT
+				else
+					ySpeed = 0
+					heightZ = 0
 		if(heightZ < T.TurfHeight) //Don't make players go under the floor. todo fix this bullshit because turfs aren't being picked up correctly
 			heightZ = T.TurfHeight
 			onFloor = 1
