@@ -54,12 +54,7 @@
 		del(src)
 
 /obj/mine/proc/triggerkick(obj)
-	var/datum/effects/system/spark_spread/s = new /datum/effects/system/spark_spread
-	s.set_up(3, 1, src)
-	s.start()
-	del(obj:client)
-	spawn(0)
-		del(src)
+	return
 
 /obj/mine/proc/explode(obj)
 	explosion(loc, 0, 1, 2, 3)
