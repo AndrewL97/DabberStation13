@@ -138,7 +138,7 @@
 	if(src.mutations & 32)
 		tally += 1.5
 	if (src.bodytemperature < 283.222)
-		tally += ((283.222 - src.bodytemperature) / 30) * 1.75
+		tally += (283.222 - src.bodytemperature)/75
 
 	return tally
 
