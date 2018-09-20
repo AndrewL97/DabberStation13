@@ -135,7 +135,7 @@
 			tally += 15
 		else
 			tally += -1.0
-	var/obj/lattice/LAT = locate(/obj/lattice) in T
+	var/obj/lattice/LAT = locate(/obj/lattice) in loc
 	if(LAT)
 		if(heightZ == 0)
 			tally += 3
