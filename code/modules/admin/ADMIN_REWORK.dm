@@ -65,6 +65,11 @@ client
 	proc/delete(datum/D in world)
 		set category = "Admin"
 		set name = "(ADMIN) Delete"
+		if(istype(D,/mob))
+			var/mob/G = D
+			if(G.client)
+				src << "You can't just delete a player!"
+				return
 		if(alert("Delete [D]?","Delete","Yes","No") == "Yes")
 			message_admins("[key] has deleted [D]")
 			del D
