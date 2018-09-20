@@ -5,10 +5,15 @@
 
 # 1. HOW TO MAKE A MAP USING THE ACCESS LEVEL SYSTEM
 1- Make a map as normal
+
 2- Select a door that you want to not be accessible to everybody
+
 3- Right click on it and edit its attributes
+
 4- Make the "req_access_txt" attribute be a semicolon-separated list of the permissions required to open the doors
+
 5- Repeat for all doors.
+
 
 For example, a brig door would have it be "2" while a door that requires you have toxins and teleporter access (for whatever reason) would have it be "9;20"
 
