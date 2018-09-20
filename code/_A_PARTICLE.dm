@@ -1,3 +1,7 @@
+/*
+credit to kaiochao for his vector2 library and spaceship movement demo which is what this uses
+*/
+
 var/list/PARTICLE_LIST = list() //List of particles to process
 
 datum/controller/game_controller/proc/particle_process()

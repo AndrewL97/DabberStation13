@@ -64,6 +64,11 @@ var
 	cargoMax = 0
 	hydroponicsMax = 0
 
+/mob/verb/deltest()
+      var/itickusage = world.tick_usage
+      del(new/obj)
+      src << world.tick_usage - itickusage
+
 obj
 	item
 		plane = ITEM_PLANE
