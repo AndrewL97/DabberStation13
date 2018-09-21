@@ -18,6 +18,10 @@
 			/*
 			uhhhhhhhhhhhhhhh this is the new shit for health like shield and shit i forgot lol
 			*/
+			var/turf/T = loc
+			if(istype(T,/turf))
+				if(T.water_height >= 27 && !internal)
+					air -= world.tick_lag
 			if(frm_counter % 15 == 1)
 				breathe()
 

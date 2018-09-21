@@ -291,10 +291,6 @@
 				air += world.tick_lag*12
 				oxygen_used = breath.oxygen/6
 				oxygen_alert = 0
-			var/turf/T = loc
-			if(istype(T,/turf))
-				if(T.water_height >= 27 && !internal)
-					air -= world.tick_lag*7
 
 			breath.oxygen -= oxygen_used
 			breath.carbon_dioxide += oxygen_used
