@@ -176,7 +176,7 @@
 					location_as_object.handle_internal_lifeform(src, 0)
 			else
 				//First, check for air from internal atmosphere (using an air tank and mask generally)
-				breath = get_breath_from_internal(BREATH_VOLUME/50)
+				breath = get_breath_from_internal(BREATH_VOLUME)
 
 				//No breath from internal atmosphere so get breath from location
 				if(!breath)
