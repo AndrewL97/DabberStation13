@@ -129,7 +129,20 @@
 		switch(src.wear_suit.type)
 			if(/obj/item/clothing/suit/straight_jacket)
 				tally += 15
-
+	else
+		var/turf/T = locate(x,y,z)
+		if(istype(T,/turf))
+			switch(T.water_height)
+				if(1 to 4)
+					move_delay += 1
+				if(5 to 8)
+					move_delay += 2
+				if(9 to 16)
+					move_delay += 4
+				if(17 to 24)
+					move_delay += 5
+				if(25 to 32)
+					move_delay += 7
 	if (istype(src.shoes, /obj/item/clothing/shoes))
 		if (src.shoes.chained)
 			tally += 15

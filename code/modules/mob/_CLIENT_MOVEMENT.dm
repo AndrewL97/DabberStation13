@@ -262,9 +262,6 @@ mob
 				if("walk")
 					src.move_delay += 3
 
-
-
-
 			src.move_delay += src.mob.movement_delay()
 			if (src.mob.resting || src.mob.lying)
 				return 0
