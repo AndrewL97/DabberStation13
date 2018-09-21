@@ -6,14 +6,6 @@ turf
 	var/fully_cover = 0
 
 	proc/Render_Water_Icon()
-		if(!gW1)
-			gW1 = new(locate(x,y,z))
-			gW1.Get_Layer_Y(0.1)
-			gW1.plane = MOB_PLANE_ALT
-		if(!gW2)
-			gW2 = new(locate(x,y,z))
-			gW2.plane = LIGHT_PLANE
-			gW2.layer = TURF_LAYER+0.5
 		if(round(water_height) == round(old_water_height))
 			return //We shouldn't update.
 		var/rounded_height = round(water_height)
@@ -36,12 +28,23 @@ turf
 			gW1.plane = MOB_PLANE_ALT
 
 		old_water_height = water_height
-
+	New()
+		..()
+		if(!gW1)
+			gW1 = new(locate(x,y,z))
+			gW1.Get_Layer_Y(0.1)
+			gW1.plane = MOB_PLANE_ALT
+		if(!gW2)
+			gW2 = new(locate(x,y,z))
+			gW2.plane = LIGHT_PLANE
+			gW2.layer = TURF_LAYER+0.5
 	Del()
 		if(gW1)
 			del gW1
 		if(gW2)
 			del gW2
+		if(src in water_changed)
+			water_changed -= src
 		..()
 
 #define DIR2PIXEL list("1" = list(0,1),"2" = list(0,-1),"4" = list(1,0),"8" = list(-1,0))
@@ -178,14 +181,17 @@ obj
 		Get_Connections()
 	for(var/a in listofconnections)
 		if(istype(a,/turf/simulated))
-			var/turf/simulated/pe = a
 			CHECK_TICK_WATER()
+			var/turf/simulated/pe = a
+
 			if(pe.water_height < water_height)
 				var/tmp/calc = water_height/(1+listofconnections.len)
 				pe.water_height = pe.water_height + calc
 				water_height = water_height - calc
+
 			if(!(pe in water_changed))
 				water_changed += pe
+
 			pe.Render_Water_Icon()
 		else
 			Get_Connections()
