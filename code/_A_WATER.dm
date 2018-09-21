@@ -162,17 +162,21 @@ obj
 				return 0
 	return !density
 
+/turf/simulated
+	var/list/listofconnections = list()
+	proc/Get_Connections()
+		listofconnections = list()
+		for(var/DIRE in cardinal)
+			CHECK_TICK_WATER()
+			var/tmp/turf/simulated/to_add = get_step(src,DIRE)
+			if(istype(to_add,/turf/simulated))
+				if(to_add.Water_Can_Pass())
+					listofconnections += to_add
+
 /turf/simulated/proc/Process_Water()
-	var/tmp/list/listofturfs = list()
-
-	for(var/DIRE in cardinal)
-		CHECK_TICK_WATER()
-		var/tmp/turf/simulated/to_add = get_step(src,DIRE)
-		if(to_add)
-			if(to_add.Water_Can_Pass())
-				listofturfs += to_add
-
-	for(var/turf/simulated/pe in listofturfs)
+	if(listofconnections.len == 0)
+		Get_Connections()
+	for(var/turf/simulated/pe in listofconnections)
 		CHECK_TICK_WATER()
 		/*if(water_height < pe.water_height)
 			var/tmp/calc = pe.water_height/listofturfs.len
