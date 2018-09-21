@@ -61,7 +61,7 @@
 	icon = 'power.dmi'
 	icon_state = "core_cooler9"
 	var/coolant_left = 999999
-	var/max_coolant = 20000
+	var/max_coolant = 2000
 	var/on = 1
 
 /obj/machinery/power/core/coolant/attack_hand(mob/user as mob)
@@ -79,7 +79,11 @@
 			e.temp -= world.tick_lag/2
 			coolant_left -= world.tick_lag/2
 	if(!on)
-		coolant_left += world.tick_lag/3
+		var/obj/water/device/connector/D = locate(/obj/water/device/connector) in locate(x,y,z)
+		if(D)
+			if(D.water_pressure > 1)
+				coolant_left += 1 //now epic
+				D.water_pressure -= 1
 	if(coolant_left < 0)
 		coolant_left = 0
 

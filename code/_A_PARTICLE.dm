@@ -54,6 +54,11 @@ datum/controller/game_controller/proc/particle_process()
 default particles
 
 */
+	Water
+		time_to_disappear = 3
+		icon_state = "water"
+		offset_x = -1
+		offset_y = -1
 	Spark
 		time_to_disappear = 6
 		alpha_fade = -255

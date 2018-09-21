@@ -14,6 +14,7 @@ var/lighting_inited = 0
 var/frm_counter = 0
 var/listofitems = ""
 var/list/clients = list()
+var/list/water_objects = list() //_A_WATER.dm
 var/special_processing = list()
 
 #define CPU_WARN 75
@@ -43,10 +44,21 @@ var/CPU_warning = 0
 var/actions_per_tick_atmos = 0
 var/max_actions_atmos = 70 //Max actions per tick (FOR ATMOS), also fast. i definitely think this could be higher if optimized.
 
+var/actions_per_tick_water = 0
+var/max_actions_water = 10 //Max actions per tick (FOR WATER), not fast.
+
 var/list/typepaths = list()
 
 var/master_Processed = 0
 var/atmos_processed = 0
+var/water_processed = 0
+
+proc/CHECK_TICK_WATER() //epic optimizer used for our water system.
+	actions_per_tick_water += 1
+	water_processed += 1
+	if(actions_per_tick_water > max_actions_water)
+		sleep(world.tick_lag)
+		actions_per_tick_water = 0
 
 proc/CHECK_TICK_ATMOS() //epic optimizer (ATMOS EDITION)
 	actions_per_tick_atmos += 1
@@ -78,7 +90,7 @@ datum/controller/game_controller
 		fast_process()
 		slow_process()
 		start_processing()
-		lighting_process()
+		water_process()
 	setup() //this takes way too long
 		if(master_controller && (master_controller != src))
 			del(src)
@@ -88,6 +100,8 @@ datum/controller/game_controller
 		if(!air_master)
 			air_master = new /datum/controller/air_system()
 			air_master.setup()
+		if(!water_master)
+			water_master = new /datum/controller/water_system()
 
 
 		setup_objects()
@@ -126,9 +140,9 @@ datum/controller/game_controller
 
 	start_processing()
 		slow_process()
+		water_process()
 		fast_process()
 		process()
-
 	setup_objects()
 
 		var/start_time = world.timeofday
@@ -162,6 +176,10 @@ datum/controller/game_controller
 			i.ProcessClient()
 		spawn(world.tick_lag)
 			fast_process()
+	water_process()
+		water_master.process()
+		spawn(world.tick_lag)
+			water_process()
 	slow_process()
 		atmos_processed = 0
 		air_master.process()
