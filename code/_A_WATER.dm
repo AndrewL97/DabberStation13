@@ -71,6 +71,14 @@ obj
 		icon = 'water_pipes.dmi'
 		pipes
 			icon_state = "water_pipe"
+			New()
+				..()
+				hide()
+			hide()
+				var/turf/T = loc
+				if(T)
+					if(level == 1)
+						invisibility = level < T.level ? 101 : 0
 			Process_Water()
 				if(water_pressure > 0)
 					if(water_pressure_direction != 0)

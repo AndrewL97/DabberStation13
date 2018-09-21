@@ -327,7 +327,7 @@
 "go" = (/obj/cable{icon_state = "4-8"; d1 = 4; d2 = 8},/obj/cable{icon_state = "1-2"; d1 = 1; d2 = 2},/turf/simulated/floor/plating,/area/hallway/primary/fore)
 "gp" = (/obj/cable{icon_state = "2-4"; d1 = 2; d2 = 4},/turf/simulated/floor/plating,/area/hallway/primary/fore)
 "gq" = (/obj/machinery/light,/obj/cable{icon_state = "2-4"; d1 = 2; d2 = 4},/turf/simulated/floor,/area/hallway/primary/central)
-"gr" = (/obj/stool/chair{dir = 1},/obj/cable{icon_state = "2-8"; d1 = 2; d2 = 8},/obj/cable{icon_state = "4-8"; d1 = 4; d2 = 8},/obj/water/pipes{dir = 4},/turf/simulated/floor{fully_cover = 1; icon_state = "floorwhiter"; name = "floor"; TurfHeight = 0},/area/hallway/primary/fore)
+"gr" = (/obj/cable{icon_state = "2-8"; d1 = 2; d2 = 8},/obj/cable{icon_state = "4-8"; d1 = 4; d2 = 8},/obj/water/pipes{dir = 4},/turf/simulated/floor{fully_cover = 1; icon_state = "floorwhiter"; name = "floor"; TurfHeight = 0},/area/hallway/primary/fore)
 "gs" = (/obj/machinery/power/core,/obj/cable,/turf/simulated/floor/plating,/area/hallway/primary/fore)
 "gt" = (/obj/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/obj/cable{icon_state = "1-2"; d1 = 1; d2 = 2},/turf/simulated/floor,/area/hallway/primary/central)
 "gu" = (/obj/cable{d1 = 1; d2 = 8; icon_state = "1-8"},/turf/simulated/wall,/area/hallway/primary/central)

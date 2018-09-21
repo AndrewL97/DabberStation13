@@ -62,6 +62,7 @@ turf
 			TurfHeight = -416
 	simulated
 		floor
+			level = 2
 			New()
 				..()
 				if(TurfHeight >= 32)
