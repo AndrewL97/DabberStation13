@@ -2,6 +2,7 @@
 	var/specialloss = 0.0 //you are have the stupidddddddddddddd loooooooooooooooooooooooooooooooooooooo looooooooooooooooooooooooooooooo
 	var/old_new_health = 100
 	var/old_lying = 0
+	var/air = 100
 
 /mob/living/carbon/human
 	updatehealth() //this method is not required FUCK YOU
@@ -17,7 +18,14 @@
 			/*
 			uhhhhhhhhhhhhhhh this is the new shit for health like shield and shit i forgot lol
 			*/
-
+			var/turf/T = locate(x,y,z)
+			if(T.water_height >= 27 && !wear_mask)
+				air -= world.tick_lag
+			else
+				air += world.tick_lag*2
+			air = max(0,min(100,air)) //Clamp values
+			if(air < world.tick_lag)
+				oxyloss += 2
 			var/new_health = maxhealth - (oxyloss + toxloss + fireloss + bruteloss + specialloss)
 			if(shield > 0)
 				//world << "shield taking [new_health-health] damage"

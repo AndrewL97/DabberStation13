@@ -138,11 +138,11 @@
 				if(5 to 8) //knees
 					tally += 2
 				if(9 to 16) //chest
-					move_delay += 4
+					tally += 4
 				if(17 to 24) //neck
-					move_delay += 5
+					tally += 5
 				if(25 to 32) //head, and above
-					move_delay += 7
+					tally += 7
 	if (istype(src.shoes, /obj/item/clothing/shoes))
 		if (src.shoes.chained)
 			tally += 15
