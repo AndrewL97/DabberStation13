@@ -155,12 +155,12 @@ obj/light
 			// type /atom/movable), check to see if the owner has moved
 			if(mobile && ownerF)
 				glide_size = ownerF:glide_size
-				if(x != ownerF.x || x != ownerF.y)
+				if(x != ownerF.x || x != ownerF.y || pixel_x != ownerF.pixel_x+ownerF.pixel_w-32 || pixel_y != ownerF.pixel_y+ownerF.pixel_z-32)
 					x = ownerF.x
 					y = ownerF.y
-				pixel_x = ownerF.pixel_x+ownerF.pixel_w-32
-				pixel_y = ownerF.pixel_y+ownerF.pixel_z-32
-					//changed = 1
+					pixel_x = ownerF.pixel_x+ownerF.pixel_w-32
+					pixel_y = ownerF.pixel_y+ownerF.pixel_z-32
+					changed = 1
 
 			if(changed)
 				//world << "<font color='yellow'>received light change"

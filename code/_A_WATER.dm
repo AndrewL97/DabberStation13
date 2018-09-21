@@ -177,8 +177,7 @@ obj
 					listofconnections += to_add
 
 /turf/simulated/proc/Process_Water()
-	if(listofconnections.len == 0)
-		Get_Connections()
+	Get_Connections()
 	for(var/a in listofconnections)
 		if(istype(a,/turf/simulated))
 			CHECK_TICK_WATER()
@@ -206,7 +205,9 @@ datum
 					water_processed = 0
 					for(var/obj/water/W in water_objects)
 						CHECK_TICK_WATER()
-						W.Process_Water()
+						if(W)
+							W.Process_Water()
 					for(var/turf/simulated/T in water_changed)
 						CHECK_TICK_WATER()
-						T.Process_Water()
+						if(T)
+							T.Process_Water()
