@@ -8,12 +8,25 @@ atom
 /mob
 	var/obj/screen_alt/plane_master_turf2/plane_master_turf = null
 	var/obj/screen_alt/plane_master_turf3/lighting_master = null
+	var/obj/screen_alt/plane_master_parallax_layer_1/parallax_master_1 = null
+	var/obj/screen_alt/plane_master_parallax_layer_2/parallax_master_2 = null
 
 /obj/screen_alt/plane_master_turf2
 	plane = WALL_PLANE
 	screen_loc = "1,1"
 	filters = filter(type="drop_shadow", x=0, y=0,size=5, offset=2, color=rgb(0,0,0,190))
 	appearance_flags = PIXEL_SCALE | KEEP_TOGETHER | PLANE_MASTER
+
+/obj/screen_alt/plane_master_parallax_layer_1
+	plane = SPACE_PLANE_0
+	screen_loc = "1,1"
+	appearance_flags = PIXEL_SCALE | PLANE_MASTER | TILE_BOUND
+
+/obj/screen_alt/plane_master_parallax_layer_2
+	plane = SPACE_PLANE_1
+	screen_loc = "1,1"
+	appearance_flags = PIXEL_SCALE | PLANE_MASTER | TILE_BOUND
+
 
 /obj/screen
 	plane = HUD_PLANE
@@ -24,8 +37,16 @@ atom
 		mymob.plane_master_turf = new
 	if(!mymob.lighting_master)
 		mymob.lighting_master = new
+	if(!mymob.parallax_master_1)
+		mymob.parallax_master_1 = new
+	if(!mymob.parallax_master_2)
+		mymob.parallax_master_2 = new
+
 	mymob.client.screen += mymob.plane_master_turf
 	mymob.client.screen += mymob.lighting_master
+	mymob.client.screen += mymob.parallax_master_1
+	mymob.client.screen += mymob.parallax_master_2
+
 	return
 
 /obj/hud/proc/parallax()
@@ -37,13 +58,15 @@ atom
 	mymob.space_parallax_list_2 = list()
 	for(var/xA in 0 to 2)
 		for(var/yA in 0 to 2)
+			var/matrix/M = matrix()
+			M.Translate(xA*480,yA*480)
 			var/obj/screen_alt/spaceParallax/g = new()
-			g.xF = xA
-			g.yF = yA
+			g.transform = M
+			g.plane = SPACE_PLANE_0
 			mymob.space_parallax_list_1 += g
 			var/obj/screen_alt/spaceParallax/g2 = new()
-			g2.xF = xA
-			g2.yF = yA
+			g2.transform = M
+			g2.plane = SPACE_PLANE_1
 			mymob.space_parallax_list_2 += g2
 
 	mymob.client.screen += mymob.space_parallax_list_1
@@ -96,7 +119,6 @@ mob
 	screen_loc = "1,1"
 	icon_state = "layer1"
 	layer = 1
-	plane = SPACE_PLANE
 	mouse_opacity = 0
 	var/xF = 0
 	var/yF = 0
@@ -105,7 +127,10 @@ mob
 	can_push = 0
 	var/list/space_parallax_list_1 = list()
 	var/list/space_parallax_list_2 = list()
-
+	var/old_x = 0
+	var/old_y = 0
+	var/space_parallax_layer_1_old = ""
+	var/space_parallax_layer_2_old = ""
 	//var/obj/screen_alt/plane_master_turf2/plane_master_turf = null
 
 	proc/ParallaxMove()
@@ -120,15 +145,15 @@ mob
 			cando = A.parallax_type
 		switch(cando)
 			if(2)
-				ParallaxLayer(space_parallax_list_1,0.25,0.25,"layer1",0,0,-98)
-				ParallaxLayer(space_parallax_list_2,2,2,"layer2alt",(world.time),(world.time/2),BELOW_SHADING)
+				ParallaxLayer(parallax_master_1,space_parallax_list_1,0.25,0.25,"layer1",0,0)
+				ParallaxLayer(parallax_master_2,space_parallax_list_2,2,2,"layer2alt",(world.time),(world.time/2))
 			if(1)
-				ParallaxLayer(space_parallax_list_1,1,0,"layer1alt",(world.time),0,-98)
-				ParallaxLayer(space_parallax_list_2,2,2,"layer2alt",(world.time/2),(world.time/4),-98)
+				ParallaxLayer(parallax_master_1,space_parallax_list_1,1,0,"layer1alt",(world.time),0)
+				ParallaxLayer(parallax_master_2,space_parallax_list_2,2,2,"layer2alt",(world.time/2),(world.time/4))
 			if(0)
-				ParallaxLayer(space_parallax_list_1,0.5,0.5,"layer1",0,0,-98)
-				ParallaxLayer(space_parallax_list_2,1,1,"layer2",0,0,-98)
-	proc/ParallaxLayer(var/list/space_list,var/mult_1,var/mult_2,var/iconA,var/offsetX,var/offsetY,var/plane_new) //Tbh this honestly could be redone to use a master plane, and throw all parallax layers there.
+				ParallaxLayer(parallax_master_1,space_parallax_list_1,0.5,0.5,"layer1",0,0)
+				ParallaxLayer(parallax_master_2,space_parallax_list_2,1,1,"layer2",0,0)
+	proc/ParallaxLayer(var/obj/screen_alt/G,var/list/space_list,var/mult_1,var/mult_2,var/iconA,var/offsetX,var/offsetY)
 		if(!client)
 			return //don't do this.
 		if(!client.eye)
@@ -140,17 +165,28 @@ mob
 		var/atom/eye = client.eye
 		var/xAxis = round((((eye.x+(xoffset/32))*mult_1) + offsetX)) % 480
 		var/yAxis = round((((eye.y+(yoffset/32))*mult_2) + offsetY)) % 480
-		for(var/obj/screen_alt/spaceParallax/g in space_list)
-			g.plane = plane_new
-			if(g.icon_state != iconA)
-				g.icon_state = iconA
-			if(iconA != "")
-				ParallaxHandle(g,xAxis,yAxis,g.xF*480,g.yF*480)
 
-	proc/ParallaxHandle(var/obj/screen_alt/spaceParallax/space1,var/xAxis,var/yAxis,var/xOff,var/yOff)
-		var/matrix/space1e = matrix()
-		space1e.Translate(xOff-xAxis  ,  yOff-yAxis) //This is actually kryfrac level retarded
-		space1.transform = space1e
+		var/can_change_icon = 0
+		if(space_list == space_parallax_list_1)
+			if(iconA != space_parallax_layer_1_old)
+				space_parallax_layer_1_old = iconA
+				can_change_icon = 1
+		else
+			if(iconA != space_parallax_layer_2_old)
+				space_parallax_layer_2_old = iconA
+				can_change_icon = 1
+
+		if(can_change_icon)
+			for(var/obj/screen_alt/spaceParallax/g in space_list)
+				if(g.icon_state != iconA)
+					g.icon_state = iconA
+
+		if(x != old_x || y != old_y)
+			var/matrix/M = matrix()
+			M.Translate(-xAxis,-yAxis)
+			G.transform = M
+			old_x = x
+			old_y = y
 
 /mob/verb/use_hotkey()
 	set hidden = 1

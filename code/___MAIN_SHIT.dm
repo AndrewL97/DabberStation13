@@ -18,7 +18,8 @@
 #define ITEM_PLANE 2
 #define HUD_PLANE 99
 #define HUD_PLANE_2 100
-#define SPACE_PLANE -98
+#define SPACE_PLANE_0 -98
+#define SPACE_PLANE_1 -97
 
 #define SOUND_CHANNEL_1 1120
 #define SOUND_CHANNEL_AMBI 1
