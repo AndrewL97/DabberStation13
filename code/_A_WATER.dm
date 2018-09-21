@@ -1,6 +1,6 @@
 turf
 	var/obj/water_overlay/gW1
-	//var/obj/water_overlay/gW2
+	var/obj/water_overlay/gW2
 	var/water_height = 0
 	var/old_water_height = 0
 	var/fully_cover = 0
@@ -10,10 +10,9 @@ turf
 			gW1 = new(locate(x,y,z))
 			gW1.Get_Layer_Y(0.1)
 			gW1.plane = MOB_PLANE_ALT
-		/*if(!gW2)
+		if(!gW2)
 			gW2 = new(locate(x,y,z))
-			gW2.layer = TURF_LAYER+0.5*/
-		water_height = max(0,min(32,water_height))
+			gW2.layer = TURF_LAYER+0.5
 		if(round(water_height) == round(old_water_height))
 			return //We shouldn't update.
 		/*var/turf/below = locate(x,y-1,z)
@@ -31,27 +30,28 @@ turf
 
 		if(gW1.I)
 			del gW1.I
-		/*if(gW2.I)
-			del gW2.I*/
+		if(gW2.I)
+			del gW2.I
 
 		if(round(water_height) < 1)
 			return
 		gW1.I = icon('water sprites.dmi',"template",SOUTH)
-		//gW2.I = icon('water sprites.dmi',"template",SOUTH)
+		gW2.I = icon('water sprites.dmi',"template",SOUTH)
 
-		gW1.I.DrawBox(rgb(35,137,218),1,1,32,round(water_height))
-		//gW2.I.DrawBox(rgb(35,137,218),1,1,32,0)
+		gW1.I.DrawBox(rgb(35,137,218),1,1,32,round(max(0,min(32,water_height))))
+		if(round(max(0,min(32,water_height)))!=32)
+			gW2.I.DrawBox(rgb(35,137,218),1,round(max(0,min(32,water_height+1))),32,32)
 
 		gW1.icon = gW1.I
 
 		old_water_height = water_height
-		//gW2.icon = gW2.I
+		gW2.icon = gW2.I
 
 	Del()
 		if(gW1)
 			del gW1
-		/*if(gW2)
-			del gW2*/
+		if(gW2)
+			del gW2
 		..()
 
 #define DIR2PIXEL list("1" = list(0,1),"2" = list(0,-1),"4" = list(1,0),"8" = list(-1,0))
@@ -63,7 +63,7 @@ obj
 		anchored = 1
 		mouse_opacity = 0
 		var/icon/I = null
-		alpha = 100
+		alpha = 50
 	water
 		plane = CABLE_PLANE
 		icon = 'water_pipes.dmi'
@@ -113,16 +113,17 @@ obj
 				icon_state = "filler"
 		tank
 			icon_state = "water_pump"
+			desc = "Due to it's technology, it holds infinite water."
 			water_pressure_direction = SOUTH
 			density = 1
-			water_pressure = 5000
+			water_pressure = 1 //now infinite
 			Process_Water()
 				if(water_pressure > 0)
 					var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,water_pressure_direction)
 					if(G)
 						G.water_pressure_direction = SOUTH
 						G.water_pressure += 20
-						water_pressure -= 20
+						//water_pressure -= 20
 		meter
 			name = "meter"
 			icon = 'meter.dmi'
@@ -163,8 +164,9 @@ obj
 
 /turf/proc/Water_Can_Pass()
 	for(var/obj/obstacle in src)
-		if(obstacle.density)
-			return 0
+		if(istype(obstacle,/obj/window) || istype(obstacle,/obj/machinery/door))
+			if(obstacle.density)
+				return 0
 	return !density
 
 /turf/simulated/proc/Process_Water()
@@ -179,14 +181,14 @@ obj
 
 	for(var/turf/simulated/pe in listofturfs)
 		CHECK_TICK_WATER()
-		if(water_height < pe.water_height)
+		/*if(water_height < pe.water_height)
 			var/tmp/calc = pe.water_height/listofturfs.len
 
 			pe.water_height = pe.water_height - calc
-			water_height = water_height + calc
+			water_height = water_height + calc*/
 
-		if(water_height > pe.water_height)
-			var/tmp/calc = water_height/listofturfs.len
+		if(pe.water_height < water_height)
+			var/tmp/calc = water_height/(1+listofturfs.len)
 			pe.water_height = pe.water_height + calc
 			water_height = water_height - calc
 		if(!(pe in water_changed))
