@@ -2,7 +2,7 @@
 	var/specialloss = 0.0 //you are have the stupidddddddddddddd loooooooooooooooooooooooooooooooooooooo looooooooooooooooooooooooooooooo
 	var/old_new_health = 100
 	var/old_lying = 0
-	var/air = 100
+	var/air = 50
 
 /mob/living/carbon/human
 	updatehealth() //this method is not required FUCK YOU

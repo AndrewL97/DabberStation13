@@ -12,46 +12,30 @@ turf
 			gW1.plane = MOB_PLANE_ALT
 		if(!gW2)
 			gW2 = new(locate(x,y,z))
+			gW2.plane = LIGHT_PLANE
 			gW2.layer = TURF_LAYER+0.5
 		if(round(water_height) == round(old_water_height))
 			return //We shouldn't update.
-		/*var/turf/below = locate(x,y-1,z)
-		var/turf/above = locate(x,y+1,z)
-		if(below)
-			below_turf_height = below.TurfHeight
-			below_water_height = below.water_height
-		else
-			below_turf_height = 0
-			below_water_height = 0
-		if(above)
-			above_water_height = above.water_height
-		else
-			above_water_height = 0*/
-
-		if(gW1.I)
-			del gW1.I
-		if(gW2.I)
-			del gW2.I
-
-		if(round(water_height) < 1)
-			return
-		gW1.I = icon('water sprites.dmi',"template",SOUTH)
-		gW2.I = icon('water sprites.dmi',"template",SOUTH)
+		var/rounded_height = round(water_height)
 		if(fully_cover == 1 && round(water_height) < TurfHeight)
 			return
-		gW1.I.DrawBox(rgb(35,137,218),1,1,32,round(max(0,min(32,water_height))))
-		if(round(max(0,min(32,water_height)))!=32)
-			if(round(water_height) >= TurfHeight)
-				gW2.I.DrawBox(rgb(35,137,218),1,round(max(0,min(32,water_height+1))),32,32)
+		var/ass = (max(0,min(32,rounded_height))/32)*0.5
+		var/ColorWater = rgb(35*(1-ass),137*(1-ass),218*(1-ass))
+		gW1.color = ColorWater
+		gW2.color = ColorWater
+		gW1.icon_state = "[max(0,min(32,rounded_height))]"
+		if(round(water_height) >= TurfHeight)
+			if(rounded_height > 0)
+				gW2.icon_state = "[max(0,min(32,32-rounded_height ))]"
+				gW2.pixel_y = max(0,min(32,rounded_height))
+			else
+				gW2.icon_state = "0"
 		if(round(max(0,min(32,water_height)))==32)
 			gW1.plane = TOP_PLANE
 		else
 			gW1.plane = MOB_PLANE_ALT
 
-		gW1.icon = gW1.I
-
 		old_water_height = water_height
-		gW2.icon = gW2.I
 
 	Del()
 		if(gW1)
@@ -66,10 +50,13 @@ turf
 #define CARDINALS list(SOUTH,NORTH,EAST,WEST)
 obj
 	water_overlay
+		icon = 'water sprites.dmi'
 		anchored = 1
 		mouse_opacity = 0
-		var/icon/I = null
-		alpha = 50
+		color = rgb(35,137,218)
+		alpha = 75
+		ex_act()
+			return
 	water
 		plane = CABLE_PLANE
 		icon = 'water_pipes.dmi'
@@ -79,10 +66,10 @@ obj
 				..()
 				hide()
 			hide()
-				var/turf/T = loc
-				if(T)
+				var/turf/T = locate(x,y,z)
+				if(istype(T,/turf))
 					if(level == 1)
-						invisibility = level < T.level ? 101 : 0
+						alpha = level < T.level ? 0 : 255
 			Process_Water()
 				if(water_pressure > 0)
 					if(water_pressure_direction != 0)
