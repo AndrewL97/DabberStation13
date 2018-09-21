@@ -185,7 +185,7 @@ datum/controller/game_controller
 			fast_process()
 	water_process()
 		water_master.process()
-		spawn(1)
+		spawn(world.tick_lag)
 			water_process()
 	slow_process()
 		atmos_processed = 0
