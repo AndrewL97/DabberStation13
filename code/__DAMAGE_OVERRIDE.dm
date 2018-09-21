@@ -23,6 +23,7 @@
 				air -= world.tick_lag
 			else
 				air += world.tick_lag*2
+			breathe()
 			air = max(0,min(100,air)) //Clamp values
 			if(air < world.tick_lag)
 				oxyloss += 2
@@ -141,7 +142,7 @@
 				src.ear_damage -= 0.05
 				src.ear_damage = max(src.ear_damage, 0)
 
-			src.density = !( src.lying )
+			src.density = !(src.resting || src.lying)
 
 			if ((src.sdisabilities & 1 || istype(src.glasses, /obj/item/clothing/glasses/blindfold)))
 				src.blinded = 1

@@ -16,18 +16,10 @@
 
 	var/datum/gas_mixture/environment = loc.return_air()
 
-	if (src.stat != 2) //still breathing
-
-		//First, resolve location and get a breath
-
-		if(air_master.current_cycle%4==2)
-			//Only try to take a breath every 4 seconds, unless suffocating
-			spawn(0) breathe()
-
-		else //Still give containing object the chance to interact
-			if(istype(loc, /obj/))
-				var/obj/location_as_object = loc
-				location_as_object.handle_internal_lifeform(src, 0)
+	if (src.stat == 2) //still breathing
+		if(istype(loc, /obj/))
+			var/obj/location_as_object = loc
+			location_as_object.handle_internal_lifeform(src, 0)
 
 	//Apparently, the person who wrote this code designed it so that
 	//blinded get reset each cycle and then get activated later in the
@@ -197,7 +189,7 @@
 				src.losebreath++
 
 			if(losebreath>0) //Suffocating so do not take a breath
-				src.losebreath--
+				air-=world.tick_lag
 				if (prob(75)) //High chance of gasping for air
 					spawn emote("gasp")
 				if(istype(loc, /obj/))
@@ -261,7 +253,7 @@
 				return
 
 			if(!breath || (breath.total_moles() == 0))
-				oxyloss += 7
+				air-=world.tick_lag
 
 				oxygen_alert = max(oxygen_alert, 1)
 
@@ -288,10 +280,10 @@
 					spawn(0) emote("gasp")
 				if(O2_pp > 0)
 					var/ratio = safe_oxygen_min/O2_pp
-					oxyloss += min(5*ratio, 7) // Don't fuck them up too fast (space only does 7 after all!)
+					air-=world.tick_lag
 					oxygen_used = breath.oxygen*ratio/6
 				else
-					oxyloss += 7
+					air-=world.tick_lag
 				oxygen_alert = max(oxygen_alert, 1)
 			/*else if (O2_pp > safe_oxygen_max) 		// Too much oxygen (commented this out for now, I'll deal with pressure damage elsewhere I suppose)
 				spawn(0) emote("cough")
@@ -300,9 +292,13 @@
 				oxygen_used = breath.oxygen*ratio/6
 				oxygen_alert = max(oxygen_alert, 1)*/
 			else 									// We're in safe limits
-				oxyloss = max(oxyloss-5, 0)
+				air += world.tick_lag*2
 				oxygen_used = breath.oxygen/6
 				oxygen_alert = 0
+			var/turf/T = loc
+			if(istype(T,/turf))
+				if(T.water_height >= 27 && !wear_mask)
+					air -= world.tick_lag
 
 			breath.oxygen -= oxygen_used
 			breath.carbon_dioxide += oxygen_used
@@ -312,9 +308,9 @@
 					co2overloadtime = world.time
 				else if(world.time - co2overloadtime > 120)
 					src.paralysis = max(src.paralysis, 3)
-					oxyloss += 3 // Lets hurt em a little, let them know we mean business
+					air -= world.tick_lag
 					if(world.time - co2overloadtime > 300) // They've been in here 30s now, lets start to kill them for their own good!
-						oxyloss += 8
+						air -= world.tick_lag
 				if(prob(20)) // Lets give them some chance to know somethings not right though I guess.
 					spawn(0) emote("cough")
 
@@ -323,6 +319,7 @@
 
 			if(Toxins_pp > safe_toxins_max) // Too much toxins
 				var/ratio = breath.toxins/safe_toxins_max
+				air -= world.tick_lag
 				toxloss += min(ratio, 10)	//Limit amount of damage toxin exposure can do per second
 				toxins_alert = max(toxins_alert, 1)
 			else
@@ -343,7 +340,7 @@
 			if(breath.temperature > (T0C+66) && !(src.mutations & 2)) // Hot air hurts :(
 				if(prob(20))
 					src << "\red You feel a searing heat in your lungs!"
-				fire_alert = max(fire_alert, 1)
+				fire_alert = 1
 			else
 				fire_alert = 0
 
