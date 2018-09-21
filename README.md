@@ -17,5 +17,7 @@ You need to edit ADMIN_REWORK.dm to change admins. And you need to create a webh
 
 Gamemodes cannot be configured yet. I plan to add configuration for it soon.
 
+You can go here for more stuff. https://github.com/AlcaroIsAFrick/Dab13/blob/master/docs/README.md
+
 # Admin Tools / Commands
 Admin tools aren't that big. But you may suggest new ones to me. Currently we have main admin features like banning, kicking, sounds, teleporting. etc
