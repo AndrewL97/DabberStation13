@@ -2,6 +2,7 @@
 	icon = 'floors.dmi'
 	icon_state = "eartharea"
 	forced_lighting = 0
+	atmos_simulation_required = 0
 	song = 'music/grass.ogg'
 	CAN_GRIFE = 0
 	name = "Forest Area"
