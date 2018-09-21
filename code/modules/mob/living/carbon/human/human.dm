@@ -141,8 +141,8 @@
 					tally += 4
 				if(17 to 24) //neck
 					tally += 5
-				if(25 to 32) //head, and above
-					tally += 7
+			if(T.water_height >= 25)
+				tally += 7
 	if (istype(src.shoes, /obj/item/clothing/shoes))
 		if (src.shoes.chained)
 			tally += 15

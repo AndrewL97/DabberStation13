@@ -189,7 +189,7 @@
 				src.losebreath++
 
 			if(losebreath>0) //Suffocating so do not take a breath
-				air-=world.tick_lag
+				air-=world.tick_lag*4
 				if(istype(loc, /obj/))
 					var/obj/location_as_object = loc
 					location_as_object.handle_internal_lifeform(src, 0)
@@ -293,7 +293,7 @@
 				oxygen_alert = 0
 			var/turf/T = loc
 			if(istype(T,/turf))
-				if(T.water_height >= 27 && !wear_mask)
+				if(T.water_height >= 27 && !internal)
 					air -= world.tick_lag*7
 
 			breath.oxygen -= oxygen_used
