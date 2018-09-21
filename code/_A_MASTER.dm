@@ -48,7 +48,7 @@ var/actions_per_tick_atmos = 0
 var/max_actions_atmos = 60 //Max actions per tick (FOR ATMOS), also fast. i definitely think this could be higher if optimized.
 
 var/actions_per_tick_water = 0
-var/max_actions_water = 120 //Max actions per tick (FOR WATER), also fast.
+var/max_actions_water = 70 //Max actions per tick (FOR WATER), also fast.
 
 var/list/typepaths = list()
 
@@ -185,7 +185,7 @@ datum/controller/game_controller
 			fast_process()
 	water_process()
 		water_master.process()
-		spawn(world.tick_lag)
+		spawn(1)
 			water_process()
 	slow_process()
 		atmos_processed = 0
@@ -211,19 +211,20 @@ datum/controller/game_controller
 		if(!processing)
 			return 0
 
-		if(world.cpu > 600)
-			if(!(world.port in PORTS_NOT_ALLOWED))
-				spawn()
-					call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server has rebooted due to high processor usage, (%[world.cpu])**\" } ", "Content-Type: application/json")
-			world << "<font color='red'><b><font size=5>Due to extreme lag (world CPU was %[world.cpu]), server is rebooting to prevent a crash."
-			world.Reboot()
-			return
-		if(world.cpu > CPU_WARN && CPU_warning == 0)
-			if(!(world.port in PORTS_NOT_ALLOWED))
-				spawn()
-					call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server is having high stress, CPU too high (%[world.cpu] > [CPU_WARN]), will attempt to throttle actions.**\" } ", "Content-Type: application/json")
-			world << "<font color='red'><b><font size=5>Server CPU is (%[world.cpu] > [CPU_WARN]), Will attempt to throttle MC to lower CPU."
-			CPU_warning = 1
+		if(frm_counter > 60)
+			if(world.cpu > 600)
+				if(!(world.port in PORTS_NOT_ALLOWED))
+					spawn()
+						call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server has rebooted due to high processor usage, (%[world.cpu])**\" } ", "Content-Type: application/json")
+				world << "<font color='red'><b><font size=5>Due to extreme lag (world CPU was %[world.cpu]), server is rebooting to prevent a crash."
+				world.Reboot()
+				return
+			if(world.cpu > CPU_WARN && CPU_warning == 0)
+				if(!(world.port in PORTS_NOT_ALLOWED))
+					spawn()
+						call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server is having high stress, CPU too high (%[world.cpu] > [CPU_WARN]), will attempt to throttle actions.**\" } ", "Content-Type: application/json")
+				world << "<font color='red'><b><font size=5>Server CPU is (%[world.cpu] > [CPU_WARN]), Will attempt to throttle MC to lower CPU."
+				CPU_warning = 1
 		master_Processed = 0
 
 		mobs_process()
