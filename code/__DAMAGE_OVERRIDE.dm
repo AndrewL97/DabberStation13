@@ -18,9 +18,10 @@
 			/*
 			uhhhhhhhhhhhhhhh this is the new shit for health like shield and shit i forgot lol
 			*/
-			breathe()
+			if(frm_counter % 15 == 1)
+				breathe()
 
-			air = max(0,min(100,air)) //Clamp values
+			air = max(0,min(50,air)) //Clamp values
 			if(air < world.tick_lag)
 				oxyloss += 0.5
 				if(frm_counter % 60 == 1)

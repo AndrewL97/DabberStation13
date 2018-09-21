@@ -276,10 +276,10 @@
 			if(O2_pp < safe_oxygen_min) 			// Too little oxygen
 				if(O2_pp > 0)
 					var/ratio = safe_oxygen_min/O2_pp
-					air-=world.tick_lag
+					air-=world.tick_lag*7
 					oxygen_used = breath.oxygen*ratio/6
 				else
-					air-=world.tick_lag
+					air-=world.tick_lag*7
 				oxygen_alert = max(oxygen_alert, 1)
 			/*else if (O2_pp > safe_oxygen_max) 		// Too much oxygen (commented this out for now, I'll deal with pressure damage elsewhere I suppose)
 				spawn(0) emote("cough")
@@ -288,13 +288,13 @@
 				oxygen_used = breath.oxygen*ratio/6
 				oxygen_alert = max(oxygen_alert, 1)*/
 			else 									// We're in safe limits
-				air += world.tick_lag*2
+				air += world.tick_lag*12
 				oxygen_used = breath.oxygen/6
 				oxygen_alert = 0
 			var/turf/T = loc
 			if(istype(T,/turf))
 				if(T.water_height >= 27 && !wear_mask)
-					air -= world.tick_lag
+					air -= world.tick_lag*7
 
 			breath.oxygen -= oxygen_used
 			breath.carbon_dioxide += oxygen_used
@@ -304,9 +304,9 @@
 					co2overloadtime = world.time
 				else if(world.time - co2overloadtime > 120)
 					src.paralysis = max(src.paralysis, 3)
-					air -= world.tick_lag
+					air -= world.tick_lag*7
 					if(world.time - co2overloadtime > 300) // They've been in here 30s now, lets start to kill them for their own good!
-						air -= world.tick_lag
+						air -= world.tick_lag*7
 				if(prob(1)) // Lets give them some chance to know somethings not right though I guess.
 					spawn(0) emote("cough")
 
@@ -315,7 +315,7 @@
 
 			if(Toxins_pp > safe_toxins_max) // Too much toxins
 				var/ratio = breath.toxins/safe_toxins_max
-				air -= world.tick_lag
+				air -= world.tick_lag*7
 				toxloss += min(ratio, 10)	//Limit amount of damage toxin exposure can do per second
 				toxins_alert = max(toxins_alert, 1)
 			else
