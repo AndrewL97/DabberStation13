@@ -22,7 +22,9 @@
 
 			air = max(0,min(100,air)) //Clamp values
 			if(air < world.tick_lag)
-				oxyloss += 0.2
+				oxyloss += 0.5
+				if(frm_counter % 60 == 1)
+					emote("gasp")
 			var/new_health = maxhealth - (oxyloss + toxloss + fireloss + bruteloss + specialloss)
 			if(shield > 0)
 				//world << "shield taking [new_health-health] damage"
