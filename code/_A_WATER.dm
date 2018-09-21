@@ -37,11 +37,16 @@ turf
 			return
 		gW1.I = icon('water sprites.dmi',"template",SOUTH)
 		gW2.I = icon('water sprites.dmi',"template",SOUTH)
-
+		if(fully_cover == 1 && round(water_height) < TurfHeight)
+			return
 		gW1.I.DrawBox(rgb(35,137,218),1,1,32,round(max(0,min(32,water_height))))
 		if(round(max(0,min(32,water_height)))!=32)
-			if(round(water_height) > TurfHeight)
+			if(round(water_height) >= TurfHeight)
 				gW2.I.DrawBox(rgb(35,137,218),1,round(max(0,min(32,water_height+1))),32,32)
+		if(round(max(0,min(32,water_height)))==32)
+			gW1.plane = TOP_PLANE
+		else
+			gW1.plane = MOB_PLANE_ALT
 
 		gW1.icon = gW1.I
 
