@@ -190,8 +190,6 @@
 
 			if(losebreath>0) //Suffocating so do not take a breath
 				air-=world.tick_lag
-				if (prob(75)) //High chance of gasping for air
-					spawn emote("gasp")
 				if(istype(loc, /obj/))
 					var/obj/location_as_object = loc
 					location_as_object.handle_internal_lifeform(src, 0)
@@ -259,7 +257,7 @@
 
 				return 0
 
-			var/safe_oxygen_min = 16 // Minimum safe partial pressure of O2, in kPa
+			var/safe_oxygen_min = 20 // Minimum safe partial pressure of O2, in kPa
 			//var/safe_oxygen_max = 140 // Maximum safe partial pressure of O2, in kPa (Not used for now)
 			var/safe_co2_max = 10 // Yes it's an arbitrary value who cares?
 			var/safe_toxins_max = 0.5
@@ -276,8 +274,6 @@
 			var/CO2_pp = (breath.carbon_dioxide/breath.total_moles())*breath_pressure
 
 			if(O2_pp < safe_oxygen_min) 			// Too little oxygen
-				if(prob(20))
-					spawn(0) emote("gasp")
 				if(O2_pp > 0)
 					var/ratio = safe_oxygen_min/O2_pp
 					air-=world.tick_lag
@@ -292,7 +288,7 @@
 				oxygen_used = breath.oxygen*ratio/6
 				oxygen_alert = max(oxygen_alert, 1)*/
 			else 									// We're in safe limits
-				air += world.tick_lag*2
+				air += world.tick_lag
 				oxygen_used = breath.oxygen/6
 				oxygen_alert = 0
 			var/turf/T = loc
@@ -311,7 +307,7 @@
 					air -= world.tick_lag
 					if(world.time - co2overloadtime > 300) // They've been in here 30s now, lets start to kill them for their own good!
 						air -= world.tick_lag
-				if(prob(20)) // Lets give them some chance to know somethings not right though I guess.
+				if(prob(1)) // Lets give them some chance to know somethings not right though I guess.
 					spawn(0) emote("cough")
 
 			else
@@ -333,12 +329,12 @@
 						if(SA_pp > SA_sleep_min) // Enough to make us sleep as well
 							src.sleeping = max(src.sleeping, 2)
 					else if(SA_pp > 0.01)	// There is sleeping gas in their lungs, but only a little, so give them a bit of a warning
-						if(prob(20))
+						if(prob(1))
 							spawn(0) emote(pick("giggle", "laugh"))
 
 
 			if(breath.temperature > (T0C+66) && !(src.mutations & 2)) // Hot air hurts :(
-				if(prob(20))
+				if(prob(1))
 					src << "\red You feel a searing heat in your lungs!"
 				fire_alert = 1
 			else
