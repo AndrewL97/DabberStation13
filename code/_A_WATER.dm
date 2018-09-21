@@ -40,7 +40,8 @@ turf
 
 		gW1.I.DrawBox(rgb(35,137,218),1,1,32,round(max(0,min(32,water_height))))
 		if(round(max(0,min(32,water_height)))!=32)
-			gW2.I.DrawBox(rgb(35,137,218),1,round(max(0,min(32,water_height+1))),32,32)
+			if(round(water_height) > TurfHeight)
+				gW2.I.DrawBox(rgb(35,137,218),1,round(max(0,min(32,water_height+1))),32,32)
 
 		gW1.icon = gW1.I
 
