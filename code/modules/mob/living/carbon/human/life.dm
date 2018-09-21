@@ -288,7 +288,7 @@
 				oxygen_used = breath.oxygen*ratio/6
 				oxygen_alert = max(oxygen_alert, 1)*/
 			else 									// We're in safe limits
-				air += world.tick_lag
+				air += world.tick_lag*2
 				oxygen_used = breath.oxygen/6
 				oxygen_alert = 0
 			var/turf/T = loc
