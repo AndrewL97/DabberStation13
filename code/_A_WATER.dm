@@ -1,10 +1,8 @@
 turf
 	var/obj/water_overlay/gW1
-	var/obj/water_overlay/gW2
+	//var/obj/water_overlay/gW2
 	var/water_height = 0
-	var/below_water_height = 0
-	var/above_water_height = 0
-	var/below_turf_height = 0
+	var/old_water_height = 0
 	var/fully_cover = 0
 
 	proc/Render_Water_Icon()
@@ -12,11 +10,13 @@ turf
 			gW1 = new(locate(x,y,z))
 			gW1.Get_Layer_Y(0.1)
 			gW1.plane = MOB_PLANE_ALT
-		if(!gW2)
+		/*if(!gW2)
 			gW2 = new(locate(x,y,z))
-			gW2.layer = TURF_LAYER+0.5
+			gW2.layer = TURF_LAYER+0.5*/
 		water_height = max(0,min(32,water_height))
-		var/turf/below = locate(x,y-1,z)
+		if(round(water_height) == round(old_water_height))
+			return //We shouldn't update.
+		/*var/turf/below = locate(x,y-1,z)
 		var/turf/above = locate(x,y+1,z)
 		if(below)
 			below_turf_height = below.TurfHeight
@@ -27,39 +27,37 @@ turf
 		if(above)
 			above_water_height = above.water_height
 		else
-			above_water_height = 0
+			above_water_height = 0*/
 
 		if(gW1.I)
 			del gW1.I
-		if(gW2.I)
-			del gW2.I
+		/*if(gW2.I)
+			del gW2.I*/
 
 		if(round(water_height) < 1)
 			return
 		gW1.I = icon('water sprites.dmi',"template",SOUTH)
-		gW2.I = icon('water sprites.dmi',"template",SOUTH)
-		if(round(water_height) != 1)
-			if(!(fully_cover == 1 && water_height <= TurfHeight))
-				gW1.I.DrawBox((round(below_water_height) > 0 || below_turf_height > TurfHeight) ? rgb(35,137,218) : rgb(15,94,156),1,1,32,round(water_height)-1)
-		if(water_height >= TurfHeight)
-			gW2.I.DrawBox(rgb(35,137,218),1,round(water_height),32,round(water_height)+(32)-round(above_water_height))
+		//gW2.I = icon('water sprites.dmi',"template",SOUTH)
+
+		gW1.I.DrawBox(rgb(35,137,218),1,1,32,round(water_height))
+		//gW2.I.DrawBox(rgb(35,137,218),1,1,32,0)
+
 		gW1.icon = gW1.I
-		gW2.icon = gW2.I
 
-
-		gW1.I = icon('water sprites.dmi',"template",SOUTH)
-		gW2.I = icon('water sprites.dmi',"template",SOUTH)
+		old_water_height = water_height
+		//gW2.icon = gW2.I
 
 	Del()
 		if(gW1)
 			del gW1
-		if(gW2)
-			del gW2
+		/*if(gW2)
+			del gW2*/
 		..()
 
 #define DIR2PIXEL list("1" = list(0,1),"2" = list(0,-1),"4" = list(1,0),"8" = list(-1,0))
 #define DIAGONALS list(SOUTHWEST,SOUTHEAST,NORTHWEST,NORTHEAST)
 #define REVERSEDIRS list("1" = SOUTH,"2" = NORTH,"4" = WEST,"8" = EAST)
+#define CARDINALS list(SOUTH,NORTH,EAST,WEST)
 obj
 	water_overlay
 		anchored = 1
@@ -85,7 +83,7 @@ obj
 						var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,water_pressure_direction)
 						var/obj/water/device/D = locate() in get_step(src,water_pressure_direction)
 						if(D)
-							world << "Filling a [D]"
+							//world << "Filling a [D]"
 							D.water_pressure += water_pressure
 							water_pressure = 0
 							return
@@ -103,6 +101,11 @@ obj
 								A.y_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][2]*16)
 								A.x_spd = DIR2PIXEL["[water_pressure_direction]"][1]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][1]*(rand(1,30)/10)
 								A.y_spd = DIR2PIXEL["[water_pressure_direction]"][2]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][2]*(rand(1,30)/10)
+							var/turf/simulated/T = get_step(src,water_pressure_direction)
+							if(istype(T,/turf/simulated))
+								T.water_height += water_pressure
+								if(!(T in water_changed))
+									water_changed += T
 							water_pressure = 0
 							//Fuck it's leaking
 		device
@@ -112,14 +115,14 @@ obj
 			icon_state = "water_pump"
 			water_pressure_direction = SOUTH
 			density = 1
-			water_pressure = 2000
+			water_pressure = 5000
 			Process_Water()
 				if(water_pressure > 0)
 					var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,water_pressure_direction)
 					if(G)
 						G.water_pressure_direction = SOUTH
-						G.water_pressure += 5
-						water_pressure -= 5
+						G.water_pressure += 20
+						water_pressure -= 20
 		meter
 			name = "meter"
 			icon = 'meter.dmi'
@@ -157,12 +160,50 @@ obj
 					damaged = prob(35)
 		proc
 			Process_Water() //Called every time we want a process.
+
+/turf/proc/Water_Can_Pass()
+	for(var/obj/obstacle in src)
+		if(obstacle.density)
+			return 0
+	return !density
+
+/turf/simulated/proc/Process_Water()
+	var/tmp/list/listofturfs = list()
+
+	for(var/DIRE in cardinal)
+		CHECK_TICK_WATER()
+		var/tmp/turf/simulated/to_add = get_step(src,DIRE)
+		if(to_add)
+			if(to_add.Water_Can_Pass())
+				listofturfs += to_add
+
+	for(var/turf/simulated/pe in listofturfs)
+		CHECK_TICK_WATER()
+		if(water_height < pe.water_height)
+			var/tmp/calc = pe.water_height/listofturfs.len
+
+			pe.water_height = pe.water_height - calc
+			water_height = water_height + calc
+
+		if(water_height > pe.water_height)
+			var/tmp/calc = water_height/listofturfs.len
+			pe.water_height = pe.water_height + calc
+			water_height = water_height - calc
+		if(!(pe in water_changed))
+			water_changed += pe
+		pe.Render_Water_Icon()
+	Render_Water_Icon()
+
 var/global/datum/controller/water_system/water_master
 datum
 	controller
 		water_system
 			proc
 				process()
+					water_processed = 0
 					for(var/obj/water/W in water_objects)
 						CHECK_TICK_WATER()
 						W.Process_Water()
+					for(var/turf/simulated/T in water_changed)
+						CHECK_TICK_WATER()
+						T.Process_Water()

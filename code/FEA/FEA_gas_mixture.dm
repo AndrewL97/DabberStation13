@@ -277,6 +277,7 @@ datum
 			nitrogen_archived =  nitrogen
 			toxins_archived = toxins
 
+
 			if(trace_gases.len)
 				for(var/datum/gas/trace_gas in trace_gases)
 					trace_gas.moles_archived = trace_gas.moles

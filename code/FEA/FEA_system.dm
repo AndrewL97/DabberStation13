@@ -291,6 +291,7 @@ datum
 				for(var/turf/simulated/T in tiles_to_update)
 					CHECK_TICK_ATMOS()
 					T.update_air_properties()
+					//T.update_visuals(T.air)
 /*
 				for(var/obj/movable/floor/O in tiles_to_update)
 					O.update_air_properties()

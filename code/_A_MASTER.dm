@@ -14,7 +14,10 @@ var/lighting_inited = 0
 var/frm_counter = 0
 var/listofitems = ""
 var/list/clients = list()
+
 var/list/water_objects = list() //_A_WATER.dm
+var/list/water_changed = list()
+
 var/special_processing = list()
 
 #define CPU_WARN 75
@@ -45,7 +48,7 @@ var/actions_per_tick_atmos = 0
 var/max_actions_atmos = 70 //Max actions per tick (FOR ATMOS), also fast. i definitely think this could be higher if optimized.
 
 var/actions_per_tick_water = 0
-var/max_actions_water = 10 //Max actions per tick (FOR WATER), not fast.
+var/max_actions_water = 70 //Max actions per tick (FOR WATER), also fast.
 
 var/list/typepaths = list()
 
@@ -56,7 +59,7 @@ var/water_processed = 0
 proc/CHECK_TICK_WATER() //epic optimizer used for our water system.
 	actions_per_tick_water += 1
 	water_processed += 1
-	if(actions_per_tick_water > max_actions_water)
+	if(actions_per_tick_water > max_actions_water - ((max(0,min(world.cpu,100))/100)*(max_actions_water/2)))
 		sleep(world.tick_lag)
 		actions_per_tick_water = 0
 
@@ -139,10 +142,14 @@ datum/controller/game_controller
 		world << "\green \b Initializations complete in [world.timeofday-RLstart_time] seconds!"
 
 	start_processing()
-		slow_process()
-		water_process()
-		fast_process()
-		process()
+		spawn()
+			slow_process()
+		spawn()
+			water_process()
+		spawn()
+			fast_process()
+		spawn()
+			process()
 	setup_objects()
 
 		var/start_time = world.timeofday
