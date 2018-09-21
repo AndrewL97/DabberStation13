@@ -134,7 +134,7 @@ datum/controller/game_controller
 
 		start_time = world.timeofday
 		world << "\red \b Creating sandbox spawn list."
-		for(var/i in typesof(/obj)+typesof(/mob/living/carbon)-/mob/living/carbon-/mob/living/carbon/human-/mob/living/carbon/human/dummy-/mob/living/carbon/alien-/mob/living/carbon/alien/humanoid-/obj/item)
+		for(var/i in typesof(/obj)/obj/item)
 			listofitems = "[listofitems]<br><a href=?[i]>[i]</a>"
 			typepaths += i
 		world << "\green \b Created sandbox spawn list in [world.timeofday-start_time] seconds!"
