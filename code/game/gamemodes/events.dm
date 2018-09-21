@@ -48,22 +48,6 @@
 						P.name = "wormhole"
 						spawn(rand(300,600))
 							del(P)
-		if(4)
-			event = 1
-			command_alert("Confirmed outbreak of level 5 biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
-			var/turf/T = pick(blobstart)
-			var/obj/blob/bl = new /obj/blob( T.loc, 30 )
-			spawn(0)
-				bl.Life()
-				bl.Life()
-				bl.Life()
-				bl.Life()
-				bl.Life()
-			blobevent = 1
-			dotheblobbaby()
-			spawn(3000)
-				blobevent = 0
-			//start loop here
 
 		if(5)
 			event = 1
@@ -84,14 +68,6 @@
 		if(6)
 			event = 1
 			viral_outbreak()
-
-/proc/dotheblobbaby()
-	if (blobevent)
-		for(var/obj/blob/B in world)
-			if (prob (40))
-				B.Life()
-		spawn(30)
-			dotheblobbaby()
 
 /obj/bhole/New()
 	src.smoke = new /datum/effects/system/harmless_smoke_spread()

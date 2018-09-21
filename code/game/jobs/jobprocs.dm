@@ -231,7 +231,7 @@
 
 	var/obj/item/weapon/tank/air/AAA = new(src)
 	src.equip_if_possible(AAA, slot_l_store)
-	src.internal = AAA //Toggle internals.
+	//src.internal = AAA //Toggle internals.
 
 	spawnId(rank)
 
