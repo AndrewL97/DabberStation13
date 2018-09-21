@@ -176,21 +176,19 @@ obj
 /turf/simulated/proc/Process_Water()
 	if(listofconnections.len == 0)
 		Get_Connections()
-	for(var/turf/simulated/pe in listofconnections)
-		CHECK_TICK_WATER()
-		/*if(water_height < pe.water_height)
-			var/tmp/calc = pe.water_height/listofturfs.len
-
-			pe.water_height = pe.water_height - calc
-			water_height = water_height + calc*/
-
-		if(pe.water_height < water_height)
-			var/tmp/calc = water_height/(1+listofturfs.len)
-			pe.water_height = pe.water_height + calc
-			water_height = water_height - calc
-		if(!(pe in water_changed))
-			water_changed += pe
-		pe.Render_Water_Icon()
+	for(var/a in listofconnections)
+		if(istype(a,/turf/simulated))
+			var/turf/simulated/pe = a
+			CHECK_TICK_WATER()
+			if(pe.water_height < water_height)
+				var/tmp/calc = water_height/(1+listofconnections.len)
+				pe.water_height = pe.water_height + calc
+				water_height = water_height - calc
+			if(!(pe in water_changed))
+				water_changed += pe
+			pe.Render_Water_Icon()
+		else
+			Get_Connections()
 	Render_Water_Icon()
 
 var/global/datum/controller/water_system/water_master
