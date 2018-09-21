@@ -247,8 +247,8 @@
 /obj/item/weapon/tank/air/New()
 	..()
 
-	src.air_contents.oxygen = (80*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C) * O2STANDARD
-	src.air_contents.nitrogen = (80*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C) * N2STANDARD
+	src.air_contents.oxygen = (170*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C) * O2STANDARD
+	src.air_contents.nitrogen = (170*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C) * N2STANDARD
 	return
 
 /obj/item/weapon/tank/oxygen/New()
@@ -265,7 +265,7 @@
 
 /obj/item/weapon/tank/jetpack/New()
 	..()
-	src.air_contents.oxygen = (95*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C)
+	src.air_contents.oxygen = (250*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C)
 	return
 
 /obj/item/weapon/tank/jetpack/verb/toggle()
