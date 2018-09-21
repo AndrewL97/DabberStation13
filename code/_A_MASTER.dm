@@ -45,7 +45,7 @@ var/max_actions = 50 //Max actions per tick, Really fast. of course this can be 
 var/CPU_warning = 0
 
 var/actions_per_tick_atmos = 0
-var/max_actions_atmos = 60 //Max actions per tick (FOR ATMOS), also fast. i definitely think this could be higher if optimized.
+var/max_actions_atmos = 50 //Max actions per tick (FOR ATMOS), also fast. i definitely think this could be higher if optimized.
 
 var/actions_per_tick_water = 0
 var/max_actions_water = 70 //Max actions per tick (FOR WATER), also fast.
@@ -59,7 +59,7 @@ var/water_processed = 0
 proc/CHECK_TICK_WATER() //epic optimizer used for our water system.
 	actions_per_tick_water += 1
 	water_processed += 1
-	if(actions_per_tick_water > max_actions_water - ((max(0,min(world.cpu,100))/100)*(max_actions_water/2)))
+	if(actions_per_tick_water > max_actions_water - ((max(0,min(world.cpu,100))/100)*(max_actions_water/1.5)))
 		sleep(world.tick_lag)
 		actions_per_tick_water = 0
 
