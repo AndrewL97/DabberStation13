@@ -273,7 +273,7 @@ mob
 
 			src.moving = 1
 
-			var/RLMove = src.move_delay - world.time
+			var/RLMove = max(world.tick_lag,(src.move_delay - world.time)-1)
 			mob.glide_size = (world.icon_size/RLMove)*world.tick_lag
 			//TILE_HEIGHT / move_delay * TICK_LAG
 			glide_size = mob.glide_size

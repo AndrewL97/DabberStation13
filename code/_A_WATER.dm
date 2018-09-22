@@ -272,9 +272,9 @@ obj
 /atom/proc/water_act(height)
 	return
 
-/turf/proc/Water_Can_Pass()
+/turf/proc/Water_Can_Pass(water_in_me)
 	for(var/obj/obstacle in src)
-		obstacle.water_act(water_height)
+		obstacle.water_act(water_in_me)
 		if(istype(obstacle,/obj/window) || istype(obstacle,/obj/machinery/door))
 			if(obstacle.density)
 				return 0
@@ -288,7 +288,7 @@ obj
 			CHECK_TICK_WATER()
 			var/tmp/turf/simulated/to_add = get_step(src,DIRE)
 			if(istype(to_add,/turf/simulated))
-				if(to_add.Water_Can_Pass())
+				if(to_add.Water_Can_Pass(water_height))
 					listofconnections += to_add
 
 /turf/simulated/proc/Process_Water()
