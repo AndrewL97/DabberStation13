@@ -139,73 +139,48 @@ obj
 					del src
 					return
 				if(water_pressure > 0)
-					if(water_pressure_direction != 0)
-						var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,water_pressure_direction)
-						var/obj/water/device/D = locate() in get_step(src,water_pressure_direction)
-						if(D)
-							if(REVERSEDIRS(D.dir) == water_pressure_direction)
-								D.water_pressure += water_pressure
+					if(icon_state != "4-way")
+						if(water_pressure_direction != 0)
+							Process_Direction(water_pressure_direction,1)
+					else
+						for(var/i in CARDINALS-dir)
+							Process_Direction(i,3)
+			proc/Process_Direction(DIRECTIONSEND,EMPTY)
+				var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,DIRECTIONSEND)
+				var/obj/water/device/D = locate() in get_step(src,DIRECTIONSEND)
+				if(D)
+					if(REVERSEDIRS(D.dir) == DIRECTIONSEND)
+						D.water_pressure += water_pressure/EMPTY
+						if(EMPTY == 1)
+							water_pressure = 0
+						return
+				if(G)
+					if(G.dir in DIAGONALS)
+						if(G.dir - REVERSEDIRS(DIRECTIONSEND) in CARDINALS)
+							G.water_pressure += water_pressure/EMPTY
+							G.water_pressure_direction = G.dir - REVERSEDIRS(DIRECTIONSEND)
+							if(EMPTY == 1)
 								water_pressure = 0
-								return
-							else
-								if(D.four_way == 1)
-									return //the pipe will fill until it explodes
-						if(G)
-							if(G.dir in DIAGONALS)
-								if(G.dir - REVERSEDIRS(water_pressure_direction) in CARDINALS)
-									G.water_pressure += water_pressure
-									G.water_pressure_direction = G.dir - REVERSEDIRS(water_pressure_direction)
-									water_pressure = 0
-									return
-							else
-								if(DIRTOHORVER["[water_pressure_direction]"] == DIRTOHORVER["[G.dir]"])
-									G.water_pressure += water_pressure
-									G.water_pressure_direction = water_pressure_direction
-									water_pressure = 0
-									return
-						var/turf/simulated/T = get_step(src,water_pressure_direction)
-						if(istype(T,/turf/simulated))
-							T.water_height += water_pressure
-							if(!(T in water_changed))
-								water_changed += T
-							if(T.water_height <= 16)
-								for(var/i in 1 to round(water_pressure))
-									CreateWaterParticle(water_pressure_direction)
-						water_pressure = 0
-							//Fuck it's leaking
+							return
+					else
+						if(DIRTOHORVER["[DIRECTIONSEND]"] == DIRTOHORVER["[G.dir]"])
+							G.water_pressure += water_pressure/EMPTY
+							G.water_pressure_direction = DIRECTIONSEND
+							if(EMPTY == 1)
+								water_pressure = 0
+							return
+				var/turf/simulated/T = get_step(src,DIRECTIONSEND)
+				if(istype(T,/turf/simulated))
+					T.water_height += water_pressure/EMPTY
+					if(!(T in water_changed))
+						water_changed += T
+					if(T.water_height <= 16)
+						for(var/i in 1 to round(water_pressure/EMPTY))
+							CreateWaterParticle(DIRECTIONSEND)
+				water_pressure = 0
 		device
-			var/four_way = 0
 			connector
 				icon_state = "filler"
-				four_way = 0
-			four_way_connector
-				icon_state = "4-way"
-				four_way = 1
-				Process_Water()
-					if(water_pressure > 0)
-						for(var/DIRE in CARDINALS-dir)
-							var/list/connections = list()
-							var/list/nonconnections = list()
-							var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,DIRE)
-							if(G)
-								connections += G
-								connections[G] = DIRE
-							else
-								var/turf/simulated/T = get_step(src,DIRE)
-								if(istype(T,/turf/simulated))
-									nonconnections += src
-									nonconnections[T] = DIRE
-							var/water_division = water_pressure/(connections.len+nonconnections.len)
-							for(var/obj/water/pipes/PIPE in connections)
-								PIPE.water_pressure += water_division
-								PIPE.water_pressure_direction = connections[PIPE]
-							for(var/turf/simulated/TURF in nonconnections)
-								TURF.water_height += water_division
-								if(!(TURF in water_changed))
-									water_changed += TURF
-								if(TURF.water_height <= 16)
-									for(var/i in 1 to round(water_division))
-										CreateWaterParticle(nonconnections[TURF])
 		tank
 			icon_state = "water_pump_1"
 			desc = "Due to it's technology, it holds infinite water."
