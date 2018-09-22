@@ -165,6 +165,9 @@ obj
 					if(G.icon_state == "4-way")
 						if(REVERSEDIRS(G.dir) == water_pressure_direction)
 							G.water_pressure += water_pressure/EMPTY
+							if(EMPTY == 1)
+								water_pressure = 0
+							return
 						else
 							return //Keep filling
 					else
