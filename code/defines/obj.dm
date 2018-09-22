@@ -124,7 +124,6 @@
 	name = "grille"
 	icon = 'structures.dmi'
 	icon_state = "grille"
-	density = 1
 	plane = WINDOW_PLANE
 	var/health = 10.0
 	var/destroyed = 0.0

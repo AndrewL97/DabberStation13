@@ -2,6 +2,7 @@
 
 /obj/grille
 	density = 1
+
 /obj/grille/proc/get_connection()
 	var/turf/T = src.loc
 	if(!istype(T, /turf/simulated/floor))
@@ -77,7 +78,7 @@
 		src.health -= 1
 
 /obj/grille/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
-	return src.density
+	return !src.density
 
 /obj/grille/attackby(obj/item/weapon/W, mob/user)
 	if (istype(W, /obj/item/weapon/wirecutters))
