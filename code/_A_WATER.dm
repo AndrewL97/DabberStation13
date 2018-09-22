@@ -248,7 +248,8 @@ obj
 					water_height = water_height - calc
 
 				if(!(pe in water_changed))
-					water_changed += pe
+					if(round(pe.water_height) > 0)
+						water_changed += pe
 
 				pe.Render_Water_Icon()
 		else
