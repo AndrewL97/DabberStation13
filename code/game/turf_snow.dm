@@ -21,6 +21,11 @@
 	name = "grass"
 	icon_state = "1"
 
+/turf/simulated/grass
+	icon = 'grasstiles.dmi'
+	name = "grass"
+	icon_state = "1"
+
 /turf/unsimulated/dirt
 	icon = 'grasstiles.dmi'
 	name = "grass"
