@@ -138,17 +138,18 @@ obj
 									G.water_pressure_direction = water_pressure_direction
 									water_pressure = 0
 									return
-						for(var/i in 1 to round(water_pressure))
-							var/obj/Particle/Water/A = new(locate(x,y,z))
-							A.x_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][1]*16)
-							A.y_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][2]*16)
-							A.x_spd = DIR2PIXEL["[water_pressure_direction]"][1]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][1]*(rand(1,30)/10)
-							A.y_spd = DIR2PIXEL["[water_pressure_direction]"][2]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][2]*(rand(1,30)/10)
 						var/turf/simulated/T = get_step(src,water_pressure_direction)
 						if(istype(T,/turf/simulated))
 							T.water_height += water_pressure
 							if(!(T in water_changed))
 								water_changed += T
+							if(T.water_height <= 16)
+								for(var/i in 1 to round(water_pressure))
+									var/obj/Particle/Water/A = new(locate(x,y,z))
+									A.x_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][1]*16)
+									A.y_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][2]*16)
+									A.x_spd = DIR2PIXEL["[water_pressure_direction]"][1]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][1]*(rand(1,30)/10)
+									A.y_spd = DIR2PIXEL["[water_pressure_direction]"][2]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][2]*(rand(1,30)/10)
 						water_pressure = 0
 							//Fuck it's leaking
 		device
