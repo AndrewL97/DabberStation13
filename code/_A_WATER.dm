@@ -124,8 +124,10 @@ obj
 						if(PIPE_DIRS[new_dir] == 99)
 							var/four_way_dir = input(user,"What is the pipe that sends water to this 4-way?","Change direction") as null|anything in PIPE_DIRS_2
 							if(four_way_dir)
+								icon_state = "4-way"
 								dir = PIPE_DIRS_2[four_way_dir]
 						else
+							icon_state = "water_pipe"
 							dir = PIPE_DIRS[new_dir]
 			Process_Water()
 				if(water_pressure > 100)
@@ -307,6 +309,14 @@ obj
 						water_changed += pe
 
 				pe.Render_Water_Icon()
+			if(round(pe.water_height) == 0)
+				pe.water_height = 0
+				if(pe in water_changed)
+					water_changed -= pe
+	if(round(water_height) == 0)
+		water_height = 0
+		if(src in water_changed)
+			water_changed -= src
 	Render_Water_Icon()
 
 var/global/datum/controller/water_system/water_master
