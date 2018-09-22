@@ -14,7 +14,7 @@ var
 	stat(null, "Air : %[round(air*2)]")
 	//stat(null, "Shield : %[round(shield)]")
 	if(veh)
-		stat("Vehicle Speed","[round(veh.velocity.SquareMagnitude()/75)] km/h")
+		stat("Vehicle Speed","[round(veh.velocity.SquareMagnitude()/50)] km/h")
 		if(veh.Kart)
 			stat("Racing status",null)
 			stat(null, "Lap : [veh.lap]")

@@ -71,7 +71,7 @@ atom/movable
 				if(!istype(e,/mob))
 					if(PixelCollision(e))
 						if(istype(src,/obj/machinery/vehicle))
-							if(round(src:velocity:SquareMagnitude()/75) > 120 && !istype(e,/turf/unsimulated))
+							if(round(src:velocity:SquareMagnitude()/50) > 120 && !istype(e,/turf/unsimulated))
 								src:velocity *= 0.75
 								explosion(e, 2, 3, 5, 10,0)
 							else
