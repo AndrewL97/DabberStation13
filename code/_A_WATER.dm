@@ -138,7 +138,7 @@ obj
 									G.water_pressure_direction = water_pressure_direction
 									water_pressure = 0
 									return
-						for(var/i in 1 to round(water_pressure/5))
+						for(var/i in 1 to round(water_pressure))
 							var/obj/Particle/Water/A = new(locate(x,y,z))
 							A.x_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][1]*16)
 							A.y_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][2]*16)
