@@ -241,16 +241,16 @@ obj
 		if(istype(a,/turf/simulated))
 			CHECK_TICK_WATER()
 			var/turf/simulated/pe = a
+			if(round(water_height) > 0)
+				if(pe.water_height < water_height)
+					var/tmp/calc = water_height/(1+listofconnections.len)
+					pe.water_height = pe.water_height + calc
+					water_height = water_height - calc
 
-			if(pe.water_height < water_height)
-				var/tmp/calc = water_height/(1+listofconnections.len)
-				pe.water_height = pe.water_height + calc
-				water_height = water_height - calc
+				if(!(pe in water_changed))
+					water_changed += pe
 
-			if(!(pe in water_changed))
-				water_changed += pe
-
-			pe.Render_Water_Icon()
+				pe.Render_Water_Icon()
 		else
 			Get_Connections()
 	Render_Water_Icon()
