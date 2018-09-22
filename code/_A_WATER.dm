@@ -49,9 +49,41 @@ turf
 
 #define DIR2PIXEL list("1" = list(0,1),"2" = list(0,-1),"4" = list(1,0),"8" = list(-1,0))
 #define DIAGONALS list(SOUTHWEST,SOUTHEAST,NORTHWEST,NORTHEAST)
-#define REVERSEDIRS list("1" = SOUTH,"2" = NORTH,"4" = WEST,"8" = EAST)
+#define REVERSEDIRS(DIR) turn(DIR,180)
 #define CARDINALS list(SOUTH,NORTH,EAST,WEST)
 #define TEXT2DIR list("NORTH" = NORTH,"SOUTH" = SOUTH,"EAST" = EAST,"WEST" = WEST,"NORTHEAST" = NORTHEAST,"NORTHWEST" = NORTHWEST,"SOUTHEAST" = SOUTHEAST,"SOUTHWEST" = SOUTHWEST)
+#define DIRTOHORVER list("1" = "VER","2" = "VER","4" = "HOR","8" = "HOR")
+#define PIPE_DIRS list("HORIZONTAL" = EAST,"VERTICAL" = SOUTH,"TOP-RIGHT" = NORTHEAST,"TOP-LEFT" = NORTHWEST,"BOTTOM-RIGHT" = SOUTHEAST,"BOTTOM-LEFT" = SOUTHWEST)
+obj
+	item
+		water_pipe
+			icon = 'water_pipes.dmi'
+			icon_state = "pipe"
+			var/amount = 50
+			afterattack(atom/T, mob/user as mob)
+				..()
+				if(istype(T,/obj/item/water_pipe))
+					var/obj/item/water_pipe/E = T
+					amount += E.amount
+					del T
+				if(istype(T,/obj/water/pipes))
+					var/obj/water/pipes/G = T
+					if(G.water_pressure == 0)
+						amount += 1
+						user << "You disconnect the pipe on the floor and add it to your stack."
+						del T
+					else
+						user << "\red <b>You cannot disconnect this pipe! Water is flowing through it currently."
+				if(istype(T,/turf/simulated))
+					var/obj/water/pipes/G = locate(/obj/water/pipes) in T
+					if(G)
+						usr << "\red <b>There is already a pipe here."
+						return
+					if(amount > 0)
+						amount -= 1
+						new /obj/water/pipes(T.loc)
+						if(amount == 0)
+							del src
 obj
 	water_overlay
 		icon = 'water sprites.dmi'
@@ -66,6 +98,7 @@ obj
 		icon = 'water_pipes.dmi'
 		pipes
 			icon_state = "water_pipe"
+			desc = "A pretty robust pipe for water to flow in. Use crowbar to remove, wrench to rotate."
 			New()
 				..()
 				hide()
@@ -74,42 +107,50 @@ obj
 				if(istype(T,/turf))
 					if(level == 1)
 						alpha = level < T.level ? 0 : 255
-			attackby(obj/item/weapon/wrench/G as obj, mob/user as mob)
-				if(!istype(G,/obj/item/weapon/wrench))
-					return
-				var/new_dir = input(user,"What direction","Change direction") as null|anything in TEXT2DIR
-				if(new_dir)
-					dir = TEXT2DIR[new_dir]
+			attackby(obj/item/weapon/G as obj, mob/user as mob)
+				..()
+				if(istype(G,/obj/item/weapon/crowbar))
+					user << "\red <b>You pry the pipe out!"
+					var/obj/item/water_pipe/A = new(locate(x,y,z))
+					A.amount = 1
+				if(istype(G,/obj/item/weapon/wrench))
+					var/new_dir = input(user,"What direction","Change direction") as null|anything in PIPE_DIRS
+					if(new_dir)
+						dir = PIPE_DIRS[new_dir]
 			Process_Water()
 				if(water_pressure > 0)
 					if(water_pressure_direction != 0)
 						var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,water_pressure_direction)
 						var/obj/water/device/D = locate() in get_step(src,water_pressure_direction)
 						if(D)
-							//world << "Filling a [D]"
 							D.water_pressure += water_pressure
 							water_pressure = 0
 							return
 						if(G)
-							G.water_pressure += water_pressure
 							if(G.dir in DIAGONALS)
-								G.water_pressure_direction = G.dir - REVERSEDIRS["[water_pressure_direction]"]
+								if(G.dir - REVERSEDIRS(water_pressure_direction) in CARDINALS)
+									G.water_pressure += water_pressure
+									G.water_pressure_direction = G.dir - REVERSEDIRS(water_pressure_direction)
+									water_pressure = 0
+									return
 							else
-								G.water_pressure_direction = water_pressure_direction
-							water_pressure = 0
-						else
-							for(var/i in 1 to round(water_pressure/5))
-								var/obj/Particle/Water/A = new(locate(x,y,z))
-								A.x_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][1]*16)
-								A.y_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][2]*16)
-								A.x_spd = DIR2PIXEL["[water_pressure_direction]"][1]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][1]*(rand(1,30)/10)
-								A.y_spd = DIR2PIXEL["[water_pressure_direction]"][2]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][2]*(rand(1,30)/10)
-							var/turf/simulated/T = get_step(src,water_pressure_direction)
-							if(istype(T,/turf/simulated))
-								T.water_height += water_pressure
-								if(!(T in water_changed))
-									water_changed += T
-							water_pressure = 0
+								if(DIRTOHORVER["[water_pressure_direction]"] == DIRTOHORVER["[G.dir]"])
+									G.water_pressure += water_pressure
+									G.water_pressure_direction = water_pressure_direction
+									water_pressure = 0
+									return
+						for(var/i in 1 to round(water_pressure/5))
+							var/obj/Particle/Water/A = new(locate(x,y,z))
+							A.x_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][1]*16)
+							A.y_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][2]*16)
+							A.x_spd = DIR2PIXEL["[water_pressure_direction]"][1]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][1]*(rand(1,30)/10)
+							A.y_spd = DIR2PIXEL["[water_pressure_direction]"][2]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][2]*(rand(1,30)/10)
+						var/turf/simulated/T = get_step(src,water_pressure_direction)
+						if(istype(T,/turf/simulated))
+							T.water_height += water_pressure
+							if(!(T in water_changed))
+								water_changed += T
+						water_pressure = 0
 							//Fuck it's leaking
 		device
 			connector
@@ -120,8 +161,13 @@ obj
 			water_pressure_direction = SOUTH
 			density = 1
 			water_pressure = 1 //now infinite
+			var/outputting_pressure = 0
 			var/on = 0
 			attack_hand(mob/user as mob)
+				if(!on)
+					var/new_pres = input(user,"Change water output pressure (0-20)","Water Tank") as null|num
+					if(new_pres)
+						outputting_pressure = max(0,min(20,new_pres))
 				on = !on
 				user << "You flip the water tank's valve to <b>[on ? "<font color='green'>ON</font>" : "<font color='red'>OFF</font>"]</b>!"
 				icon_state = "water_pump_[on]"
@@ -130,10 +176,10 @@ obj
 					var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,water_pressure_direction)
 					if(G)
 						if(G.dir in DIAGONALS)
-							G.water_pressure_direction = G.dir - REVERSEDIRS["[SOUTH]"]
+							G.water_pressure_direction = G.dir - REVERSEDIRS(SOUTH)
 						else
 							G.water_pressure_direction = SOUTH
-						G.water_pressure += 20
+						G.water_pressure += outputting_pressure
 		meter
 			name = "meter"
 			icon = 'meter.dmi'

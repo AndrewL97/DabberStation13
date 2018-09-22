@@ -15,6 +15,7 @@ proc/atan2(x, y)
 	var/fire_rate = 0
 	var/reload_rate = 0
 	var/gun_sound = 'shot.ogg'
+	var/reload_sound = 'reload.ogg'
 	var/bullet_speed = 0
 	var/bullet_damage = 0
 	var/automatic_reload = 0
@@ -64,6 +65,13 @@ proc/atan2(x, y)
 				G.damage = bullet_damage
 				G.owner = user
 				playsound(user, gun_sound, 100, 1, sound_range, 0)
+		else
+
+			if(automatic == 0)
+				playsound(user, reload_sound, 100, 1, sound_range, 0)
+				ammo = ammo_max
+			else
+				user << "\red <b>No ammunition!"
 	New()
 		..()
 		special_processing += src
