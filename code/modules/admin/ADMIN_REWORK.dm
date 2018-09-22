@@ -233,7 +233,7 @@ client
 	set name="Sandbox Panel"
 
 	var/output = "<h1>Sandbox Panel</h1><br>"
-	if(client.holder)
+	if(holder)
 		output += "[listofitems2]"
 	else
 		output += "[listofitems]"
@@ -243,7 +243,7 @@ client
 /client/Topic(href)
 	var/g = text2path(href)
 	if(g)
-		if(!client.holder)
+		if(!holder)
 			if(sandbox == -1)
 				src << "<font color='red'>Failed to spawn. Sandbox disabled."
 				..()
