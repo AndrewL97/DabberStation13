@@ -230,13 +230,13 @@
 	boxes.icon_state = "block"
 	boxes.screen_loc = "CENTER-3,[screen_loc_g] to CENTER+3,[screen_loc_g]"
 	boxes.layer = 18
-	boxes.plane = 10
+	boxes.plane = HUD_PLANE
 	var/obj/screen/close/closer = new /obj/screen/close(  )
 	closer.master = src
 	closer.icon_state = "closeback"
 	closer.screen_loc = "CENTER+4,[screen_loc_g]"
 	closer.layer = 19
-	closer.plane = 10
+	closer.plane = HUD_PLANE
 	src:closer = closer
 	src:boxes = boxes
 /obj/screen/storage/attackby(W, mob/user as mob)

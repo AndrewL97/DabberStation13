@@ -474,6 +474,7 @@
 /obj/screen/storage
 	name = "storage"
 	master = null
+	mouse_opacity = 0
 
 /obj/screen/zone_sel
 	name = "Damage Zone"
