@@ -69,6 +69,7 @@ turf
 					plane = MOB_PLANE_ALT
 					Get_Layer_Y(-1)
 /turf/simulated/floor/plating/water
+	level = 1
 	TurfHeight = 0
 
 	ex_act()
