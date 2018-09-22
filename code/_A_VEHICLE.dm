@@ -72,11 +72,8 @@ atom/movable
 					if(PixelCollision(e))
 						if(istype(src,/obj/machinery/vehicle))
 							if(round(src:velocity:SquareMagnitude()/75) > 120 && !istype(e,/turf/unsimulated))
-								playsound(src, 'Explosion1.ogg', 100, 1, 6, 0)
-								src:velocity *= 0.97
-								for(var/mob/A as mob in src)
-									A << 'Explosion1.ogg'
-								del e
+								src:velocity *= 0.75
+								explosion(e, 2, 3, 5, 10,0)
 							else
 								bumpedwalls += 1
 						else
