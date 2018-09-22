@@ -8,8 +8,8 @@
 	anchored = 1
 	icon = 'chemical.dmi'
 	icon_state = "dispenser"
-	var/energy = 25
-	var/max_energy = 25
+	var/energy = 200
+	var/max_energy = 200
 	var/list/dispensable_reagents = list("water","oxygen","nitrogen","hydrogen","potassium","mercury","sulfur","carbon","chlorine","fluorine","phosphorus","lithium","acid","radium","iron","aluminium","silicon","plasma","sugar","ethanol")
 
 	proc

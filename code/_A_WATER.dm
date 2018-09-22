@@ -145,6 +145,7 @@ obj
 					else
 						for(var/i in CARDINALS-dir)
 							Process_Direction(i,3)
+						water_pressure = 0
 			proc/Process_Direction(DIRECTIONSEND,EMPTY)
 				var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,DIRECTIONSEND)
 				var/obj/water/device/D = locate() in get_step(src,DIRECTIONSEND)
@@ -177,7 +178,8 @@ obj
 					if(T.water_height <= 16)
 						for(var/i in 1 to round(water_pressure/EMPTY))
 							CreateWaterParticle(DIRECTIONSEND)
-				water_pressure = 0
+				if(EMPTY == 1)
+					water_pressure = 0
 		device
 			connector
 				icon_state = "filler"

@@ -61,7 +61,7 @@
 	icon = 'power.dmi'
 	icon_state = "core_cooler9"
 	var/coolant_left = 999999
-	var/max_coolant = 2000
+	var/max_coolant = 3000
 	var/on = 1
 
 /obj/machinery/power/core/coolant/attack_hand(mob/user as mob)
@@ -73,7 +73,7 @@
 		use_power(250)
 	if(coolant_left > max_coolant)
 		coolant_left = max_coolant //cap
-	icon_state = "core_cooler[round((coolant_left/max_coolant)*9)]"
+	icon_state = "core_cooler[round((coolant_left/max_coolant)*18)]"
 	if(coolant_left > 0 && on)
 		for(var/obj/machinery/power/core/e in orange(1,src))
 			e.temp -= world.tick_lag/2
