@@ -71,9 +71,9 @@ atom/movable
 				if(!istype(e,/mob))
 					if(PixelCollision(e))
 						if(istype(src,/obj/machinery/vehicle))
-							if(round(src:velocity:SquareMagnitude()/50) > 95)
-								src:velocity *= 0.75
+							if(round(src:velocity:SquareMagnitude()/50) > 80)
 								explosion(e, 2, 3, 5, 10,0)
+								del src
 							else
 								bumpedwalls += 1
 						else
@@ -130,6 +130,9 @@ vy = v * sin(angle)
 		del E
 		del I
 	Del()
+		for(var/atom/movable/A as mob|obj in src)
+			A.loc = src.loc
+			A.ex_act(1)
 		special_processing -= src
 		..()
 
