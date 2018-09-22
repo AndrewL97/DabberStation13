@@ -13,6 +13,7 @@ var/global/datum/controller/game_controller/master_controller //Set in world.New
 var/lighting_inited = 0
 var/frm_counter = 0
 var/listofitems = ""
+var/listofitems2 = "" //admin list
 var/list/clients = list()
 
 var/list/water_objects = list() //_A_WATER.dm
@@ -136,8 +137,10 @@ datum/controller/game_controller
 
 		start_time = world.timeofday
 		world << "\red \b Creating sandbox spawn list."
-		for(var/i in typesof(/obj)-/obj/item)
+		for(var/i in typesof(/obj/item)-/obj/item)
 			listofitems = "[listofitems]<br><a href=?[i]>[i]</a>"
+		for(var/i in typesof(/obj)+typesof(/mob))
+			listofitems2 = "[listofitems2]<br><a href=?[i]>[i]</a>"
 			typepaths += i
 		world << "\green \b Created sandbox spawn list in [world.timeofday-start_time] seconds!"
 

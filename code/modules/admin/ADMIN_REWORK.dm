@@ -233,17 +233,21 @@ client
 	set name="Sandbox Panel"
 
 	var/output = "<h1>Sandbox Panel</h1><br>"
-	output += "[listofitems]"
+	if(client.holder)
+		output += "[listofitems2]"
+	else
+		output += "[listofitems]"
 	src << browse(cssStyleSheetDab13 + output,"window=sandboxwindow;size=800x600;can_close=1")
 
 
 /client/Topic(href)
 	var/g = text2path(href)
 	if(g)
-		if(sandbox == -1)
-			src << "<font color='red'>Failed to spawn. Sandbox disabled."
-			..()
-			return
+		if(!client.holder)
+			if(sandbox == -1)
+				src << "<font color='red'>Failed to spawn. Sandbox disabled."
+				..()
+				return
 		var/atom/movable/e = new g
 		e.loc = locate(mob.x,mob.y,mob.z)
 		message_admins("[key] spawned a [e.name] ([href]) at [mob.x],[mob.y]")
