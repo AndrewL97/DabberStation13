@@ -55,7 +55,8 @@ turf
 #define CARDINALS list(SOUTH,NORTH,EAST,WEST)
 #define TEXT2DIR list("NORTH" = NORTH,"SOUTH" = SOUTH,"EAST" = EAST,"WEST" = WEST,"NORTHEAST" = NORTHEAST,"NORTHWEST" = NORTHWEST,"SOUTHEAST" = SOUTHEAST,"SOUTHWEST" = SOUTHWEST)
 #define DIRTOHORVER list("1" = "VER","2" = "VER","4" = "HOR","8" = "HOR")
-#define PIPE_DIRS list("HORIZONTAL" = EAST,"VERTICAL" = SOUTH,"TOP-RIGHT" = NORTHEAST,"TOP-LEFT" = NORTHWEST,"BOTTOM-RIGHT" = SOUTHEAST,"BOTTOM-LEFT" = SOUTHWEST)
+#define PIPE_DIRS list("HORIZONTAL" = EAST,"VERTICAL" = SOUTH,"TOP-RIGHT" = NORTHEAST,"TOP-LEFT" = NORTHWEST,"BOTTOM-RIGHT" = SOUTHEAST,"BOTTOM-LEFT" = SOUTHWEST,"4-WAY" = 99)
+#define PIPE_DIRS_2 list("UP" = NORTH,"DOWN" = SOUTH,"RIGHT" = EAST,"LEFT" = WEST)
 obj
 	item
 		water_pipe
@@ -118,9 +119,14 @@ obj
 					A.amount = 1
 					del src
 				if(istype(G,/obj/item/weapon/wrench))
-					var/new_dir = input(user,"What direction","Change direction") as null|anything in PIPE_DIRS
+					var/new_dir = input(user,"What direction should this pipe have?","Change direction") as null|anything in PIPE_DIRS
 					if(new_dir)
-						dir = PIPE_DIRS[new_dir]
+						if(PIPE_DIRS[new_dir] == 99)
+							var/four_way_dir = input(user,"What is the pipe that sends water to this 4-way?","Change direction") as null|anything in PIPE_DIRS_2
+							if(four_way_dir)
+								dir = PIPE_DIRS_2[four_way_dir]
+						else
+							dir = PIPE_DIRS[new_dir]
 			Process_Water()
 				if(water_pressure > 100)
 					damaged = 1
@@ -156,20 +162,26 @@ obj
 							water_pressure = 0
 						return
 				if(G)
-					if(G.dir in DIAGONALS)
-						if(G.dir - REVERSEDIRS(DIRECTIONSEND) in CARDINALS)
+					if(G.icon_state == "4-way")
+						if(REVERSEDIRS(G.dir) == water_pressure_direction)
 							G.water_pressure += water_pressure/EMPTY
-							G.water_pressure_direction = G.dir - REVERSEDIRS(DIRECTIONSEND)
-							if(EMPTY == 1)
-								water_pressure = 0
-							return
+						else
+							return //Keep filling
 					else
-						if(DIRTOHORVER["[DIRECTIONSEND]"] == DIRTOHORVER["[G.dir]"])
-							G.water_pressure += water_pressure/EMPTY
-							G.water_pressure_direction = DIRECTIONSEND
-							if(EMPTY == 1)
-								water_pressure = 0
-							return
+						if(G.dir in DIAGONALS)
+							if(G.dir - REVERSEDIRS(DIRECTIONSEND) in CARDINALS)
+								G.water_pressure += water_pressure/EMPTY
+								G.water_pressure_direction = G.dir - REVERSEDIRS(DIRECTIONSEND)
+								if(EMPTY == 1)
+									water_pressure = 0
+								return
+						else
+							if(DIRTOHORVER["[DIRECTIONSEND]"] == DIRTOHORVER["[G.dir]"])
+								G.water_pressure += water_pressure/EMPTY
+								G.water_pressure_direction = DIRECTIONSEND
+								if(EMPTY == 1)
+									water_pressure = 0
+								return
 				var/turf/simulated/T = get_step(src,DIRECTIONSEND)
 				if(istype(T,/turf/simulated))
 					T.water_height += water_pressure/EMPTY
