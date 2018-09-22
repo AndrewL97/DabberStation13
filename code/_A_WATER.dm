@@ -161,7 +161,7 @@ obj
 			water_pressure_direction = SOUTH
 			density = 1
 			water_pressure = 1 //now infinite
-			var/outputting_pressure = 0
+			var/outputting_pressure = 20
 			var/on = 0
 			attack_hand(mob/user as mob)
 				if(!on)
