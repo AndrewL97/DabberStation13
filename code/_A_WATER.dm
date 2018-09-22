@@ -81,7 +81,7 @@ obj
 						return
 					if(amount > 0)
 						amount -= 1
-						new /obj/water/pipes(T.loc)
+						new /obj/water/pipes(locate(T.x,T.y,T.z))
 						if(amount == 0)
 							del src
 obj
@@ -113,6 +113,7 @@ obj
 					user << "\red <b>You pry the pipe out!"
 					var/obj/item/water_pipe/A = new(locate(x,y,z))
 					A.amount = 1
+					del src
 				if(istype(G,/obj/item/weapon/wrench))
 					var/new_dir = input(user,"What direction","Change direction") as null|anything in PIPE_DIRS
 					if(new_dir)
