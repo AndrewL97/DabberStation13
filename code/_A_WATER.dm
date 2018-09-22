@@ -99,14 +99,12 @@ obj
 		pipes
 			icon_state = "water_pipe"
 			desc = "A pretty robust pipe for water to flow in. Use crowbar to remove, wrench to rotate."
+			level = 1
 			New()
 				..()
-				hide()
-			hide()
 				var/turf/T = locate(x,y,z)
 				if(istype(T,/turf))
-					if(level == 1)
-						alpha = level < T.level ? 0 : 255
+					alpha = level < T.level ? 0 : 255
 			attackby(obj/item/weapon/G as obj, mob/user as mob)
 				..()
 				if(istype(G,/obj/item/weapon/crowbar))
@@ -162,7 +160,7 @@ obj
 			water_pressure_direction = SOUTH
 			density = 1
 			water_pressure = 1 //now infinite
-			var/outputting_pressure = 20
+			var/outputting_pressure = 1
 			var/on = 0
 			attack_hand(mob/user as mob)
 				if(!on)
