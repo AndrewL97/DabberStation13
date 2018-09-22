@@ -232,7 +232,7 @@ obj
 				var/t = null
 				var/obj/water/pipes/G = locate(/obj/water/pipes) in loc
 				if(G)
-					t = text("<B>Pressure:</B> [G.water_pressure] water.")
+					t = text("<B>Pressure:</B> [G.water_pressure]m³")
 				else
 					usr << "\blue <B>You are too far away.</B>"
 
