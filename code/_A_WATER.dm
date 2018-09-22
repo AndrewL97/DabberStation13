@@ -30,6 +30,8 @@ turf
 		old_water_height = water_height
 	New()
 		..()
+		for(var/obj/water/G in src)
+			G.hide()
 		if(!gW1)
 			gW1 = new(locate(x,y,z))
 			gW1.Get_Layer_Y(0.1)
@@ -75,9 +77,9 @@ obj
 					else
 						user << "\red <b>You cannot disconnect this pipe! Water is flowing through it currently."
 				if(istype(T,/turf/simulated))
-					var/obj/water/pipes/G = locate(/obj/water/pipes) in T
+					var/obj/water/G = locate(/obj/water/pipes) in T
 					if(G)
-						usr << "\red <b>There is already a pipe here."
+						usr << "\red <b>There is already a pipe device here."
 						return
 					if(amount > 0)
 						amount -= 1
@@ -96,15 +98,18 @@ obj
 	water
 		plane = CABLE_PLANE
 		icon = 'water_pipes.dmi'
+		hide()
+			return
 		pipes
 			icon_state = "water_pipe"
 			desc = "A pretty robust pipe for water to flow in. Use crowbar to remove, wrench to rotate."
 			level = 1
 			New()
 				..()
-				/*var/turf/T = locate(x,y,z)
+			hide()
+				var/turf/T = locate(x,y,z)
 				if(istype(T,/turf))
-					alpha = level < T.level ? 0 : 255*/
+					alpha = level < T.level ? 0 : 255
 			attackby(obj/item/weapon/G as obj, mob/user as mob)
 				..()
 				if(istype(G,/obj/item/weapon/crowbar))
@@ -117,14 +122,34 @@ obj
 					if(new_dir)
 						dir = PIPE_DIRS[new_dir]
 			Process_Water()
+				if(water_pressure > 100)
+					damaged = 1
+				if(damaged == 1)
+					var/turf/simulated/T = locate(x,y,z)
+					T.water_height += water_pressure
+					message_admins("Pipe at [x],[y],[z] ruptured and blew up")
+					for(var/i in 1 to 100)
+						var/obj/Particle/Water/A = new(locate(x,y,z))
+						A.x_pos = 16
+						A.y_pos = 16
+						A.x_spd = (rand(-30,30)/10)
+						A.y_spd = (rand(-30,30)/10)
+					playsound(src, 'explosionfar.ogg', 100, 1, 30)
+					playsound(src, "explosion", 100, 1, 15)
+					del src
+					return
 				if(water_pressure > 0)
 					if(water_pressure_direction != 0)
 						var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,water_pressure_direction)
 						var/obj/water/device/D = locate() in get_step(src,water_pressure_direction)
 						if(D)
-							D.water_pressure += water_pressure
-							water_pressure = 0
-							return
+							if(REVERSEDIRS(D.dir) == water_pressure_direction)
+								D.water_pressure += water_pressure
+								water_pressure = 0
+								return
+							else
+								if(D.four_way == 1)
+									return //the pipe will fill until it explodes
 						if(G)
 							if(G.dir in DIAGONALS)
 								if(G.dir - REVERSEDIRS(water_pressure_direction) in CARDINALS)
@@ -145,16 +170,42 @@ obj
 								water_changed += T
 							if(T.water_height <= 16)
 								for(var/i in 1 to round(water_pressure))
-									var/obj/Particle/Water/A = new(locate(x,y,z))
-									A.x_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][1]*16)
-									A.y_pos = 16+(DIR2PIXEL["[water_pressure_direction]"][2]*16)
-									A.x_spd = DIR2PIXEL["[water_pressure_direction]"][1]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][1]*(rand(1,30)/10)
-									A.y_spd = DIR2PIXEL["[water_pressure_direction]"][2]==0 ? rand(-20,20)/10 : DIR2PIXEL["[water_pressure_direction]"][2]*(rand(1,30)/10)
+									CreateWaterParticle(water_pressure_direction)
 						water_pressure = 0
 							//Fuck it's leaking
 		device
+			var/four_way = 0
 			connector
 				icon_state = "filler"
+				four_way = 0
+			four_way_connector
+				icon_state = "4-way"
+				four_way = 1
+				Process_Water()
+					if(water_pressure > 0)
+						for(var/DIRE in CARDINALS-dir)
+							var/list/connections = list()
+							var/list/nonconnections = list()
+							var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,DIRE)
+							if(G)
+								connections += G
+								connections[G] = DIRE
+							else
+								var/turf/simulated/T = get_step(src,DIRE)
+								if(istype(T,/turf/simulated))
+									nonconnections += src
+									nonconnections[T] = DIRE
+							var/water_division = water_pressure/(connections.len+nonconnections.len)
+							for(var/obj/water/pipes/PIPE in connections)
+								PIPE.water_pressure += water_division
+								PIPE.water_pressure_direction = connections[PIPE]
+							for(var/turf/simulated/TURF in nonconnections)
+								TURF.water_height += water_division
+								if(!(TURF in water_changed))
+									water_changed += TURF
+								if(TURF.water_height <= 16)
+									for(var/i in 1 to round(water_division))
+										CreateWaterParticle(nonconnections[TURF])
 		tank
 			icon_state = "water_pump_1"
 			desc = "Due to it's technology, it holds infinite water."
@@ -217,9 +268,19 @@ obj
 					damaged = prob(35)
 		proc
 			Process_Water() //Called every time we want a process.
+			CreateWaterParticle(DIRECTION)
+				var/obj/Particle/Water/A = new(locate(x,y,z))
+				A.x_pos = 16+(DIR2PIXEL["[DIRECTION]"][1]*16)
+				A.y_pos = 16+(DIR2PIXEL["[DIRECTION]"][2]*16)
+				A.x_spd = DIR2PIXEL["[DIRECTION]"][1]==0 ? rand(-20,20)/10 : DIR2PIXEL["[DIRECTION]"][1]*(rand(1,30)/10)
+				A.y_spd = DIR2PIXEL["[DIRECTION]"][2]==0 ? rand(-20,20)/10 : DIR2PIXEL["[DIRECTION]"][2]*(rand(1,30)/10)
+
+/atom/proc/water_act(height)
+	return
 
 /turf/proc/Water_Can_Pass()
 	for(var/obj/obstacle in src)
+		obstacle.water_act(water_height)
 		if(istype(obstacle,/obj/window) || istype(obstacle,/obj/machinery/door))
 			if(obstacle.density)
 				return 0
@@ -237,7 +298,8 @@ obj
 					listofconnections += to_add
 
 /turf/simulated/proc/Process_Water()
-	Get_Connections()
+	if(water_cycles % 4 == 1)
+		Get_Connections()
 	for(var/a in listofconnections)
 		if(istype(a,/turf/simulated))
 			CHECK_TICK_WATER()
@@ -253,8 +315,6 @@ obj
 						water_changed += pe
 
 				pe.Render_Water_Icon()
-		else
-			Get_Connections()
 	Render_Water_Icon()
 
 var/global/datum/controller/water_system/water_master

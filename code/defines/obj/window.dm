@@ -19,6 +19,8 @@
 			for(var/obj/window/g in orange(1,src))
 				if(abs(src.x-g.x)-abs(src.y-g.y)) //doesn't count diagonal walls
 					g.AutoJoin()
+	Del()
+		..()
 	proc/AutoJoin()
 		var/junction = 0 //will be used to determine from which side the wall is connected to other walls
 		for(var/obj/window/W in orange(src,1))
@@ -26,6 +28,9 @@
 				junction |= get_dir(src,W)
 		icon_state = "[smooth_shit][junction]"
 		return
+	water_act(height)
+		if(height > 70)
+			del src
 
 // Reinforced
 

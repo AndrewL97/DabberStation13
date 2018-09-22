@@ -49,18 +49,19 @@ var/actions_per_tick_atmos = 0
 var/max_actions_atmos = 50 //Max actions per tick (FOR ATMOS), also fast. i definitely think this could be higher if optimized.
 
 var/actions_per_tick_water = 0
-var/max_actions_water = 130 //Max actions per tick (FOR WATER), also fast.
+var/max_actions_water = 140 //Max actions per tick (FOR WATER), also fast.
 
 var/list/typepaths = list()
 
 var/master_Processed = 0
 var/atmos_processed = 0
 var/water_processed = 0
+var/water_cycles = 0
 
 proc/CHECK_TICK_WATER() //epic optimizer used for our water system.
 	actions_per_tick_water += 1
 	water_processed += 1
-	if(actions_per_tick_water > max_actions_water - ((max(0,min(world.cpu,100))/100)*(max_actions_water/1.5)))
+	if(actions_per_tick_water > max_actions_water - ((max(0,min(world.cpu,50))/50)*(max_actions_water/1.5)))
 		sleep(world.tick_lag)
 		actions_per_tick_water = 0
 
@@ -189,6 +190,7 @@ datum/controller/game_controller
 		spawn(world.tick_lag)
 			fast_process()
 	water_process()
+		water_cycles += 1
 		water_master.process()
 		spawn(world.tick_lag)
 			water_process()
