@@ -102,9 +102,9 @@ obj
 			level = 1
 			New()
 				..()
-				var/turf/T = locate(x,y,z)
+				/*var/turf/T = locate(x,y,z)
 				if(istype(T,/turf))
-					alpha = level < T.level ? 0 : 255
+					alpha = level < T.level ? 0 : 255*/
 			attackby(obj/item/weapon/G as obj, mob/user as mob)
 				..()
 				if(istype(G,/obj/item/weapon/crowbar))
