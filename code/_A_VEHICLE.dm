@@ -71,7 +71,7 @@ atom/movable
 				if(!istype(e,/mob))
 					if(PixelCollision(e))
 						if(istype(src,/obj/machinery/vehicle))
-							if(round(src:velocity:SquareMagnitude()/75))
+							if(round(src:velocity:SquareMagnitude()/75) > 110)
 								playsound(src, 'Explosion1.ogg', 100, 1, 6, 0)
 								for(var/mob/A as mob in src)
 									A << 'Explosion1.ogg'
