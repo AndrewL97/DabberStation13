@@ -73,6 +73,7 @@ atom/movable
 						if(istype(src,/obj/machinery/vehicle))
 							if(round(src:velocity:SquareMagnitude()/75) > 150)
 								playsound(src, 'Explosion1.ogg', 100, 1, 6, 0)
+								src:velocity *= 0.9
 								for(var/mob/A as mob in src)
 									A << 'Explosion1.ogg'
 								del e
