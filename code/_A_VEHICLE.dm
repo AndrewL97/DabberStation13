@@ -70,7 +70,13 @@ atom/movable
 			for(var/atom/e in orange(1,src))
 				if(!istype(e,/mob))
 					if(PixelCollision(e))
-						bumpedwalls += 1
+						if(istype(src,/obj/machinery/vehicle))
+							if(round(src:velocity:SquareMagnitude()/75))
+								del e
+							else
+								bumpedwalls += 1
+						else
+							bumpedwalls += 1
 
 			if(bumpedwalls > 0)
 				x = old_x
