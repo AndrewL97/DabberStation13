@@ -26,7 +26,6 @@ turf
 			gW1.plane = TOP_PLANE
 		else
 			gW1.plane = MOB_PLANE_ALT
-
 		old_water_height = water_height
 	New()
 		..()
