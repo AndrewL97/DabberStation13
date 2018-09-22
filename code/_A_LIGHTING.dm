@@ -160,8 +160,6 @@ obj/light
 					y = ownerF.y
 					pixel_x = ownerF.pixel_x+ownerF.pixel_w-32
 					pixel_y = ownerF.pixel_y+ownerF.pixel_z-32
-					changed = 1
-
 			if(changed)
 				//world << "<font color='yellow'>received light change"
 				var/matrix/M = matrix()

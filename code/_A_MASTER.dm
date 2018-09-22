@@ -116,6 +116,8 @@ datum/controller/game_controller
 		world << "\red \b Initializing lighting"
 		lighting.init()
 		lighting_inited = 1
+		for(var/obj/water/tank/i in world)
+			i.on = 1
 		for(var/obj/machinery/light/l in world)
 			l.update()
 		world << "\green \b Initialized lighting system in [world.timeofday-start_time] seconds!"

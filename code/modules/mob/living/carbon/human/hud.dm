@@ -127,8 +127,6 @@ mob
 	can_push = 0
 	var/list/space_parallax_list_1 = list()
 	var/list/space_parallax_list_2 = list()
-	var/old_x = 0
-	var/old_y = 0
 	var/space_parallax_layer_1_old = ""
 	var/space_parallax_layer_2_old = ""
 	//var/obj/screen_alt/plane_master_turf2/plane_master_turf = null
@@ -180,14 +178,9 @@ mob
 			for(var/obj/screen_alt/spaceParallax/g in space_list)
 				if(g.icon_state != iconA)
 					g.icon_state = iconA
-
-		if(x != old_x || y != old_y)
-			var/matrix/M = matrix()
-			M.Translate(-xAxis,-yAxis)
-			G.transform = M
-			old_x = x
-			old_y = y
-
+		var/matrix/M = matrix()
+		M.Translate(-xAxis,-yAxis)
+		G.transform = M
 /mob/verb/use_hotkey()
 	set hidden = 1
 	set name = "use_hotkey"

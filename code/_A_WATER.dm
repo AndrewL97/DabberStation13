@@ -51,6 +51,7 @@ turf
 #define DIAGONALS list(SOUTHWEST,SOUTHEAST,NORTHWEST,NORTHEAST)
 #define REVERSEDIRS list("1" = SOUTH,"2" = NORTH,"4" = WEST,"8" = EAST)
 #define CARDINALS list(SOUTH,NORTH,EAST,WEST)
+#define TEXT2DIR list("NORTH" = NORTH,"SOUTH" = SOUTH,"EAST" = EAST,"WEST" = WEST,"NORTHEAST" = NORTHEAST,"NORTHWEST" = NORTHWEST,"SOUTHEAST" = SOUTHEAST,"SOUTHWEST" = SOUTHWEST)
 obj
 	water_overlay
 		icon = 'water sprites.dmi'
@@ -73,6 +74,12 @@ obj
 				if(istype(T,/turf))
 					if(level == 1)
 						alpha = level < T.level ? 0 : 255
+			attackby(obj/item/weapon/wrench/G as obj, mob/user as mob)
+				if(!istype(G,/obj/item/weapon/wrench))
+					return
+				var/new_dir = input(user,"What direction","Change direction") as null|anything in TEXT2DIR
+				if(new_dir)
+					dir = TEXT2DIR[new_dir]
 			Process_Water()
 				if(water_pressure > 0)
 					if(water_pressure_direction != 0)
@@ -108,18 +115,25 @@ obj
 			connector
 				icon_state = "filler"
 		tank
-			icon_state = "water_pump"
+			icon_state = "water_pump_1"
 			desc = "Due to it's technology, it holds infinite water."
 			water_pressure_direction = SOUTH
 			density = 1
 			water_pressure = 1 //now infinite
+			var/on = 0
+			attack_hand(mob/user as mob)
+				on = !on
+				user << "You flip the water tank's valve to <b>[on ? "<font color='green'>ON</font>" : "<font color='red'>OFF</font>"]</b>!"
+				icon_state = "water_pump_[on]"
 			Process_Water()
-				if(water_pressure > 0)
+				if(water_pressure > 0 && on)
 					var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,water_pressure_direction)
 					if(G)
-						G.water_pressure_direction = SOUTH
+						if(G.dir in DIAGONALS)
+							G.water_pressure_direction = G.dir - REVERSEDIRS["[SOUTH]"]
+						else
+							G.water_pressure_direction = SOUTH
 						G.water_pressure += 20
-						//water_pressure -= 20
 		meter
 			name = "meter"
 			icon = 'meter.dmi'
