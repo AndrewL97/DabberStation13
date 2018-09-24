@@ -297,26 +297,14 @@
 				if (istype(usr, /mob/living/carbon/human))
 					src.attack_hand(usr, usr.hand)
 				else
-					if (istype(usr, /mob/living/carbon/monkey))
-						src.attack_paw(usr, usr.hand)
-					else
-						if (istype(usr, /mob/living/carbon/alien/humanoid))
-							src.attack_alien(usr, usr.hand)
-						else
-							if (istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/living/silicon/robot))
-								src.attack_ai(usr, usr.hand)
+					if (istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/living/silicon/robot))
+						src.attack_ai(usr, usr.hand)
 		else
 			if (istype(usr, /mob/living/carbon/human))
 				src.hand_h(usr, usr.hand)
 			else
-				if (istype(usr, /mob/living/carbon/monkey))
-					src.hand_p(usr, usr.hand)
-				else
-					if (istype(usr, /mob/living/carbon/alien/humanoid))
-						src.hand_al(usr, usr.hand)
-					else
-						if (istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/living/silicon/robot))
-							src.hand_a(usr, usr.hand)
+				if (istype(usr, /mob/living/silicon/ai) || istype(usr, /mob/living/silicon/robot))
+					src.hand_a(usr, usr.hand)
 
 	else
 		if (istype(src, /obj/screen))
@@ -334,20 +322,8 @@
 				else
 					if (istype(usr, /mob/living/carbon/human))
 						src.attack_hand(usr, usr.hand)
-					else
-						if (istype(usr, /mob/living/carbon/monkey))
-							src.attack_paw(usr, usr.hand)
-						else
-							if (istype(usr, /mob/living/carbon/alien/humanoid))
-								src.attack_alien(usr, usr.hand)
 			else
 				if (istype(usr, /mob/living/carbon/human))
 					src.hand_h(usr, usr.hand)
-				else
-					if (istype(usr, /mob/living/carbon/monkey))
-						src.hand_p(usr, usr.hand)
-					else
-						if (istype(usr, /mob/living/carbon/alien/humanoid))
-							src.hand_al(usr, usr.hand)
 	return
 

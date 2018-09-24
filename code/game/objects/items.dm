@@ -46,19 +46,6 @@
 			playsound(src.loc, 'handcuffs.ogg', 30, 1, -2)
 			O.process()
 			return
-	else
-		var/obj/equip_e/monkey/O = new /obj/equip_e/monkey(  )
-		O.source = user
-		O.target = M
-		O.item = user.equipped()
-		O.s_loc = user.loc
-		O.t_loc = M.loc
-		O.place = "handcuff"
-		M.requests += O
-		spawn( 0 )
-			playsound(src.loc, 'handcuffs.ogg', 30, 1, -2)
-			O.process()
-			return
 	return
 
 

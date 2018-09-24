@@ -69,7 +69,7 @@
 
 	if(triggered) return
 
-	if(istype(M, /mob/living/carbon/human) || istype(M, /mob/living/carbon/monkey))
+	if(istype(M, /mob/living/carbon/human))
 		for(var/mob/O in viewers(world.view, src.loc))
 			O << text("<font color='red'>[M] triggered the \icon[] [src]</font>", src)
 		triggered = 1

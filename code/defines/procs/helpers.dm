@@ -546,13 +546,9 @@
 		mob_list.Add(M)
 	for(var/mob/living/carbon/human/M in world)
 		mob_list.Add(M)
-	for(var/mob/living/carbon/alien/M in world)
-		mob_list.Add(M)
 	for(var/mob/dead/observer/M in world)
 		mob_list.Add(M)
 	for(var/mob/new_player/M in world)
-		mob_list.Add(M)
-	for(var/mob/living/carbon/monkey/M in world)
 		mob_list.Add(M)
 
 	return mob_list

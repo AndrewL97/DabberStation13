@@ -11,7 +11,7 @@
 	set invisibility = 0
 	set background = 1
 
-	if (src.monkeyizing)
+	if (src.transforming)
 		return
 
 	var/datum/gas_mixture/environment = loc.return_air()

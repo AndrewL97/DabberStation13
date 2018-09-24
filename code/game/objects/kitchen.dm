@@ -4,9 +4,6 @@
 /obj/kitchenspike/attackby(obj/item/weapon/grab/G as obj, mob/user as mob)
 	if(!istype(G, /obj/item/weapon/grab))
 		return
-	if(!istype(G.affecting, /mob/living/carbon/monkey))
-		user << "\red They are too big for the spike, try something smaller!"
-		return
 
 	if(src.occupied == 0)
 		src.icon_state = "spikebloody"

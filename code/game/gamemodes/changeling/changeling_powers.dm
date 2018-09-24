@@ -1,6 +1,4 @@
 /mob/proc/make_lesser_changeling()
-	src.verbs += /client/proc/changeling_lesser_transform
-	src.verbs += /client/proc/changeling_fakedeath
 
 	spawn(600)
 		src.verbs += /client/proc/changeling_neurotoxic_sting
@@ -12,7 +10,6 @@
 /mob/proc/make_changeling()
 	src.verbs += /client/proc/changeling_absorb_dna
 	src.verbs += /client/proc/changeling_transform
-	src.verbs += /client/proc/changeling_lesser_form
 	src.verbs += /client/proc/changeling_fakedeath
 
 	spawn(600)
@@ -25,8 +22,6 @@
 /mob/proc/remove_changeling_powers()
 	src.verbs -= /client/proc/changeling_absorb_dna
 	src.verbs -= /client/proc/changeling_transform
-	src.verbs -= /client/proc/changeling_lesser_form
-	src.verbs -= /client/proc/changeling_lesser_transform
 	src.verbs -= /client/proc/changeling_fakedeath
 	src.verbs -= /client/proc/changeling_neurotoxic_sting
 	usr.verbs -= /client/proc/changeling_hallucinogenic_sting
@@ -113,163 +108,6 @@
 	usr.real_name = S
 	updateappearance(usr, usr.dna.uni_identity)
 	domutcheck(usr, null)
-	return
-
-/client/proc/changeling_lesser_form()
-	set category = "Changeling"
-	set name = "Lesser Form"
-
-	if(usr.stat)
-		usr << "\red Not when we are incapicated."
-		return
-
-	usr.remove_changeling_powers()
-
-	usr.visible_message(text("\red <B>[usr] transforms!</B>"))
-
-	var/list/implants = list() //Try to preserve implants.
-	for(var/obj/item/weapon/W in usr)
-		if (istype(W, /obj/item/weapon/implant))
-			implants += W
-
-	for(var/obj/item/W in usr)
-		usr.u_equip(W)
-		if (usr.client)
-			usr.client.screen -= W
-		if (W)
-			W.loc = usr.loc
-			W.dropped(usr)
-			W.plane = ITEM_PLANE
-			W.layer = initial(W.layer)
-
-	usr.update_clothing()
-	usr.monkeyizing = 1
-	usr.canmove = 0
-	usr.icon = null
-	usr.invisibility = 101
-	var/atom/movable/overlay/animation = new /atom/movable/overlay( usr.loc )
-	animation.icon_state = "blank"
-	animation.icon = 'mob.dmi'
-	animation.master = src
-	flick("h2monkey", animation)
-	sleep(48)
-	del(animation)
-
-	var/mob/living/carbon/monkey/O = new /mob/living/carbon/monkey(src)
-	O.dna = usr.dna
-	usr.dna = null
-	O.absorbed_dna = usr.absorbed_dna
-
-	for(var/obj/T in usr)
-		del(T)
-	for(var/R in usr.organs)
-		del(usr.organs[text("[]", R)])
-
-	O.loc = usr.loc
-
-	O.name = text("monkey ([])",copytext(md5(usr.real_name), 2, 6))
-	O.toxloss = usr.toxloss
-	O.bruteloss = usr.bruteloss
-	O.oxyloss = usr.oxyloss
-	O.fireloss = usr.fireloss
-	O.stat = usr.stat
-	O.a_intent = "hurt"
-	for (var/obj/item/weapon/implant/I in implants)
-		I.loc = O
-		I.implanted = O
-		continue
-
-	if(usr.mind)
-		usr.mind.transfer_to(O)
-
-	O.make_lesser_changeling()
-
-	del(usr)
-	return
-
-/client/proc/changeling_lesser_transform()
-	set category = "Changeling"
-	set name = "Transform"
-
-	if(usr.stat)
-		usr << "\red Not when we are incapicated."
-		return
-
-	if (usr.absorbed_dna.len <= 0)
-		usr << "\red We have not yet absorbed any compatible DNA."
-		return
-
-	var/S = input("Select the target DNA: ", "Target DNA", null) in usr.absorbed_dna
-
-	if (S == null)
-		return
-
-	usr.remove_changeling_powers()
-
-	usr.visible_message(text("\red <B>[usr] transforms!</B>"))
-
-	usr.dna = usr.absorbed_dna[S]
-
-	var/list/implants = list()
-	for (var/obj/item/weapon/implant/I in usr) //Still preserving implants
-		implants += I
-
-	for(var/obj/item/W in usr)
-		usr.u_equip(W)
-		if (usr.client)
-			usr.client.screen -= W
-		if (W)
-			W.loc = usr.loc
-			W.dropped(usr)
-			W.plane = ITEM_PLANE
-			W.layer = initial(W.layer)
-
-	usr.update_clothing()
-	usr.monkeyizing = 1
-	usr.canmove = 0
-	usr.icon = null
-	usr.invisibility = 101
-	var/atom/movable/overlay/animation = new /atom/movable/overlay( usr.loc )
-	animation.icon_state = "blank"
-	animation.icon = 'mob.dmi'
-	animation.master = src
-	flick("monkey2h", animation)
-	sleep(48)
-	del(animation)
-
-	var/mob/living/carbon/human/O = new /mob/living/carbon/human( src )
-	if (isblockon(getblock(usr.dna.uni_identity, 11,3),11))
-		O.gender = FEMALE
-	else
-		O.gender = MALE
-	O.dna = usr.dna
-	usr.dna = null
-	O.absorbed_dna = usr.absorbed_dna
-	O.real_name = S
-
-	for(var/obj/T in usr)
-		del(T)
-
-	O.loc = usr.loc
-
-	updateappearance(O,O.dna.uni_identity)
-	domutcheck(O, null)
-	O.toxloss = usr.toxloss
-	O.bruteloss = usr.bruteloss
-	O.oxyloss = usr.oxyloss
-	O.fireloss = usr.fireloss
-	O.stat = usr.stat
-	for (var/obj/item/weapon/implant/I in implants)
-		I.loc = O
-		I.implanted = O
-		continue
-
-	if(usr.mind)
-		usr.mind.transfer_to(O)
-
-	O.make_changeling()
-
-	del(usr)
 	return
 
 /client/proc/changeling_fakedeath()

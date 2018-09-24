@@ -1,54 +1,5 @@
-/mob/living/carbon/human/proc/monkeyize()
-	if (src.monkeyizing)
-		return
-	for(var/obj/item/weapon/W in src)
-		src.u_equip(W)
-		if (src.client)
-			src.client.screen -= W
-		if (W)
-			W.loc = src.loc
-			W.dropped(src)
-			W.plane = ITEM_PLANE
-			W.layer = initial(W.layer)
-	src.update_clothing()
-	src.monkeyizing = 1
-	src.canmove = 0
-	src.icon = null
-	src.invisibility = 101
-	for(var/t in src.organs)
-		//src.organs[text("[]", t)] = null
-		del(src.organs[text("[]", t)])
-	var/atom/movable/overlay/animation = new /atom/movable/overlay( src.loc )
-	animation.icon_state = "blank"
-	animation.icon = 'mob.dmi'
-	animation.master = src
-	flick("h2monkey", animation)
-	sleep(48)
-	//animation = null
-	del(animation)
-	var/mob/living/carbon/monkey/O = new /mob/living/carbon/monkey( src.loc )
-
-	O.name = "monkey"
-	O.dna = src.dna
-	src.dna = null
-	O.dna.uni_identity = "00600200A00E0110148FC01300B009"
-	O.dna.struc_enzymes = "0983E840344C39F4B059D5145FC5785DC6406A4BB8"
-	if (src.client)
-		src.client.mob = O
-	O.loc = src.loc
-	O.a_intent = "hurt"
-	O << "<B>You are now a monkey.</B>"
-	/*
-	if (ticker.mode.name == "monkey")
-		O << "<B>Don't be angry at the source as now you are just like him so deal with it.</B>"
-		O << "<B>Follow your objective.</B>"
-	//SN src = null
-	*/
-	del(src)
-	return
-
 /mob/living/carbon/AIize()
-	if (src.monkeyizing)
+	if (src.transforming)
 		return
 	for(var/obj/item/weapon/W in src)
 		src.u_equip(W)
@@ -61,7 +12,7 @@
 			W.layer = initial(W.layer)
 			del(W)
 	src.update_clothing()
-	src.monkeyizing = 1
+	src.transforming = 1
 	src.canmove = 0
 	src.icon = null
 	src.invisibility = 101
@@ -143,7 +94,7 @@
 
 //human -> robot
 /mob/living/carbon/human/proc/Robotize()
-	if (src.monkeyizing)
+	if (src.transforming)
 		return
 	for(var/obj/item/weapon/W in src)
 		src.u_equip(W)
@@ -156,7 +107,7 @@
 			W.layer = initial(W.layer)
 			del(W)
 	src.update_clothing()
-	src.monkeyizing = 1
+	src.transforming = 1
 	src.canmove = 0
 	src.icon = null
 	src.invisibility = 101
@@ -195,44 +146,3 @@
 
 	del(src)
 	return O
-
-//human -> alien
-/mob/living/carbon/human/proc/Alienize()
-	if (src.monkeyizing)
-		return
-	for(var/obj/item/weapon/W in src)
-		src.u_equip(W)
-		if (src.client)
-			src.client.screen -= W
-		if (W)
-			W.loc = src.loc
-			W.dropped(src)
-			W.plane = ITEM_PLANE
-			W.layer = initial(W.layer)
-	src.update_clothing()
-	src.monkeyizing = 1
-	src.canmove = 0
-	src.icon = null
-	src.invisibility = 101
-	for(var/t in src.organs)
-		del(src.organs[t])
-//	var/atom/movable/overlay/animation = new /atom/movable/overlay( src.loc )
-//	animation.icon_state = "blank"
-//	animation.icon = 'mob.dmi'
-//	animation.master = src
-//	flick("h2alien", animation)
-//	sleep(48)
-//	del(animation)
-	var/mob/living/carbon/alien/humanoid/O = new /mob/living/carbon/alien/humanoid( src.loc )
-	O.name = "alien"
-	O.dna = src.dna
-	src.dna = null
-	O.dna.uni_identity = "00600200A00E0110148FC01300B009"
-	O.dna.struc_enzymes = "0983E840344C39F4B059D5145FC5785DC6406A4BB8"
-	if (src.client)
-		src.client.mob = O
-	O.loc = src.loc
-	O.a_intent = "hurt"
-	O << "<B>You are now an alien.</B>"
-	del(src)
-	return

@@ -191,10 +191,7 @@ mob
 	if(istype(src.mob, /mob/living/silicon/ai))
 		return AIMove(n,direct,src.mob)
 
-	if (src.mob.monkeyizing)
-		return
 
-	var/is_monkey = istype(src.mob, /mob/living/carbon/monkey)
 	if (locate(/obj/item/weapon/grab, locate(/obj/item/weapon/grab, src.mob.grabbed_by.len)))
 		var/list/grabbing = list(  )
 		if (istype(src.mob.l_hand, /obj/item/weapon/grab))
@@ -210,7 +207,7 @@ mob
 			else
 				if (G.state == 2)
 					src.move_delay = world.time + 10
-					if ((prob(25) && (!( is_monkey ) || prob(25))))
+					if (prob(25))
 						mob.visible_message("\red [mob] has broken free of [G.assailant]'s grip!")
 						del(G)
 					else
@@ -218,7 +215,7 @@ mob
 				else
 					if (G.state == 3)
 						src.move_delay = world.time + 10
-						if ((prob(5) && !( is_monkey ) || prob(25)))
+						if (prob(5))
 							mob.visible_message("\red [mob] has broken free of [G.assailant]'s headlock!")
 							del(G)
 						else

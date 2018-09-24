@@ -568,8 +568,6 @@ Auto Patrol: []"},
 
 			if (istype(C, /mob/living/carbon/human))
 				src.threatlevel = src.assess_perp(C)
-			else if ((istype(C, /mob/living/carbon/monkey)) && (C.client) && (ticker.mode.name == "monkey"))
-				src.threatlevel = 4
 
 			if (!src.threatlevel)
 				continue

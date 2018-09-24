@@ -63,8 +63,6 @@
 					else
 						randmutg(H)
 						domutcheck(H,null,1)
-			for(var/mob/living/carbon/monkey/M in world)
-				M.radiation += rand(5,25)
 		if(6)
 			event = 1
 			viral_outbreak()

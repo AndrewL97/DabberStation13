@@ -23,16 +23,6 @@
 		return 1
 	return 0
 
-/proc/isalien(A)
-	if(A && istype(A, /mob/living/carbon/alien))
-		return 1
-	return 0
-
-/proc/ismonkey(A)
-	if(A && istype(A, /mob/living/carbon/monkey))
-		return 1
-	return 0
-
 /proc/isrobot(A)
 	if(A && istype(A, /mob/living/silicon/robot))
 		return 1
@@ -431,7 +421,7 @@
 			s_click(src.hud1)
 		return
 	if(M == src.assailant && src.state >= 2)
-		if( ( ishuman(user) && (user.mutations & 32) && ismonkey(src.affecting) ) || ( isalien(user) && iscarbon(src.affecting) ) )
+		if(iscarbon(src.affecting))
 			var/mob/living/carbon/attacker = user
 			for(var/mob/N in viewers(user, null))
 				if(N.client)
@@ -1280,11 +1270,6 @@
 		H.UpdateDamageIcon()
 		H.updatehealth()
 		return 1
-	else if(istype(src, /mob/living/carbon/monkey) && (!src.mutations & 2))
-		var/mob/living/carbon/monkey/M = src
-		M.fireloss += burn_amount
-		M.updatehealth()
-		return 1
 	else if(istype(src, /mob/living/silicon/ai))
 		return 0
 
@@ -1315,7 +1300,7 @@
 		return
 	src.death(1)
 	var/atom/movable/overlay/animation = null
-	src.monkeyizing = 1
+	src.transforming = 1
 	src.canmove = 0
 	src.icon = null
 	src.invisibility = 101

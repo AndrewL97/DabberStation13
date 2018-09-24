@@ -24,11 +24,11 @@
 
 	var/list/obj/hallucination/hallucinations = list()
 
-	var/alien_egg_flag = 0
-
 	var/last_special = 0
 
 	var/obj/screen/zone_sel/zone_sel = null
+
+	var/transforming = 0
 
 	var/emote_allowed = 1
 	var/computer_id = null
@@ -45,7 +45,6 @@
 	var/stat = 0.0
 	var/next_move = null
 	var/prev_move = null
-	var/monkeyizing = null
 	var/other = 0.0
 	var/hand = null
 	var/eye_blind = null
