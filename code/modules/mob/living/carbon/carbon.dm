@@ -6,7 +6,7 @@
 		if(src.mutations & 32 && src.m_intent == "run")
 			src.bodytemperature += 2
 
-/mob/living/carbon/relaymove(var/mob/user, direction)
+/mob/living/carbon/relaymove(var/mob/user, direction) //shit we gotta remove this in the next dab13 update because this is disgusting
 	if(user in src.stomach_contents)
 		if(prob(40))
 			for(var/mob/M in hearers(4, src))

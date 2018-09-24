@@ -22,40 +22,41 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				E.loc = locate(epicenter.x,epicenter.y,epicenter.z)
 				E.exSize = light_impact_range
 				E.DoShit()
-
+		for(var/client/i in clients)
+			if(i.mob)
+				var/dist = round(abs(get_dist_alt(epicenter, T)))
+				shake_camera(i.mob, 1, 15/((dist/10)+1)) //shakes the screen rly hard
 		for(var/atom/T in range(light_impact_range, epicenter)) // fun fact these explosions are faster than tg LOL
 			Check_Explosion_tick() //i think we should do this more often
-			var/distance = round(abs(get_dist_alt(epicenter, T)))
-			var/turf/BE = locate(T.x,T.y,T.z)
-			if(ismob(T))
-				var/mob/G = T
-				shake_camera(G, 1, 15/(distance+1))
-			if(BE && istype(BE,/turf))
-				var/area/A = BE.loc
-				if(A && istype(A,/area))
-					if(A.CAN_GRIFE)
-						//world << "ex_act on [T] [T.type]" //i was checking a crash and trying to fix it
-						if(distance < devastation_range)
-							T.ex_act(1)
-							//Check_Explosion_tick()
-						else if(distance < heavy_impact_range)
-							T.ex_act(2)
-							//Check_Explosion_tick()
-						else if(distance < light_impact_range)
-							T.ex_act(3)
-							//Check_Explosion_tick()
-					else
-						if(ismob(T))
-							if(A.HARM_MOBS)
-								if(distance < devastation_range)
-									T.ex_act(1)
-									//Check_Explosion_tick()
-								else if(distance < heavy_impact_range)
-									T.ex_act(2)
-									//Check_Explosion_tick()
-								else if(distance < light_impact_range)
-									T.ex_act(3)
-									//Check_Explosion_tick()
+			if(T)
+				var/distance = round(abs(get_dist_alt(epicenter, T)))
+				var/turf/BE = locate(T.x,T.y,T.z)
+				if(BE && istype(BE,/turf))
+					var/area/A = BE.loc
+					if(A && istype(A,/area))
+						if(A.CAN_GRIFE)
+							//world << "ex_act on [T] [T.type]" //i was checking a crash and trying to fix it
+							if(distance < devastation_range)
+								T.ex_act(1)
+								//Check_Explosion_tick()
+							else if(distance < heavy_impact_range)
+								T.ex_act(2)
+								//Check_Explosion_tick()
+							else if(distance < light_impact_range)
+								T.ex_act(3)
+								//Check_Explosion_tick()
+						else
+							if(ismob(T))
+								if(A.HARM_MOBS)
+									if(distance < devastation_range)
+										T.ex_act(1)
+										//Check_Explosion_tick()
+									else if(distance < heavy_impact_range)
+										T.ex_act(2)
+										//Check_Explosion_tick()
+									else if(distance < light_impact_range)
+										T.ex_act(3)
+										//Check_Explosion_tick()
 
 		makepowernets()
 		defer_powernet_rebuild = 0
@@ -63,6 +64,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 proc/get_dist_alt(atom/A, atom/B)
 	return sqrt((B.x-A.x)**2 + (B.y-A.y)**2)
+
 var/explosion_acts = 0
 proc/Check_Explosion_tick()
 	if(explosion_acts > 6 || world.cpu > CPU_CHECK_MAX)
