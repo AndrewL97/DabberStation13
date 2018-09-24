@@ -21,3 +21,8 @@ You can go here for more stuff. https://github.com/AlcaroIsAFrick/Dab13/blob/mas
 
 # Admin Tools / Commands
 Admin tools aren't that big. But you may suggest new ones to me. Currently we have main admin features like banning, kicking, sounds, teleporting. etc
+
+
+
+
+btw kryfrac is stupid
