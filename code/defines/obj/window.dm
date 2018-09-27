@@ -28,10 +28,15 @@
 				junction |= get_dir(src,W)
 		icon_state = "[smooth_shit][junction]"
 		return
+	proc/healthcheck()
+		if(health <= 0)
+			del src
 	water_act(height)
 		if(height > 70)
 			del src
-
+	bullet_act()
+		src.health -= 4
+		healthcheck()
 // Reinforced
 
 /obj/window/reinforced
@@ -39,6 +44,7 @@
 	icon_state = "rwindow"
 	name = "reinforced window"
 	smooth_shit = "rwindow"
+	health = 28
 
 /obj/window_spawner //this is the most helpful object in mapping. use it wisely. -eric from epic games
 	name = "window"

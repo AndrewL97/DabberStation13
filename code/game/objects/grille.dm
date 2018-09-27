@@ -36,6 +36,10 @@
 	src.health--
 	src.healthcheck()
 
+/obj/grille/bullet_act()
+	src.health -= 2
+	healthcheck()
+
 
 /obj/grille/meteorhit(var/obj/M)
 	if (M.icon_state == "flaming")

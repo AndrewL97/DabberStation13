@@ -4,7 +4,8 @@ This currently works, but the damage method could be redone.
 proc/atan2(x, y)
 	if(!x && !y) return 0
 	return y >= 0 ? arccos(x / sqrt(x * x + y * y)) : -arccos(x / sqrt(x * x + y * y))
-
+/atom/proc/bullet_act(var/obj/projectile/bullet)
+	return //This is for bullets.
 /obj/item/weapon/gun
 	icon = 'guns.dmi'
 	icon_state = "gun"
@@ -123,12 +124,16 @@ proc/atan2(x, y)
 		..()
 	special_process()
 		..()
-		for(var/mob/e in orange(1,src))
-			if(e != owner)
+		for(var/atom/movable/e in orange(1,src))
+			if(istype(e,/mob))
+				if(e != owner)
+					if(PixelCollision2(e))
+						if(heightZ >= e.heightZ && heightZ+2 <= e.heightZ+e.heightSize)
+							e.bruteloss += damage
+							del src
+			else
 				if(PixelCollision2(e))
-					if(heightZ >= e.heightZ && heightZ+2 <= e.heightZ+e.heightSize)
-						e.bruteloss += damage
-						del src
+					e.bullet_act(src)
 		if(!PixelMove(X_SPEED,Y_SPEED))
 			del src
 		MyShadow.pixel_x = pixel_x+pixel_w
