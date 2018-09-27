@@ -536,19 +536,26 @@
 
 			if(reagents) reagents.metabolize(src)
 
-			if(src.nutrition > 400 && !(src.mutations & 32))
-				if(prob(5 + round((src.nutrition - 200) / 2)))
-					src << "\red You suddenly feel blubbery!"
-					src.mutations |= 32
-					update_body()
-			if (src.nutrition < 100 && src.mutations & 32)
-				if(prob(round((50 - src.nutrition) / 100)))
-					src << "\blue You feel fit again!"
-					src.mutations &= ~32
-					update_body()
+			if(src.weight > 95 && !(src.mutations & 32))
+				src << "\red You suddenly feel blubbery!"
+				src.mutations |= 32
+				update_body()
+			if (src.weight < 95 && src.mutations & 32)
+				src << "\blue You feel fit again!"
+				src.mutations &= ~32
+				update_body()
 			if (src.nutrition > 0)
-				src.nutrition--
-
+				src.nutrition -= world.tick_lag/10
+				if(nutrition < 35)
+					weight -= world.tick_lag/20
+				if(nutrition > 100)
+					weight += world.tick_lag/20
+					if(nutrition > 150)
+						nutrition = 150
+			else
+				bruteloss += world.tick_lag //Starving
+			if(weight < 30)
+				bruteloss -= weight-30
 			if (src.drowsyness)
 				src.drowsyness--
 				src.eye_blurry = max(2, src.eye_blurry)

@@ -12,6 +12,8 @@ var
 	stat(null, "Server time of day : [time2text(world.timeofday)]")
 	stat(null, "Server CPU : %[world.cpu]")
 	stat(null, "Air : %[round(air*2)]")
+	stat(null, "Nutrition : %[max(0,min(100,round(nutrition)))]")
+	stat(null, "Weight : [round(weight,0.125)] KG")
 	//stat(null, "Shield : %[round(shield)]")
 	if(veh)
 		stat("Vehicle Speed","[round(veh.velocity.SquareMagnitude()/50)] km/h")

@@ -2,7 +2,7 @@
 	. = ..()
 	if(.)
 		if(src.nutrition)
-			src.nutrition--
+			src.nutrition -= world.tick_lag/20
 		if(src.mutations & 32 && src.m_intent == "run")
 			src.bodytemperature += 2
 
