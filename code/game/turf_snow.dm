@@ -2,19 +2,9 @@
 	icon = 'floors.dmi'
 	name = "snow"
 	icon_state = "snow"
-	water
+	sand
 		icon = 'extra images/water2.dmi'
 		icon_state = "snad"
-		name = "sand"
-		layer = 1.99
-		TurfStepSound = list('footstepw1.ogg','footstepw2.ogg','footstepw3.ogg')
-		New()
-			..()
-			overlays += new /image/water()
-		sand1
-			icon_state = "snad"
-		sand2
-			icon_state = "snad2"
 
 /turf/unsimulated/grass
 	icon = 'grasstiles.dmi'
