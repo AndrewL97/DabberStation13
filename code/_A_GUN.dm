@@ -128,8 +128,8 @@ proc/atan2(x, y)
 			if(istype(e,/mob))
 				if(e != owner)
 					if(PixelCollision2(e))
-						if(heightZ >= e.heightZ && heightZ+2 <= e.heightZ+e.heightSize)
-							e.bruteloss += damage
+						if(heightZ >= e:heightZ && heightZ+2 <= e:heightZ+e:heightSize)
+							e:bruteloss += damage
 							del src
 			else
 				if(PixelCollision2(e))
