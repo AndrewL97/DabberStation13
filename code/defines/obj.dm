@@ -520,25 +520,6 @@
 	var/obj/item/assembly/shock_kit/part1 = null
 	var/last_time = 1.0
 
-/obj/table
-	name = "table"
-	icon = 'structures.dmi'
-	icon_state = "table"
-	density = 1
-	anchored = 1.0
-	New()
-		..()
-		del src
-
-/obj/table/reinforced
-	name = "reinforced table"
-	icon_state = "reinf_table"
-	var/status = 2
-
-/obj/table/woodentable
-	name = "wooden table"
-	icon_state = "woodentable"
-
 /obj/mopbucket
 	desc = "Fill it with water, but don't forget a mop!"
 	name = "mop bucket"

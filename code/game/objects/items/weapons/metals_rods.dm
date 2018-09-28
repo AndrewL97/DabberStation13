@@ -146,7 +146,6 @@ LATTICE
 	L["stool"] = "stool"
 	L["chair"] = "chair"
 	L["bed"] = "bed (2 metal)<BR>"
-	L["table"] = "table parts (2 metal)"
 	L["rack"] = "rack parts<BR>"
 	L["aircan"] = "air canister (2 metal)"
 	L["o2can"] = "oxygen canister (2 metal)"
@@ -187,12 +186,6 @@ LATTICE
 				src.amount--
 				var/obj/item/weapon/rods/R = new /obj/item/weapon/rods( usr.loc )
 				R.amount = 2
-			if("table")
-				if (src.amount < 2)
-					usr << text("\red You haven't got enough metal to build the table parts!")
-					return
-				src.amount -= 2
-				new /obj/item/weapon/table_parts( usr.loc )
 			if("stool")
 				src.amount--
 				new /obj/stool( usr.loc )
@@ -337,7 +330,6 @@ LATTICE
 	var/t1 = text("<HTML><HEAD></HEAD><TT>Amount Left: [] <BR>", src.amount)
 	var/counter = 1
 	var/list/L = list(  )
-	L["table"] = "table parts (2 metal)"
 	L["metal"] = "2x metal sheet (1 metal)<BR>"
 	for(var/t in L)
 		counter++
@@ -360,12 +352,6 @@ LATTICE
 			del(src)
 			return
 		switch(href_list["make"])
-			if("table")
-				if (src.amount < 2)
-					usr << text("\red You haven't got enough metal to build the reinforced table parts!")
-					return
-				src.amount -= 2
-				new /obj/item/weapon/table_parts/reinforced( usr.loc )
 			if("metal")
 				if (src.amount < 2)
 					usr << text("\red You haven't got enough metal to build the metal sheets!")

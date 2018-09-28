@@ -889,19 +889,6 @@ Total SMES charging rate should not exceed total power generation rate, or an ov
 	w_class = 2.0
 	flags = FPRINT | TABLEPASS | NOSHIELD
 
-
-/obj/item/weapon/table_parts
-	name = "table parts"
-	icon = 'items.dmi'
-	icon_state = "table_parts"
-	flags = FPRINT | TABLEPASS| CONDUCT
-
-/obj/item/weapon/table_parts/reinforced
-	name = "table parts"
-	icon = 'items.dmi'
-	icon_state = "reinf_tableparts"
-	flags = FPRINT | TABLEPASS| CONDUCT
-
 /obj/item/weapon/tank
 	name = "tank"
 	icon = 'tank.dmi'
