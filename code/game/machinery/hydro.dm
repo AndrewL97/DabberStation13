@@ -3,6 +3,8 @@
 	tray
 		var/planted_crop = "tomatoes"
 		icon_state = "hydrotray"
+		pixel_y = 4
+		density = 1
 		var
 			grow_state = 0 //0 to 6
 			grow_state_old = -1
