@@ -1,5 +1,5 @@
-/mob/living/carbon/human/examine()
-	set src in view()
+/mob/living/carbon/human/examineproc()
+	..()
 
 	usr << "\blue *---------*"
 
