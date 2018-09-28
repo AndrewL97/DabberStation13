@@ -163,6 +163,7 @@ obj
 		pixel_w = 16
 		layer = 5
 		mouse_opacity = 0
+		plane = TOP_PLANE
 		ex_act()
 			return
 		New()
