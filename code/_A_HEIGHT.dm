@@ -115,7 +115,7 @@ mob
 		if(canmove == 1 && lying == 0 && !src.restrained() && !ANIMATION_RUNNING ) //If on floor/space and not restrained...
 			if(onFloor == 1)
 				ySpeed = 1320/256
-				view(15,src) << 'jump.ogg'
+				playsound(src, 'jump.ogg', 100, 0, 12, 0)
 			else
 				flyPack()
 	proc/flyPack()
@@ -179,7 +179,7 @@ mob
 						heightZ = i.heightZ+i.heightSize
 						if(istype(src,/mob/living/carbon/human) && istype(src:shoes,/obj/item/clothing/shoes/brown/goomba_stomp))
 							i.specialloss += 15
-							view(10,src) << 'hitJump.ogg'
+							playsound(src, 'hitJump.ogg', 100, 0, 12, 0)
 							ySpeed = 3
 		var/obj/lattice/LAT = locate(/obj/lattice) in T
 		if(LAT)
