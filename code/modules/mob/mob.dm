@@ -540,12 +540,8 @@
 	return
 
 
-/obj/screen/attack_hand(mob/user as mob, using)
-	user.db_click(src.name, using)
-	return
-
-/obj/screen/attack_paw(mob/user as mob, using)
-	user.db_click(src.name, using)
+/obj/screen/Click()
+	usr.db_click(src.name, usr:using)
 	return
 
 /obj/equip_e/proc/process()
