@@ -16,7 +16,7 @@
 	Life()
 		if(onFloor && world.time > j_delay)
 			ySpeed = rand(600,800)/256
-			playsound(src, pick('bounce1.wav','bounce2.wav','bounce3.wav','bounce4.wav'), 100, 0, 12, (rand()-0.5)/10)
+			playsound(src, pick('bounce1.wav','bounce2.wav','bounce3.wav','bounce4.wav'), 100, 0, 4, (rand()-0.5)/10)
 			j_delay = world.time+rand(2,6)
 		if(world.time > l_delay)
 			if(!client)
