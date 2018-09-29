@@ -267,6 +267,11 @@ obj
 			if(owner)
 				owner.alpha = 0
 				SplitIcon()
+			var/matrix/Reset = matrix()
+			for(var/obj/limb_dance/g in list(Limb1,Limb2,Limb3,Limb4,Limb5,Limb6))
+				if(g)
+					animate(g,transform = Reset, time = 2.5)
+			sleep(2.5)
 		Del()
 			if(Limb1)
 				del Limb1
