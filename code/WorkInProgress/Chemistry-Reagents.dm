@@ -472,19 +472,6 @@ datum
 				..()
 				return
 
-		thermite
-			name = "Thermite"
-			id = "thermite"
-			description = "Thermite produces an aluminothermic reaction known as a thermite reaction. Can be used to melt walls."
-			reagent_state = SOLID
-			reaction_turf(var/turf/T, var/volume)
-				src = null
-				if(istype(T, /turf/simulated/wall))
-					T:thermite = 1
-					T.overlays = null
-					T.overlays = image('effects.dmi',icon_state = "thermite")
-				return
-
 		mutagen
 			name = "Unstable mutagen"
 			id = "mutagen"

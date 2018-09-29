@@ -8,7 +8,7 @@
 		start_events()
 
 /proc/event()
-	switch(rand(1,6))
+	switch(rand(1,4))
 		if(1)
 			event = 1
 			command_alert("Meteors have been detected on collision course with the station.", "Meteor Alert")
@@ -20,14 +20,6 @@
 				meteor_wave()
 
 		if(2)
-			event = 1
-			command_alert("Gravitational anomalies detected on the station. There is no additional data.", "Anomaly Alert")
-			var/turf/T = pick(blobstart)
-			var/obj/bhole/bh = new /obj/bhole( T.loc, 30 )
-			spawn(rand(50, 300))
-				del(bh)
-
-		if(3)
 			event = 1
 			command_alert("Space-time anomalies detected on the station. There is no additional data.", "Anomaly Alert")
 			var/list/turfs = list(	)
@@ -49,7 +41,7 @@
 						spawn(rand(300,600))
 							del(P)
 
-		if(5)
+		if(3)
 			event = 1
 			command_alert("High levels of radiation detected near the station. Please report to the Med-bay if you feel strange.", "Anomaly Alert")
 			for(var/mob/living/carbon/human/H in world)
@@ -63,96 +55,9 @@
 					else
 						randmutg(H)
 						domutcheck(H,null,1)
-		if(6)
+		if(4)
 			event = 1
 			viral_outbreak()
-
-/obj/bhole/New()
-	src.smoke = new /datum/effects/system/harmless_smoke_spread()
-	src.smoke.set_up(5, 0, src)
-	src.smoke.attach(src)
-	src:life()
-
-/obj/bhole/Bumped(atom/A)
-	var/mob/dead/observer/newmob
-	if (istype(A,/mob/living) && A:client)
-		newmob = new/mob/dead/observer(A)
-		A:client:mob = newmob
-		newmob:client:eye = newmob
-		del(A)
-	else if (istype(A,/mob/living) && !A:client)
-		del(A)
-	else
-		A:ex_act(1.0)
-
-
-/obj/bhole/proc/life() //Oh man , this will LAG
-
-	if (prob(10))
-		src.anchored = 0
-		step(src,pick(alldirs))
-		if (prob(30))
-			step(src,pick(alldirs))
-		src.anchored = 1
-
-	for (var/atom/X in orange(9,src))
-		if ((istype(X,/obj) || istype(X,/mob/living)) && prob(7))
-			if (!X:anchored)
-				step_towards(X,src)
-
-	for (var/atom/B in orange(7,src))
-		if (istype(B,/obj))
-			if (!B:anchored && prob(50))
-				step_towards(B,src)
-				if(prob(10)) B:ex_act(3.0)
-			else
-				B:anchored = 0
-				//step_towards(B,src)
-				//B:anchored = 1
-				if(prob(10)) B:ex_act(3.0)
-		else if (istype(B,/turf))
-			if (istype(B,/turf/simulated) && (prob(1) && prob(75)))
-				src.smoke.start()
-				B:ReplaceWithSpace()
-		else if (istype(B,/mob/living))
-			step_towards(B,src)
-
-
-	for (var/atom/A in orange(4,src))
-		if (istype(A,/obj))
-			if (!A:anchored && prob(90))
-				step_towards(A,src)
-				if(prob(30)) A:ex_act(2.0)
-			else
-				A:anchored = 0
-				//step_towards(A,src)
-				//A:anchored = 1
-				if(prob(30)) A:ex_act(2.0)
-		else if (istype(A,/turf))
-			if (istype(A,/turf/simulated) && prob(1))
-				src.smoke.start()
-				A:ReplaceWithSpace()
-		else if (istype(A,/mob/living))
-			step_towards(A,src)
-
-
-	for (var/atom/D in orange(1,src))
-		//if (hascall(D,"blackholed"))
-		//	call(D,"blackholed")(null)
-		//	continue
-		var/mob/dead/observer/newmob
-		if (istype(D,/mob/living) && D:client)
-			newmob = new/mob/dead/observer(D)
-			D:client:mob = newmob
-			newmob:client:eye = newmob
-			del(D)
-		else if (istype(D,/mob/living) && !D:client)
-			del(D)
-		else
-			D:ex_act(1.0)
-
-	spawn(17)
-		life()
 
 /proc/power_failure()
 	command_alert("Abnormal activity detected in [station_name()]'s powernet. As a precautionary measure, the station's power will be shut off for an indeterminate duration.", "Critical Power Failure")

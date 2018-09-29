@@ -118,29 +118,18 @@
 		if(O.level == 1)
 			O.hide(0)
 
-/turf/proc/ReplaceWithFloor()
-	if(!icon_old) icon_old = icon_state
+proc/ReplaceWithFloor(turf/simulated/floor/G)
 	var/turf/simulated/floor/W
-	var/old_icon = icon_old
-	var/old_dir = dir
 
-	W = new /turf/simulated/floor( locate(src.x, src.y, src.z) )
-
-	W.dir = old_dir
-	W.icon_old = old_icon
-	if(old_icon) W.icon_state = old_icon
-	W.opacity = 1
+	W = new /turf/simulated/floor( locate(G.x, G.y, G.z) )
+	W.opacity = 0
 	W.sd_SetOpacity(0)
 	W.levelupdate()
 	return W
 
-/turf/proc/ReplaceWithEngineFloor()
-	if(!icon_old) icon_old = icon_state
-	var/old_icon = icon_old
-	var/old_dir = dir
-	var/turf/simulated/floor/engine/E = new /turf/simulated/floor/engine( locate(src.x, src.y, src.z) )
-	E.dir = old_dir
-	E.icon_old = old_icon
+proc/ReplaceWithEngineFloor(turf/simulated/floor/G)
+	var/turf/simulated/floor/engine/E = new /turf/simulated/floor/engine( locate(G.x, G.y, G.z) )
+	return E
 
 /turf/simulated/Entered(atom/A, atom/OL)
 	if (istype(A,/mob/living/carbon))
@@ -184,35 +173,21 @@
 
 	..()
 
-/turf/proc/ReplaceWithSpace()
-	if(!icon_old) icon_old = icon_state
-	var/old_icon = icon_old
-	var/old_dir = dir
-	var/turf/space/S = new /turf/space( locate(src.x, src.y, src.z) )
-	S.dir = old_dir
-	S.icon_old = old_icon
+proc/ReplaceTurfWithSpace(turf/G)
+	var/turf/space/S = new /turf/space( locate(G.x, G.y, G.z) )
 	return S
 
-/turf/proc/ReplaceWithLattice()
-	if(!icon_old) icon_old = icon_state
-	var/old_icon = icon_old
-	var/old_dir = dir
-	var/turf/space/S = new /turf/space( locate(src.x, src.y, src.z) )
-	S.dir = old_dir
-	S.icon_old = old_icon
-	new /obj/lattice( locate(src.x, src.y, src.z) )
+proc/ReplaceTurfWithLattice(turf/G)
+	var/turf/space/S = new /turf/space( locate(G.x, G.y, G.z) )
+	new /obj/lattice( locate(S.x, S.y, S.z) )
 	return S
 
-/turf/proc/ReplaceWithWall()
-	var/turf/simulated/wall/S = new /turf/simulated/wall( locate(src.x, src.y, src.z) )
-	S.opacity = 0
-	S.sd_NewOpacity(1)
+proc/ReplaceTurfWithWall(turf/G)
+	var/turf/simulated/wall/S = new /turf/simulated/wall( locate(G.x, G.y, G.z) )
 	return S
 
-/turf/proc/ReplaceWithRWall()
-	var/turf/simulated/wall/r_wall/S = new /turf/simulated/wall/r_wall( locate(src.x, src.y, src.z) )
-	S.opacity = 0
-	S.sd_NewOpacity(1)
+proc/ReplaceTurfWithRWall(turf/G)
+	var/turf/simulated/wall/r_wall/S = new /turf/simulated/wall/r_wall( locate(G.x, G.y, G.z) )
 	return S
 
 /turf/simulated/wall
@@ -261,7 +236,7 @@
 			new /obj/item/weapon/sheet/metal( src )
 			new /obj/item/weapon/sheet/metal( src )
 
-	ReplaceWithFloor()
+	ReplaceWithFloor(src)
 
 /turf/simulated/wall/examine()
 	set src in oview(1)
@@ -274,7 +249,7 @@
 	switch(severity)
 		if(1.0)
 			//SN src = null
-			src.ReplaceWithSpace()
+			ReplaceTurfWithSpace(src)
 			del(src)
 			return
 		if(2.0)
@@ -330,22 +305,6 @@
 		if (!( istype(T, /turf) ))
 			return
 
-		if (thermite)
-			var/obj/overlay/O = new/obj/overlay( src )
-			O.name = "Thermite"
-			O.desc = "Looks hot."
-			O.icon = 'fire.dmi'
-			O.icon_state = "2"
-			O.anchored = 1
-			O.density = 1
-			O.layer = 5
-			var/turf/simulated/floor/F = ReplaceWithFloor()
-			F.to_plating()
-			F.burn_tile()
-			user << "\red The thermite melts the wall."
-			spawn(100) del(O)
-			return
-
 		if (W:get_fuel() < 5)
 			user << "\blue You need more welding fuel to complete this task."
 			return
@@ -374,22 +333,6 @@
 		W:eyecheck(user)
 		var/turf/T = user.loc
 		if (!( istype(T, /turf) ))
-			return
-
-		if (thermite)
-			var/obj/overlay/O = new/obj/overlay( src )
-			O.name = "Thermite"
-			O.desc = "Looks hot."
-			O.icon = 'fire.dmi'
-			O.icon_state = "2"
-			O.anchored = 1
-			O.density = 1
-			O.layer = 5
-			var/turf/simulated/floor/F = ReplaceWithFloor()
-			F.to_plating()
-			F.burn_tile()
-			user << "\red The thermite melts the wall."
-			spawn(100) del(O)
 			return
 
 		if (src.d_state == 2)
@@ -495,14 +438,13 @@
 			return
 	switch(severity)
 		if(1.0)
-			src.ReplaceWithSpace()
+			ReplaceTurfWithSpace(src)
 		if(2.0)
 			switch(pick(1,2;75,3))
 				if (1)
-					src.ReplaceWithLattice()
-					if(prob(33)) new /obj/item/weapon/sheet/metal(src)
+					ReplaceTurfWithLattice(src)
 				if(2)
-					src.ReplaceWithSpace()
+					ReplaceTurfWithSpace(src)
 				if(3)
 					if(prob(80))
 						src.break_tile_to_plating()
@@ -554,7 +496,7 @@ turf/simulated/floor/proc/update_icon()
 		if(do_after(user, 30))
 			new /obj/item/weapon/rods(src)
 			new /obj/item/weapon/rods(src)
-			ReplaceWithFloor()
+			ReplaceWithFloor(src)
 			var/turf/simulated/floor/F = src
 			F.to_plating()
 			return
@@ -564,7 +506,9 @@ turf/simulated/floor/proc/update_icon()
 	if(istype(src,/turf/simulated/floor/engine)) return
 	//if(!intact) return
 	//if(!icon_old) icon_old = icon_state
-	new /turf/simulated/floor/plating(locate(x,y,z))
+	var/turf/simulated/floor/plating/G = new(locate(x,y,z))
+	G.has_cover = 0
+	//new /turf/simulated/floor/plating(locate(x,y,z))
 	/*src.icon_state = "plating"
 	color = "#FFFFFF"
 	intact = 0
@@ -593,17 +537,6 @@ turf/simulated/floor/proc/update_icon()
 	if(!icon_old) icon_old = icon_state
 	color = "#808080"
 	burnt = 1
-
-/turf/simulated/floor/proc/restore_tile()
-	if(intact) return
-	intact = 1
-	broken = 0
-	burnt = 0
-	if(icon_old)
-		icon_state = icon_old
-	else
-		icon_state = "floor"
-	levelupdate()
 
 /turf/simulated/floor/attackby(obj/item/weapon/C as obj, mob/user as mob)
 
@@ -635,7 +568,7 @@ turf/simulated/floor/proc/update_icon()
 			if (C:amount >= 2)
 				user << "\blue Reinforcing the floor..."
 				if(do_after(user, 30))
-					ReplaceWithEngineFloor()
+					ReplaceWithEngineFloor(src)
 					C:amount -= 2
 					if (C:amount <= 0) del(C) //wtf
 					playsound(src, 'Deconstruct.ogg', 80, 1)
@@ -650,12 +583,11 @@ turf/simulated/floor/proc/update_icon()
 			if(src:has_cover)
 				user << "\red You must remove the cover first."
 			else
-				restore_tile()
 				var/obj/item/weapon/tile/T = C
 				playsound(src, 'Genhit.ogg', 50, 1)
 				if(--T.amount < 1)
 					del(T)
-					return
+				ReplaceWithFloor(src)
 
 	if(istype(C, /obj/item/weapon/cable_coil))
 		if(!intact)
@@ -711,7 +643,7 @@ turf/simulated/floor/proc/update_icon()
 	if (istype(C, /obj/item/weapon/rods))
 		user << "\blue Constructing support lattice ..."
 		playsound(src, 'Genhit.ogg', 50, 1)
-		ReplaceWithLattice()
+		ReplaceTurfWithLattice(src)
 		C:amount--
 
 		if (C:amount < 1)

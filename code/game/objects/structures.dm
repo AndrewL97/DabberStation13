@@ -72,7 +72,7 @@ obj/structure
 		if (get_turf(user) == T)
 			user << "\blue You added the plating!"
 			var/turf/Tsrc = get_turf(src)
-			Tsrc.ReplaceWithWall()
+			ReplaceTurfWithWall(Tsrc)
 			W:amount -= 2
 			if(W:amount <= 0)
 				del(W)
@@ -87,7 +87,7 @@ obj/structure
 			if(get_turf(user) == T)
 				user << "\blue Wall fully reinforced!"
 				var/turf/Tsrc = get_turf(src)
-				Tsrc.ReplaceWithRWall()
+				ReplaceTurfWithRWall(Tsrc)
 				W:amount--
 				if (W:amount <= 0)
 					del(W)

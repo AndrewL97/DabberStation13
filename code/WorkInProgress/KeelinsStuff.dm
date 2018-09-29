@@ -400,7 +400,7 @@
 						fromupdate += ttl
 
 					else
-						T.ReplaceWithSpace()
+						ReplaceTurfWithSpace(T)
 
 					refined_src -= T
 					refined_trg -= B

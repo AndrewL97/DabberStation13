@@ -92,10 +92,6 @@ mob/new_player
 
 		if(href_list["SelectedJob"])
 
-			if (!enter_allowed)
-				usr << "\blue There is an administrative lock on entering the game!"
-				return
-
 			switch(href_list["SelectedJob"])
 				if ("1")
 					AttemptLateSpawn("Captain", captainMax)

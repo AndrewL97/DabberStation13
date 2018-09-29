@@ -37,7 +37,7 @@
 
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
-	
+
 	var/const/traitors_possible = 4
 
 /datum/game_mode/traitor/announce()
@@ -46,30 +46,21 @@
 
 /datum/game_mode/traitor/pre_setup()
 	var/list/possible_traitors = get_possible_traitors()
-	
-	var/num_players = 0
-	for(var/mob/new_player/P in world)
-		if(P.client && P.ready)
-			num_players++
-	
-	var/i = rand(5)
+
 	var/num_traitors = 1
 
 	// stop setup if no possible traitors
 	if(!possible_traitors.len)
 		return 0
 
-	if(traitor_scaling)
-		num_traitors = max(1, min(round((num_players + i) / 10), traitors_possible))
-	
 //	log_game("Number of traitors: [num_traitors]")
 //	message_admins("Players counted: [num_players]  Number of traitors chosen: [num_traitors]")
-	
+
 	for(var/j = 0, j < num_traitors, j++)
 		var/datum/mind/traitor = pick(possible_traitors)
 		traitors += traitor
 		possible_traitors.Remove(traitor)
-		
+
 	for(var/datum/mind/traitor in traitors)
 		if(!traitor || !istype(traitor))
 			traitors.Remove(traitor)

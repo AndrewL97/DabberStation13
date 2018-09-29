@@ -51,7 +51,7 @@ RCD
 			playsound(src, 'Deconstruct.ogg', 50, 1)
 			spark_system.set_up(5, 0, src)
 			src.spark_system.start()
-			A:ReplaceWithFloor()
+			ReplaceWithFloor(A)
 			matter--
 			user << "The RCD now holds [matter]/[max_matter] matter-units."
 			desc = "A RCD. It currently holds [matter]/[max_matter] matter-units."
@@ -62,7 +62,7 @@ RCD
 			if(do_after(user, rcd_delay))
 				spark_system.set_up(5, 0, src)
 				src.spark_system.start()
-				A:ReplaceWithWall()
+				ReplaceTurfWithWall(A)
 				playsound(src, 'Deconstruct.ogg', 50, 1)
 				matter -= 3
 				user << "The RCD now holds [matter]/[max_matter] matter-units."
@@ -90,7 +90,7 @@ RCD
 				spark_system.set_up(5, 0, src)
 				src.spark_system.start()
 				matter -= 5
-				A:ReplaceWithFloor()
+				ReplaceWithFloor(A)
 				playsound(src, 'Deconstruct.ogg', 50, 1)
 				user << "The RCD now holds [matter]/[max_matter] matter-units."
 				desc = "A RCD. It currently holds [matter]/[max_matter] matter-units."
@@ -102,7 +102,7 @@ RCD
 				spark_system.set_up(5, 0, src)
 				src.spark_system.start()
 				matter -= 5
-				A:ReplaceWithWall()
+				ReplaceTurfWithWall(A)
 				playsound(src, 'Deconstruct.ogg', 50, 1)
 				user << "The RCD now holds [matter]/[max_matter] matter-units."
 				desc = "A RCD. It currently holds [matter]/[max_matter] matter-units."
@@ -114,7 +114,7 @@ RCD
 				spark_system.set_up(5, 0, src)
 				src.spark_system.start()
 				matter -= 5
-				A:ReplaceWithSpace()
+				ReplaceTurfWithSpace(A)
 				playsound(src, 'Deconstruct.ogg', 50, 1)
 				user << "The RCD now holds [matter]/[max_matter] matter-units."
 				desc = "A RCD. It currently holds [matter]/[max_matter] matter-units."

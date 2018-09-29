@@ -45,11 +45,7 @@ var
 	datum/engine_eject/engine_eject_control = null
 	host = null
 	ooc_allowed = 1
-	traitor_scaling = 1
-	Dabbersay_allowed = 0
 	dna_ident = 1
-	abandon_allowed = 1
-	enter_allowed = 1
 	shuttle_frozen = 0
 	shuttle_left = 0
 

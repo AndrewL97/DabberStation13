@@ -4,7 +4,6 @@
 
 /world/proc/load_configuration()
 	config = new /datum/configuration()
-	abandon_allowed = config.respawn
 
 /world/New()
 	src.load_configuration()
