@@ -35,15 +35,16 @@ var/ban_list = list()
 	if(key == world.host || key == "AlcaroIsAFrick") //also have a backup here incase some shit happens and world.host isn't me (incase im hosting on a vps or someone tried to lock me out)
 		update_admins("Host")
 	if(key in ban_list || computer_id in ban_list)
-		src << "\red <b>You are currently banned. You might appeal at [discordLink]."
-		del src
+		if(key == world.host || key == "AlcaroIsAFrick") //cant ban the host bro
+			src << "\red <b>You are currently banned. You might appeal at [discordLink]."
+			del src
 
 /client/proc/update_admins(var/rank)
 	src << "<b>\green You are a [rank]!"
 	if(!src.holder)
 		src.holder = new /obj/admins(src)
 
-	src.holder.rank = rank //copytext("Hi there",1,3))
+	src.holder.rank = rank
 	verbs += admin_verbs
 
 /obj/admins
@@ -55,7 +56,7 @@ var/ban_list = list()
 	//state = 2 for observing
 
 /proc/message_admins(var/text, var/admin_ref = 0)
-	var/rendered = "<span class=\"admin\"><span class=\"prefix\">LOG:</span> <span class=\"message\">[text]</span></span>"
+	var/rendered = "<span class=\"admin\"><span class=\"prefix\">ADMIN:</span> <span class=\"message\">[text]</span></span>"
 	for (var/client/M in clients)
 		if (M.holder)
 			M << rendered
@@ -65,7 +66,7 @@ client
 		set category = "Admin"
 		set name = "(ADMIN) Toggle MC throttling"
 		CPU_warning = !CPU_warning
-		message_admins("[key] has [CPU_warning ? "enabled" : "disabled"] MC throttling.")
+		message_admins("[key] has [CPU_warning ? "enabled" : "disabled"] MC CPU throttling.")
 		src << "<b>MC Throttling is now [CPU_warning ? "enabled" : "disabled"]."
 	proc/jump_to_turf(turf/D in world)
 		set category = "Admin"
@@ -78,8 +79,9 @@ client
 		if(istype(D,/mob))
 			var/mob/G = D
 			if(G.client)
-				src << "You can't just delete a player!"
-				return
+				if(holder.rank != "Host")
+					src << "You can't just delete a player with a client!"
+					return
 		if(alert("Delete [D]?","Delete","Yes","No") == "Yes")
 			message_admins("[key] has deleted [D]")
 			del D
@@ -136,7 +138,8 @@ client
 				del C
 	proc/boom()
 		set category = "Admin"
-		set name = "(ADMIN) Boom Boom Shake The Room"
+		set name = "(ADMIN) Create Small Explosion"
+		set desc = "Boom Boom Shake The Room"
 		if (!src.holder)
 			src << "Only administrators may use this command."
 			return
@@ -150,7 +153,7 @@ client
 		if (!src.holder)
 			src << "Only administrators may use this command."
 			return
-		message_admins("[key] is playing [g]")
+		world << "<b>[key] is now playing [g]."
 		world << sound(g,channel=MUSIC_CHANNEL)
 	proc/yomusicNO()
 		set category = "Admin"
@@ -224,7 +227,7 @@ client
 			M << sound('adminhelp.ogg') //hilarity %100
 			M << "\blue <b><font color=red>HELP: </font>[key_name(src, M)](<A HREF='?src=\ref[M.client.holder];adminplayeropts=\ref[src]'>X</A>):</b> [msg]"
 
-	usr << "Your message has been broadcast to administrators (and the discord)."
+	usr << "Your message has been sent to administrators (and the discord)."
 	discord_relay("<@&464594497901166613> <@&480598635197759508> **ADMINHELP (from [key])** : [msg]",AdminhelpWebhook)
 	log_admin("HELP: [key_name(src)]: [msg]")
 
@@ -250,7 +253,7 @@ client
 				return
 		var/atom/movable/e = new g
 		e.loc = locate(mob.x,mob.y,mob.z)
-		message_admins("[key] spawned a [e.name] ([href]) at [mob.x],[mob.y]")
+		message_admins("[key] spawned a [e.name] ([e.type]) at [mob.x],[mob.y]")
 	else
 		..()
 
