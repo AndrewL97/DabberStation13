@@ -381,7 +381,7 @@ mob
 						usr:handcuffed = null
 
 		else
-			src.DblClick()
+			src.Click()
 	return
 
 /obj/hud

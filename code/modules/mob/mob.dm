@@ -599,10 +599,6 @@
 	src.master:s_click(src)
 	return
 
-/obj/screen/grab/DblClick()
-	src.master:s_dbclick(src)
-	return
-
 /obj/screen/grab/attack_hand()
 	return
 

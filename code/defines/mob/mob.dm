@@ -93,7 +93,6 @@
 	var/a_intent = "help"
 	var/m_int = null
 	var/m_intent = "walk"
-	var/lastDblClick = 0
 	var/lastKnownIP = null
 	var/obj/stool/buckled = null
 	var/obj/item/weapon/handcuffs/handcuffed = null

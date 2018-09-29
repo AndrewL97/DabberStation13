@@ -302,8 +302,6 @@ GETLINEEEEEEEEEEEEEEEEEEEEE
 	onclose(user, "flamethrow2er")
 	return
 
-
-// gets this from turf.dm turf/dblclick
 /obj/item/weapon/flamethrow2er/proc/flame_turf(turflist)
 	if(!lit || operating)	return
 	operating = 1

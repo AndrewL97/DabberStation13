@@ -1,4 +1,4 @@
-/turf/DblClick()
+/turf/Click()
 	if(istype(usr, /mob/living/silicon/ai))
 		return move_camera_by_click()
 	if(usr.stat || usr.restrained() || usr.lying)

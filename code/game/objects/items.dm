@@ -179,7 +179,7 @@
 	del(src)
 	return
 
-/obj/screen/close/DblClick()
+/obj/screen/close/Click()
 	if (src.master)
 		src.master:close(usr)
 	return

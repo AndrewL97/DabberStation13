@@ -82,20 +82,18 @@
 		if(istype(src.equipped(), /obj/item/weapon/baton)) // add any other item paths you think are necessary
 			if(src.loc:sd_lumcount < 3 || src.blinded)
 				var/obj/item/weapon/W = src.equipped()
-				if (world.time > src.lastDblClick+2)
-					src.lastDblClick = world.time
-					if((prob(40)) || (prob(95) && src.mutations & 16))
-						src << "\red You accidentally stun yourself with the [W.name]."
-						src.weakened = max(12, src.weakened)
-					else
-						for(var/mob/M in viewers(src, null))
-							if(M.client)
-								M << "\red <B>[src] accidentally bumps into [tmob] with the [W.name]."
-						tmob.weakened = max(4, tmob.weakened)
-						tmob.stunned = max(4, tmob.stunned)
-					playsound(src, 'Egloves.ogg', 50, 1, -1)
-					W:charges--
-					return
+				if((prob(40)) || (prob(95) && src.mutations & 16))
+					src << "\red You accidentally stun yourself with the [W.name]."
+					src.weakened = max(12, src.weakened)
+				else
+					for(var/mob/M in viewers(src, null))
+						if(M.client)
+							M << "\red <B>[src] accidentally bumps into [tmob] with the [W.name]."
+					tmob.weakened = max(4, tmob.weakened)
+					tmob.stunned = max(4, tmob.stunned)
+				playsound(src, 'Egloves.ogg', 50, 1, -1)
+				W:charges--
+				return
 		if(istype(tmob, /mob/living/carbon/human) && tmob.mutations & 32)
 			if(prob(40) && !(src.mutations & 32))
 				for(var/mob/M in viewers(src, null))
@@ -420,19 +418,18 @@
 
 	update_clothing()
 
-/mob/living/carbon/human/db_click(text, t1)
+/mob/living/carbon/human/s_click(text, t1)
 	var/obj/item/W = src.equipped()
 	var/emptyHand = (W == null)
 	if ((!emptyHand) && (!istype(W, /obj/item)))
 		return
 	if (emptyHand)
 		usr.next_move = usr.prev_move
-		usr:lastDblClick -= 3	//permit the double-click redirection to proceed.
 	switch(text)
 		if("mask")
 			if (src.wear_mask)
 				if (emptyHand)
-					src.wear_mask.DblClick()
+					src.wear_mask.Click()
 				return
 			if (!( istype(W, /obj/item/clothing/mask) ))
 				return
@@ -442,7 +439,7 @@
 		if("back")
 			if (src.back)
 				if (emptyHand)
-					src.back.DblClick()
+					src.back.Click()
 				return
 			if (!istype(W, /obj/item))
 				return
@@ -455,7 +452,7 @@
 /*		if("headset")
 			if (src.ears)
 				if (emptyHand)
-					src.ears.DblClick()
+					src.ears.Click()
 				return
 			if (!( istype(W, /obj/item/device/radio/headset) ))
 				return
@@ -465,7 +462,7 @@
 		if("o_clothing")
 			if (src.wear_suit)
 				if (emptyHand)
-					src.wear_suit.DblClick()
+					src.wear_suit.Click()
 				return
 			if (!( istype(W, /obj/item/clothing/suit) ))
 				return
@@ -478,7 +475,7 @@
 		if("gloves")
 			if (src.gloves)
 				if (emptyHand)
-					src.gloves.DblClick()
+					src.gloves.Click()
 				return
 			if (!( istype(W, /obj/item/clothing/gloves) ))
 				return
@@ -488,7 +485,7 @@
 		if("shoes")
 			if (src.shoes)
 				if (emptyHand)
-					src.shoes.DblClick()
+					src.shoes.Click()
 				return
 			if (!( istype(W, /obj/item/clothing/shoes) ))
 				return
@@ -498,7 +495,7 @@
 		if("belt")
 			if (src.belt)
 				if (emptyHand)
-					src.belt.DblClick()
+					src.belt.Click()
 				return
 			if (!W || !W.flags || !( W.flags & ONBELT ))
 				return
@@ -508,7 +505,7 @@
 		if("eyes")
 			if (src.glasses)
 				if (emptyHand)
-					src.glasses.DblClick()
+					src.glasses.Click()
 				return
 			if (!( istype(W, /obj/item/clothing/glasses) ))
 				return
@@ -518,7 +515,7 @@
 		if("head")
 			if (src.head)
 				if (emptyHand)
-					src.head.DblClick()
+					src.head.Click()
 				return
 			if (( istype(W, /obj/item/weapon/paper) ))
 				src.u_equip(W)
@@ -531,7 +528,7 @@
 		if("ears")
 			if (src.ears)
 				if (emptyHand)
-					src.ears.DblClick()
+					src.ears.Click()
 				return
 			if (!( istype(W, /obj/item/clothing/ears) ) && !( istype(W, /obj/item/device/radio/headset) ))
 				return
@@ -541,7 +538,7 @@
 		if("i_clothing")
 			if (src.w_uniform)
 				if (emptyHand)
-					src.w_uniform.DblClick()
+					src.w_uniform.Click()
 				return
 			if (!( istype(W, /obj/item/clothing/under) ))
 				return
@@ -554,7 +551,7 @@
 		if("id")
 			if (src.wear_id)
 				if (emptyHand)
-					src.wear_id.DblClick()
+					src.wear_id.Click()
 				return
 			if (!src.w_uniform)
 				return
@@ -566,7 +563,7 @@
 		if("storage1")
 			if (src.l_store)
 				if (emptyHand)
-					src.l_store.DblClick()
+					src.l_store.Click()
 				return
 			if ((!( istype(W, /obj/item) ) || W.w_class > 2 || !( src.w_uniform )))
 				return
@@ -575,7 +572,7 @@
 		if("storage2")
 			if (src.r_store)
 				if (emptyHand)
-					src.r_store.DblClick()
+					src.r_store.Click()
 				return
 			if ((!( istype(W, /obj/item) ) || W.w_class > 2 || !( src.w_uniform )))
 				return

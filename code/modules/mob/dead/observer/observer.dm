@@ -26,7 +26,10 @@
 /mob/dead/observer/Move(NewLoc, direct)
 	if(world.time < delayed_world_time)
 		return
-	delayed_world_time = world.time + 0.7
+	glide_size = 32 / max(1,world.tick_lag) * world.tick_lag
+	if(MyShadow)
+		MyShadow.glide_size = glide_size
+	delayed_world_time = world.time + 1
 	if(NewLoc)
 		src.loc = NewLoc
 		return

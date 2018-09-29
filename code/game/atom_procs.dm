@@ -142,20 +142,7 @@
 	return
 
 /atom/Click(location,control,params)
-	//world << "atom.Click() on [src] by [usr] : src.type is [src.type]"
-
-	return DblClick()
-
-/atom/DblClick() //TODO: DEFERRED: REWRITE
-	/*if (world.time <= usr:lastDblClick+2)
-		//world << "BLOCKED atom.DblClick() on [src] by [usr] : src.type is [src.type]"
-		return
-	else
-		//world << "atom.DblClick() on [src] by [usr] : src.type is [src.type]"
-		usr:lastDblClick = world.time*/
-
 	..()
-
 
 	if(usr.in_throw2_mode)
 		return usr:throw2_item(src)
@@ -193,106 +180,17 @@
 
 	if ((!( src in usr.contents ) && (((!( isturf(src) ) && (!( isturf(src.loc) ) && (src.loc && !( isturf(src.loc.loc) )))) || !( isturf(usr.loc) )) && (src.loc != usr.loc && (!( istype(src, /obj/screen) ) && !( usr.contents.Find(src.loc) ))))))
 		return
-
 	var/t5 = in_range(src, usr) || src.loc == usr
-
-	if (istype(usr, /mob/living/silicon/ai))
-		t5 = 1
-
-	if (istype(usr, /mob/living/silicon/robot) && W == null)
-		t5 = 1
-
 	if (istype(src, /datum/organ) && src in usr.contents)
 		return
 
-	if (((t5 || (W && (W.flags & 16))) && !( istype(src, /obj/screen) )))
-		/*if (usr.next_move < world.time)
-			usr.prev_move = usr.next_move
-			usr.next_move = world.time + 10
-		else
-			return*/
-		if ((src.loc && (get_dist(src, usr) < 2 || src.loc == usr.loc)))
-			var/direct = get_dir(usr, src)
-			var/obj/item/weapon/dummy/D = new /obj/item/weapon/dummy( usr.loc )
-			var/ok = 0
-			if ( (direct - 1) & direct)
-				var/turf/Step_1
-				var/turf/Step_2
-				switch(direct)
-					if(5.0)
-						Step_1 = get_step(usr, NORTH)
-						Step_2 = get_step(usr, EAST)
-
-					if(6.0)
-						Step_1 = get_step(usr, SOUTH)
-						Step_2 = get_step(usr, EAST)
-
-					if(9.0)
-						Step_1 = get_step(usr, NORTH)
-						Step_2 = get_step(usr, WEST)
-
-					if(10.0)
-						Step_1 = get_step(usr, SOUTH)
-						Step_2 = get_step(usr, WEST)
-
-					else
-				if(Step_1 && Step_2)
-					var/check_1 = 0
-					var/check_2 = 0
-					if(step_to(D, Step_1))
-						check_1 = 1
-						for(var/obj/border_obstacle in Step_1)
-							if(border_obstacle.flags & ON_BORDER)
-								if(!border_obstacle.CheckExit(D, src))
-									check_1 = 0
-						for(var/obj/border_obstacle in get_turf(src))
-							if((border_obstacle.flags & ON_BORDER) && (src != border_obstacle))
-								if(!border_obstacle.CanPass(D, D.loc, 1, 0))
-									check_1 = 0
-
-					D.loc = usr.loc
-					if(step_to(D, Step_2))
-						check_2 = 1
-
-						for(var/obj/border_obstacle in Step_2)
-							if(border_obstacle.flags & ON_BORDER)
-								if(!border_obstacle.CheckExit(D, src))
-									check_2 = 0
-						for(var/obj/border_obstacle in get_turf(src))
-							if((border_obstacle.flags & ON_BORDER) && (src != border_obstacle))
-								if(!border_obstacle.CanPass(D, D.loc, 1, 0))
-									check_2 = 0
-					if(check_1 || check_2)
-						ok = 1
-			else
-				if(loc == usr.loc)
-					ok = 1
-				else
-					ok = 1
-
-					//Now, check objects to block exit that are on the border
-					for(var/obj/border_obstacle in usr.loc)
-						if(border_obstacle.flags & ON_BORDER)
-							if(!border_obstacle.CheckExit(D, src))
-								ok = 0
-
-					//Next, check objects to block entry that are on the border
-					for(var/obj/border_obstacle in get_turf(src))
-						if((border_obstacle.flags & ON_BORDER) && (src != border_obstacle))
-							if(!border_obstacle.CanPass(D, D.loc, 1, 0))
-								ok = 0
-
-			del(D)
-			if (!( ok ))
-
-				return 0
-
+	if ((t5 || (W && (W.flags & 16))) && !istype(src,/obj/screen) )
 		if (!( usr.restrained() ))
 			if (W)
-				if (t5)
+				if(t5)
 					src.attackby(W, usr)
 				if (W)
-					W.afterattack(src, usr, (t5 ? 1 : 0))
+					W.afterattack(src, usr, t5 ? 1 : 0)
 			else
 				if (istype(usr, /mob/living/carbon/human))
 					src.attack_hand(usr, usr.hand)
@@ -307,12 +205,12 @@
 					src.hand_a(usr, usr.hand)
 
 	else
-		if (istype(src, /obj/screen))
-			/*usr.prev_move = usr.next_move
-			if (usr.next_move < world.time)
-				usr.next_move = world.time + 10
-			else
-				return*/
+		/*usr.prev_move = usr.next_move
+		if (usr.next_move < world.time)
+			usr.next_move = world.time + 10
+		else
+			return*/
+		if(istype(src, /obj/screen))
 			if (!( usr.restrained() ))
 				if ((W && !( istype(src, /obj/screen) )))
 					src.attackby(W, usr)
