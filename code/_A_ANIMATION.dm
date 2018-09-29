@@ -291,9 +291,8 @@ obj
 				owner.alpha = 255
 			del src
 		proc/Reset_Limbs()
-			var/matrix/Reset = matrix()
 			for(var/obj/limb_dance/g in list(Limb1,Limb2,Limb3,Limb4,Limb5,Limb6))
-				animate(g,transform = Reset, time = 5)
+				animate(g,transform = owner.transform, time = 5)
 			sleep(5)
 		proc/SplitIcon()
 			PlayerIcon = new('Sprited Animations.dmi',"Blank Dir 2 Template",2)
