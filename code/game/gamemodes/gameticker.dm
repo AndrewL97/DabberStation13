@@ -112,8 +112,8 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 			if (S.name != "AI")
 				del(S)
 
-		//Start master_controller.process()
-		world << "<FONT color='blue'><B>Get ready and enjoy the game! Buckle up too, because this is surely gonna be a ride!</B></FONT>"
+	world << "<FONT color='blue'><B><font size=4>Welcome to [Station_Name]!"
+	world << 'welcome.ogg'
 	if(mode.do_kick == 1)
 		world << "<b><font color='red'>Automatic kicking is enabled! After [TIMETOKICK/60] minutes of inactivity, you will be kicked."
 		kick_inactive_players = 1
