@@ -142,17 +142,17 @@
 	return
 
 /atom/Click(location,control,params)
-	//world << "atom.Click() on [src] by [usr] : src.type is [src.type]"
+	world << "atom.Click() on [src] by [usr] : src.type is [src.type]"
 
 	return DblClick()
 
 /atom/DblClick() //TODO: DEFERRED: REWRITE
-	if (world.time <= usr:lastDblClick+2)
+	/*if (world.time <= usr:lastDblClick+2)
 		//world << "BLOCKED atom.DblClick() on [src] by [usr] : src.type is [src.type]"
 		return
 	else
 		//world << "atom.DblClick() on [src] by [usr] : src.type is [src.type]"
-		usr:lastDblClick = world.time
+		usr:lastDblClick = world.time*/
 
 	..()
 
@@ -206,11 +206,11 @@
 		return
 
 	if (((t5 || (W && (W.flags & 16))) && !( istype(src, /obj/screen) )))
-		if (usr.next_move < world.time)
+		/*if (usr.next_move < world.time)
 			usr.prev_move = usr.next_move
 			usr.next_move = world.time + 10
 		else
-			return
+			return*/
 		if ((src.loc && (get_dist(src, usr) < 2 || src.loc == usr.loc)))
 			var/direct = get_dir(usr, src)
 			var/obj/item/weapon/dummy/D = new /obj/item/weapon/dummy( usr.loc )
@@ -308,11 +308,11 @@
 
 	else
 		if (istype(src, /obj/screen))
-			usr.prev_move = usr.next_move
+			/*usr.prev_move = usr.next_move
 			if (usr.next_move < world.time)
 				usr.next_move = world.time + 10
 			else
-				return
+				return*/
 			if (!( usr.restrained() ))
 				if ((W && !( istype(src, /obj/screen) )))
 					src.attackby(W, usr)
