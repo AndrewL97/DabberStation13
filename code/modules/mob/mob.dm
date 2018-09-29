@@ -541,8 +541,8 @@
 
 
 /obj/screen/Click()
-	usr.db_click(src.name, usr:using)
-	return
+	..()
+	usr.db_click(src.name, null)
 
 /obj/equip_e/proc/process()
 	return

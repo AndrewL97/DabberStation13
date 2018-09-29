@@ -379,7 +379,7 @@ mob
 						usr << "\blue You successfully remove your handcuffs."
 						usr:handcuffed:loc = usr:loc
 						usr:handcuffed = null
-	return
+
 
 /obj/hud
 	name = "hud"
