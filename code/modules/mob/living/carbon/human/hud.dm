@@ -379,9 +379,6 @@ mob
 						usr << "\blue You successfully remove your handcuffs."
 						usr:handcuffed:loc = usr:loc
 						usr:handcuffed = null
-
-		else
-			src.Click()
 	return
 
 /obj/hud
