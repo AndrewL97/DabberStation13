@@ -1,3 +1,6 @@
+/atom/proc/thrown(mob/user)
+	return
+
 /mob/living/carbon/proc/toggle_throw2_mode()
 	if (src.in_throw2_mode)
 		throw2_mode_off()
@@ -41,6 +44,8 @@
 		if(istype(src.loc, /turf/space)) //they're in space, move em one space in the opposite direction
 			src.inertia_dir = get_dir(target, src)
 			step(src, inertia_dir)
+		item.thrown(src)
+		item.dir = get_step(item,target)
 		item.throw2_at(target, item.throw2_range, item.throw2_speed)
 		//animate(item, transform = M, time = 5,loop = 2)
 

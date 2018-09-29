@@ -9,6 +9,7 @@
 	item_state = "flashbang"
 	throw2_speed = 4
 	throw2_range = 20
+	mouse_opacity = 1
 	flags =  FPRINT | TABLEPASS | CONDUCT | ONBELT
 
 	New()
@@ -33,13 +34,13 @@
 
 	special_process()
 		s.screen_loc = screen_loc
+		s.loc = src.loc
 		var/turf/T = loc
 		if(istype(T,/turf))
 			if(world.time > nextmove && spd > 1 && h > 0.2)
 				step(src,dir)
 				nextmove = world.time + (2.5-((spd/25)*2))
-
-			s.loc = src.loc
+			s.pixel_z = T.TurfHeight
 			if(y_speed > -4)
 				y_speed = y_speed - 0.1
 			h = h + y_speed
@@ -52,6 +53,12 @@
 			M.Turn(ang)
 			transform = M
 			pixel_y = round(h)
+	thrown(mob/user)
+		spd = rand(15,25)
+		ang = 0
+		h = user.heightZ
+		y_speed = 3
+		nextmove = world.time
 
 /obj/item/weapon/grenade/explosiongrenade
 	desc = "It is set to detonate in 3 seconds."
@@ -59,24 +66,16 @@
 	icon = 'grenade.dmi'
 
 
-/obj/item/weapon/grenade/explosiongrenade/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
+/obj/item/weapon/grenade/explosiongrenade/attack_hand(mob/user as mob, unused, flag)
 	if (user.equipped() == src)
 		if (!( src.state ))
-			user << "\red You prime the grenade and throw it! [det_time/10] seconds!"
-			src.state = 1
-			src.icon_state = "flashbang1"
+			user << "\red You prime the grenade! [det_time/10] seconds! Throw it!"
+			state = 1
+			icon_state = "flashbang1"
 			spawn( src.det_time )
 				prime()
 				return
-		user.dir = get_dir(user, target)
-		user.drop_item()
 		playsound(locate(x,y,z), 'armbomb.ogg', 75, 1, -3)
-		dir = user.dir
-		spd = rand(15,25)
-		ang = 0
-		h = user.heightZ
-		y_speed = 3
-		nextmove = world.time
 
 		src.add_fingerprint(user)
 	return
