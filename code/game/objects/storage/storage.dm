@@ -91,12 +91,12 @@
 	return
 
 /obj/item/weapon/storage/attack_paw(mob/user as mob)
-	playsound(src.loc, "rustle", 50, 1, -5)
+	playsound(src, "rustle", 50, 1, -5)
 	return src.attack_hand(user)
 	return
 
 /obj/item/weapon/storage/attack_hand(mob/user as mob)
-	playsound(src.loc, "rustle", 50, 1, -5)
+	playsound(src, "rustle", 50, 1, -5)
 	if (src.loc == user)
 		if (user.s_active)
 			user.s_active.close(user)
@@ -162,7 +162,7 @@
 		else
 			M << "\red I need to wear the belt for that."
 			return
-	playsound(src.loc, "rustle", 50, 1, -5)
+	playsound(src, "rustle", 50, 1, -5)
 	if (!M.restrained() && !M.stat && can_use())
 		if (over_object.name == "r_hand")
 			if (!( M.r_hand ))
@@ -183,7 +183,7 @@
 /obj/item/weapon/storage/utilitybelt/attack_hand(mob/user as mob)
 	if (src.loc == user)
 		if(can_use())
-			playsound(src.loc, "rustle", 50, 1, -5)
+			playsound(src, "rustle", 50, 1, -5)
 			if (user.s_active)
 				user.s_active.close(user)
 			src.show_to(user)

@@ -288,7 +288,7 @@
 			return
 
 	else if (istype(W, /obj/item/weapon/screwdriver))
-		playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+		playsound(src, 'Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
 			var/obj/computer2frame/A = new /obj/computer2frame( src.loc )
 			A.created_icon_state = src.base_icon_state

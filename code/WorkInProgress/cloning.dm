@@ -87,7 +87,7 @@
 			src.updateUsrDialog()
 			return
 	else if((istype(W, /obj/item/weapon/screwdriver)) && (src.stat & BROKEN))
-		playsound(src.loc, 'Screwdriver.ogg', 50, 1)
+		playsound(src, 'Screwdriver.ogg', 50, 1)
 		if(do_after(user, 20))
 			user << "\blue The broken glass falls out."
 			var/obj/computerframe/A = new /obj/computerframe( src.loc )

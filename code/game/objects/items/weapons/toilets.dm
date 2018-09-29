@@ -26,7 +26,7 @@ TOILET
 	if (istype(W, /obj/item/weapon/storage/))
 		return
 	if (istype(W, /obj/item/weapon/grab))
-		playsound(src.loc, 'slosh.ogg', 50, 1)
+		playsound(src, 'slosh.ogg', 50, 1)
 		for(var/mob/O in viewers(user, null))
 			O << text("\blue [] gives [] a swirlie!", user, W)
 		return

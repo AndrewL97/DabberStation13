@@ -168,7 +168,7 @@ Buildable meters
 				if( (M.p_dir & pipedir) || (M.h_dir & pipedir) )	// matches at least one direction on either type of pipe
 					user << "There is already a pipe at that location."
 					return
-		playsound(src.loc, 'Ratchet.ogg', 50, 1)
+		playsound(src, 'Ratchet.ogg', 50, 1)
 
 		// no conflicts found
 
@@ -414,7 +414,7 @@ Buildable meters
 	if (istype(W, /obj/item/weapon/wrench))
 		if(locate(/obj/machinery/pipes, src.loc))
 			new/obj/machinery/meter( src.loc )
-			playsound(src.loc, 'Ratchet.ogg', 50, 1)
+			playsound(src, 'Ratchet.ogg', 50, 1)
 			user << "You have fastened the meter to the pipe"
 			del(src)
 		else

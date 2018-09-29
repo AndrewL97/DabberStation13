@@ -80,7 +80,7 @@
 	return
 
 /obj/item/weapon/grenade/explosiongrenade/proc/prime()
-	playsound(src.loc, 'nice.ogg', 75, 1, -2)
+	playsound(src, 'nice.ogg', 75, 1, -2)
 	explosion(locate(x,y,z),2,4,6,4)
 	del src
 

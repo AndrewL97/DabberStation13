@@ -145,7 +145,7 @@
 	return
 
 /obj/item/weapon/secstorage/attack_paw(mob/user as mob)
-	playsound(src.loc, "rustle", 50, 1, -5)
+	playsound(src, "rustle", 50, 1, -5)
 	return src.attack_hand(user)
 	return
 
@@ -153,7 +153,7 @@
 	if ((src.loc == user) && (src.locked == 1))
 		usr << "\red [src] is locked and cannot be opened!"
 	else if ((src.loc == user) && (!src.locked))
-		playsound(src.loc, "rustle", 50, 1, -5)
+		playsound(src, "rustle", 50, 1, -5)
 		if (user.s_active)
 			user.s_active.close(user)
 		src.show_to(user)

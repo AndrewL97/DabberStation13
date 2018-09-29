@@ -249,7 +249,7 @@
 
 	display_alert(var/alert_message) //Add alert overlay and beep
 		if (alert_message)
-			playsound(src.loc, 'twobeep.ogg', 50, 1)
+			playsound(src, 'twobeep.ogg', 50, 1)
 			for (var/mob/O in hearers(3, src.loc))
 				O.show_message(text("\icon[src] *[alert_message]*"))
 

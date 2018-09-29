@@ -49,18 +49,18 @@
 			for(var/mob/O in viewers(M, null))
 				O.show_message(text("\red <B>[] heals [] with the power of Christ!</B>", user, M), 1)
 			M << "\red May the power of Christ compel you to be healed!"
-			playsound(src.loc, "punch", 25, 1, -1)
+			playsound(src, "punch", 25, 1, -1)
 		else
 			if(ishuman(M) && !istype(M:head, /obj/item/clothing/head/helmet))
 				M.brainloss += 10
 				M << "\red You feel dumber."
 			for(var/mob/O in viewers(M, null))
 				O.show_message(text("\red <B>[] beats [] over the head with []!</B>", user, M, src), 1)
-			playsound(src.loc, "punch", 25, 1, -1)
+			playsound(src, "punch", 25, 1, -1)
 	else if(M.stat == 2)
 		for(var/mob/O in viewers(M, null))
 			O.show_message(text("\red <B>[] smacks []'s lifeless corpse with [].</B>", user, M, src), 1)
-			playsound(src.loc, "punch", 25, 1, -1)
+			playsound(src, "punch", 25, 1, -1)
 	return
 
 /obj/item/weapon/storage/bible/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -78,7 +78,7 @@
 
 		user << "You cannot fit the item inside. (Remove larger classed items)"
 		return
-	playsound(src.loc, "rustle", 50, 1, -5)
+	playsound(src, "rustle", 50, 1, -5)
 	user.u_equip(W)
 	W.loc = src
 	if ((user.client && user.s_active != src))

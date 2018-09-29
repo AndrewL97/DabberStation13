@@ -10,7 +10,7 @@
 		var/mob/M = usr
 		if (!( istype(over_object, /obj/screen) ))
 			return ..()
-		playsound(src.loc, "rustle", 50, 1, -5)
+		playsound(src, "rustle", 50, 1, -5)
 		if ((!( M.restrained() ) && !( M.stat ) && M.back == src))
 			if (over_object.name == "r_hand")
 				if (!( M.r_hand ))
@@ -44,7 +44,7 @@
 	for(var/obj/item/weapon/O in src)
 		t += O.w_class
 
-	playsound(src.loc, "rustle", 50, 1, -5)
+	playsound(src, "rustle", 50, 1, -5)
 	user.u_equip(W)
 	W.loc = src
 	if ((user.client && user.s_active != src))
@@ -178,7 +178,7 @@
 	P.name = finished_title
 	P.desc = finished_detail
 
-	playsound(src.loc, pick('polaroid1.ogg','polaroid2.ogg'), 75, 1, -3)
+	playsound(src, pick('polaroid1.ogg','polaroid2.ogg'), 75, 1, -3)
 
 	pictures_left--
 	src.desc = "A one use - polaroid camera. [pictures_left] photos left."

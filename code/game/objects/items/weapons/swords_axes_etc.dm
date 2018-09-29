@@ -75,10 +75,10 @@ STUN BATON
 		return
 	if (src.status)
 		user << "\blue The baton is now on."
-		playsound(src.loc, "sparks", 75, 1, -1)
+		playsound(src, "sparks", 75, 1, -1)
 	else
 		user << "\blue The baton is now off."
-		playsound(src.loc, "sparks", 75, 1, -1)
+		playsound(src, "sparks", 75, 1, -1)
 
 	update_icon()
 	src.add_fingerprint(user)
@@ -114,7 +114,7 @@ STUN BATON
 	if((charges > 0 && status == 1) && (istype(H, /mob/living/carbon/human)))
 		flick("baton_active", src)
 		if (user.a_intent == "hurt")
-			playsound(src.loc, 'Genhit.ogg', 50, 1, -1)
+			playsound(src, 'Genhit.ogg', 50, 1, -1)
 			if(isrobot(user))
 				var/mob/living/silicon/robot/R = user
 				R.cell.charge -= 20
@@ -128,7 +128,7 @@ STUN BATON
 			if (M.stunned < 1 && (!(M.mutations & 8))  /*&& (!istype(H:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
 				M.stunned = 1
 		else
-			playsound(src.loc, 'Egloves.ogg', 50, 1, -1)
+			playsound(src, 'Egloves.ogg', 50, 1, -1)
 			if(isrobot(user))
 				var/mob/living/silicon/robot/R = user
 				R.cell.charge -= 20
@@ -157,7 +157,7 @@ STUN BATON
 	src.add_fingerprint(user)
 
 	if (user.a_intent == "hurt")
-		playsound(src.loc, "swing_hit", 50, 1, -1)
+		playsound(src, "swing_hit", 50, 1, -1)
 		if (M.weakened < 8 && (!(M.mutations & 8))  /*&& (!istype(H:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
 			M.weakened = 8
 		if (M.stuttering < 8 && (!(M.mutations & 8))  /*&& (!istype(H:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
@@ -168,7 +168,7 @@ STUN BATON
 		for(var/mob/O in viewers(M))
 			if (O.client)	O.show_message("\red <B>[M] has been beaten with the police baton by [user]!</B>", 1, "\red You hear someone fall", 2)
 	else
-		playsound(src.loc, 'Genhit.ogg', 50, 1, -1)
+		playsound(src, 'Genhit.ogg', 50, 1, -1)
 		if (M.weakened < 5 && (!(M.mutations & 8))  /*&& (!istype(H:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
 			M.weakened = 5
 		if (M.stunned < 5 && (!(M.mutations & 8))  /*&& (!istype(H:wear_suit, /obj/item/clothing/suit/judgerobe))*/)

@@ -93,7 +93,7 @@
 								M << "\red <B>[src] accidentally bumps into [tmob] with the [W.name]."
 						tmob.weakened = max(4, tmob.weakened)
 						tmob.stunned = max(4, tmob.stunned)
-					playsound(src.loc, 'Egloves.ogg', 50, 1, -1)
+					playsound(src, 'Egloves.ogg', 50, 1, -1)
 					W:charges--
 					return
 		if(istype(tmob, /mob/living/carbon/human) && tmob.mutations & 32)
@@ -1107,7 +1107,7 @@
 			if (src.paralysis >= 3) src.paralysis -= 3
 			if (src.stunned >= 3) src.stunned -= 3
 			if (src.weakened >= 3) src.weakened -= 3
-			playsound(src.loc, 'thudswoosh.ogg', 50, 1, -1)
+			playsound(src, 'thudswoosh.ogg', 50, 1, -1)
 			for(var/mob/O in viewers(src, null))
 				O.show_message(text("\blue [] shakes [] trying to wake [] up!", M, src, src), 1)
 		else
@@ -1141,7 +1141,7 @@
 			G.affecting = src
 			src.grabbed_by += G
 			G.synch()
-			playsound(src.loc, 'thudswoosh.ogg', 50, 1, -1)
+			playsound(src, 'thudswoosh.ogg', 50, 1, -1)
 			for(var/mob/O in viewers(src, null))
 				O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
 		else
@@ -1164,7 +1164,7 @@
 							step_away(src,M,15)
 							sleep(3)
 							step_away(src,M,15)
-					playsound(src.loc, "punch", 25, 1, -1)
+					playsound(src, "punch", 25, 1, -1)
 					for(var/mob/O in viewers(src, null))
 						O.show_message(text("\red <B>[] has punched []!</B>", M, src), 1)
 
@@ -1190,7 +1190,7 @@
 								if (prob(50))
 									if (src.weakened < 5)
 										src.weakened = 5
-									playsound(src.loc, 'thudswoosh.ogg', 50, 1, -1)
+									playsound(src, 'thudswoosh.ogg', 50, 1, -1)
 									for(var/mob/O in viewers(src, null))
 										O.show_message(text("\red <B>[] has knocked down []!</B>", M, src), 1, "\red You hear someone fall.", 2)
 								else
@@ -1225,7 +1225,7 @@
 
 					src.updatehealth()
 				else
-					playsound(src.loc, 'punchmiss.ogg', 25, 1, -1)
+					playsound(src, 'punchmiss.ogg', 25, 1, -1)
 					for(var/mob/O in viewers(src, null))
 						O.show_message(text("\red <B>[] has attempted to punch []!</B>", M, src), 1)
 					return
@@ -1236,17 +1236,17 @@
 					var/randn = rand(1, 100)
 					if (randn <= 25)
 						src.weakened = 2
-						playsound(src.loc, 'thudswoosh.ogg', 50, 1, -1)
+						playsound(src, 'thudswoosh.ogg', 50, 1, -1)
 						for(var/mob/O in viewers(src, null))
 							O.show_message(text("\red <B>[] has pushed down []!</B>", M, src), 1)
 					else
 						if (randn <= 60)
 							src.drop_item()
-							playsound(src.loc, 'thudswoosh.ogg', 50, 1, -1)
+							playsound(src, 'thudswoosh.ogg', 50, 1, -1)
 							for(var/mob/O in viewers(src, null))
 								O.show_message(text("\red <B>[] has disarmed []!</B>", M, src), 1)
 						else
-							playsound(src.loc, 'punchmiss.ogg', 25, 1, -1)
+							playsound(src, 'punchmiss.ogg', 25, 1, -1)
 							for(var/mob/O in viewers(src, null))
 								O.show_message(text("\red <B>[] has attempted to disarm []!</B>", M, src), 1)
 	return

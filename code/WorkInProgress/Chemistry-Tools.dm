@@ -31,7 +31,7 @@
 	attackby(obj/item/weapon/W as obj, mob/user as mob)
 		if(istype(W,/obj/item/assembly/time_ignite) && !stage)
 			user << "\blue You add [W] to the metal casing."
-			playsound(src.loc, 'Screwdriver2.ogg', 25, -3)
+			playsound(src, 'Screwdriver2.ogg', 25, -3)
 			del(W) //Okay so we're not really adding anything here. cheating.
 			icon_state = "chemg2"
 			name = "unsecured grenade"
@@ -39,7 +39,7 @@
 		else if(istype(W,/obj/item/weapon/screwdriver) && stage == 1)
 			if(beakers.len)
 				user << "\blue You lock the assembly."
-				playsound(src.loc, 'Screwdriver.ogg', 25, -3)
+				playsound(src, 'Screwdriver.ogg', 25, -3)
 				name = "grenade"
 				icon_state = "chemg3"
 				stage = 2
@@ -91,11 +91,11 @@
 				if(G.reagents.total_volume) has_reagents = 1
 
 			if(!has_reagents)
-				playsound(src.loc, 'Screwdriver2.ogg', 50, 1)
+				playsound(src, 'Screwdriver2.ogg', 50, 1)
 				state = 0
 				return
 
-			playsound(src.loc, 'bamf.ogg', 50, 1)
+			playsound(src, 'bamf.ogg', 50, 1)
 
 			for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
 				G.reagents.trans_to(src, G.reagents.total_volume)

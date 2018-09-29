@@ -137,7 +137,7 @@ steam.start() -- spawns the effect
 
 /obj/effects/sparks/New()
 	..()
-	playsound(src.loc, "sparks", 100, 1)
+	playsound(src, "sparks", 100, 1)
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
@@ -609,7 +609,7 @@ steam.start() -- spawns the effect
 
 		M.pulling = null
 		M << "\blue You slipped on the foam!"
-		playsound(src.loc, 'slip.ogg', 50, 1, -3)
+		playsound(src, 'slip.ogg', 50, 1, -3)
 		M.stunned = 5
 		M.weakened = 2
 

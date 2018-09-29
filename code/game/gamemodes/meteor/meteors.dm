@@ -96,11 +96,11 @@
 				shake_camera(M, 3, 1)
 		if (A)
 			A.meteorhit(src)
-			playsound(src.loc, 'meteorimpact.ogg', 40, 1)
+			playsound(src, 'meteorimpact.ogg', 40, 1)
 		if (--src.hits <= 0)
 			if(prob(15) && !istype(A, /obj/grille))
 				explosion(loc, 0, 1, 2, 3)
-				playsound(src.loc, "explosion", 50, 1)
+				playsound(src, "explosion", 50, 1)
 			del(src)
 	return
 

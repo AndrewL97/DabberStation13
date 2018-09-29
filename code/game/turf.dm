@@ -147,39 +147,40 @@
 		var/mob/M = A
 		if(M.lying)
 			return
-		if(istype(M, /mob/living/carbon/human) && istype(M:shoes, /obj/item/clothing/shoes/clown_shoes))
-			if(M.m_intent == "run")
-				if(M.footstep >= 2)
-					M.footstep = 0
+		if(M.onFloor)
+			if(istype(M, /mob/living/carbon/human) && istype(M:shoes, /obj/item/clothing/shoes/clown_shoes))
+				if(M.m_intent == "run")
+					if(M.footstep >= 2)
+						M.footstep = 0
+					else
+						M.footstep++
+					if(M.footstep == 0)
+						playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
 				else
-					M.footstep++
-				if(M.footstep == 0)
-					playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
-			else
-				playsound(src, "clownstep", 20, 1)
-		switch (src.wet)
-			if(1)
-				if ((M.m_intent == "run") && (!istype(M:shoes, /obj/item/clothing/shoes/galoshes)))
+					playsound(src, "clownstep", 20, 1)
+			switch (src.wet)
+				if(1)
+					if ((M.m_intent == "run") && (!istype(M:shoes, /obj/item/clothing/shoes/galoshes)))
+						M.pulling = null
+						step(M, M.dir)
+						M << "\blue You slipped on the wet floor!"
+						playsound(src, 'slip.ogg', 50, 1, -3)
+						M.stunned = 8
+						M.weakened = 5
+					else
+						M.inertia_dir = 0
+						return
+				if(2) //lube
 					M.pulling = null
 					step(M, M.dir)
-					M << "\blue You slipped on the wet floor!"
-					playsound(src.loc, 'slip.ogg', 50, 1, -3)
-					M.stunned = 8
-					M.weakened = 5
-				else
-					M.inertia_dir = 0
-					return
-			if(2) //lube
-				M.pulling = null
-				step(M, M.dir)
-				spawn(1) step(M, M.dir)
-				spawn(2) step(M, M.dir)
-				spawn(3) step(M, M.dir)
-				spawn(4) step(M, M.dir)
-				M.bruteloss += 5
-				M << "\blue You slipped on the floor!"
-				playsound(src.loc, 'slip.ogg', 50, 1, -3)
-				M.weakened = 10
+					spawn(1) step(M, M.dir)
+					spawn(2) step(M, M.dir)
+					spawn(3) step(M, M.dir)
+					spawn(4) step(M, M.dir)
+					M.bruteloss += 5
+					M << "\blue You slipped on the floor!"
+					playsound(src, 'slip.ogg', 50, 1, -3)
+					M.weakened = 10
 
 	..()
 
@@ -242,7 +243,7 @@
 /turf/simulated/wall/proc/dismantle_wall(devastated=0)
 	if(istype(src,/turf/simulated/wall/r_wall))
 		if(!devastated)
-			playsound(src.loc, 'Welder.ogg', 100, 1)
+			playsound(src, 'Welder.ogg', 100, 1)
 			new /obj/structure/girder/reinforced(src)
 			new /obj/item/weapon/sheet/r_metal( src )
 		else
@@ -251,7 +252,7 @@
 			new /obj/item/weapon/sheet/r_metal( src )
 	else
 		if(!devastated)
-			playsound(src.loc, 'Welder.ogg', 100, 1)
+			playsound(src, 'Welder.ogg', 100, 1)
 			new /obj/structure/girder(src)
 			new /obj/item/weapon/sheet/metal( src )
 			new /obj/item/weapon/sheet/metal( src )
@@ -313,7 +314,7 @@
 			return
 
 	user << "\blue You push the wall but nothing happens!"
-	playsound(src.loc, 'Genhit.ogg', 25, 1)
+	playsound(src, 'Genhit.ogg', 25, 1)
 	src.add_fingerprint(user)
 	return
 
@@ -351,7 +352,7 @@
 		W:use_fuel(5)
 
 		user << "\blue Now disassembling the outer wall plating."
-		playsound(src.loc, 'Welder.ogg', 100, 1)
+		playsound(src, 'Welder.ogg', 100, 1)
 
 		sleep(100)
 
@@ -393,7 +394,7 @@
 
 		if (src.d_state == 2)
 			user << "\blue Slicing metal cover."
-			playsound(src.loc, 'Welder.ogg', 100, 1)
+			playsound(src, 'Welder.ogg', 100, 1)
 			sleep(60)
 			if ((user.loc == T && user.equipped() == W))
 				src.d_state = 3
@@ -401,7 +402,7 @@
 
 		else if (src.d_state == 5)
 			user << "\blue Removing support rods."
-			playsound(src.loc, 'Welder.ogg', 100, 1)
+			playsound(src, 'Welder.ogg', 100, 1)
 			sleep(100)
 			if ((user.loc == T && user.equipped() == W))
 				src.d_state = 6
@@ -412,7 +413,7 @@
 		if (src.d_state == 4)
 			var/turf/T = user.loc
 			user << "\blue Detaching support rods."
-			playsound(src.loc, 'Ratchet.ogg', 100, 1)
+			playsound(src, 'Ratchet.ogg', 100, 1)
 			sleep(40)
 			if ((user.loc == T && user.equipped() == W))
 				src.d_state = 5
@@ -420,14 +421,14 @@
 
 	else if (istype(W, /obj/item/weapon/wirecutters))
 		if (src.d_state == 0)
-			playsound(src.loc, 'Wirecutter.ogg', 100, 1)
+			playsound(src, 'Wirecutter.ogg', 100, 1)
 			src.d_state = 1
 			new /obj/item/weapon/rods( src )
 
 	else if (istype(W, /obj/item/weapon/screwdriver))
 		if (src.d_state == 1)
 			var/turf/T = user.loc
-			playsound(src.loc, 'Screwdriver.ogg', 100, 1)
+			playsound(src, 'Screwdriver.ogg', 100, 1)
 			user << "\blue Removing support lines."
 			sleep(40)
 			if ((user.loc == T && user.equipped() == W))
@@ -439,7 +440,7 @@
 		if (src.d_state == 3)
 			var/turf/T = user.loc
 			user << "\blue Prying cover off."
-			playsound(src.loc, 'Crowbar.ogg', 100, 1)
+			playsound(src, 'Crowbar.ogg', 100, 1)
 			sleep(100)
 			if ((user.loc == T && user.equipped() == W))
 				src.d_state = 4
@@ -448,7 +449,7 @@
 		else if (src.d_state == 6)
 			var/turf/T = user.loc
 			user << "\blue Prying outer sheath off."
-			playsound(src.loc, 'Crowbar.ogg', 100, 1)
+			playsound(src, 'Crowbar.ogg', 100, 1)
 			sleep(100)
 			if ((user.loc == T && user.equipped() == W))
 				user << "\blue You removed the outer sheath."
@@ -549,7 +550,7 @@ turf/simulated/floor/proc/update_icon()
 		return
 	if(istype(C, /obj/item/weapon/wrench))
 		user << "\blue Removing rods..."
-		playsound(src.loc, 'Ratchet.ogg', 80, 1)
+		playsound(src, 'Ratchet.ogg', 80, 1)
 		if(do_after(user, 30))
 			new /obj/item/weapon/rods(src)
 			new /obj/item/weapon/rods(src)
@@ -559,16 +560,17 @@ turf/simulated/floor/proc/update_icon()
 			return
 
 /turf/simulated/floor/proc/to_plating()
-	if(TurfHeight > 0) return
+	//if(TurfHeight > 0) return
 	if(istype(src,/turf/simulated/floor/engine)) return
-	if(!intact) return
-	if(!icon_old) icon_old = icon_state
-	src.icon_state = "plating"
+	//if(!intact) return
+	//if(!icon_old) icon_old = icon_state
+	new /turf/simulated/floor/plating(locate(x,y,z))
+	/*src.icon_state = "plating"
 	color = "#FFFFFF"
 	intact = 0
 	broken = 0
 	burnt = 0
-	levelupdate()
+	levelupdate()*/
 
 /turf/simulated/floor/proc/break_tile_to_plating()
 	if(intact) to_plating()
@@ -608,16 +610,25 @@ turf/simulated/floor/proc/update_icon()
 	if(!C || !user)
 		return 0
 
-	if(istype(C, /obj/item/weapon/crowbar) && intact)
-		if(broken || burnt)
-			user << "\red You remove the broken plating."
+	if(istype(C, /obj/item/weapon/crowbar))
+		if(istype(src,/turf/simulated/floor/plating))
+			if(src:has_cover)
+				src:has_cover = 0
+				update_icon()
+				user << "\red You tear the cover off, and break it. You can now place floor tiles on this plating." //todo make this drop a thing or something.
+				playsound(src, 'Crowbar.ogg', 80, 1)
 		else
-			new /obj/item/weapon/tile(src)
+			if(intact)
+				if(broken || burnt)
+					user << "\red You get rid of the broken plating."
+				else
+					new /obj/item/weapon/tile(src)
 
-		to_plating()
-		playsound(src.loc, 'Crowbar.ogg', 80, 1)
+				to_plating()
 
-		return
+				playsound(src, 'Crowbar.ogg', 80, 1)
+
+				return
 
 	if(istype(C, /obj/item/weapon/rods))
 		if (!src.intact)
@@ -627,20 +638,24 @@ turf/simulated/floor/proc/update_icon()
 					ReplaceWithEngineFloor()
 					C:amount -= 2
 					if (C:amount <= 0) del(C) //wtf
-					playsound(src.loc, 'Deconstruct.ogg', 80, 1)
+					playsound(src, 'Deconstruct.ogg', 80, 1)
 			else
 				user << "\red You need more rods."
 		else
 			user << "\red You must remove the plating first."
 		return
 
-	if(istype(C, /obj/item/weapon/tile) && !intact)
-		restore_tile()
-		var/obj/item/weapon/tile/T = C
-		playsound(src.loc, 'Genhit.ogg', 50, 1)
-		if(--T.amount < 1)
-			del(T)
-			return
+	if(istype(C, /obj/item/weapon/tile) && istype(src,/turf/simulated/floor/plating))
+		if(!intact)
+			if(src:has_cover)
+				user << "\red You must remove the cover first."
+			else
+				restore_tile()
+				var/obj/item/weapon/tile/T = C
+				playsound(src, 'Genhit.ogg', 50, 1)
+				if(--T.amount < 1)
+					del(T)
+					return
 
 	if(istype(C, /obj/item/weapon/cable_coil))
 		if(!intact)
@@ -695,7 +710,7 @@ turf/simulated/floor/proc/update_icon()
 
 	if (istype(C, /obj/item/weapon/rods))
 		user << "\blue Constructing support lattice ..."
-		playsound(src.loc, 'Genhit.ogg', 50, 1)
+		playsound(src, 'Genhit.ogg', 50, 1)
 		ReplaceWithLattice()
 		C:amount--
 
@@ -709,7 +724,7 @@ turf/simulated/floor/proc/update_icon()
 		if(locate(/obj/lattice, src))
 			var/obj/lattice/L = locate(/obj/lattice, src)
 			del(L)
-			playsound(src.loc, 'Genhit.ogg', 50, 1)
+			playsound(src, 'Genhit.ogg', 50, 1)
 			C:build(src)
 			C:amount--
 

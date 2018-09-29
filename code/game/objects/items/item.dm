@@ -167,7 +167,7 @@
 		return
 
 	if (src.hitsound)
-		playsound(src.loc, hitsound, 50, 1, -1)
+		playsound(src, hitsound, 50, 1, -1)
 	/////////////////////////
 	user.lastattacked = M
 	M.lastattacker = user

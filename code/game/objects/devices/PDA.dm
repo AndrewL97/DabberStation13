@@ -1226,7 +1226,7 @@ Code:
 		else if (href_list["honk"])
 			if (last_honk && world.time < last_honk + 20)
 				return
-			playsound(src.loc, 'bikehorn.ogg', 50, 1)
+			playsound(src, 'bikehorn.ogg', 50, 1)
 			src.last_honk = world.time
 
 		//Toxins PDA signaler stuff
@@ -1271,7 +1271,7 @@ Code:
 
 		if ((src.honkamt > 0) && (prob(60)))
 			src.honkamt--
-			playsound(src.loc, 'bikehorn.ogg', 30, 1)
+			playsound(src, 'bikehorn.ogg', 30, 1)
 
 		for (var/mob/M in viewers(1, src.loc))
 			if (M.client && M.machine == src)
@@ -1399,7 +1399,7 @@ Code:
 
 		M.pulling = null
 		M << "\blue You slipped on the PDA!"
-		playsound(src.loc, 'slip.ogg', 50, 1, -3)
+		playsound(src, 'slip.ogg', 50, 1, -3)
 		M.stunned = 8
 		M.weakened = 5
 

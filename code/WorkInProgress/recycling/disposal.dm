@@ -446,7 +446,7 @@
 		for (var/mob/M in hearers(src.loc.loc))
 			M << "<FONT size=[max(0, 5 - get_dist(src, M))]>CLONG, clong!</FONT>"
 
-		playsound(src.loc, 'clang.ogg', 50, 0, 0)
+		playsound(src, 'clang.ogg', 50, 0, 0)
 
 	// called to vent all gas in holder to a location
 	proc/vent_gas(var/atom/location)
@@ -678,7 +678,7 @@
 			if(W.welding)
 				if(W.get_fuel() > 3)
 					W.use_fuel(3)
-					playsound(src.loc, 'Welder2.ogg', 100, 1)
+					playsound(src, 'Welder2.ogg', 100, 1)
 
 					// check if anything changed over 2 seconds
 					var/turf/uloc = user.loc

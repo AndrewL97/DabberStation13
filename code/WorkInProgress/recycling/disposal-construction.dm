@@ -126,14 +126,14 @@
 				level = 1
 				density = 0
 				user << "You attach the pipe to the underfloor."
-			playsound(src.loc, 'Ratchet.ogg', 100, 1)
+			playsound(src, 'Ratchet.ogg', 100, 1)
 
 		else if(istype(I, /obj/item/weapon/weldingtool))
 			var/obj/item/weapon/weldingtool/W = I
 			if(W.welding)
 				if(W.get_fuel() > 2)
 					W.use_fuel(2)
-					playsound(src.loc, 'Welder2.ogg', 100, 1)
+					playsound(src, 'Welder2.ogg', 100, 1)
 
 					// check if anything changed over 2 seconds
 					var/turf/uloc = user.loc

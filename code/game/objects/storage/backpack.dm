@@ -12,7 +12,7 @@
 		var/mob/M = usr
 		if (!( istype(over_object, /obj/screen) ))
 			return ..()
-		playsound(src.loc, "rustle", 50, 1, -5)
+		playsound(src, "rustle", 50, 1, -5)
 		if ((!( M.restrained() ) && !( M.stat ) && M.back == src))
 			if (over_object.name == "r_hand")
 				if (!( M.r_hand ))
@@ -47,7 +47,7 @@
 	if (t > 20)
 		user << "You cannot fit the item inside. (Remove larger classed items)"
 		return
-	playsound(src.loc, "rustle", 50, 1, -5)
+	playsound(src, "rustle", 50, 1, -5)
 	user.u_equip(W)
 	W.loc = src
 	if ((user.client && user.s_active != src))
