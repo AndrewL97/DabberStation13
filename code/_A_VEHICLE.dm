@@ -10,6 +10,7 @@ atom
 			return (x*world.icon_size) + pixel_x + pixel_w
 		Get_Position_Y()
 			return (y*world.icon_size) + pixel_y + pixel_z
+		pixel_hit(atom/A)
 atom/movable
 	var
 		real_pixel_x = 0
@@ -77,6 +78,7 @@ atom/movable
 							else
 								bumpedwalls += 1
 						else
+							pixel_hit(e)
 							bumpedwalls += 1
 
 			if(bumpedwalls > 0)

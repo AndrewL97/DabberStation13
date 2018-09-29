@@ -122,21 +122,17 @@ proc/atan2(x, y)
 			del MyShadow
 		special_processing -= src
 		..()
+	pixel_hit(atom/e)
+		e.bullet_act(src)
 	special_process()
 		..()
-		for(var/atom/movable/e in orange(1,src))
-			if(istype(e,/mob))
-				if(e != owner)
-					if(PixelCollision2(e))
-						if(heightZ >= e:heightZ && heightZ+2 <= e:heightZ+e:heightSize)
-							e:bruteloss += damage
-							del src
-			else
-				if(PixelCollision2(e))
-					e.bullet_act(src)
 		if(!PixelMove(X_SPEED,Y_SPEED))
 			del src
 		MyShadow.pixel_x = pixel_x+pixel_w
 		MyShadow.pixel_y = pixel_y
 		MyShadow.loc = loc
 		pixel_z = heightZ
+
+/mob/bullet_act(obj/projectile/G)
+	if(G.heightZ >= heightZ && G.heightZ+2 <= heightZ+heightSize)
+		bruteloss += G.damage
