@@ -10,6 +10,7 @@
 	throw2_speed = 4
 	throw2_range = 20
 	mouse_opacity = 1
+	plane = MOB_PLANE_ALT
 	flags =  FPRINT | TABLEPASS | CONDUCT | ONBELT
 
 	New()
