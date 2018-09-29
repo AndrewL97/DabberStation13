@@ -15,18 +15,6 @@
 	var/nofail
 	var/is_bullet = 0
 
-/obj/item/weapon/dnainjector/antihulk
-	name = "DNA-Injector (Anti-Hulk)"
-	dnatype = "se"
-	dna = "708"
-	block = 2
-
-/obj/item/weapon/dnainjector/hulkmut
-	name = "DNA-Injector (Hulk)"
-	dnatype = "se"
-	dna = "FED"
-	block = 2
-
 /obj/item/weapon/dnainjector/xraymut
 	name = "DNA-Injector (Xray)"
 	dnatype = "se"

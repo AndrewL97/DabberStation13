@@ -589,12 +589,8 @@
 				src.see_in_dark = 4
 				src.see_invisible = 2
 			else if (src.stat != 2)
-				if (src.mutantrace == "lizard")
-					src.see_in_dark = 3
-					src.see_invisible = 1
-				else
-					src.see_in_dark = 2
-					src.see_invisible = 0
+				src.see_in_dark = 2
+				src.see_invisible = 0
 
 			if (src.sleep) src.sleep.icon_state = text("sleep[]", src.sleeping)
 

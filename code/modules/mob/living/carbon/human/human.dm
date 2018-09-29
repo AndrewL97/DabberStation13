@@ -681,28 +681,15 @@
 
 	src.overlays = null
 
-
-
-	if (src.mutations & 8)
-		src.overlays += image("icon" = 'genetics.dmi', "icon_state" = "hulk_s")
-
 	if (src.mutations & 2)
 		src.overlays += image("icon" = 'genetics.dmi', "icon_state" = "fire_s")
 
 	if (src.mutations & 1)
 		src.overlays += image("icon" = 'genetics.dmi', "icon_state" = "telekinesishead_s")
-
-	if (src.mutantrace)
-		src.overlays += image("icon" = 'genetics.dmi', "icon_state" = "[mutantrace]_s")
-		if(src.face_standing)
-			del(src.face_standing)
-		if(src.stand_icon)
-			del(src.stand_icon)
-	else
-		if(!src.face_standing)
-			src.update_face()
-		if(!src.stand_icon)
-			src.update_body()
+	if(!src.face_standing)
+		src.update_face()
+	if(!src.stand_icon)
+		src.update_body()
 
 	if(src.buckled)
 		if(istype(src.buckled, /obj/stool/bed))
@@ -1262,10 +1249,6 @@
 	if(src.stand_icon)
 		del(src.stand_icon)
 
-
-	if (src.mutantrace)
-		return
-
 	var/g = "m"
 	if (src.gender == MALE)
 		g = "m"
@@ -1313,10 +1296,6 @@
 
 /mob/living/carbon/human/proc/update_face()
 	del(src.face_standing)
-
-
-	if (src.mutantrace)
-		return
 
 	var/g = "m"
 	if (src.gender == MALE)

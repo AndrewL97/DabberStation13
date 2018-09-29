@@ -129,7 +129,7 @@
 /proc/isblockon(hnumber, bnumber)
 	var/temp2
 	temp2 = hex2num(hnumber)
-	if (bnumber == HULKBLOCK || bnumber == TELEBLOCK)
+	if (bnumber == TELEBLOCK)
 		if (temp2 >= 3500 + BLOCKADD)
 			return 1
 		else
@@ -155,7 +155,7 @@
 /proc/randmutg(mob/M as mob)
 	var/num
 	var/newdna
-	num = pick(HULKBLOCK,XRAYBLOCK,FIREBLOCK,TELEBLOCK)
+	num = pick(XRAYBLOCK,FIREBLOCK,TELEBLOCK)
 	newdna = setblock(M.dna.struc_enzymes,num,toggledblock(getblock(M.dna.struc_enzymes,num,3)),3)
 	M.dna.struc_enzymes = newdna
 	return
@@ -283,10 +283,6 @@
 	if (isblockon(getblock(M.dna.struc_enzymes, 1,3),1))
 		M.disabilities |= 1
 		M << "\red Your eyes feel strange."
-	if (isblockon(getblock(M.dna.struc_enzymes, HULKBLOCK,3),2))
-		if(inj || prob(15))
-			M << "\blue Your muscles hurt."
-			M.mutations |= 8
 	if (isblockon(getblock(M.dna.struc_enzymes, 3,3),3))
 		M.disabilities |= 2
 		M << "\red You get a headache."

@@ -19,9 +19,6 @@
 
 	tempnum = pick(avnums)
 	avnums.Remove(tempnum)
-	HULKBLOCK = tempnum
-	tempnum = pick(avnums)
-	avnums.Remove(tempnum)
 	TELEBLOCK = tempnum
 	tempnum = pick(avnums)
 	avnums.Remove(tempnum)

@@ -600,9 +600,6 @@ Auto Patrol: []"},
 			if(istype(perp:wear_suit, /obj/item/clothing/suit/wizrobe))
 				threatcount += 8
 
-			if(perp.mutantrace != "none")
-				threatcount += 2
-
 	//Agent cards lower threatlevel when normal idchecking is off.
 			if((istype(perp:wear_id, /obj/item/weapon/card/id/syndicate)) && src.idcheck)
 				threatcount -= 2

@@ -44,8 +44,6 @@
 
 	var/list/body_standing = list()
 
-	var/mutantrace = null
-
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
 	nodamage = 1
