@@ -340,69 +340,6 @@
 		else
 	return
 
-/obj/item/weapon/grab/proc/s_dbclick(obj/screen/S as obj)
-	if ((src.assailant.next_move > world.time && !( src.last_suffocate < world.time + 2 )))
-		return
-	if ((!( src.assailant.canmove ) || src.assailant.lying))
-		del(src)
-		return
-	switch(S.id)
-		if(1.0)
-			if (src.state < 2)
-				if (!( src.allow_upgrade ))
-					return
-				if (prob(75))
-					for(var/mob/O in viewers(src.assailant, null))
-						O.show_message(text("\red [] has grabbed [] aggressively (now hands)!", src.assailant, src.affecting), 1)
-					src.state = 2
-					src.icon_state = "grabbed1"
-				else
-					for(var/mob/O in viewers(src.assailant, null))
-						O.show_message(text("\red [] has failed to grab [] aggressively!", src.assailant, src.affecting), 1)
-					del(src)
-					return
-			else
-				if (src.state < 3)
-					if(istype(src.affecting, /mob/living/carbon/human))
-						var/mob/living/carbon/human/H = src.affecting
-						if(H.mutations & 32)
-							src.assailant << "\blue You can't strangle [src.affecting] through all that fat!"
-							return
-						for(var/obj/item/clothing/C in list(H.head, H.wear_suit, H.wear_mask, H.w_uniform))
-							if(C.body_parts_covered & HEAD)
-								src.assailant << "\blue You have to take off [src.affecting]'s [C.name] first!"
-								return
-						/*
-						if(istype(H.wear_suit, /obj/item/clothing/suit/space) || istype(H.wear_suit, /obj/item/clothing/suit/armor) || istype(H.wear_suit, /obj/item/clothing/suit/bio_suit) || istype(H.wear_suit, /obj/item/clothing/suit/swat_suit))
-							src.assailant << "\blue You can't strangle [src.affecting] through their suit collar!"
-							return
-						*/
-					for(var/mob/O in viewers(src.assailant, null))
-						O.show_message(text("\red [] has reinforced his grip on [] (now neck)!", src.assailant, src.affecting), 1)
-
-					src.state = 3
-					src.icon_state = "grabbed+1"
-					if (!( src.affecting.buckled ))
-						src.affecting.loc = src.assailant.loc
-					src.hud1.icon_state = "disarm/kill"
-					src.hud1.name = "disarm/kill"
-				else
-					if (src.state >= 3)
-						src.killing = !( src.killing )
-						if (src.killing)
-							for(var/mob/O in viewers(src.assailant, null))
-								O.show_message(text("\red [] has tightened his grip on []'s neck!", src.assailant, src.affecting), 1)
-							src.assailant.next_move = world.time + 10
-							src.affecting.stunned = max(2, src.affecting.stunned)
-							src.affecting.paralysis = max(1, src.affecting.paralysis)
-							src.affecting.losebreath += 1
-							src.hud1.icon_state = "disarm/kill1"
-						else
-							src.hud1.icon_state = "disarm/kill"
-							for(var/mob/O in viewers(src.assailant, null))
-								O.show_message(text("\red [] has loosened the grip on []'s neck!", src.assailant, src.affecting), 1)
-		else
-	return
 
 /obj/item/weapon/grab/New()
 	..()
@@ -415,10 +352,7 @@
 
 /obj/item/weapon/grab/attack(mob/M as mob, mob/user as mob)
 	if (M == src.affecting)
-		if (src.state < 3)
-			s_dbclick(src.hud1)
-		else
-			s_click(src.hud1)
+		s_click(src.hud1)
 		return
 	if(M == src.assailant && src.state >= 2)
 		if(iscarbon(src.affecting))

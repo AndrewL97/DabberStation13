@@ -418,7 +418,7 @@
 
 	update_clothing()
 
-/mob/living/carbon/human/s_click(text, t1)
+/mob/living/carbon/human/db_click(text, t1)
 	var/obj/item/W = src.equipped()
 	var/emptyHand = (W == null)
 	if ((!emptyHand) && (!istype(W, /obj/item)))
