@@ -220,7 +220,8 @@ mob
 /obj/screen/Click(location, control, params)
 
 	var/list/pa = params2list(params)
-
+	world << "screen click"
+	usr.db_click(src.name, null)
 	switch(src.name)
 		if("map")
 
