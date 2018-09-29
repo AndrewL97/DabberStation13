@@ -367,7 +367,7 @@
 	icon_state = "0-1"
 	var/d1 = 0
 	var/d2 = 1
-	layer = 2.5
+	layer = TURF_LAYER-0.125
 
 /obj/manifest
 	name = "manifest"

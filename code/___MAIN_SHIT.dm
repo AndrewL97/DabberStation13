@@ -3,7 +3,7 @@
 #define WALL_PLANE 1
 #define LIGHT_PLANE 3
 #define ALARM_PLANE 2
-#define CABLE_PLANE 1
+#define CABLE_PLANE 0
 #define TOP_PLANE 7
 #define BELOW_SHADING 8
 #define SHADING_PLANE 9

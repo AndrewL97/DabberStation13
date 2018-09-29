@@ -64,6 +64,17 @@ turf
 		floor
 			plating
 				level = 1
+				icon_state = "plating"
+				layer = TURF_LAYER-0.25
+				var/has_cover = 1
+				New()
+					..()
+					update_icon()
+				update_icon()
+					overlays = null
+					if(has_cover)
+						overlays += image("icon" = 'floors.dmi', "icon_state" = "plating_cover",layer=TURF_LAYER)
+					..()
 			level = 2
 			New()
 				..()
