@@ -346,7 +346,7 @@ obj
 			E.Blend(I,ICON_OVERLAY,x1,y1)
 
 			del I
-
+			G.transform = owner.transform
 			G.layer = owner.layer + ord/10
 			G.icon = E
 			G.plane = owner.plane

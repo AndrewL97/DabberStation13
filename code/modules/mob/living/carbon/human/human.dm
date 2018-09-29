@@ -3,7 +3,7 @@
 	var/species_icon = 'human.dmi'
 	var/species_color = null
 
-	var/animating = 0
+	//var/animating = 0
 	var/tail = "none"
 	var/zangoose
 	var/tail_color = null

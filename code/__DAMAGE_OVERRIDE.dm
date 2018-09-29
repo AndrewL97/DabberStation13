@@ -65,11 +65,8 @@
 			if ((src.lying || src.resting) && updatematrix)
 				MAT.Turn(90)
 				MAT.Translate(0,-10)
-			if(animating == 0 && updatematrix)
-				animating = 1
-				animate(src, transform = MAT, time = 5)
-				spawn(5)
-					animating = 0
+			if(updatematrix)
+				animate(src, transform = MAT, time = 1)
 
 			/*
 
