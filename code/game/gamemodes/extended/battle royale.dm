@@ -46,7 +46,7 @@
 	src.equip_if_possible(new /obj/item/weapon/grenade/explosiongrenade(src), slot_in_backpack)
 
 	src.equip_if_possible(new /obj/item/weapon/grenade/explosiongrenade(src), slot_l_hand)
-	//src.equip_if_possible(new /obj/item/weapon/gun/energy/laser_gun(src), slot_r_hand)
+	src.equip_if_possible(new /obj/item/weapon/gun/pistol(src), slot_r_hand)
 
 	src.equip_if_possible(new /obj/item/clothing/mask/breath(src), slot_wear_mask)
 
