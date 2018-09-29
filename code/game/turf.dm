@@ -574,10 +574,13 @@ proc/turf_to_plating(turf/E)
 				user << "\red You must remove the cover first."
 			else
 				var/obj/item/weapon/tile/T = C
-				playsound(src, 'Genhit.ogg', 50, 1)
-				if(--T.amount < 1)
-					del(T)
-				ReplaceWithFloor(src)
+				if(T.amount > 0)
+					playsound(src, 'Genhit.ogg', 50, 1)
+					if(--T.amount <= 0)
+						del(T)
+					ReplaceWithFloor(src)
+				else
+					del(T) //?
 
 	if(istype(C, /obj/item/weapon/cable_coil))
 		if(!intact)
