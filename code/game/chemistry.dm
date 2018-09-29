@@ -33,23 +33,25 @@
 
 	special_process()
 		s.screen_loc = screen_loc
-		if(world.time > nextmove && spd > 1 && h > 0.2)
-			step(src,dir)
-			nextmove = world.time + (2.5-((spd/25)*2))
+		var/turf/T = loc
+		if(istype(T,/turf))
+			if(world.time > nextmove && spd > 1 && h > 0.2)
+				step(src,dir)
+				nextmove = world.time + (2.5-((spd/25)*2))
 
-		s.loc = src.loc
-		if(y_speed > -4)
-			y_speed = y_speed - 0.1
-		h = h + y_speed
-		if(h < 0)
-			y_speed = y_speed * -0.8
-			spd = spd * 0.5
-			h = 0
-		ang = ang + spd
-		var/matrix/M = matrix()
-		M.Turn(ang)
-		transform = M
-		pixel_y = round(h)
+			s.loc = src.loc
+			if(y_speed > -4)
+				y_speed = y_speed - 0.1
+			h = h + y_speed
+			if(h < T.TurfHeight)
+				y_speed = y_speed * -0.8
+				spd = spd * 0.5
+				h = T.TurfHeight
+			ang = ang + spd
+			var/matrix/M = matrix()
+			M.Turn(ang)
+			transform = M
+			pixel_y = round(h)
 
 /obj/item/weapon/grenade/explosiongrenade
 	desc = "It is set to detonate in 3 seconds."
@@ -70,7 +72,7 @@
 		user.drop_item()
 		playsound(locate(x,y,z), 'armbomb.ogg', 75, 1, -3)
 		dir = user.dir
-		spd = 25
+		spd = rand(15,25)
 		ang = 0
 		h = user.heightZ
 		y_speed = 3
