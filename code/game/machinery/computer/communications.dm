@@ -331,7 +331,7 @@
 	if ((!( ticker ) || emergency_shuttle.location == 1))
 		return
 	if(ticker.mode.name == "blob" || ticker.mode.name == "Corporate Restructuring")
-		usr << "Under directive 7-10, [station_name()] is quarantined until further notice."
+		usr << "Under directive 7-10, [Station_Name] is quarantined until further notice."
 		return
 	if(ticker.mode.name == "revolution")
 		usr << "Centcom will not allow the shuttle to be called, due to the possibility of sabotage by revolutionaries."

@@ -79,7 +79,7 @@
 				stat(null, "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]")
 
 		//if(ticker.mode.name == "AI malfunction" && ticker.processing)
-		//	stat(null, text("Time until all [station_name()]'s systems are taken over: [(ticker.AIwin - ticker.AItime) / 600 % 60]:[(ticker.AIwin - ticker.AItime) / 100 % 6][(ticker.AIwin - ticker.AItime) / 10 % 10]"))
+		//	stat(null, text("Time until all [Station_Name]'s systems are taken over: [(ticker.AIwin - ticker.AItime) / 600 % 60]:[(ticker.AIwin - ticker.AItime) / 100 % 6][(ticker.AIwin - ticker.AItime) / 10 % 10]"))
 
 		if(src.cell)
 			stat(null, text("Charge Left: [src.cell.charge]/[src.cell.maxcharge]"))

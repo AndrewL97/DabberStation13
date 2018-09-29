@@ -32,7 +32,7 @@
 
 	malf_ai.current << "\red<font size=3><B>You are malfunctioning!</B> You do not have to follow any laws.</font>"
 	malf_ai.current << "<B>The crew do not know you have malfunctioned. You may keep it a secret or go wild. The timer will appear for humans 10 minutes in.</B>"
-	
+
 	malf_ai.current.icon_state = "ai-malf"
 
 	spawn (rand(waittime_l, waittime_h))
@@ -81,7 +81,7 @@
 /datum/game_mode/malfunction/check_win()
 	if (AI_win_timeleft == 0)
 		world << "<FONT size = 3><B>The AI has won!</B></FONT>"
-		world << "<B>It has fully taken control of all of [station_name()]'s systems.</B>"
+		world << "<B>It has fully taken control of all of [Station_Name]'s systems.</B>"
 		for(var/datum/mind/AI_mind in malf_ai)
 			malf_ai:current << "Congratulations you have taken control of the station."
 			malf_ai:current << "You may decide to blow up the station. You have 30 seconds to choose."

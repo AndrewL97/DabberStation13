@@ -60,7 +60,7 @@
 			viral_outbreak()
 
 /proc/power_failure()
-	command_alert("Abnormal activity detected in [station_name()]'s powernet. As a precautionary measure, the station's power will be shut off for an indeterminate duration.", "Critical Power Failure")
+	command_alert("Abnormal activity detected in [Station_Name]'s powernet. As a precautionary measure, the station's power will be shut off for an indeterminate duration.", "Critical Power Failure")
 	for(var/obj/machinery/power/apc/C in world)
 		if(C.cell && C.z == 1)
 			C.cell.charge = 0
@@ -80,7 +80,7 @@
 			A.power_change()
 
 /proc/power_restore()
-	command_alert("Power has been restored to [station_name()]. We apologize for the inconvenience.", "Power Systems Nominal")
+	command_alert("Power has been restored to [Station_Name]. We apologize for the inconvenience.", "Power Systems Nominal")
 	for(var/obj/machinery/power/apc/C in world)
 		if(C.cell && C.z == 1)
 			C.cell.charge = C.cell.maxcharge
@@ -100,7 +100,7 @@
 			A.power_change()
 
 /proc/viral_outbreak()
-	command_alert("Confirmed outbreak of level 7 viral biohazard aboard [station_name()]. All personnel must contain the outbreak.", "Biohazard Alert")
+	command_alert("Confirmed outbreak of level 7 viral biohazard aboard [Station_Name]. All personnel must contain the outbreak.", "Biohazard Alert")
 	var/virus_type = pick(/datum/disease/dnaspread,/datum/disease/cold)
 	for(var/mob/living/carbon/human/H in world)
 		if((H.virus) || (H.stat == 2))

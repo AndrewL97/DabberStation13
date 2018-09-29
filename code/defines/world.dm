@@ -17,6 +17,12 @@ proc/Init_Names()
 	first_names_female = dd_file2list("config/names/first_female.txt")
 	last_names = dd_file2list("config/names/last.txt")
 
+proc/Random_Station_Name()
+	var/list/first = list("Ass","Blobby","Javier","Furry","Kryfrac","Ikea","Pezoa","Supper","Dabber","RETARDS IN SPACE","noober","Alcaro")
+	var/list/second = list("land","research establishment","station","persecution","gang","sucks","is SHIT") //truthpost
+	Station_Name = "[pick(first)] [pick(second)]"
+	world.name = "[Station_Name] (Dab13 [Game_Version])"
+	world.update_status()
 world
 	mob = /mob/new_player
 	turf = /turf/space
@@ -36,13 +42,9 @@ world
 			AdminhelpWebhook = file2text("config/webhookAdmin.txt")
 			WebhookURL = file2text("config/webhook.txt")
 			Init_Names()
-			update_status()
 		else
-			Station_Name = "Dabber Station 13"
-			Game_Version = "Testing Mode"
-			if(port in PORTS_NOT_ALLOWED)
-				Game_Version = "Local Testing Mode"
-		name = "[Station_Name] ([Game_Version])"
+			Game_Version = "Testrun"
+		Random_Station_Name()
 
 		if(!(port in PORTS_NOT_ALLOWED))
 			spawn(50)
@@ -63,7 +65,7 @@ world
 
 /world/proc/update_status()
 	var/s = ""
-	s += "<b>[Station_Name]</b> - <i>[Game_Version]</i> (<a href='https://discord.gg/dMQqThd'>Discord</a>)<br>Features : "
+	s += "<b>Dab13 : [Station_Name]</b> - <i>[Game_Version]</i> (<a href='https://discord.gg/dMQqThd'>Discord</a>)<br>Features : "
 	var/features = list()
 	features += "running [byond_version].[byond_build]"
 	features += "511 allowed"

@@ -12,8 +12,8 @@
 
 /datum/game_mode/nuclear/announce()
 	world << "<B>The current game mode is - Nuclear Emergency!</B>"
-	world << "<B>A [syndicate_name()] Strike Force is approaching [station_name()]!</B>"
-	world << "A nuclear explosive was being transported by ASS BLAST USA 2018 to a military base. The transport ship mysteriously lost contact with Space Traffic Control (STC). About that time a strange disk was discovered around [station_name()]. It was identified by ASS BLAST USA 2018 as a nuclear auth. disk and now Syndicate Operatives have arrived to retake the disk and detonate SS13! Also, most likely Syndicate star ships are in the vicinity so take care not to lose the disk!\n<B>Syndicate</B>: Reclaim the disk and detonate the nuclear bomb anywhere on SS13.\n<B>Personnel</B>: Hold the disk and <B>escape with the disk</B> on the shuttle!"
+	world << "<B>A [syndicate_name()] Strike Force is approaching [Station_Name]!</B>"
+	world << "A nuclear explosive was being transported by ASS BLAST USA 2018 to a military base. The transport ship mysteriously lost contact with Space Traffic Control (STC). About that time a strange disk was discovered around [Station_Name]. It was identified by ASS BLAST USA 2018 as a nuclear auth. disk and now Syndicate Operatives have arrived to retake the disk and detonate SS13! Also, most likely Syndicate star ships are in the vicinity so take care not to lose the disk!\n<B>Syndicate</B>: Reclaim the disk and detonate the nuclear bomb anywhere on SS13.\n<B>Personnel</B>: Hold the disk and <B>escape with the disk</B> on the shuttle!"
 
 
 /datum/game_mode/nuclear/pre_setup()
@@ -148,10 +148,10 @@
 	switch(finished)
 		if(0)
 			world << "<FONT size = 3><B>Neutral Victory</B></FONT>"
-			world << "<B>[syndicate_name()] operatives recovered the abandoned authentication disk but detonation of [station_name()] was averted.</B> Next time, don't lose the disk!"
+			world << "<B>[syndicate_name()] operatives recovered the abandoned authentication disk but detonation of [Station_Name] was averted.</B> Next time, don't lose the disk!"
 
 		if(1)
-			world << "<B>[syndicate_name()] operatives have destroyed [station_name()]!</B>"
+			world << "<B>[syndicate_name()] operatives have destroyed [Station_Name]!</B>"
 			for(var/datum/mind/M in syndicates)
 				if(!M.current)
 					continue
