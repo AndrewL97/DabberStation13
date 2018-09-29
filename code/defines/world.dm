@@ -21,7 +21,7 @@ proc/Random_Station_Name()
 	var/list/first = list("Ass","Blobby","Javier","Furry","Kryfrac","Ikea","Pezoa","Supper","Dabber","RETARDS IN SPACE","noober","Alcaro")
 	var/list/second = list("land","research establishment","station","persecution","gang","sucks","is SHIT") //truthpost
 	Station_Name = "[pick(first)] [pick(second)]"
-	world.name = "[Station_Name] (Dab13 [Game_Version])"
+	world.name = "Dabber Station 13 - [Station_Name] ([Game_Version])"
 	world.update_status()
 world
 	mob = /mob/new_player
