@@ -106,6 +106,5 @@ TILES
 
 /obj/item/weapon/tile/proc/build(turf/S as turf)
 
-	var/turf/simulated/floor/W = ReplaceWithFloor(S)
-	W.to_plating()
+	turf_to_plating(S)
 	return

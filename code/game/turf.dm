@@ -497,27 +497,18 @@ turf/simulated/floor/proc/update_icon()
 			new /obj/item/weapon/rods(src)
 			new /obj/item/weapon/rods(src)
 			ReplaceWithFloor(src)
-			var/turf/simulated/floor/F = src
-			F.to_plating()
+			turf_to_plating(src)
 			return
 
-/turf/simulated/floor/proc/to_plating()
-	//if(TurfHeight > 0) return
-	if(istype(src,/turf/simulated/floor/engine)) return
-	//if(!intact) return
-	//if(!icon_old) icon_old = icon_state
-	var/turf/simulated/floor/plating/G = new(locate(x,y,z))
+proc/turf_to_plating(turf/E)
+	if(istype(E,/turf/simulated/floor/engine)) return
+	var/turf/simulated/floor/plating/G = new(locate(E.x,E.y,E.z))
 	G.has_cover = 0
-	//new /turf/simulated/floor/plating(locate(x,y,z))
-	/*src.icon_state = "plating"
-	color = "#FFFFFF"
-	intact = 0
-	broken = 0
-	burnt = 0
-	levelupdate()*/
+	G.update_icon()
+	return G
 
 /turf/simulated/floor/proc/break_tile_to_plating()
-	if(intact) to_plating()
+	if(intact) turf_to_plating(src)
 	break_tile()
 
 /image/crack
@@ -557,9 +548,9 @@ turf/simulated/floor/proc/update_icon()
 				else
 					new /obj/item/weapon/tile(src)
 
-				to_plating()
-
 				playsound(src, 'Crowbar.ogg', 80, 1)
+
+				turf_to_plating(src)
 
 				return
 
@@ -567,11 +558,10 @@ turf/simulated/floor/proc/update_icon()
 		if (!src.intact)
 			if (C:amount >= 2)
 				user << "\blue Reinforcing the floor..."
-				if(do_after(user, 30))
-					ReplaceWithEngineFloor(src)
-					C:amount -= 2
-					if (C:amount <= 0) del(C) //wtf
-					playsound(src, 'Deconstruct.ogg', 80, 1)
+				C:amount -= 2
+				if (C:amount <= 0) del(C) //wtf
+				playsound(src, 'Deconstruct.ogg', 80, 1)
+				ReplaceWithEngineFloor(src)
 			else
 				user << "\red You need more rods."
 		else
