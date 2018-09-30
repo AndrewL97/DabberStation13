@@ -20,7 +20,12 @@
 	// following two only used if a diverter is present
 	var/divert = 0 		// if non-zero, direction to divert items
 	var/divdir = 0		// if diverting, will be conveyer dir needed to divert (otherwise dense)
-
+	New()
+		..()
+		special_processing += src
+	Del()
+		special_processing -= src
+		..()
 
 
 	// create a conveyor
@@ -54,12 +59,14 @@
 
 	// machine process
 	// move items to the target location
-/obj/machinery/conveyor/process()
+/obj/machinery/conveyor/special_process()
 	if(stat & (BROKEN | NOPOWER))
 		return
 	if(!operating)
 		return
-	use_power(20)
+	if(!loc)
+		return
+	use_power(world.tick_lag)
 
 	var/movedir = dir	// base movement dir
 	if(divert && dir==divdir)	// update if diverter present
@@ -67,23 +74,9 @@
 
 
 	affecting = loc.contents - src		// moved items will be all in loc
-	spawn(1)	// slight delay to prevent infinite propagation due to map order
-		for(var/atom/movable/A in affecting)
-			if(!A.anchored)
-				if(ismob(A))
-					var/mob/M = A
-					if(M.buckled == src)
-						var/obj/machinery/conveyor/C = locate() in get_step(src, dir)
-						M.buckled = null
-						step(M,dir)
-						if(C)
-							M.buckled = C
-						else
-							new/obj/item/weapon/cable_coil/cut(M.loc)
-					else
-						step(M,movedir)
-				else
-					step(A,movedir)
+	for(var/atom/movable/A in affecting)
+		if(!A.anchored)
+			step(A,movedir)
 
 // attack with item, place item on conveyor
 
