@@ -1,5 +1,6 @@
 /obj/machinery/hydroponics
 	icon = 'hydroponics.dmi'
+	anchored = 1 //wow lol
 	tray
 		var/planted_crop = "tomatoes"
 		icon_state = "hydrotray"
@@ -55,5 +56,6 @@
 	heal_amt = 2
 	tomatoes
 		icon_state = "tomatoes"
+		desc = "Tomatoes."
 		amount = 2
 		heal_amt = 1
