@@ -66,6 +66,8 @@
 		return
 	if(!loc)
 		return
+	if(frm_counter % 30 != 1)
+		return
 	use_power(world.tick_lag)
 
 	var/movedir = dir	// base movement dir
@@ -76,6 +78,7 @@
 	affecting = loc.contents - src		// moved items will be all in loc
 	for(var/atom/movable/A in affecting)
 		if(!A.anchored)
+			A.glide_size = 32 / max(5,world.tick_lag) * world.tick_lag
 			step(A,movedir)
 
 // attack with item, place item on conveyor

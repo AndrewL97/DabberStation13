@@ -231,6 +231,7 @@ mob
 			MyShadow.pixel_z = T.TurfHeight+pixel_y_2
 			MyShadow.layer = layer-0.05
 			MyShadow.pixel_x = pixel_x+pixel_w
+			MyShadow.glide_size = glide_size
 			MyShadow.loc = loc
 
 		pixel_z = round(heightZ)+round(pixel_y_2) //Set pixel_z.
