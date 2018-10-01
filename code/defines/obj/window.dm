@@ -32,7 +32,7 @@
 		if(health <= 0)
 			del src
 	water_act(height)
-		if(height > 70)
+		if(height > 40)
 			del src
 	bullet_act()
 		src.health -= 4

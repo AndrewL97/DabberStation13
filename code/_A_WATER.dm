@@ -272,12 +272,17 @@ obj
 	return
 
 /turf/proc/Water_Can_Pass(water_in_me)
-	for(var/obj/obstacle in src)
-		obstacle.water_act(water_in_me)
+	for(var/obj/obstacle in contents)
 		if(istype(obstacle,/obj/window) || istype(obstacle,/obj/machinery/door))
 			if(obstacle.density)
 				return 0
 	return !density
+
+/turf/proc/water_mob_act(d)
+	var/mob/living/carbon/human/to_push = locate(/mob/living/carbon/human) in locate(x,y,z)
+	if(istype(to_push,/mob/living/carbon/human))
+		if(!to_push.wear_suit)
+			step(to_push,d)
 
 /turf/simulated
 	var/list/listofconnections = list()
@@ -289,7 +294,11 @@ obj
 			if(istype(to_add,/turf/simulated))
 				if(to_add.Water_Can_Pass(water_height))
 					listofconnections += to_add
-
+	proc/Can_Still_Process()
+		if(round(water_height) == 0)
+			//water_height = 0
+			if(src in water_changed)
+				water_changed -= src
 /turf/simulated/proc/Process_Water()
 	if(water_cycles % 4 == 1)
 		Get_Connections()
@@ -302,20 +311,16 @@ obj
 					var/tmp/calc = water_height/(1+listofconnections.len)
 					pe.water_height = pe.water_height + calc
 					water_height = water_height - calc
+					if(calc > 5)
+						pe.water_mob_act(get_dir(src,pe))
 
 				if(!(pe in water_changed))
 					if(round(pe.water_height) > 0)
 						water_changed += pe
 
 				pe.Render_Water_Icon()
-			if(round(pe.water_height) == 0)
-				pe.water_height = 0
-				if(pe in water_changed)
-					water_changed -= pe
-	if(round(water_height) == 0)
-		water_height = 0
-		if(src in water_changed)
-			water_changed -= src
+			pe.Can_Still_Process()
+	Can_Still_Process()
 	Render_Water_Icon()
 
 var/global/datum/controller/water_system/water_master
