@@ -38,9 +38,7 @@ mob
 				var/turf/T = locate(x,y,z)
 
 				if(T && T.TurfStepSound != null)
-					var/sound/S = sound(pick(T.TurfStepSound))
-					S.frequency = rand(99,101)/100
-					view() << S
+					playsound(src, pick(T.TurfStepSound), 100, 0, 8, 0)
 /client
 	//animate_movement = 2
 	var/s = 0
