@@ -278,11 +278,13 @@ obj
 				return 0
 	return !density
 
-/turf/proc/water_mob_act(d)
+/turf/proc/water_mob_act(d,h)
 	var/mob/living/carbon/human/to_push = locate(/mob/living/carbon/human) in locate(x,y,z)
 	if(istype(to_push,/mob/living/carbon/human))
 		if(!to_push.wear_suit)
+			to_push.glide_size = 32 / world.tick_lag * world.tick_lag
 			step(to_push,d)
+			to_push.bruteloss += h/10
 
 /turf/simulated
 	var/list/listofconnections = list()
@@ -312,7 +314,7 @@ obj
 					pe.water_height = pe.water_height + calc
 					water_height = water_height - calc
 					if(calc > 5)
-						pe.water_mob_act(get_dir(src,pe))
+						pe.water_mob_act(get_dir(src,pe),calc)
 
 				if(!(pe in water_changed))
 					if(round(pe.water_height) > 0)
