@@ -130,17 +130,18 @@
 	else
 		var/turf/T = locate(x,y,z)
 		if(istype(T,/turf))
-			switch(T.water_height)
-				if(1 to 4) //feet
-					tally += 1
-				if(5 to 8) //knees
-					tally += 2
-				if(9 to 16) //chest
-					tally += 4
-				if(17 to 24) //neck
-					tally += 5
-			if(T.water_height >= 25)
-				tally += 7
+			if(heightZ <= T.water_height)
+				switch(T.water_height)
+					if(1 to 4) //feet
+						tally += 1
+					if(5 to 8) //knees
+						tally += 2
+					if(9 to 16) //chest
+						tally += 4
+					if(17 to 24) //neck
+						tally += 5
+				if(T.water_height >= 25)
+					tally += 7
 	if (istype(src.shoes, /obj/item/clothing/shoes))
 		if (src.shoes.chained)
 			tally += 15
