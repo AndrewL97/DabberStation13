@@ -261,7 +261,7 @@ obj
 		New(loc,var/g)
 			owner = g
 			..()
-			g.ANIMATION_RUNNING = 1
+			owner.ANIMATION_RUNNING = 1
 			if(PlayerIcon)
 				del PlayerIcon
 			icon = null
