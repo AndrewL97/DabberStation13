@@ -45,6 +45,20 @@ mob
 					playsound(src, pick(T.TurfStepSound), 100, 0, 8, 0)
 /client
 	//animate_movement = 2
+	var
+		ping = 0
+	verb
+		ping(time as num)
+			set instant = 1
+			set waitfor = 0
+			set hidden = 1
+			ping = (world.time+world.tick_lag*world.tick_usage/100)-time
+			sleep(1)
+			ping(world.time+world.tick_lag*world.tick_usage/100)
+			//winset(src,null,"command=ping+[world.time+world.tick_lag*world.tick_usage/100]")
+	New()
+		. = ..()
+		ping()
 	var/s = 0
 	var/n = 0
 	var/e = 0
