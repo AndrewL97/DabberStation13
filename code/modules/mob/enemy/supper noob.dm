@@ -7,7 +7,7 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 	icon = 'big.dmi'
 	icon_state = "SUPPER NOOB"
 	density = 1
-	pixel_x = -32
+	pixel_w = -32
 	maxhealth = 1000 //This thing's op but killable
 	heightSize = 72 //dab13 players will be amazed you can stack ontop him
 	var
@@ -42,10 +42,11 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 				nearest_dist = 50 //search dist
 				mob/nearest_mob = null
 			for(var/mob/i in Mobs)
-				var/dist = GetDist(src,i)
-				if(dist < nearest_dist)
-					nearest_mob = i
-					nearest_dist = dist
+				if(i.type != type) //Yo dont kill my friends!!!!!!!!!!!!!!!!!!!!!!!!!!
+					var/dist = GetDist(src,i)
+					if(dist < nearest_dist)
+						nearest_mob = i
+						nearest_dist = dist
 			if(nearest_mob)
 				new /obj/Particle/crosshair(nearest_mob.loc)
 				glide_size = 32 / 0.5 * world.tick_lag
