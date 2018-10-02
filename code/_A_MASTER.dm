@@ -219,7 +219,7 @@ datum/controller/game_controller
 			return 0
 
 		if(frm_counter > 60)
-			if(world.cpu > 600)
+			if(world.cpu > 200) //we are missing alot of stuff already
 				if(!(world.port in PORTS_NOT_ALLOWED))
 					spawn()
 						call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server has rebooted due to high processor usage, (%[world.cpu])**\" } ", "Content-Type: application/json")

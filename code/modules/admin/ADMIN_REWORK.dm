@@ -21,7 +21,8 @@ var/list/admin_verbs = list(
 /client/proc/jump_to_turf,
 /client/proc/delete_non_player_mobs,
 /client/proc/delete_all,
-/client/proc/Toggle_MC_Throttling
+/client/proc/Toggle_MC_Throttling,
+/client/proc/Reboot
 )
 var/ban_list = list()
 
@@ -62,6 +63,11 @@ var/ban_list = list()
 			M << rendered
 
 client
+	proc/Reboot()
+		set category = "Admin"
+		set name = "Reboot Game"
+		message_admins("Restarting game, started by [key]")
+		world.Reboot()
 	proc/Toggle_MC_Throttling()
 		set category = "Admin"
 		set name = "(ADMIN) Toggle MC throttling"
