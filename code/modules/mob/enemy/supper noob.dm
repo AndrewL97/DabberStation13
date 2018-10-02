@@ -25,13 +25,19 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 				world << "Finished Wave [CurrentWave]"
 				DoingWave = 0
 	proc
-		Wave1()
-			//Wave 1 : Jump
-			ySpeed = 32
+		Jump(ynew)
+			ySpeed = ynew
 			onFloor = 0
 			while(!onFloor)
 				sleep(world.tick_lag)
-			explosion(src, 1, 5, 7, 0,1)
+		Wave1()
+			//Wave 1 : Jump
+			if(onFloor)
+				Jump(2)
+				Jump(4)
+				Jump(8)
+				Jump(32)
+				explosion(src, 1, 5, 7, 0,1)
 		Wave2()
 			sleep(10)
 		Wave3()
