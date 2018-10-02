@@ -547,9 +547,9 @@
 			if (src.nutrition > 0)
 				src.nutrition -= world.tick_lag/10
 				if(nutrition < 35)
-					weight -= world.tick_lag/20
+					weight -= world.tick_lag/70
 				if(nutrition > 100)
-					weight += world.tick_lag/20
+					weight += world.tick_lag/70
 					if(nutrition > 150)
 						nutrition = 150
 			else
