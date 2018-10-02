@@ -2,23 +2,23 @@
 client
 	verb/Resolution()
 		set hidden = 1
-		var/viewX = input("What resolution in X (pixels), Recommended : 672","Input resolution") as num|null
+		var/viewX = input("What resolution in X (pixels), Recommended : 672, Default 608","Input resolution") as num|null
 		if(viewX)
 			viewX = round(viewX/32)
 			if(viewX < 17)
 				viewX = 17
-			if(viewX > 25)
-				viewX = 25
+			if(viewX > 33)
+				viewX = 33
 		else
 			viewX = 17
 
-		var/viewY = input("What resolution in Y (pixels), Recommended : 480","Input resolution") as num|null
+		var/viewY = input("What resolution in Y (pixels), Recommended : 480, Default 480","Input resolution") as num|null
 		if(viewY)
 			viewY = round(viewY/32)
 			if(viewY < 15)
 				viewY = 15
-			if(viewY > 25)
-				viewY = 25
+			if(viewY > 33)
+				viewY = 33
 		else
 			viewY = 15
 		view = "[viewX]x[viewY]"
@@ -168,29 +168,6 @@ old ui incase you are rarted
 
 mob/living/carbon/uses_hud = 1
 
-obj/hud/New()
-	..()
-	return
-
-
-/obj/hud/proc/other_update()
-
-	if(!mymob) return
-	if(show_otherinventory)
-		if(mymob:shoes) mymob:shoes:screen_loc = ui_shoes
-		if(mymob:gloves) mymob:gloves:screen_loc = ui_gloves
-		if(mymob:ears) mymob:ears:screen_loc = ui_ears
-//		if(mymob:w_radio) mymob:w_radio:screen_loc = ui_headset
-		if(mymob:glasses) mymob:glasses:screen_loc = ui_glasses
-	else
-		if(mymob:shoes) mymob:shoes:screen_loc = null
-		if(mymob:gloves) mymob:gloves:screen_loc = null
-		if(mymob:ears) mymob:ears:screen_loc = null
-//		if(mymob:w_radio) mymob:w_radio:screen_loc = null
-		if(mymob:glasses) mymob:glasses:screen_loc = null
-
-
-/obj/hud/var/show_otherinventory = 1
 /obj/hud/var/obj/screen/action_intent
 /obj/hud/var/obj/screen/move_intent
 

@@ -781,8 +781,10 @@
 /*	if (src.w_radio)
 		src.overlays += image("icon" = 'ears.dmi', "icon_state" = "headset[!src.lying ? "" : "2"]") */
 
-	if(src.client) src.hud_used.other_update() //Update the screenloc of the items on the 'other' inventory bar
-											   //to hide / show them.
+	shoes:screen_loc = ui_shoes
+	gloves:screen_loc = ui_gloves
+	ears:screen_loc = ui_ears
+	glasses:screen_loc = ui_glasses
 
 	if (src.wear_mask)
 		if (istype(src.wear_mask, /obj/item/clothing/mask))
