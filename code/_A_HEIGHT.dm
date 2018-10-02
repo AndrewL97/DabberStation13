@@ -51,15 +51,18 @@ turf
 	var/TurfGravity = 96/256 //Obvious variable names
 	var/TurfStepSound = list('footstep1.ogg','footstep2.ogg','footstep3.ogg','footstep4.ogg')
 	var/TurfHeight = 0
+	var/TurfCeiling = 256
 	mouse_opacity = 2 //Fixes RCD shit
 	space
 		TurfStepSound = null
 		TurfGravity = 24/256
 		TurfHeight = -416
+		TurfCeiling = 0
 	unsimulated
 		space2
 			alpha = 0
 			TurfHeight = -416
+			TurfCeiling = 0
 	simulated
 		floor
 			plating
@@ -173,8 +176,10 @@ mob
 				ySpeed = ySpeed - T.TurfGravity //Adds gravity.
 		else
 			ySpeed = ySpeed - T.TurfGravity //Adds gravity.
-
-		if(heightZ > 416) heightZ = 416
+		if(T.TurfCeiling != 0)
+			if(heightZ > T.TurfCeiling)
+				heightZ = T.TurfCeiling //god why does this limit exist
+				ySpeed = 0
 
 		heightZ = heightZ + ySpeed //Changes height by speed.
 
@@ -243,4 +248,4 @@ mob
 			else
 				c2.icon_state = "height"
 		if(c1)
-			c1.screen_loc = "WEST+3, NORTH:[max(1,min(round((heightZ/416)*32)+1,30))]"
+			c1.screen_loc = "WEST+3, NORTH:[max(1,min(round((min(heightZ,416)/416)*32)+1,30))]"

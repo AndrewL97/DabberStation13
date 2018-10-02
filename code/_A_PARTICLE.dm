@@ -54,6 +54,10 @@ datum/controller/game_controller/proc/particle_process()
 default particles
 
 */
+	crosshair
+		icon = 'extra_overlay.dmi'
+		icon_state = "crosshair"
+		time_to_disappear = 1
 	Water
 		time_to_disappear = 3
 		icon_state = "water"
