@@ -87,6 +87,7 @@ proc/atan2(x, y)
 				if(ammo > ammo_max)
 					ammo = ammo_max
 
+var/list/bullets = list()
 /obj/projectile
 	icon = 'guns.dmi'
 	icon_state = "bullet"
@@ -116,17 +117,17 @@ proc/atan2(x, y)
 		MyShadow.pixel_x = pixel_x+pixel_w
 		MyShadow.pixel_y = pixel_y
 		MyShadow.loc = loc
-		special_processing += src
+		bullets += src
 	Del()
 		if(MyShadow)
 			del MyShadow
-		special_processing -= src
+		bullets -= src
 		..()
 	pixel_hit(atom/e)
 		e.bullet_act(src)
-	special_process()
+	proc/bullet_process()
 		..()
-		if(!PixelMove(X_SPEED,Y_SPEED))
+		if(!PixelMove(X_SPEED,Y_SPEED,owner))
 			del src
 		MyShadow.pixel_x = pixel_x+pixel_w
 		MyShadow.pixel_y = pixel_y

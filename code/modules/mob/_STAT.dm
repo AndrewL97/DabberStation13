@@ -31,13 +31,12 @@ var
 	if(statpanel("Debugging information")) //Debug.
 		var/tickdrift = (world.timeofday - worldstarttimeofday) - (world.time - worldstarttime)  / world.tick_lag
 		stat("MAIN",null)
+		stat(null, "Bullets : [bullets.len]")
 		stat(null, "Particles : [PARTICLE_LIST.len]")
-		stat(null, "3D Position : [x], [round(heightZ)], [y], [z]")
-		stat(null, "Health : %[health]")
+		stat(null, "3D Position : [x], [round(heightZ)], [y]")
 		stat(null, "Server CPU : %[world.cpu] - [world.tick_usage]")
 		stat(null, "Server Time : [time2text(world.realtime)]")
 		stat(null, "Tick Drift : [tickdrift]")
-		stat(null, "World port : [world.port]")
 		if(client)
 			stat(null, "Server FPS : [world.fps] FPS - [world.tick_lag/10] SECS")
 			stat(null, "Client FPS : [client.fps] FPS - [client.tick_lag/10] SECS (sync if 0)")

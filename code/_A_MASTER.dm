@@ -180,6 +180,8 @@ datum/controller/game_controller
 			ticker.process_timer()
 		for(var/obj/i in special_processing)
 			i.special_process()
+		for(var/obj/projectile/G in bullets)
+			G.bullet_process()
 		if(lighting_inited)
 			lighting.loop()
 		particle_process()

@@ -44,7 +44,7 @@ atom/movable
 			var/st4 = Get_Position_Y() <= a.Get_Position_Y()+a.pixel_collision_size_y
 
 			return (st1 && st2 && st3 && st4)*a.density
-		PixelMove(var/x_to_move,var/y_to_move)
+		PixelMove(var/x_to_move,var/y_to_move,var/ignore)
 			var/old_real_x = real_pixel_x
 			var/old_real_y = real_pixel_y
 			var/old_x = x
@@ -69,17 +69,18 @@ atom/movable
 
 			var/bumpedwalls = 0
 			for(var/atom/e in orange(1,src))
-				if(!istype(e,/mob))
-					if(PixelCollision(e))
-						if(istype(src,/obj/machinery/vehicle))
-							if(round(src:velocity:SquareMagnitude()/50) > 80)
-								explosion(e, 2, 3, 5, 10,0)
-								del src
+				if(e != ignore)
+					if(!istype(e,/mob))
+						if(PixelCollision(e))
+							if(istype(src,/obj/machinery/vehicle))
+								if(round(src:velocity:SquareMagnitude()/50) > 80)
+									explosion(e, 2, 3, 5, 10,0)
+									del src
+								else
+									bumpedwalls += 1
 							else
+								pixel_hit(e)
 								bumpedwalls += 1
-						else
-							pixel_hit(e)
-							bumpedwalls += 1
 
 			if(bumpedwalls > 0)
 				x = old_x
