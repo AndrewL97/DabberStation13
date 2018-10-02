@@ -1,3 +1,7 @@
+/*
+TO-DO overly optimize
+*/
+
 mob
 	Move(NewLoc,Dir,step_x,step_y)
 		if(ANIMATION_RUNNING)

@@ -29,8 +29,7 @@ world
 	area = /area
 	view = "17x15"
 	name = ""
-
-
+	sleep_offline = 0
 	New()
 		..()
 		if(world.host == "Kryfrac") // die
@@ -47,8 +46,8 @@ world
 		Random_Station_Name()
 
 		if(!(port in PORTS_NOT_ALLOWED))
-			spawn(50)
-				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Server [name] is up.\" } ", "Content-Type: application/json")
+			spawn(2)
+				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Server [name] is up. byond://[internet_address]:[port]\" } ", "Content-Type: application/json")
 	Del()
 		for(var/datum/credit_card/i in list_dab_cards)
 			i.Save()
@@ -67,8 +66,6 @@ world
 	var/s = ""
 	s += "<b>Dab13 : [Station_Name]</b> - <i>[Game_Version]</i> (<a href='https://discord.gg/dMQqThd'>Discord</a>)<br>Features : "
 	var/features = list()
-	features += "running [byond_version].[byond_build]"
-	features += "511 allowed"
 	features += "dab13 codebase"
 	if(sandbox == 1)
 		features += "sandbox"
