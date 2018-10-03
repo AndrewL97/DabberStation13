@@ -29,56 +29,12 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 	return
 
 /datum/controller/gameticker/proc/get_random_mode()
-	var/list/random_game_modes = list(
-	/datum/game_mode/normal = 0,
-	/datum/game_mode/battle_royale = 0,
-	/datum/game_mode/greytide_racing = 0
-
-	)
-	if(!ticker)
-		return null
-	for(var/mob/i in Mobs)
-		spawn()
-			var/datum/game_mode/chosen_gamemode = input(i,"Vote for a gamemode!","Gamemode") as null|anything in random_game_modes
-			if(chosen_gamemode)
-				random_game_modes[chosen_gamemode] += 1
-				ticker.votes += 1
-	while(ticker.votes < 1)
-		sleep(1) //gotta wait till atleast 1 person has voted smh
-	if(!(world.port in PORTS_NOT_ALLOWED))
-		for(var/i in 0 to 10)
-			world << "[10-i] seconds left to vote"
-			sleep(10)
-	var/datum/game_mode/highest_gamemode = null
-	var/highest_votes = -1
-	for(var/i in random_game_modes)
-		world << "<b><font color='green'>[i] got [random_game_modes[i]] votes!"
-		if(random_game_modes[i] > highest_votes)
-			highest_votes = random_game_modes[i]
-			highest_gamemode = i
-	world << "<b><font size=4><font color='red'>[highest_gamemode] is the winner gamemode!"
-	var/datum/game_mode/game_mode_chosen = highest_gamemode
-	game_mode_chosen = new game_mode_chosen
+	var/datum/game_mode/game_mode_chosen
+	game_mode_chosen = new /datum/game_mode/normal
 	return game_mode_chosen
+
 /datum/controller/gameticker/proc/setup()
-	//Create and announce mode
-	while(clients.len < 1) //Gotta wait till a player joins.
-		sleep(1)
-	if(!(world.port in PORTS_NOT_ALLOWED))
-		for(var/i in 0 to 6)
-			world << "[6-i] seconds left till vote"
-			sleep(10)
-	else
-		sleep(10)
 	src.mode = get_random_mode()
-	if(!mode)
-
-		current_state = GAME_STATE_PREGAME
-		world << "<B>Could not start game. get_random_mode returned null."
-
-		spawn pregame()
-
-		return 0
 	src.mode.announce()
 
 	//Configure mode and assign player to special mode stuff
