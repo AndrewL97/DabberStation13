@@ -35,10 +35,9 @@
 	layer = 4
 
 	special_process()
-		s.screen_loc = screen_loc
-		s.loc = src.loc
 		var/turf/T = loc
 		if(istype(T,/turf))
+			s.loc = src.loc
 			if(world.time > nextmove && spd > 1 && h > 0.2)
 				step(src,dir)
 				nextmove = world.time + (2.5-((spd/25)*2))
@@ -55,12 +54,15 @@
 			M.Turn(ang)
 			transform = M
 			pixel_y = round(h)
+		else
+			s.loc = null
 	thrown(mob/user)
 		spd = rand(15,25)
 		ang = 0
 		h = user.heightZ
 		y_speed = 3
 		nextmove = world.time
+		dir = user.dir
 
 /obj/item/weapon/grenade/explosiongrenade
 	desc = "It is set to detonate in 3 seconds."
