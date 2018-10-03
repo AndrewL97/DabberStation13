@@ -9,7 +9,7 @@
 	item_state = "flashbang"
 	throw2_speed = 4
 	throw2_range = 20
-	mouse_opacity = 1
+
 	plane = MOB_PLANE_ALT
 	flags =  FPRINT | TABLEPASS | CONDUCT | ONBELT
 
@@ -67,7 +67,7 @@
 	icon = 'grenade.dmi'
 
 
-/obj/item/weapon/grenade/explosiongrenade/attack_hand(mob/user as mob, unused, flag)
+/obj/item/weapon/grenade/explosiongrenade/attack_self(mob/user as mob)
 	if (user.equipped() == src)
 		if (!( src.state ))
 			user << "\red You prime the grenade! [det_time/10] seconds! Throw it!"
@@ -76,8 +76,7 @@
 			spawn( src.det_time )
 				prime()
 				return
-		playsound(locate(x,y,z), 'armbomb.ogg', 75, 1, -3)
-
+		playsound(user, 'armbomb.ogg', 75, 1, -3)
 		src.add_fingerprint(user)
 	return
 
