@@ -28,27 +28,22 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 /datum/game_mode/proc/ending()
 	return
 
-/datum/controller/gameticker/proc/get_random_mode()
-	var/datum/game_mode/game_mode_chosen
-	game_mode_chosen = new /datum/game_mode/normal
-	return game_mode_chosen
-
 /datum/controller/gameticker/proc/setup()
-	src.mode = get_random_mode()
+	src.mode = new /datum/game_mode/normal
 	src.mode.announce()
-
-	//Configure mode and assign player to special mode stuff
 	var/can_continue = src.mode.pre_setup()
 
 	if(!can_continue)
-		del(mode)
-
+		del mode
 		current_state = GAME_STATE_PREGAME
 		world << "<B>Error setting up [master_mode].</B> Reverting to pre-game lobby."
-
-		spawn pregame()
-
+		spawn()
+			pregame()
 		return 0
+
+	world << "<FONT color='blue'><B><font size=4>Welcome to [Station_Name]!"
+	world << 'welcome.ogg'
+	sleep(10)
 
 	//Create player characters and transfer them
 	create_characters()
@@ -68,8 +63,6 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 			if (S.name != "AI")
 				del(S)
 
-	world << "<FONT color='blue'><B><font size=4>Welcome to [Station_Name]!"
-	world << 'welcome.ogg'
 	if(mode.do_kick == 1)
 		world << "<b><font color='red'>Automatic kicking is enabled! After [TIMETOKICK/60] minutes of inactivity, you will be kicked."
 		kick_inactive_players = 1
