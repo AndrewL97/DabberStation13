@@ -48,11 +48,11 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 				GamerJump(64)
 		Wave2()
 			ScreamBullshit("NIGGERFAGGOT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-			for(var/i in 1 to 60)
+			for(var/i in 1 to 12)
 				var/obj/projectile/G = new(locate(x,y,z))
 				G.owner = src
-				G.X_SPEED = cos(i*6)*5
-				G.Y_SPEED = sin(i*6)*5
+				G.X_SPEED = cos(i*30)*5
+				G.Y_SPEED = sin(i*30)*5
 		Wave3()
 			sleep(10)
 		Wave4()
