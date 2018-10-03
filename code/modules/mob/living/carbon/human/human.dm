@@ -781,6 +781,7 @@
 		if (src.shoes.blood_DNA)
 			var/icon/stain_icon = icon('blood.dmi', "shoesblood")
 			src.overlays += stain_icon
+		src.shoes.screen_loc = ui_shoes
 /*	if (src.w_radio)
 		src.overlays += image("icon" = 'ears.dmi', "icon_state" = "headset[!src.lying ? "" : "2"]") */
 
