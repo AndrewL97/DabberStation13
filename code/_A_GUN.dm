@@ -136,4 +136,4 @@ var/list/bullets = list()
 
 /mob/bullet_act(obj/projectile/G)
 	if(G.heightZ >= heightZ && G.heightZ+2 <= heightZ+heightSize)
-		bruteloss += G.damage
+		TakeBruteDamage(G.damage)

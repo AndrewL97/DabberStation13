@@ -4,6 +4,11 @@
 	var/old_lying = 0
 	var/air = 50
 
+/mob/proc/TakeBruteDamage(damage)
+	if(istype(src,/mob/living/carbon/human))
+		bruteloss += damage/(1+src:wear_suit ? 1 : 0)
+	else
+		bruteloss += damage
 /mob/living/carbon/human
 	updatehealth() //this method is not required FUCK YOU
 		return
