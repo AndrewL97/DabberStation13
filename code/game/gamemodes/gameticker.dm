@@ -29,7 +29,21 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 	return
 
 /datum/controller/gameticker/proc/setup()
-	src.mode = new /datum/game_mode/battle_royale
+	var/gamemodes_list=list(
+	/datum/game_mode/normal,
+	/datum/game_mode/battle_royale
+	)
+
+	var/randgame=pick(gamemodes_list)
+
+	if((world.port in PORTS_NOT_ALLOWED) && clients.len == 1)
+		var/newmode = input(clients[1],"What gamemode?","Local Test") as null|anything in gamemodes_list
+		if(newmode)
+			src.mode = new newmode
+		else
+			src.mode = new randgame
+	else
+		src.mode = new randgame
 	src.mode.announce()
 	var/can_continue = src.mode.pre_setup()
 
