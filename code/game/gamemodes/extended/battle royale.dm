@@ -10,6 +10,7 @@
 /datum/game_mode/battle_royale/announce()
 	world << "<B>The current game mode is - Dab13 Battle Royale</B>"
 	world << "<B>Get ready to fight!</B>"
+	new /turf/unsimulated/wall(locate(249.295,1))
 	sandbox = -1
 	var/list/objects = list(
 	/obj/item/weapon/gun/pistol,
