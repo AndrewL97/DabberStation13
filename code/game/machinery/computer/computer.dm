@@ -84,21 +84,31 @@ Pod/Blast Doors computer
 		set_broken()
 		src.density = 0
 
+/obj/machinery/computer
+	var/lightcolor = rgb(0,114,227)
+	New()
+		..()
+		var/icon/I = new(icon,icon_state,dir,0,0)
+		lightcolor = I.GetPixel(6,17,icon_state,dir,0,0)
+		del I
 /obj/machinery/computer/power_change()
 	if(!istype(src,/obj/machinery/computer/security/telescreen))
+		if(light)
+			light.color = lightcolor
 		if(stat & BROKEN)
 			icon_state = initial(icon_state)
 			src.icon_state += "b"
+			sd_SetLuminosity(0)
 
 		else if(powered())
 			icon_state = initial(icon_state)
 			stat &= ~NOPOWER
+			sd_SetLuminosity(1)
 		else
-			spawn(rand(0, 15))
-				//src.icon_state = "c_unpowered"
-				icon_state = initial(icon_state)
-				src.icon_state += "0"
-				stat |= NOPOWER
+			icon_state = initial(icon_state)
+			src.icon_state += "0"
+			stat |= NOPOWER
+			sd_SetLuminosity(0)
 
 /obj/machinery/computer/process()
 	if(stat & (NOPOWER|BROKEN))
