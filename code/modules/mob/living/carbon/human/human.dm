@@ -674,6 +674,8 @@
 
 /mob/living/carbon/human/update_clothing()
 	..()
+	if(ANIMATION_RUNNING)
+		return
 
 	if (src.transforming)
 		return

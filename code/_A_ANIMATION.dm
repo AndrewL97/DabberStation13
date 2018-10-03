@@ -272,6 +272,9 @@ obj
 			for(var/obj/limb_dance/A in list(Limb1,Limb2,Limb3,Limb4,Limb5,Limb6))
 				if(A != null)
 					animate(A,transform = Reset, time = 2.5)
+			if(owner.MyShadow)
+				owner.MyShadow.overlays = null
+				owner.MyShadow.overlays += list(Limb1,Limb2,Limb3,Limb4,Limb5,Limb6)
 			sleep(2.5)
 		Del()
 			if(Limb1)
@@ -290,6 +293,7 @@ obj
 		proc/End_Animation()
 			if(owner)
 				owner.alpha = 255
+			owner:update_clothing() //update their stuff
 			del src
 		proc/Reset_Limbs()
 			for(var/obj/limb_dance/g in list(Limb1,Limb2,Limb3,Limb4,Limb5,Limb6))
