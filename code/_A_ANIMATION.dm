@@ -268,13 +268,15 @@ obj
 			if(owner)
 				owner.alpha = 0
 				SplitIcon()
+			if(owner.MyShadow)
+				owner.MyShadow.overlays = null
+				owner.MyShadow.icon = null
+				owner.MyShadow.underlays = null
 			var/matrix/Reset = matrix()
 			for(var/obj/limb_dance/A in list(Limb1,Limb2,Limb3,Limb4,Limb5,Limb6))
 				if(A != null)
 					animate(A,transform = Reset, time = 2.5)
-			if(owner.MyShadow)
-				owner.MyShadow.overlays = null
-				owner.MyShadow.overlays += list(Limb1,Limb2,Limb3,Limb4,Limb5,Limb6)
+					owner.MyShadow.overlays += A
 			sleep(2.5)
 		Del()
 			if(Limb1)
