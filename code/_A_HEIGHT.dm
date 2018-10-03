@@ -236,7 +236,7 @@ mob
 			if(T.TurfHeight < -96)
 				MyShadow.alpha = 0
 			else
-				MyShadow.alpha = max(120-((heightZ-T.TurfHeight)/2),30)
+				MyShadow.alpha = max(70-((heightZ-T.TurfHeight)/4),30)
 				MyShadow.pixel_z = T.TurfHeight+pixel_y_2
 				MyShadow.layer = layer-0.05
 				MyShadow.pixel_x = pixel_x+pixel_w
