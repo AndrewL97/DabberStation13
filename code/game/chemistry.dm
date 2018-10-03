@@ -5,6 +5,7 @@
 	var/state = null
 	var/firestrength = 100
 	var/det_time = 20.0
+	can_throw = 0
 	w_class = 2.0
 	item_state = "flashbang"
 	throw2_speed = 4

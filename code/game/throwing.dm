@@ -104,8 +104,11 @@
 		src.throw2ing = 0
 	..()
 
+/atom/movable/var/can_throw = 1
 /atom/movable/proc/throw2_at(atom/target, range, speed)
 	//use a modified version of Bresenham's algorithm to get from the atom's current position to that of the target
+	if(!can_throw)
+		return
 	src.throw2ing = 1
 
 	var/dist_x = abs(target.x - src.x)
@@ -122,6 +125,7 @@
 		dy = NORTH
 	else
 		dy = SOUTH
+	glide_size = 32 / 1 * tick_lag_original
 	var/dist_travelled = 0
 	var/dist_since_sleep = 0
 	if(dist_x > dist_y)
