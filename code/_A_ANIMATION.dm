@@ -275,6 +275,8 @@ obj
 				owner.MyShadow.vis_contents = null
 			var/matrix/Reset = matrix()
 			for(var/obj/limb_dance/A in list(Limb1,Limb2,Limb3,Limb4,Limb5,Limb6))
+				A.plane = owner.plane
+				A.layer = owner.layer //g
 				if(A != null)
 					animate(A,transform = Reset, time = 2.5)
 					owner.MyShadow.vis_contents += A
