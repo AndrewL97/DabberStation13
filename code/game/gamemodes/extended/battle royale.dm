@@ -74,7 +74,7 @@
 					yG += 1
 				heightZ = 99999
 				ySpeed = 0
-				glide_size = 32 / 0.25 * tick_lag_original
+				glide_size = 32 / 2.5 * tick_lag_original
 				loc = locate(242,yG,1)
 				sleep(world.tick_lag)
 			loc = locate(242,yG,1)
