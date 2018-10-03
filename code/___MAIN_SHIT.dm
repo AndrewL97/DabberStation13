@@ -21,7 +21,7 @@
 #define SPACE_PLANE_0 -98
 #define SPACE_PLANE_1 -97
 
-#define MAX_PLAYERS 20 //change this I guess
+#define MAX_PLAYERS 25 //change this I guess
 
 #define SOUND_CHANNEL_1 1120
 #define SOUND_CHANNEL_AMBI 1
@@ -161,7 +161,6 @@ obj
 				transform = M
 	title_screen
 		icon = 'dab13.dmi'
-		var/sine = 0
 		pixel_w = 16
 		layer = 5
 		mouse_opacity = 0
@@ -175,8 +174,7 @@ obj
 			special_processing -= src
 			..()
 		special_process()
-			sine = sine + 1
-			pixel_z = 10+(sin(sine)*10)
+			pixel_z = 10+(sin(frm_counter)*10)
 	title_screen_shadow
 		pixel_w = 16
 		mouse_opacity = 0
@@ -186,7 +184,7 @@ obj
 			return
 
 
-/mob/living/carbon/human/kryfrac //RIS
+/*/mob/living/carbon/human/kryfrac
 	species = "shark"
 	species_icon = 'shark.dmi'
 	species_color = rgb(40,40,40)
@@ -204,22 +202,6 @@ obj
 	Life()
 		..()
 		if(src.stat != 2)
-			Disco_Fever() //hey guys remember when this was actually funny LOL
+			Disco_Fever() */
 
-/mob/living/carbon/human/alcaro //RS4
-	species = "vulpine"
-	species_icon = 'vulpine.dmi'
-	name = "Alcaro"
-	real_name = "Alcaro"
-	desc = "Looks like it hates it's life."
-	gender = FEMALE
-	species_color = rgb(0,206,209)
-	tail = "vulptail1"
-	hair_icon_state = "hair_kleeia"
-	h_style = "Kleeia"
-	tail_color = rgb(60,179,113)
-	zangoose = "Yes"
-	r_hair = 255
-	g_hair = 20
-	b_hair = 147
-	dir = NORTH
+//We don't give furfucks any more love.

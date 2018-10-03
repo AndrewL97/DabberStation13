@@ -31,6 +31,7 @@ var
 	if(statpanel("Debugging information")) //Debug.
 		var/tickdrift = (world.timeofday - worldstarttimeofday) - (world.time - worldstarttime)  / world.tick_lag
 		stat("MAIN",null)
+		stat(null, "Frame [frm_counter]")
 		stat(null, "Bullets : [bullets.len]")
 		stat(null, "Particles : [PARTICLE_LIST.len]")
 		stat(null, "3D Position : [x], [round(heightZ)], [y]")
@@ -38,8 +39,7 @@ var
 		stat(null, "Server Time : [time2text(world.realtime)]")
 		stat(null, "Tick Drift : [tickdrift]")
 		if(client)
-			stat(null, "Server FPS : [world.fps] FPS - [world.tick_lag/10] SECS")
-			stat(null, "Client FPS : [client.fps] FPS - [client.tick_lag/10] SECS (sync if 0)")
+			stat(null, "Frames Per Second : [world.fps] FPS - [frm_counter % world.fps] / [world.fps]")
 			stat(null, "Next move : [max((client.move_delay-world.time)*10,0)]")
 		if(master_controller)
 			stat("MASTER",null)
