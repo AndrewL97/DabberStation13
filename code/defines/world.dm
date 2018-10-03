@@ -59,13 +59,11 @@ world
 	spawn()
 		call("ByondPOST.dll", "send_post_request")("[webhook_url]", " { \"content\" : \"[content]\" } ", "Content-Type: application/json")
 
-/world/proc/update_Status_of_Hub()
-	update_status()
-
 /world/proc/update_status()
 	var/s = ""
 	s += "<b>Dab13 : [Station_Name]</b> - <i>[Game_Version]</i> (<a href='https://discord.gg/dMQqThd'>Discord</a>)<br>Features : "
 	var/features = list()
+	features += "[clients.len]/[MAX_PLAYERS] players"
 	features += "dab13 codebase"
 	if(sandbox == 1)
 		features += "sandbox"

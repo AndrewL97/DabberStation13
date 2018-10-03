@@ -211,7 +211,7 @@ datum/controller/game_controller
 					plrs = plrs + 1
 
 		sun.calc_position()
-		world.update_Status_of_Hub()
+		world.update_status()
 
 		spawn(SLOW_PROCESS_TIME)
 			slow_process()

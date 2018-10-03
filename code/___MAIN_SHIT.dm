@@ -21,6 +21,8 @@
 #define SPACE_PLANE_0 -98
 #define SPACE_PLANE_1 -97
 
+#define MAX_PLAYERS 20 //change this I guess
+
 #define SOUND_CHANNEL_1 1120
 #define SOUND_CHANNEL_AMBI 1
 #define SOUND_CHANNEL_2 1000
