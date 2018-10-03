@@ -29,7 +29,7 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 	return
 
 /datum/controller/gameticker/proc/setup()
-	src.mode = new /datum/game_mode/normal
+	src.mode = new /datum/game_mode/battle_royale
 	src.mode.announce()
 	var/can_continue = src.mode.pre_setup()
 

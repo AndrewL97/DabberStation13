@@ -41,7 +41,7 @@ datum/controller/game_controller/proc/particle_process()
 		y_pos = y_pos + y_spd
 		pixel_w = x_pos + offset_x
 		pixel_z = y_pos + offset_y
-		timer = timer + world.tick_lag
+		timer = timer + tick_lag_original
 
 		if(time_to_disappear != -1)
 			if(timer > time_to_disappear)

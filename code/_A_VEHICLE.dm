@@ -154,7 +154,7 @@ vy = v * sin(angle)
 		if(Kart == 1)
 			if(Spinning > 0)
 				forward.Turn(20)
-				Spinning = Spinning - world.tick_lag
+				Spinning = Spinning - tick_lag_original
 			var/peels = 0
 			for(var/obj/item/weapon/bananapeel/g in loc)
 				if(g.can_trip)
@@ -174,18 +174,18 @@ vy = v * sin(angle)
 
 		if(turning)
 			// Turn the forward direction and keep it normalized.
-			forward = forward.Turn((turning * TurnRate()) * world.tick_lag).Normalized()
+			forward = forward.Turn((turning * TurnRate()) * tick_lag_original).Normalized()
 			transform = initial(transform) * forward.ToRotation()
 
 		if(accelerating)
 			// Accelerate!
-			velocity += forward * (Acceleration() * world.tick_lag)
+			velocity += forward * (Acceleration() * tick_lag_original)
 		else
 			velocity *= 0.99 //slowly stop accelerating
 		//world << velocity.SquareMagnitude()
 
 		if(velocity.SquareMagnitude() > 1)
-			if(PixelMove(velocity.x*world.tick_lag,velocity.y*world.tick_lag)==0)
+			if(PixelMove(velocity.x*tick_lag_original,velocity.y*tick_lag_original)==0)
 				velocity *= -1
 		else
 			if(!accelerating)

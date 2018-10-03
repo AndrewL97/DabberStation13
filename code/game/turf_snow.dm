@@ -10,15 +10,17 @@
 	icon = 'grasstiles.dmi'
 	name = "grass"
 	icon_state = "1"
+	TurfCeiling = 0
 
 /turf/simulated/grass
 	icon = 'grasstiles.dmi'
 	name = "grass"
 	icon_state = "1"
+	TurfCeiling = 0
 
 /turf/unsimulated/dirt
 	icon = 'grasstiles.dmi'
-	name = "grass"
+	name = "dirt"
 	icon_state = "dirt"
 
 /obj/greenland

@@ -231,8 +231,8 @@ var/SpawnKartY = 221
 			if("speed")
 				spawn()
 					for(var/i in 1 to 75)
-						sleep(world.tick_lag)
-						velocity += forward * (Acceleration() * world.tick_lag)
+						sleep(tick_lag_original)
+						velocity += forward * (Acceleration() * tick_lag_original)
 				for(var/mob/A as mob in src)
 					A << 'boost.wav'
 		current_item = "none"

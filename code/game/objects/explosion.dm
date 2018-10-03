@@ -70,7 +70,7 @@ proc/get_dist_alt(atom/A, atom/B)
 var/explosion_acts = 0
 proc/Check_Explosion_tick()
 	if(explosion_acts > 6 || world.cpu > CPU_CHECK_MAX)
-		sleep(world.tick_lag)
+		sleep(tick_lag_original)
 		explosion_acts = explosion_acts = 0
 	else
 		explosion_acts = explosion_acts + 1

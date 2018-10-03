@@ -23,7 +23,7 @@ var/special_processing = list()
 
 #define CPU_WARN 75
 #define CPU_STABLE_LEVEL 20
-#define CPU_CHECK_MAX 40 //if cpu goes higher than this, some things will do sleep(world.tick_lag) and throttle, this is done in CHECK_TICK()
+#define CPU_CHECK_MAX 40 //if cpu goes higher than this, some things will do sleep(tick_lag_original) and throttle, this is done in CHECK_TICK()
 
 client
 	New()
@@ -34,7 +34,7 @@ client
 		..()
 
 
-var/plrs = 0
+var/plrs = 1
 
 obj
 	proc/special_process() //special_processing
@@ -62,14 +62,14 @@ proc/CHECK_TICK_WATER() //epic optimizer used for our water system.
 	actions_per_tick_water += 1
 	water_processed += 1
 	if(actions_per_tick_water > max_actions_water - ((max(0,min(world.cpu,50))/50)*(max_actions_water/1.5)))
-		sleep(world.tick_lag)
+		sleep(tick_lag_original)
 		actions_per_tick_water = 0
 
 proc/CHECK_TICK_ATMOS() //epic optimizer (ATMOS EDITION)
 	actions_per_tick_atmos += 1
 	atmos_processed += 1
 	if(actions_per_tick_atmos > max_actions_atmos)
-		sleep(world.tick_lag)
+		sleep(tick_lag_original)
 		actions_per_tick_atmos = 0
 
 
@@ -80,7 +80,7 @@ proc/CHECK_TICK() //epic optimizer
 	master_Processed += 1
 	actions_per_tick += 1
 	if(actions_per_tick > max_actions - ((max(0,min(world.cpu,100))/100)*(max_actions/2)*(CPU_warning)) )
-		sleep(world.tick_lag)
+		sleep(tick_lag_original)
 		actions_per_tick = 0
 
 datum/controller/game_controller
@@ -189,12 +189,12 @@ datum/controller/game_controller
 		for(var/client/i in clients)
 			i.InactivityLoop()
 			i.ProcessClient()
-		spawn(world.tick_lag)
+		spawn(tick_lag_original)
 			fast_process()
 	water_process()
 		water_cycles += 1
 		water_master.process()
-		spawn(world.tick_lag)
+		spawn(tick_lag_original)
 			water_process()
 	slow_process()
 		atmos_processed = 0
@@ -205,9 +205,9 @@ datum/controller/game_controller
 			network.process()
 
 		plrs = 0
-		for(var/mob/i in Mobs)
-			if(!istype(i,/mob/dead))
-				if(i.health > 0 && istype(i,/mob/living/carbon/human))
+		for(var/client/i in clients)
+			if(!istype(i.mob,/mob/dead))
+				if(i.mob.health > 0)
 					plrs = plrs + 1
 
 		sun.calc_position()
@@ -238,7 +238,7 @@ datum/controller/game_controller
 
 		mobs_process()
 
-		T = T + world.tick_lag
+		T = T + tick_lag_original
 		for(var/obj/machinery/machine in machines)
 			CHECK_TICK()
 			machine.process()

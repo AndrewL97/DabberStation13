@@ -11,7 +11,7 @@ X < 97
 /datum/controller/gameticker/proc/process_timer()
 
 	if(nuke_enabled == 1)
-		nuke_timer = nuke_timer - (1/world.fps) //Decrement!
+		nuke_timer -= tick_lag_original //Decrement!
 		if(nuke_timer < 41 && nuke_timer > 40)
 			world << sound('chaos dunk.ogg',channel=SOUND_CHANNEL_2)
 		if(nuke_timer < 3.8 && nuke_timer > 3.7)

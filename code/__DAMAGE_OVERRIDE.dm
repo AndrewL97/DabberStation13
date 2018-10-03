@@ -21,12 +21,12 @@
 			var/turf/T = loc
 			if(istype(T,/turf))
 				if(T.water_height >= 27 && !internal)
-					air -= world.tick_lag
+					air -= tick_lag_original
 			if(frm_counter % 15 == 1)
 				breathe()
 
 			air = max(0,min(50,air)) //Clamp values
-			if(air < world.tick_lag)
+			if(air < tick_lag_original)
 				oxyloss += 0.5
 				if(frm_counter % 60 == 1)
 					emote("gasp")
@@ -67,6 +67,8 @@
 				MAT.Translate(0,-10)
 			if(updatematrix)
 				animate(src, transform = MAT, time = 1)
+				if(MyShadow)
+					animate(MyShadow, transform = MAT, time = 1)
 
 			/*
 
@@ -98,14 +100,14 @@
 
 				if (src.paralysis || src.stunned || src.weakened || changeling_fakedeath) //Stunned etc.
 					if (src.stunned > 0)
-						src.stunned -= world.tick_lag
+						src.stunned -= tick_lag_original
 						src.stat = 0
 					if (src.weakened > 0)
-						src.weakened -= world.tick_lag
+						src.weakened -= tick_lag_original
 						src.lying = 1
 						src.stat = 0
 					if (src.paralysis > 0)
-						src.paralysis -= world.tick_lag
+						src.paralysis -= tick_lag_original
 						src.blinded = 1
 						src.lying = 1
 						src.stat = 1

@@ -29,7 +29,7 @@ var
 						stat(null, "[k.name] - [k.lap] - %[(k.checkpoint/8)*100]")
 
 	if(statpanel("Debugging information")) //Debug.
-		var/tickdrift = (world.timeofday - worldstarttimeofday) - (world.time - worldstarttime)  / world.tick_lag
+		var/tickdrift = (world.timeofday - worldstarttimeofday) - (world.time - worldstarttime)  / tick_lag_original
 		stat("MAIN",null)
 		stat(null, "Frame [frm_counter]")
 		stat(null, "Bullets : [bullets.len]")

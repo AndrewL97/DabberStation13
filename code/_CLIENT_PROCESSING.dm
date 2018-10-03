@@ -53,10 +53,10 @@ mob
 			set instant = 1
 			set waitfor = 0
 			set hidden = 1
-			ping = (world.time+world.tick_lag*world.tick_usage/100)-time
+			ping = (world.time+tick_lag_original*world.tick_usage/100)-time
 			sleep(1)
-			ping(world.time+world.tick_lag*world.tick_usage/100)
-			//winset(src,null,"command=ping+[world.time+world.tick_lag*world.tick_usage/100]")
+			ping(world.time+tick_lag_original*world.tick_usage/100)
+			//winset(src,null,"command=ping+[world.time+tick_lag_original*world.tick_usage/100]")
 	New()
 		. = ..()
 		ping()
@@ -66,7 +66,7 @@ mob
 	var/w = 0
 	var/j = 0
 	var/spri = 0
-	//fps = 60
+
 	var/mousedown
 	verb/KeyDownM(a as text)
 		set instant = 1
@@ -289,8 +289,8 @@ mob
 
 			src.moving = 1
 
-			var/RLMove = max(world.tick_lag,(src.move_delay - world.time))
-			mob.glide_size = (world.icon_size/RLMove)*world.tick_lag
+			var/RLMove = max(tick_lag_original,(src.move_delay - world.time))
+			mob.glide_size = (world.icon_size/RLMove)*tick_lag_original
 			//TILE_HEIGHT / move_delay * TICK_LAG
 			glide_size = mob.glide_size
 			if(mob.MyShadow)

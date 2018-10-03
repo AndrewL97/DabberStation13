@@ -22,7 +22,7 @@
 					del(src)
 				else
 					Spawn_Kart(rank, joined_late)
-			if("Dab Station 13 Battle Royale")
+			if("Dabber Station 13 Battle Royale")
 				if(joined_late)
 					src << "<b>\green Now spectating. Move around!"
 					src.ghostize()

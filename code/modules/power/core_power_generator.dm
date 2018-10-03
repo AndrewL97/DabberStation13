@@ -28,7 +28,7 @@
 		..()
 
 /obj/machinery/power/core/special_process()
-	temp = temp + world.tick_lag/4
+	temp = temp + tick_lag_original/4
 	if(temp < 0)
 		temp = 0
 	if(temp > 3500 && melt_down_alert == 0)
@@ -76,8 +76,8 @@
 	icon_state = "core_cooler[round((coolant_left/max_coolant)*18)]"
 	if(coolant_left > 0 && on)
 		for(var/obj/machinery/power/core/e in orange(1,src))
-			e.temp -= world.tick_lag/2
-			coolant_left -= world.tick_lag/2
+			e.temp -= tick_lag_original/2
+			coolant_left -= tick_lag_original/2
 	if(!on)
 		var/obj/water/device/connector/D = locate(/obj/water/device/connector) in locate(x,y,z)
 		if(D)

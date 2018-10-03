@@ -189,7 +189,7 @@
 				src.losebreath++
 
 			if(losebreath>0) //Suffocating so do not take a breath
-				air-=world.tick_lag*4
+				air-=tick_lag_original*4
 				if(istype(loc, /obj/))
 					var/obj/location_as_object = loc
 					location_as_object.handle_internal_lifeform(src, 0)
@@ -251,7 +251,7 @@
 				return
 
 			if(!breath || (breath.total_moles() == 0))
-				air-=world.tick_lag
+				air-=tick_lag_original
 
 				oxygen_alert = max(oxygen_alert, 1)
 
@@ -276,10 +276,10 @@
 			if(O2_pp < safe_oxygen_min) 			// Too little oxygen
 				if(O2_pp > 0)
 					var/ratio = safe_oxygen_min/O2_pp
-					air-=world.tick_lag*7
+					air-=tick_lag_original*7
 					oxygen_used = breath.oxygen*ratio/6
 				else
-					air-=world.tick_lag*7
+					air-=tick_lag_original*7
 				oxygen_alert = max(oxygen_alert, 1)
 			/*else if (O2_pp > safe_oxygen_max) 		// Too much oxygen (commented this out for now, I'll deal with pressure damage elsewhere I suppose)
 				spawn(0) emote("cough")
@@ -288,7 +288,7 @@
 				oxygen_used = breath.oxygen*ratio/6
 				oxygen_alert = max(oxygen_alert, 1)*/
 			else 									// We're in safe limits
-				air += world.tick_lag*12
+				air += tick_lag_original*12
 				oxygen_used = breath.oxygen/6
 				oxygen_alert = 0
 
@@ -300,9 +300,9 @@
 					co2overloadtime = world.time
 				else if(world.time - co2overloadtime > 120)
 					src.paralysis = max(src.paralysis, 3)
-					air -= world.tick_lag*7
+					air -= tick_lag_original*7
 					if(world.time - co2overloadtime > 300) // They've been in here 30s now, lets start to kill them for their own good!
-						air -= world.tick_lag*7
+						air -= tick_lag_original*7
 				if(prob(1)) // Lets give them some chance to know somethings not right though I guess.
 					spawn(0) emote("cough")
 
@@ -311,7 +311,7 @@
 
 			if(Toxins_pp > safe_toxins_max) // Too much toxins
 				var/ratio = breath.toxins/safe_toxins_max
-				air -= world.tick_lag*7
+				air -= tick_lag_original*7
 				toxloss += min(ratio, 10)	//Limit amount of damage toxin exposure can do per second
 				toxins_alert = max(toxins_alert, 1)
 			else
@@ -545,15 +545,15 @@
 				src.mutations &= ~32
 				update_body()
 			if (src.nutrition > 0)
-				src.nutrition -= world.tick_lag/10
+				src.nutrition -= tick_lag_original/10
 				if(nutrition < 35)
-					weight -= world.tick_lag/70
+					weight -= tick_lag_original/70
 				if(nutrition > 100)
-					weight += world.tick_lag/70
+					weight += tick_lag_original/70
 					if(nutrition > 150)
 						nutrition = 150
 			else
-				bruteloss += world.tick_lag //Starving
+				bruteloss += tick_lag_original //Starving
 			if(weight < 30)
 				bruteloss -= weight-30
 			if (src.drowsyness)

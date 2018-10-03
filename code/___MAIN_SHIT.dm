@@ -1,4 +1,5 @@
 //THese are special variables used for The Game.
+
 #define FLOOR_PLANE 0
 #define WALL_PLANE 1
 #define LIGHT_PLANE 3
@@ -83,10 +84,14 @@ var
 		LIGHT_LAYER = 100
 	Lighting/lighting = new()
 
+var/tick_lag_original = 0
 world
 	fps = 60
 	hub = "Exadv1.spacestation13"
 	hub_password = "kMZy3U5jJHSiBQjr"
+	New()
+		..()
+		tick_lag_original = tick_lag
 
 proc
 	animate_flash(var/type,var/atom/se)
@@ -183,6 +188,9 @@ obj
 		ex_act()
 			return
 
+
+client
+	fps = 60
 
 /*/mob/living/carbon/human/kryfrac
 	species = "shark"

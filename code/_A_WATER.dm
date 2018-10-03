@@ -283,7 +283,7 @@ obj
 	if(istype(to_push,/mob/living/carbon/human))
 		if(to_push.heightZ <= water_height)
 			if(!to_push.wear_suit)
-				to_push.glide_size = 32 / world.tick_lag * world.tick_lag
+				to_push.glide_size = 32 / tick_lag_original * tick_lag_original
 				step(to_push,d)
 				to_push.bruteloss += h/10
 

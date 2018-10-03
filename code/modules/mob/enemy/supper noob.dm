@@ -33,7 +33,7 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 			ySpeed = ynew
 			onFloor = 0
 			while(!onFloor)
-				sleep(world.tick_lag)
+				sleep(tick_lag_original)
 		Wave1()
 			//Wave 1 : Jump
 			ScreamBullshit("YOURE ALL FUCKING IDIOTS!!!!!!!!!")
@@ -70,5 +70,5 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 			if(nearest_mob)
 				ScreamBullshit("I FOUND YOU IDIOT IM COMING FOR YOUR MOM!!!!!!!!!!!!!!!!!!")
 				new /obj/Particle/crosshair(nearest_mob.loc)
-				glide_size = 32 / 0.5 * world.tick_lag
+				glide_size = 32 / 0.5 * tick_lag_original
 				walk_to(src,nearest_mob,4,0.5,0)

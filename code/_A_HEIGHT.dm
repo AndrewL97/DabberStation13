@@ -243,6 +243,8 @@ mob
 				MyShadow.glide_size = glide_size
 				MyShadow.loc = loc
 				MyShadow.dir = dir
+				if(heightZ > 99998)
+					MyShadow.alpha = 0
 
 		pixel_z = round(heightZ)+round(pixel_y_2) //Set pixel_z.
 		if(buckled)

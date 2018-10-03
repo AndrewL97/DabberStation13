@@ -35,7 +35,7 @@
 				if(D && frm_counter % 3 == 1)
 					if(D.water_pressure > 1)
 						D.water_pressure -= 1
-						grow_state += world.tick_lag/40
+						grow_state += tick_lag_original/40
 				if(round(grow_state) != grow_state_old)
 					grow_state_old = round(grow_state)
 					Get_Overlay()

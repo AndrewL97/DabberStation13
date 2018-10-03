@@ -1,5 +1,5 @@
 /datum/game_mode/battle_royale
-	name = "Dab Station 13 Battle Royale"
+	name = "Dabber Station 13 Battle Royale"
 	config_tag = "fortnite"
 	events_enabled = 0
 	do_kick = 1
@@ -8,8 +8,22 @@
 	..()
 	return 1
 /datum/game_mode/battle_royale/announce()
-	world << "<B>The current game mode is - Dab Battle Royale 13</B>"
+	world << "<B>The current game mode is - Dab13 Battle Royale</B>"
 	world << "<B>Get ready to fight!</B>"
+	sandbox = -1
+	var/list/objects = list(
+	/obj/item/weapon/gun/pistol,
+	/obj/item/weapon/gun/machine_gun,
+	/obj/item/weapon/storage/backpack,
+	/obj/item/weapon/grenade/explosiongrenade,
+	/obj/item/weapon/classic_baton,
+	/obj/item/clothing/suit/armor/vest,
+	/obj/item/clothing/suit/armor/swat
+	)
+	for(var/obj/loot_spawner/G in world)
+		for(var/i in 1 to rand(2,3))
+			var/A = pick(objects)
+			new A(G.loc)
 
 
 /datum/game_mode/battle_royale/ending()
@@ -17,56 +31,54 @@
 
 
 /datum/game_mode/battle_royale/check_finished()
-	var/mob/lastplr = null
-	for(var/mob/i in Mobs)
-		if(!istype(i,/mob/dead))
-			if(i.health > 0)
+	var/client/lastplr = null
+	for(var/client/i in clients)
+		if(!istype(i.mob,/mob/dead))
+			if(i.mob.health > 0)
 				lastplr = i
-
-	if(plrs <= 1)
+	if(plrs <= 0)
 		if(lastplr)
-			world.log << "[lastplr.name] won!"
-			lastplr << "<b><font size=6><font color='#00FFFF'>First place, victory royale!"
-		return 1
+			world << "<b><font size=6><font color='#00FFFF'>[lastplr.key] won!"
+			sleep(10)
+			world << 'victory.ogg'
+			world.fps = 15 //slow mo effect
+			sleep(22)
+			world.fps = 60
+			return 1
 	return 0
 
 
-
+/obj/loot_spawner
+	//random loot spawner
+	density = 0
+	anchored = 1
+	icon = 'screen1.dmi'
+	icon_state = "x2"
+	mouse_opacity = 0
+	New()
+		..()
+		alpha = 0
 /mob/living/carbon/human/proc/Spawn_Fortain(rank, joined_late)
-	src.equip_if_possible(new /obj/item/weapon/storage/backpack(src), slot_back)
-
 	src.equip_if_possible(new /obj/item/clothing/under/lightblue(src), slot_w_uniform)
 	src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
 
-	src.equip_if_possible(new /obj/item/weapon/grenade/explosiongrenade(src), slot_in_backpack)
-	src.equip_if_possible(new /obj/item/weapon/grenade/explosiongrenade(src), slot_in_backpack)
-	src.equip_if_possible(new /obj/item/weapon/grenade/explosiongrenade(src), slot_in_backpack)
-	src.equip_if_possible(new /obj/item/weapon/grenade/explosiongrenade(src), slot_in_backpack)
-	src.equip_if_possible(new /obj/item/weapon/grenade/explosiongrenade(src), slot_in_backpack)
-	src.equip_if_possible(new /obj/item/weapon/grenade/explosiongrenade(src), slot_in_backpack)
-
-	src.equip_if_possible(new /obj/item/weapon/grenade/explosiongrenade(src), slot_l_hand)
-	src.equip_if_possible(new /obj/item/weapon/gun/pistol(src), slot_r_hand)
-
-	src.equip_if_possible(new /obj/item/clothing/mask/breath(src), slot_wear_mask)
-
-	var/obj/item/weapon/tank/air/AAA = new(src)
-	src.equip_if_possible(AAA, slot_l_store)
-	src.internal = AAA //Toggle internals.
-
-	src << "<b>\green You have automatically enabled your internals and are now landing. Move!"
-	spawnId(rank)
 	src << 'storm.ogg'
-	src.job = rank
-	src.mind.assigned_role = rank
 
-	//if (!joined_late && rank != "Tourist")
-
-	src.loc = locate(275,86,1)
-	spawn()
-		for(var/i in 1 to 1000) //999 frames, like 9 seconds
-			sleep(world.tick_lag)
-			src.heightZ = 416
-
-
+	src.loc = locate(202,202,1)
+	if (client)
+		src << "Press space to jump into the map! You will be forced off automatically if you don't."
+		var/yG = 203
+		spawn()
+			while(yG < 292 && client && client.j == 0)
+				if(frm_counter % 15 == 1)
+					yG += 1
+				heightZ = 99999
+				ySpeed = 0
+				glide_size = 32 / 0.25 * tick_lag_original
+				loc = locate(242,yG,1)
+				sleep(world.tick_lag)
+			loc = locate(242,yG,1)
+			heightZ = 2000
+			ySpeed = 0
+			world << sound("sound/busdrop[rand(1,3)].ogg")
 	return

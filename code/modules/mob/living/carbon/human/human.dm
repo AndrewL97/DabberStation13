@@ -765,15 +765,18 @@
 		if (src.gloves.blood_DNA)
 			var/icon/stain_icon = icon('blood.dmi', "bloodyhands")
 			src.overlays += stain_icon
+		gloves.screen_loc = ui_gloves
 	else if (src.blood_DNA)
 		var/icon/stain_icon = icon('blood.dmi', "bloodyhands")
 		src.overlays += stain_icon
 	// Glasses
 	if (src.glasses)
 		src.overlays += image("icon" = 'eyes.dmi', "icon_state" = text("[]", src.glasses.icon_state)) //, "layer" = MOB_LAYER)
+		glasses.screen_loc = ui_glasses
 	// Ears
 	if (src.ears)
 		src.overlays += image("icon" = 'ears.dmi', "icon_state" = text("[]", src.ears.icon_state)) //, "layer" = MOB_LAYER)
+		ears.screen_loc = ui_ears
 	// Shoes
 	if (src.shoes)
 
