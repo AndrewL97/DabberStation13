@@ -8,6 +8,7 @@
 	var/zangoose
 	var/tail_color = null
 	var/cat_ears = 0
+	//var/icon/fullplayericon = null
 
 /mob/living/carbon/human/New()
 	..()
@@ -949,9 +950,13 @@
 				src.show_inv(M)
 				return
 
-
-
+	//fullplayericon = GetSplitIcon()
+	if(MyShadow)
+		MyShadow.underlays = underlays
+		MyShadow.icon = icon
+		MyShadow.overlays = overlays
 	src.last_b_state = src.stat
+
 
 /mob/living/carbon/human/hand_p(mob/M as mob)
 	if (!ticker)

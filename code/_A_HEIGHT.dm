@@ -36,6 +36,7 @@ mob
 		Mobs += src
 obj
 	shadow
+		color = list(rgb(0,0,0),rgb(0,0,0),rgb(0,0,0),rgb(0,0,0),rgb(0,0,0))
 		anchored = 1
 		layer = 3.999
 		mouse_opacity = 0
@@ -45,7 +46,7 @@ obj
 		icon_state = "shadow"
 		ex_act()
 			return
-		appearance_flags = PIXEL_SCALE | LONG_GLIDE
+		appearance_flags = PIXEL_SCALE | LONG_GLIDE | KEEP_TOGETHER
 
 turf
 	var/TurfGravity = 96/256 //Obvious variable names
@@ -232,12 +233,16 @@ mob
 				heightZ = 0
 
 		if(MyShadow) //Handle shadow transparency.
-			MyShadow.alpha = max(220-((heightZ-T.TurfHeight)*3),100)
-			MyShadow.pixel_z = T.TurfHeight+pixel_y_2
-			MyShadow.layer = layer-0.05
-			MyShadow.pixel_x = pixel_x+pixel_w
-			MyShadow.glide_size = glide_size
-			MyShadow.loc = loc
+			if(T.TurfHeight < -96)
+				MyShadow.alpha = 0
+			else
+				MyShadow.alpha = max(120-((heightZ-T.TurfHeight)),0)
+				MyShadow.pixel_z = T.TurfHeight+pixel_y_2
+				MyShadow.layer = layer-0.05
+				MyShadow.pixel_x = pixel_x+pixel_w
+				MyShadow.glide_size = glide_size
+				MyShadow.loc = loc
+				MyShadow.dir = dir
 
 		pixel_z = round(heightZ)+round(pixel_y_2) //Set pixel_z.
 		if(buckled)

@@ -35,6 +35,7 @@ mob
 				i.glide_size = glide_size
 				i.Move(NewLoc,Dir,step_x,step_y)
 		if(MyShadow)
+			MyShadow.dir = dir
 			MyShadow.loc = locate(x,y,z)
 
 		if(loc == NewLoc)
@@ -151,7 +152,8 @@ mob
 			var/mos_x = mouse_position.WorldX()
 			var/mos_y = mouse_position.WorldY()
 			mob.dir = get_dir(mob.loc,locate((mos_x/32)+1,(mos_y/32)+1,mob.z))
-
+			if(mob.MyShadow)
+				mob.MyShadow.dir = mob.dir
 			if(istype(G,/obj/item/weapon/gun) && G.automatic)
 				G.fire(mob,mos_x,mos_y)
 		if (isobj(src.mob.loc) || ismob(src.mob.loc))
