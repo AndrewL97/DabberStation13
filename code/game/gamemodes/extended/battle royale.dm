@@ -26,7 +26,7 @@
 		for(var/i in 1 to rand(2,3))
 			var/A = pick(objects)
 			var/location = locate(G.x+rand(-1,1),G.y+rand(-1,1),G.z)
-			if(location.density == 0)
+			if(location:density == 0)
 				new A(location)
 			else
 				new A(G.loc)
