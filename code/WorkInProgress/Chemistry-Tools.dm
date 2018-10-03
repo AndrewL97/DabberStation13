@@ -1151,7 +1151,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cola
 	name = "bepis"
-	desc = "Sipp."
+	desc = "Gives you shield!"
 	icon_state = "cola"
 	heal_amt = 1
 	New()

@@ -18,12 +18,14 @@
 	/obj/item/weapon/grenade/explosiongrenade,
 	/obj/item/weapon/classic_baton,
 	/obj/item/clothing/suit/armor/vest,
-	/obj/item/clothing/suit/armor/swat
+	/obj/item/clothing/suit/armor/swat,
+	/obj/item/weapon/reagent_containers/food/drinks/cola,
+	/obj/item/weapon/reagent_containers/food/drinks/slurp_juice
 	)
 	for(var/obj/loot_spawner/G in world)
 		for(var/i in 1 to rand(2,3))
 			var/A = pick(objects)
-			new A(G.loc)
+			new A(locate(G.x+rand(-1,1),G.y+rand(-1,1),G.z))
 
 
 /datum/game_mode/battle_royale/ending()
