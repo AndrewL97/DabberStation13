@@ -27,14 +27,17 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 
 /datum/game_mode/proc/ending()
 	return
-
+var/gamemodes_list=list(
+/datum/game_mode/normal,
+/datum/game_mode/battle_royale
+)
 /datum/controller/gameticker/proc/setup()
-	var/gamemodes_list=list(
-	/datum/game_mode/normal,
-	/datum/game_mode/battle_royale
-	)
-
-	var/randgame=pick(gamemodes_list)
+	var/randgame=text2path(file2text("config/gamemode.txt"))
+	if(randgame)
+		world << "Loaded gamemode [randgame]"
+	else
+		world << "\red <B>Error loading gamemode. Please set with administrator and reboot."
+		return
 
 	if((world.port in PORTS_NOT_ALLOWED) && clients.len == 1)
 		var/newmode = input(clients[1],"What gamemode?","Local Test") as null|anything in gamemodes_list
@@ -50,14 +53,14 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 	if(!can_continue)
 		del mode
 		current_state = GAME_STATE_PREGAME
-		world << "<B>Error setting up [master_mode].</B> Reverting to pre-game lobby."
+		world << "\red <B>Error setting up [master_mode].</B> Reverting to pre-game lobby."
 		spawn()
 			pregame()
 		return 0
 
 	world << "<FONT color='blue'><B><font size=4>Welcome to [Station_Name]!"
 	world << 'welcome.ogg'
-	sleep(10)
+	sleep(world.tick_lag)
 
 	//Create player characters and transfer them
 	create_characters()
