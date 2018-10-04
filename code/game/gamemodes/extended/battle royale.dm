@@ -117,7 +117,7 @@ obj/storm_overlay
 		if(timer_left < 0 && !decrementing)
 			world << 'storm.ogg'
 			glide_size = 32 / 2.5 * tick_lag_original
-			walk_to(src,locate(rand(202,299),rand(202,299),1),3,2.5,0)
+			walk_towards(src,locate(rand(202,299),rand(202,299),1),2.5,0)
 			decrementing = 1
 		if(decrementing)
 			size -= world.tick_lag/2
