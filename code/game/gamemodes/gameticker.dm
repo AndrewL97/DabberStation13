@@ -122,9 +122,10 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 
 			spawn(60)
 				mode.ending()
-				world << "\blue <B>Restarting in 60 seconds</B>"
+				world << sound('titlesong.ogg',channel=LOBBY_CHANNEL,volume=100, repeat = 1)
+				world << "\blue <B>Restarting in 50 seconds</B>"
 
-				sleep(600)
+				sleep(500)
 				world.Reboot()
 
 		return 1

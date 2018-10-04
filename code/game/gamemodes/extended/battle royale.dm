@@ -4,14 +4,16 @@
 	events_enabled = 0
 	do_kick = 1
 
-/datum/game_mode/battle_royaleg/pre_setup()
+/datum/game_mode/battle_royale/pre_setup()
 	..()
 	return 1
 /datum/game_mode/battle_royale/announce()
 	world << "<B>The current game mode is - Dab13 Battle Royale</B>"
 	world << "<B>Get ready to fight!</B>"
+	//244,202
 	new /turf/unsimulated/wall(locate(249,295,1))
 	sandbox = -1
+	BATTLE_ROYALE_PLANE = new(locate(242,203,1))
 	var/list/objects = list(
 	/obj/item/weapon/gun/pistol,
 	/obj/item/weapon/gun/machine_gun,
@@ -34,8 +36,7 @@
 
 
 /datum/game_mode/battle_royale/ending()
-	world << sound(null)
-
+	..()
 
 /datum/game_mode/battle_royale/check_finished()
 	if(dropped > 0)
@@ -49,7 +50,7 @@
 				world << "<b><font size=6><font color='#00FFFF'>[lastplr.key] won!"
 				sleep(10)
 				world << 'victory.ogg'
-				world.fps = 15 //slow mo effect
+				world.fps = 6 //slow mo effect
 				sleep(22)
 				world.fps = 60
 				return 1
@@ -66,6 +67,36 @@ var/dropped = 0
 	New()
 		..()
 		alpha = 0
+var/obj/plane_thing/BATTLE_ROYALE_PLANE = null
+/obj/plane_thing
+	//for battle royale
+	icon = 'battle_royale_plane.dmi'
+	plane = BELOW_SHADING //ontop everything
+	var/forced_drop = 0
+	var/obj/shadow/s = null
+	pixel_x = -40+16
+	pixel_z = 200
+	New()
+		..()
+		special_processing += src
+		s = new()
+		s.icon = icon
+		s.icon_state = icon_state
+	Del()
+		del s
+		special_processing -= src
+		..()
+	special_process()
+		if(y > 293)
+			forced_drop = 1
+		glide_size = 32 / 2.5 * tick_lag_original
+		if(frm_counter % 15 == 1)
+			y += 1
+		s.pixel_x = pixel_x
+		s.glide_size = glide_size
+		s.loc = loc
+		if(z == 0)
+			del src
 /mob/living/carbon/human/proc/Spawn_Fortain(rank, joined_late)
 	src.equip_if_possible(new /obj/item/clothing/under/lightblue(src), slot_w_uniform)
 	src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
@@ -73,20 +104,17 @@ var/dropped = 0
 	src << 'storm.ogg'
 
 	src.loc = locate(202,202,1)
-	if (client)
+	if (client && BATTLE_ROYALE_PLANE)
 		src << "Press space to jump into the map! You will be forced off automatically if you don't."
-		var/yG = 203
+		//var/yG = 203
 		spawn()
-			while(yG < 292 && client && client.j == 0)
-				if(frm_counter % 15 == 1)
-					yG += 1
-				heightZ = 99999
-				ySpeed = 0
-				glide_size = 32 / 2.5 * tick_lag_original
-				loc = locate(242,yG,1)
+			while(BATTLE_ROYALE_PLANE.forced_drop == 0 && client && client.j == 0)
+				client.eye = BATTLE_ROYALE_PLANE
 				sleep(world.tick_lag)
-			loc = locate(242,yG,1)
-			heightZ = 2000
+			if(client)
+				client.eye = src
+			loc = BATTLE_ROYALE_PLANE.loc
+			heightZ = 200
 			ySpeed = 0
 			world << sound("sound/busdrop[rand(1,3)].ogg")
 			spawn(20)

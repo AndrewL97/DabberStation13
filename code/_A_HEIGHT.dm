@@ -238,7 +238,10 @@ mob
 			else
 				MyShadow.alpha = max(70-((heightZ-T.TurfHeight)/4),30)
 				MyShadow.pixel_z = T.TurfHeight+pixel_y_2
-				MyShadow.layer = layer-0.05
+				if(T.TurfHeight < 0)
+					MyShadow.layer = TURF_LAYER-0.05
+				else
+					MyShadow.layer = layer-0.05
 				MyShadow.pixel_x = pixel_x+pixel_w
 				MyShadow.glide_size = glide_size
 				MyShadow.loc = loc
@@ -246,11 +249,14 @@ mob
 				if(heightZ > 99998)
 					MyShadow.alpha = 0
 
-		pixel_z = round(heightZ)+round(pixel_y_2) //Set pixel_z.
+		if(world.fps < 55)
+			animate(src,pixel_z = round(heightZ)+round(pixel_y_2),time = world.tick_lag) //smooth
+		else
+			pixel_z = round(heightZ)+round(pixel_y_2) //Set pixel_z.
 		if(buckled)
 			buckled.pixel_z = round(heightZ)
 		if(c2)
-			if(T.TurfHeight < 0)
+			if(T.TurfHeight < -32)
 				c2.icon_state = "heightNOFL"
 			else
 				c2.icon_state = "height"
