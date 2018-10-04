@@ -38,23 +38,24 @@
 
 
 /datum/game_mode/battle_royale/check_finished()
-	var/client/lastplr = null
-	for(var/client/i in clients)
-		if(!istype(i.mob,/mob/dead))
-			if(i.mob.health > 0)
-				lastplr = i
-	if(plrs <= 0)
-		if(lastplr)
-			world << "<b><font size=6><font color='#00FFFF'>[lastplr.key] won!"
-			sleep(10)
-			world << 'victory.ogg'
-			world.fps = 15 //slow mo effect
-			sleep(22)
-			world.fps = 60
-			return 1
+	if(dropped > 0)
+		var/client/lastplr = null
+		for(var/client/i in clients)
+			if(!istype(i.mob,/mob/dead))
+				if(i.mob.health > 0)
+					lastplr = i
+		if(plrs <= 1)
+			if(lastplr)
+				world << "<b><font size=6><font color='#00FFFF'>[lastplr.key] won!"
+				sleep(10)
+				world << 'victory.ogg'
+				world.fps = 15 //slow mo effect
+				sleep(22)
+				world.fps = 60
+				return 1
 	return 0
 
-
+var/dropped = 0
 /obj/loot_spawner
 	//random loot spawner
 	density = 0
@@ -88,4 +89,6 @@
 			heightZ = 2000
 			ySpeed = 0
 			world << sound("sound/busdrop[rand(1,3)].ogg")
+			spawn(20)
+				dropped += 1
 	return
