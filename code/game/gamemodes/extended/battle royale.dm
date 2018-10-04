@@ -94,7 +94,7 @@ obj/storm_overlay
 	anchored = 1
 	plane = SHADING_PLANE
 	blend_mode = BLEND_ADD
-	appearance_flags = RESET_COLOR | PIXEL_SCALE
+	appearance_flags = RESET_COLOR | PIXEL_SCALE | LONG_GLIDE
 	icon = 'bigcircle.dmi'
 	icon_state = "circle"
 	mouse_opacity = 0
@@ -111,13 +111,13 @@ obj/storm_overlay
 		var/matrix/M = matrix()
 		M.Scale(max(0,size/128))
 		transform = M
+		glide_size = 32 / 4 * tick_lag_original
 	special_process()
 		timer_left -= world.tick_lag/10
 		updatestormsize()
 		if(timer_left < 0 && !decrementing)
 			world << 'storm.ogg'
-			glide_size = 32 / 2.5 * tick_lag_original
-			walk_towards(src,locate(rand(202,299),rand(202,299),1),2.5,0)
+			walk_towards(src,locate(rand(202,299),rand(202,299),1),4,0)
 			decrementing = 1
 		if(decrementing)
 			size -= world.tick_lag/2
