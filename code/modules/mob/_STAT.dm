@@ -18,7 +18,7 @@ var
 			stat(null, "Nutrition : %[max(0,min(100,round(nutrition)))]")
 			stat(null, "Weight : [round(weight,0.125)] KG")
 		else
-			stat(null, "Storm eye closing in [round(STORM.timer_left)] secs")
+			stat(null, "Storm eye closing in [max(0,round(STORM.timer_left))] secs")
 		//stat(null, "Shield : %[round(shield)]")
 		if(veh)
 			stat("Vehicle Speed","[round(veh.velocity.SquareMagnitude()/50)] km/h")

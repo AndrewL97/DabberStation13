@@ -98,6 +98,7 @@ obj/storm_overlay
 	icon = 'bigcircle.dmi'
 	icon_state = "circle"
 	mouse_opacity = 0
+	density = 0
 	pixel_x = -2048+16
 	pixel_y = -2048+16
 	var/size = 128
@@ -108,19 +109,24 @@ obj/storm_overlay
 	layer = LIGHT_LAYER + 1
 	proc/updatestormsize()
 		var/matrix/M = matrix()
-		M.Scale(size/128,size/128)
+		M.Scale(max(0,size/128))
 		transform = M
 	special_process()
 		timer_left -= world.tick_lag/10
 		updatestormsize()
 		if(timer_left < 0 && !decrementing)
 			world << 'storm.ogg'
+			glide_size = 32 / 2.5 * tick_lag_original
+			walk_to(src,locate(rand(202,299),rand(202,299),1),3,2.5,0)
 			decrementing = 1
 		if(decrementing)
-			size -= world.tick_lag/10
-			if(timer_left < -32)
+			size -= world.tick_lag/2
+			if(size < 16)
+				size = 16
+			if(timer_left < -5)
+				walk(src,0)
 				decrementing = 0
-				timer_left = 60
+				timer_left = 2
 	New()
 		..()
 		special_processing += src
