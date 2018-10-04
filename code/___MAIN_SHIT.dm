@@ -109,7 +109,6 @@ obj
 		icon = 'boring shit.dmi'
 		icon_state = "discoball"
 		anchored = 1
-		var/cycle = 0
 		New()
 			..()
 			special_processing += src
@@ -117,13 +116,13 @@ obj
 			special_processing -= src
 			..()
 		special_process()
-			spawn()
-				cycle += 1
-				if(light && cycle > 25) // A full sec
+			if(frm_counter % 15 == 1) // A full sec
+				if(light)
 					light.color = rgb(rand(180,255),rand(180,255),rand(180,255))
-					cycle = 0
-				else
-					sd_SetLuminosity(10)
+				cycle = 0
+			else
+				sd_SetLuminosity(10)
+				if(light)
 					light.intensity = 1
 	spotlight
 		icon = 'speciallighting.dmi'
