@@ -69,8 +69,25 @@ var/dropped = 0
 /area/forest/storm = 1
 
 /mob/var/used_to_be_in_storm = 0
+/mob/var/INPLANE = 1
 
 /mob/proc/ProcessBattleRoyale()
+	if(INPLANE)
+		if (client && BATTLE_ROYALE_PLANE)
+			//var/yG = 203
+			spawn()
+				if(BATTLE_ROYALE_PLANE.forced_drop == 0 && client && client.j == 0)
+					loc = locate(BATTLE_ROYALE_PLANE.x,BATTLE_ROYALE_PLANE.y+2,BATTLE_ROYALE_PLANE.z)
+					glide_size = BATTLE_ROYALE_PLANE.glide_size
+					heightZ = BATTLE_ROYALE_PLANE.pixel_z
+				else
+					loc = BATTLE_ROYALE_PLANE.loc
+					heightZ = BATTLE_ROYALE_PLANE.pixel_z
+					ySpeed = 0
+					INPLANE = 0
+					world << sound("sound/busdrop[rand(1,3)].ogg")
+					spawn(20)
+						dropped += 1
 	if(STORM)
 		if(get_dist_alt(src,STORM) > STORM.size/2)
 			if(!used_to_be_in_storm)
@@ -173,17 +190,6 @@ var/obj/plane_thing/BATTLE_ROYALE_PLANE = null
 	src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
 
 	src.loc = locate(202,202,1)
-	if (client && BATTLE_ROYALE_PLANE)
-		src << "Press space to jump into the map! You will be forced off automatically if you don't."
-		//var/yG = 203
-		spawn()
-			while(BATTLE_ROYALE_PLANE.forced_drop == 0 && client && client.j == 0)
-				loc = locate(BATTLE_ROYALE_PLANE.x,BATTLE_ROYALE_PLANE.y+2,BATTLE_ROYALE_PLANE.z)
-				sleep(world.tick_lag)
-			loc = BATTLE_ROYALE_PLANE.loc
-			heightZ = 200
-			ySpeed = 0
-			world << sound("sound/busdrop[rand(1,3)].ogg")
-			spawn(20)
-				dropped += 1
+	INPLANE = 1
+	src << "Press space to jump into the map! You will be forced off automatically if you don't."
 	return
