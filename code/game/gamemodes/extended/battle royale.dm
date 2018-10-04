@@ -69,9 +69,20 @@ var/dropped = 0
 /area/var/storm = 0
 /area/forest/storm = 1
 
+/mob/var/used_to_be_in_storm = 0
+
 /mob/proc/ProcessBattleRoyale()
 	if(STORM)
-		world << "[get_dist_alt(src,STORM)]"
+		if(get_dist_alt(src,STORM) > STORM.size/2)
+			if(!used_to_be_in_storm)
+				used_to_be_in_storm = 1
+				src << 'stormenter.ogg'
+			if(frm_counter % 15 == 1)
+				TakeBruteDamage(5)
+		else
+			if(used_to_be_in_storm)
+				used_to_be_in_storm = 0
+
 turf
 	proc
 		init_storm()
@@ -90,9 +101,33 @@ obj/storm_overlay
 	mouse_opacity = 0
 	pixel_x = -512+16
 	pixel_y = -512+16
+	var/size = 128
+	var/timer_left = 60
+	var/decrementing = 0
 	ex_act()
 		return
 	layer = LIGHT_LAYER + 1
+	proc/updatestormsize()
+		var/matrix/M = matrix()
+		M.Scale(size/32,size/32)
+		transform = M
+	special_process()
+		timer_left -= world.tick_lag/10
+		updatestormsize()
+		if(timer_left < 0 && !decrementing)
+			world << 'storm.ogg'
+			decrementing = 1
+		if(decrementing)
+			size -= world.tick_lag/10
+			if(timer_left < -32)
+				decrementing = 0
+				timer_left = 60
+	New()
+		..()
+		special_processing += src
+	Del()
+		special_processing -= src
+		..()
 
 var/obj/plane_thing/BATTLE_ROYALE_PLANE = null
 /obj/plane_thing
@@ -127,8 +162,6 @@ var/obj/plane_thing/BATTLE_ROYALE_PLANE = null
 /mob/living/carbon/human/proc/Spawn_Fortain(rank, joined_late)
 	src.equip_if_possible(new /obj/item/clothing/under/lightblue(src), slot_w_uniform)
 	src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
-
-	src << 'storm.ogg'
 
 	src.loc = locate(202,202,1)
 	if (client && BATTLE_ROYALE_PLANE)
