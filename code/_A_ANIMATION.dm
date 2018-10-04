@@ -306,8 +306,8 @@ obj
 		proc/Reset_Limbs()
 			for(var/obj/limb_dance/g in list(Limb1,Limb2,Limb3,Limb4,Limb5,Limb6))
 				animate(g,transform = owner.transform, time = 5)
-			if(owner.MyShadow)
-				animate(owner.MyShadow,transform = owner.transform, time = 2.5)
+			/*if(owner.MyShadow)
+				animate(owner.MyShadow,transform = owner.transform, time = 2.5)*/
 			sleep(5)
 		proc/SplitIcon()
 			PlayerIcon = new('Sprited Animations.dmi',"Blank Dir 2 Template",2)
