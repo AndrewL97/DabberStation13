@@ -89,6 +89,7 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 	if(mode.do_default_processing)
 		spawn master_controller.start_processing()
 	else
+		lighting_inited = 0 //trick to make it not process stuff
 		spawn master_controller.fast_process()
 
 /datum/controller/gameticker
