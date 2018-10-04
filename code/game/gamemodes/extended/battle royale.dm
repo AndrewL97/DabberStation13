@@ -73,33 +73,34 @@ var/dropped = 0
 /mob/var/INPLANE = 1
 
 /mob/proc/ProcessBattleRoyale()
-	if(INPLANE)
-		if (client && BATTLE_ROYALE_PLANE)
-			//var/yG = 203
-			spawn()
-				if(BATTLE_ROYALE_PLANE.forced_drop == 0 && client && client.j == 0)
-					loc = locate(BATTLE_ROYALE_PLANE.x,BATTLE_ROYALE_PLANE.y+2,BATTLE_ROYALE_PLANE.z)
-					glide_size = BATTLE_ROYALE_PLANE.glide_size
-					heightZ = BATTLE_ROYALE_PLANE.pixel_z
-					ySpeed = 0
-				else
-					loc = BATTLE_ROYALE_PLANE.loc
-					heightZ = BATTLE_ROYALE_PLANE.pixel_z
-					ySpeed = 0
-					INPLANE = 0
-					world << sound("sound/busdrop[rand(1,3)].ogg")
-					spawn(20)
-						dropped += 1
-	if(STORM)
-		if(get_dist_alt(src,STORM) > STORM.size/2)
-			if(!used_to_be_in_storm)
-				used_to_be_in_storm = 1
-				src << 'stormenter.ogg'
-			if(frm_counter % 60 == 1)
-				TakeBruteDamage(2)
-		else
-			if(used_to_be_in_storm)
-				used_to_be_in_storm = 0
+	if(istype(src,/mob/living/carbon))
+		if(INPLANE)
+			if (client && BATTLE_ROYALE_PLANE)
+				//var/yG = 203
+				spawn()
+					if(BATTLE_ROYALE_PLANE.forced_drop == 0 && client && client.j == 0)
+						loc = locate(BATTLE_ROYALE_PLANE.x,BATTLE_ROYALE_PLANE.y+2,BATTLE_ROYALE_PLANE.z)
+						glide_size = BATTLE_ROYALE_PLANE.glide_size
+						heightZ = BATTLE_ROYALE_PLANE.pixel_z
+						ySpeed = 0
+					else
+						loc = BATTLE_ROYALE_PLANE.loc
+						heightZ = BATTLE_ROYALE_PLANE.pixel_z
+						ySpeed = 0
+						INPLANE = 0
+						world << sound("sound/busdrop[rand(1,3)].ogg")
+						spawn(20)
+							dropped += 1
+		if(STORM)
+			if(get_dist_alt(src,STORM) > STORM.size/2)
+				if(!used_to_be_in_storm)
+					used_to_be_in_storm = 1
+					src << 'stormenter.ogg'
+				if(frm_counter % 60 == 1)
+					TakeBruteDamage(2)
+			else
+				if(used_to_be_in_storm)
+					used_to_be_in_storm = 0
 
 turf
 	proc
@@ -109,7 +110,7 @@ turf
 				shading.icon_state = "storm" //easy to handle
 
 var/obj/storm_overlay/STORM = null
-#define TIMER_TOTAL 2
+#define TIMER_TOTAL 90
 #define STORMSPEEDMULTIPLIER 0.25
 #define STORMMOVESPEED 16
 #define STORMMOVESFORSECS 10
@@ -125,7 +126,7 @@ obj/storm_overlay
 	pixel_x = -2048+16
 	pixel_y = -2048+16
 	var/size = 128
-	var/timer_left = TIMER_TOTAL*2
+	var/timer_left = TIMER_TOTAL
 	var/decrementing = 0
 	ex_act()
 		return
