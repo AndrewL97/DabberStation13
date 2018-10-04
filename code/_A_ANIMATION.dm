@@ -268,12 +268,13 @@ obj
 			if(owner)
 				owner.alpha = 0
 				SplitIcon()
+			var/matrix/Reset = matrix()
 			if(owner.MyShadow)
 				owner.MyShadow.overlays = null
 				owner.MyShadow.icon = null
 				owner.MyShadow.underlays = null
 				owner.MyShadow.vis_contents = null
-			var/matrix/Reset = matrix()
+				animate(owner.MyShadow,transform = Reset, time = 2.5)
 			for(var/obj/limb_dance/A in list(Limb1,Limb2,Limb3,Limb4,Limb5,Limb6))
 				A.plane = owner.plane
 				A.layer = owner.layer //g
@@ -305,6 +306,8 @@ obj
 		proc/Reset_Limbs()
 			for(var/obj/limb_dance/g in list(Limb1,Limb2,Limb3,Limb4,Limb5,Limb6))
 				animate(g,transform = owner.transform, time = 5)
+			if(owner.MyShadow)
+				animate(owner.MyShadow,transform = owner.transform, time = 2.5)
 			sleep(5)
 		proc/SplitIcon()
 			PlayerIcon = new('Sprited Animations.dmi',"Blank Dir 2 Template",2)

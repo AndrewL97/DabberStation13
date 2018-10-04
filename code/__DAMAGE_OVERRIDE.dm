@@ -71,9 +71,9 @@
 				MAT.Turn(90)
 				MAT.Translate(0,-10)
 			if(updatematrix)
-				animate(src, transform = MAT, time = 1)
+				animate(src, transform = MAT, time = 5,easing = SINE_EASING | EASE_OUT)
 				if(MyShadow)
-					animate(MyShadow, transform = MAT, time = 1)
+					animate(MyShadow, transform = MAT, time = 5,easing = SINE_EASING | EASE_OUT)
 
 			/*
 
