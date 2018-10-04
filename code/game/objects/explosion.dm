@@ -4,8 +4,11 @@ proc/explosion(atom/epicenter, devastation_range, heavy_impact_range, light_impa
 	spawn()
 		if(!istype(epicenter,/turf))
 			var/turf/T = epicenter.loc
-			if(T)
+			if(istype(T,/turf))
 				epicenter = T //makes the epicenter a turf
+		var/area/AREAEX = epicenter.loc
+		if(!istype(AREAEX,/area) || !epicenter)
+			return //Why are we blowing up a different object?
 		message_admins("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z])")
 		defer_powernet_rebuild = 1
 		if(cap ==1)
@@ -27,6 +30,15 @@ proc/explosion(atom/epicenter, devastation_range, heavy_impact_range, light_impa
 				E.DoShit()
 		for(var/client/i in clients)
 			if(i.mob)
+				spawn()
+					if(AREAEX.HARM_MOBS)
+						var/distance = round(abs(get_dist_alt(epicenter, i.mob)))
+						if(distance < devastation_range)
+							i.mob.ex_act(1)
+						else if(distance < heavy_impact_range)
+							i.mob.ex_act(2)
+						else if(distance < light_impact_range)
+							i.mob.ex_act(3)
 				var/dist = round(abs(get_dist_alt(epicenter, i.mob)))
 				shake_camera(i.mob, 1, 15/((dist/10)+1)) //shakes the screen rly hard
 		for(var/atom/T in range(light_impact_range, epicenter)) // fun fact these explosions are faster than tg LOL
@@ -47,18 +59,6 @@ proc/explosion(atom/epicenter, devastation_range, heavy_impact_range, light_impa
 						else if(distance < light_impact_range)
 							T.ex_act(3)
 							//Check_Explosion_tick()
-					else
-						if(ismob(T))
-							if(A.HARM_MOBS)
-								if(distance < devastation_range)
-									T.ex_act(1)
-									//Check_Explosion_tick()
-								else if(distance < heavy_impact_range)
-									T.ex_act(2)
-									//Check_Explosion_tick()
-								else if(distance < light_impact_range)
-									T.ex_act(3)
-									//Check_Explosion_tick()
 
 		makepowernets()
 		defer_powernet_rebuild = 0
