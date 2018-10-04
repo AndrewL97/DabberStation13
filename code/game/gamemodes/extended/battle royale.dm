@@ -64,9 +64,29 @@ var/dropped = 0
 	icon = 'screen1.dmi'
 	icon_state = "x2"
 	mouse_opacity = 0
-	New()
-		..()
-		alpha = 0
+
+/area/forest
+	plane = SHADING_PLANE
+	layer = LIGHT_LAYER
+
+/area/forest/New()
+
+	src.icon = 'storm.dmi'
+	icon_state = "storm"
+	alpha = 255
+
+	spawn(1)
+		master = src
+		related = list(src)
+		requires_power = 0
+		power_light = 1
+		power_equip = 1
+		power_environ = 1
+		luminosity = 1
+		sd_lighting = 0
+	spawn(15)
+		src.power_change()		// all machines set to current power level, also updates lighting icon
+
 var/obj/plane_thing/BATTLE_ROYALE_PLANE = null
 /obj/plane_thing
 	//for battle royale
