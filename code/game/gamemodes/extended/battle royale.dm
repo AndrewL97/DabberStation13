@@ -90,6 +90,10 @@ turf
 				shading.icon_state = "storm" //easy to handle
 
 var/obj/storm_overlay/STORM = null
+#define TIMER_TOTAL 2
+#define STORMSPEEDMULTIPLIER 0.01
+#define STORMMOVESPEED 16
+#define STORMMOVESFORSECS 10
 obj/storm_overlay
 	anchored = 1
 	plane = SHADING_PLANE
@@ -102,7 +106,7 @@ obj/storm_overlay
 	pixel_x = -2048+16
 	pixel_y = -2048+16
 	var/size = 128
-	var/timer_left = 5
+	var/timer_left = TIMER_TOTAL*2
 	var/decrementing = 0
 	ex_act()
 		return
@@ -111,22 +115,22 @@ obj/storm_overlay
 		var/matrix/M = matrix()
 		M.Scale(max(0,size/128))
 		transform = M
-		glide_size = 32 / 4 * tick_lag_original
+		glide_size = 32 / STORMMOVESPEED * tick_lag_original
 	special_process()
-		timer_left -= world.tick_lag/10
+		timer_left -= world.tick_lag*STORMSPEEDMULTIPLIER
 		updatestormsize()
 		if(timer_left < 0 && !decrementing)
 			world << 'storm.ogg'
-			walk_towards(src,locate(rand(202,299),rand(202,299),1),4,0)
+			walk_towards(src,locate(rand(202,299),rand(202,299),1),STORMMOVESPEED,0)
 			decrementing = 1
 		if(decrementing)
 			size -= world.tick_lag/2
 			if(size < 16)
 				size = 16
-			if(timer_left < -5)
+			if(timer_left < -STORMMOVESFORSECS)
 				walk(src,0)
 				decrementing = 0
-				timer_left = 2
+				timer_left = TIMER_TOTAL
 	New()
 		..()
 		special_processing += src
@@ -174,10 +178,8 @@ var/obj/plane_thing/BATTLE_ROYALE_PLANE = null
 		//var/yG = 203
 		spawn()
 			while(BATTLE_ROYALE_PLANE.forced_drop == 0 && client && client.j == 0)
-				client.eye = BATTLE_ROYALE_PLANE
+				loc = locate(BATTLE_ROYALE_PLANE.x,BATTLE_ROYALE_PLANE.y+2,BATTLE_ROYALE_PLANE.z)
 				sleep(world.tick_lag)
-			if(client)
-				client.eye = src
 			loc = BATTLE_ROYALE_PLANE.loc
 			heightZ = 200
 			ySpeed = 0
