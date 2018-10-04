@@ -80,6 +80,7 @@ var/dropped = 0
 					loc = locate(BATTLE_ROYALE_PLANE.x,BATTLE_ROYALE_PLANE.y+2,BATTLE_ROYALE_PLANE.z)
 					glide_size = BATTLE_ROYALE_PLANE.glide_size
 					heightZ = BATTLE_ROYALE_PLANE.pixel_z
+					ySpeed = 0
 				else
 					loc = BATTLE_ROYALE_PLANE.loc
 					heightZ = BATTLE_ROYALE_PLANE.pixel_z
