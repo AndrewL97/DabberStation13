@@ -387,6 +387,9 @@ client/proc/ProcessClient()
 						src << sound(null,channel=SOUND_CHANNEL_1+2)
 						amb_sound_area.file = A.song
 				dec_volume(A.song != null)
+		if(ticker)
+			if(istype(ticker.mode,/datum/game_mode/battle_royale))
+				mob.ProcessBattleRoyale()
 		if(music_pitch < music_pitch_new)
 			music_pitch += 0.0025
 			if(music_pitch > music_pitch_new)

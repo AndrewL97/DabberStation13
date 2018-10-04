@@ -13,7 +13,7 @@
 	//244,202
 	new /turf/unsimulated/wall(locate(249,295,1))
 	sandbox = -1
-	BATTLE_ROYALE_PLANE = new(locate(242,203,1))
+	BATTLE_ROYALE_PLANE = new(locate(202+49,203,1))
 	STORM = new(locate(202+49,202+49,1))
 	var/list/objects = list(
 	/obj/item/weapon/gun/pistol,
@@ -69,6 +69,9 @@ var/dropped = 0
 /area/var/storm = 0
 /area/forest/storm = 1
 
+/mob/proc/ProcessBattleRoyale()
+	if(STORM)
+		world << "[get_dist_alt(src,STORM)]"
 turf
 	proc
 		init_storm()
