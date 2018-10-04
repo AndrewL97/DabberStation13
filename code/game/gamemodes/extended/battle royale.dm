@@ -3,7 +3,7 @@
 	config_tag = "fortnite"
 	events_enabled = 0
 	do_kick = 1
-	do_default_processing = 1
+	do_default_processing = 0
 
 /datum/game_mode/battle_royale/pre_setup()
 	..()
