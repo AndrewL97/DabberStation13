@@ -301,6 +301,7 @@ obj
 				owner.alpha = 255
 			if(owner.MyShadow)
 				owner.MyShadow.vis_contents = null
+				owner.MyShadow.transform = owner.transform
 			owner:update_clothing() //update their stuff
 			del src
 		proc/Reset_Limbs()

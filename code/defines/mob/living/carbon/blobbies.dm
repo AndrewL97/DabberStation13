@@ -1,3 +1,8 @@
+/image/slime_face
+	icon = 'blobbies.dmi'
+	icon_state = "aslime-:)"
+	appearance_flags = RESET_COLOR
+
 /mob/living/carbon/blobby
 	name = "blobby"
 	voice_name = "blobby"
@@ -12,7 +17,7 @@
 	gender = NEUTER
 	New()
 		..()
-		src.overlays += image("icon" = 'blobbies.dmi', "icon_state" = "aslime-:)")
+		src.overlays += new /image/slime_face
 	Life()
 		if(onFloor && world.time > j_delay)
 			ySpeed = rand(600,800)/256

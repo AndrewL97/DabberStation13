@@ -117,8 +117,8 @@ mob
 			HeightMobs -= src
 		if(src in Mobs)
 			Mobs -= src
-		del MyShadow
-		MyShadow = null //Make sure to delete shadow.
+		if(MyShadow)
+			del MyShadow
 		..()
 
 	#if defined(GRAVDEBUG)
@@ -162,6 +162,9 @@ mob
 	proc/ProcessHeight()
 		if(!MyShadow)
 			MyShadow = new
+			MyShadow.icon = icon
+			MyShadow.overlays = overlays
+			MyShadow.underlays = underlays
 		Get_Layer_Y((src.resting || src.lying/-10)) //People laying down are below you.
 
 		onFloor = 0
