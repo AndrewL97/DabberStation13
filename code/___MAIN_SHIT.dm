@@ -119,7 +119,6 @@ obj
 			if(frm_counter % 15 == 1) // A full sec
 				if(light)
 					light.color = rgb(rand(180,255),rand(180,255),rand(180,255))
-				cycle = 0
 			else
 				sd_SetLuminosity(10)
 				if(light)
