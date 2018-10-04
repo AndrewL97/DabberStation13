@@ -108,7 +108,7 @@ obj/storm_overlay
 	layer = LIGHT_LAYER + 1
 	proc/updatestormsize()
 		var/matrix/M = matrix()
-		M.Scale(size/32,size/32)
+		M.Scale(size/128,size/128)
 		transform = M
 	special_process()
 		timer_left -= world.tick_lag/10
