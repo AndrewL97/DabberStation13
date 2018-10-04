@@ -86,7 +86,10 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 			start_events()
 		spawn ((18000+rand(3000)))
 			event()
-	spawn master_controller.start_processing()
+	if(mode.do_default_processing)
+		spawn master_controller.start_processing()
+	else
+		spawn master_controller.fast_process()
 
 /datum/controller/gameticker
 

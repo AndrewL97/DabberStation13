@@ -4,6 +4,7 @@
 	var/votable = 1
 	var/do_kick = 0
 	var/probability = 1
+	var/do_default_processing = 1
 	// this includes admin-appointed traitors and multitraitors. Easy!
 	var/list/datum/mind/traitors = list()
 

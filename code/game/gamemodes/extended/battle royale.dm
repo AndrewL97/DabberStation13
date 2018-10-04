@@ -3,6 +3,7 @@
 	config_tag = "fortnite"
 	events_enabled = 0
 	do_kick = 1
+	do_default_processing = 1
 
 /datum/game_mode/battle_royale/pre_setup()
 	..()
@@ -109,7 +110,7 @@ turf
 
 var/obj/storm_overlay/STORM = null
 #define TIMER_TOTAL 2
-#define STORMSPEEDMULTIPLIER 0.01
+#define STORMSPEEDMULTIPLIER 0.25
 #define STORMMOVESPEED 16
 #define STORMMOVESFORSECS 10
 obj/storm_overlay
@@ -135,14 +136,14 @@ obj/storm_overlay
 		transform = M
 		glide_size = 32 / STORMMOVESPEED * tick_lag_original
 	special_process()
-		timer_left -= world.tick_lag*STORMSPEEDMULTIPLIER
+		timer_left -= world.tick_lag/10
 		updatestormsize()
 		if(timer_left < 0 && !decrementing)
 			world << 'storm.ogg'
 			walk_towards(src,locate(rand(202,299),rand(202,299),1),STORMMOVESPEED,0)
 			decrementing = 1
 		if(decrementing)
-			size -= world.tick_lag/2
+			size -= world.tick_lag*STORMSPEEDMULTIPLIER
 			if(size < 16)
 				size = 16
 			if(timer_left < -STORMMOVESFORSECS)
