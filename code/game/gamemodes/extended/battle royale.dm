@@ -12,9 +12,8 @@
 	world << "<B>The current game mode is - Dab13 Battle Royale</B>"
 	world << "<B>Get ready to fight!</B>"
 	//244,202
-	new /turf/unsimulated/wall(locate(249,295,1))
 	sandbox = -1
-	BATTLE_ROYALE_PLANE = new(locate(202+49,203,1))
+	BATTLE_ROYALE_PLANE = new(locate(202+49,207,1))
 	STORM = new(locate(202+49,202+49,1))
 	var/list/objects = list(
 	/obj/item/weapon/gun/pistol,
@@ -65,6 +64,9 @@ var/dropped = 0
 	icon = 'screen1.dmi'
 	icon_state = "x2"
 	mouse_opacity = 0
+	New()
+		..()
+		alpha = 0
 
 /area/var/storm = 0
 /area/forest/storm = 1
