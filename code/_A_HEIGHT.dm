@@ -163,6 +163,7 @@ mob
 		if(!MyShadow)
 			MyShadow = new
 			MyShadow.icon = icon
+			MyShadow.icon_state = icon_state
 			MyShadow.overlays = overlays
 			MyShadow.underlays = underlays
 		Get_Layer_Y((src.resting || src.lying/-10)) //People laying down are below you.
