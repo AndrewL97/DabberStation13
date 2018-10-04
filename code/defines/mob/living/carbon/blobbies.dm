@@ -7,7 +7,7 @@
 	name = "blobby"
 	voice_name = "blobby"
 	icon = 'blobbies.dmi'
-	desc = "Looks slimy."
+	desc = "Ranchero De Slimes!"
 	icon_state = "grey baby slime"
 	pixel_y = -4
 	color = "#DD4569"
@@ -19,6 +19,8 @@
 		..()
 		src.overlays += new /image/slime_face
 	Life()
+		if(MyShadow)
+			MyShadow.pixel_y = pixel_y
 		if(onFloor && world.time > j_delay)
 			ySpeed = rand(600,800)/256
 			playsound(src, pick('bounce1.wav','bounce2.wav','bounce3.wav','bounce4.wav'), 100, 0, 4, (rand()-0.5)/10)
