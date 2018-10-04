@@ -46,10 +46,9 @@
 			if(!istype(i.mob,/mob/dead))
 				if(i.mob.health > 0)
 					lastplr = i
-		if(plrs <= 1)
+		if(plrs <= 0)
 			if(lastplr)
 				world << "<b><font size=6><font color='#00FFFF'>[lastplr.key] won!"
-				sleep(10)
 				world << 'victory.ogg'
 				world.fps = 6 //slow mo effect
 				sleep(22)
@@ -77,8 +76,8 @@ var/dropped = 0
 			if(!used_to_be_in_storm)
 				used_to_be_in_storm = 1
 				src << 'stormenter.ogg'
-			if(frm_counter % 15 == 1)
-				TakeBruteDamage(5)
+			if(frm_counter % 60 == 1)
+				TakeBruteDamage(2)
 		else
 			if(used_to_be_in_storm)
 				used_to_be_in_storm = 0
@@ -95,14 +94,14 @@ obj/storm_overlay
 	anchored = 1
 	plane = SHADING_PLANE
 	blend_mode = BLEND_ADD
-	appearance_flags = RESET_COLOR
+	appearance_flags = RESET_COLOR | PIXEL_SCALE
 	icon = 'bigcircle.dmi'
 	icon_state = "circle"
 	mouse_opacity = 0
-	pixel_x = -512+16
-	pixel_y = -512+16
+	pixel_x = -2048+16
+	pixel_y = -2048+16
 	var/size = 128
-	var/timer_left = 60
+	var/timer_left = 5
 	var/decrementing = 0
 	ex_act()
 		return
