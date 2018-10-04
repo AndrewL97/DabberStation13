@@ -14,6 +14,7 @@
 	new /turf/unsimulated/wall(locate(249,295,1))
 	sandbox = -1
 	BATTLE_ROYALE_PLANE = new(locate(242,203,1))
+	STORM = new(locate(202+49,202+49,1))
 	var/list/objects = list(
 	/obj/item/weapon/gun/pistol,
 	/obj/item/weapon/gun/machine_gun,
@@ -65,27 +66,30 @@ var/dropped = 0
 	icon_state = "x2"
 	mouse_opacity = 0
 
-/area/forest
+/area/var/storm = 0
+/area/forest/storm = 1
+
+turf
+	proc
+		init_storm()
+			if(!shading)
+				shading = new(locate(x,y,z))
+				shading.icon_state = "storm" //easy to handle
+
+var/obj/storm_overlay/STORM = null
+obj/storm_overlay
+	anchored = 1
 	plane = SHADING_PLANE
-	layer = LIGHT_LAYER
-
-/area/forest/New()
-
-	src.icon = 'storm.dmi'
-	icon_state = "storm"
-	alpha = 255
-
-	spawn(1)
-		master = src
-		related = list(src)
-		requires_power = 0
-		power_light = 1
-		power_equip = 1
-		power_environ = 1
-		luminosity = 1
-		sd_lighting = 0
-	spawn(15)
-		src.power_change()		// all machines set to current power level, also updates lighting icon
+	blend_mode = BLEND_ADD
+	appearance_flags = RESET_COLOR
+	icon = 'bigcircle.dmi'
+	icon_state = "circle"
+	mouse_opacity = 0
+	pixel_x = -32
+	pixel_y = -32
+	ex_act()
+		return
+	layer = LIGHT_LAYER + 1
 
 var/obj/plane_thing/BATTLE_ROYALE_PLANE = null
 /obj/plane_thing

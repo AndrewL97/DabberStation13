@@ -29,16 +29,19 @@ Lighting
 						var/turf/t = locate(x, y, z)
 						var/area/a = t.loc
 						if(a)
-							if(a.forced_lighting == 1)
-								if(a.sd_lighting == 1)
-									// create the shading object for this tile
-									t.init_light(1)
-								else
-									if(!istype(t,/turf/space))
+							if(a.storm)
+								t.init_storm(1)
+							else
+								if(a.forced_lighting == 1)
+									if(a.sd_lighting == 1)
 										// create the shading object for this tile
 										t.init_light(1)
 									else
-										t.init_space(1)
+										if(!istype(t,/turf/space))
+											// create the shading object for this tile
+											t.init_light(1)
+										else
+											t.init_space(1)
 
 /turf/space/New()
 	alpha = 0
