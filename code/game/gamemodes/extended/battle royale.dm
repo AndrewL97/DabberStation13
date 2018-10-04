@@ -88,8 +88,8 @@ obj/storm_overlay
 	icon = 'bigcircle.dmi'
 	icon_state = "circle"
 	mouse_opacity = 0
-	pixel_x = -32
-	pixel_y = -32
+	pixel_x = -512+16
+	pixel_y = -512+16
 	ex_act()
 		return
 	layer = LIGHT_LAYER + 1
