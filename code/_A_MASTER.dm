@@ -201,9 +201,14 @@ datum/controller/game_controller
 			lighting.loop()
 		particle_process()
 		do_gravity_loop()
+		plrs = 0
 		for(var/client/i in clients)
 			i.InactivityLoop()
 			i.ProcessClient()
+			if(!istype(i.mob,/mob/dead))
+				if(i.mob.health > 0)
+					plrs = plrs + 1
+					lastplr = i
 		CPU_CHECK()
 		spawn(tick_lag_original)
 			fast_process()
@@ -220,11 +225,6 @@ datum/controller/game_controller
 			CHECK_TICK_ATMOS() //first time this is used on a non atmos thing
 			network.process()
 
-		plrs = 0
-		for(var/client/i in clients)
-			if(!istype(i.mob,/mob/dead))
-				if(i.mob.health > 0)
-					plrs = plrs + 1
 
 		sun.calc_position()
 		world.update_status()

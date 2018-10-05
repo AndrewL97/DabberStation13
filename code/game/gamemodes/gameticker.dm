@@ -32,6 +32,8 @@ var/gamemodes_list=list(
 /datum/game_mode/battle_royale
 )
 /datum/controller/gameticker/proc/setup()
+	if(!(world.port in PORTS_NOT_ALLOWED))
+		sleep(100)
 	var/randgame=text2path(file2text("config/gamemode.txt"))
 	if(!(world.port in PORTS_NOT_ALLOWED))
 		if(randgame)

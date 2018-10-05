@@ -1,1 +1,1 @@
-/datum/game_mode/battle_royale
+/datum/game_mode/normal

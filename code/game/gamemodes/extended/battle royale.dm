@@ -35,25 +35,19 @@
 			else
 				new A(G.loc)
 
-
+var/client/lastplr = null
 /datum/game_mode/battle_royale/ending()
 	..()
 
 /datum/game_mode/battle_royale/check_finished()
-	if(dropped > 0)
-		var/client/lastplr = null
-		for(var/client/i in clients)
-			if(!istype(i.mob,/mob/dead))
-				if(i.mob.health > 0)
-					lastplr = i
-		if(plrs <= 1)
-			if(lastplr)
-				world << "<b><font size=6><font color='#00FFFF'>[lastplr.key] won!"
-				world << 'victory.ogg'
-				world.fps = 6 //slow mo effect
-				sleep(22)
-				world.fps = 60
-				return 1
+	if(plrs <= 1)
+		if(lastplr)
+			world << "<b><font size=6><font color='#00FFFF'>[lastplr.key] won!"
+		world << 'victory.ogg'
+		world.fps = 6 //slow mo effect
+		sleep(22)
+		world.fps = 60
+		return 1
 	return 0
 
 var/dropped = 0
@@ -115,7 +109,7 @@ var/obj/storm_overlay/STORM = null
 #define TIMER_TOTAL 90
 #define STORMSPEEDMULTIPLIER 0.25
 #define STORMMOVESPEED 16
-#define STORMMOVESFORSECS 10
+#define STORMMOVESFORSECS 25
 obj/storm_overlay
 	anchored = 1
 	plane = SHADING_PLANE
