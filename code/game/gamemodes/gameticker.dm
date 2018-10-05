@@ -38,6 +38,7 @@ var/gamemodes_list=list(
 		for(var/i in 0 to 10)
 			world << "<font color='#00FFFF'>Game starting in <b>[10-i] secs</b>"
 			sleep(10)
+
 	if(admin_clients.len > 0)
 		world << "\red <B>Admins are currently connected. They will pick the gamemode."
 		for(var/client/i in admin_clients)
@@ -45,14 +46,15 @@ var/gamemodes_list=list(
 		while(gamemode_chosen == null)
 			sleep(1)
 	else
+		world << "\red <B>Loading gamemode from config file."
 		gamemode_chosen=text2path(replacetext("[file2text("config/gamemode.txt")]","\n",""))
-	if(!(world.port in PORTS_NOT_ALLOWED))
-		if(gamemode_chosen)
-			world << "<b>Loaded gamemode [gamemode_chosen]"
-		else
-			world << "\red <B>Error loading gamemode. Please set with administrator. Starting setup again."
-			spawn setup()
-			return
+
+	if(gamemode_chosen)
+		world << "<b>Loaded gamemode [gamemode_chosen]"
+	else
+		world << "\red <B>Error loading gamemode. Please set with administrator. Starting setup again."
+		spawn setup()
+		return
 
 	src.mode = new gamemode_chosen
 	src.mode.announce()
