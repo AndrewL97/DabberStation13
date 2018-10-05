@@ -26,6 +26,7 @@ var/list/admin_verbs = list(
 /client/proc/Gamemode
 )
 var/ban_list = list()
+var/admin_clients = list()
 
 /client
 	var/obj/admins/holder = null //This is a Holder.
@@ -43,6 +44,7 @@ var/ban_list = list()
 
 /client/proc/update_admins(var/rank)
 	src << "<b>\green You are a [rank]!"
+	admin_clients += src
 	if(!src.holder)
 		src.holder = new /obj/admins(src)
 
@@ -69,15 +71,22 @@ client
 		set name = "(ADMIN) Reboot Game"
 		message_admins("Restarting game, started by [key]")
 		world.Reboot()
-	proc/Gamemode(ass as null|anything in gamemodes_list)
+	proc/Gamemode()
 		set category = "Admin"
 		set name = "(ADMIN) Change Gamemode"
+		if(!ticker)
+			src << "\red <B>Game ticker does not exist."
+			return
+		var/ass = input("What gamemode?","Choose Gamemode") as null|anything in gamemodes_list
 		if(ass)
-			fdel("config/gamemode.txt")
-			sleep(1)
-			text2file("[ass]","config/gamemode.txt")
-			message_admins("[key] changed the gamemode.")
-			world << "<font color=#00FFFF><b>Next round the gamemode will be [ass]."
+			if(ticker.gamemode_chosen)
+				fdel("config/gamemode.txt")
+				text2file("[ass]","config/gamemode.txt")
+				message_admins("[key] changed the next round gamemode to [ass] (ignored if admins online)")
+				world << "<font color=#00FFFF><b>Next round the gamemode will be [ass]."
+			else
+				message_admins("[key] picked gamemode [ass]")
+				ticker.gamemode_chosen = ass
 	proc/Toggle_MC_Throttling()
 		set category = "Admin"
 		set name = "(ADMIN) Toggle MC throttling"

@@ -31,6 +31,8 @@ client
 		clients += src
 	Del()
 		clients -= src
+		if(src in admin_clients)
+			admin_clients -= src
 		..()
 
 

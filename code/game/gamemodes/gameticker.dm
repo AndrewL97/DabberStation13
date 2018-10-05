@@ -17,6 +17,7 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 
 	var/pregame_timeleft = 0
 	var/votes = 0
+	var/gamemode_chosen = null
 
 /datum/controller/gameticker/proc/pregame()
 	current_state = GAME_STATE_SETTING_UP
@@ -24,6 +25,7 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 
 /datum/game_mode
 	var/events_enabled = 0
+
 
 /datum/game_mode/proc/ending()
 	return
@@ -36,24 +38,23 @@ var/gamemodes_list=list(
 		for(var/i in 0 to 10)
 			world << "<font color='#00FFFF'>Game starting in <b>[10-i] secs</b>"
 			sleep(10)
-	var/randgame=text2path(replacetext("[file2text("config/gamemode.txt")]","\n",""))
+	if(admin_clients.len > 0)
+		world << "\red <B>Admins are currently connected. They will pick the gamemode."
+		for(var/client/i in admin_clients)
+			i.Gamemode()
+		while(gamemode_chosen == null)
+			sleep(1)
+	else
+		gamemode_chosen=text2path(replacetext("[file2text("config/gamemode.txt")]","\n",""))
 	if(!(world.port in PORTS_NOT_ALLOWED))
-		if(randgame)
-			world << "<b>Loaded gamemode [randgame]"
+		if(gamemode_chosen)
+			world << "<b>Loaded gamemode [gamemode_chosen]"
 		else
 			world << "\red <B>Error loading gamemode. Please set with administrator. Starting setup again."
 			spawn setup()
 			return
 
-	if((world.port in PORTS_NOT_ALLOWED) && clients.len == 1)
-		var/newmode = input(clients[1],"What gamemode?","Local Test") as null|anything in gamemodes_list
-		if(newmode)
-			src.mode = new newmode
-		else
-			var/gam = pick(gamemodes_list)
-			src.mode = new gam
-	else
-		src.mode = new randgame
+	src.mode = new gamemode_chosen
 	src.mode.announce()
 	var/can_continue = src.mode.pre_setup()
 

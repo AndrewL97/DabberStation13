@@ -42,7 +42,7 @@ h1, h2, h3, h4, h5, h6
 .admin
 {
 	font-weight: bold;
-	color: #386aff;
+	color: #00FFFF;
 }
 
 .gfartooc
