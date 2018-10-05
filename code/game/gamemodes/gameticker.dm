@@ -33,13 +33,15 @@ var/gamemodes_list=list(
 )
 /datum/controller/gameticker/proc/setup()
 	if(!(world.port in PORTS_NOT_ALLOWED))
-		sleep(100)
-	var/randgame=text2path(file2text("config/gamemode.txt"))
+		for(var/i in 0 to 10)
+			world << "<font color='#00FFFF'>Game starting in <b>[10-i] secs</b>"
+	var/randgame=text2path(replacetext("[file2text("config/gamemode.txt")]","\n",""))
 	if(!(world.port in PORTS_NOT_ALLOWED))
 		if(randgame)
 			world << "<b>Loaded gamemode [randgame]"
 		else
-			world << "\red <B>Error loading gamemode. Please set with administrator and reboot."
+			world << "\red <B>Error loading gamemode. Please set with administrator. Starting setup again."
+			spawn setup()
 			return
 
 	if((world.port in PORTS_NOT_ALLOWED) && clients.len == 1)
@@ -73,6 +75,9 @@ var/gamemodes_list=list(
 
 	data_core.manifest()
 
+
+	if(!(world.port in PORTS_NOT_ALLOWED))
+		call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Round on [world.name] started, mode is [mode.name]\" } ", "Content-Type: application/json")
 
 	current_state = GAME_STATE_PLAYING
 	spawn(0)
@@ -118,7 +123,7 @@ var/gamemodes_list=list(
 
 
 	proc/process()
-		if(current_state != GAME_STATE_FINISHED)
+		if(current_state == GAME_STATE_FINISHED)
 			return
 		mode.process()
 
@@ -129,13 +134,14 @@ var/gamemodes_list=list(
 
 			spawn
 				declare_completion()
-
-			spawn(60)
+			if(!(world.port in PORTS_NOT_ALLOWED))
+				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Round on [world.name] ended. Rebooting.\" } ", "Content-Type: application/json")
+			spawn(50)
 				mode.ending()
 				world << sound('titlesong.ogg',channel=LOBBY_CHANNEL,volume=100, repeat = 1)
-				world << "\blue <B>Restarting in 50 seconds</B>"
+				world << "\blue <B>Restarting in 10 seconds</B>"
 
-				sleep(500)
+				sleep(100)
 				world.Reboot()
 
 		return 1
