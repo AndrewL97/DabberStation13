@@ -26,7 +26,7 @@ var/list/admin_verbs = list(
 /client/proc/Gamemode
 )
 var/ban_list = list()
-var/admin_clients = list()
+var/list/admin_clients = list()
 
 /client
 	var/obj/admins/holder = null //This is a Holder.
