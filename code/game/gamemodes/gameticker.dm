@@ -45,7 +45,8 @@ var/gamemodes_list=list(
 		if(newmode)
 			src.mode = new newmode
 		else
-			src.mode = new pick(gamemodes_list)
+			var/gam = pick(gamemodes_list)
+			src.mode = new gam
 	else
 		src.mode = new randgame
 	src.mode.announce()
