@@ -8,15 +8,20 @@ var
 		worldstarttime = world.time
 		worldstarttimeofday = world.timeofday
 	if(statpanel("Status"))
+		if(ticker)
+			if(ticker.status == GAME_STATE_SETTING_UP)
+				stat(null, "Gamemode : [ticker.mode ? ticker.mode.name : "Not Chosen"]")
 		stat("Status",null)
 		if(client)
 			stat(null, "Ping : [client.ping] ms")
 		stat(null, "Server time of day : [time2text(world.timeofday)]")
 		stat(null, "Server CPU : %[world.cpu]")
+		stat(null, "Players Online : [clients.len]/[MAX_PLAYERS]")
 		if(!STORM)
-			stat(null, "Air : %[round(air*2)]")
-			stat(null, "Nutrition : %[max(0,min(100,round(nutrition)))]")
-			stat(null, "Weight : [round(weight,0.125)] KG")
+			if(istype(src,/mob/living))
+				stat(null, "Air : %[round(air*2)]")
+				stat(null, "Nutrition : %[max(0,min(100,round(nutrition)))]")
+				stat(null, "Weight : [round(weight,0.125)] KG")
 		else
 			stat(null, "Storm eye closing in [max(0,round(STORM.timer_left))] secs")
 		//stat(null, "Shield : %[round(shield)]")
