@@ -35,6 +35,7 @@ var/gamemodes_list=list(
 	if(!(world.port in PORTS_NOT_ALLOWED))
 		for(var/i in 0 to 10)
 			world << "<font color='#00FFFF'>Game starting in <b>[10-i] secs</b>"
+			sleep(10)
 	var/randgame=text2path(replacetext("[file2text("config/gamemode.txt")]","\n",""))
 	if(!(world.port in PORTS_NOT_ALLOWED))
 		if(randgame)
@@ -77,7 +78,8 @@ var/gamemodes_list=list(
 
 
 	if(!(world.port in PORTS_NOT_ALLOWED))
-		call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Round on [world.name] started, mode is [mode.name]\" } ", "Content-Type: application/json")
+		spawn()
+			call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Round on [world.name] started, mode is [mode.name]\" } ", "Content-Type: application/json")
 
 	current_state = GAME_STATE_PLAYING
 	spawn(0)
@@ -135,7 +137,8 @@ var/gamemodes_list=list(
 			spawn
 				declare_completion()
 			if(!(world.port in PORTS_NOT_ALLOWED))
-				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Round on [world.name] ended. Rebooting.\" } ", "Content-Type: application/json")
+				spawn()
+					call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Round on [world.name] ended. Rebooting.\" } ", "Content-Type: application/json")
 			spawn(50)
 				mode.ending()
 				world << sound('titlesong.ogg',channel=LOBBY_CHANNEL,volume=100, repeat = 1)
