@@ -30,7 +30,7 @@ proc/atan2(x, y)
 		reload_rate = 15
 		gun_sound = 'shot.ogg'
 		bullet_speed = 15
-		bullet_damage = 2
+		bullet_damage = 20
 		automatic_reload = 1
 	pistol
 		icon_state = "pistol"
@@ -39,7 +39,7 @@ proc/atan2(x, y)
 		ammo_max = 24
 		gun_sound = 'shot2.ogg'
 		bullet_speed = 20
-		bullet_damage = 10
+		bullet_damage = 40
 		sound_range = 25 //alot louder
 	proc/fire(mob/user,xoff,yoff)
 		if(ammo > 0)
@@ -94,7 +94,7 @@ var/list/bullets = list()
 	var/X_SPEED = 0
 	var/Y_SPEED = 0
 	var/mob/owner = null
-	var/damage = 5
+	var/damage = 30
 	var/heightZ = 0
 	var/obj/shadow/MyShadow = null //Shadow. This is handled in master controller.
 	pixel_collision_size_x = 2

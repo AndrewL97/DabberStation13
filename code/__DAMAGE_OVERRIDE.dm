@@ -6,7 +6,7 @@
 
 /mob/proc/TakeBruteDamage(damage)
 	if(istype(src,/mob/living/carbon/human))
-		bruteloss += damage/(1+src:wear_suit ? 1 : 0)
+		bruteloss += damage/(1+(src:wear_suit ? 1 : 0))
 	else
 		bruteloss += damage
 /mob/living/carbon/human
