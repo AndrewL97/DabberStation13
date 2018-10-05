@@ -131,6 +131,7 @@ obj
 							icon_state = "water_pipe"
 							dir = PIPE_DIRS[new_dir]
 			Process_Water()
+				hide()
 				if(water_pressure > 100)
 					damaged = 1
 				if(damaged == 1)
@@ -201,6 +202,15 @@ obj
 		device
 			connector
 				icon_state = "filler"
+				New()
+					..()
+					hide()
+				hide()
+					var/turf/T = locate(x,y,z)
+					if(istype(T,/turf))
+						icon_state = level < T.level ? "filler_hidden" : "filler"
+				Process_Water()
+					hide()
 		tank
 			icon_state = "water_pump_1"
 			desc = "Due to it's technology, it holds infinite water."
@@ -305,7 +315,7 @@ obj
 			if(src in water_changed)
 				water_changed -= src
 /turf/simulated/proc/Process_Water()
-	if(water_cycles % 4 == 1)
+	if(listofconnections.len < 1 || frm_counter % 5 == 1)
 		Get_Connections()
 	for(var/a in listofconnections)
 		if(istype(a,/turf/simulated))
