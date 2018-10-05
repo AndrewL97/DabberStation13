@@ -118,9 +118,8 @@ var/gamemodes_list=list(
 
 
 	proc/process()
-		if(current_state != GAME_STATE_PLAYING)
-			return 0
-
+		if(current_state != GAME_STATE_FINISHED)
+			return
 		mode.process()
 
 		emergency_shuttle.process()
