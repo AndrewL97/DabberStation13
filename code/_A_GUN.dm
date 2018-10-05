@@ -15,7 +15,7 @@ proc/atan2(x, y)
 	var/ammo_max = 0
 	var/fire_rate = 0
 	var/reload_rate = 0
-	var/gun_sound = 'shot.ogg'
+	var/list/gun_sounds = list()
 	var/reload_sound = 'reload.ogg'
 	var/bullet_speed = 0
 	var/bullet_damage = 0
@@ -28,44 +28,35 @@ proc/atan2(x, y)
 		ammo_max = 50
 		fire_rate = 5
 		reload_rate = 15
-		gun_sound = 'shot.ogg'
+		gun_sounds = list('shot.ogg')
 		bullet_speed = 15
-		bullet_damage = 20
+		bullet_damage = 5
 		automatic_reload = 1
 	pistol
 		icon_state = "pistol"
 		automatic = 0
 		ammo = 24
 		ammo_max = 24
-		gun_sound = 'shot2.ogg'
+		gun_sounds = list('shot2.ogg')
 		bullet_speed = 20
-		bullet_damage = 40
+		bullet_damage = 20
 		sound_range = 25 //alot louder
 	proc/fire(mob/user,xoff,yoff)
 		if(ammo > 0)
 			if(automatic == 1)
 				if(frm_counter % fire_rate == 1)
-					ammo -= 1
-					var/obj/projectile/G = new(user.loc)
-					G.heightZ = user.heightZ+16
-					G.pixel_z = G.heightZ
-					var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+32)-((G.y*32)+G.real_pixel_y))
-					G.X_SPEED = cos(angle)*bullet_speed
-					G.Y_SPEED = sin(angle)*bullet_speed
-					G.damage = bullet_damage
-					G.owner = user
-					playsound(user, gun_sound, 100, 1, sound_range, 0)
-			else
-				ammo -= 1
-				var/obj/projectile/G = new(user.loc)
-				G.heightZ = user.heightZ+16
-				G.pixel_z = G.heightZ
-				var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+32)-((G.y*32)+G.real_pixel_y))
-				G.X_SPEED = cos(angle)*bullet_speed
-				G.Y_SPEED = sin(angle)*bullet_speed
-				G.damage = bullet_damage
-				G.owner = user
-				playsound(user, gun_sound, 100, 1, sound_range, 0)
+				else
+					return
+			ammo -= 1
+			var/obj/projectile/G = new(user.loc)
+			G.heightZ = user.heightZ+16
+			G.pixel_z = G.heightZ
+			var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+32)-((G.y*32)+G.real_pixel_y))
+			G.X_SPEED = cos(angle)*bullet_speed
+			G.Y_SPEED = sin(angle)*bullet_speed
+			G.damage = bullet_damage
+			G.owner = user
+			playsound(user, pick(gun_sounds), 100, 1, sound_range, (rand()-0.5)*0.2)
 		else
 
 			if(automatic == 0)
@@ -80,7 +71,7 @@ proc/atan2(x, y)
 		special_processing -= src
 		..()
 	special_process()
-		desc = "A gun, it seems to hold [ammo]/[ammo_max] ammunition.<br><b>Extra stats : </b><br><br>Bullet Speed : [bullet_speed]<br>Reload Rate : [reload_rate]<br>Fire Rate : [fire_rate]"
+		desc = "<font color=#FF1493>A gun, it seems to hold [ammo]/[ammo_max] ammunition.<br><b>Extra stats : </b><br><br>Bullet Speed : [bullet_speed]<br>Reload Rate : [reload_rate]<br>Fire Rate : [fire_rate]<br>Bullet Damage : [bullet_damage]</font>"
 		if(automatic_reload)
 			if(frm_counter % reload_rate == 1)
 				ammo += 1
