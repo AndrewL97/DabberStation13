@@ -205,7 +205,9 @@
 		var/datum/reagents/R = new/datum/reagents(1000)
 		reagents = R
 		R.my_atom = src
-
+	bullet_act()
+		..()
+		ex_act(2)
 	examine()
 		set src in view(2)
 		..()
