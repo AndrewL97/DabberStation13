@@ -9,7 +9,6 @@
 		diary << ""
 	else
 		diary = world
-		diary << "Staring up test"
 
 
 

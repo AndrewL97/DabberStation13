@@ -137,7 +137,7 @@ datum/controller/game_controller
 			i.on = 1
 		for(var/obj/machinery/light/l in world)
 			l.update()
-		world << "\green \b Initialized lighting system in [world.timeofday-start_time] seconds!"
+		world << "\green \b Initialized lighting system in [world.timeofday-start_time/10] seconds!"
 
 		emergency_shuttle = new /datum/shuttle_controller/emergency_shuttle()
 
@@ -158,9 +158,9 @@ datum/controller/game_controller
 		for(var/i in typesof(/obj)+typesof(/mob))
 			listofitems2 = "[listofitems2]<br><a href=?[i]>[i]</a>"
 			typepaths += i
-		world << "\green \b Created sandbox spawn list in [world.timeofday-start_time] seconds!"
+		world << "\green \b Created sandbox spawn list in [world.timeofday-start_time/10] seconds!"
 
-		world << "\green \b Initializations complete in [world.timeofday-RLstart_time] seconds!"
+		world << "\green \b Initializations complete in [world.timeofday-RLstart_time/10] seconds!"
 
 	start_processing()
 		spawn()

@@ -69,12 +69,15 @@ client
 		set name = "(ADMIN) Reboot Game"
 		message_admins("Restarting game, started by [key]")
 		world.Reboot()
-	proc/Gamemode(ass in gamemodes_list)
+	proc/Gamemode(ass as null|anything in gamemodes_list)
 		set category = "Admin"
 		set name = "(ADMIN) Change Gamemode"
-		text2file(ass,"config/gamemode.txt")
-		message_admins("[key] changed the gamemode.")
-		world << "<font color=#00FFFF><b>Next round the gamemode will be [ass]."
+		if(ass)
+			fdel("config/gamemode.txt")
+			sleep(1)
+			text2file("[ass]","config/gamemode.txt")
+			message_admins("[key] changed the gamemode.")
+			world << "<font color=#00FFFF><b>Next round the gamemode will be [ass]."
 	proc/Toggle_MC_Throttling()
 		set category = "Admin"
 		set name = "(ADMIN) Toggle MC throttling"

@@ -33,18 +33,19 @@ var/gamemodes_list=list(
 )
 /datum/controller/gameticker/proc/setup()
 	var/randgame=text2path(file2text("config/gamemode.txt"))
-	if(randgame)
-		world << "Loaded gamemode [randgame]"
-	else
-		world << "\red <B>Error loading gamemode. Please set with administrator and reboot."
-		return
+	if(!(world.port in PORTS_NOT_ALLOWED))
+		if(randgame)
+			world << "<b>Loaded gamemode [randgame]"
+		else
+			world << "\red <B>Error loading gamemode. Please set with administrator and reboot."
+			return
 
 	if((world.port in PORTS_NOT_ALLOWED) && clients.len == 1)
 		var/newmode = input(clients[1],"What gamemode?","Local Test") as null|anything in gamemodes_list
 		if(newmode)
 			src.mode = new newmode
 		else
-			src.mode = new randgame
+			src.mode = new pick(gamemodes_list)
 	else
 		src.mode = new randgame
 	src.mode.announce()
