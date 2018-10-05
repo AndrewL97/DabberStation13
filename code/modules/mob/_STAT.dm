@@ -8,9 +8,9 @@ var
 		worldstarttime = world.time
 		worldstarttimeofday = world.timeofday
 	if(statpanel("Status"))
-		if(ticker)
-			if(ticker.current_state == GAME_STATE_SETTING_UP)
-				stat(null, "Gamemode : [ticker.mode ? ticker.mode.name : "Not Chosen"]")
+		if(ticker && istype(src,/mob/new_player))
+			stat("Lobby",null)
+			stat(null, "Gamemode : [ticker.mode ? ticker.mode.name : "Not Chosen"]")
 		stat("Status",null)
 		if(client)
 			stat(null, "Ping : [client.ping] ms")
