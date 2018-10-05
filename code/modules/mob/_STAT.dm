@@ -21,6 +21,7 @@ var
 			if(istype(src,/mob/living))
 				stat(null, "Air : %[round(air*2)]")
 				stat(null, "Nutrition : %[max(0,min(100,round(nutrition)))]")
+				stat(null, "Thirst : %[max(0,min(100,round(thirst)))]")
 				stat(null, "Weight : [round(weight,0.125)] KG")
 		else
 			stat(null, "Storm eye closing in [max(0,round(STORM.timer_left))] secs")

@@ -80,8 +80,10 @@
 	var/jitteriness = 0
 	var/charges = 0.0
 
-	var/nutrition = 120 //start a bit fat
-	var/weight = 80
+	var/nutrition = 100
+	var/weight = 75
+
+	var/thirst = 100
 
 	var/paralysis = 0.0
 	var/stunned = 0.0

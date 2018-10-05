@@ -15,6 +15,8 @@
 		Del()
 			special_processing -= src
 			..()
+		attack_hand(mob/user as mob)
+			attackby(null,user)
 		attackby(var/obj/D, mob/user as mob)
 			if(istype(D,/obj/item/weapon/reagent_containers/food/snacks/hydro))
 				planted_crop = D.icon_state
@@ -23,6 +25,7 @@
 			else
 				if(round(min(7,grow_state)) == 7)
 					var/path = text2path("/obj/item/weapon/reagent_containers/food/snacks/hydro/[planted_crop]")
+					src << "<b>You harvest some [planted_crop]."
 					for(var/i in 1 to 7)
 						new path(user.loc)
 					grow_state = 0

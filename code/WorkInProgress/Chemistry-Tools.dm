@@ -220,18 +220,13 @@
 	ex_act(severity)
 		switch(severity)
 			if(1.0)
-				del(src)
+				del src
 				return
-			if(2.0)
+			if(2.0 to 3.0)
 				if (prob(50))
-					new /obj/effects/water(src.loc)
-					del(src)
-					return
-			if(3.0)
-				if (prob(5))
-					new /obj/effects/water(src.loc)
-					del(src)
-					return
+					for(var/datum/reagent/R in reagents.reagent_list)
+						R.reaction_turf(loc, R.volume)
+					del src
 			else
 		return
 
@@ -645,7 +640,7 @@
 				reagents.reaction(M, INGEST)
 				spawn(5)
 					reagents.trans_to(M, gulp_size)
-
+			M.thirst += gulp_size*2
 			playsound(M.loc,'drink.ogg', rand(10,50), 1)
 
 			return 1
@@ -662,7 +657,7 @@
 				reagents.reaction(M, INGEST)
 				spawn(5)
 					reagents.trans_to(M, gulp_size)
-
+			M.thirst += gulp_size*2
 			playsound(M.loc,'drink.ogg', rand(10,50), 1)
 
 

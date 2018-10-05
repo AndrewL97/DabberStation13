@@ -357,7 +357,6 @@
 #include "code\game\objects\items\weapons\table_rack_parts.dm"
 #include "code\game\objects\items\weapons\teleportation.dm"
 #include "code\game\objects\items\weapons\tiles_wires.dm"
-#include "code\game\objects\items\weapons\toilets.dm"
 #include "code\game\objects\items\weapons\tools.dm"
 #include "code\game\objects\items\weapons\uplinks.dm"
 #include "code\game\objects\radio\beacon.dm"

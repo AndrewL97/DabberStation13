@@ -106,6 +106,7 @@ obj
 			level = 1
 			New()
 				..()
+				hide()
 			hide()
 				var/turf/T = locate(x,y,z)
 				if(istype(T,/turf))
