@@ -8,7 +8,6 @@
 datum
 	reagent
 		var/name = "Reagent"
-		var/id = "reagent"
 		var/description = ""
 		var/datum/reagents/holder = null
 		var/reagent_state = SOLID
@@ -28,13 +27,13 @@ datum
 
 					if(prob(chance))
 						if(M.reagents)
-							M.reagents.add_reagent(self.id,self.volume/2)
+							M.reagents.add_reagent(self.type,self.volume/2)
 				return
 
 			reaction_obj(var/obj/O, var/volume) //By default we transfer a small part of the reagent to the object
 				src = null						//if it can hold reagents. nope!
 				//if(O.reagents)
-				//	O.reagents.add_reagent(id,volume/3)
+				//	O.reagents.add_reagent(//DEPRECATED id,volume/3)
 				return
 
 			reaction_turf(var/turf/T, var/volume)
@@ -42,18 +41,18 @@ datum
 				return
 
 			on_mob_life(var/mob/M)
-				holder.remove_reagent(src.id, 0.4) //By default it slowly disappears.
+				holder.remove_reagent(src.type, 0.4) //By default it slowly disappears.
 				return
 
 		milk
 			name = "Milk"
-			id = "milk"
-			description = "An opaque white liquid produced by the mammary glands of mammals."
+			//DEPRECATED id = "milk"
+			description = "An opaque white LIQUID produced by the mammary glands of mammals."
 			reagent_state = LIQUID
 
 		beer
 			name = "Beer"
-			id = "beer"
+			//DEPRECATED id = "beer"
 			description = "An alcoholic beverage made from malted grains, hops, yeast, and water."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -71,7 +70,7 @@ datum
 
 		water
 			name = "Water"
-			id = "water"
+			//DEPRECATED id = "water"
 			description = "A ubiquitous chemical substance that is composed of hydrogen and oxygen."
 			reagent_state = LIQUID
 
@@ -103,7 +102,7 @@ datum
 
 		lube
 			name = "Space Lube"
-			id = "lube"
+			//DEPRECATED id = "lube"
 			description = "Lubricant is a substance introduced between two moving surfaces to reduce the friction and wear between them. giggity."
 			reagent_state = LIQUID
 
@@ -121,13 +120,13 @@ datum
 
 		bilk
 			name = "Bilk"
-			id = "bilk"
+			//DEPRECATED id = "bilk"
 			description = "This appears to be beer mixed with milk. Disgusting."
 			reagent_state = LIQUID
 
 		anti_toxin
 			name = "Anti-Toxin (Dylovene)"
-			id = "anti_toxin"
+			//DEPRECATED id = "anti_toxin"
 			description = "Dylovene is a broad-spectrum antitoxin."
 			reagent_state = LIQUID
 
@@ -140,17 +139,17 @@ datum
 					holder.remove_reagent("stoxin", 2)
 				if(holder.has_reagent("plasma"))
 					holder.remove_reagent("plasma", 1)
-				if(holder.has_reagent("acid"))
-					holder.remove_reagent("acid", 1)
-				if(holder.has_reagent("cyanide"))
-					holder.remove_reagent("cyanide", 1)
+				if(holder.has_reagent("ac//DEPRECATED id"))
+					holder.remove_reagent("ac//DEPRECATED id", 1)
+				if(holder.has_reagent("cyan//DEPRECATED ide"))
+					holder.remove_reagent("cyan//DEPRECATED ide", 1)
 				M:toxloss = max(M:toxloss-2,0)
 				..()
 				return
 
 		toxin
 			name = "Toxin"
-			id = "toxin"
+			//DEPRECATED id = "toxin"
 			description = "A Toxic chemical."
 			reagent_state = LIQUID
 
@@ -160,9 +159,9 @@ datum
 				..()
 				return
 
-		cyanide
-			name = "Cyanide"
-			id = "cyanide"
+		cyan//DEPRECATED ide
+			name = "Cyan//DEPRECATED ide"
+			//DEPRECATED id = "cyan//DEPRECATED ide"
 			description = "A highly toxic chemical."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -174,7 +173,7 @@ datum
 
 		stoxin
 			name = "Sleep Toxin"
-			id = "stoxin"
+			//DEPRECATED id = "stoxin"
 			description = "An effective hypnotic used to treat insomnia."
 			reagent_state = LIQUID
 
@@ -195,7 +194,7 @@ datum
 
 		inaprovaline
 			name = "Inaprovaline"
-			id = "inaprovaline"
+			//DEPRECATED id = "inaprovaline"
 			description = "Inaprovaline is a synaptic stimulant and cardiostimulant. Commonly used to stabilize patients."
 			reagent_state = LIQUID
 
@@ -203,12 +202,12 @@ datum
 				if(!M) M = holder.my_atom
 				if(M.losebreath >= 10)
 					M.losebreath = max(10, M.losebreath-5)
-				holder.remove_reagent(src.id, 0.2)
+				holder.remove_reagent(src.type, 0.2)
 				return
 
 		space_drugs
 			name = "Space drugs"
-			id = "space_drugs"
+			//DEPRECATED id = "space_drugs"
 			description = "An illegal chemical compound used as drug."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -216,12 +215,12 @@ datum
 				M.druggy = max(M.druggy, 15)
 				if(M.canmove) step(M, pick(cardinal))
 				if(prob(7)) M:emote(pick("twitch","drool","moan","giggle"))
-				holder.remove_reagent(src.id, 0.2)
+				holder.remove_reagent(src.type, 0.2)
 				return
 
 		silicate
 			name = "Silicate"
-			id = "silicate"
+			//DEPRECATED id = "silicate"
 			description = "A compound that can be used to reinforce glass."
 			reagent_state = LIQUID
 			reaction_obj(var/obj/O, var/volume)
@@ -235,31 +234,31 @@ datum
 
 		oxygen
 			name = "Oxygen"
-			id = "oxygen"
+			//DEPRECATED id = "oxygen"
 			description = "A colorless, odorless gas."
 			reagent_state = GAS
 
 		nitrogen
 			name = "Nitrogen"
-			id = "nitrogen"
+			//DEPRECATED id = "nitrogen"
 			description = "A colorless, odorless, tasteless gas."
 			reagent_state = GAS
 
 		hydrogen
 			name = "Hydrogen"
-			id = "hydrogen"
+			//DEPRECATED id = "hydrogen"
 			description = "A colorless, odorless, nonmetallic, tasteless, highly combustible diatomic gas."
 			reagent_state = GAS
 
 		potassium
 			name = "Potassium"
-			id = "potassium"
-			description = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
+			//DEPRECATED id = "potassium"
+			description = "A soft, low-melting SOLID that can easily be cut with a knife. Reacts violently with water."
 			reagent_state = SOLID
 
 		mercury
 			name = "Mercury"
-			id = "mercury"
+			//DEPRECATED id = "mercury"
 			description = "A chemical element."
 			reagent_state = LIQUID
 
@@ -272,13 +271,13 @@ datum
 
 		sulfur
 			name = "Sulfur"
-			id = "sulfur"
+			//DEPRECATED id = "sulfur"
 			description = "A chemical element."
 			reagent_state = SOLID
 
 		carbon
 			name = "Carbon"
-			id = "carbon"
+			//DEPRECATED id = "carbon"
 			description = "A chemical element."
 			reagent_state = SOLID
 
@@ -289,7 +288,7 @@ datum
 
 		chlorine
 			name = "Chlorine"
-			id = "chlorine"
+			//DEPRECATED id = "chlorine"
 			description = "A chemical element."
 			reagent_state = GAS
 			on_mob_life(var/mob/M)
@@ -300,7 +299,7 @@ datum
 
 		fluorine
 			name = "Fluorine"
-			id = "fluorine"
+			//DEPRECATED id = "fluorine"
 			description = "A highly-reactive chemical element."
 			reagent_state = GAS
 			on_mob_life(var/mob.M)
@@ -311,13 +310,13 @@ datum
 
 		phosphorus
 			name = "Phosphorus"
-			id = "phosphorus"
+			//DEPRECATED id = "phosphorus"
 			description = "A chemical element."
 			reagent_state = SOLID
 
 		lithium
 			name = "Lithium"
-			id = "lithium"
+			//DEPRECATED id = "lithium"
 			description = "A chemical element."
 			reagent_state = SOLID
 
@@ -330,14 +329,14 @@ datum
 
 		sugar
 			name = "Sugar"
-			id = "sugar"
+			//DEPRECATED id = "sugar"
 			description = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 			reagent_state = SOLID
 
-		acid
-			name = "Sulphuric acid"
-			id = "acid"
-			description = "A strong mineral acid with the molecular formula H2SO4."
+		ac//DEPRECATED id
+			name = "Sulphuric ac//DEPRECATED id"
+			//DEPRECATED id = "ac//DEPRECATED id"
+			description = "A strong mineral ac//DEPRECATED id with the molecular formula H2SO4."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
 				if(!M) M = holder.my_atom
@@ -350,11 +349,11 @@ datum
 					if(istype(M, /mob/living/carbon/human))
 						if(M:wear_mask)
 							del (M:wear_mask)
-							M << "\red Your mask melts away but protects you from the acid!"
+							M << "\red Your mask melts away but protects you from the ac//DEPRECATED id!"
 							return
 						if(M:head)
 							del (M:head)
-							M << "\red Your helmet melts into uselessness but protects you from the acid!"
+							M << "\red Your helmet melts into uselessness but protects you from the ac//DEPRECATED id!"
 							return
 
 					if(prob(75))
@@ -378,10 +377,10 @@ datum
 						M << "\red \the [O] melts."
 					del(O)
 
-		pacid
-			name = "Polytrinic acid"
-			id = "pacid"
-			description = "Polytrinic acid is a an extremely corrosive chemical substance."
+		pac//DEPRECATED id
+			name = "Polytrinic ac//DEPRECATED id"
+			//DEPRECATED id = "pac//DEPRECATED id"
+			description = "Polytrinic ac//DEPRECATED id is a an extremely corrosive chemical substance."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
 				if(!M) M = holder.my_atom
@@ -431,7 +430,7 @@ datum
 
 		radium
 			name = "Radium"
-			id = "radium"
+			//DEPRECATED id = "radium"
 			description = "Radium is an alkaline earth metal. It is extremely radioactive."
 			reagent_state = SOLID
 			on_mob_life(var/mob/M)
@@ -449,7 +448,7 @@ datum
 
 		ryetalyn
 			name = "Ryetalyn"
-			id = "ryetalyn"
+			//DEPRECATED id = "ryetalyn"
 			description = "Ryetalyn can cure all genetic abnomalities."
 			reagent_state = SOLID
 			on_mob_life(var/mob/M)
@@ -462,7 +461,7 @@ datum
 
 		mutagen
 			name = "Unstable mutagen"
-			id = "mutagen"
+			//DEPRECATED id = "mutagen"
 			description = "Might cause unpredictable mutations. Keep away from children."
 			reagent_state = LIQUID
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
@@ -484,25 +483,25 @@ datum
 
 		iron
 			name = "Iron"
-			id = "iron"
+			//DEPRECATED id = "iron"
 			description = "Pure iron is a metal."
 			reagent_state = SOLID
 
 		aluminium
 			name = "Aluminium"
-			id = "aluminium"
+			//DEPRECATED id = "aluminium"
 			description = "A silvery white and ductile member of the boron group of chemical elements."
 			reagent_state = SOLID
 
 		silicon
 			name = "Silicon"
-			id = "silicon"
-			description = "A tetravalent metalloid, silicon is less reactive than its chemical analog carbon."
+			//DEPRECATED id = "silicon"
+			description = "A tetravalent metallo//DEPRECATED id, silicon is less reactive than its chemical analog carbon."
 			reagent_state = SOLID
 
 		fuel
 			name = "Welding fuel"
-			id = "fuel"
+			//DEPRECATED id = "fuel"
 			description = "Required for welders. Flamable."
 			reagent_state = LIQUID
 			reaction_obj(var/obj/O, var/volume)
@@ -524,7 +523,7 @@ datum
 
 		coffee
 			name = "Coffee"
-			id = "coffee"
+			//DEPRECATED id = "coffee"
 			description = "Coffee is a brewed drink prepared from roasted seeds, commonly called coffee beans, of the coffee plant."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -537,7 +536,7 @@ datum
 
 		space_cleaner
 			name = "Space cleaner"
-			id = "cleaner"
+			//DEPRECATED id = "cleaner"
 			description = "A compound used to clean things. Now with 50% more sodium hypochlorite!"
 			reagent_state = LIQUID
 			reaction_obj(var/obj/O, var/volume)
@@ -575,7 +574,7 @@ datum
 
 		space_cola
 			name = "Cola"
-			id = "cola"
+			//DEPRECATED id = "cola"
 			description = "A refreshing beverage."
 			reagent_state = LIQUID
 			var/F = 0
@@ -597,7 +596,7 @@ datum
 
 		slurp_juice
 			name = "Slurp Juice"
-			id = "slurpjuice"
+			//DEPRECATED id = "slurpjuice"
 			description = "A refreshing beverage."
 			reagent_state = LIQUID
 			var/F = 0
@@ -613,8 +612,8 @@ datum
 
 		plasma
 			name = "Plasma"
-			id = "plasma"
-			description = "Plasma in its liquid form."
+			//DEPRECATED id = "plasma"
+			description = "Plasma in its LIQUID form."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
 				if(!M) M = holder.my_atom
@@ -642,8 +641,8 @@ datum
 
 		leporazine
 			name = "Leporazine"
-			id = "leporazine"
-			description = "Leporazine can be use to stabilize an individuals body temperature."
+			//DEPRECATED id = "leporazine"
+			description = "Leporazine can be use to stabilize an indiv//DEPRECATED iduals body temperature."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
 				if(!M) M = holder.my_atom
@@ -656,7 +655,7 @@ datum
 
 		cryptobiolin
 			name = "Cryptobiolin"
-			id = "cryptobiolin"
+			//DEPRECATED id = "cryptobiolin"
 			description = "Cryptobiolin causes confusion and dizzyness."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -664,23 +663,23 @@ datum
 				M.make_dizzy(1)
 				if(!M.confused) M.confused = 1
 				M.confused = max(M.confused, 20)
-				holder.remove_reagent(src.id, 0.2)
+				holder.remove_reagent(src.type, 0.2)
 				return
 
 		lexorin
 			name = "Lexorin"
-			id = "lexorin"
+			//DEPRECATED id = "lexorin"
 			description = "Lexorin temporarily stops respiration. Causes tissue damage."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
 				if(!M) M = holder.my_atom
 				if(prob(33)) M.bruteloss++
-				holder.remove_reagent(src.id, 0.3)
+				holder.remove_reagent(src.type, 0.3)
 				return
 
 		kelotane
 			name = "Kelotane"
-			id = "kelotane"
+			//DEPRECATED id = "kelotane"
 			description = "Kelotane is a drug used to treat burns."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -691,7 +690,7 @@ datum
 
 		dexalin
 			name = "Dexalin"
-			id = "dexalin"
+			//DEPRECATED id = "dexalin"
 			description = "Dexalin is used in the treatment of oxygen deprivation."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -702,7 +701,7 @@ datum
 
 		dexalinp
 			name = "Dexalin Plus"
-			id = "dexalinp"
+			//DEPRECATED id = "dexalinp"
 			description = "Dexalin Plus is used in the treatment of oxygen deprivation. Its highly effective."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -713,8 +712,8 @@ datum
 
 		tricordrazine
 			name = "Tricordrazine"
-			id = "tricordrazine"
-			description = "Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a wide range of injuries."
+			//DEPRECATED id = "tricordrazine"
+			description = "Tricordrazine is a highly potent stimulant, originally derived from cordrazine. Can be used to treat a w//DEPRECATED ide range of injuries."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
 				if(!M) M = holder.my_atom
@@ -727,7 +726,7 @@ datum
 
 		synaptizine
 			name = "Synaptizine"
-			id = "synaptizine"
+			//DEPRECATED id = "synaptizine"
 			description = "Synaptizine is used to treat neuroleptic shock. Can be used to help remove disabling symptoms such as paralysis."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -741,7 +740,7 @@ datum
 
 		impedrezene
 			name = "Impedrezene"
-			id = "impedrezene"
+			//DEPRECATED id = "impedrezene"
 			description = "Impedrezene is a narcotic that impedes one's ability by slowing down the higher brain cell functions."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -755,7 +754,7 @@ datum
 
 		hyronalin
 			name = "Hyronalin"
-			id = "hyronalin"
+			//DEPRECATED id = "hyronalin"
 			description = "Hyronalin is a medicinal drug used to counter the effects of radiation poisoning."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -766,7 +765,7 @@ datum
 
 		alkysine
 			name = "Alkysine"
-			id = "alkysine"
+			//DEPRECATED id = "alkysine"
 			description = "Alkysine is a drug used to lessen the damage to neurological tissue after a catastrophic injury. Can heal brain tissue."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -777,7 +776,7 @@ datum
 
 		arithrazine
 			name = "Arithrazine"
-			id = "arithrazine"
+			//DEPRECATED id = "arithrazine"
 			description = "Arithrazine is an unstable medication used for the most extreme cases of radiation poisoning."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -788,10 +787,10 @@ datum
 				..()
 				return
 
-		bicaridine
-			name = "Bicaridine"
-			id = "bicaridine"
-			description = "Bicaridine is an analgesic medication and can be used to treat blunt trauma."
+		bicar//DEPRECATED idine
+			name = "Bicar//DEPRECATED idine"
+			//DEPRECATED id = "bicar//DEPRECATED idine"
+			description = "Bicar//DEPRECATED idine is an analgesic medication and can be used to treat blunt trauma."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
 				if(!M) M = holder.my_atom
@@ -801,18 +800,18 @@ datum
 
 		hyperzine
 			name = "Hyperzine"
-			id = "hyperzine"
+			//DEPRECATED id = "hyperzine"
 			description = "Hyperzine is a highly effective, long lasting, muscle stimulant."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
 				if(!M) M = holder.my_atom
 				if(prob(5)) M:emote(pick("twitch","blink_r","shiver"))
-				holder.remove_reagent(src.id, 0.2)
+				holder.remove_reagent(src.type, 0.2)
 				return
 
 		cryoxadone
 			name = "Cryoxadone"
-			id = "cryoxadone"
+			//DEPRECATED id = "cryoxadone"
 			description = "A chemical mixture with almost magical healing powers. Its main limitation is that the targets body temperature must be under 170K for it to metabolise correctly."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -827,7 +826,7 @@ datum
 
 		spaceacillin
 			name = "Spaceacillin"
-			id = "spaceacillin"
+			//DEPRECATED id = "spaceacillin"
 			description = "An all-purpose antiviral agent."
 			reagent_state = LIQUID
 
@@ -840,14 +839,14 @@ datum
 					if(M.virus.stage <= 0)
 						M.resistances += M.virus.type
 						M.virus = null
-				holder.remove_reagent(src.id, 0.2)
+				holder.remove_reagent(src.type, 0.2)
 				return
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		nanites
 			name = "Nanomachines"
-			id = "nanites"
+			//DEPRECATED id = "nanites"
 			description = "Microscopic construction robots."
 			reagent_state = LIQUID
 			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
@@ -861,29 +860,29 @@ datum
 
 		fluorosurfactant
 			name = "Fluorosurfactant"
-			id = "fluorosurfactant"
-			description = "A perfluoronated sulfonic acid that forms a foam when mixed with water."
+			//DEPRECATED id = "fluorosurfactant"
+			description = "A perfluoronated sulfonic ac//DEPRECATED id that forms a foam when mixed with water."
 			reagent_state = LIQUID
 
 
 // metal foaming agent
-// this is lithium hydride. Add other recipies (e.g. LiH + H2O -> LiOH + H2) eventually
+// this is lithium hydr//DEPRECATED ide. Add other recipies (e.g. LiH + H2O -> LiOH + H2) eventually
 
 		foaming_agent
 			name = "Foaming agent"
-			id = "foaming_agent"
-			description = "A agent that yields metallic foam when mixed with light metal and a strong acid."
+			//DEPRECATED id = "foaming_agent"
+			description = "A agent that yields metallic foam when mixed with light metal and a strong ac//DEPRECATED id."
 			reagent_state = SOLID
 
 		nicotine
 			name = "Nicotine"
-			id = "nicotine"
+			//DEPRECATED id = "nicotine"
 			description = "A highly addictive stimulant extracted from the tobacco plant."
 			reagent_state = LIQUID
 
 		ethanol
 			name = "Ethanol"
-			id = "ethanol"
+			//DEPRECATED id = "ethanol"
 			description = "A well-known alcohol with a variety of applications."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
@@ -901,12 +900,12 @@ datum
 
 		ammonia
 			name = "Ammonia"
-			id = "ammonia"
+			//DEPRECATED id = "ammonia"
 			description = "A caustic substance commonly used in fertilizer or household cleaners."
 			reagent_state = GAS
 
 		diethylamine
 			name = "Diethylamine"
-			id = "diethylamine"
+			//DEPRECATED id = "diethylamine"
 			description = "A secondary amine, mildly corrosive."
 			reagent_state = LIQUID

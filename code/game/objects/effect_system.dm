@@ -585,7 +585,7 @@ steam.start() -- spawns the effect
 			if(!metal)
 				F.create_reagents(10)
 				for(var/datum/reagent/R in reagents.reagent_list)
-					F.reagents.add_reagent(R.id,1)
+					F.reagents.add_reagent(R.type,1)
 		sleep(15)
 
 // foam disolves when heated
@@ -641,7 +641,7 @@ steam.start() -- spawns the effect
 
 	if(carry && !metal)
 		for(var/datum/reagent/R in carry.reagent_list)
-			carried_reagents += R.id
+			carried_reagents += R.type
 
 /datum/effects/system/foam_spread/proc/start()
 	spawn(0)

@@ -88,8 +88,8 @@
 		for(var/re in dispensable_reagents)
 			for(var/da in typesof(/datum/reagent) - /datum/reagent)
 				var/datum/reagent/temp = new da()
-				if(temp.id == re)
-					dat += "<A href='?src=\ref[src];dispense=[temp.id];state=[temp.reagent_state];name=[temp.name]'>[temp.name]</A><BR>"
+				if(temp.type == re)
+					dat += "<A href='?src=\ref[src];dispense=[temp.type];state=[temp.reagent_state];name=[temp.name]'>[temp.name]</A><BR>"
 					dat += "[temp.description]<BR><BR>"
 		user << browse(cssStyleSheetDab13 + "<TITLE>Chemical Dispenser</TITLE>Chemical dispenser:<BR>Energy = [energy]/[max_energy]<BR><BR>[dat]", "window=chem_dispenser")
 
@@ -223,7 +223,7 @@
 			else
 				dat += "Contained reagents:<BR>"
 				for(var/datum/reagent/G in R.reagent_list)
-					dat += "[G.name] , [G.volume] Units - <A href='?src=\ref[src];isolate=[G.id]'>(Isolate)</A> <A href='?src=\ref[src];remove=[G.id]'>(Remove all)</A> <A href='?src=\ref[src];remove5=[G.id]'>(Remove 5)</A> <A href='?src=\ref[src];remove1=[G.id]'>(Remove 1)</A> <A href='?src=\ref[src];analyze=1;desc=[G.description];name=[G.name]'>(Analyze)</A><BR>"
+					dat += "[G.name] , [G.volume] Units - <A href='?src=\ref[src];isolate=[G.type]'>(Isolate)</A> <A href='?src=\ref[src];remove=[G.type]'>(Remove all)</A> <A href='?src=\ref[src];remove5=[G.type]'>(Remove 5)</A> <A href='?src=\ref[src];remove1=[G.type]'>(Remove 1)</A> <A href='?src=\ref[src];analyze=1;desc=[G.description];name=[G.name]'>(Analyze)</A><BR>"
 				dat += "<BR><A href='?src=\ref[src];createpill=1'>Create pill</A><BR>"
 				dat += "<A href='?src=\ref[src];createbottle=1'>Create bottle (30 units max)</A>"
 		user << browse(cssStyleSheetDab13 + "<TITLE>Chemmaster 3000</TITLE>Chemmaster menu:<BR><BR>[dat]", "window=chem_master;size=575x400")

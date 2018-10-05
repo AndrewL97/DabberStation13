@@ -28,7 +28,7 @@ datum
 					if(current_list_element > reagent_list.len) current_list_element = 1
 					var/datum/reagent/current_reagent = reagent_list[current_list_element]
 
-					src.remove_reagent(current_reagent.id, 1)
+					src.remove_reagent(current_reagent.type, 1)
 
 					current_list_element++
 					total_transfered++
@@ -53,7 +53,7 @@ datum
 				var/datum/reagents/R = target.reagents
 				//if(R.total_volume + amount > R.maximum_volume) return 0
 
-				current_list_element = rand(1,reagent_list.len) //Eh, bandaid fix.
+				current_list_element = rand(1,reagent_list.len) //Eh, bandatype fix.
 
 				while(total_transfered != amount)
 					if(total_transfered >= amount) break //Better safe than sorry.
@@ -63,8 +63,8 @@ datum
 					if(current_list_element > reagent_list.len) current_list_element = 1
 					var/datum/reagent/current_reagent = reagent_list[current_list_element]
 
-					R.add_reagent(current_reagent.id, (1 * multiplier) )
-					src.remove_reagent(current_reagent.id, 1)
+					R.add_reagent(current_reagent.type, (1 * multiplier) )
+					src.remove_reagent(current_reagent.type, 1)
 
 					current_list_element++
 					total_transfered++
@@ -84,7 +84,7 @@ datum
 
 			handle_reactions()
 
-				if(ismob(my_atom)) return //No reactions inside mobs :I
+				if(ismob(my_atom)) return //No reactions instypee mobs :I
 
 				for(var/A in typesof(/datum/chemical_reaction) - /datum/chemical_reaction)
 					var/datum/chemical_reaction/C = new A()
@@ -119,14 +119,14 @@ datum
 			isolate_reagent(var/reagent)
 				for(var/A in reagent_list)
 					var/datum/reagent/R = A
-					if (R.id != reagent)
-						del_reagent(R.id)
+					if (R.type != reagent)
+						del_reagent(R.type)
 						update_total()
 
 			del_reagent(var/reagent)
 				for(var/A in reagent_list)
 					var/datum/reagent/R = A
-					if (R.id == reagent)
+					if (R.type == reagent)
 						reagent_list -= A
 						del(A)
 						update_total()
@@ -140,7 +140,7 @@ datum
 				total_volume = 0
 				for(var/datum/reagent/R in reagent_list)
 					if(R.volume < 1)
-						del_reagent(R.id)
+						del_reagent(R.type)
 					else
 						total_volume += R.volume
 
@@ -148,7 +148,7 @@ datum
 
 			clear_reagents()
 				for(var/datum/reagent/R in reagent_list)
-					del_reagent(R.id)
+					del_reagent(R.type)
 				return 0
 
 			reaction(var/atom/A, var/method=TOUCH, var/volume_modifier=0)
@@ -172,7 +172,7 @@ datum
 
 				for(var/A in reagent_list)
 					var/datum/reagent/R = A
-					if (R.id == reagent)
+					if (R.type == reagent)
 						R.volume += amount
 						update_total()
 						my_atom.on_reagent_change()
@@ -180,7 +180,7 @@ datum
 
 				for(var/A in typesof(/datum/reagent) - /datum/reagent)
 					var/datum/reagent/R = new A()
-					if (R.id == reagent)
+					if (R.type == reagent)
 						reagent_list += R
 						R.holder = src
 						R.volume = amount
@@ -196,7 +196,7 @@ datum
 
 				for(var/A in reagent_list)
 					var/datum/reagent/R = A
-					if (R.id == reagent)
+					if (R.type == reagent)
 						R.volume -= amount
 						update_total()
 						handle_reactions()
@@ -209,7 +209,7 @@ datum
 
 				for(var/A in reagent_list)
 					var/datum/reagent/R = A
-					if (R.id == reagent)
+					if (R.type == reagent)
 						if(!amount) return 1
 						else
 							if(R.volume >= amount) return 1
@@ -220,7 +220,7 @@ datum
 			get_reagent_amount(var/reagent)
 				for(var/A in reagent_list)
 					var/datum/reagent/R = A
-					if (R.id == reagent)
+					if (R.type == reagent)
 						return R.volume
 
 				return 0
