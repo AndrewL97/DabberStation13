@@ -46,7 +46,7 @@
 			if(!istype(i.mob,/mob/dead))
 				if(i.mob.health > 0)
 					lastplr = i
-		if(plrs <= 0)
+		if(plrs <= 1)
 			if(lastplr)
 				world << "<b><font size=6><font color='#00FFFF'>[lastplr.key] won!"
 				world << 'victory.ogg'
