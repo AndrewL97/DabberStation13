@@ -97,7 +97,7 @@ datum/controller/game_controller
 		start_processing()
 		water_process()
 		CPU_CHECK()
-			if(frm_counter > 60 && frm_counter % 10 == 1)
+			if(frm_counter > 200 && frm_counter % 10 == 1)
 				if(world.cpu > 500) //we are missing alot of stuff already
 					if(!(world.port in PORTS_NOT_ALLOWED))
 						spawn()
