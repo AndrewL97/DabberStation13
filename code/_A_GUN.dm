@@ -71,8 +71,8 @@ proc/atan2(x, y)
 			if(automatic == 0)
 				playsound(user, reload_sound, 100, 1, sound_range, 0)
 				ammo = ammo_max
-			else
-				user << "\red <b>No ammunition!"
+			/*else
+				user << "\red <b>No ammunition!"*/
 	New()
 		..()
 		special_processing += src
