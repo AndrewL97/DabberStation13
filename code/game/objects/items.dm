@@ -13,43 +13,6 @@
 
 
 
-
-/obj/item/weapon/handcuffs/attack(mob/M as mob, mob/user as mob)
-	if ((usr.mutations & 16) && prob(50))
-		usr << "\red Uh ... how do those things work?!"
-		if (istype(M, /mob/living/carbon/human))
-			var/obj/equip_e/human/O = new /obj/equip_e/human(  )
-			O.source = user
-			O.target = user
-			O.item = user.equipped()
-			O.s_loc = user.loc
-			O.t_loc = user.loc
-			O.place = "handcuff"
-			M.requests += O
-			spawn( 0 )
-				O.process()
-				return
-		return
-	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
-		usr << "\red You don't have the dexterity to do this!"
-		return
-	if (istype(M, /mob/living/carbon/human))
-		var/obj/equip_e/human/O = new /obj/equip_e/human(  )
-		O.source = user
-		O.target = M
-		O.item = user.equipped()
-		O.s_loc = user.loc
-		O.t_loc = M.loc
-		O.place = "handcuff"
-		M.requests += O
-		spawn( 0 )
-			playsound(src, 'handcuffs.ogg', 30, 1, -2)
-			O.process()
-			return
-	return
-
-
-
 /obj/item/weapon/extinguisher/New()
 	var/datum/reagents/R = new/datum/reagents(50)
 	reagents = R

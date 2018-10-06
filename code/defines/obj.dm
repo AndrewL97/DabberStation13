@@ -68,19 +68,6 @@
 		density = 1
 		opacity = 0
 		anchored = 1
-/obj/bhole
-	name = "black hole"
-	icon = 'objects.dmi'
-	desc = "FUCK FUCK FUCK AAAHHH"
-	icon_state = "bhole2"
-	opacity = 0
-	density = 0
-	anchored = 1
-	var/datum/effects/system/harmless_smoke_spread/smoke
-
-	New()
-		..()
-		del(src)
 
 
 /obj/bedsheetbin
@@ -102,22 +89,6 @@
 	var/list/medical = list(  )
 	var/list/general = list(  )
 	var/list/security = list(  )
-
-/obj/equip_e
-	name = "equip e"
-	var/mob/source = null
-	var/s_loc = null
-	var/t_loc = null
-	var/obj/item/item = null
-	var/place = null
-
-/obj/equip_e/human
-	name = "human"
-	var/mob/living/carbon/human/target = null
-
-/obj/equip_e/monkey
-	name = "monkey"
-	var/mob/living/carbon/monkey/target = null
 
 /obj/grille
 	desc = "A piece of metal with evenly spaced gridlike holes in it. Blocks large object but lets small items, gas, or energy beams through."

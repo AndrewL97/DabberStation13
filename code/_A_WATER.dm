@@ -201,6 +201,7 @@ obj
 					water_pressure = 0
 		device
 			connector
+				level = 1
 				icon_state = "filler"
 				New()
 					..()

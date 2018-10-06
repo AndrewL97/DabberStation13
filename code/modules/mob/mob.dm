@@ -539,40 +539,11 @@
 /obj/screen/grab/attackby()
 	return
 
-
-/obj/equip_e/proc/process()
-	return
-
-/obj/equip_e/proc/done()
-	return
-
-/obj/equip_e/New()
-	if (!ticker)
-		del(src)
-		return
-	spawn(100)
-		del(src)
-		return
-	..()
-	return
-
 /mob/living/carbon/human/Topic(href, href_list)
 	if (href_list["mach_close"])
 		var/t1 = text("window=[]", href_list["mach_close"])
 		src.machine = null
 		src << browse(null, t1)
-	if ((href_list["item"] && !( usr.stat ) && usr.canmove && !( usr.restrained() ) && in_range(src, usr) && ticker)) //if game hasn't started, can't make an equip_e
-		var/obj/equip_e/human/O = new /obj/equip_e/human(  )
-		O.source = usr
-		O.target = src
-		O.item = usr.equipped()
-		O.s_loc = usr.loc
-		O.t_loc = src.loc
-		O.place = href_list["item"]
-		src.requests += O
-		spawn( 0 )
-			O.process()
-			return
 	..()
 	return
 

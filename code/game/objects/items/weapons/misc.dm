@@ -62,22 +62,9 @@ DNA INJECTOR
 		user << "\red You don't have the dexterity to do this!"
 		return
 	if (user)
-		if (istype(M, /mob/living/carbon/human))
-			var/obj/equip_e/human/O = new /obj/equip_e/human(  )
-			O.source = user
-			O.target = M
-			O.item = src
-			O.s_loc = user.loc
-			O.t_loc = M.loc
-			O.place = "dnainjector"
-			M.requests += O
-			spawn( 0 )
-				O.process()
-				return
-		else
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\red [] has been injected with [] by [].", M, src, user), 1)
-				//Foreach goto(192)
-			inject(M)
-			user.show_message(text("\red You inject [M]"))
+		for(var/mob/O in viewers(M, null))
+			O.show_message(text("\red [] has been injected with [] by [].", M, src, user), 1)
+			//Foreach goto(192)
+		inject(M)
+		user.show_message(text("\red You inject [M]"))
 	return
