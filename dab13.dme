@@ -28,7 +28,6 @@
 #define FILE_DIR "sound/machines"
 #define FILE_DIR "sound/misc"
 #define FILE_DIR "sound/oocvoice"
-#define FILE_DIR "sound/playervoices"
 #define FILE_DIR "sound/voice"
 #define FILE_DIR "sound/weapons"
 // END_FILE_DIR
@@ -55,7 +54,6 @@
 #include "code\_JOB_HANDLER.dm"
 #include "code\_K_CSS.dm"
 #include "code\_SETUP.dm"
-#include "code\_STYLE.dm"
 #include "code\_TTS_IMPLEMENTATION.dm"
 #include "code\ATMOSPHERICS\atmospherics.dm"
 #include "code\ATMOSPHERICS\datum_pipe_network.dm"

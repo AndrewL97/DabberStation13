@@ -1060,8 +1060,21 @@
 	examineproc(usr)
 	return
 
-/client/North()
-	..()
+/client
+	North()
+		return
+	South()
+		return
+	East()
+		return
+	West()
+		return
+	Southeast()
+		return
+	Southwest()
+		return
+	Northeast()
+		return
 
 /client/South()
 	..()
@@ -1072,34 +1085,8 @@
 /client/East()
 	..()
 
-/client/Northeast()
-	if(istype(src.mob, /mob/living/carbon))
-		src.mob:swap_hand()
-	return
-
-/client/Southeast()
-	var/obj/item/weapon/W = src.mob.equipped()
-	if (W)
-		W.attack_self(src.mob)
-	return
-
-/client/Northwest()
-	src.mob.drop_item_v()
-	return
-
-/client/Center()
-	if (isobj(src.mob.loc))
-		var/obj/O = src.mob.loc
-		if (src.mob.canmove)
-			return O.relaymove(src.mob, 16)
-	return
-
 
 /client/New()
-	if(findtextEx(src.key, "Telnet @"))
-		src << "Sorry, this game does not support Telnet."
-		del(src)
-
 	if (((world.address == src.address || !(src.address)) && !(host)))
 		host = src.key
 		world.update_status()
@@ -1107,7 +1094,7 @@
 	..()
 
 	if (join_motd)
-		src << "<div class=\"motd\">[join_motd]</div>"
+		src << "[join_motd]"
 
 /client/Del()
 	spawn(0)

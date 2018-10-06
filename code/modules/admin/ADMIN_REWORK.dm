@@ -23,7 +23,8 @@ var/list/admin_verbs = list(
 /client/proc/delete_all,
 /client/proc/Toggle_MC_Throttling,
 /client/proc/Reboot,
-/client/proc/Gamemode
+/client/proc/Gamemode,
+/client/proc/StationName
 )
 var/ban_list = list()
 var/list/admin_clients = list()
@@ -66,6 +67,12 @@ var/list/admin_clients = list()
 			M << rendered
 
 client
+	proc/StationName(StationName as text)
+		set category = "Admin"
+		set name = "(ADMIN) Station Name"
+		Station_Name = StationName
+		world.name = "Dabber Station 13 - [Station_Name] ([Game_Version])"
+		world.update_status()
 	proc/Reboot()
 		set category = "Admin"
 		set name = "(ADMIN) Reboot Game"

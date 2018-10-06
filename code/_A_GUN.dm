@@ -21,6 +21,8 @@ proc/atan2(x, y)
 	var/bullet_damage = 0
 	var/automatic_reload = 0
 	var/sound_range = 15
+	var/bullet_amount = 1
+	var/spread = 0
 	machine_gun
 		icon_state = "gun"
 		automatic = 1
@@ -41,21 +43,34 @@ proc/atan2(x, y)
 		bullet_speed = 20
 		bullet_damage = 20
 		sound_range = 25 //alot louder
+	shotgun
+		icon_state = "shotgun"
+		automatic = 0
+		spread = 10
+		bullet_amount = 5 //5 bullets
+		ammo = 45
+		ammo_max = 45
+		gun_sounds = list('shotgun.ogg')
+		bullet_speed = 10
+		bullet_damage = 5
+		sound_range = 25 //alot louder
 	proc/fire(mob/user,xoff,yoff)
-		if(ammo > 0)
+		if(ammo >= bullet_amount)
 			if(automatic == 1)
 				if(frm_counter % fire_rate == 1)
 				else
 					return
-			ammo -= 1
-			var/obj/projectile/G = new(user.loc)
-			G.heightZ = user.heightZ+16
-			G.pixel_z = G.heightZ
-			var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+32)-((G.y*32)+G.real_pixel_y))
-			G.X_SPEED = cos(angle)*bullet_speed
-			G.Y_SPEED = sin(angle)*bullet_speed
-			G.damage = bullet_damage
-			G.owner = user
+			ammo -= bullet_amount
+			for(var/i in 1 to bullet_amount)
+				var/obj/projectile/G = new(user.loc)
+				G.heightZ = user.heightZ+16
+				G.pixel_z = G.heightZ
+				var/angle = atan2((xoff+32)-((G.x*32)+G.real_pixel_x),(yoff+32)-((G.y*32)+G.real_pixel_y))
+				var/spread_rand = rand(-spread,spread)
+				G.X_SPEED = cos(angle+spread_rand)*bullet_speed
+				G.Y_SPEED = sin(angle+spread_rand)*bullet_speed
+				G.damage = bullet_damage
+				G.owner = user
 			playsound(user, pick(gun_sounds), 100, 1, sound_range, (rand()-0.5)*0.2)
 		else
 
@@ -88,6 +103,7 @@ var/list/bullets = list()
 	var/damage = 30
 	var/heightZ = 0
 	var/obj/shadow/MyShadow = null //Shadow. This is handled in master controller.
+	var/lifespan = 0
 	pixel_collision_size_x = 2
 	pixel_collision_size_y = 2
 	real_pixel_x = 15
@@ -118,6 +134,9 @@ var/list/bullets = list()
 		e.bullet_act(src)
 	proc/bullet_process()
 		..()
+		lifespan += 1
+		if(lifespan > 60*4) //bullet has existed for too long
+			del src
 		if(!PixelMove(X_SPEED,Y_SPEED,owner))
 			del src
 		MyShadow.pixel_x = pixel_x+pixel_w

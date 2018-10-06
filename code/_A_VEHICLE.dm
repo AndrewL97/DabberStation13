@@ -53,7 +53,15 @@ atom/movable
 			real_pixel_x += x_to_move
 			real_pixel_y += y_to_move
 
-			while(real_pixel_x > world.icon_size)
+			var pixel_x_to_move = round(real_pixel_x, 32)
+			real_pixel_x -= pixel_x_to_move
+			x += pixel_x_to_move / 32
+
+			var pixel_y_to_move = round(real_pixel_y, 32)
+			real_pixel_y -= pixel_y_to_move
+			y += pixel_y_to_move / 32
+
+			/*while(real_pixel_x > world.icon_size)
 				real_pixel_x -= world.icon_size
 				x += 1
 			while(real_pixel_x < 0)
@@ -64,7 +72,7 @@ atom/movable
 				y += 1
 			while(real_pixel_y < 0)
 				real_pixel_y += world.icon_size
-				y -= 1
+				y -= 1*/
 
 
 			var/bumpedwalls = 0

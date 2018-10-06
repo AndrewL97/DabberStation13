@@ -1,14 +1,18 @@
 <font color="#9CFF75">
 <h1>Welcome to Dab Station 13! Please read the information below.</h1>
-This server aims to be fun for everyone. It has gamemodes which allow you to race against other, murder, roleplay, build, survive.
+This server aims to be fun for everyone. Running Dab13 code.
 
 Rules :
-1. No ERP/NSFW content in any type of chat. We do not tolerate fetishes.
-2. The only crime here is not being funny.
+0. This is a LRP/NRP server. RP is not required at all, since most of the game is about working and doing your stuff, stories aren't really required. You're allowed to talk about anything in IC/OOC.
+1. No ERP/NSFW content in any type of chat.
+2. The only crime here is not being funny. We all deserve a good laugh sometimes!
+3. If you get banned, you've really annoyed us and don't expect to get unbanned.
 
 <font color="#00FFFF">
-Controls (tell me if you need another one) :
-Shift - Sprint
+<b>Controls :</b>
+Hold Left Mouse Button - Fire/Look Around
+1,2,3,4 - Intent
+Shift - Sprint (hold)
 Space - Jump
 Arrow Keys/WASD - Move
 Q - Drop Item

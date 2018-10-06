@@ -18,11 +18,12 @@ proc/Init_Names()
 	last_names = dd_file2list("config/names/last.txt")
 
 proc/Random_Station_Name()
-	var/list/first = list("Blobby","Javier","Kryfrac","Ikea","Pezoa","Dabber","RETARDS IN SPACE","Noober","Alcaro","Free Fire")
-	var/list/second = list("land","research establishment","station","gang") //retards in space fucking sucks btw
-	Station_Name = "[pick(first)] [pick(second)] [rand(1,99)]"
+	var/list/first = list("Blobby","Javier","Kryfrac","Ikea","Pezoa","Dabber","RETARDS IN SPACE","Alcaro","Free Fire","Jota","Javier")
+	var/list/second = list("orbital station","researchers","station","outpost") //retards in space fucking sucks btw
+	Station_Name = "[pick(first)] [pick(second)] [rand(1,999)]"
 	world.name = "Dabber Station 13 - [Station_Name] ([Game_Version])"
 	world.update_status()
+
 world
 	mob = /mob/new_player
 	turf = /turf/space
@@ -67,7 +68,6 @@ world
 	features += "dab13 codebase"
 	if(sandbox == 1)
 		features += "sandbox"
-	features += "respawning"
 
 	s += jointext(features,", ")
 	if (src.status != s)
