@@ -121,8 +121,8 @@ client
 			message_admins("[key] has deleted all instances of [object] in the game.")
 			var o
 			while((o = locate(object)))
-				CHECK_WHILE_TICK()
 				del o
+				CHECK_WHILE_TICK()
 	proc/delete_non_player_mobs()
 		set category = "Admin"
 		set name = "(ADMIN) Delete non player mobs"
