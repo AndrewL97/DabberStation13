@@ -66,13 +66,13 @@ mob/new_player
 			return 1
 		if(href_list["observe"])
 
-			if(alert(src,"Are you sure you wish to observe? You will not be able to play this round!","Player Setup","Yes","No") == "Yes")
+			if(alert(src,"Are you sure you wish to spectate?","Player Setup","Yes","No") == "Yes")
 				var/mob/dead/observer/observer = new()
 				src << sound(null,channel=LOBBY_CHANNEL)
 				close_spawn_windows()
-				var/obj/O = locate("landmark*Observer-Start")
+				var/obj/machinery/sleeper/spawner/g = pick(rand_spawns)
+				observer.loc = g.loc
 				src << "\blue Now teleporting."
-				observer.loc = O.loc
 				observer.key = key
 				if(preferences.be_random_name)
 					preferences.randomize_name()

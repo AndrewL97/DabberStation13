@@ -43,6 +43,8 @@ obj
 	proc/special_process() //special_processing
 		return
 
+var/list/rand_spawns = list()
+
 var/actions_per_tick = 0
 var/max_actions = 40 //Max actions per tick, Really fast. of course this can be loewr!!!!!!!!!!!
 
@@ -120,7 +122,6 @@ datum/controller/game_controller
 		if(!water_master)
 			water_master = new /datum/controller/water_system()
 
-
 		setup_objects()
 
 		setupgenetics()
@@ -148,6 +149,8 @@ datum/controller/game_controller
 			i.on = 1
 		for(var/obj/window_spawner/G in world)
 			G.Initialize_Window()
+		for(var/obj/machinery/sleeper/spawner/e in world)
+			rand_spawns += e
 		world << "\green \b Initialized special objects in [world.timeofday-start_time/10] seconds!"
 
 		start_time = world.timeofday

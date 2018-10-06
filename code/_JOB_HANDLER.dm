@@ -49,8 +49,6 @@
 			src.equip_if_possible(new /obj/item/device/pda/chaplain(src), slot_belt)
 			src.equip_if_possible(new /obj/item/clothing/under/rank/chaplain(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/black(src), slot_shoes)
-			if(prob(15))
-				src.see_invisible = 15
 
 		if ("Geneticist")
 			src.equip_if_possible(new /obj/item/device/pda/medical(src), slot_belt)
@@ -241,11 +239,6 @@
 	src.job = rank
 	src.mind.assigned_role = rank
 
-	//src.equip_if_possible(new /obj/item/clothing/head/helmet/space(src), slot_head)
-	//if (!joined_late && rank != "Tourist")
-	var/list/rand_spawns = list()
-	for(var/obj/machinery/sleeper/spawner/e in world)
-		rand_spawns += e
 	var/obj/machinery/sleeper/spawner/g = pick(rand_spawns)
 	src.loc = g.loc
 
@@ -269,7 +262,7 @@
 		C.credit.InitCard("[key]")
 	else
 		C.credit = fC //This method is unoptimized, it could be better.
-	src << "<b><font color='#00ffff'>Your DabCard security number is : [C.credit.code], You have [C.credit.dabcoins] dabcoins currently. To get more dabcoins, work."
+	src << "<b><font color='#00ffff'>Your DabCard security number is : [C.credit.code], You have [C.credit.dabcoins] dabcoins currently."
 	if(C)
 		C.registered = src.real_name
 		C.assignment = rank
