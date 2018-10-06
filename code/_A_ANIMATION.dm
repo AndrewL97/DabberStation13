@@ -37,6 +37,7 @@ mob
 				verb
 					T_Pose()
 						set category = "Animations"
+						set name = {""T-Pose""}
 						if(!ANIMATION_RUNNING)
 							dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
 
