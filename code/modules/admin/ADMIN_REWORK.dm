@@ -260,7 +260,7 @@ client
 	set category = "Sandbox"
 	set name="Sandbox Panel"
 
-	var/output = "<h1>Sandbox Panel</h1><br><b><font color='#00FFFF'>You can use CTRL+F to get around in this list. Spawn anything here that you like! I know it's not comfortable, and it will be improved soon.</font></b><br>"
+	var/output = "<h1>Sandbox Panel</h1><br><b><font color='#00FFFF'>You can use CTRL+F to get around in this list. Spawn anything here that you like! I know it's not comfortable, and it will be improved soon.</font><br><font color=#FF0000>Warning though, some items might be broken. If they are, please report these to [world.host].</font></b><br>"
 	if(holder)
 		output += "[listofitems2]"
 	else
