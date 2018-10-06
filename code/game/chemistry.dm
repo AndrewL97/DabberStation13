@@ -39,6 +39,7 @@
 		if(istype(T,/turf))
 			s.loc = src.loc
 			if(world.time > nextmove && spd > 1 && h > 0.2)
+				glide_size = 32 / (2.5-((spd/25)*2)) * tick_lag_original
 				step(src,dir)
 				nextmove = world.time + (2.5-((spd/25)*2))
 			s.pixel_z = T.TurfHeight
