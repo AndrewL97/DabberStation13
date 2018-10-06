@@ -31,8 +31,6 @@ datum/preferences/proc/savefile_save(mob/user)
 	F["blood_type"] << src.b_type
 	F["be_syndicate"] << src.be_syndicate
 	F["tts_extra_pitch"] << src.tts_extra_pitch
-
-	F["zangoose_markings"] << src.zangoose_markings
 /*
 	var/species = "human"
 	var/species_color = null
@@ -100,7 +98,7 @@ datum/preferences/proc/savefile_load(mob/user, var/silent = 1)
 	F["tail_color"] >> src.tail_color
 	F["tts_extra_pitch"] >> src.tts_extra_pitch
 	F["name_is_always_random"] >> src.be_random_name
-	F["zangoose_markings"] >> src.zangoose_markings
+
 	return 1
 
 #undef SAVEFILE_VERSION_MAX

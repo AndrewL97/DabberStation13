@@ -1,4 +1,4 @@
-/proc/iscool(mob/M) //I don't even know lol
+/proc/iscool(mob/M) //epic way to know if your a furry
 	if(M.client)
 		if(M.client.key in AdministrationTeam || M.client.key == world.host)
 			return 1
@@ -217,8 +217,7 @@ datum/preferences
 		dat += "Voice pitch: <a href='byond://?src=\ref[user];preferences=1;tts_pitch=input'>Change</a><br>"
 
 
-		if(iscool(user))
-			dat += "Furry Markings: <a href='byond://?src=\ref[user];preferences=1;s_zangoose_markings=input'>Change</a><br>"
+		if(iscool(user)) //why we removed furry markings : 1. nitro suggested them
 			dat += "Tail: <a href='byond://?src=\ref[user];preferences=1;tail=input'>[tail] (Change)</a><br>"
 			dat += "Tail Color: <a href='byond://?src=\ref[user];preferences=1;t_tone=input'>Change</a><br>"
 
@@ -616,8 +615,6 @@ datum/preferences
 		character.b_facial = b_facial
 
 		character.tts_extra_pitch = tts_extra_pitch
-
-		character.zangoose = zangoose_markings
 		character.s_tone = s_tone
 
 		character.h_style = h_style

@@ -48,12 +48,13 @@ mob/new_player
 			var/output = "<HR><B>Lobby</B><BR>"
 			output += "<HR><br><a href='byond://?src=\ref[src];show_preferences=1'>Character Creator</A><BR><BR>"
 			//if(istester(src.key))
-			if(!ticker || ticker.current_state <= GAME_STATE_PREGAME)
+			if(!ticker)
 				output += "The game has not started yet.<BR>"
 				ready = 1
 			else
-				ready = 0
-				output += "<a href='byond://?src=\ref[src];late_join=1'>Join Game!</A><BR>"
+				if(ticker.current_state == GAME_STATE_PLAYING)
+					ready = 0
+					output += "<a href='byond://?src=\ref[src];late_join=1'>Join Game!</A><BR>"
 
 			output += "<BR><a href='byond://?src=\ref[src];observe=1'>Spectate</A><BR><BR>"
 
@@ -63,12 +64,6 @@ mob/new_player
 		if(href_list["show_preferences"])
 			preferences.ShowChoices(src)
 			return 1
-
-		if(href_list["ready"])
-
-			if(!ready)
-				if(alert(src,"Are you sure you are ready? This will lock-in your preferences.","Player Setup","Yes","No") == "Yes")
-					ready = 1
 		if(href_list["observe"])
 
 			if(alert(src,"Are you sure you wish to observe? You will not be able to play this round!","Player Setup","Yes","No") == "Yes")
@@ -128,7 +123,7 @@ mob/new_player
 				if ("17")
 					AttemptLateSpawn("Roboticist", roboticsMax)
 				if ("18")
-					AttemptLateSpawn("Assistant", 10000)
+					AttemptLateSpawn("Assistant",999999)
 				if ("19")
 					AttemptLateSpawn("Quartermaster", cargoMax)
 				if ("20")

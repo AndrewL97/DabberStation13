@@ -5,7 +5,6 @@
 
 	//var/animating = 0
 	var/tail = "none"
-	var/zangoose
 	var/tail_color = null
 	var/cat_ears = 0
 	//var/icon/fullplayericon = null
@@ -44,9 +43,9 @@
 		var/datum/organ/external/r_foot/r_foot = new /datum/organ/external/r_foot( src )
 		r_foot.owner = src
 
-		if(gender == FEMALE && species == "human") //cat girls more like bestiality, added ironically.
+		if(gender == FEMALE && species == "human") //gamer catgirl pee
 			cat_ears = 1
-			src << "<b>Something's nya~t right." //cats piss the carpet so what
+			src << "<b>Something's nya~t right."
 
 		src.organs["chest"] = chest
 		src.organs["groin"] = groin
@@ -1249,13 +1248,6 @@
 			ge += species_color
 
 		src.stand_icon.Blend(ge, ICON_OVERLAY)
-
-	if(zangoose == "Yes" && src.species == "vulpine")
-		var/icon/zan =  new /icon('vulpine.dmi', "zangor")
-
-		zan += tail_color
-
-		src.stand_icon.Blend(zan, ICON_OVERLAY)
 
 	for (var/part in list("head", "arm_left", "arm_right", "hand_left", "hand_right"))
 		var/icon/ge =  new /icon(species_icon, "[part]_s")
