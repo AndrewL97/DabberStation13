@@ -138,7 +138,7 @@ obj
 					var/turf/simulated/T = locate(x,y,z)
 					T.water_height += water_pressure
 					message_admins("Pipe at [x],[y],[z] ruptured and blew up")
-					for(var/i in 1 to 100)
+					for(var/i in 1 to round(water_pressure*5))
 						var/obj/Particle/Water/A = new(locate(x,y,z))
 						A.x_pos = 16
 						A.y_pos = 16
