@@ -1,9 +1,6 @@
 var/AdministrationTeam = list(
-"Unixian" = "Dab13 Administrator",
-"LuigiBoiBY" = "Dab13 Administrator",
-"Zennerx" = "noob admin",
-"AlcaroIsAFrick" = "Host",
-"MACIEKBAKI" = "Dab13 Administrator"
+"Unixian" = "Dab13 Shitmin",
+"LuigiBoiBY" = "Dab13 Administrator"
 )
 var/sandbox = -1
 var/list/admin_verbs = list(
@@ -124,6 +121,7 @@ client
 			message_admins("[key] has deleted all instances of [object] in the game.")
 			var o
 			while((o = locate(object)))
+				CHECK_WHILE_TICK()
 				del o
 	proc/delete_non_player_mobs()
 		set category = "Admin"

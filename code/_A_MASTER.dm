@@ -63,6 +63,10 @@ var/atmos_processed = 0
 var/water_processed = 0
 var/water_cycles = 0 //how
 
+proc/CHECK_WHILE_TICK()
+	if(world.tick_usage > 60)
+		sleep(world.tick_lag)
+
 proc/CHECK_TICK_WATER() //epic optimizer used for our water system.
 	actions_per_tick_water += 1
 	water_processed += 1
