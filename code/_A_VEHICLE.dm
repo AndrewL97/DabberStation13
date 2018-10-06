@@ -61,20 +61,6 @@ atom/movable
 			real_pixel_y -= pixel_y_to_move
 			y += pixel_y_to_move / 32
 
-			/*while(real_pixel_x > world.icon_size)
-				real_pixel_x -= world.icon_size
-				x += 1
-			while(real_pixel_x < 0)
-				real_pixel_x += world.icon_size
-				x -= 1
-			while(real_pixel_y > world.icon_size)
-				real_pixel_y -= world.icon_size
-				y += 1
-			while(real_pixel_y < 0)
-				real_pixel_y += world.icon_size
-				y -= 1*/
-
-
 			var/bumpedwalls = 0
 			for(var/atom/e in orange(1,src))
 				if(e != ignore)
@@ -297,7 +283,7 @@ vy = v * sin(angle)
 		var/turf/T = locate(x,y,z)
 		if(T)
 			if(a && istype(a,/obj/machinery/vehicle) && heightZ == T.TurfHeight)
-				if (locate(/mob, a))
+				if(a.contents.len > 0)
 					src << "<b>\red There is no room!"
 				if (M.client)
 					M.client.perspective = EYE_PERSPECTIVE

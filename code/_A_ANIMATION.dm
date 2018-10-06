@@ -71,7 +71,7 @@ mob
 								dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
 
 								view() << "<b>[name]</b> farts."
-								view() << 'fart.ogg' //hilarity %100
+								playsound(src, 'fart.ogg', 100, 0, 4, 0) //hilarity %100
 
 								danc = new(locate(x,y,z),src)
 								ANIMATION_RUNNING = 1 //This part initializes the animation.
@@ -164,7 +164,7 @@ mob
 							if(!ANIMATION_RUNNING)
 								dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
 
-								view() << 'disco fever.ogg'
+								playsound(src, 'disco fever.ogg', 100, 0, 7, 0)
 
 								danc = new(locate(x,y,z),src)
 								ANIMATION_RUNNING = 1 //This part initializes the animation.
@@ -235,7 +235,7 @@ mob
 							if(!ANIMATION_RUNNING)
 								dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
 
-								view() << 'hate niggers.ogg'
+								playsound(src, 'hate niggers.ogg', 100, 0, 7, 0)
 
 								danc = new(locate(x,y,z),src)
 								ANIMATION_RUNNING = 1 //This part initializes the animation.
