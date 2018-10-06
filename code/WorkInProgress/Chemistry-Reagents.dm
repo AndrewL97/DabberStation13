@@ -80,7 +80,7 @@ datum
 					T:water_height += volume
 					water_changed += T //eh
 				for(var/i in 1 to round(volume*5))
-					var/obj/Particle/Water/A = new(T.loc)
+					var/obj/Particle/Water/A = new(T)
 					A.x_pos = 16
 					A.y_pos = 16
 					A.x_spd = (rand(-30,30)/10)
