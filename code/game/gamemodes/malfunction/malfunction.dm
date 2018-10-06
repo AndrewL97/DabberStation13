@@ -9,11 +9,6 @@
 	var/intercept_hacked = 0
 	var/malf_mode_declared = 0
 
-/datum/game_mode/malfunction/announce()
-	world << "<B>The current game mode is - AI Malfunction!</B>"
-	world << "<B>The AI on the satellite has malfunctioned and must be destroyed.</B>"
-	world << "The AI satellite is deep in space and can only be accessed with the use of a teleporter! You have 30 minutes to disable it."
-
 /datum/game_mode/malfunction/post_setup()
 	for (var/obj/landmark/A in world)
 		if (A.name == "Malf-Gear-Closet")
@@ -42,7 +37,7 @@
 	intercept_hacked = 1
 
 /datum/game_mode/malfunction/send_intercept()
-	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested staus information:</FONT><HR>"
+	var/intercepttext = "<FONT size = 3><B>Fucktrasen Update</B> Requested staus information:</FONT><HR>"
 	intercepttext += "<B> Cent. Com has recently been contacted by the following syndicate affiliated organisations in your area, please investigate any information you may have:</B>"
 
 	var/list/possible_modes = list()
@@ -63,10 +58,10 @@
 	for (var/obj/machinery/computer/communications/comm in world)
 		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
 			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
-			intercept.name = "paper- 'Cent. Com. Status Summary'"
+			intercept.name = "paper- 'Fucktrasen Status Summary'"
 			intercept.info = intercepttext
 
-			comm.messagetitle.Add("Cent. Com. Status Summary")
+			comm.messagetitle.Add("Fucktrasen Status Summary")
 			comm.messagetext.Add(intercepttext)
 
 	command_alert("Summary downloaded and printed out at all communications consoles.", "Enemy communication intercept. Security Level Elevated.")

@@ -28,14 +28,6 @@ var
 		//stat(null, "Shield : %[round(shield)]")
 		if(veh)
 			stat("Vehicle Speed","[round(veh.velocity.SquareMagnitude()/50)] km/h")
-			if(veh.Kart)
-				stat("Racing status",null)
-				stat(null, "Lap : [veh.lap]")
-				stat(null, "Lap completed : %[(veh.checkpoint/8)*100]")
-				stat("Other people",null)
-				for(var/obj/machinery/vehicle/k in karts)
-					if(k.Kart == 1)
-						stat(null, "[k.name] - [k.lap] - %[(k.checkpoint/8)*100]")
 
 	if(statpanel("Debugging information")) //Debug.
 		var/tickdrift = (world.timeofday - worldstarttimeofday) - (world.time - worldstarttime)  / tick_lag_original

@@ -1,7 +1,7 @@
 /datum/game_mode/traitor
 	name = "traitor"
 	config_tag = "traitor"
-
+	sandbox_allowed = 0
 	var/const/prob_int_murder_target = 50 // intercept names the assassination target half the time
 	var/const/prob_right_murder_target_l = 25 // lower bound on probability of naming right assassination target
 	var/const/prob_right_murder_target_h = 50 // upper bound on probability of naimg the right assassination target
@@ -40,10 +40,6 @@
 
 	var/const/traitors_possible = 4
 
-/datum/game_mode/traitor/announce()
-	world << "<B>The current game mode is - Traitor!</B>"
-	world << "<B>There is a syndicate traitor on the station. Do not let the traitor succeed!!</B>"
-
 /datum/game_mode/traitor/pre_setup()
 	var/list/possible_traitors = get_possible_traitors()
 
@@ -54,7 +50,7 @@
 		return 0
 
 //	log_game("Number of traitors: [num_traitors]")
-//	message_admins("Players counted: [num_players]  Number of traitors chosen: [num_traitors]")
+	message_admins("Players counted: [plrs]  Number of traitors chosen: [num_traitors]")
 
 	for(var/j = 0, j < num_traitors, j++)
 		var/datum/mind/traitor = pick(possible_traitors)
@@ -137,8 +133,8 @@
 	return candidates
 
 /datum/game_mode/traitor/send_intercept()
-	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested staus information:</FONT><HR>"
-	intercepttext += "<B> Cent. Com has recently been contacted by the following syndicate affiliated organisations in your area, please investigate any information you may have:</B>"
+	var/intercepttext = "<FONT size = 3><B>Fucktrasen Update</B> Requested staus information:</FONT><HR>"
+	intercepttext += "<B> Fucktrasen has recently been contacted by the following syndicate affiliated organisations in your area, please investigate any information you may have:</B>"
 
 	var/list/possible_modes = list()
 	possible_modes.Add("revolution", "wizard", "nuke", "traitor", "malf")
@@ -156,10 +152,10 @@
 	for (var/obj/machinery/computer/communications/comm in world)
 		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
 			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
-			intercept.name = "paper- 'Cent. Com. Status Summary'"
+			intercept.name = "paper- 'Fucktrasen Status Summary'"
 			intercept.info = intercepttext
 
-			comm.messagetitle.Add("Cent. Com. Status Summary")
+			comm.messagetitle.Add("Fucktrasen Status Summary")
 			comm.messagetext.Add(intercepttext)
 
 	command_alert("Summary downloaded and printed out at all communications consoles.", "Enemy communication intercept. Security Level Elevated.")

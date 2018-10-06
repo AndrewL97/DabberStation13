@@ -2,26 +2,21 @@
 	name = "Dabber Station 13 Battle Royale"
 	config_tag = "fortnite"
 	events_enabled = 0
+	sandbox_allowed = 0
 	do_kick = 1
 
 /datum/game_mode/battle_royale/pre_setup()
 	..()
-	return 1
-/datum/game_mode/battle_royale/announce()
-	world << "<B>The current game mode is - Dab13 Battle Royale</B>"
-	world << "<B>Get ready to fight!</B>"
 	//244,202
-	sandbox = -1
 	BATTLE_ROYALE_PLANE = new(locate(202+49,207,1))
 	STORM = new(locate(202+49,202+49,1))
 	var/list/objects = list(
 	/obj/item/weapon/gun/pistol,
 	/obj/item/weapon/gun/machine_gun,
+	/obj/item/weapon/gun/shotgun,
 	/obj/item/weapon/storage/backpack,
 	/obj/item/weapon/grenade/explosiongrenade,
-	/obj/item/weapon/classic_baton,
 	/obj/item/clothing/suit/armor/vest,
-	/obj/item/clothing/suit/armor/swat,
 	/obj/item/weapon/reagent_containers/food/drinks/cola,
 	/obj/item/weapon/reagent_containers/food/drinks/slurp_juice
 	)
@@ -33,6 +28,7 @@
 				new A(location)
 			else
 				new A(G.loc)
+	return 1
 
 var/client/lastplr = null
 /datum/game_mode/battle_royale/ending()

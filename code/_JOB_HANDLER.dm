@@ -15,13 +15,6 @@
 		switch(ticker.mode.name)
 			if("normal")
 				Spawn_Normal(rank, joined_late)
-			if("greytide kart")
-				if(joined_late)
-					src << "<b>\green Now spectating. Move around!"
-					src.ghostize()
-					del(src)
-				else
-					Spawn_Kart(rank, joined_late)
 			if("Dabber Station 13 Battle Royale")
 				if(joined_late)
 					src << "<b>\green Now spectating. Move around!"

@@ -10,12 +10,6 @@
 	var/const/waittime_l = 600 //lower bound on time before intercept arrives (in tenths of seconds)
 	var/const/waittime_h = 1800 //upper bound on time before intercept arrives (in tenths of seconds)
 
-/datum/game_mode/nuclear/announce()
-	world << "<B>The current game mode is - Nuclear Emergency!</B>"
-	world << "<B>A [syndicate_name()] Strike Force is approaching [Station_Name]!</B>"
-	world << "A nuclear explosive was being transported by ASS BLAST USA 2018 to a military base. The transport ship mysteriously lost contact with Space Traffic Control (STC). About that time a strange disk was discovered around [Station_Name]. It was identified by ASS BLAST USA 2018 as a nuclear auth. disk and now Syndicate Operatives have arrived to retake the disk and detonate SS13! Also, most likely Syndicate star ships are in the vicinity so take care not to lose the disk!\n<B>Syndicate</B>: Reclaim the disk and detonate the nuclear bomb anywhere on SS13.\n<B>Personnel</B>: Hold the disk and <B>escape with the disk</B> on the shuttle!"
-
-
 /datum/game_mode/nuclear/pre_setup()
 	var/list/possible_syndicates = list()
 	possible_syndicates = get_possible_syndicates()
@@ -187,7 +181,7 @@
 		return candidates
 
 /datum/game_mode/revolution/send_intercept()
-	var/intercepttext = "<FONT size = 3><B>Cent. Com. Update</B> Requested staus information:</FONT><HR>"
+	var/intercepttext = "<FONT size = 3><B>Fucktrasen Update</B> Requested staus information:</FONT><HR>"
 	intercepttext += "<B> Cent. Com has recently been contacted by the following syndicate affiliated organisations in your area, please investigate any information you may have:</B>"
 
 	var/list/possible_modes = list()
@@ -206,10 +200,10 @@
 	for (var/obj/machinery/computer/communications/comm in world)
 		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
 			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
-			intercept.name = "paper- 'Cent. Com. Status Summary'"
+			intercept.name = "paper- 'Fucktrasen Status Summary'"
 			intercept.info = intercepttext
 
-			comm.messagetitle.Add("Cent. Com. Status Summary")
+			comm.messagetitle.Add("Fucktrasen Status Summary")
 			comm.messagetext.Add(intercepttext)
 
 	command_alert("Summary downloaded and printed out at all communications consoles.", "Enemy communication intercept. Security Level Elevated.")

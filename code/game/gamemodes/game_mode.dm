@@ -4,12 +4,9 @@
 	var/votable = 1
 	var/do_kick = 0
 	var/probability = 1
-	var/do_default_processing = 1
+	var/sandbox_allowed = 0
 	// this includes admin-appointed traitors and multitraitors. Easy!
 	var/list/datum/mind/traitors = list()
-
-/datum/game_mode/proc/announce()
-	world << "<B>[src] did not define announce()</B>"
 
 /datum/game_mode/proc/pre_setup()
 	return 1

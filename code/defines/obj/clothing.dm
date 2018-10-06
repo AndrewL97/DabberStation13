@@ -520,7 +520,7 @@ shitspriting
 	heat_transfer_coefficient = 0.0001
 
 /obj/item/clothing/suit/armor/centcomm
-	name = "Cent. Com. armor"
+	name = "Fucktrasen armor"
 	desc = "A suit that protects against some damage."
 	icon_state = "centcom"
 	item_state = "centcom"

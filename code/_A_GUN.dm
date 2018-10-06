@@ -23,6 +23,7 @@ proc/atan2(x, y)
 	var/sound_range = 15
 	var/bullet_amount = 1
 	var/spread = 0
+	var/next_fire = 0
 	machine_gun
 		icon_state = "gun"
 		automatic = 1
@@ -37,6 +38,7 @@ proc/atan2(x, y)
 	pistol
 		icon_state = "pistol"
 		automatic = 0
+		fire_rate = 15 //also works as a delay
 		ammo = 24
 		ammo_max = 24
 		gun_sounds = list('shot2.ogg')
@@ -47,7 +49,8 @@ proc/atan2(x, y)
 		icon_state = "shotgun"
 		automatic = 0
 		spread = 10
-		bullet_amount = 5 //5 bullets
+		fire_rate = 50
+		bullet_amount = 3 //3 bullets
 		ammo = 45
 		ammo_max = 45
 		gun_sounds = list('shotgun.ogg')
@@ -57,9 +60,11 @@ proc/atan2(x, y)
 	proc/fire(mob/user,xoff,yoff)
 		if(ammo >= bullet_amount)
 			if(automatic == 1)
-				if(frm_counter % fire_rate == 1)
-				else
+				if(frm_counter % fire_rate != 1)
 					return
+			else
+				if(frm_counter < next_fire)
+					return //Can't fire yet
 			ammo -= bullet_amount
 			for(var/i in 1 to bullet_amount)
 				var/obj/projectile/G = new(user.loc)
@@ -71,14 +76,13 @@ proc/atan2(x, y)
 				G.Y_SPEED = sin(angle+spread_rand)*bullet_speed
 				G.damage = bullet_damage
 				G.owner = user
+			next_fire = frm_counter + fire_rate
 			playsound(user, pick(gun_sounds), 100, 1, sound_range, (rand()-0.5)*0.2)
 		else
-
 			if(automatic == 0)
 				playsound(user, reload_sound, 100, 1, sound_range, 0)
 				ammo = ammo_max
-			/*else
-				user << "\red <b>No ammunition!"*/
+				next_fire = frm_counter + fire_rate
 	New()
 		..()
 		special_processing += src

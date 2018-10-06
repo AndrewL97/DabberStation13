@@ -139,29 +139,10 @@ vy = v * sin(angle)
 
 
 /obj/machinery/vehicle/special_process()
-	if(src.Kart == 1)
-		check_point()
 	if(CanMove == 1)
 
 		density = 0
-		if(Kart == 1)
-			if(race_started == 0)
-				forward = Vector2_North // Initialize direction to north.
-				velocity = Vector2_Zero // Initialize velocity to zero.
 
-		if(Kart == 1)
-			if(Spinning > 0)
-				forward.Turn(20)
-				Spinning = Spinning - tick_lag_original
-			var/peels = 0
-			for(var/obj/item/weapon/bananapeel/g in loc)
-				if(g.can_trip)
-					peels = peels + 1
-					del g
-			if(peels > 0)
-				for(var/mob/A as mob in src)
-					A << 'cpuspin.wav'
-				Spinning = 5
 		if(frm_counter % 5 && accelerating)
 			var/obj/Particle/Spark/Heat/S = new()
 			S.loc = loc
@@ -191,27 +172,10 @@ vy = v * sin(angle)
 		pixel_x = real_pixel_x
 		pixel_y = real_pixel_y
 		for(var/mob/A as mob in src)
-			if(Kart == 1)
-				if(!race_won)
-					var/sound/AS = sound('engine.ogg')
-					AS.repeat = 1
-					AS.frequency = abs(velocity.SquareMagnitude()*0.5 + 1)
-					AS.channel = MOTOR_CHANNEL //Channel 900 is used for epic sound effects
-					A << AS
 
 			if(A.client)
-				if(Kart == 0)
-					A.client.pixel_x = pixel_x
-					A.client.pixel_y2 = pixel_y
-					A.client.Process_Kart_Racing()
-				else
-					if(!race_won)
-						A.client.pixel_x = pixel_x
-						A.client.pixel_y2 = pixel_y
-						A.client.Process_Kart_Racing()
-					else
-						A.client.eye = forcedloc
-						A << sound(null, channel = MOTOR_CHANNEL)
+				A.client.pixel_x = pixel_x
+				A.client.pixel_y2 = pixel_y
 	else
 		//animate(src,transform = initial(transform),time = 5)
 		real_pixel_x = real_pixel_x * 0.9

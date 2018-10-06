@@ -57,7 +57,6 @@ var/gamemodes_list=list(
 		return
 
 	src.mode = new gamemode_chosen
-	src.mode.announce()
 	var/can_continue = src.mode.pre_setup()
 
 	if(!can_continue)
@@ -70,7 +69,6 @@ var/gamemodes_list=list(
 
 	world << "<FONT color='blue'><B><font size=4>Welcome to [Station_Name]!"
 	world << 'welcome.ogg'
-	sleep(world.tick_lag)
 
 	//Create player characters and transfer them
 	create_characters()
@@ -97,17 +95,14 @@ var/gamemodes_list=list(
 	if(mode.do_kick == 1)
 		world << "<b><font color='red'>Automatic kicking is enabled! After [TIMETOKICK/60] minutes of inactivity, you will be kicked."
 		kick_inactive_players = 1
-
+	if(mode.sandbox_allowed)
+		sandbox = 1
 	if(mode.events_enabled) //src.mob.ghostize()
 		spawn (3000)
 			start_events()
 		spawn ((18000+rand(3000)))
 			event()
-	if(mode.do_default_processing)
-		spawn master_controller.start_processing()
-	else
-		lighting_inited = 0 //trick to make it not process stuff
-		spawn master_controller.fast_process()
+	spawn master_controller.start_processing()
 
 /datum/controller/gameticker
 
@@ -228,7 +223,7 @@ var/gamemodes_list=list(
 				ticker.AItime += 10
 				sleep(10)
 				if (ticker.AItime == 6000)
-					world << "<FONT size = 3><B>Cent. Com. Update</B> AI Malfunction Detected</FONT>"
+					world << "<FONT size = 3><B>Fucktrasen Update</B> AI Malfunction Detected</FONT>"
 					world << "\red It seems we have provided you with a malfunctioning AI. We're very sorry."
 			while(src.processing)
 			return

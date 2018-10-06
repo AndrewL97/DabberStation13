@@ -5,7 +5,7 @@ var/AdministrationTeam = list(
 "AlcaroIsAFrick" = "Host",
 "MACIEKBAKI" = "Dab13 Administrator"
 )
-var/sandbox = 1
+var/sandbox = -1
 var/list/admin_verbs = list(
 /client/proc/yomusic,
 /client/proc/yomusicNO,

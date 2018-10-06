@@ -177,7 +177,6 @@
 #include "code\game\gamemodes\setupgame.dm"
 #include "code\game\gamemodes\extended\battle royale.dm"
 #include "code\game\gamemodes\extended\extended.dm"
-#include "code\game\gamemodes\extended\kartracing.dm"
 #include "code\game\gamemodes\malfunction\Malf_Modules.dm"
 #include "code\game\gamemodes\malfunction\malfunction.dm"
 #include "code\game\gamemodes\nuclear\nuclear.dm"

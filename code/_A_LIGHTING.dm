@@ -245,8 +245,8 @@ atom
 			opacity = newOpacity
 
 
-/area/racing
-	icon = 'racing.dmi'
+/area/black_space
+	icon = 'idk.dmi'
 	icon_state = "area"
 	forced_lighting = 0
 	CAN_GRIFE = 0
