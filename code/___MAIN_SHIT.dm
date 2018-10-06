@@ -177,7 +177,7 @@ obj
 			special_processing -= src
 			..()
 		special_process()
-			pixel_z = 10+(sin(frm_counter)*10)
+			pixel_z = 10+(sin(frm_counter)*15)
 	title_screen_shadow
 		pixel_w = 16
 		mouse_opacity = 0

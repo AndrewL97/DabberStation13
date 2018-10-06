@@ -73,7 +73,9 @@
 /area/admin
 	name = "Admin room"
 	icon_state = "start"
-
+	parallax_type = 1
+	sd_lighting = 0
+	forced_lighting = 0
 
 
 //These are shuttle areas, they must contain two areas in a subgroup if you want to move a shuttle from one
@@ -82,6 +84,7 @@
 /area/shuttle //DO NOT TURN THE SD_LIGHTING STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
 	requires_power = 0
 	sd_lighting = 0
+	forced_lighting = 1
 
 /area/shuttle/arrival
 	name = "Arrival Shuttle"
