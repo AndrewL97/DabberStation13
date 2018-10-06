@@ -270,7 +270,7 @@
 "afy" = (/obj/machinery/atmospherics/pipe/simple{dir = 5; icon_state = "intact-f"; layer = 3},/turf/simulated/floor/plating,/area/security/checkpoint2)
 "afz" = (/obj/machinery/atmospherics/pipe/manifold{dir = 4; initialize_directions = 11},/turf/simulated/floor/plating,/area/security/checkpoint2)
 "afA" = (/turf/simulated/wall/r_wall,/area/crew_quarters/captain)
-"afB" = (/obj/item/weapon/card/id/captains_spare,/obj/item/weapon/pinpointer,/obj/item/weapon/disk/nuclear,/obj/item/weapon/hand_tele,/turf/simulated/floor/plating,/area/crew_quarters/captain)
+"afB" = (/obj/item/weapon/card/id/captains_spare,/obj/item/weapon/disk/nuclear,/obj/item/weapon/hand_tele,/turf/simulated/floor/plating,/area/crew_quarters/captain)
 "afC" = (/obj/machinery/alarm{pixel_y = 20},/obj/item/weapon/storage/photo_album{pixel_y = -10},/obj/item/weapon/camera_test,/turf/simulated/floor/plating,/area/crew_quarters/captain)
 "afD" = (/turf/simulated/wall,/area/crew_quarters/captain)
 "afE" = (/turf/simulated/floor/plating,/area/crew_quarters/captain)

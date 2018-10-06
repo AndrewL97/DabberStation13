@@ -35,6 +35,33 @@ mob
 		carbon
 			human
 				verb
+					T_Pose()
+						set category = "Animations"
+						if(!ANIMATION_RUNNING)
+							dir = 2 //Makes it so you face south. I don't plan to add support for 4-dir animations.
+
+							view() << "<b>[name]</b> does a T-Pose!"
+
+							danc = new(locate(x,y,z),src)
+							ANIMATION_RUNNING = 1 //This part initializes the animation.
+
+							var/matrix/RightArm = matrix()
+							var/matrix/LeftArm = matrix() //You can create as much matrixes, then control them, as seen below.
+
+							RightArm.Turn(-90)
+							RightArm.Translate(7,-1)
+							LeftArm.Turn(90)
+							LeftArm.Translate(-8,-2)
+
+							animate(danc.Limb3,transform = LeftArm, time = 10, easing = SINE_EASING | EASE_OUT)
+							animate(danc.Limb4,transform = RightArm, time = 10, easing = SINE_EASING | EASE_OUT) //This is what causes the magic.
+
+							sleep(20)
+
+							danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
+
+							danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
+							ANIMATION_RUNNING = 0
 					Fart()
 						set category = "Animations"
 						set name = {""The Fart""}
