@@ -19,12 +19,12 @@ proc/explosion(atom/epicenter, devastation_range, heavy_impact_range, light_impa
 			if(light_impact_range > 9)
 				light_impact_range = 9
 
-		for(var/i in 1 to light_impact_range*8)
+		for(var/i in 1 to min(100,light_impact_range*11)) //no big explosion
 			var/obj/Particle/Explosion/A = new(epicenter)
 			A.x_pos = 16
 			A.y_pos = 16
-			A.x_spd = (rand(-30,30)/5)
-			A.y_spd = (rand(-30,30)/5)
+			A.x_spd = (rand(-30,30)/2)
+			A.y_spd = (rand(-30,30)/2)
 
 		playsound(epicenter, 'explosionfar.ogg', 100, 1, round(devastation_range*2,1) )
 		playsound(epicenter, "explosion", 100, 1, round(devastation_range,1) )
@@ -99,7 +99,7 @@ obj
 		proc/DoShit()
 			var/matrix/M = matrix()
 			M.Scale(exSize/25)
-			animate(src, transform = M, alpha = 0, time = exSize/2, easing = SINE_EASING | EASE_OUT)
+			animate(src, transform = M, alpha = 0, time = exSize, easing = SINE_EASING | EASE_OUT)
 			spawn(exSize)
 				del src
 		ex_act()
