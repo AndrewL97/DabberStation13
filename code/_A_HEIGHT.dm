@@ -127,9 +127,10 @@ mob
 	#endif
 
 	proc/Jump()
-		if(canmove == 1 && lying == 0 && !src.restrained() && !ANIMATION_RUNNING ) //If on floor/space and not restrained...
+		var/turf/T = loc
+		if(canmove == 1 && lying == 0 && !src.restrained() && !ANIMATION_RUNNING && istype(T,/turf)) //If on floor/space and not restrained...
 			if(onFloor == 1)
-				ySpeed = 1320/256
+				ySpeed = (1320/256)/(1+(heightZ<T.water_height))
 				playsound(src, 'jump.ogg', 100, 0, 12, 0)
 			else
 				flyPack()
@@ -176,9 +177,9 @@ mob
 
 		if(client)
 			if(client.j)
-				ySpeed = ySpeed - (T.TurfGravity/2) //Adds gravity.
+				ySpeed = ySpeed - (T.TurfGravity/2)/(1+(heightZ<T.water_height)) //Adds gravity.
 			else
-				ySpeed = ySpeed - T.TurfGravity //Adds gravity.
+				ySpeed = ySpeed - T.TurfGravity/(1+(heightZ<T.water_height)) //Adds gravity.
 		else
 			ySpeed = ySpeed - T.TurfGravity //Adds gravity.
 		if(T.TurfCeiling != 0)

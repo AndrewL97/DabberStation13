@@ -2,7 +2,7 @@
 	icon = 'hydroponics.dmi'
 	anchored = 1 //wow lol
 	tray
-		var/planted_crop = "tomatoes"
+		var/planted_crop = null
 		icon_state = "hydrotray"
 		pixel_y = 4
 		density = 1
@@ -23,13 +23,14 @@
 				src << "<b>You plant some [D.icon_state]."
 				del D
 			else
-				if(round(min(7,grow_state)) == 7)
+				if(min(7,round(grow_state)) >= 7)
 					var/path = text2path("/obj/item/weapon/reagent_containers/food/snacks/hydro/[planted_crop]")
-					src << "<b>You harvest some [planted_crop]."
-					for(var/i in 1 to 7)
-						new path(user.loc)
-					grow_state = 0
-					planted_crop = null
+					if(path)
+						src << "<b>You harvest some [planted_crop]."
+						for(var/i in 1 to 7)
+							new path(user.loc)
+						grow_state = 0
+						planted_crop = null
 		special_process()
 			if(planted_crop)
 				desc = "It's a hydroponics tray. It has [planted_crop] planted.<br><b>Grow Status : %[round((min(7,grow_state)/7)*100)]</b>"
@@ -60,5 +61,6 @@
 	tomatoes
 		icon_state = "tomatoes"
 		desc = "Tomatoes."
+		name = "Tomatoes"
 		amount = 2
 		heal_amt = 1
