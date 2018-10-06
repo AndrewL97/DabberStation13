@@ -8,7 +8,7 @@ MOP
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
-	R.add_reagent("cleaner", 1000)
+	R.add_reagent(/datum/reagent/water, 1000)
 
 /obj/item/weapon/cleaner/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	return

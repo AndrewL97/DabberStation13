@@ -206,8 +206,8 @@
 		M.weakened = 3
 	if (M.stunned <= 1)
 		M.stunned = 3
-	if (M:reagents.get_reagent_amount("inaprovaline") < 5)
-		M:reagents.add_reagent("inaprovaline", 5)
+	if (M:reagents.get_reagent_amount(/datum/reagent/inaprovaline) < 5)
+		M:reagents.add_reagent(/datum/reagent/inaprovaline, 5)
 	return
 
 /obj/machinery/sleeper/proc/go_out()
@@ -225,9 +225,9 @@
 
 /obj/machinery/sleeper/proc/inject(mob/user as mob)
 	if (src.occupant)
-		if (src.occupant.reagents.get_reagent_amount("inaprovaline") < 60)
-			src.occupant.reagents.add_reagent("inaprovaline", 30)
-		user << text("Occupant now has [] units of rejuvenation in his/her bloodstream.", src.occupant.reagents.get_reagent_amount("inaprovaline"))
+		if (src.occupant.reagents.get_reagent_amount(/datum/reagent/inaprovaline) < 60)
+			src.occupant.reagents.add_reagent(/datum/reagent/inaprovaline, 30)
+		user << text("Occupant now has [] units of rejuvenation in his/her bloodstream.", src.occupant.reagents.get_reagent_amount(/datum/reagent/inaprovaline))
 	else
 		user << "No occupant!"
 	return

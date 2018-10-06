@@ -174,8 +174,8 @@
 	usr << "\blue We stealthily sting [T]."
 	T << "You feel a small prick and a burning sensation."
 
-	T.reagents.add_reagent("toxin", 10)
-	T.reagents.add_reagent("stoxin", 20)
+	T.reagents.add_reagent(/datum/reagent/toxin, 10)
+	T.reagents.add_reagent(/datum/reagent/stoxin, 20)
 
 	usr.verbs -= /client/proc/changeling_neurotoxic_sting
 
@@ -194,9 +194,6 @@
 		return
 
 	usr << "\blue We stealthily sting [T]."
-
-	spawn(50) //Give the changeling a chance to calmly walk away before the target FREAKS THE FUCK OUT
-		T.reagents.add_reagent("LSD", 30)
 
 	usr.verbs -= /client/proc/changeling_hallucinogenic_sting
 

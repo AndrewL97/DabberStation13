@@ -119,7 +119,7 @@
 /mob/living/carbon/human/movement_delay()
 	var/tally = 0
 
-	if(src.reagents.has_reagent("hyperzine")) return 0
+	if(src.reagents.has_reagent(/datum/reagent/hyperzine)) return 0
 
 	var/health_deficiency = (maxhealth - src.health)
 	if(health_deficiency >= 40) tally += (health_deficiency / 20)

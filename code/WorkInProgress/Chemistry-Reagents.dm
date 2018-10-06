@@ -133,16 +133,14 @@ datum
 			on_mob_life(var/mob/M)
 				if(!M) M = holder.my_atom
 				M:drowsyness = max(M:drowsyness-2, 0)
-				if(holder.has_reagent("toxin"))
-					holder.remove_reagent("toxin", 2)
-				if(holder.has_reagent("stoxin"))
-					holder.remove_reagent("stoxin", 2)
-				if(holder.has_reagent("plasma"))
-					holder.remove_reagent("plasma", 1)
-				if(holder.has_reagent("ac//DEPRECATED id"))
-					holder.remove_reagent("ac//DEPRECATED id", 1)
-				if(holder.has_reagent("cyan//DEPRECATED ide"))
-					holder.remove_reagent("cyan//DEPRECATED ide", 1)
+				if(holder.has_reagent(/datum/reagent/toxin))
+					holder.remove_reagent(/datum/reagent/toxin, 2)
+				if(holder.has_reagent(/datum/reagent/stoxin))
+					holder.remove_reagent(/datum/reagent/stoxin, 2)
+				if(holder.has_reagent(/datum/reagent/plasma))
+					holder.remove_reagent(/datum/reagent/plasma, 1)
+				if(holder.has_reagent(/datum/reagent/acid))
+					holder.remove_reagent(/datum/reagent/acid, 1)
 				M:toxloss = max(M:toxloss-2,0)
 				..()
 				return
@@ -333,10 +331,10 @@ datum
 			description = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
 			reagent_state = SOLID
 
-		ac//DEPRECATED id
-			name = "Sulphuric ac//DEPRECATED id"
+		acid
+			name = "Sulphuric acid"
 			//DEPRECATED id = "ac//DEPRECATED id"
-			description = "A strong mineral ac//DEPRECATED id with the molecular formula H2SO4."
+			description = "A strong mineral acid with the molecular formula H2SO4."
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
 				if(!M) M = holder.my_atom
@@ -377,8 +375,8 @@ datum
 						M << "\red \the [O] melts."
 					del(O)
 
-		pac//DEPRECATED id
-			name = "Polytrinic ac//DEPRECATED id"
+		pacid
+			name = "Polytrinic acid"
 			//DEPRECATED id = "pac//DEPRECATED id"
 			description = "Polytrinic ac//DEPRECATED id is a an extremely corrosive chemical substance."
 			reagent_state = LIQUID
@@ -617,8 +615,8 @@ datum
 			reagent_state = LIQUID
 			on_mob_life(var/mob/M)
 				if(!M) M = holder.my_atom
-				if(holder.has_reagent("inaprovaline"))
-					holder.remove_reagent("inaprovaline", 2)
+				if(holder.has_reagent(/datum/reagent/inaprovaline))
+					holder.remove_reagent(/datum/reagent/inaprovaline, 2)
 				M:toxloss++
 				..()
 				return
@@ -787,7 +785,7 @@ datum
 				..()
 				return
 
-		bicar//DEPRECATED idine
+		bicaridine
 			name = "Bicar//DEPRECATED idine"
 			//DEPRECATED id = "bicar//DEPRECATED idine"
 			description = "Bicar//DEPRECATED idine is an analgesic medication and can be used to treat blunt trauma."

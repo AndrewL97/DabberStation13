@@ -73,7 +73,7 @@ WELDINGTOOOL
 	var/datum/reagents/R = new/datum/reagents(200)
 	reagents = R
 	R.my_atom = src
-	R.add_reagent("fuel", 200)
+	R.add_reagent(/datum/reagent/fuel, 200)
 	return
 
 /obj/item/weapon/weldingtool/examine()
@@ -122,12 +122,12 @@ WELDINGTOOOL
 
 // return fuel amount
 /obj/item/weapon/weldingtool/proc/get_fuel()
-	return reagents.get_reagent_amount("fuel")
+	return reagents.get_reagent_amount(/datum/reagent/fuel)
 
 // remove fuel amount
 /obj/item/weapon/weldingtool/proc/use_fuel(var/amount)
 	amount = min( get_fuel() , amount)
-	reagents.remove_reagent("fuel", amount)
+	reagents.remove_reagent(/datum/reagent/fuel, amount)
 	return
 
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob)

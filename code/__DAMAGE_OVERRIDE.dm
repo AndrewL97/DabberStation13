@@ -96,7 +96,7 @@
 				if(src.health <= 20 && prob(1)) spawn(0) emote("gasp")
 
 				//if(!src.rejuv) src.oxyloss++
-				if(!src.reagents.has_reagent("inaprovaline")) src.oxyloss++
+				if(!src.reagents.has_reagent(/datum/reagent/inaprovaline)) src.oxyloss++
 
 				if(src.stat != 2)	src.stat = 1
 				src.paralysis = max(src.paralysis, 5)

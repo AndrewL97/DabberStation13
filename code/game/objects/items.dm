@@ -17,7 +17,7 @@
 	var/datum/reagents/R = new/datum/reagents(50)
 	reagents = R
 	R.my_atom = src
-	R.add_reagent("water", 50)
+	R.add_reagent(/datum/reagent/water, 100)
 
 /obj/item/weapon/extinguisher/examine()
 	set src in usr
@@ -104,9 +104,9 @@
 	var/datum/reagents/R = new/datum/reagents(300)
 	reagents = R
 	R.my_atom = src
-	R.add_reagent("stoxin", 100)
-	R.add_reagent("impedrezene", 100)
-	R.add_reagent("cryptobiolin", 100)
+	R.add_reagent(/datum/reagent/stoxin, 100)
+	R.add_reagent(/datum/reagent/impedrezene, 100)
+	R.add_reagent(/datum/reagent/cryptobiolin, 100)
 	..()
 	return
 

@@ -660,7 +660,7 @@ steam.start() -- spawns the effect
 				for(var/id in carried_reagents)
 					F.reagents.add_reagent(id,1)
 			else
-				F.reagents.add_reagent("water", 1)
+				F.reagents.add_reagent(/datum/reagent/water, 1)
 
 // wall formed by metal foams
 // dense and opaque, but easy to break

@@ -687,9 +687,9 @@
 		////////////////////////////////////////////////////////
 		if (href_list["rejuv"])
 			var/mob/living/carbon/human/H = src.connected.occupant
-			if (H.reagents.get_reagent_amount("inaprovaline") < 60)
-				H.reagents.add_reagent("inaprovaline", 30)
-			usr << text("Occupant now has [] units of rejuvenation in his/her bloodstream.", H.reagents.get_reagent_amount("inaprovaline"))
+			if (H.reagents.get_reagent_amount(/datum/reagent/inaprovaline) < 60)
+				H.reagents.add_reagent(/datum/reagent/inaprovaline, 30)
+			usr << text("Occupant now has [] units of rejuvenation in his/her bloodstream.", H.reagents.get_reagent_amount(/datum/reagent/inaprovaline))
 			src.delete = 0
 		////////////////////////////////////////////////////////
 		if (href_list["strucmenu"])
@@ -1028,61 +1028,6 @@
 				src.temphtml = "Replicator not ready yet."
 				src.delete = 0
 		////////////////////////////////////////////////////////
-		if (href_list["load_disk"])
-			var/buffernum = text2num(href_list["load_disk"])
-			if ((buffernum > 3) || (buffernum < 1))
-				return
-			if ((isnull(src.diskette)) || (!src.diskette.data) || (src.diskette.data == ""))
-				return
-			switch(buffernum)
-				if(1)
-					src.buffer1 = src.diskette.data
-					src.buffer1type = src.diskette.data_type
-					src.buffer1iue = src.diskette.ue
-					src.buffer1owner = src.diskette.owner
-				if(2)
-					src.buffer2 = src.diskette.data
-					src.buffer2type = src.diskette.data_type
-					src.buffer2iue = src.diskette.ue
-					src.buffer2owner = src.diskette.owner
-				if(3)
-					src.buffer3 = src.diskette.data
-					src.buffer3type = src.diskette.data_type
-					src.buffer3iue = src.diskette.ue
-					src.buffer3owner = src.diskette.owner
-			src.temphtml = "Data loaded."
-
-		if (href_list["save_disk"])
-			var/buffernum = text2num(href_list["save_disk"])
-			if ((buffernum > 3) || (buffernum < 1))
-				return
-			if ((isnull(src.diskette)) || (src.diskette.read_only))
-				return
-			switch(buffernum)
-				if(1)
-					src.diskette.data = buffer1
-					src.diskette.data_type = src.buffer1type
-					src.diskette.ue = src.buffer1iue
-					src.diskette.owner = src.buffer1owner
-					src.diskette.name = "data disk - '[src.buffer1owner]'"
-				if(2)
-					src.diskette.data = buffer2
-					src.diskette.data_type = src.buffer2type
-					src.diskette.ue = src.buffer2iue
-					src.diskette.owner = src.buffer2owner
-					src.diskette.name = "data disk - '[src.buffer2owner]'"
-				if(3)
-					src.diskette.data = buffer3
-					src.diskette.data_type = src.buffer3type
-					src.diskette.ue = src.buffer3iue
-					src.diskette.owner = src.buffer3owner
-					src.diskette.name = "data disk - '[src.buffer3owner]'"
-			src.temphtml = "Data saved."
-		if (href_list["eject_disk"])
-			if (!src.diskette)
-				return
-			src.diskette.loc = get_turf(src)
-			src.diskette = null
 		////////////////////////////////////////////////////////
 		if (href_list["clear"])
 			src.temphtml = null

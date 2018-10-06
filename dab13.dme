@@ -456,7 +456,6 @@
 #include "code\WorkInProgress\Chemistry-Reagents.dm"
 #include "code\WorkInProgress\Chemistry-Recipes.dm"
 #include "code\WorkInProgress\Chemistry-Tools.dm"
-#include "code\WorkInProgress\cloning.dm"
 #include "code\WorkInProgress\stuff.dm"
 #include "code\WorkInProgress\computer2\airlock_control.dm"
 #include "code\WorkInProgress\computer2\arcade.dm"

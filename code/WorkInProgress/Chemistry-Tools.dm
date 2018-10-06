@@ -127,9 +127,9 @@
 		var/obj/item/weapon/reagent_containers/glass/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/B2 = new(src)
 
-		B1.reagents.add_reagent("aluminium", 30)
-		B2.reagents.add_reagent("foaming_agent", 10)
-		B2.reagents.add_reagent("pacid", 10)
+		B1.reagents.add_reagent(/datum/reagent/aluminium, 30)
+		B2.reagents.add_reagent(/datum/reagent/foaming_agent, 10)
+		B2.reagents.add_reagent(/datum/reagent/pacid, 10)
 
 		beakers += B1
 		beakers += B2
@@ -145,9 +145,9 @@
 		var/obj/item/weapon/reagent_containers/glass/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/B2 = new(src)
 
-		B1.reagents.add_reagent("fluorosurfactant", 30)
-		B2.reagents.add_reagent("water", 10)
-		B2.reagents.add_reagent("cleaner", 10)
+		B1.reagents.add_reagent(/datum/reagent/fluorosurfactant, 30)
+		B2.reagents.add_reagent(/datum/reagent/water, 10)
+		//B2.reagents.add_reagent(/datum/reagent/cleaner, 10)
 
 		beakers += B1
 		beakers += B2
@@ -163,8 +163,8 @@
 		var/obj/item/weapon/reagent_containers/glass/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/B2 = new(src)
 
-		B1.reagents.add_reagent("poo", 30)
-		B2.reagents.add_reagent("poo", 30)
+		B1.reagents.add_reagent(/datum/reagent/poo", 30)
+		B2.reagents.add_reagent(/datum/reagent/poo", 30)
 
 		beakers += B1
 		beakers += B2
@@ -826,7 +826,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("fluorosurfactant", 20)
+		reagents.add_reagent(/datum/reagent/fluorosurfactant, 20)
 
 
 /obj/item/weapon/reagent_containers/glass/large
@@ -869,7 +869,7 @@
 		var/datum/reagents/R = new/datum/reagents(30)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("inaprovaline", 30)
+		R.add_reagent(/datum/reagent/inaprovaline, 30)
 
 /obj/item/weapon/reagent_containers/glass/bottle/toxin
 	name = "toxin bottle"
@@ -882,7 +882,7 @@
 		var/datum/reagents/R = new/datum/reagents(30)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("toxin", 30)
+		R.add_reagent(/datum/reagent/toxin, 30)
 
 /obj/item/weapon/reagent_containers/glass/bottle/stoxin
 	name = "sleep-toxin bottle"
@@ -895,7 +895,7 @@
 		var/datum/reagents/R = new/datum/reagents(30)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("stoxin", 30)
+		R.add_reagent(/datum/reagent/stoxin, 30)
 
 /obj/item/weapon/reagent_containers/glass/bottle/antitoxin
 	name = "anti-toxin bottle"
@@ -908,7 +908,7 @@
 		var/datum/reagents/R = new/datum/reagents(30)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("anti_toxin", 30)
+		R.add_reagent(/datum/reagent/anti_toxin, 30)
 
 
 
@@ -936,7 +936,7 @@
 		var/datum/reagents/R = new/datum/reagents(30)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("cryoxadone", 30)
+		R.add_reagent(/datum/reagent/cryoxadone, 30)
 
 
 //Syringes
@@ -948,8 +948,8 @@
 		reagents = R
 		R.maximum_volume = 15
 		R.my_atom = src
-		R.add_reagent("inaprovaline", 7)
-		R.add_reagent("anti_toxin", 8)
+		R.add_reagent(/datum/reagent/inaprovaline, 7)
+		R.add_reagent(/datum/reagent/anti_toxin, 8)
 		mode = "i"
 		update_icon()
 
@@ -961,7 +961,7 @@
 		reagents = R
 		R.maximum_volume = 15
 		R.my_atom = src
-		R.add_reagent("inaprovaline", 15)
+		R.add_reagent(/datum/reagent/inaprovaline, 15)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/antitoxin
@@ -972,7 +972,7 @@
 		reagents = R
 		R.maximum_volume = 15
 		R.my_atom = src
-		R.add_reagent("anti_toxin", 15)
+		R.add_reagent(/datum/reagent/anti_toxin, 15)
 		update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/antiviral
@@ -983,7 +983,7 @@
 		reagents = R
 		R.maximum_volume = 15
 		R.my_atom = src
-		R.add_reagent("spaceacillin", 15)
+		R.add_reagent(/datum/reagent/spaceacillin, 15)
 		update_icon()
 
 //Snacks
@@ -1075,7 +1075,7 @@
 	var/warm = 0
 	heal(var/mob/M)
 		if(src.warm && M.reagents)
-			M.reagents.add_reagent("tricordrazine",15)
+			M.reagents.add_reagent(/datum/reagent/tricordrazine,15)
 		else
 			M << "\red It's just not good enough cold.."
 		..()
@@ -1113,7 +1113,7 @@
 		var/datum/reagents/R = new/datum/reagents(5)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("nanites", 5)
+		R.add_reagent(/datum/reagent/nanites, 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeymeat
 	name = "meat"
@@ -1144,7 +1144,7 @@
 		var/datum/reagents/R = new/datum/reagents(50)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("coffee", 30)
+		R.add_reagent(/datum/reagent/coffee, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cola
 	name = "bepis"
@@ -1155,7 +1155,7 @@
 		var/datum/reagents/R = new/datum/reagents(50)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("cola", 30)
+		R.add_reagent(/datum/reagent/space_cola, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/slurp_juice
 	name = "slurp juice"
@@ -1166,7 +1166,7 @@
 		var/datum/reagents/R = new/datum/reagents(50)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("slurpjuice", 30)
+		R.add_reagent(/datum/reagent/slurp_juice, 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/beer
 	name = "Space Beer"
@@ -1177,7 +1177,7 @@
 		var/datum/reagents/R = new/datum/reagents(50)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("beer", 30)
+		R.add_reagent(/datum/reagent/beer, 30)
 
 //Pills
 /obj/item/weapon/reagent_containers/pill/antitox
@@ -1189,7 +1189,7 @@
 		var/datum/reagents/R = new/datum/reagents(100)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("anti_toxin", 50)
+		R.add_reagent(/datum/reagent/anti_toxin, 50)
 
 /obj/item/weapon/reagent_containers/pill/tox
 	name = "Toxins pill"
@@ -1200,7 +1200,7 @@
 		var/datum/reagents/R = new/datum/reagents(100)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("toxin", 50)
+		R.add_reagent(/datum/reagent/toxin, 50)
 
 /obj/item/weapon/reagent_containers/pill/stox
 	name = "Sleeping pill"
@@ -1211,7 +1211,7 @@
 		var/datum/reagents/R = new/datum/reagents(100)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("stoxin", 30)
+		R.add_reagent(/datum/reagent/stoxin, 30)
 
 /obj/item/weapon/reagent_containers/pill/kelotane
 	name = "Kelotane pill"
@@ -1222,7 +1222,7 @@
 		var/datum/reagents/R = new/datum/reagents(100)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("kelotane", 30)
+		R.add_reagent(/datum/reagent/kelotane, 30)
 
 /obj/item/weapon/reagent_containers/pill/inaprovaline
 	name = "Inaprovaline pill"
@@ -1233,7 +1233,7 @@
 		var/datum/reagents/R = new/datum/reagents(100)
 		reagents = R
 		R.my_atom = src
-		R.add_reagent("inaprovaline", 30)
+		R.add_reagent(/datum/reagent/inaprovaline, 30)
 
 //Dispensers
 /obj/reagent_dispensers/watertank
@@ -1245,7 +1245,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("water",100)
+		reagents.add_reagent(/datum/reagent/water,100)
 
 /obj/reagent_dispensers/fueltank
 	name = "fueltank"
@@ -1256,7 +1256,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("fuel",100)
+		reagents.add_reagent(/datum/reagent/fuel,100)
 
 /obj/reagent_dispensers/beerkeg
 	name = "beer keg"
@@ -1267,7 +1267,7 @@
 
 	New()
 		..()
-		reagents.add_reagent("beer",100)
+		reagents.add_reagent(/datum/reagent/beer,100)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////

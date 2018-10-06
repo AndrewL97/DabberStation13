@@ -72,7 +72,7 @@
 
 		user << "You inject the solution into the power cell."
 
-		if(S.reagents.has_reagent("plasma", 5))
+		if(S.reagents.has_reagent(/datum/reagent/plasma, 5))
 
 			rigged = 1
 

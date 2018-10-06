@@ -755,9 +755,9 @@
 		/*
 		if(ismob(load))
 			var/mob/M = load
-			if(M.reagents.has_reagent("beer"))
+			if(M.reagents.has_reagent(/datum/reagent/beer"))
 				M.unlock_medal("DUI", 1)
-			if(M.reagents.has_reagent("space_drugs") && istype(H) && H.wear_id.assignment == "Security Officer")
+			if(M.reagents.has_reagent(/datum/reagent/space_drugs") && istype(H) && H.wear_id.assignment == "Security Officer")
 				M.unlock_medel("Ridin' Dirty",1)
 		*/
 
