@@ -13,7 +13,7 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 	var
 		CurrentWave = 1
 		DoingWave = 0
-		Cooldown = 5*10
+		Cooldown = 1
 	ex_act()
 		return
 	EnemyProcess()
@@ -47,6 +47,7 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 				explosion(src, 0, 0, 7, 0,1)
 				GamerJump(64)
 		Wave2()
+			Wave4()
 			ScreamBullshit("NIGGERFAGGOT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
 			for(var/i in 1 to 12)
 				var/obj/projectile/G = new(locate(x,y,z))
@@ -54,7 +55,9 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 				G.X_SPEED = cos(i*30)*5
 				G.Y_SPEED = sin(i*30)*5
 		Wave3()
-			sleep(10)
+			ScreamBullshit("HOW DARE YOU CALL KRYFRAC A IDIOT IM GONNA FUCKING KILL U")
+			Wave4()
+			Wave2()
 		Wave4()
 			//Wave 4 : Search for a enemy.
 			var
