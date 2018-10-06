@@ -20,20 +20,21 @@
 		attackby(var/obj/D, mob/user as mob)
 			if(istype(D,/obj/item/weapon/reagent_containers/food/snacks/hydro))
 				planted_crop = D.icon_state
-				src << "<b>You plant some [D.icon_state]."
+				user << "<b>You plant some [D.icon_state]."
 				del D
 			else
 				if(min(7,round(grow_state)) >= 7)
 					var/path = text2path("/obj/item/weapon/reagent_containers/food/snacks/hydro/[planted_crop]")
 					if(path)
-						src << "<b>You harvest some [planted_crop]."
+						user << "<b>You harvest some [planted_crop]."
 						for(var/i in 1 to 7)
 							new path(user.loc)
 						grow_state = 0
 						planted_crop = null
+						Get_Overlay()
 		special_process()
 			if(planted_crop)
-				desc = "It's a hydroponics tray. It has [planted_crop] planted.<br><b>Grow Status : %[round((min(7,grow_state)/7)*100)]</b>"
+				desc = "It's a hydroponics tray. It has <b>[planted_crop]</b> planted.<br><font color='#00FF00'><b>Grow Status : %[round((min(7,grow_state)/7)*100)]</b>"
 				//every crop has a grow time of 6
 				var/obj/water/device/connector/D = locate(/obj/water/device/connector) in locate(x,y,z)
 				if(D && frm_counter % 3 == 1)
@@ -49,7 +50,8 @@
 
 		proc/Get_Overlay()
 			overlays = null
-			src.overlays += image("icon" = 'hydroponics.dmi', "icon_state" = "[planted_crop][min(7,round(grow_state))]")
+			if(planted_crop)
+				src.overlays += image("icon" = 'hydroponics.dmi', "icon_state" = "[planted_crop][min(7,round(grow_state))]")
 
 /obj/item/weapon/reagent_containers/food/snacks/hydro
 	name = "hydro food"
