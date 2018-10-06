@@ -316,8 +316,12 @@ obj
 			if(src in water_changed)
 				water_changed -= src
 /turf/simulated/proc/Process_Water()
-	if(listofconnections.len < 1 || frm_counter % 5 == 1)
+	if(listofconnections.len < 1 || water_cycles % 5 == 1)
 		Get_Connections()
+		if(listofconnections.len == 0)
+			if(src in water_changed)
+				water_changed -= src
+			return //Stop processing this as there's nothing to flood.
 	for(var/a in listofconnections)
 		if(istype(a,/turf/simulated))
 			CHECK_TICK_WATER()

@@ -48,16 +48,6 @@ var/dab_coins_currency = 250
 	containername = "Special Ops crate"
 	hidden = 1
 
-/datum/supply_packs/wizard
-	name = "Wizard costume"
-	contains = list("/obj/item/weapon/staff",
-					"/obj/item/clothing/suit/wizrobe",
-					"/obj/item/clothing/shoes/sandal",
-					"/obj/item/clothing/head/wizard")
-	cost = 20
-	containertype = "/obj/crate"
-	containername = "Wizard costume crate"
-
 /datum/supply_packs/metal50
 	name = "50 Metal Sheets"
 	contains = list("/obj/item/weapon/sheet/metal")

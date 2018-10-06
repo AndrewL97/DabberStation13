@@ -8,18 +8,9 @@
 		start_events()
 
 /proc/event()
-	switch(rand(1,4))
-		if(1)
-			event = 1
-			command_alert("Meteors have been detected on collision course with the station.", "Meteor Alert")
-			spawn(100)
-				meteor_wave()
-				meteor_wave()
-			spawn(500)
-				meteor_wave()
-				meteor_wave()
+	switch(rand(1,3))
 
-		if(2)
+		if(1)
 			event = 1
 			command_alert("Space-time anomalies detected on the station. There is no additional data.", "Anomaly Alert")
 			var/list/turfs = list(	)
@@ -41,7 +32,7 @@
 						spawn(rand(300,600))
 							del(P)
 
-		if(3)
+		if(2)
 			event = 1
 			command_alert("High levels of radiation detected near the station. Please report to the Med-bay if you feel strange.", "Anomaly Alert")
 			for(var/mob/living/carbon/human/H in world)
@@ -55,7 +46,7 @@
 					else
 						randmutg(H)
 						domutcheck(H,null,1)
-		if(4)
+		if(3)
 			event = 1
 			viral_outbreak()
 

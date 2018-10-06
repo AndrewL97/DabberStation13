@@ -201,7 +201,7 @@
 
 	var/datum/intercept_text/i_text = new /datum/intercept_text
 	for(var/A in possible_modes)
-		intercepttext += i_text.build(A, pick(head_revolutionaries))
+		intercepttext += i_text.build(A, null)
 
 	for (var/obj/machinery/computer/communications/comm in world)
 		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)

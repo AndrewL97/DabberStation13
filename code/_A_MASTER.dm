@@ -21,9 +21,10 @@ var/list/water_changed = list()
 
 var/special_processing = list()
 
-#define CPU_WARN 75
-#define CPU_STABLE_LEVEL 20
-#define CPU_CHECK_MAX 40 //if cpu goes higher than this, some things will do sleep(tick_lag_original) and throttle, this is done in CHECK_TICK()
+#define CPU_WARN 55 //How much CPU should trigger the warning that it's going too high?
+#define CPU_STABLE_LEVEL 25 //What CPU does dab13 normally run on?
+#define CPU_CHECK_MAX 40 //if cpu goes higher than this, some things will do sleep(tick_lag_original) and throttle.
+#define ATMOS_CPU_FORCE_SLEEP 70 //Force atmos/water to sleep (and throttle) if CPU goes higher than this value to stabilize the CPU.
 
 client
 	New()
@@ -43,7 +44,7 @@ obj
 		return
 
 var/actions_per_tick = 0
-var/max_actions = 50 //Max actions per tick, Really fast. of course this can be loewr!!!!!!!!!!!
+var/max_actions = 40 //Max actions per tick, Really fast. of course this can be loewr!!!!!!!!!!!
 
 var/CPU_warning = 0
 
@@ -51,37 +52,33 @@ var/actions_per_tick_atmos = 0
 var/max_actions_atmos = 50 //Max actions per tick (FOR ATMOS), also fast. i definitely think this could be higher if optimized.
 
 var/actions_per_tick_water = 0
-var/max_actions_water = 140 //Max actions per tick (FOR WATER), also fast.
+var/max_actions_water = 120 //Max actions per tick (FOR WATER), also fast.
 
 var/list/typepaths = list()
 
 var/master_Processed = 0
 var/atmos_processed = 0
 var/water_processed = 0
-var/water_cycles = 0
+var/water_cycles = 0 //how
 
 proc/CHECK_TICK_WATER() //epic optimizer used for our water system.
 	actions_per_tick_water += 1
 	water_processed += 1
-	if(actions_per_tick_water > max_actions_water - ((max(0,min(world.cpu,50))/50)*(max_actions_water/1.5)))
+	if(actions_per_tick_water > max_actions_water - ((max(0,min(world.cpu,50))/50)*(max_actions_water/1.5)) || world.cpu > ATMOS_CPU_FORCE_SLEEP)
 		sleep(tick_lag_original)
 		actions_per_tick_water = 0
 
 proc/CHECK_TICK_ATMOS() //epic optimizer (ATMOS EDITION)
 	actions_per_tick_atmos += 1
 	atmos_processed += 1
-	if(actions_per_tick_atmos > max_actions_atmos)
+	if(actions_per_tick_atmos > max_actions_atmos || world.cpu > ATMOS_CPU_FORCE_SLEEP)
 		sleep(tick_lag_original)
 		actions_per_tick_atmos = 0
-
-
-//a good calculation could be ((max(0,min(world.cpu,100))/100)*(max_actions/2))
-//courtesy of eric from epic games
 
 proc/CHECK_TICK() //epic optimizer
 	master_Processed += 1
 	actions_per_tick += 1
-	if(actions_per_tick > max_actions - ((max(0,min(world.cpu,100))/100)*(max_actions/2)*(CPU_warning)) )
+	if(actions_per_tick > max_actions - ((max(0,min(world.cpu,100))/100)*(max_actions/2)*(CPU_warning)))
 		sleep(tick_lag_original)
 		actions_per_tick = 0
 
@@ -100,11 +97,11 @@ datum/controller/game_controller
 		water_process()
 		CPU_CHECK()
 			if(frm_counter > 200 && frm_counter % 10 == 1)
-				if(world.cpu > 500) //we are missing alot of stuff already
+				if(world.cpu > 600) //we are missing alot of stuff already
 					if(!(world.port in PORTS_NOT_ALLOWED))
 						spawn()
 							call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server has rebooted due to high processor usage, (%[world.cpu])**\" } ", "Content-Type: application/json")
-					world << "<font color='red'><b><font size=5>Due to extreme lag (world CPU was %[world.cpu]), server is rebooting to prevent a crash."
+					world << "<font color='red'><b><font size=5>Due to extreme lag (world CPU was %[world.cpu]), server is stopping and rebooting to prevent a crash."
 					world.Reboot()
 					return
 				if(world.cpu > CPU_WARN && CPU_warning == 0)
@@ -116,8 +113,6 @@ datum/controller/game_controller
 	setup() //this takes way too long
 		if(master_controller && (master_controller != src))
 			del(src)
-			//There can be only one master. SHUT THE FUCK UP FURTARD
-		var/RLstart_time = world.timeofday
 
 		if(!air_master)
 			air_master = new /datum/controller/air_system()
@@ -130,13 +125,12 @@ datum/controller/game_controller
 
 		setupgenetics()
 
+		var/RLstart_time = world.timeofday
 		var/start_time = world.timeofday
 
 		world << "\red \b Initializing lighting"
 		lighting.init()
 		lighting_inited = 1
-		for(var/obj/water/tank/i in world)
-			i.on = 1
 		for(var/obj/machinery/light/l in world)
 			l.update()
 		world << "\green \b Initialized lighting system in [world.timeofday-start_time/10] seconds!"
@@ -148,10 +142,13 @@ datum/controller/game_controller
 
 		spawn
 			ticker.pregame()
-
+		start_time = world.timeofday
 		world << "Initializing Special objects"
+		for(var/obj/water/tank/i in world)
+			i.on = 1
 		for(var/obj/window_spawner/G in world)
 			G.Initialize_Window()
+		world << "\green \b Initialized special objects in [world.timeofday-start_time/10] seconds!"
 
 		start_time = world.timeofday
 		world << "\red \b Creating sandbox spawn list."
