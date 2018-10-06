@@ -63,6 +63,11 @@ default particles
 		icon_state = "water"
 		offset_x = -1
 		offset_y = -1
+	Explosion
+		time_to_disappear = 2
+		icon_state = "explosion"
+		offset_x = -1
+		offset_y = -1
 	Spark
 		time_to_disappear = 6
 		alpha_fade = -255
