@@ -10,6 +10,7 @@
 /mob/verb/ooc(msg as text)
 	//log_ooc("[src.name]/[src.key] : [msg]")
 	msg = replacetext("[msg]", "@", "not funny")
+	msg = replacetext("[msg]", "nigger", "(goon friendly word)") //LOL
 	if(msg != "")
 		if(fexists("sound/oocvoice/[lowertext(msg)].ogg"))
 			world << sound("sound/oocvoice/[lowertext(msg)].ogg")
