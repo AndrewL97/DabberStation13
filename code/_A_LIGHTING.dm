@@ -1,6 +1,6 @@
 /*
 lighting based off forum_account's library.
-except i got tired of tile by tile so instead we use a overlay, see RGBlights.dmi and spotlight.dmi
+except i got tired of tile by tile so instead we use a obj with special blend modes, see RGBlights.dmi and spotlight.dmi
 */
 
 atom
