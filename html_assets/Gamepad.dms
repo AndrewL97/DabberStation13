@@ -1,0 +1,54 @@
+<byondclass name="gamepad">
+	<script>
+	{
+		config: {gamepads: null,gamepadIDs: {}},
+		fn: {
+			create: function(){
+				alert("Gamepad Control Created.");
+				document.addEventListener("gamepadconnected",function(event){
+					byond.fn.input("GamepadConnected \"" + event.gamepad.index.toString() + "\"");
+					alert("Gamepad Gonnected: " + Number(event.gamepad.index));
+				});
+				document.addEventListener("gamepaddisconnected",function(event){
+					byond.fn.input("GamepadDisconnected \"" + event.gamepad.index.toString() + "\"");
+					alert("Gamepad Gonnected: " + Number(event.gamepad.index));
+				});
+				window.requestAnimationFrame(this.runAnimation);
+			},
+			runAnimation: function(){
+				window.requestAnimationFrame(this.runAnimation);
+
+				gamepads = navigator.getGamepads();
+
+				for(var i = 0; i < gamepads.length; ++i){
+					var pad = gamepads[i];
+					var padID = pad.index.toString();
+					if(!(padID in gamepadIDs))
+						gamepadIDs[padID] = {
+						buttons:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+						abuttons:[0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],
+						axes:[0.0,0.0,0.0,0.0] };
+					for(var j = 0; j < pad.buttons.length; ++j){
+						var button = pad.buttons[j];
+						if(button.pressed != gamepadIDs[padID].buttons[j]){
+							gamepadIDs[padID].buttons[j] = button.pressed;
+							byond.fn.input("ButtonPress \"" + padID + "\" " + Number(j) +  " " + Number(gamepadIDs[padID].buttons[j]));
+						}
+						if(button.value != gamepadIDs[padID].abuttons[j]){
+							gamepadIDs[padID].abuttons[j] = button.value;
+							byond.fn.input("ChangeButton \"" + padID + "\" " + Number(j) + " " + Number(gamepadIDs[padID].abuttons[j]));
+						}
+					}
+					for(var k = 0; j < pad.axes.length; k++){
+						var axis = pad.axes[k];
+						if(axis != gamepadIDs[padID].axes[k]){
+							gamePadIDs[padID].axes[k] = axis;
+							byond.fn.input("ChangeAxis \"" + padID + "\" " + Number(j) + " " + Number(gamepadIDs[padID].axes[k]));
+						}
+					}
+				}
+			}
+		}
+	}
+	</script>
+</byondclass>

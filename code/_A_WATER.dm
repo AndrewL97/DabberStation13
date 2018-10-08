@@ -237,6 +237,32 @@ obj
 						else
 							G.water_pressure_direction = SOUTH
 						G.water_pressure += outputting_pressure
+		drain
+			icon_state = "drain"
+			desc = "Drains water in rooms."
+			water_pressure_direction = SOUTH
+			density = 1
+			level = 1
+			hide()
+				var/turf/T = locate(x,y,z)
+				if(istype(T,/turf))
+					icon_state = level < T.level ? "drain_f" : "drain"
+			Process_Water()
+				hide()
+				var/turf/T = locate(x,y,z)
+				if(T)
+					water_pressure += T.water_height
+					T.water_height = 0
+				water_pressure_direction = dir
+				if(water_pressure > 0)
+					var/obj/water/pipes/G = locate(/obj/water/pipes) in get_step(src,water_pressure_direction)
+					if(G)
+						if(G.dir in DIAGONALS)
+							G.water_pressure_direction = G.dir - REVERSEDIRS(water_pressure_direction)
+						else
+							G.water_pressure_direction = water_pressure_direction
+						G.water_pressure += water_pressure
+					water_pressure = 0
 		meter
 			name = "meter"
 			icon = 'meter.dmi'

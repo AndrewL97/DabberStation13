@@ -143,7 +143,7 @@ mob
 				if(mob.hud_used)
 					if(mob.hud_used.move_intent)
 						mob.hud_used.move_intent.icon_state = "walking"
-		var/dirAA = (s*SOUTH)+(n*NORTH)+(e*EAST)+(w*WEST)
+		var/dirAA = ((s||axes["1"]>0.5)*SOUTH)+((n||axes["1"]<-0.5)*NORTH)+((e||axes["0"]>0.5)*EAST)+((w||axes["0"]<-0.5)*WEST)
 		if(dirAA != 0 && can_mo)
 			Move(get_step(mob,dirAA),dirAA)
 		if(j)

@@ -28,6 +28,7 @@
 #define FILE_DIR "sound/machines"
 #define FILE_DIR "sound/misc"
 #define FILE_DIR "sound/oocvoice"
+#define FILE_DIR "sound/playervoices"
 #define FILE_DIR "sound/voice"
 #define FILE_DIR "sound/weapons"
 // END_FILE_DIR
@@ -41,6 +42,7 @@
 #include "code\__ANTI_NIGGER.dm"
 #include "code\__DAMAGE_OVERRIDE.dm"
 #include "code\_A_ANIMATION.dm"
+#include "code\_A_GAMEPAD.dm"
 #include "code\_A_GUN.dm"
 #include "code\_A_HEIGHT.dm"
 #include "code\_A_LAYERING.dm"
