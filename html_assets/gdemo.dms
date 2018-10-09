@@ -1,6 +1,0 @@
-<body>
-	<div id="main" byondclass=child>
-		<div id="map" byondclass=map></div>
-		<div id="gamepad" byondclass=gamepad></div>
-	</div>
-</body>
