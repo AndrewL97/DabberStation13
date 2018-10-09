@@ -38,12 +38,13 @@
 			return
 
 		if (href_list["loadcard"])
-			var/obj/item/weapon/card/C = input(usr,"What card do you want to use?","Credit Card Check") in usr.contents
-			if(C && istype(C,/obj/item/weapon/card))
-				if(C.credit)
-					var/cod = input(usr,"Security Code","Credit Card Check") as num|null
-					if("[cod]" == "[C.credit.code]")
-						Cred = C.credit
+			if(istype(usr,/mob/living/carbon/human))
+				var/obj/item/weapon/card/C = usr:wear_id
+				if(C && istype(C,/obj/item/weapon/card))
+					if(C.credit)
+						var/cod = input(usr,"Security Code","Credit Card Check") as num|null
+						if("[cod]" == "[C.credit.code]")
+							Cred = C.credit
 		if (href_list["logout"])
 			Cred = null //Log out.
 		src.add_fingerprint(usr)

@@ -79,7 +79,7 @@
 			//src.equip_if_possible(new /obj/item/device/t_scanner(src), slot_r_store)
 
 		if ("Assistant")
-			src.equip_if_possible(new /obj/item/clothing/under/color/grey(src), slot_w_uniform)
+			src.equip_if_possible(new /obj/item/clothing/under/lightred(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/black(src), slot_shoes)
 
 		if ("Detective")
