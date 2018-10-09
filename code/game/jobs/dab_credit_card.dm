@@ -3,7 +3,7 @@ DabCoins credit card
 
 not a vbucks ripoff i swear
 */
-var/list_dab_cards = list()
+var/list/list_dab_cards = list()
 /datum/credit_card
 	//name = "credit card"
 	var/owner = ""
@@ -15,6 +15,7 @@ var/list_dab_cards = list()
 	proc/Spend_DabCoins(var/amount)
 		if(dabcoins >= amount)
 			dabcoins -= amount
+			Save()
 			return 1
 		else
 			return 0

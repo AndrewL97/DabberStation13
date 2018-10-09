@@ -237,6 +237,19 @@
 
 	return
 
+/obj/item/weapon/card/id/proc/loadCredit(var/key)
+	var/datum/credit_card/fC = null
+	for(var/datum/credit_card/FI in list_dab_cards)
+		if(FI.owner == key)
+			fC = FI
+	if(!fC)
+		credit = new()
+		var/security_code = rand(1000,9999)
+		credit.code = security_code
+		credit.InitCard("[key]")
+	else
+		credit = fC //This method is unoptimized, it could be better.
+
 /mob/living/carbon/human/proc/spawnId(rank)
 	var/obj/item/weapon/card/id/C = null
 	switch(rank)
@@ -244,18 +257,9 @@
 			C = new /obj/item/weapon/card/id/gold(src)
 		else
 			C = new /obj/item/weapon/card/id(src)
-	var/datum/credit_card/fC = null
-	for(var/datum/credit_card/FI in list_dab_cards)
-		if(FI.owner == key)
-			fC = FI
-	if(!fC)
-		C.credit = new()
-		var/security_code = rand(1000,9999)
-		C.credit.code = security_code
-		C.credit.InitCard("[key]")
-	else
-		C.credit = fC //This method is unoptimized, it could be better.
-	src << "<b><font color='#00ffff'>Your DabCard security number is : [C.credit.code], You have [C.credit.dabcoins] dabcoins currently."
+	C.loadCredit(key)
+	if(C.credit)
+		src << "<b><font color='#00ffff'>Your DabCard security number is : [C.credit.code], You have [C.credit.dabcoins] dabcoins currently."
 	if(C)
 		C.registered = src.real_name
 		C.assignment = rank

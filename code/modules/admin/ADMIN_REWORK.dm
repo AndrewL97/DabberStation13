@@ -283,6 +283,8 @@ client
 				return
 		var/atom/movable/e = new g
 		e.loc = locate(mob.x,mob.y,mob.z)
+		if(istype(e,/obj/item/weapon/card))
+			e:loadCredit(key)
 		message_admins("[key] spawned a [e.name] ([e.type]) at [mob.x],[mob.y]")
 	else
 		..()
