@@ -1,9 +1,7 @@
 //Config stuff
-#define SUPPLY_DOCKZ 1          //Z-level of the Dock.
-#define SUPPLY_STATIONZ 1       //Z-level of the Station.
 #define SUPPLY_POINTSPER 1      //Points per tick.
-#define SUPPLY_POINTDELAY 450	//Delay between ticks in milliseconds.
-#define SUPPLY_MOVETIME 50	//Time to station is milliseconds.
+#define SUPPLY_POINTDELAY 10	//Delay between ticks in milliseconds.
+#define SUPPLY_MOVETIME 5	//Time to station is seconds.
 #define SUPPLY_POINTSPERCRATE 5	//Points per crate sent back.
 #define SUPPLY_STATION_AREATYPE "/area/supply/station" //Type of the supply shuttle area for station
 #define SUPPLY_DOCK_AREATYPE "/area/supply/dock"	//Type of the supply shuttle area for dock
@@ -14,7 +12,6 @@ var/list/supply_shuttle_shoppinglist = new/list()
 var/list/supply_shuttle_requestlist = new/list()
 var/supply_shuttle_can_send = 1
 var/supply_shuttle_time = 0
-var/supply_shuttle_timeleft = 0
 var/dab_coins_currency = 250
 
 /area/supply/station //DO NOT TURN THE SD_LIGHTING STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
@@ -339,14 +336,8 @@ var/dab_coins_currency = 250
 	spawn(SUPPLY_POINTDELAY) supply_ticker()
 
 /proc/supply_process()
-	while(supply_shuttle_time - world.timeofday > 0)
-		var/ticksleft = supply_shuttle_time - world.timeofday
-
-		if(ticksleft > 1e5)
-			supply_shuttle_time = world.timeofday + 10	// midnight rollover
-
-
-		supply_shuttle_timeleft = round( ((ticksleft / 10)/60) )
+	while(supply_shuttle_time > 0)
+		supply_shuttle_time -= 1
 		sleep(10)
 	supply_shuttle_moving = 0
 	send_supply_shuttle()
@@ -358,8 +349,6 @@ var/dab_coins_currency = 250
 
 	for(var/turf/T in get_area_turfs(shuttleat) )
 		if(locate(/mob/living) in T) return 0
-		for(var/atom/ATM in T)
-			if(locate(/mob/living) in ATM) return 0
 
 	return 1
 
@@ -441,7 +430,7 @@ var/dab_coins_currency = 250
 	else
 
 		dat += {"<BR><B>Supply shuttle</B><HR>
-		Location: [supply_shuttle_moving ? "Moving to station ([supply_shuttle_timeleft] Mins.)":supply_shuttle_at_station ? "Station":"Dock"]<BR>
+		Location: [supply_shuttle_moving ? "Moving to station ([supply_shuttle_time] Secs.)":supply_shuttle_at_station ? "Station":"Dock"]<BR>
 		<HR>dabcoins: [dab_coins_currency] <A href='?src=\ref[src];dabcoins=1'>Add more</A><BR>
 		<BR>\n<A href='?src=\ref[src];order=1'>Request items</A><BR><BR>
 		<A href='?src=\ref[src];vieworders=1'>View approved orders</A><BR><BR>
@@ -512,7 +501,7 @@ var/dab_coins_currency = 250
 		dat = src.temp
 	else
 		dat += {"<BR><B>Supply shuttle</B><HR>
-		\nLocation: [supply_shuttle_moving ? "Moving to station ([supply_shuttle_timeleft] Mins.)":supply_shuttle_at_station ? "Station":"Dock"]<BR>
+		\nLocation: [supply_shuttle_moving ? "Moving to station ([supply_shuttle_time] Secs.)":supply_shuttle_at_station ? "Station":"Dock"]<BR>
 		<HR>\nDabcoins: [dab_coins_currency] <A href='?src=\ref[src];dabcoins=1'>Add more</A><BR>\n<BR>
 		[supply_shuttle_moving ? "\n*Must be at dock to order items*<BR>\n<BR>":supply_shuttle_at_station ? "\n*Must be at dock to order items*<BR>\n<BR>":"\n<A href='?src=\ref[src];order=1'>Order items</A><BR>\n<BR>"]
 		[supply_shuttle_moving ? "\n*Shuttle already called*<BR>\n<BR>":supply_shuttle_at_station ? "\n<A href='?src=\ref[src];sendtodock=1'>Send to Dock</A><BR>\n<BR>":"\n<A href='?src=\ref[src];sendtostation=1'>Send to station</A><BR>\n<BR>"]
@@ -565,7 +554,7 @@ var/dab_coins_currency = 250
 
 		process_supply_order()
 
-		supply_shuttle_time = world.timeofday + SUPPLY_MOVETIME
+		supply_shuttle_time = SUPPLY_MOVETIME
 		spawn(0)
 			supply_process()
 
@@ -681,11 +670,8 @@ var/dab_coins_currency = 250
 
 
 /proc/send_supply_shuttle()
-
-	if (supply_shuttle_moving) return
-
 	if (!supply_can_move())
-		usr << "\red The supply shuttle can not transport station employees."
+		world << "\red The supply shuttle can not transport station employees."
 		return
 
 	var/shuttleat = supply_shuttle_at_station ? SUPPLY_STATION_AREATYPE : SUPPLY_DOCK_AREATYPE
@@ -695,7 +681,6 @@ var/dab_coins_currency = 250
 	var/area/dest = locate(text2path(shuttleto))
 
 	if(!from || !dest)
-		world << "fail"
 		return
 
 	from.move_contents_to(dest)

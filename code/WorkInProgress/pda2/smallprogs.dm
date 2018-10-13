@@ -188,7 +188,7 @@ Code:
 		dat += "<h4>Supply Record Interlink</h4>"
 
 		dat += "<BR><B>Supply shuttle</B><BR>"
-		dat += "Location: [supply_shuttle_moving ? "Moving to station ([supply_shuttle_timeleft] Mins.)":supply_shuttle_at_station ? "Station":"Dock"]<BR>"
+		dat += "Location: [supply_shuttle_moving ? "Moving to station ([supply_shuttle_time] Secs.)":supply_shuttle_at_station ? "Station":"Dock"]<BR>"
 		dat += "Current approved orders: <BR><ol>"
 		for(var/S in supply_shuttle_shoppinglist)
 			var/datum/supply_order/SO = S

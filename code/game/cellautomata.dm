@@ -1,12 +1,14 @@
 /world/proc/load_motd()
 	join_motd = file2text("config/motd.txt")
 
+var/list/gamemodes_list=list()
 
 /world/proc/load_configuration()
 	config = new /datum/configuration()
 
 /world/New()
 	src.load_configuration()
+	gamemodes_list = typesof(/datum/game_mode)-/datum/game_mode
 
 	if (config && config.server_name != null && config.server_suffix && world.port > 0)
 		// dumb and hardcoded but I don't care~

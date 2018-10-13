@@ -29,10 +29,7 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 
 /datum/game_mode/proc/ending()
 	return
-var/gamemodes_list=list(
-/datum/game_mode/normal,
-/datum/game_mode/battle_royale
-)
+
 /datum/controller/gameticker/proc/setup()
 	if(!(world.port in PORTS_NOT_ALLOWED))
 		for(var/i in 0 to 10)
