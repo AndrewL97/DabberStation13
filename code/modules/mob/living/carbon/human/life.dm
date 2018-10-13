@@ -117,11 +117,28 @@
 				if (prob(7))
 					switch(pick(1,2,3))
 						if(1)
-							say(pick("IM A PONY NEEEEEEIIIIIIIIIGH", "without oxigen blob don't evoluate?", "CAPTAINS A COMDOM", "[pick("", "that faggot traitor")] [pick("joerge", "george", "gorge", "gdoruge")] [pick("mellens", "melons", "mwrlins")] is grifing me HAL;P!!!", "can u give me [pick("telikesis","halk","eppilapse")]?", "THe saiyans screwed", "Bi is THE BEST OF BOTH WORLDS>", "I WANNA PET TEH MONKIES", "stop grifing me!!!!", "SOTP IT#"))
+							say(pick("I... I just really like your penis, okay?",
+							";g",
+							"this game sucks",
+							"krifra eat poo?",
+							"without oxigen blob don't evoluate?",
+							"CAPTAINS A COMDOM",
+							"wjy is niger cemsored?",
+							";ADMIN REVIVE ME CLANCE KILLED ME NOT VALID!!!",
+							";CLANCE KILLING ME!!",
+							"[pick("", "that faggot traitor")] [pick("joerge", "george", "gorge", "gdoruge")] [pick("mellens", "melons", "mwrlins")] is grifing me HAL;P!!!",
+							"can u give me [pick("telikesis","halk","eppilapse")]?",
+							"THe saiyans screwed",
+							"im trangsegeder!!!!",
+							"I WANNA PET TEH MONKIES",
+							"PLEASE TURN ME INTO A SENTIENT LOAF AS A JOKE IT WOULD BE FUNNY!",
+							"By the way CHANCE KILLED ME. I didn't just walk onto it accidentally. Chance PULLED me onto it. (And he couldn't of known I was an antagonist so it is not valid)"
+							"stop grifing me!!!!",
+							"SOTP IT#"))
 						if(2)
-							emote("fart")
-						if(3)
 							emote("drool")
+						if(3)
+							T_Pose()
 
 		handle_mutations_and_radiation()
 

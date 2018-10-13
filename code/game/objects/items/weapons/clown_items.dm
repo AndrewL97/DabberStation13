@@ -20,10 +20,10 @@ BIKE HORN
 
 /obj/item/weapon/bananapeel/HasEntered(AM as mob|obj)
 	if (istype(AM, /mob/living/carbon))
-		var/mob/M =	AM
-		if ((istype(M, /mob/living/carbon/human) && istype(M:shoes, /obj/item/clothing/shoes/galoshes)))
-			return
-		if(!M.onFloor)
+		if(AM:onFloor==0)
+			var/mob/M =	AM
+			if ((istype(M, /mob/living/carbon/human) && istype(M:shoes, /obj/item/clothing/shoes/galoshes)))
+				return
 			M.pulling = null
 			M << "\blue You slipped on the banana peel!"
 			playsound(src, 'slip.ogg', 50, 1, -3)

@@ -136,10 +136,11 @@ var/list/bullets = list()
 		..()
 	pixel_hit(atom/e)
 		e.bullet_act(src)
+		del src
 	proc/bullet_process()
 		..()
 		lifespan += 1
-		if(lifespan > 60*4) //bullet has existed for too long
+		if(lifespan > 60*3) //bullet has existed for too long
 			del src
 		if(!PixelMove(X_SPEED,Y_SPEED,owner))
 			del src

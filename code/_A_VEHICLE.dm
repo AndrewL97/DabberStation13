@@ -78,7 +78,6 @@ atom/movable
 					else
 						if(PixelCollision2(e))
 							pixel_hit(e)
-							bumpedwalls += 1
 
 			if(bumpedwalls > 0)
 				x = old_x

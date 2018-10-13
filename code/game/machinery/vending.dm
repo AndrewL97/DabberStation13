@@ -69,6 +69,7 @@
 		R.product_name = capitalize(temp.name)
 		R.product_path = path_list[p]
 		R.display_color = pick("red","blue","green")
+		R.product_cost = rand(50,200)
 
 		if(hidden)
 			R.amount = rand(1,6)

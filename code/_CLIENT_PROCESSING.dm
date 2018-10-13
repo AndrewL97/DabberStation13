@@ -267,11 +267,12 @@ mob
 			if ((j_pack && j_pack < 1))
 				src.move_delay += 5
 
+			if (src.mob.drowsyness > 0)
+				src.move_delay += 6
+
 			switch(src.mob.m_intent)
 
 				if("run")
-					if (src.mob.drowsyness > 0)
-						src.move_delay += 6
 
 					src.move_delay += 2
 
@@ -284,14 +285,14 @@ mob
 			if (src.mob.restrained())
 				for(var/mob/M in range(src.mob, 1))
 					if (((M.pulling == src.mob && (!( M.restrained() ) && M.stat == 0)) || locate(/obj/item/weapon/grab, src.mob.grabbed_by.len)))
-						src << "\blue You're restrained! You can't move!" //gay
+						src << "\blue You're restrained! You can't move!"
 						return 0
 
 			src.moving = 1
 
 			var/RLMove = max(tick_lag_original,(src.move_delay - world.time))
 			mob.glide_size = (world.icon_size/RLMove)*tick_lag_original
-			//TILE_HEIGHT / move_delay * TICK_LAG
+
 			glide_size = mob.glide_size
 			if(mob.MyShadow)
 				mob.MyShadow.glide_size = mob.glide_size

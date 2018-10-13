@@ -26,7 +26,6 @@ datum/preferences
 	var/animating = 0
 	*/
 	var/tail = "none"
-	var/zangoose_markings = "No"
 	var/tail_color = rgb(127,127,127)
 
 	var/occupation1 = "No Preference"
@@ -82,22 +81,18 @@ datum/preferences
 		var/list/speciesorganGENDER = list("chest","groin") //will eb converted to "chest_m_s"
 		var/list/speciesorganNORMAL = list("head", "arm_left", "arm_right", "hand_left", "hand_right", "leg_left", "leg_right", "foot_left", "foot_right")
 		src.preview_icon = new /icon(Get_Species_Icon(), "blank")
-		if(species != "xenomasisi")
-			for(var/ee in speciesorganNORMAL)
-				src.preview_icon.Blend(new /icon(Get_Species_Icon(), "[ee]_s"), ICON_OVERLAY)
-			for(var/eee in speciesorganGENDER)
-				src.preview_icon.Blend(new /icon(Get_Species_Icon(), "[eee]_[g]_s"), ICON_OVERLAY)
-		else
-			src.preview_icon.Blend(new /icon(Get_Species_Icon(), "alien_s"), ICON_OVERLAY)
+		for(var/ee in speciesorganNORMAL)
+			src.preview_icon.Blend(new /icon(Get_Species_Icon(), "[ee]_s"), ICON_OVERLAY)
+		for(var/eee in speciesorganGENDER)
+			src.preview_icon.Blend(new /icon(Get_Species_Icon(), "[eee]_[g]_s"), ICON_OVERLAY)
 
 		// Skin tone
-		if (src.species_color != null && species != "human" && species != "xenomasisi")
+		if (src.species_color != null && species != "human")
 			src.preview_icon += species_color
-
-			if(zangoose_markings == "Yes")
-				var/icon/tail_c = new /icon('icons/mob/vulpine.dmi', "icon_state" = "zangor")
-				tail_c += tail_color
-				src.preview_icon.Blend(tail_c, ICON_OVERLAY)
+		if(tail != "none")
+			var/icon/tail_c = new /icon('icons/mob/mob_acc.dmi', "icon_state" = "[tail]") //i hate maintaining furry code
+			tail_c += tail_color
+			src.preview_icon.Blend(tail_c, ICON_OVERLAY)
 		var/icon/eyes_s = new/icon("icon" = 'icons/mob/human_face.dmi', "icon_state" = "eyes_s")
 		eyes_s.Blend(rgb(src.r_eyes, src.g_eyes, src.b_eyes), ICON_ADD)
 
@@ -178,7 +173,6 @@ datum/preferences
 		update_preview_icon()
 		user << browse_rsc(preview_icon, "previewicon.png")
 
-		var/list/destructive = assistant_occupations.Copy()
 		var/dat = "<html><body>"
 		dat += "<b>Name:</b> "
 		dat += "<a href=\"byond://?src=\ref[user];preferences=1;real_name=input\"><b>[src.real_name]</b></a> "
@@ -188,28 +182,8 @@ datum/preferences
 		dat += "(&reg; = <a href=\"byond://?src=\ref[user];preferences=1;b_random_name=1\">[src.be_random_name ? "Yes" : "No"]</a>)"
 		dat += "<br>"
 
-		dat += "<b>Gender:</b> <a href=\"byond://?src=\ref[user];preferences=1;gender=input\"><b>[src.gender == MALE ? "Male" : "Female"]</b></a><br>"
+		dat += "<b>Gender:</b> <a href=\"byond://?src=\ref[user];preferences=1;gender=input\"><b>[src.gender == MALE ? "Male" : "Female"][species == "human" && gender == FEMALE ? " (catgirl ears enabled)" : ""]</b></a><br>" //this is what you get for PLAYING TG NOOB
 		dat += "<b>Age:</b> <a href='byond://?src=\ref[user];preferences=1;age=input'>[src.age]</a>"
-
-		dat += "<hr><b>Occupation Choices</b><br>"
-		if (destructive.Find(src.occupation1))
-			dat += "\t<a href=\"byond://?src=\ref[user];preferences=1;occ=1\"><b>[occupation1]</b></a><br>"
-		else
-			if (src.occupation1 != "No Preference")
-				dat += "\tFirst Choice: <a href=\"byond://?src=\ref[user];preferences=1;occ=1\"><b>[occupation1]</b></a><br>"
-
-				if (destructive.Find(src.occupation2))
-					dat += "\tSecond Choice: <a href=\"byond://?src=\ref[user];preferences=1;occ=2\"><b>[occupation2]</b></a><BR>"
-
-				else
-					if (src.occupation2 != "No Preference")
-						dat += "\tSecond Choice: <a href=\"byond://?src=\ref[user];preferences=1;occ=2\"><b>[occupation2]</b></a><BR>"
-						dat += "\tLast Choice: <a href=\"byond://?src=\ref[user];preferences=1;occ=3\"><b>[occupation3]</b></a><BR>"
-
-					else
-						dat += "\tSecond Choice: <a href=\"byond://?src=\ref[user];preferences=1;occ=2\">No Preference</a><br>"
-			else
-				dat += "\t<a href=\"byond://?src=\ref[user];preferences=1;occ=1\">No Preference</a><br>"
 
 		dat += "<hr><table><tr><td><b>Body</b><br>"
 		dat += "Blood Type: <a href='byond://?src=\ref[user];preferences=1;b_type=input'>[src.b_type]</a><br>"
@@ -217,7 +191,7 @@ datum/preferences
 		dat += "Voice pitch: <a href='byond://?src=\ref[user];preferences=1;tts_pitch=input'>Change</a><br>"
 
 
-		if(iscool(user)) //why we removed furry markings : 1. nitro suggested them
+		if(iscool(user))
 			dat += "Tail: <a href='byond://?src=\ref[user];preferences=1;tail=input'>[tail] (Change)</a><br>"
 			dat += "Tail Color: <a href='byond://?src=\ref[user];preferences=1;t_tone=input'>Change</a><br>"
 
@@ -226,30 +200,15 @@ datum/preferences
 		dat += "<hr><b>Hair</b><br>"
 
 		dat += "<a href='byond://?src=\ref[user];preferences=1;hair=input'>Change Color</a> <font face=\"fixedsys\" size=\"3\" color=\"#[num2hex(src.r_hair, 2)][num2hex(src.g_hair, 2)][num2hex(src.b_hair, 2)]\"><table bgcolor=\"#[num2hex(src.r_hair, 2)][num2hex(src.g_hair, 2)][num2hex(src.b_hair)]\"><tr><td>IM</td></tr></table></font>"
-/*
-		dat += " <font color=\"#[num2hex(src.r_hair, 2)]0000\">Red</font> - <a href='byond://?src=\ref[user];preferences=1;r_hair=input'>[src.r_hair]</a>"
-		dat += " <font color=\"#00[num2hex(src.g_hair, 2)]00\">Green</font> - <a href='byond://?src=\ref[user];preferences=1;g_hair=input'>[src.g_hair]</a>"
-		dat += " <font color=\"#0000[num2hex(src.b_hair, 2)]\">Blue</font> - <a href='byond://?src=\ref[user];preferences=1;b_hair=input'>[src.b_hair]</a><br>"
-*/
 		dat += "Style: <a href='byond://?src=\ref[user];preferences=1;h_style=input'>[src.h_style]</a>"
 
 		dat += "<hr><b>Facial</b><br>"
 
 		dat += "<a href='byond://?src=\ref[user];preferences=1;facial=input'>Change Color</a> <font face=\"fixedsys\" size=\"3\" color=\"#[num2hex(src.r_facial, 2)][num2hex(src.g_facial, 2)][num2hex(src.b_facial, 2)]\"><table bgcolor=\"#[num2hex(src.r_facial, 2)][num2hex(src.g_facial, 2)][num2hex(src.b_facial)]\"><tr><td>GO</td></tr></table></font>"
-/*
-		dat += " <font color=\"#[num2hex(src.r_facial, 2)]0000\">Red</font> - <a href='byond://?src=\ref[user];preferences=1;r_facial=input'>[src.r_facial]</a>"
-		dat += " <font color=\"#00[num2hex(src.g_facial, 2)]00\">Green</font> - <a href='byond://?src=\ref[user];preferences=1;g_facial=input'>[src.g_facial]</a>"
-		dat += " <font color=\"#0000[num2hex(src.b_facial, 2)]\">Blue</font> - <a href='byond://?src=\ref[user];preferences=1;b_facial=input'>[src.b_facial]</a><br>"
-*/
 		dat += "Style: <a href='byond://?src=\ref[user];preferences=1;f_style=input'>[src.f_style]</a>"
 
 		dat += "<hr><b>Eyes</b><br>"
 		dat += "<a href='byond://?src=\ref[user];preferences=1;eyes=input'>Change Color</a> <font face=\"fixedsys\" size=\"3\" color=\"#[num2hex(src.r_eyes, 2)][num2hex(src.g_eyes, 2)][num2hex(src.b_eyes, 2)]\"><table bgcolor=\"#[num2hex(src.r_eyes, 2)][num2hex(src.g_eyes, 2)][num2hex(src.b_eyes)]\"><tr><td>KU</td></tr></table></font>"
-/*
-		dat += " <font color=\"#[num2hex(src.r_eyes, 2)]0000\">Red</font> - <a href='byond://?src=\ref[user];preferences=1;r_eyes=input'>[src.r_eyes]</a>"
-		dat += " <font color=\"#00[num2hex(src.g_eyes, 2)]00\">Green</font> - <a href='byond://?src=\ref[user];preferences=1;g_eyes=input'>[src.g_eyes]</a>"
-		dat += " <font color=\"#0000[num2hex(src.b_eyes, 2)]\">Blue</font> - <a href='byond://?src=\ref[user];preferences=1;b_eyes=input'>[src.b_eyes]</a>"
-*/
 		dat += "<hr>"
 
 		if (!IsGuestKey(user.key))
@@ -260,126 +219,9 @@ datum/preferences
 		dat += "</body></html>"
 
 		user << browse(cssStyleSheetDab13 + dat, "window=preferences;size=300x640")
-
-	proc/SetChoices(mob/user, occ=1)
-		var/HTML = "<body>"
-		HTML += "<tt><center>"
-		switch(occ)
-			if(1.0)
-				HTML += "<b>Which occupation would you like most?</b><br><br>"
-			if(2.0)
-				HTML += "<b>Which occupation would you like if you couldn't have your first?</b><br><br>"
-			if(3.0)
-				HTML += "<b>Which occupation would you like if you couldn't have the others?</b><br><br>"
-			else
-		for(var/job in uniquelist(occupations + assistant_occupations) )
-			if ((job!="AI" || config.allow_ai))
-				HTML += "<a href=\"byond://?src=\ref[user];preferences=1;occ=[occ];job=[job]\">[job]</a><br>"
-
-		HTML += "<a href=\"byond://?src=\ref[user];preferences=1;occ=[occ];job=Captain\">Captain</a><br>"
-		HTML += "<br>"
-		HTML += "<a href=\"byond://?src=\ref[user];preferences=1;occ=[occ];job=No Preference\">\[No Preference\]</a><br>"
-		HTML += "<a href=\"byond://?src=\ref[user];preferences=1;occ=[occ];cancel\">\[Cancel\]</a>"
-		HTML += "</center></tt>"
-
-		user << browse(null, "window=preferences")
-		user << browse(cssStyleSheetDab13 + HTML, "window=mob_occupation;size=320x500")
-		return
-
-	proc/SetJob(mob/user, occ=1, job="Captain")
-		if ((!( occupations.Find(job) ) && !( assistant_occupations.Find(job) ) && job != "Captain"))
-			return
-		if (job=="AI" && (!config.allow_ai))
-			return
-
-		switch(occ)
-			if(1.0)
-				if (job == occupation1)
-					user << browse(null, "window=mob_occupation")
-					return
-				else
-					if (job == "No Preference")
-						src.occupation1 = "No Preference"
-					else
-						if (job == src.occupation2)
-							job = src.occupation1
-							src.occupation1 = src.occupation2
-							src.occupation2 = job
-						else
-							if (job == src.occupation3)
-								job = src.occupation1
-								src.occupation1 = src.occupation3
-								src.occupation3 = job
-							else
-								src.occupation1 = job
-			if(2.0)
-				if (job == src.occupation2)
-					user << browse(null, "window=mob_occupation")
-					return
-				else
-					if (job == "No Preference")
-						if (src.occupation3 != "No Preference")
-							src.occupation2 = src.occupation3
-							src.occupation3 = "No Preference"
-						else
-							src.occupation2 = "No Preference"
-					else
-						if (job == src.occupation1)
-							if (src.occupation2 == "No Preference")
-								user << browse(null, "window=mob_occupation")
-								return
-							job = src.occupation2
-							src.occupation2 = src.occupation1
-							src.occupation1 = job
-						else
-							if (job == src.occupation3)
-								job = src.occupation2
-								src.occupation2 = src.occupation3
-								src.occupation3 = job
-							else
-								src.occupation2 = job
-			if(3.0)
-				if (job == src.occupation3)
-					user << browse(null, "window=mob_occupation")
-					return
-				else
-					if (job == "No Preference")
-						src.occupation3 = "No Preference"
-					else
-						if (job == src.occupation1)
-							if (src.occupation3 == "No Preference")
-								user << browse(null, "window=mob_occupation")
-								return
-							job = src.occupation3
-							src.occupation3 = src.occupation1
-							src.occupation1 = job
-						else
-							if (job == src.occupation2)
-								if (src.occupation3 == "No Preference")
-									user << browse(null, "window=mob_occupation")
-									return
-								job = src.occupation3
-								src.occupation3 = src.occupation2
-								src.occupation2 = job
-							else
-								src.occupation3 = job
-
-		user << browse(null, "window=mob_occupation")
-		ShowChoices(user)
-
-		return 1
-
 	proc/process_link(mob/user, list/link_tags)
 
 		if (link_tags["occ"])
-			if (link_tags["cancel"])
-				user << browse(null, "window=\ref[user]occupation")
-				return
-			else if(link_tags["job"])
-				src.SetJob(user, text2num(link_tags["occ"]), link_tags["job"])
-			else
-				src.SetChoices(user, text2num(link_tags["occ"]))
-
 			return 1
 
 		if (link_tags["tts_pitch"])
@@ -508,9 +350,6 @@ datum/preferences
 		if (link_tags["s_tone"])
 			var/new_species_color = input(user, "Please select species color", "Character Generation")  as color
 			species_color = new_species_color
-
-		if (link_tags["s_zangoose_markings"])
-			zangoose_markings = input(user, "Zangoose markings?", "Character Generation")  in list("No","Yes")
 
 		if (link_tags["t_tone"])
 			var/new_species_tail_color = input(user, "Please select tail color", "Character Generation")  as color

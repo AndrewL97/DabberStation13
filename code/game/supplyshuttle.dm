@@ -1,9 +1,9 @@
 //Config stuff
-#define SUPPLY_DOCKZ 2          //Z-level of the Dock.
+#define SUPPLY_DOCKZ 1          //Z-level of the Dock.
 #define SUPPLY_STATIONZ 1       //Z-level of the Station.
 #define SUPPLY_POINTSPER 1      //Points per tick.
 #define SUPPLY_POINTDELAY 450	//Delay between ticks in milliseconds.
-#define SUPPLY_MOVETIME 100	//Time to station is milliseconds.
+#define SUPPLY_MOVETIME 50	//Time to station is milliseconds.
 #define SUPPLY_POINTSPERCRATE 5	//Points per crate sent back.
 #define SUPPLY_STATION_AREATYPE "/area/supply/station" //Type of the supply shuttle area for station
 #define SUPPLY_DOCK_AREATYPE "/area/supply/dock"	//Type of the supply shuttle area for dock
@@ -691,10 +691,12 @@ var/dab_coins_currency = 250
 	var/shuttleat = supply_shuttle_at_station ? SUPPLY_STATION_AREATYPE : SUPPLY_DOCK_AREATYPE
 	var/shuttleto = !supply_shuttle_at_station ? SUPPLY_STATION_AREATYPE : SUPPLY_DOCK_AREATYPE
 
-	var/area/from = locate(shuttleat)
-	var/area/dest = locate(shuttleto)
+	var/area/from = locate(text2path(shuttleat))
+	var/area/dest = locate(text2path(shuttleto))
 
-	if(!from || !dest) return
+	if(!from || !dest)
+		world << "fail"
+		return
 
 	from.move_contents_to(dest)
 	supply_shuttle_at_station = !supply_shuttle_at_station
