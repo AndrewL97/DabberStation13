@@ -23,11 +23,9 @@
 				else
 					Spawn_Fortain(rank, joined_late)
 			else
-				src << "<b><font color='red'>Something went FUCKING terribly wrong. We weren't able to spawn you correctly. So we are gonna spawn you using the normal method. Please report this bug INMEDIATELY."
-				//Custom behaviour here
 				Spawn_Normal(rank, joined_late)
 	else
-		src << "<b><font color='red'>Something went FUCKING terribly wrong. We weren't able to spawn you correctly. So we are gonna spawn you using the normal method. Please report this bug INMEDIATELY."
+		src << "<b><font color='red'>Something went FUCKING terribly wrong (in this case the gameticker is missing). We weren't able to spawn you correctly. So we are gonna spawn you using the normal method. Please report this bug INMEDIATELY."
 		Spawn_Normal(rank, joined_late)
 
 
