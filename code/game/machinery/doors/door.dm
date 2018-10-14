@@ -15,8 +15,6 @@
 	if(!mover)
 		return
 	if(air_group) return 0
-	if(!mover.density)
-		return 1
 	return !density
 
 /obj/machinery/door/proc/update_nearby_tiles(need_rebuild)

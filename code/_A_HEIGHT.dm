@@ -134,7 +134,7 @@ mob
 		var/turf/T = loc
 		if(canmove == 1 && lying == 0 && !src.restrained() && !ANIMATION_RUNNING && istype(T,/turf)) //If on floor/space and not restrained...
 			if(onFloor == 1)
-				ySpeed = (1320/256)/(1+(heightZ<T.water_height))
+				ySpeed = (1320/256)/(1+(heightZ<round(T.water_height)))
 				playsound(src, 'jump.ogg', 100, 0, 12, 0)
 			else
 				flyPack()
@@ -180,12 +180,9 @@ mob
 			return //We cannot process height, either player is on a vehicle, or player is deleted (null) or what we are stepping on doesn't even have a turf.
 
 		if(client)
-			if(client.j)
-				ySpeed = ySpeed - (T.TurfGravity/2)/(1+(heightZ<T.water_height)) //Adds gravity.
-			else
-				ySpeed = ySpeed - T.TurfGravity/(1+(heightZ<T.water_height)) //Adds gravity.
+			ySpeed -= T.TurfGravity/(1+client.j+(heightZ<round(T.water_height))) //Adds gravity.
 		else
-			ySpeed = ySpeed - T.TurfGravity //Adds gravity.
+			ySpeed -= T.TurfGravity/(1+(heightZ<T.water_height)) //Adds gravity.
 		if(T.TurfCeiling != 0)
 			if(heightZ > T.TurfCeiling)
 				heightZ = T.TurfCeiling //god why does this limit exist

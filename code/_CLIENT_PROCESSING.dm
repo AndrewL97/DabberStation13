@@ -360,7 +360,7 @@ client/proc/ProcessClient()
 		else
 			mouse_position =  new(src)
 		var/A_S = 0
-		for(var/sound/i in list(amb_sound,amb_sound_ext,amb_sound_area,radio_sound))
+		for(var/sound/i in list(amb_sound,amb_sound_ext,amb_sound_area,radio_sound,amb_sound_water))
 			if(i.status != SOUND_UPDATE)
 				i.status = SOUND_UPDATE
 				i.channel = SOUND_CHANNEL_1+A_S
@@ -402,6 +402,10 @@ client/proc/ProcessClient()
 		amb_sound.volume = vol
 		amb_sound_ext.volume = vol_ext
 		amb_sound_ext.frequency = music_pitch
+		if(T)
+			amb_sound_water.volume = (mob.heightZ+mob.heightSize<round(T.water_height))*100
+		else
+			amb_sound_water.volume = 0
 		amb_sound.frequency = music_pitch
 		radio_sound.frequency = music_pitch
 		if(amb_sound_area.file)
@@ -498,6 +502,7 @@ client
 	var/sound/amb_sound_ext = sound('music/exterior.ogg')
 	var/vol_ext = 0 //Ambient sound vol
 	var/sound/amb_sound_area = sound('music/silence.ogg')
+	var/sound/amb_sound_water = sound('music/water.ogg')
 	var/old_song = 'music/silence.ogg'
 	var/vol_area = 0 //Ambient sound vol
 	var/sound/radio_sound = sound('music/silence.ogg')

@@ -341,7 +341,7 @@ obj
 			if(!(src in water_changed))
 				water_changed += src
 	proc/Can_Still_Process()
-		if(round(water_height) == 0 || water_height == 99999999)
+		if(round(water_height) == 0)
 			//water_height = 0
 			if(src in water_changed)
 				water_changed -= src
@@ -359,8 +359,8 @@ obj
 			if(pe.water_height != 99999999) //only called if a flooded turf is gonna flood another
 				if(round(water_height) > 0)
 					if(pe.water_height < water_height)
-						var/tmp/calc = water_height/(1+listofconnections.len)
-						pe.water_height = pe.water_height + calc*(water_height != 99999999 ? calc : 32)
+						var/tmp/calc = (water_height != 99999999 ? water_height/(1+listofconnections.len) : 8)
+						pe.water_height = pe.water_height + calc
 						water_height = water_height - calc*(water_height != 99999999)
 						if(calc > 5)
 							pe.water_mob_act(get_dir(src,pe),calc)
