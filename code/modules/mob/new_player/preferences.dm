@@ -172,11 +172,8 @@ datum/preferences
 		user << browse_rsc(preview_icon, "previewicon.png")
 
 		var/dat = "<html><body>"
-		dat += "<b>Name:</b> "
-		dat += "<a href=\"byond://?src=\ref[user];preferences=1;real_name=input\"><b>[src.real_name]</b></a> "
+		dat += "<a href=\"byond://?src=\ref[user];preferences=1;real_name=input\"><b>Name : [src.real_name]</b></a> "
 		dat += "(<a href=\"byond://?src=\ref[user];preferences=1;real_name=random\">Randomize</A>)<br><br>"
-		if(iscool(user))
-			dat += "<b>Species:</b> <a href='byond://?src=\ref[user];preferences=1;species_change=input'>[species] (Change)</a><br>"
 		dat += "<br>"
 
 		dat += "<b>Gender:</b> <a href=\"byond://?src=\ref[user];preferences=1;gender=input\"><b>[src.gender == MALE ? "Male" : "Female"][species == "human" && gender == FEMALE ? " (catgirl ears enabled)" : ""]</b></a><br>" //this is what you get for PLAYING TG NOOB
@@ -184,13 +181,13 @@ datum/preferences
 
 		dat += "<hr><table><tr><td><b>Body</b><br>"
 		dat += "Blood Type: <a href='byond://?src=\ref[user];preferences=1;b_type=input'>[src.b_type]</a><br>"
-		dat += "Color: <a href='byond://?src=\ref[user];preferences=1;s_tone=input'>Change</a><br>"
-		dat += "Voice pitch: <a href='byond://?src=\ref[user];preferences=1;tts_pitch=input'>Change</a><br>"
-
+		dat += "Voice Pitch: <a href='byond://?src=\ref[user];preferences=1;tts_pitch=input'>Change</a><br>"
 
 		if(iscool(user))
-			dat += "Tail: <a href='byond://?src=\ref[user];preferences=1;tail=input'>[tail] (Change)</a><br>"
-			dat += "Tail Color: <a href='byond://?src=\ref[user];preferences=1;t_tone=input'>Change</a><br>"
+			dat += "<b>Species:</b> <a href='byond://?src=\ref[user];preferences=1;species_change=input'>[species] (Change)</a><br>"
+			dat += "<b>Species Color:</b> <a href='byond://?src=\ref[user];preferences=1;s_tone=input'>Change</a><br>"
+			dat += "<b>Tail:</b> <a href='byond://?src=\ref[user];preferences=1;tail=input'>[tail] (Change)</a><br>"
+			dat += "<b>Tail Color:</b> <a href='byond://?src=\ref[user];preferences=1;t_tone=input'>Change</a><br>"
 
 		dat += "</td><td><b>Preview</b><br><img src=previewicon.png height=64 width=64></td></tr></table>"
 

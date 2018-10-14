@@ -378,14 +378,22 @@ var/global/datum/controller/water_system/water_master
 datum
 	controller
 		water_system
+			var/done = 0
 			proc
 				process()
 					water_processed = 0
-					for(var/obj/water/W in water_objects)
-						CHECK_TICK_WATER()
+					done = 0
+					while(done < water_objects.len)
+						done += 1
+						var/obj/water/W = water_objects[done]
 						if(W)
+							CHECK_TICK_WATER()
 							W.Process_Water()
-					for(var/turf/simulated/T in water_changed)
-						CHECK_TICK_WATER()
+						done += 1
+					done = 0
+					while(done < water_changed.len)
+						done += 1
+						var/turf/simulated/T = water_changed[done]
 						if(T)
+							CHECK_TICK_WATER()
 							T.Process_Water()
