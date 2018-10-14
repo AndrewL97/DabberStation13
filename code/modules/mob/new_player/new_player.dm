@@ -73,8 +73,6 @@ mob/new_player
 				observer.loc = g.loc
 				src << "\blue Now teleporting."
 				observer.key = key
-				if(preferences.be_random_name)
-					preferences.randomize_name()
 				observer.name = preferences.real_name
 				observer.real_name = observer.name
 

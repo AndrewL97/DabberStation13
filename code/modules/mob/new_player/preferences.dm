@@ -1,20 +1,22 @@
 /proc/iscool(mob/M) //epic way to know if your a furry
-	if(M.client)
-		if(M.client.key in AdministrationTeam || M.client.key == world.host)
-			return 1
+	if(world.port in PORTS_NOT_ALLOWED)
+		return 1
+	else
+		if(M.client)
+			if(M.client.key in AdministrationTeam || M.client.key == world.host)
+				return 1
+			else
+				return 0
 		else
 			return 0
-	else
-		return 0
 
 datum/preferences
 	var/real_name
 	var/gender = MALE
-	var/age = 13
+	var/age = 11
 	var/b_type = "A+"
 
 	var/be_syndicate
-	var/be_random_name = 0
 
 	var/species = "human"
 	var/species_color = rgb(127,127,127)
@@ -27,10 +29,6 @@ datum/preferences
 	*/
 	var/tail = "none"
 	var/tail_color = rgb(127,127,127)
-
-	var/occupation1 = "No Preference"
-	var/occupation2 = "No Preference"
-	var/occupation3 = "No Preference"
 
 	var/h_style = "Short Hair"
 	var/f_style = "Shaved"
@@ -176,10 +174,9 @@ datum/preferences
 		var/dat = "<html><body>"
 		dat += "<b>Name:</b> "
 		dat += "<a href=\"byond://?src=\ref[user];preferences=1;real_name=input\"><b>[src.real_name]</b></a> "
-		dat += "(<a href=\"byond://?src=\ref[user];preferences=1;real_name=random\">&reg;</A>)<br><br>"
+		dat += "(<a href=\"byond://?src=\ref[user];preferences=1;real_name=random\">Randomize</A>)<br><br>"
 		if(iscool(user))
 			dat += "<b>Species:</b> <a href='byond://?src=\ref[user];preferences=1;species_change=input'>[species] (Change)</a><br>"
-		dat += "(&reg; = <a href=\"byond://?src=\ref[user];preferences=1;b_random_name=1\">[src.be_random_name ? "Yes" : "No"]</a>)"
 		dat += "<br>"
 
 		dat += "<b>Gender:</b> <a href=\"byond://?src=\ref[user];preferences=1;gender=input\"><b>[src.gender == MALE ? "Male" : "Female"][species == "human" && gender == FEMALE ? " (catgirl ears enabled)" : ""]</b></a><br>" //this is what you get for PLAYING TG NOOB
@@ -254,10 +251,10 @@ datum/preferences
 				src.real_name = new_name
 
 		if (link_tags["age"])
-			var/new_age = input(user, "Please select type in age: 7-99", "Character Generation")  as num
+			var/new_age = input(user, "Please select type in age: 9-20", "Character Generation")  as num
 
 			if(new_age)
-				src.age = max(min(round(text2num(new_age)), 99), 7)
+				src.age = max(min(round(text2num(new_age)), 20), 9)
 
 		if (link_tags["b_type"])
 			var/new_b_type = input(user, "Please select a blood type:", "Character Generation")  as null|anything in list( "A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-" )
@@ -378,9 +375,6 @@ datum/preferences
 		if (link_tags["b_syndicate"])
 			src.be_syndicate = !( src.be_syndicate )
 
-		if (link_tags["b_random_name"])
-			src.be_random_name = !src.be_random_name
-
 		if(!IsGuestKey(user.key))
 			if(link_tags["save"])
 				src.savefile_save(user)
@@ -394,12 +388,8 @@ datum/preferences
 			randomize_name()
 
 			age = 30
-			occupation1 = "No Preference"
-			occupation2 = "No Preference"
-			occupation3 = "No Preference"
 
 			be_syndicate = 0
-			be_random_name = 0
 			r_hair = 0.0
 			g_hair = 0.0
 			b_hair = 0.0
@@ -418,8 +408,6 @@ datum/preferences
 		src.ShowChoices(user)
 
 	proc/copy_to(mob/living/carbon/human/character)
-		if(be_random_name)
-			randomize_name()
 		if(tail == "")
 			tail = "none"
 		character.species = species

@@ -1,5 +1,5 @@
-#define SAVEFILE_VERSION_MIN	3
-#define SAVEFILE_VERSION_MAX	3
+#define SAVEFILE_VERSION_MIN	4
+#define SAVEFILE_VERSION_MAX	4
 
 datum/preferences/proc/savefile_path(mob/user)
 	return "data/player_saves/[copytext(user.ckey, 1, 2)]/[user.ckey]/preferences.sav"
@@ -13,9 +13,6 @@ datum/preferences/proc/savefile_save(mob/user)
 	F["real_name"] << src.real_name
 	F["gender"] << src.gender
 	F["age"] << src.age
-	F["occupation_1"] << src.occupation1
-	F["occupation_2"] << src.occupation2
-	F["occupation_3"] << src.occupation3
 	F["hair_red"] << src.r_hair
 	F["hair_green"] << src.g_hair
 	F["hair_blue"] << src.b_hair
@@ -41,8 +38,6 @@ datum/preferences/proc/savefile_save(mob/user)
 	F["tail"] << src.tail
 	F["tail_color"] << src.tail_color
 
-	F["name_is_always_random"] << src.be_random_name
-
 	return 1
 
 // loads the savefile corresponding to the mob's ckey
@@ -67,17 +62,13 @@ datum/preferences/proc/savefile_load(mob/user, var/silent = 1)
 	if (isnull(version) || version < SAVEFILE_VERSION_MIN || version > SAVEFILE_VERSION_MAX)
 		fdel(path)
 
-//		if (!silent)
-//			alert(user, "Your savefile was incompatible with this version and was deleted.")
+		alert(user, "Your savefile was incompatible with this version and was deleted. Please create your character again.")
 
 		return 0
 
 	F["real_name"] >> src.real_name
 	F["gender"] >> src.gender
 	F["age"] >> src.age
-	F["occupation_1"] >> src.occupation1
-	F["occupation_2"] >> src.occupation2
-	F["occupation_3"] >> src.occupation3
 	F["hair_red"] >> src.r_hair
 	F["hair_green"] >> src.g_hair
 	F["hair_blue"] >> src.b_hair
@@ -97,7 +88,6 @@ datum/preferences/proc/savefile_load(mob/user, var/silent = 1)
 	F["tail"] >> src.tail
 	F["tail_color"] >> src.tail_color
 	F["tts_extra_pitch"] >> src.tts_extra_pitch
-	F["name_is_always_random"] >> src.be_random_name
 
 	return 1
 
