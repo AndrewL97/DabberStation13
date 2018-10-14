@@ -220,10 +220,6 @@ datum/preferences
 
 		user << browse(cssStyleSheetDab13 + dat, "window=preferences;size=300x640")
 	proc/process_link(mob/user, list/link_tags)
-
-		if (link_tags["occ"])
-			return 1
-
 		if (link_tags["tts_pitch"])
 			tts_extra_pitch = input(user,"TTS voice pitch ( -50 to 50 )","Character Generation") as num
 			tts_extra_pitch = tts_extra_pitch/10

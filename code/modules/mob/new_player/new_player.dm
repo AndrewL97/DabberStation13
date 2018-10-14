@@ -27,7 +27,7 @@ mob/new_player
 			mind = new
 			mind.key = key
 			mind.current = src
-
+		src << sound('titlesong.ogg',channel=LOBBY_CHANNEL,volume=100, repeat = 1)
 		new_player_panel()
 
 		loc = locate(230,91,1)
@@ -44,7 +44,6 @@ mob/new_player
 	verb
 		new_player_panel()
 			set src = usr
-			src << sound('titlesong.ogg',channel=LOBBY_CHANNEL,volume=100, repeat = 1)
 			var/output = "<HR><B>Lobby</B><BR>"
 			output += "<HR><br><a href='byond://?src=\ref[src];show_preferences=1'>Character Creator</A><BR><BR>"
 			//if(istester(src.key))
@@ -84,6 +83,7 @@ mob/new_player
 
 		if(href_list["late_join"])
 			LateChoices()
+			return 1
 
 		if(href_list["SelectedJob"])
 
@@ -130,12 +130,11 @@ mob/new_player
 					AttemptLateSpawn("Research Director", directorMax)
 				if ("21")
 					AttemptLateSpawn("Chief Engineer", chiefMax)
-//				if ("22")
-//					AttemptLateSpawn("Hydroponist", hydroponicsMax)
-
-		if(!ready && href_list["preferences"])
+			return 1
+		if(href_list["preferences"])
 			preferences.process_link(src, href_list)
-		else if(!href_list["late_join"])
+			return 1
+		else
 			new_player_panel()
 
 	proc/IsJobAvailable(rank, maxAllowed)
