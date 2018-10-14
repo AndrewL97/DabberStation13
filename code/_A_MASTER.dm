@@ -92,6 +92,7 @@ datum/controller/game_controller
 	var/processing = 1
 	var/wait = 0.5
 	var/SLOW_PROCESS_TIME = 10
+	var/process_objects_done = 0
 	var/T = 0
 	proc
 		setup()
@@ -246,22 +247,37 @@ datum/controller/game_controller
 
 		mobs_process()
 
-		T = T + tick_lag_original
-		for(var/obj/machinery/machine in machines)
-			CHECK_TICK()
-			machine.process()
-			if(T >= 50)
-				machine.updateUsrDialog()
-		if(T >= 50)
-			T = 0
+		T = T + 1
+		process_objects_done = 0
+		while(process_objects_done < machines.len)
+			process_objects_done += 1
+			var/obj/machinery/machine = machines[process_objects_done]
+			if(machine)
+				CHECK_TICK()
+				machine.process()
+				if(T % 90 == 45)
+					machine.updateUsrDialog()
+			else
+				machines -= machine
 
-		for(var/obj/item/item in processing_items)
-			CHECK_TICK()
-			item.process()
-
-		for(var/datum/powernet/P in powernets)
-			CHECK_TICK()
-			P.reset()
+		process_objects_done = 0
+		while(process_objects_done < processing_items.len)
+			process_objects_done += 1
+			var/obj/item/item = processing_items[process_objects_done]
+			if(item)
+				CHECK_TICK()
+				item.process()
+			else
+				processing_items -= item
+		process_objects_done = 0
+		while(process_objects_done < powernets.len)
+			process_objects_done += 1
+			var/datum/powernet/P = powernets[process_objects_done]
+			if(P)
+				CHECK_TICK()
+				P.reset()
+			else
+				powernets -= P
 
 		ticker.process()
 
