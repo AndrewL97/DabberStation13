@@ -19,12 +19,6 @@
 	desc = "Twoooo!"
 	icon_state = "owl"
 
-/obj/item/clothing/under/owl
-	name = "Owl uniform"
-	desc = "Twoooo!"
-	icon_state = "owl"
-	color2 = "owl"
-
 /obj/item/clothing/gloves/cyborg
 	desc = "beep boop borp"
 	name = "cyborg gloves"
@@ -62,13 +56,6 @@
 	desc = "Such a dapper eyepiece!"
 	icon_state = "monocle"
 	item_state = "headset" // lol
-
-/obj/item/clothing/under/rank/head_of_personnel/suit
-	name = "Head of Personnel's Suit"
-	desc = "A teal suit and yellow necktie. An authoritative yet tacky ensemble."
-	icon_state = "teal_suit"
-	item_state = "g_suit"
-	color2 = "teal_suit"
 
 /obj/item/clothing/under/rank/police
 	name = "Police Uniform"

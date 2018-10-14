@@ -610,6 +610,6 @@ shitspriting
 	icon_state = "overlay_s"
 	New()
 		..()
-		overlay_color = rgb(rand(0,255),rand(0,255),rand(0,255))
+		overlay_color = rgb(rand(0,195),rand(0,195),rand(0,195))
 		color = list(null,null,null,overlay_color)
 		overlays += image('uniform.dmi',icon_state = "overlay2_s")
