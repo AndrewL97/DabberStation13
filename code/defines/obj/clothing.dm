@@ -613,3 +613,6 @@ shitspriting
 		overlay_color = rgb(rand(0,195),rand(0,195),rand(0,195))
 		color = list(null,null,null,overlay_color)
 		overlays += image('uniform.dmi',icon_state = "overlay2_s")
+	verb/Change_uniform_color(g as color)
+		overlay_color = g
+		color = list(null,null,null,overlay_color)

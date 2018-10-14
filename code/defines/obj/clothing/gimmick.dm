@@ -57,13 +57,6 @@
 	icon_state = "monocle"
 	item_state = "headset" // lol
 
-/obj/item/clothing/under/rank/police
-	name = "Police Uniform"
-	desc = "Move along, nothing to see here."
-	icon_state = "police"
-	item_state = "b_suit"
-	color2 = "police"
-
 /obj/item/clothing/head/helmet/bobby
 	name = "Custodian Helmet"
 	desc = "Heh. Lookit dat fukken helmet."
@@ -75,13 +68,6 @@
 	desc = "A working man's cap."
 	icon_state = "flat_cap"
 	item_state = "detective"
-
-/obj/item/clothing/under/overalls
-	name = "Laborer's Overalls"
-	desc = "A set of durable overalls for getting the job done."
-	icon_state = "overalls"
-	item_state = "lb_suit"
-	color2 = "overalls"
 
 /obj/item/weapon/classic_baton
 	name = "police baton"
