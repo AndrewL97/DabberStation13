@@ -336,6 +336,10 @@ obj
 			if(istype(to_add,/turf/simulated))
 				if(to_add.Water_Can_Pass(water_height))
 					listofconnections += to_add
+	proc/Water_React()
+		if(round(water_height) > 0)
+			if(!(src in water_changed))
+				water_changed += src
 	proc/Can_Still_Process()
 		if(round(water_height) == 0)
 			//water_height = 0

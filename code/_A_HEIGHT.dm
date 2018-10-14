@@ -59,12 +59,16 @@ turf
 		TurfGravity = 24/256
 		TurfHeight = -416
 		TurfCeiling = 0
-	unsimulated
-		space2
-			alpha = 0
-			TurfHeight = -416
-			TurfCeiling = 0
 	simulated
+		water_flooded
+			water_height = 5000
+			TurfCeiling = 0
+			icon = 'floors.dmi'
+			icon_state = "sand1"
+			name = "sand"
+			New()
+				..()
+				Render_Water_Icon()
 		floor
 			plating
 				level = 1
