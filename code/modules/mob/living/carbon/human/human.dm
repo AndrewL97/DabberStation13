@@ -729,7 +729,10 @@
 			var/t1 = src.w_uniform.color2
 			if (!t1)
 				t1 = src.icon_state
-			src.overlays += image("icon" = 'uniform.dmi', "icon_state" = text("[][]",t1, "_s"))
+			var/image/unif_image = image("icon" = 'uniform.dmi', "icon_state" = "overlay_s")
+			unif_image.color = list(null,null,null,w_uniform.overlay_color)
+			src.overlays += unif_image
+			src.overlays += image("icon" = 'uniform.dmi', "icon_state" = "overlay2_s")
 			if (src.w_uniform.blood_DNA)
 				var/icon/stain_icon = icon('blood.dmi', "uniformblood")
 				src.overlays += image("icon" = stain_icon)
@@ -902,10 +905,10 @@
 
 		src.l_hand.screen_loc = ui_lhand
 
-
-	var/image/taile = image("icon" = 'icons/mob/mob_acc.dmi', "icon_state" = "[tail]") //, "layer" = MOB_LAYER+0.9)
-	taile.icon += tail_color
-	src.overlays += taile
+	if(tail != "none")
+		var/image/taile = image("icon" = 'icons/mob/mob_acc.dmi', "icon_state" = "[tail]") //, "layer" = MOB_LAYER+0.9)
+		taile.icon += tail_color
+		src.overlays += taile
 
 	if(cat_ears)
 		var/image/catear = image("icon" = 'icons/mob/mob_acc.dmi', "icon_state" = "cat_ear") //, "layer" = MOB_LAYER+0.9)

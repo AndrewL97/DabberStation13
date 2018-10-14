@@ -95,7 +95,7 @@ obj/light
 	anchored = 1
 	plane = SHADING_PLANE
 	blend_mode = BLEND_ADD
-	appearance_flags = RESET_COLOR
+	appearance_flags = RESET_COLOR | LONG_GLIDE
 	icon = 'spotlight.dmi'
 	//icon_state = "light"
 	mouse_opacity = 0

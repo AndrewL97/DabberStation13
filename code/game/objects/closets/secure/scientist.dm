@@ -4,7 +4,7 @@
 	new /obj/item/weapon/tank/air( src )
 	new /obj/item/clothing/mask/gas( src )
 	new /obj/item/clothing/suit/bio_suit( src )
-	new /obj/item/clothing/under/rank/scientist( src )
+	new /obj/item/clothing/under(src)
 	new /obj/item/clothing/shoes/white( src )
 	new /obj/item/clothing/gloves/latex( src )
 	new /obj/item/clothing/head/bio_hood( src )

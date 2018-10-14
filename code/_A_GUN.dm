@@ -98,6 +98,10 @@ proc/atan2(x, y)
 					ammo = ammo_max
 
 var/list/bullets = list()
+mob
+	pixel_collision_size_x = 7
+	real_pixel_x = 11 //ya
+
 /obj/projectile
 	icon = 'guns.dmi'
 	icon_state = "bullet"

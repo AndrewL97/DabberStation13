@@ -180,7 +180,7 @@ var/obj/plane_thing/BATTLE_ROYALE_PLANE = null
 		if(z == 0)
 			del src
 /mob/living/carbon/human/proc/Spawn_Fortain(rank, joined_late)
-	src.equip_if_possible(new /obj/item/clothing/under/lightblue(src), slot_w_uniform)
+	src.equip_if_possible(new /obj/item/clothing/under(src), slot_w_uniform)
 	src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
 
 	src.loc = locate(202,202,1)

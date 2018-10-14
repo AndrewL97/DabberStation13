@@ -111,20 +111,6 @@ FLASHBANG
 		if (locate(/obj/item/weapon/baton, M))
 			for(var/obj/item/weapon/baton/B in M) //Add something for the intercoms.
 				B.charges = 0
-
-		if(locate(/obj/item/clothing/under/chameleon, M))
-			for(var/obj/item/clothing/under/chameleon/C in M) //Add something for the intercoms.
-				M << "\red <B>Your jumpsuit malfunctions</B>"
-				C.name = "psychedelic"
-				C.desc = "Groovy!"
-				C.icon_state = "psyche"
-				C.color = "psyche"
-				spawn(200)
-					C.name = "Black Jumpsuit"
-					C.icon_state = "bl_suit"
-					C.color = "black"
-					C.desc = null
-
 		M << "\red <B>BZZZT</B>"
 
 

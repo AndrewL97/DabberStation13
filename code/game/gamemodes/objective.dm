@@ -119,7 +119,7 @@ datum
 					if("jetpack")
 						steal_target = /obj/item/weapon/tank/jetpack
 					if("captains jumpsuit")
-						steal_target = /obj/item/clothing/under/rank/captain
+						steal_target = /obj/item/clothing/under
 
 
 				explanation_text = "Steal a [target_name]."

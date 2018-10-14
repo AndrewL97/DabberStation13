@@ -38,29 +38,29 @@
 		if ("Chaplain")
 			src.equip_if_possible(new /obj/item/weapon/storage/bible(src), slot_l_hand)
 			src.equip_if_possible(new /obj/item/device/pda/chaplain(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/chaplain(src), slot_w_uniform)
+			//unused part/rank/chaplain(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/black(src), slot_shoes)
 
 		if ("Geneticist")
 			src.equip_if_possible(new /obj/item/device/pda/medical(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/geneticist(src), slot_w_uniform)
+			//unused part/rank/geneticist(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/white(src), slot_shoes)
 			src.equip_if_possible(new /obj/item/clothing/suit/labcoat(src), slot_wear_suit)
 
 		if ("Chemist")
 			src.equip_if_possible(new /obj/item/device/pda/toxins(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/geneticist(src), slot_w_uniform)
+			//unused part/rank/geneticist(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/white(src), slot_shoes)
 			src.equip_if_possible(new /obj/item/clothing/suit/labcoat(src), slot_wear_suit)
 
 		if ("Janitor")
 			src.equip_if_possible(new /obj/item/device/pda/janitor(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/janitor(src), slot_w_uniform)
+			//unused part/rank/janitor(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/black(src), slot_shoes)
 
 		if ("Clown")
 			src.equip_if_possible(new /obj/item/device/pda/clown(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/clown(src), slot_w_uniform)
+			//unused part/clown(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/clown_shoes(src), slot_shoes)
 
 			src.equip_if_possible(new /obj/item/weapon/banana(src), slot_in_backpack)
@@ -69,7 +69,7 @@
 
 		if ("Station Engineer")
 			src.equip_if_possible(new /obj/item/device/pda/engineering(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/engineer(src), slot_w_uniform)
+			//unused part/rank/engineer(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/orange(src), slot_shoes)
 			src.equip_if_possible(new /obj/item/weapon/storage/toolbox/mechanical(src), slot_l_hand)
 			src.equip_if_possible(new /obj/item/clothing/gloves/yellow(src), slot_gloves)
@@ -77,12 +77,12 @@
 			//src.equip_if_possible(new /obj/item/device/t_scanner(src), slot_r_store)
 
 		if ("Assistant")
-			src.equip_if_possible(new /obj/item/clothing/under/lightred(src), slot_w_uniform)
+			//unused part/random_col(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/black(src), slot_shoes)
 
 		if ("Detective")
 			src.equip_if_possible(new /obj/item/device/pda/security(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/det(src), slot_w_uniform)
+			//unused part/det(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
 			//src.equip_if_possible(new /obj/item/clothing/head/det_hat(src), slot_head)
 			src.equip_if_possible(new /obj/item/clothing/gloves/black(src), slot_gloves)
@@ -94,14 +94,14 @@
 
 		if ("Medical Doctor")
 			src.equip_if_possible(new /obj/item/device/pda/medical(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/medical(src), slot_w_uniform)
+			//unused part/rank/medical(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/white(src), slot_shoes)
 			src.equip_if_possible(new /obj/item/clothing/suit/labcoat(src), slot_wear_suit)
 			src.equip_if_possible(new /obj/item/weapon/storage/firstaid/regular(src), slot_l_hand)
 
 		if ("Captain")
 			src.equip_if_possible(new /obj/item/device/pda/captain(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/captain(src), slot_w_uniform)
+			//unused part/rank/captain(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/suit/armor/captain(src), slot_wear_suit)
 			src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
 			//src.equip_if_possible(new /obj/item/clothing/head/caphat(src), slot_head)
@@ -113,7 +113,7 @@
 
 		if ("Security Officer")
 			src.equip_if_possible(new /obj/item/device/pda/security(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/color/red(src), slot_w_uniform)
+			//unused part/color/red(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/suit/armor/vest(src), slot_wear_suit)
 			//src.equip_if_possible(new /obj/item/clothing/head/helmet(src), slot_head)
 			src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
@@ -128,7 +128,7 @@
 
 		if ("Scientist")
 			src.equip_if_possible(new /obj/item/device/pda/toxins(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/scientist(src), slot_w_uniform)
+			//unused part/rank/scientist(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/white(src), slot_shoes)
 //			src.equip_if_possible(new /obj/item/clothing/suit/bio_suit(src), slot_wear_suit)
 //			src.equip_if_possible(new /obj/item/clothing/head/bio_hood(src), slot_head)
@@ -136,7 +136,7 @@
 
 		if ("Head of Security")
 			src.equip_if_possible(new /obj/item/device/pda/heads(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/head_of_security(src), slot_w_uniform)
+			//unused part/rank/head_of_security(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/suit/armor/vest(src), slot_wear_suit)
 			src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
 			//src.equip_if_possible(new /obj/item/clothing/head/helmet/HoS(src), slot_head)
@@ -149,7 +149,7 @@
 
 		if ("Head of Personnel")
 			src.equip_if_possible(new /obj/item/device/pda/heads(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/head_of_personnel(src), slot_w_uniform)
+			//unused part/rank/head_of_personnel(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/suit/armor/vest(src), slot_wear_suit)
 			src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
 			//src.equip_if_possible(new /obj/item/clothing/head/helmet(src), slot_head)
@@ -161,25 +161,25 @@
 
 
 		if ("Atmospheric Technician")
-			src.equip_if_possible(new /obj/item/clothing/under/rank/atmospheric_technician(src), slot_w_uniform)
+			//unused part/rank/atmospheric_technician(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/black(src), slot_shoes)
 			src.equip_if_possible(new /obj/item/weapon/storage/toolbox/mechanical(src), slot_l_hand)
 			src.equip_if_possible(new /obj/item/weapon/crowbar(src), slot_in_backpack)
 
 		if ("Barman")
-			src.equip_if_possible(new /obj/item/clothing/under/bartender(src), slot_w_uniform)
+			//unused part/bartender(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/black(src), slot_shoes)
 			src.equip_if_possible(new /obj/item/clothing/suit/armor/vest(src), slot_wear_suit)
 
 		if ("Chef")
-			src.equip_if_possible(new /obj/item/clothing/under/chef(src), slot_w_uniform)
+			//unused part/chef(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/black(src), slot_shoes)
 			//src.equip_if_possible(new /obj/item/clothing/head/chefhat(src), slot_head)
 			src.equip_if_possible(new /obj/item/weapon/kitchen/rollingpin(src), slot_in_backpack)
 
 		if ("Roboticist")
 			src.equip_if_possible(new /obj/item/device/pda/medical(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/color/black(src), slot_w_uniform)
+			//unused part/color/black(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/black(src), slot_shoes)
 			src.equip_if_possible(new /obj/item/clothing/suit/labcoat(src), slot_wear_suit)
 			src.equip_if_possible(new /obj/item/weapon/crowbar(src), slot_in_backpack)
@@ -188,14 +188,14 @@
 
 		if ("Hydroponist")
 			src.equip_if_possible(new /obj/item/device/pda/medical(src), slot_belt)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/hydroponics(src), slot_w_uniform)
+			//unused part/rank/hydroponics(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/shoes/black(src), slot_shoes)
 			src.equip_if_possible(new /obj/item/clothing/gloves/latex(src), slot_gloves)
 
 		if ("Quartermaster")
 			src.equip_if_possible(new /obj/item/clothing/gloves/black(src), slot_gloves)
 			src.equip_if_possible(new /obj/item/clothing/shoes/black(src), slot_shoes)
-			src.equip_if_possible(new /obj/item/clothing/under/cargo(src), slot_w_uniform)
+			//unused part/cargo(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/device/pda/quartermaster(src), slot_belt)
 			//src.equip_if_possible(new /obj/item/clothing/suit/exo_suit(src), slot_wear_suit)
 
@@ -205,17 +205,18 @@
 			src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
 			//src.equip_if_possible(new /obj/item/clothing/head/helmet/hardhat(src), slot_head)
 			src.equip_if_possible(new /obj/item/clothing/glasses/meson(src), slot_glasses)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/chief_engineer(src), slot_w_uniform)
+			//unused part/rank/chief_engineer(src), slot_w_uniform)
 
 		if ("Research Director")
 			src.equip_if_possible(new /obj/item/device/pda/heads(src), slot_belt)
 			src.equip_if_possible(new /obj/item/clothing/shoes/brown(src), slot_shoes)
-			src.equip_if_possible(new /obj/item/clothing/under/rank/research_director(src), slot_w_uniform)
+			//unused part/rank/research_director(src), slot_w_uniform)
 			src.equip_if_possible(new /obj/item/clothing/suit/labcoat(src), slot_wear_suit)
 			//src.equip_if_possible(new /obj/item/weapon/pen(src), slot_l_store)
 			src.equip_if_possible(new /obj/item/weapon/clipboard(src), slot_r_hand)
 		else
 			world << "<font color='red'><font size=6>We weren't able to load [rank]. Please report this to a coder."
+	src.equip_if_possible(new /obj/item/clothing/under(src), slot_w_uniform)
 	src.equip_if_possible(new /obj/item/clothing/mask/breath(src), slot_wear_mask)
 
 	var/obj/item/weapon/tank/air/AAA = new(src)

@@ -414,6 +414,7 @@ client/proc/ProcessClient()
 			src << amb_sound_area
 		src << amb_sound
 		src << amb_sound_ext
+		src << amb_sound_water
 		if(current_radio_song != old_radio_sound)
 			old_radio_sound = current_radio_song
 			src << sound(null,channel=SOUND_CHANNEL_1+3)

@@ -22,7 +22,6 @@ atom/movable
 	Get_Position_Y()
 		return (y*world.icon_size) + real_pixel_y
 	proc
-
 		GetCollisionSizes()
 			var/icon/I = new(icon)
 			pixel_collision_size_x = I.Width()

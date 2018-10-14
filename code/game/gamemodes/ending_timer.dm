@@ -49,13 +49,13 @@ X < 97
 
 /datum/controller/gameticker/proc/nuke_enable()
 	if(nuke_enabled == 0)
-		world << sound('escape2.ogg',channel=MUSIC_CHANNEL,repeat=1)
+		world << sound('escape1.ogg',channel=MUSIC_CHANNEL,repeat=1)
 		nuke_enabled = 1
 		call_shuttle_proc(src)
 
 /datum/controller/gameticker/proc/nuke_disable()
 	if(nuke_enabled == 1)
-		nuke_timer = 300
+		nuke_timer = initial(nuke_timer)
 		world << sound(null,channel=MUSIC_CHANNEL)
 		nuke_enabled = 0
 		cancel_call_proc()

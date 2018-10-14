@@ -100,9 +100,6 @@ mob
 	var/onFloor = 0 //Am I on floor?
 	var/heightSize = 28
 	var/pixel_y_2 = 0
-	real_pixel_x = 11
-	pixel_collision_size_x = 8
-	pixel_collision_size_y = 29
 	var/obj/shadow/MyShadow = null //Shadow. This is handled in master controller.
 
 	#if defined(GRAVDEBUG)
@@ -172,7 +169,7 @@ mob
 			MyShadow.overlays = overlays
 			MyShadow.underlays = underlays
 		Get_Layer_Y((src.resting || src.lying/-10)) //People laying down are below you.
-
+		pixel_collision_size_x = heightSize
 		onFloor = 0
 		var/turf/T = locate(x,y,z) //Gets turf player is stepping on.
 		if(!loc || !istype(T,/turf) || veh)

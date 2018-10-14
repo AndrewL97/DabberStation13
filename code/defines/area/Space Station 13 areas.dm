@@ -691,8 +691,7 @@
 /area/derelict/ship
 	name = "Sunken Ship"
 	icon_state = "yellow"
-	forced_lighting = 0
-	parallax_type = 1
+	parallax_type = 0
 	requires_power = 0
 	CAN_GRIFE = 0
 	song = 'music/sunken.ogg'

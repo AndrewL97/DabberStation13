@@ -32,7 +32,6 @@ SYNDICATE UPLINK
 			dat += "<A href='byond://?src=\ref[src];item_revolver_ammo=1'>Ammo-357</A> for use with Revolver (2)<BR>"
 			dat += "<A href='byond://?src=\ref[src];item_empbox=1'>5 EMP Grenades</A> (4)<BR>"
 			dat += "<A href='byond://?src=\ref[src];item_voice=1'>Voice-Changer</A> (4)<BR>"
-			dat += "<A href='byond://?src=\ref[src];item_jump=1'>Chameleon Jumpsuit</A> (3)<BR>"
 			dat += "<A href='byond://?src=\ref[src];item_card=1'>Syndicate Card</A> (3)<BR>"
 			dat += "<A href='byond://?src=\ref[src];item_emag=1'>Electromagnet Card</A> (3)<BR>"
 			dat += "<A href='byond://?src=\ref[src];item_imp_freedom=1'>Freedom Implant (with injector)</A> (3)<BR>"
@@ -84,10 +83,6 @@ SYNDICATE UPLINK
 			if (src.uses >= 4)
 				src.uses -= 4
 				new /obj/item/clothing/mask/gas/voice(H.loc)
-		else if (href_list["item_jump"])
-			if (src.uses >= 3)
-				src.uses -= 3
-				new /obj/item/clothing/under/chameleon(H.loc)
 		else if (href_list["item_imp_freedom"])
 			if (src.uses >= 3)
 				src.uses -= 3

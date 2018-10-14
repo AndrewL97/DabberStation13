@@ -1532,7 +1532,6 @@ Code:
 	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=projector'>Chameleon-projector</A> (4)<BR>"
 	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=empbox'>5 EMP Grenades</A> (4)<BR>"
 	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=voice'>Voice-Changer</A> (4)<BR>"
-	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=jump'>Chameleon Jumpsuit</A> (3)<BR>"
 	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=card'>Syndicate Card</A> (3)<BR>"
 	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=emag'>Electromagnet Card</A> (3)<BR>"
 	src.menu_message += "<A href='byond://?src=\ref[src];buy_item=imp_freedom'>Freedom Implant (with injector)</A> (3)<BR>"
@@ -1574,10 +1573,6 @@ Code:
 				if (src.uses >= 4)
 					src.uses -= 4
 					new /obj/item/clothing/mask/gas/voice(get_turf(src.hostpda))
-			if("jump")
-				if (src.uses >= 3)
-					src.uses -= 3
-					new /obj/item/clothing/under/chameleon(get_turf(src.hostpda))
 			if("card")
 				if (src.uses >= 3)
 					src.uses -= 3
