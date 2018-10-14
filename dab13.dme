@@ -246,7 +246,6 @@
 #include "code\game\machinery\doors\door.dm"
 #include "code\game\machinery\doors\firedoor.dm"
 #include "code\game\machinery\doors\poddoor.dm"
-#include "code\game\machinery\doors\shuttledoor.dm"
 #include "code\game\machinery\doors\windowdoor.dm"
 #include "code\game\machinery\embedded_controller\access_controller.dm"
 #include "code\game\machinery\embedded_controller\airlock_controller.dm"

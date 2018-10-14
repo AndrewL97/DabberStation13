@@ -874,8 +874,6 @@ About the new airlock wires panel:
 				sleep(8)
 
 				src.density = 0
-				for(var/turf/simulated/G in range(1,src))
-					G.Water_React() //trigger floods
 				sleep(4)
 				update_icon()
 

@@ -27,7 +27,9 @@
 	var/turf/simulated/south = get_step(source,SOUTH)
 	var/turf/simulated/east = get_step(source,EAST)
 	var/turf/simulated/west = get_step(source,WEST)
-
+	for(var/G in list(north,south,west,east))
+		if(istype(G,/turf/simulated))
+			G:Water_React() //trigger floods
 	if(need_rebuild)
 		if(istype(source)) //Rebuild/update nearby group geometry
 			if(source.parent)
@@ -164,8 +166,9 @@
 		src.operating = 1
 
 	animate2("opening")
-	sleep(10)
+	sleep(6)
 	src.density = 0
+	sleep(4)
 	update_icon()
 
 	src.sd_SetOpacity(0)
@@ -187,8 +190,9 @@
 	src.operating = 1
 
 	animate2("closing")
+	sleep(6)
 	src.density = 1
-	sleep(10)
+	sleep(4)
 	update_icon()
 
 	if (src.visible && (!istype(src, /obj/machinery/door/airlock/glass)))
