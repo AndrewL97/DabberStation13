@@ -341,7 +341,7 @@ obj
 			if(!(src in water_changed))
 				water_changed += src
 	proc/Can_Still_Process()
-		if(round(water_height) == 0)
+		if(round(water_height) == 0 || water_height == 99999999)
 			//water_height = 0
 			if(src in water_changed)
 				water_changed -= src
@@ -356,20 +356,21 @@ obj
 		if(istype(a,/turf/simulated))
 			CHECK_TICK_WATER()
 			var/turf/simulated/pe = a
-			if(round(water_height) > 0)
-				if(pe.water_height < water_height)
-					var/tmp/calc = water_height/(1+listofconnections.len)
-					pe.water_height = pe.water_height + calc
-					water_height = water_height - calc
-					if(calc > 5)
-						pe.water_mob_act(get_dir(src,pe),calc)
+			if(pe.water_height != 99999999) //only called if a flooded turf is gonna flood another
+				if(round(water_height) > 0)
+					if(pe.water_height < water_height)
+						var/tmp/calc = water_height/(1+listofconnections.len)
+						pe.water_height = pe.water_height + calc*(water_height != 99999999 ? calc : 32)
+						water_height = water_height - calc*(water_height != 99999999)
+						if(calc > 5)
+							pe.water_mob_act(get_dir(src,pe),calc)
 
-				if(!(pe in water_changed))
-					if(round(pe.water_height) > 0)
-						water_changed += pe
+					if(!(pe in water_changed))
+						if(round(pe.water_height) > 0)
+							water_changed += pe
 
-				pe.Render_Water_Icon()
-			pe.Can_Still_Process()
+					pe.Render_Water_Icon()
+				pe.Can_Still_Process()
 	Can_Still_Process()
 	Render_Water_Icon()
 

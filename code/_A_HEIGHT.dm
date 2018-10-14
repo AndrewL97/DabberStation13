@@ -61,7 +61,7 @@ turf
 		TurfCeiling = 0
 	simulated
 		water_flooded
-			water_height = 5000
+			water_height =  99999999
 			TurfCeiling = 0
 			icon = 'floors.dmi'
 			icon_state = "sand1"
