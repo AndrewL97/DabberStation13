@@ -214,7 +214,7 @@ mob
 										animate(danc.Limb4,transform = RightArm2, time = 2)
 										sleep(2)
 								spawn()
-									for(var/i in 1 to 24)
+									for(var/i in 1 to 21)
 										animate(danc.Limb5,transform = LeftLeg2, time = 4)
 										animate(danc.Limb6,transform = RightLeg2, time = 4)
 										animate(danc.Limb3,transform = LeftArm, time = 3)
