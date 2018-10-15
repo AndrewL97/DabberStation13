@@ -69,9 +69,9 @@
 	..()													// then go ahead and delete the cable
 
 /obj/cable/hide(var/i)
-
+	var/turf/simulated/T = loc
 	if(level == 1 && istype(loc, /turf/simulated))
-		invisibility = i ? 101 : 0
+		alpha = level < T.level ? 0 : 255
 	updateicon()
 
 /obj/cable/proc/updateicon()

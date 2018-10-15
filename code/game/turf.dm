@@ -33,6 +33,8 @@
 						if(!istype(src,/turf/space))
 							init_light()
 	for(var/atom/movable/AM as mob|obj in src)
+		if(istype(AM,/obj))
+			AM:hide(level)
 		spawn( 0 )
 			src.Entered(AM)
 			return

@@ -33,13 +33,13 @@ client/New()
 			if(!(key in Player_CID_list))
 				if(Player_CID_list[key] != "Checked")
 					Player_CID_list[key] = computer_id
-					src << "<font size=4><font color='red'>You will now be reconnected to the game server to check if you are using ban evasion tools." //Uh Oh!!!
+					src << "<font size=4><font color='red'>Redirecting.." //Uh Oh!!!
 					check_cid = 1
 					message_admins("[key] will be checked for ban evasion tools (JOIN)")
 					src << link("byond://[world.internet_address]:[world.port]")
 			else
 				if (Player_CID_list[key] != computer_id && Player_CID_list[key] != "Checked")
-					src << "<font size=4><font color='red'>You have been detected using ban evasion tools. The administrators have been messaged." //trolled.
+					src << "<font size=4><font color='red'>You seem to have a CID changer installed on your computer. The administrators have been notified and will proceed to take whatever action is required." //trolled.
 					message_admins("[key] is using a CID changer. might want to get involved.")
 					discord_relay("<@&464594497901166613> <@&480598635197759508> ALERT : [key] is using a CID changer. (CID changed during 2 joins.)",AdminhelpWebhook)
 					Join_Message()
@@ -63,5 +63,6 @@ client
 		if(!(world.port in PORTS_NOT_ALLOWED) && check_cid == 0)
 			spawn()
 				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**[key]** left.\" } ", "Content-Type: application/json")
-		world << "<font color='yellow'>[key] left the game."
+		if(!check_cid)
+			world << "<font color='yellow'>[key] left the game."
 		..()
