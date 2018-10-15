@@ -1,9 +1,12 @@
-# List of contents.
+# Dabber Station 13 Docs
+Warning! Might be outdated.
+
+## List of contents.
 1. HOW TO MAKE A MAP USING THE ACCESS LEVEL SYSTEM
 2. HOW DOES THE HEIGHT SYSTEM WORK
 3. ___MAIN_SHIT.dm
 
-# 1. HOW TO MAKE A MAP USING THE ACCESS LEVEL SYSTEM
+## 1. HOW TO MAKE A MAP USING THE ACCESS LEVEL SYSTEM
 1- Make a map as normal
 
 2- Select a door that you want to not be accessible to everybody
@@ -50,7 +53,7 @@ Here is a list of the permissions and their numbers (this may be out of date, se
 	access_janitor = 29
 	access_disposal_units = 30
 
-# 2. HOW DOES THE HEIGHT SYSTEM WORK
+## 2. HOW DOES THE HEIGHT SYSTEM WORK
 You can press space to jump, and you can stack ontop other players, stand on lattices (if falling too fast, you will break them and die.)
 
 The Calculations applied here are as follows :
@@ -64,5 +67,5 @@ The Calculations applied here are as follows :
  
 The values mentioned here can be edited in _A_HEIGHT.dm
 
-# 3. MAIN SHIT
+## 3. MAIN SHIT
 This file holds most defines, and can be used to change job slot amounts. I wouldn't recommend changing any of the defines.
