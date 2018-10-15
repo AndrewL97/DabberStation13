@@ -13,8 +13,6 @@
 /mob/living/carbon/human/proc/Equip_Rank(rank, joined_late)
 	if(ticker) //	if(joined_late == 1) master_mode
 		switch(ticker.mode.name)
-			if("normal")
-				Spawn_Normal(rank, joined_late)
 			if("Dabber Station 13 Battle Royale")
 				if(joined_late)
 					src << "<b>\green Now spectating. Move around!"
