@@ -49,15 +49,16 @@ var
 	hopMax = 1
 	hosMax = 1
 	chiefMax = 1
-	engineerMax = 2
-	scientistMax = 2
-	chemistMax = 2
-	geneticistMax = 2
-	securityMax = 2
+	engineerMax = 1
+	scientistMax = 4
+	chemistMax = 3
+	geneticistMax = 1
+	securityMax = 1
 	doctorMax = 2
-	atmosMax = 3
+	atmosMax = 2
+	cargoMax = 1
+	barmanMax = 1
 
-	barmanMax = 0
 	directorMax = 0
 	detectiveMax = 0
 	chaplainMax = 0
@@ -65,7 +66,6 @@ var
 	clownMax = 0
 	chefMax = 0
 	roboticsMax = 0
-	cargoMax = 0
 	hydroponicsMax = 0
 
 obj

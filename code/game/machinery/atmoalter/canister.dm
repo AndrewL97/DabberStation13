@@ -8,7 +8,8 @@
 	var/valve_open = 0
 	var/release_pressure = ONE_ATMOSPHERE
 
-	var/color2 = "blue"
+	var/color2 = "yellow"
+	icon_state = "yellow"
 	var/filled = 0.5
 	pressure_resistance = 7*ONE_ATMOSPHERE
 	var/temperature_resistance = 1000 + T0C
