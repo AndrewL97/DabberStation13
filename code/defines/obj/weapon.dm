@@ -10,9 +10,8 @@
 	opacity = 0
 	density = 0
 	anchored = 0.0
-	var/matter = 100
-	var/max_matter = 100
-	var/rcd_delay = 2 //0.2 seconds
+	var/matter = 500
+	var/max_matter = 500
 	var/working = 0
 	var/mode = 1
 	flags = FPRINT | TABLEPASS| CONDUCT
