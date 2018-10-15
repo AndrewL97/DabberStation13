@@ -59,7 +59,7 @@ atom
 	for(var/xA in 0 to 2)
 		for(var/yA in 0 to 2)
 			var/matrix/M = matrix()
-			M.Translate(xA*480,yA*480)
+			M.Translate(xA*1024,yA*1024)
 			var/obj/screen_alt/spaceParallax/g = new()
 			g.transform = M
 			g.plane = SPACE_PLANE_0
@@ -118,6 +118,7 @@ mob
 	name = "space parallax image"
 	screen_loc = "1,1"
 	icon_state = "layer1"
+	appearance_flags = PIXEL_SCALE | TILE_BOUND
 	layer = 1
 	mouse_opacity = 0
 	var/xF = 0
@@ -146,7 +147,7 @@ mob
 				ParallaxLayer(parallax_master_1,space_parallax_list_1,0.25,0.25,"layer1",0,0)
 				ParallaxLayer(parallax_master_2,space_parallax_list_2,2,2,"layer2alt",(world.time),(world.time/2))
 			if(1)
-				ParallaxLayer(parallax_master_1,space_parallax_list_1,1,0,"layer1alt",(world.time),0)
+				ParallaxLayer(parallax_master_1,space_parallax_list_1,1,0,"layer",(world.time),0)
 				ParallaxLayer(parallax_master_2,space_parallax_list_2,2,2,"layer2alt",(world.time/2),(world.time/4))
 			if(0)
 				ParallaxLayer(parallax_master_1,space_parallax_list_1,0.5,0.5,"layer1",0,0)
@@ -161,8 +162,8 @@ mob
 		var/yoffset = client.pixel_z + client.pixel_y
 		var/xoffset = client.pixel_x + client.pixel_w
 		var/atom/eye = client.eye
-		var/xAxis = round((((eye.x+(xoffset/32))*mult_1) + offsetX)) % 480
-		var/yAxis = round((((eye.y+(yoffset/32))*mult_2) + offsetY)) % 480
+		var/xAxis = round((((eye.x+(xoffset/32))*mult_1) + offsetX)) % 1024
+		var/yAxis = round((((eye.y+(yoffset/32))*mult_2) + offsetY)) % 1024
 
 		var/can_change_icon = 0
 		if(space_list == space_parallax_list_1)
