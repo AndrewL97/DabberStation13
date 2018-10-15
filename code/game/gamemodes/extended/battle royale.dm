@@ -35,14 +35,15 @@ var/client/lastplr = null
 	..()
 
 /datum/game_mode/battle_royale/check_finished()
-	if(plrs <= 1)
-		if(lastplr)
-			world << "<b><font size=6><font color='#00FFFF'>[lastplr.key] won!"
-		world << 'victory.ogg'
-		world.fps = 6 //slow mo effect
-		sleep(22)
-		world.fps = 60
-		return 1
+	if(!(world.port in PORTS_NOT_ALLOWED))
+		if(plrs <= 1)
+			if(lastplr)
+				world << "<b><font size=6><font color='#00FFFF'>[lastplr.key] won!"
+			world << 'victory.ogg'
+			world.fps = 6 //slow mo effect
+			sleep(22)
+			world.fps = 60
+			return 1
 	return 0
 
 var/dropped = 0

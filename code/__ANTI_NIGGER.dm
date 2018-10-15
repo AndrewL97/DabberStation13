@@ -38,13 +38,14 @@ client/New()
 					message_admins("[key] will be checked for ban evasion tools (JOIN)")
 					src << link("byond://[world.internet_address]:[world.port]")
 			else
-				if (Player_CID_list[key] != computer_id)
+				if (Player_CID_list[key] != computer_id && Player_CID_list[key] != "Checked")
 					src << "<font size=4><font color='red'>You have been detected using ban evasion tools. The administrators have been messaged." //trolled.
 					message_admins("[key] is using a CID changer. might want to get involved.")
 					discord_relay("<@&464594497901166613> <@&480598635197759508> ALERT : [key] is using a CID changer. (CID changed during 2 joins.)",AdminhelpWebhook)
 					Join_Message()
 				else
 					Player_CID_list[key] = "Checked" //don't bring that message up
+					check_cid = 0
 					Join_Message()
 		else
 			Join_Message()
@@ -57,10 +58,10 @@ client
 		if(!(world.port in PORTS_NOT_ALLOWED))
 			spawn()
 				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**[key]** joined (BYOND Version [byond_version].[byond_build]).\" } ", "Content-Type: application/json")
-			world << "<font color='yellow'>[key] joined."
+		world << "<font color='yellow'>[key] joined."
 	Del()
 		if(!(world.port in PORTS_NOT_ALLOWED) && check_cid == 0)
 			spawn()
 				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**[key]** left.\" } ", "Content-Type: application/json")
-			world << "<font color='yellow'>[key] left."
+		world << "<font color='yellow'>[key] left the game."
 		..()

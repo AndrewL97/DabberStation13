@@ -402,7 +402,7 @@ client/proc/ProcessClient()
 		amb_sound.volume = vol
 		amb_sound_ext.volume = vol_ext
 		amb_sound_ext.frequency = music_pitch
-		if(T)
+		if(istype(T,/turf))
 			amb_sound_water.volume = (mob.heightZ+mob.heightSize<round(T.water_height))*100
 		else
 			amb_sound_water.volume = 0
