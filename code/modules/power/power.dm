@@ -57,7 +57,7 @@
 // rebuild all power networks from scratch
 
 /proc/makepowernets()
-
+	diary << "Rebuilding powernets"
 	var/netcount = 0
 	powernets = list()
 
@@ -66,7 +66,7 @@
 		PC.netnum = 0
 	for(var/obj/machinery/power/M in machines)
 		CHECK_TICK()
-		if(M.netnum >=0)
+		if(M.netnum >= 0)
 			M.netnum = 0
 
 
@@ -78,20 +78,22 @@
 			if(Debug) world.log << "Starting mpn at [PC.x],[PC.y] ([PC.d1]/[PC.d2]) #[netcount]"
 			powernet_nextlink(PC, PC.netnum)
 
-	if(Debug) world.log << "[netcount] powernets found"
+	diary << "[netcount] powernets found"
 
 	for(var/L = 1 to netcount)
 		CHECK_TICK()
 		var/datum/powernet/PN = new()
-		//PN.tag = "powernet #[L]"
 		powernets += PN
 		PN.number = L
 
 
 	for(var/obj/cable/C in world)
 		CHECK_TICK()
-		var/datum/powernet/PN = powernets[C.netnum]
-		PN.cables += C
+		if(powernets.len >= C.netnum)
+			var/datum/powernet/PN = powernets[C.netnum]
+			PN.cables += C
+		else
+			diary << "Failed to put [C] ([C.x],[C.y],[C.z]) in cables"
 
 	for(var/obj/machinery/power/M in machines)
 		CHECK_TICK()
