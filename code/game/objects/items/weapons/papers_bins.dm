@@ -34,20 +34,6 @@ CLIPBOARDS
 	return
 
 
-/obj/item/weapon/paper/Map/examine()
-	set src in view()
-
-	..()
-
-	usr << browse_rsc(map_graphic)
-	if (!( istype(usr, /mob/living/carbon/human) || istype(usr, /mob/dead/observer) || istype(usr, /mob/living/silicon) ))
-		usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, stars(src.info)), text("window=[]", src.name))
-		onclose(usr, "[src.name]")
-	else
-		usr << browse(cssStyleSheetDab13 + text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", src.name, src.info), text("window=[]", src.name))
-		onclose(usr, "[src.name]")
-	return
-
 
 /obj/item/weapon/paper/attack_self(mob/user as mob)
 	if ((usr.mutations & 16) && prob(50))
