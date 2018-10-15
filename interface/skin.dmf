@@ -116,51 +116,6 @@ menu "menu"
 		category = "&File"
 		saved-params = "is-checked"
 	elem 
-		name = "&Resolution"
-		command = ""
-		saved-params = "is-checked"
-	elem "stretch"
-		name = "&Stretch icons to fit"
-		command = ".winset \"mapwindow.map.icon-size=0\""
-		category = "&Resolution"
-		is-checked = true
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
-	elem 
-		name = "&Change resolution"
-		command = "Resolution"
-		category = "&Resolution"
-		saved-params = "is-checked"
-	elem "icon128"
-		name = "&128x128 Icon Size"
-		command = ".winset \"mapwindow.map.icon-size=128\""
-		category = "&Resolution"
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
-	elem "icon96"
-		name = "&96x96 Icon Size"
-		command = ".winset \"mapwindow.map.icon-size=96\""
-		category = "&Resolution"
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
-	elem "icon64"
-		name = "&64x64 Icon Size"
-		command = ".winset \"mapwindow.map.icon-size=64\""
-		category = "&Resolution"
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
-	elem "icon32"
-		name = "&32x32 Icon Size"
-		command = ".winset \"mapwindow.map.icon-size=32\""
-		category = "&Resolution"
-		can-check = true
-		group = "size"
-		saved-params = "is-checked"
-	elem 
 		name = "&Help/Administration"
 		command = ""
 		saved-params = "is-checked"
@@ -168,6 +123,51 @@ menu "menu"
 		name = "&Admin help\tF1"
 		command = "adminhelp"
 		category = "&Help/Administration"
+		saved-params = "is-checked"
+	elem 
+		name = "&Resolution"
+		command = ""
+		saved-params = "is-checked"
+	elem "stretch"
+		name = "&Stretch Screen To Fit"
+		command = ".winset \"mapwindow.map.icon-size=0\""
+		category = "&Resolution"
+		is-checked = true
+		can-check = true
+		group = "size"
+		saved-params = "is-checked"
+	elem 
+		name = "&Change Screen Resolution"
+		command = "Resolution"
+		category = "&Resolution"
+		saved-params = "is-checked"
+	elem "icon128"
+		name = "&128x128 Tile Size"
+		command = ".winset \"mapwindow.map.icon-size=128\""
+		category = "&Resolution"
+		can-check = true
+		group = "size"
+		saved-params = "is-checked"
+	elem "icon96"
+		name = "&96x96 Tile Size"
+		command = ".winset \"mapwindow.map.icon-size=96\""
+		category = "&Resolution"
+		can-check = true
+		group = "size"
+		saved-params = "is-checked"
+	elem "icon64"
+		name = "&64x64 Tile Size"
+		command = ".winset \"mapwindow.map.icon-size=64\""
+		category = "&Resolution"
+		can-check = true
+		group = "size"
+		saved-params = "is-checked"
+	elem "icon32"
+		name = "&32x32 Tile Size"
+		command = ".winset \"mapwindow.map.icon-size=32\""
+		category = "&Resolution"
+		can-check = true
+		group = "size"
 		saved-params = "is-checked"
 
 
@@ -408,7 +408,6 @@ window "neatbeats"
 		size = 440x144
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		is-visible = false
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
@@ -422,7 +421,6 @@ window "neatbeats"
 		size = 216x96
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "Play Premade"
 		command = "premadesong"
@@ -432,7 +430,6 @@ window "neatbeats"
 		size = 216x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "Switch Octave"
 		command = "octave"
@@ -442,7 +439,6 @@ window "neatbeats"
 		size = 216x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "Switch Instrument"
 		command = "instrument"
@@ -452,7 +448,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "B"
 		command = "note \"B\""
@@ -462,7 +457,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "A#"
 		command = "note \"A#\""
@@ -472,7 +466,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "A"
 		command = "note \"A\""
@@ -482,7 +475,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "G#"
 		command = "note \"G#\""
@@ -492,7 +484,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "G"
 		command = "note \"G\""
@@ -502,7 +493,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "F#"
 		command = "note \"F#\""
@@ -512,7 +502,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "F"
 		command = "note \"F\""
@@ -522,7 +511,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "E"
 		command = "note \"E\""
@@ -532,7 +520,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "D#"
 		command = "note \"D#\""
@@ -542,7 +529,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "D"
 		command = "note \"D\""
@@ -552,7 +538,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "C#"
 		command = "note \"C#\""
@@ -562,7 +547,6 @@ window "neatbeats"
 		size = 112x24
 		anchor1 = none
 		anchor2 = none
-		background-color = none
 		saved-params = "is-checked"
 		text = "C"
 		command = "note \"C\""
@@ -572,7 +556,6 @@ window "neatbeats"
 		size = 52x7
 		anchor1 = 78,70
 		anchor2 = 88,75
-		background-color = none
 		saved-params = "is-checked"
 		text = "F#"
 		command = "note \"F#\""
@@ -582,7 +565,6 @@ window "neatbeats"
 		size = 52x7
 		anchor1 = 78,95
 		anchor2 = 88,100
-		background-color = none
 		saved-params = "is-checked"
 		text = "B"
 		command = "note \"B\""
@@ -592,7 +574,6 @@ window "neatbeats"
 		size = 52x7
 		anchor1 = 78,90
 		anchor2 = 88,95
-		background-color = none
 		saved-params = "is-checked"
 		text = "A#"
 		command = "note \"A#\""
@@ -602,7 +583,6 @@ window "neatbeats"
 		size = 52x6
 		anchor1 = 78,85
 		anchor2 = 88,90
-		background-color = none
 		saved-params = "is-checked"
 		text = "A"
 		command = "note \"A\""
@@ -612,7 +592,6 @@ window "neatbeats"
 		size = 52x7
 		anchor1 = 78,80
 		anchor2 = 88,85
-		background-color = none
 		saved-params = "is-checked"
 		text = "G#"
 		command = "note \"G#\""
@@ -622,7 +601,6 @@ window "neatbeats"
 		size = 52x7
 		anchor1 = 78,75
 		anchor2 = 88,80
-		background-color = none
 		saved-params = "is-checked"
 		text = "G"
 		command = "note \"G\""
@@ -632,7 +610,6 @@ window "neatbeats"
 		size = 48x7
 		anchor1 = 67,95
 		anchor2 = 78,100
-		background-color = none
 		saved-params = "is-checked"
 		text = "F"
 		command = "note \"F\""
@@ -642,7 +619,6 @@ window "neatbeats"
 		size = 48x6
 		anchor1 = 67,85
 		anchor2 = 78,90
-		background-color = none
 		saved-params = "is-checked"
 		text = "D#"
 		command = "note \"D#\""
@@ -652,7 +628,6 @@ window "neatbeats"
 		size = 48x7
 		anchor1 = 67,80
 		anchor2 = 78,85
-		background-color = none
 		saved-params = "is-checked"
 		text = "D"
 		command = "note \"D\""
@@ -662,7 +637,6 @@ window "neatbeats"
 		size = 48x7
 		anchor1 = 67,75
 		anchor2 = 78,80
-		background-color = none
 		saved-params = "is-checked"
 		text = "C#"
 		command = "note \"C#\""
@@ -672,7 +646,6 @@ window "neatbeats"
 		size = 48x7
 		anchor1 = 67,70
 		anchor2 = 78,75
-		background-color = none
 		saved-params = "is-checked"
 		text = "C"
 		command = "note \"C\""
