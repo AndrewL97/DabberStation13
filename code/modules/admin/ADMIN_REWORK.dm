@@ -65,6 +65,7 @@ var/list/admin_clients = list()
 
 client
 	var/spawn_delay = 0
+	var/cooldown = 5
 	proc/StationName(StationName as text)
 		set category = "Admin"
 		set name = "(ADMIN) Station Name"
@@ -283,10 +284,12 @@ client
 				..()
 				return
 		if(world.time < spawn_delay)
-			src << "<font color='red'>Failed to spawn. You're spawning way too fast! There's a 0.6 second cooldown."
+			cooldown = min(cooldown+1,20)
+			src << "<font color='red'>Failed to spawn. You're spawning way too fast! There's a [cooldown/10] second cooldown."
 			return
 		else
-			spawn_delay = world.time+6
+			cooldown = initial(cooldown)
+			spawn_delay = world.time+cooldown
 		var/atom/movable/e = new g
 		e.loc = locate(mob.x,mob.y,mob.z)
 		if(istype(e,/obj/item/weapon/card))
