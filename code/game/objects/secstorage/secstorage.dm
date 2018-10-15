@@ -69,7 +69,7 @@
 		CX = CX + 1
 		O.screen_loc = "CENTER+[x1+CX-1],[screen_loc_g]"
 		O.layer = 20
-		O.plane = 10
+		O.plane = HUD_PLANE
 
 	return
 
