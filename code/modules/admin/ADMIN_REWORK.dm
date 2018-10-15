@@ -64,6 +64,7 @@ var/list/admin_clients = list()
 			M << rendered
 
 client
+	var/spawn_delay = 0
 	proc/StationName(StationName as text)
 		set category = "Admin"
 		set name = "(ADMIN) Station Name"
@@ -281,6 +282,11 @@ client
 				src << "<font color='red'>Failed to spawn. Sandbox disabled."
 				..()
 				return
+		if(world.time < spawn_delay)
+			src << "<font color='red'>Failed to spawn. You're spawning way too fast! There's a 0.6 second cooldown."
+			return
+		else
+			spawn_delay = world.time+6
 		var/atom/movable/e = new g
 		e.loc = locate(mob.x,mob.y,mob.z)
 		if(istype(e,/obj/item/weapon/card))
