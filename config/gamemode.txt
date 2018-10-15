@@ -1,1 +1,1 @@
-/datum/game_mode/normal
+/datum/game_mode/sandbox
