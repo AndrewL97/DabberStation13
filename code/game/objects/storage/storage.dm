@@ -70,7 +70,7 @@
 		user.client.screen -= W
 	src.orient2hud(user)
 	W.dropped(user)
-	W.plane = ITEM_PLANE
+	W.plane = HUD_PLANE
 	add_fingerprint(user)
 	for(var/mob/O in viewers(user, null))
 		O.show_message(text("\blue [] has added [] to []!", user, W, src), 1)
