@@ -588,7 +588,7 @@
 	icon_state = "reddit"
 	product_paths = "/obj/item/weapon/storage/toolbox/mechanical;/obj/item/weapon/storage/firstaid/regular;/obj/item/weapon/tank/oxygen;/obj/item/weapon/tank/jetpack;/obj/item/weapon/wrench;/obj/item/weapon/weldingtool;/obj/item/weapon/wirecutters;/obj/item/weapon/screwdriver;/obj/item/weapon/crowbar"
 	product_amounts = "8;3;5;2;12;12;12;12;12"
-	product_slogans = "Troll the libtards, now with the new toolbox!;AI IS FUCKING MALF WHAT DO WE DO, OH I KNOW! USE A OXYGEN TANK!;Be the next greytide today!"
+	product_slogans = "but i thought reddit liked cats;buy toolboxes today and outrobust the libtards;jump higher than mario.. now with the ultimate jetpack;get your own welder today and start a fire"
 	product_hidden = "/obj/item/weapon/flashbang"
 
 /obj/machinery/vending/cigarette
