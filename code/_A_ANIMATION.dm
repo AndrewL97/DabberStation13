@@ -208,13 +208,13 @@ mob
 
 								animate(danc.Limb3,transform = LeftArm, time = 2)
 								spawn()
-									for(var/i in 1 to 15) //This would be 4 seconds.
+									for(var/i in 1 to 42) //This would be 4 seconds.
 										animate(danc.Limb4,transform = RightArm, time = 2) //This is what causes the magic.
 										sleep(2)
 										animate(danc.Limb4,transform = RightArm2, time = 2)
 										sleep(2)
 								spawn()
-									for(var/i in 1 to 7)
+									for(var/i in 1 to 24)
 										animate(danc.Limb5,transform = LeftLeg2, time = 4)
 										animate(danc.Limb6,transform = RightLeg2, time = 4)
 										animate(danc.Limb3,transform = LeftArm, time = 3)
@@ -223,7 +223,7 @@ mob
 										animate(danc.Limb6,transform = RightLeg, time = 4)
 										animate(danc.Limb3,transform = LeftArm2, time = 3)
 										sleep(4)
-								sleep(60)
+								sleep(180)
 								danc.Reset_Limbs() //make sure to put this at the end of a animation (or anywhere), since it resets your body part positions.
 
 								danc.End_Animation() //This also, but only put this if you're gonna put ANIMATION_RUNNING = 0 below.
