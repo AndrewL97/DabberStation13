@@ -229,15 +229,3 @@
 		src.network = "Prison"
 //		src.network = "AI Satellite"
 	src << "\blue Switched to [src.network] camera network."
-
-
-/mob/living/silicon/ai/proc/choose_modules()
-	set category = "AI Commands"
-	set name = "Choose Module"
-
-	src.malf_picker.use(src)
-
-
-
-
-
