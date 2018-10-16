@@ -79,7 +79,7 @@ datum
 				if(volume >= 3)
 					T:water_height += volume
 					water_changed += T //eh
-				for(var/i in 1 to round(volume*5))
+				for(var/i in 1 to min(250,round(volume*5)))
 					var/obj/Particle/Water/A = new(T)
 					A.x_pos = 16
 					A.y_pos = 16
