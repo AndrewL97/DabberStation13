@@ -242,5 +242,9 @@ client
 				as icon
 
 	log_admin("[key_name(src)] modified [original_name]'s [variable] to [O.vars[variable]]")
-	message_admins("[key_name_admin(src)] modified [original_name]'s [variable] to [O.vars[variable]]", 1)
+	message_admins("[key_name_admin(src)] modified [original_name]'s [variable] to [O.vars[variable]]")
+	if(istype(O,/mob/living/carbon/human))
+		O:update_body()
+		O:update_clothing()
+
 
