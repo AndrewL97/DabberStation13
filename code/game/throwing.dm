@@ -41,6 +41,8 @@
 	if (item)
 		item.layer = initial(item.layer)
 		src.visible_message("\red [src] has thrown [item].")
+		if(istype(item,/mob))
+			item:ySpeed = 6
 		if(istype(src.loc, /turf/space)) //they're in space, move em one space in the opposite direction
 			src.inertia_dir = get_dir(target, src)
 			step(src, inertia_dir)
@@ -81,6 +83,9 @@
 
 /atom/proc/throw2_impact(atom/hit_atom)
 	if(ismob(hit_atom))
+		if(ismob(src))
+			if(!(src:heightZ+src:heightSize > hit_atom:heightZ && src:heightZ < hit_atom:heightZ+hit_atom:heightSize))
+				return //Don't hit.
 		hit_atom.visible_message("\red [hit_atom] has been hit by [src].")
 		var/mob/M = hit_atom
 		if(src.vars.Find("throw2force"))
