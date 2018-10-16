@@ -7,6 +7,7 @@
 	var/tail = "none"
 	var/tail_color = null
 	var/cat_ears = 0
+	mouse_opacity = 1
 	//var/icon/fullplayericon = null
 
 /mob/living/carbon/human/New()
@@ -20,6 +21,7 @@
 	if (!dna)
 		dna = new /datum/dna( null )
 	spawn (1)
+		mouse_opacity = 1
 		var/datum/organ/external/chest/chest = new /datum/organ/external/chest( src )
 		chest.owner = src
 		var/datum/organ/external/groin/groin = new /datum/organ/external/groin( src )
