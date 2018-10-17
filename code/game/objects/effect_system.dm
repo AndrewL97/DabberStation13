@@ -525,7 +525,6 @@ steam.start() -- spawns the effect
 	mouse_opacity = 0
 	var/amount = 3
 	var/expand = 1
-	animate_movement = 0
 	var/metal = 0
 
 

@@ -3,7 +3,6 @@
 	var/m_amt = 0	// metal
 	var/g_amt = 0	// glass
 	var/w_amt = 0	// waster amounts
-	animate_movement = 2
 
 	proc
 		handle_internal_lifeform(mob/lifeform_inside_me, breath_request)

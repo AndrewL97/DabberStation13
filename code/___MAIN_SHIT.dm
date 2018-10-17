@@ -79,6 +79,8 @@ mob
 	appearance_flags = PIXEL_SCALE | LONG_GLIDE
 
 
+atom/movable
+	animate_movement = 2
 var
 	const
 		LIGHT_LAYER = 100

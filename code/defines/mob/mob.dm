@@ -1,7 +1,6 @@
 /mob
 	density = 1
 	layer = 4.0
-	animate_movement = 2
 	var/datum/mind/mind
 	var/shield = 0 //0-100
 	var/uses_hud = 0

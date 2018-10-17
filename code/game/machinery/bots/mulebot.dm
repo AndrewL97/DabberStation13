@@ -10,7 +10,6 @@
 	layer = MOB_LAYER
 	density = 1
 	anchored = 1
-	animate_movement=1
 	var/on = 1
 	var/locked = 1
 	var/atom/movable/load = null		// the loaded crate (usually)
