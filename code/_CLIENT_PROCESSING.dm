@@ -375,7 +375,10 @@ client/proc/ProcessClient()
 			if(nuke_enabled)
 				mob.timer_hud.maptext = {"<div align="right">[round(nuke_timer/60)]:[(round(nuke_timer) % 60) < 10 ? "0[round(nuke_timer) % 60]" : round(nuke_timer) % 60]"}
 			else
-				mob.timer_hud.maptext = {"<div align="right">0:00"}
+				if(STORM)
+					mob.timer_hud.maptext = {"<div align="right">[(STORM.timer_left > 0) ? "[round(STORM.timer_left/60)]:[(round(STORM.timer_left) % 60) < 10 ? "0[round(STORM.timer_left) % 60]" : round(STORM.timer_left) % 60]" : "0:00"]"} //STORM.timer_left
+				else
+					mob.timer_hud.maptext = {"<div align="right">0:00"}
 		if(music_pitch < music_pitch_new)
 			music_pitch += 0.0025
 			if(music_pitch > music_pitch_new)
