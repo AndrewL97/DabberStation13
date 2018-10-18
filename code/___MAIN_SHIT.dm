@@ -119,13 +119,14 @@ obj
 			special_processing -= src
 			..()
 		special_process()
-			if(frm_counter % 15 == 1) // A full sec
+			if(frm_counter % 30 == 1) // A full sec
 				if(light)
-					animate(light, color = rgb(rand(180,255),rand(180,255),rand(180,255)), time = 2.5)
+					animate(light, color = rgb(rand(0,255),rand(0,255),rand(0,255)), time = 5)
 			else
-				sd_SetLuminosity(10)
 				if(light)
 					light.intensity = 1
+				else
+					sd_SetLuminosity(10)
 	spotlight
 		icon = 'speciallighting.dmi'
 		icon_state = "stand"
