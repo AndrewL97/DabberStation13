@@ -370,10 +370,7 @@ client/proc/ProcessClient()
 			if(istype(G,/obj/item/weapon/gun))
 				mob.amm.maptext = {"<div align="right">[G.ammo]/[G.ammo_max]"}
 			else
-				if(istype(G,/obj/item))
-					mob.amm.maptext = {"<div align="right">[G.name]"}
-				else
-					mob.amm.maptext = {"<div align="right">NO WEAPON"}
+				mob.amm.maptext = {"<div align="right">NO GUN"}
 		if(mob.timer_hud)
 			if(nuke_enabled)
 				mob.timer_hud.maptext = {"<div align="right">[round(nuke_timer/60)]:[(round(nuke_timer) % 60) < 10 ? "0[round(nuke_timer) % 60]" : round(nuke_timer) % 60]"}
@@ -520,8 +517,8 @@ client
 		maptext_width = 64
 		screen_loc = "EAST-5:-16,SOUTH:4"
 	timer
-		maptext_width = 64
-		screen_loc = "EAST-5:-16,SOUTH:4"
+		maptext_width = 128
+		screen_loc = "EAST-7:-16,SOUTH:4"
 		maptext_y = 16
 
 /obj/screen_alt/heightCalc
