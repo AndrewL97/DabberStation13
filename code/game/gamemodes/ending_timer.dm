@@ -63,11 +63,6 @@ X < 97
 proc/timer_enable()
 	ticker.nuke_enable()
 
-client/Stat()
-	..()
-	if(nuke_enabled == 1)
-		stat("Seconds Left Till Explosion",round(nuke_timer))
-
 /obj/screen_number
 	icon = 'number_font.dmi'
 	plane = 10

@@ -370,7 +370,12 @@ client/proc/ProcessClient()
 			if(istype(G,/obj/item/weapon/gun))
 				mob.amm.maptext = {"<div align="right">[G.ammo]/[G.ammo_max]"}
 			else
-				mob.amm.maptext = ""
+				mob.amm.maptext = "NO GUN"
+		if(mob.timer_hud)
+			if(nuke_enabled)
+				mob.timer_hud.maptext = "[round(nuke_timer/60)]:[round(nuke_timer) % 60]"
+			else
+				mob.timer_hud.maptext = "0:00"
 		if(music_pitch < music_pitch_new)
 			music_pitch += 0.0025
 			if(music_pitch > music_pitch_new)
@@ -507,8 +512,11 @@ client
 	plane = HUD_PLANE
 	ammo
 		maptext_width = 64
-		screen_loc = "EAST-3:-16,SOUTH:4"
-		maptext_y = 7
+		screen_loc = "EAST-5:-16,SOUTH:4"
+	timer
+		maptext_width = 64
+		screen_loc = "EAST-5:-16,SOUTH:4"
+		maptext_y = 17
 
 /obj/screen_alt/heightCalc
 	icon = 'screen1.dmi'
@@ -521,14 +529,18 @@ client
 	var/obj/screen_alt/heightCalc/c1 = null
 	var/obj/screen_alt/heightCalc/heightG/c2 = null
 	var/obj/screen_alt/ammo/amm = null
-/obj/hud/proc/instantiate_height_calculator()
+	var/obj/screen_alt/timer/timer_hud = null
+
+/obj/hud/proc/extra_init_hud()
 	if(!mymob.c1)
 		mymob.c1 = new
 	if(!mymob.c2)
 		mymob.c2 = new
 	if(!mymob.amm)
 		mymob.amm = new
-
+	if(!mymob.timer_hud)
+		mymob.timer_hud = new
 	mymob.client.screen += mymob.c1
 	mymob.client.screen += mymob.c2
 	mymob.client.screen += mymob.amm
+	mymob.client.screen += mymob.timer_hud

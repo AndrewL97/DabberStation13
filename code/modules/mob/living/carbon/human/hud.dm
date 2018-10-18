@@ -97,7 +97,7 @@ mob
 	if(mymob.uses_hud)
 		spawn()
 			if(istype(mymob, /mob/living/carbon/human))
-				instantiate_height_calculator() //we need to instantiate the height calculator
+				extra_init_hud() //we need to instantiate the height calculator
 				src.human_hud()
 				//return
 
