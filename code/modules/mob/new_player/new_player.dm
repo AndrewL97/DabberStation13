@@ -27,7 +27,9 @@ mob/new_player
 			mind = new
 			mind.key = key
 			mind.current = src
-		src << sound('titlesong.ogg',channel=LOBBY_CHANNEL,volume=100, repeat = 1)
+		var/sound/S = sound('titlesong.ogg',channel=LOBBY_CHANNEL,volume=100, repeat = 1)
+		S.frequency = 2
+		src << S
 		new_player_panel()
 
 		loc = locate(230,91,1)
