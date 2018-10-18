@@ -2,7 +2,7 @@
 	var/specialloss = 0.0 //you are have the stupidddddddddddddd loooooooooooooooooooooooooooooooooooooo looooooooooooooooooooooooooooooo
 	var/old_new_health = 100
 	var/old_lying = 0
-	var/air = 50
+	var/air = 25
 
 /mob/proc/TakeBruteDamage(damage)
 	if(istype(src,/mob/living/carbon/human))
@@ -30,7 +30,7 @@
 			if(frm_counter % 15 == 1)
 				breathe()
 
-			air = max(0,min(50,air)) //Clamp values
+			air = max(0,min(25,air)) //Clamp values
 			if(air < tick_lag_original)
 				oxyloss += 0.5
 				if(frm_counter % 60 == 1)

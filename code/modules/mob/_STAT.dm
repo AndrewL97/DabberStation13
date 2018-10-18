@@ -19,7 +19,7 @@ var
 		stat(null, "Players Online : [clients.len]/[MAX_PLAYERS]")
 		if(!STORM)
 			if(istype(src,/mob/living))
-				stat(null, "Air : %[round(air*2)]")
+				stat(null, "Air : %[max(0,min(100,round(air*4)))]")
 				stat(null, "Nutrition : %[max(0,min(100,round(nutrition)))]")
 				stat(null, "Thirst : %[max(0,min(100,round(thirst)))]")
 				stat(null, "Weight : [round(weight,0.125)] KG")
