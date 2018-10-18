@@ -370,12 +370,12 @@ client/proc/ProcessClient()
 			if(istype(G,/obj/item/weapon/gun))
 				mob.amm.maptext = {"<div align="right">[G.ammo]/[G.ammo_max]"}
 			else
-				mob.amm.maptext = "NO GUN"
+				mob.amm.maptext = {"<div align="right">NO GUN"}
 		if(mob.timer_hud)
 			if(nuke_enabled)
-				mob.timer_hud.maptext = "[round(nuke_timer/60)]:[round(nuke_timer) % 60]"
+				mob.timer_hud.maptext = {"<div align="right">[round(nuke_timer/60)]:[(round(nuke_timer) % 60) < 10 ? "0[round(nuke_timer) % 60]" : round(nuke_timer) % 60]"}
 			else
-				mob.timer_hud.maptext = "0:00"
+				mob.timer_hud.maptext = {"<div align="right">0:00"}
 		if(music_pitch < music_pitch_new)
 			music_pitch += 0.0025
 			if(music_pitch > music_pitch_new)
