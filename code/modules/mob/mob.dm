@@ -354,19 +354,6 @@
 	if (M == src.affecting)
 		s_click(src.hud1)
 		return
-	if(M == src.assailant && src.state >= 2)
-		if(iscarbon(src.affecting))
-			var/mob/living/carbon/attacker = user
-			for(var/mob/N in viewers(user, null))
-				if(N.client)
-					N.show_message(text("\red <B>[user] is attempting to devour [src.affecting]!</B>"), 1)
-			if(!do_mob(user, src.affecting)) return
-			for(var/mob/N in viewers(user, null))
-				if(N.client)
-					N.show_message(text("\red <B>[user] devours [src.affecting]!</B>"), 1)
-			src.affecting.loc = user
-			attacker.stomach_contents.Add(src.affecting)
-			del(src)
 
 /obj/item/weapon/grab/dropped()
 	del(src)
