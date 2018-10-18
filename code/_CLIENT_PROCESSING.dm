@@ -516,7 +516,7 @@ client
 	timer
 		maptext_width = 64
 		screen_loc = "EAST-5:-16,SOUTH:4"
-		maptext_y = 17
+		maptext_y = 16
 
 /obj/screen_alt/heightCalc
 	icon = 'screen1.dmi'
