@@ -46,28 +46,13 @@ mob
 					playsound(src, pick(T.TurfStepSound), 100, 0, 8, 0)
 /client
 	//animate_movement = 2
-	var
-		ping = 0
-	verb
-		ping(time as num)
-			set instant = 1
-			set waitfor = 0
-			set hidden = 1
-			ping = (world.time+tick_lag_original*world.tick_usage/100)-time
-			sleep(1)
-			ping(world.time+tick_lag_original*world.tick_usage/100)
-			//winset(src,null,"command=ping+[world.time+tick_lag_original*world.tick_usage/100]")
-	New()
-		. = ..()
-		ping()
 	var/s = 0
 	var/n = 0
 	var/e = 0
 	var/w = 0
 	var/j = 0
 	var/spri = 0
-
-	var/mousedown
+	var/mousedown = 0
 	verb/KeyDownM(a as text)
 		set instant = 1
 		set hidden = 1
@@ -160,16 +145,7 @@ mob
 			var/atom/O = src.mob.loc
 			if (src.mob.canmove)
 				return O.relaymove(src.mob, dirAA)
-	Stat()
-		..()
-		if(mob)
-			var/obj/item/weapon/gun/G = null
-			if (!( mob.hand ))
-				G = mob.r_hand
-			else
-				G = mob.l_hand
-			if(istype(G,/obj/item/weapon/gun))
-				stat("Gun ammo :","[G.ammo]/[G.ammo_max]")
+
 /client/Move(n, direct)
 	if (!( src.mob ))
 		return
@@ -388,6 +364,13 @@ client/proc/ProcessClient()
 		if(ticker)
 			if(istype(ticker.mode,/datum/game_mode/battle_royale))
 				mob.ProcessBattleRoyale()
+		if(mob.amm)
+			var/obj/item/weapon/gun/G = null
+			G = !( mob.hand ) ? mob.r_hand : mob.l_hand
+			if(istype(G,/obj/item/weapon/gun))
+				mob.amm.maptext = "<text align=center valign=right>[G.ammo]/[G.ammo_max]"
+			else
+				mob.amm.maptext = ""
 		if(music_pitch < music_pitch_new)
 			music_pitch += 0.0025
 			if(music_pitch > music_pitch_new)
@@ -517,13 +500,17 @@ client
 /obj/screen
 	appearance_flags = PIXEL_SCALE | TILE_BOUND | NO_CLIENT_COLOR
 /obj/screen_num
-	plane = 10
+	plane = HUD_PLANE
 	appearance_flags = PIXEL_SCALE | TILE_BOUND | NO_CLIENT_COLOR
 /obj/screen_alt
 	appearance_flags = PIXEL_SCALE | TILE_BOUND | NO_CLIENT_COLOR
+	plane = HUD_PLANE
+	ammo
+		maptext_width = 64
+		screen_loc = "EAST-4:-16,SOUTH:4"
+		maptext_y = 8
 
 /obj/screen_alt/heightCalc
-	plane = 10
 	icon = 'screen1.dmi'
 	icon_state = "plr"
 	screen_loc = "EAST:-4, CENTER-1:-4"
@@ -533,13 +520,15 @@ client
 /mob
 	var/obj/screen_alt/heightCalc/c1 = null
 	var/obj/screen_alt/heightCalc/heightG/c2 = null
-
+	var/obj/screen_alt/ammo/amm = null
 /obj/hud/proc/instantiate_height_calculator()
 	if(!mymob.c1)
 		mymob.c1 = new
 	if(!mymob.c2)
 		mymob.c2 = new
+	if(!mymob.amm)
+		mymob.amm = new
 
 	mymob.client.screen += mymob.c1
 	mymob.client.screen += mymob.c2
-
+	mymob.client.screen += mymob.amm

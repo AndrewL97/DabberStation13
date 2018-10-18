@@ -12,8 +12,6 @@ var
 			stat("Lobby",null)
 			stat(null, "Gamemode : [ticker.mode ? ticker.mode.name : "Not Chosen"]")
 		stat("Status",null)
-		if(client)
-			stat(null, "Ping : [client.ping] ms")
 		stat(null, "Server Time : [time2text(world.timeofday)]")
 		stat(null, "Server CPU : %[world.cpu]")
 		stat(null, "Players Online : [clients.len]/[MAX_PLAYERS]")
