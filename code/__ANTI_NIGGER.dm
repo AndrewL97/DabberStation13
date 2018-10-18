@@ -60,9 +60,8 @@ client
 				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**[key]** joined (BYOND Version [byond_version].[byond_build]).\" } ", "Content-Type: application/json")
 		world << "<font color='yellow'>[key] joined."
 	Del()
-		if(!(world.port in PORTS_NOT_ALLOWED) && check_cid == 0)
-			spawn()
-				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**[key]** left.\" } ", "Content-Type: application/json")
+		if((!(world.port in PORTS_NOT_ALLOWED)) && check_cid == 0)
+			discord_relay("[key] left.",WebhookURL)
 		if(!check_cid)
 			world << "<font color='yellow'>[key] left the game."
 		..()

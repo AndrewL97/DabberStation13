@@ -22,8 +22,7 @@ var/list/water_changed = list()
 var/special_processing = list()
 
 #define CPU_WARN 55 //How much CPU should trigger the warning that it's going too high?
-#define CPU_STABLE_LEVEL 25 //What CPU does dab13 normally run on?
-#define CPU_CHECK_MAX 40 //if cpu goes higher than this, some things will do sleep(tick_lag_original) and throttle.
+#define CPU_CHECK_MAX 45 //if cpu goes higher than this, some things will do sleep(tick_lag_original) and throttle.
 #define ATMOS_CPU_FORCE_SLEEP 70 //Force atmos/water to sleep (and throttle) if CPU (tick usage) goes higher than this value to stabilize the CPU.
 #define WHILE_TICK_MAX 70 //Sleep a while loop if tick usage goes higher than this.
 #define MAIN_TICK_MAX 90 //Sleep if tick usage goes higher than this.

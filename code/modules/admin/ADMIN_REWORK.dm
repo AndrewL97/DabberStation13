@@ -132,7 +132,7 @@ client
 			var/mob/G = D
 			if(G.client)
 				if(holder.rank != "Host")
-					src << "You can't just delete a player with a client!"
+					src << "<b><font color='red'>You can't just delete a player with a client!"
 					return
 		if(alert("Delete [D]?","Delete","Yes","No") == "Yes")
 			message_admins("[key] has deleted [D]")
@@ -141,6 +141,9 @@ client
 		set category = "Admin"
 		set name = "(ADMIN) Del-all"
 		if(alert("Delete all objects of type [object]? Might lag the server!","Delete","Yes","No") == "Yes")
+			if(istype(object,/mob))
+				src << "<b><font color='red'>You cannot del-all mobs."
+				return
 			message_admins("[key] has deleted all instances of [object] in the game.")
 			var o
 			while((o = locate(object)))
@@ -189,16 +192,16 @@ client
 				message_admins("[key] has banned [C.key]")
 				C << "\red <b>You have been banned by [key] for this round. Reason : [reason], You might appeal at [discordLink]."
 				del C
-	proc/boom()
+	proc/boom(range as num)
 		set category = "Admin"
-		set name = "(ADMIN) Create Small Explosion"
+		set name = "(ADMIN) Create Explosion"
 		set desc = "Boom Boom Shake The Room"
 		if (!src.holder)
 			src << "Only administrators may use this command."
 			return
-		message_admins("[key] has used Boom Boom Shake The Room")
+		message_admins("[key] has created a small explosion.")
 		if(mob)
-			explosion(mob.loc, 3, 5, 7, 18)
+			explosion(mob.loc, range/4, range/2, range, range,0)
 	proc/yomusic(var/g as sound)
 		set category = "Admin"
 		set name = "(ADMIN) Play Music"
