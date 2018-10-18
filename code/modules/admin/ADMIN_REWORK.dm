@@ -23,7 +23,8 @@ var/list/admin_verbs = list(
 /client/proc/Reboot,
 /client/proc/Gamemode,
 /client/proc/StationName,
-/client/proc/Revive
+/client/proc/Revive,
+/client/proc/Fling
 )
 var/ban_list = list()
 var/list/admin_clients = list()
@@ -68,6 +69,12 @@ var/list/admin_clients = list()
 client
 	var/spawn_delay = 0
 	var/cooldown = 5
+	proc/Fling(mob/D in world)
+		set category = "Admin"
+		set name = "(ADMIN) Fling"
+		D.ySpeed = 20
+		D.glide_size = 32 / 1 * tick_lag_original
+		walk(D,pick(DIAGONALS+CARDINALS),1,0)
 	proc/Revive(mob/D in world)
 		set category = "Admin"
 		set name = "(ADMIN) Rejuvenate"
