@@ -112,6 +112,7 @@ obj
 		icon = 'boring shit.dmi'
 		icon_state = "discoball"
 		anchored = 1
+		var/cycle = 1
 		New()
 			..()
 			special_processing += src
@@ -121,7 +122,10 @@ obj
 		special_process()
 			if(frm_counter % 30 == 1) // A full sec
 				if(light)
-					animate(light, color = rgb(rand(0,255),rand(0,255),rand(0,255)), time = 5)
+					cycle += 1
+					if(cycle == 4)
+						cycle = 1
+					animate(light, color = rgb(cycle == 1 ? 255 : 0, cycle == 2 ? 255 : 0, cycle == 3 ? 255 : 0), time = 5)
 			else
 				if(light)
 					light.intensity = 1
