@@ -200,7 +200,7 @@ window "mainwindow"
 	elem "input"
 		type = INPUT
 		pos = 0,460
-		size = 601x20
+		size = 640x20
 		anchor1 = 0,100
 		anchor2 = 100,100
 		text-color = #ffffff
@@ -208,19 +208,6 @@ window "mainwindow"
 		is-default = true
 		border = line
 		saved-params = "command"
-	elem "saybutton"
-		type = BUTTON
-		pos = 600,460
-		size = 40x20
-		anchor1 = 100,100
-		anchor2 = none
-		text-color = #ffffff
-		background-color = #0e101b
-		border = line
-		saved-params = "is-checked"
-		text = "Hotkey"
-		command = ".winset \"saybutton.is-checked=true?input.command=\"!say \\\"\" macrobutton.is-checked=false:input.command=\""
-		button-type = pushbox
 
 window "mapwindow"
 	elem "mapwindow"
