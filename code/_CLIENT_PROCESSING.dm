@@ -368,7 +368,7 @@ client/proc/ProcessClient()
 			var/obj/item/weapon/gun/G = null
 			G = !( mob.hand ) ? mob.r_hand : mob.l_hand
 			if(istype(G,/obj/item/weapon/gun))
-				mob.amm.maptext = "<text align=center valign=right>[G.ammo]/[G.ammo_max]"
+				mob.amm.maptext = {"<div align="right">[G.ammo]/[G.ammo_max]"}
 			else
 				mob.amm.maptext = ""
 		if(music_pitch < music_pitch_new)
@@ -507,8 +507,8 @@ client
 	plane = HUD_PLANE
 	ammo
 		maptext_width = 64
-		screen_loc = "EAST-4:-16,SOUTH:4"
-		maptext_y = 8
+		screen_loc = "EAST-3:-16,SOUTH:4"
+		maptext_y = 7
 
 /obj/screen_alt/heightCalc
 	icon = 'screen1.dmi'
