@@ -125,7 +125,7 @@ obj
 					cycle += 1
 					if(cycle == 4)
 						cycle = 1
-					animate(light, color = rgb(cycle == 1 ? 255 : 0, cycle == 2 ? 255 : 0, cycle == 3 ? 255 : 0), time = 10)
+					animate(light, color = rgb(cycle == 1 ? 255 : 150, cycle == 2 ? 255 : 150, cycle == 3 ? 255 : 150), time = 10)
 			else
 				if(light)
 					light.intensity = 1
