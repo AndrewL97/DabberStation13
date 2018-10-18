@@ -1,5 +1,22 @@
 # Dabber Station 13 Docs
-Warning! Might be outdated.
+Documentation of the server.
+
+# Setup (For server hosts)
+Download this repo as a zip. **ADVICE : use github desktop for ability to update at any time**
+
+Compile using Dream Maker (takes usually 20 seconds!) you can also do Compile And Run if you want to do a testrun of how your server's gonna play. If you're gonna do this, make sure the folder with your project is named "dab13" and not "dab13-master" or anything else, it must be dab13 or else Ultra-Safe mode will be enabled.
+
+Use dream daemon to host, Don't use port 9999 or 0, because it enables local testing mode and makes a few debugging stuff enabled.
+
+You need to edit ADMIN_REWORK.dm to change admins. And you need to create a webhook.txt file and webhookAdmin.txt file in the config folder, These are used for the discord webhooks. webhook.txt is a webhook that logs player chat, and webhookAdmin.txt is a adminhelp webhook.
+
+Gamemodes cannot be configured yet. I plan to add configuration for it soon.
+
+# Admin Tools / Commands
+Admin tools aren't that big. But you may suggest new ones to me. Currently we have main admin features like banning, kicking, sounds, teleporting. etc
+
+**BELOW ARE DOCS FOR EDITING STUFF IN THE SERVER**
+
 
 ## List of contents.
 1. HOW TO MAKE A MAP USING THE ACCESS LEVEL SYSTEM
