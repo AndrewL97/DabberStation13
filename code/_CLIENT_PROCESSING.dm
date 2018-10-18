@@ -430,13 +430,13 @@ client/proc/ProcessClient()
 	if(health.len == 0)
 		var/obj/screen_num/numbG2 = new()
 		numbG2.icon = 'screen1.dmi'
-		numbG2.screen_loc = "WEST,NORTH"
+		numbG2.screen_loc = "EAST:-4,CENTER"
 		numbG2.icon_state = "%"
 		health += numbG2
 		for(var/i in 1 to 3)
 			var/obj/screen_num/numbG = new()
 			numbG.icon = 'screen1.dmi'
-			numbG.screen_loc = "WEST:[((i-1)*4)],NORTH"
+			numbG.screen_loc = "EAST:[((i-1)*4)-4],CENTER"
 			//screen += numbG
 			health += numbG
 	if(!(health in screen))
@@ -526,7 +526,7 @@ client
 	plane = 10
 	icon = 'screen1.dmi'
 	icon_state = "plr"
-	screen_loc = "WEST+3, NORTH:0"
+	screen_loc = "EAST:-4, CENTER-1:-4"
 	heightG
 		icon_state = "height"
 

@@ -38,7 +38,7 @@ turf
 			gW1.plane = MOB_PLANE_ALT
 		if(!gW2)
 			gW2 = new(locate(x,y,z))
-			gW2.plane = LIGHT_PLANE
+			gW2.plane = FLOOR_PLANE
 			gW2.layer = TURF_LAYER+0.5
 	Del()
 		if(gW1)
@@ -51,7 +51,7 @@ turf
 
 #define DIR2PIXEL list("1" = list(0,1),"2" = list(0,-1),"4" = list(1,0),"8" = list(-1,0))
 #define DIAGONALS list(SOUTHWEST,SOUTHEAST,NORTHWEST,NORTHEAST)
-#define REVERSEDIRS(DIR) turn(DIR,180)
+proc/REVERSEDIRS(DIR) return turn(DIR,180)
 #define CARDINALS list(SOUTH,NORTH,EAST,WEST)
 #define TEXT2DIR list("NORTH" = NORTH,"SOUTH" = SOUTH,"EAST" = EAST,"WEST" = WEST,"NORTHEAST" = NORTHEAST,"NORTHWEST" = NORTHWEST,"SOUTHEAST" = SOUTHEAST,"SOUTHWEST" = SOUTHWEST)
 #define DIRTOHORVER list("1" = "VER","2" = "VER","4" = "HOR","8" = "HOR")
@@ -142,8 +142,9 @@ obj
 						var/obj/Particle/Water/A = new(locate(x,y,z))
 						A.x_pos = 16
 						A.y_pos = 16
-						A.x_spd = (rand(-30,30)/10)
-						A.y_spd = (rand(-30,30)/10)
+						var/ang = rand(0,360)
+						A.x_spd = (cos(ang)*(rand()*2))
+						A.y_spd = (sin(ang)*(rand()*2))
 					playsound(src, 'explosionfar.ogg', 100, 1, 30)
 					playsound(src, "explosion", 100, 1, 15)
 					del src
@@ -341,10 +342,18 @@ obj
 			if(!(src in water_changed))
 				water_changed += src
 	proc/Can_Still_Process()
+		var/hotspot = (locate(/obj/hotspot) in src)
+		if(hotspot)
+			var/datum/gas_mixture/lowertemp = src.remove_air( src:air:total_moles() )
+			lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
+			lowertemp.react()
+			assume_air(lowertemp)
+			del(hotspot)
 		if(round(water_height) == 0)
 			//water_height = 0
 			if(src in water_changed)
 				water_changed -= src
+
 /turf/simulated/proc/Process_Water()
 	if(listofconnections.len < 1 || water_cycles % 5 == 1)
 		Get_Connections()

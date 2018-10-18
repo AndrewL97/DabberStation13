@@ -99,10 +99,9 @@ obj/light
 	icon = 'spotlight.dmi'
 	//icon_state = "light"
 	mouse_opacity = 0
-	pixel_x = -32
-	pixel_y = -32
-
 	layer = LIGHT_LAYER + 1
+	pixel_w = -32
+	pixel_z = -32
 	Move()
 		//Do Nothing
 	ex_act()
@@ -157,16 +156,16 @@ obj/light
 			// if the light is mobile (if it was attached to an atom of
 			// type /atom/movable), check to see if the owner has moved
 			if(mobile && ownerF)
-				if(x != ownerF.x || y != ownerF.y || pixel_x != ownerF.pixel_x+ownerF.pixel_w-32 || pixel_y != ownerF.pixel_y+ownerF.pixel_z-32)
+				if(x != ownerF.x || y != ownerF.y || pixel_x != ownerF.pixel_x+ownerF.pixel_w || pixel_y != ownerF.pixel_y+ownerF.pixel_z)
 					glide_size = ownerF:glide_size
 					x = ownerF.x
 					y = ownerF.y
-					pixel_x = ownerF.pixel_x+ownerF.pixel_w-32
-					pixel_y = ownerF.pixel_y+ownerF.pixel_z-32
+					pixel_x = ownerF.pixel_x+ownerF.pixel_w
+					pixel_y = ownerF.pixel_y+ownerF.pixel_z
 			if(changed)
 				//world << "<font color='yellow'>received light change"
 				var/matrix/M = matrix()
-				M.Scale((max(0,radius)*on)*0.75)
+				M.Scale(((max(0,radius)*on)*0.6))
 				animate(src,alpha=round(255*intensity),transform = M,time = 5)
 				changed = 0
 

@@ -615,8 +615,6 @@
 				src.see_in_dark = 2
 				src.see_invisible = 0
 
-			if (src.sleep) src.sleep.icon_state = text("sleep[]", src.sleeping)
-
 
 			if(src.pullin)	src.pullin.icon_state = "pull[src.pulling ? 1 : 0]"
 

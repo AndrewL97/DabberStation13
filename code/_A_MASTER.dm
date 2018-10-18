@@ -92,10 +92,9 @@ proc/CHECK_TICK() //epic optimizer
 
 datum/controller/game_controller
 	var/processing = 1
-	var/wait = 0.5
-	var/SLOW_PROCESS_TIME = 10
 	var/process_objects_done = 0
 	var/T = 0
+	var/wait = 0.5
 	proc
 		setup()
 		setup_objects()
@@ -238,7 +237,7 @@ datum/controller/game_controller
 		sun.calc_position()
 		world.update_status()
 
-		spawn(SLOW_PROCESS_TIME)
+		spawn(wait)
 			slow_process()
 	process()
 
@@ -257,7 +256,7 @@ datum/controller/game_controller
 			if(machine)
 				CHECK_TICK()
 				machine.process()
-				if(T % 90 == 45)
+				if(T % 60 == 1) //Update dialog every second.
 					machine.updateUsrDialog()
 			else
 				machines -= machine
@@ -271,6 +270,7 @@ datum/controller/game_controller
 				item.process()
 			else
 				processing_items -= item
+
 		process_objects_done = 0
 		while(process_objects_done < powernets.len)
 			process_objects_done += 1

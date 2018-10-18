@@ -264,4 +264,4 @@ mob
 			else
 				c2.icon_state = "height"
 		if(c1)
-			c1.screen_loc = "WEST+3, NORTH:[max(1,min(round((min(heightZ,416)/416)*32)+1,30))]"
+			c1.screen_loc = "EAST:-4, CENTER-1:[-4+max(1,min(round((min(heightZ,416)/416)*32)+1,30))]"

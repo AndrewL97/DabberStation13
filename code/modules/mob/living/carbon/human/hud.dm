@@ -323,8 +323,6 @@ mob
 				usr.internal = null
 		if("pull")
 			usr.pulling = null
-		if("sleep")
-			usr.sleeping = !( usr.sleeping )
 		if("rest")
 			usr.resting = !( usr.resting )
 		if("throw2")
@@ -769,11 +767,6 @@ mob
 	mymob.flash.layer = 0
 	mymob.flash.mouse_opacity = 0
 
-	mymob.sleep = new /obj/screen( null )
-	mymob.sleep.icon_state = "sleep0"
-	mymob.sleep.name = "sleep"
-	mymob.sleep.screen_loc = ui_sleep
-
 	mymob.rest = new /obj/screen( null )
 	mymob.rest.icon_state = "rest0"
 	mymob.rest.name = "rest"
@@ -869,10 +862,11 @@ mob
 
 	mymob.zone_sel = new /obj/screen/zone_sel( null )
 	mymob.zone_sel.overlays = null
+	mymob.zone_sel.screen_loc = ui_zone_sel
 	mymob.zone_sel.overlays += image("icon" = 'zone_sel.dmi', "icon_state" = text("[]", mymob.zone_sel.selecting))
 
 	//, mymob.i_select, mymob.m_select
-	mymob.client.screen += list(mymob.throw2_icon, mymob.zone_sel, mymob.oxygen, mymob.toxin, mymob.bodytemp, mymob.internals, mymob.fire, mymob.healths, mymob.shields, mymob.pullin, mymob.blind, mymob.flash, mymob.rest, mymob.sleep) //, mymob.mach )
+	mymob.client.screen += list(mymob.throw2_icon, mymob.zone_sel, mymob.oxygen, mymob.toxin, mymob.bodytemp, mymob.internals, mymob.fire, mymob.healths, mymob.shields, mymob.pullin, mymob.blind, mymob.flash, mymob.rest) //, mymob.mach )
 	mymob.client.screen += src.adding
 
 	//if(istype(mymob,/mob/living/carbon/monkey)) mymob.client.screen += src.mon_blo

@@ -17,6 +17,7 @@
 #define MACHINERY_PLANE 2
 #define PARTICLE_PLANE 5
 #define ITEM_PLANE 2
+#define HUD_BLOOD_PLANE 98 //Blood
 #define HUD_PLANE 99
 #define HUD_PLANE_2 100
 #define SPACE_PLANE_0 -98

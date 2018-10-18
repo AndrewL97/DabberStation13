@@ -66,7 +66,7 @@
 		return
 	if(!loc)
 		return
-	if(frm_counter % 30 != 1)
+	if(frm_counter % 15 != 1)
 		return
 	use_power(tick_lag_original)
 
@@ -78,7 +78,7 @@
 	affecting = loc.contents - src		// moved items will be all in loc
 	for(var/atom/movable/A in affecting)
 		if(!A.anchored)
-			A.glide_size = 32 / max(5,tick_lag_original) * tick_lag_original
+			A.glide_size = 32 / max(2.5,tick_lag_original) * tick_lag_original
 			step(A,movedir)
 
 // attack with item, place item on conveyor

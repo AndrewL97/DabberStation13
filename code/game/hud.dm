@@ -102,34 +102,35 @@ old ui incase you are rarted
 #define ui_ears       "3:12,3:12"
 #define ui_head       "2:8,4:16"
 
+
 //HUD Details
-#define ui_toxin "EAST-1:-4, SOUTH:4"
-#define ui_fire "EAST:-4, SOUTH:4"
+#define ui_toxin "EAST,NORTH-3"
+#define ui_fire "EAST,NORTH-2"
+#define ui_temp "EAST, NORTH-1"
+#define ui_oxygen "EAST, NORTH"
 
-#define ui_temp "WEST+5, NORTH"
-#define ui_oxygen "WEST+4, NORTH"
-
-#define ui_internal "WEST+2, NORTH"
-#define ui_health "west, NORTH"
+//Right Side Center
+#define ui_internal "EAST:-4, CENTER+1:4"
+#define ui_health "EAST:-4, CENTER"
 
 //More Hud details
 
 
-#define ui_hand "EAST,2"
-
-#define ui_sleep "WEST+1,NORTH" //both should be there.
-#define ui_rest "WEST+1,NORTH"
-
-#define ui_acti "EAST,NORTH-1"
-#define ui_movi "EAST,NORTH-2"
-
-#define ui_resist "EAST,NORTH-3"
-#define ui_dropbutton "EAST,NORTH-4" //center of screen, right to rhand
-#define ui_pull "EAST,NORTH-4"
-
-#define ui_throw2 "EAST,NORTH-3"
+#define ui_sleep "EAST-3:-13,SOUTH:4" //both should be there.
+#define ui_rest "EAST-3:-13,SOUTH:4"
 
 
+
+
+#define ui_zone_sel "EAST:-4, SOUTH:4"
+#define ui_movi "EAST-1:-7, SOUTH:4"
+
+#define ui_throw2 "EAST:-4, SOUTH+1:7"
+#define ui_dropbutton "EAST:-4, SOUTH+1:7"
+
+#define ui_resist "EAST-1:-7, SOUTH+1:7"
+#define ui_pull "EAST-1:-7, SOUTH+1:7"
+#define ui_acti "EAST-2:-10,SOUTH:4"
 /*
 //TESTING A LAYOUT
 #define ui_mask "south:-14,1:7"

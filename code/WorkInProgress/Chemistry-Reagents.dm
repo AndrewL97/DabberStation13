@@ -83,8 +83,9 @@ datum
 					var/obj/Particle/Water/A = new(T)
 					A.x_pos = 16
 					A.y_pos = 16
-					A.x_spd = (rand(-30,30)/10)
-					A.y_spd = (rand(-30,30)/10)
+					var/ang = rand(0,360)
+					A.x_spd = (cos(ang)*(rand()*2))
+					A.y_spd = (sin(ang)*(rand()*2))
 
 				var/hotspot = (locate(/obj/hotspot) in T)
 				if(hotspot)
@@ -97,13 +98,8 @@ datum
 			reaction_obj(var/obj/O, var/volume)
 				src = null
 				var/turf/T = get_turf(O)
-				var/hotspot = (locate(/obj/hotspot) in T)
-				if(hotspot)
-					var/datum/gas_mixture/lowertemp = T.remove_air( T:air:total_moles() )
-					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
-					lowertemp.react()
-					T.assume_air(lowertemp)
-					del(hotspot)
+				if(T)
+					reaction_turf(T,volume)
 				return
 
 		lube

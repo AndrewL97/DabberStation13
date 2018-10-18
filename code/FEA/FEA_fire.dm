@@ -136,6 +136,8 @@ obj
 			..()
 			dir = pick(cardinal)
 			sd_SetLuminosity(3)
+			if(light)
+				light.color = rgb(255,170,0)
 
 		Del()
 			loc:active_hotspot = null
