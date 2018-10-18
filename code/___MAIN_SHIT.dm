@@ -120,12 +120,12 @@ obj
 			special_processing -= src
 			..()
 		special_process()
-			if(frm_counter % 30 == 1) // A full sec
+			if(frm_counter % 60 == 1) // A full sec
 				if(light)
 					cycle += 1
 					if(cycle == 4)
 						cycle = 1
-					animate(light, color = rgb(cycle == 1 ? 255 : 0, cycle == 2 ? 255 : 0, cycle == 3 ? 255 : 0), time = 5)
+					animate(light, color = rgb(cycle == 1 ? 255 : 0, cycle == 2 ? 255 : 0, cycle == 3 ? 255 : 0), time = 10)
 			else
 				if(light)
 					light.intensity = 1
