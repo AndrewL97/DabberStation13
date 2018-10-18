@@ -5,10 +5,13 @@
 		spawn(1300)
 			event = 0
 	spawn(1200)
+		message_admins("Triggering event in 120 seconds.")
 		start_events()
 
 /proc/event()
-	switch(rand(1,3))
+	var/ev = rand(1,3)
+	message_admins("Event [ev] triggering.")
+	switch(ev)
 
 		if(1)
 			event = 1
