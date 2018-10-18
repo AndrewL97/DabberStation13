@@ -22,7 +22,8 @@ var/list/admin_verbs = list(
 /client/proc/Toggle_MC_Throttling,
 /client/proc/Reboot,
 /client/proc/Gamemode,
-/client/proc/StationName
+/client/proc/StationName,
+/client/proc/Revive
 )
 var/ban_list = list()
 var/list/admin_clients = list()
@@ -67,6 +68,18 @@ var/list/admin_clients = list()
 client
 	var/spawn_delay = 0
 	var/cooldown = 5
+	proc/Revive(mob/D in world)
+		set category = "Admin"
+		set name = "(ADMIN) Rejuvenate"
+		D.oxyloss = 0
+		D.toxloss = 0
+		D.fireloss = 0
+		D.bruteloss = 0
+		D.specialloss = 0
+		D.health = D.maxhealth
+		D.shield = 100
+		D.air = 50
+		message_admins("[key] revived/healed [D].")
 	proc/StationName(StationName as text)
 		set category = "Admin"
 		set name = "(ADMIN) Station Name"
