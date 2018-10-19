@@ -4,8 +4,8 @@
 		hadevent = 1
 		spawn(1300)
 			event = 0
-	spawn(1200)
-		message_admins("Triggering event in 120 seconds.")
+	spawn(36000)
+		message_admins("Triggering event.")
 		start_events()
 
 /proc/event()
