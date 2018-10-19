@@ -11,6 +11,7 @@ Use dream daemon to host, Don't use port 9999 or 0, because it enables local tes
 You need to edit ADMIN_REWORK.dm to change admins. And you need to create a webhook.txt file and webhookAdmin.txt file in the config folder, These are used for the discord webhooks. webhook.txt is a webhook that logs player chat, and webhookAdmin.txt is a adminhelp webhook.
 
 To configure your gamemode while ingame, go into the Admin tab in commands and do the Change Gamemode command. where you see this
+
 ![Gamemode Config](https://raw.githubusercontent.com/AlcaroIsAFrick/Dab13/master/docs/modepic.png)
 
 # Admin Tools / Commands
