@@ -59,6 +59,7 @@ turf
 		TurfGravity = 24/256
 		TurfHeight = -416
 		TurfCeiling = 0
+		water_height = -999
 	simulated
 		water_flooded
 			water_height =  99999999
