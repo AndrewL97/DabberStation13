@@ -381,14 +381,7 @@ client/proc/ProcessClient()
 					mob.timer_hud.maptext = {"<div align="right">[(STORM.timer_left > 0) ? "[round(STORM.timer_left/60)]:[(round(STORM.timer_left) % 60) < 10 ? "0[round(STORM.timer_left) % 60]" : round(STORM.timer_left) % 60]" : "0:00"]"} //STORM.timer_left
 				else
 					mob.timer_hud.maptext = {"<div align="right">0:00"}
-		if(music_pitch < music_pitch_new)
-			music_pitch += 0.0025
-			if(music_pitch > music_pitch_new)
-				music_pitch = music_pitch_new
-		if(music_pitch > music_pitch_new)
-			music_pitch -= 0.0025
-			if(music_pitch < music_pitch_new)
-				music_pitch = music_pitch_new
+		music_pitch += max(-0.025,min(0.025,((music_pitch_new-music_pitch)/100)))
 		amb_sound.volume = vol
 		amb_sound_ext.volume = vol_ext
 		amb_sound_ext.frequency = music_pitch
