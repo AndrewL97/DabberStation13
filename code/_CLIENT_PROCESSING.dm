@@ -325,20 +325,20 @@ client/proc/ProcessClient()
 	if(mob)
 		if(istype(mob,/mob/living))
 			create_health()
-		//Get_Number_Time()
-
 		if(mouse_position)
 			if(!(mouse_position.MouseCatcher in screen))
 				screen += mouse_position.MouseCatcher
 		else
 			mouse_position =  new(src)
-		var/A_S = 0
-		for(var/sound/i in list(amb_sound,amb_sound_ext,amb_sound_area,radio_sound,amb_sound_water))
-			if(i.status != SOUND_UPDATE)
-				i.status = SOUND_UPDATE
-				i.channel = SOUND_CHANNEL_1+A_S
-				i.repeat = 1
-				A_S = A_S + 1
+		if(!inited_audio_files)
+			var/A_S = 0
+			for(var/sound/i in list(amb_sound,amb_sound_ext,amb_sound_area,radio_sound,amb_sound_water))
+				if(i.status != SOUND_UPDATE)
+					i.status = SOUND_UPDATE
+					i.channel = SOUND_CHANNEL_1+A_S
+					i.repeat = 1
+					A_S = A_S + 1
+			inited_audio_files = 1
 		var/turf/T = mob.loc
 		if(T)
 			var/area/A = T.loc
@@ -381,14 +381,11 @@ client/proc/ProcessClient()
 					mob.timer_hud.maptext = {"<div align="right">[(STORM.timer_left > 0) ? "[round(STORM.timer_left/60)]:[(round(STORM.timer_left) % 60) < 10 ? "0[round(STORM.timer_left) % 60]" : round(STORM.timer_left) % 60]" : "0:00"]"} //STORM.timer_left
 				else
 					mob.timer_hud.maptext = {"<div align="right">0:00"}
-		music_pitch += max(-0.0025,min(0.0025,((music_pitch_new-music_pitch)/100)))
+		music_pitch = music_pitch + max(-0.0025,min(0.0025,((music_pitch_new-music_pitch)/100)))
 		amb_sound.volume = vol
 		amb_sound_ext.volume = vol_ext
 		amb_sound_ext.frequency = music_pitch
-		if(istype(T,/turf))
-			amb_sound_water.volume = (mob.heightZ+mob.heightSize<round(T.water_height))*100
-		else
-			amb_sound_water.volume = 0
+		amb_sound_water.volume = istype(T,/turf) ? (mob.heightZ+mob.heightSize<round(T.water_height))*100 : 0
 		amb_sound.frequency = music_pitch
 		radio_sound.frequency = music_pitch
 		if(amb_sound_area.file)
@@ -479,6 +476,7 @@ client
 	var/pixel_y5 = 0 //height system
 	var/shake = 0
 	var/music_vol_mult = 1
+	var/inited_audio_files = 0
 
 	var/list/health = list() //Health hud stuff
 	var/sound/amb_sound = sound('music/interior.ogg')
