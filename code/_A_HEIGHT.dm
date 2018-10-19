@@ -73,7 +73,7 @@ turf
 					var/image/G = new()
 					G.icon = 'seaweed.dmi'
 					G.icon_state = "[pick("tallseaweed","grass","tallgrass")]"
-					G.plane = TOP_PLANE
+					G.plane = MOB_PLANE+1
 					if(G.icon_state == "grass")
 						G.pixel_y = -32
 					overlays += G

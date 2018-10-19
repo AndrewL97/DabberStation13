@@ -85,12 +85,13 @@ obj
 	explosion
 		//can_move = 0
 		anchored = 1
-		icon = 'extra images/explosion.dmi'
+		icon = 'extra images/bigcircle.dmi'
 		var/exSize = 0
 		alpha = 200
 		plane = BELOW_SHADING
-		pixel_x = -496
-		pixel_y = -496
+		pixel_x = -2048+16
+		pixel_y = -2048+16
+		color = "#FFA500"
 		New()
 			..()
 			var/matrix/M = matrix()
@@ -98,7 +99,7 @@ obj
 			src.transform = M
 		proc/DoShit()
 			var/matrix/M = matrix()
-			M.Scale(exSize/25)
+			M.Scale(exSize/100)
 			animate(src, transform = M, alpha = 0, time = exSize, easing = SINE_EASING | EASE_OUT)
 			spawn(exSize)
 				del src

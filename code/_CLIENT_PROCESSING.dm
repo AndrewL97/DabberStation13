@@ -371,6 +371,8 @@ client/proc/ProcessClient()
 				mob.amm.maptext = {"<div align="right">[G.ammo]/[G.ammo_max]"}
 			else
 				mob.amm.maptext = {"<div align="right">NO GUN"}
+		if(mob.cpu_us)
+			mob.cpu_us.maptext = {"<div align="left">NO GUN"}
 		if(mob.timer_hud)
 			if(nuke_enabled)
 				mob.timer_hud.maptext = {"<div align="right">[round(nuke_timer/60)]:[(round(nuke_timer) % 60) < 10 ? "0[round(nuke_timer) % 60]" : round(nuke_timer) % 60]"}
@@ -520,6 +522,9 @@ client
 		maptext_width = 128
 		screen_loc = "EAST-7:-16,SOUTH:4"
 		maptext_y = 16
+	cpu_u
+		screen_loc = "1:4,NORTH:-4"
+		maptext_width = 64
 
 /obj/screen_alt/heightCalc
 	icon = 'screen1.dmi'
@@ -533,6 +538,7 @@ client
 	var/obj/screen_alt/heightCalc/heightG/c2 = null
 	var/obj/screen_alt/ammo/amm = null
 	var/obj/screen_alt/timer/timer_hud = null
+	var/obj/screen_alt/cpu_u/cpu_us = null
 
 /obj/hud/proc/extra_init_hud()
 	if(!mymob.c1)
@@ -543,7 +549,10 @@ client
 		mymob.amm = new
 	if(!mymob.timer_hud)
 		mymob.timer_hud = new
+	if(!mymob.cpu_us)
+		mymob.cpu_us = new
 	mymob.client.screen += mymob.c1
 	mymob.client.screen += mymob.c2
 	mymob.client.screen += mymob.amm
 	mymob.client.screen += mymob.timer_hud
+	mymob.client.screen += mymob.cpu_us
