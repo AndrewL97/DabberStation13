@@ -372,7 +372,7 @@ client/proc/ProcessClient()
 			else
 				mob.amm.maptext = {"<div align="right">NO GUN"}
 		if(mob.cpu_us)
-			mob.cpu_us.maptext = {"<div align="left">NO GUN"}
+			mob.cpu_us.maptext = {"<div align="left">%[world.cpu]"}
 		if(mob.timer_hud)
 			if(nuke_enabled)
 				mob.timer_hud.maptext = {"<div align="right">[round(nuke_timer/60)]:[(round(nuke_timer) % 60) < 10 ? "0[round(nuke_timer) % 60]" : round(nuke_timer) % 60]"}
@@ -525,6 +525,7 @@ client
 	cpu_u
 		screen_loc = "1:4,NORTH:-4"
 		maptext_width = 64
+		maptext_y = 17
 
 /obj/screen_alt/heightCalc
 	icon = 'screen1.dmi'
