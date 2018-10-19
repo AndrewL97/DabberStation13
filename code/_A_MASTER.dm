@@ -164,6 +164,7 @@ datum/controller/game_controller
 			listofitems = "[listofitems]<br><a href=?[i]>[i]</a>"
 		for(var/i in typesof(/obj)+typesof(/mob))
 			listofitems2 = "[listofitems2]<br><a href=?[i]>[i]</a>"
+		for(var/i in typesof(/obj))
 			typepaths += i
 		world << "\green \b Created sandbox spawn list in [world.timeofday-start_time/10] seconds!"
 
