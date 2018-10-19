@@ -24,12 +24,8 @@
 		if (istype(src.wear_suit, /obj/item/clothing/suit/armor/a_i_a_ptank))
 			var/obj/item/clothing/suit/armor/a_i_a_ptank/A = src.wear_suit
 			bombers += "[src.key] has detonated a suicide bomb. Temp = [A.part4.air_contents.temperature-T0C]."
-	//		world << "Detected that [src.key] is wearing a bomb" debug stuff
 			if(A.status && prob(90))
-	//			world << "Bomb has ignited?"
 				A.part4.ignite()
-		spawn(5)
-			ghostize(2)
 
 	var/tod = time2text(world.realtime,"hh:mm:ss") //weasellos time of death patch
 	if(mind)

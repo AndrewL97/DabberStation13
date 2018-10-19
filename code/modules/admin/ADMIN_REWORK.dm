@@ -96,6 +96,8 @@ client
 		D.thirst = 100
 		D.air = 50
 		D.stat = 0
+		D.lying = 0
+		D.canmove = 1
 		message_admins("[key] revived/healed [D].")
 	proc/StationName(StationName as text)
 		set category = "Admin"
