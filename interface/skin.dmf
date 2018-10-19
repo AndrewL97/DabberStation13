@@ -125,13 +125,13 @@ menu "menu"
 		category = "&Help/Administration"
 		saved-params = "is-checked"
 	elem 
-		name = "&Resolution"
+		name = "&Screen Resolution"
 		command = ""
 		saved-params = "is-checked"
 	elem "stretch"
 		name = "&Stretch Screen To Fit"
 		command = ".winset \"mapwindow.map.icon-size=0\""
-		category = "&Resolution"
+		category = "&Screen Resolution"
 		is-checked = true
 		can-check = true
 		group = "size"
@@ -139,33 +139,33 @@ menu "menu"
 	elem 
 		name = "&Change Screen Resolution"
 		command = "Resolution"
-		category = "&Resolution"
+		category = "&Screen Resolution"
 		saved-params = "is-checked"
 	elem "icon128"
 		name = "&128x128 Tile Size"
 		command = ".winset \"mapwindow.map.icon-size=128\""
-		category = "&Resolution"
+		category = "&Screen Resolution"
 		can-check = true
 		group = "size"
 		saved-params = "is-checked"
 	elem "icon96"
 		name = "&96x96 Tile Size"
 		command = ".winset \"mapwindow.map.icon-size=96\""
-		category = "&Resolution"
+		category = "&Screen Resolution"
 		can-check = true
 		group = "size"
 		saved-params = "is-checked"
 	elem "icon64"
 		name = "&64x64 Tile Size"
 		command = ".winset \"mapwindow.map.icon-size=64\""
-		category = "&Resolution"
+		category = "&Screen Resolution"
 		can-check = true
 		group = "size"
 		saved-params = "is-checked"
 	elem "icon32"
 		name = "&32x32 Tile Size"
 		command = ".winset \"mapwindow.map.icon-size=32\""
-		category = "&Resolution"
+		category = "&Screen Resolution"
 		can-check = true
 		group = "size"
 		saved-params = "is-checked"
@@ -232,8 +232,6 @@ window "mapwindow"
 		anchor2 = 100,100
 		is-default = true
 		saved-params = "zoom;letterbox;zoom-mode"
-		icon-size = 64
-		zoom = 2
 
 window "outputwindow"
 	elem "outputwindow"
