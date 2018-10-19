@@ -518,14 +518,17 @@ client
 	ammo
 		maptext_width = 64
 		screen_loc = "EAST-5:-16,SOUTH:4"
+		alpha = 170
 	timer
 		maptext_width = 128
 		screen_loc = "EAST-7:-16,SOUTH:4"
 		maptext_y = 16
+		alpha = 170
 	cpu_u
 		screen_loc = "1:4,NORTH:-4"
 		maptext_width = 64
 		maptext_y = 17
+		alpha = 100
 
 /obj/screen_alt/heightCalc
 	icon = 'screen1.dmi'
