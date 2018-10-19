@@ -152,8 +152,9 @@ mob
 			if(j_pack)
 				if(frm_counter % 5 == 1)
 					var/obj/Particle/Spark/Jetpack/S = new()
-					S.y_pos = rand(0,2)
+					S.y_pos = heightZ+rand(0,2)
 					S.x_pos = rand(11,18)
+					S.Particle_Process()
 					S.loc = loc
 				ySpeed = ySpeed + (27/256)
 
