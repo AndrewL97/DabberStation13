@@ -69,6 +69,14 @@ turf
 			New()
 				..()
 				Render_Water_Icon()
+				if(prob(25))
+					var/image/G = new()
+					G.icon = 'seaweed.dmi'
+					G.icon_state = "[pick("tallseaweed","grass","tallgrass")]"
+					G.plane = TOP_PLANE
+					if(G.icon_state == "grass")
+						G.pixel_y = -32
+					overlays += G
 		floor
 			plating
 				level = 1
