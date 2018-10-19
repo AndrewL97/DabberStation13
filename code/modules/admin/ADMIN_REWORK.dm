@@ -85,6 +85,8 @@ client
 		D.specialloss = 0
 		D.health = D.maxhealth
 		D.shield = 100
+		D.nutrition = 100
+		D.thirst = 100
 		D.air = 50
 		D.stat = 0
 		message_admins("[key] revived/healed [D].")

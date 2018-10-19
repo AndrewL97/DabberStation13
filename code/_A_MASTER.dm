@@ -47,7 +47,7 @@ obj
 var/list/rand_spawns = list()
 
 var/actions_per_tick = 0
-var/max_actions = 40 //Max actions per tick, Really fast. of course this can be loewr!!!!!!!!!!!
+var/max_actions = 35 //Max actions per tick, Really fast. of course this can be loewr!!!!!!!!!!!
 
 var/CPU_warning = 0
 
@@ -55,7 +55,7 @@ var/actions_per_tick_atmos = 0
 var/max_actions_atmos = 50 //Max actions per tick (FOR ATMOS), also fast. i definitely think this could be higher if optimized.
 
 var/actions_per_tick_water = 0
-var/max_actions_water = 120 //Max actions per tick (FOR WATER), also fast.
+var/max_actions_water = 100 //Max actions per tick (FOR WATER), also fast.
 
 var/list/typepaths = list()
 
