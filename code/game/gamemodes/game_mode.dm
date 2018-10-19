@@ -1,3 +1,4 @@
+var/respawn_allowed = 1
 /datum/game_mode
 	var/name = "invalid"
 	var/config_tag = null
@@ -7,6 +8,7 @@
 	var/sandbox_allowed = 0
 	// this includes admin-appointed traitors and multitraitors. Easy!
 	var/list/datum/mind/traitors = list()
+	var/respawning = 0
 
 /datum/game_mode/proc/pre_setup()
 	return 1

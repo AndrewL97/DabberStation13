@@ -3,3 +3,4 @@
 	config_tag = "normal"
 	events_enabled = 1
 	sandbox_allowed = 0
+	respawning = 1

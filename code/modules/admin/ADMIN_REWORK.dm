@@ -69,12 +69,19 @@ var/list/admin_clients = list()
 client
 	var/spawn_delay = 0
 	var/cooldown = 5
+	proc/Toggle_Respawn()
+		set category = "Admin"
+		set name = "(ADMIN) Toggle Respawn"
+		respawn_allowed = !respawn_allowed
+		world << "<b><font color='blue'>Respawning has been [respawn_allowed ? "enabled" : "disabled"]."
+		message_admins("[key] toggled respawning.")
 	proc/Fling(mob/D in world)
 		set category = "Admin"
 		set name = "(ADMIN) Fling"
 		D.ySpeed = 20
 		D.glide_size = 32 / 1 * tick_lag_original
 		walk(D,pick(DIAGONALS+CARDINALS),1,0)
+		message_admins("[key] flinged [D].")
 	proc/Revive(mob/D in world)
 		set category = "Admin"
 		set name = "(ADMIN) Rejuvenate"

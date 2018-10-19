@@ -812,6 +812,11 @@
 	abandon_mob_proc(0)
 
 /mob/proc/abandon_mob_proc(var/confirm = 0)
+	if(!respawn_allowed)
+		if(client)
+			if(!client.holder)
+				src << "<b><font color='red'>Respawning is disabled."
+				return
 	if(confirm)
 		if(client)
 			client.music_pitch_new = 0
