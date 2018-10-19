@@ -143,15 +143,12 @@ mob
 		if(istype(A,/area))
 			cando = A.parallax_type
 		switch(cando)
-			if(2)
-				ParallaxLayer(parallax_master_1,space_parallax_list_1,0.25,0.25,"layer1",0,0)
-				ParallaxLayer(parallax_master_2,space_parallax_list_2,2,2,"layer2alt",(world.time),(world.time/2))
-			if(1)
-				ParallaxLayer(parallax_master_1,space_parallax_list_1,1,0,"layer",(world.time),0)
-				ParallaxLayer(parallax_master_2,space_parallax_list_2,2,2,"layer2alt",(world.time/2),(world.time/4))
 			if(0)
 				ParallaxLayer(parallax_master_1,space_parallax_list_1,0.5,0.5,"layer1",0,0)
 				ParallaxLayer(parallax_master_2,space_parallax_list_2,1,1,"layer2",0,0)
+			if(1)
+				ParallaxLayer(parallax_master_1,space_parallax_list_1,0.5,0.5,"layer1",(world.time/2),0)
+				ParallaxLayer(parallax_master_2,space_parallax_list_2,1,1,"layer2",(world.time),0)
 	proc/ParallaxLayer(var/obj/screen_alt/G,var/list/space_list,var/mult_1,var/mult_2,var/iconA,var/offsetX,var/offsetY)
 		if(!client)
 			return //don't do this.
@@ -187,12 +184,10 @@ mob
 	set name = "use_hotkey"
 	var/obj/item/G = null
 	//attack_self(mob/user)
-	if (!( src.hand ))
-		G = r_hand
-	else
-		G = l_hand
-	if(G)
+	G = !( src.hand ) ? r_hand : l_hand
+	if(istype(G,/obj/item))
 		G.attack_self(src)
+
 /mob/verb/toggle_throw()
 	set hidden = 1
 	set name = "toggle_throw"
