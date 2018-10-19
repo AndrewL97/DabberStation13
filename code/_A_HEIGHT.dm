@@ -150,6 +150,11 @@ mob
 				var/obj/item/weapon/tank/jetpack/J = src.back
 				j_pack = J.allow_thrust(0.01, src)
 			if(j_pack)
+				if(frm_counter % 5 == 1)
+					var/obj/Particle/Spark/Jetpack/S = new()
+					S.y_pos = rand(0,2)
+					S.x_pos = rand(11,18)
+					S.loc = loc
 				ySpeed = ySpeed + (27/256)
 
 	proc/ProcessDirection()

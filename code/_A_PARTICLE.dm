@@ -58,6 +58,8 @@ default particles
 		icon = 'extra_overlay.dmi'
 		icon_state = "crosshair"
 		time_to_disappear = 1
+		offset_x = 0
+		offset_y = 0
 	Water
 		time_to_disappear = 3
 		icon_state = "water"
@@ -81,6 +83,12 @@ default particles
 				y_spd = rand()*-10
 				x_pos = rand(-1,33)
 				y_pos = 32
+				icon_state = "spark[rand(1,3)]"
+		Jetpack
+			color = "#FFA500"
+			Particle_Init()
+				//var/rand_angle = rand(0,360)
+				y_spd = rand()*-10
 				icon_state = "spark[rand(1,3)]"
 		Alternate
 			animate_movement = 2
