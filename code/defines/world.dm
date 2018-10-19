@@ -55,6 +55,9 @@ world
 		if(!(port in PORTS_NOT_ALLOWED))
 			call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Server [name] has closed/rebooted.\" } ", "Content-Type: application/json")
 		..()
+	Reboot()
+		world << "<font size=4><b><font color='red'>The game is now rebooting. If you get disconnected, rejoin."
+		..()
 //<@&464594497901166613>
 /proc/discord_relay(var/content,var/webhook_url)
 	spawn()
