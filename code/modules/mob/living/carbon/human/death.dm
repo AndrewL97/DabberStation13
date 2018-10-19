@@ -26,6 +26,8 @@
 			bombers += "[src.key] has detonated a suicide bomb. Temp = [A.part4.air_contents.temperature-T0C]."
 			if(A.status && prob(90))
 				A.part4.ignite()
+		else
+			abandon_mob_proc(1)
 
 	var/tod = time2text(world.realtime,"hh:mm:ss") //weasellos time of death patch
 	if(mind)
