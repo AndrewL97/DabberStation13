@@ -11,8 +11,8 @@ turf
 		var/rounded_height = round(water_height)
 		if(fully_cover == 1 && round(water_height) < TurfHeight)
 			return
-		var/ass = (max(0,min(32,rounded_height))/32)*0.75
-		var/ColorWater = rgb(35*(1-ass),137*(1-ass),218*(1-ass))
+		var/ass = (max(0,min(32,rounded_height))/32)
+		var/ColorWater = rgb(84/(1+ass),164/(1+ass),222/(1+ass)) //84, 164, 222
 		gW1.color = ColorWater
 		gW2.color = ColorWater
 		gW1.icon_state = "[max(0,min(32,rounded_height))]"

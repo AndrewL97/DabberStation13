@@ -88,7 +88,7 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 			//Deleting Startpoints but we need the ai point to AI-ize people later
 			if (S.name != "AI")
 				del(S)
-
+	respawn_allowed = mode.respawning
 	if(mode.do_kick == 1)
 		world << "<b><font color='red'>Automatic kicking is enabled! After [TIMETOKICK/60] minutes of inactivity, you will be kicked."
 		kick_inactive_players = 1
