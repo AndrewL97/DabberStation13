@@ -1,6 +1,8 @@
 # Dabber Station 13 Docs
 Documentation of the server.
 
+License : https://github.com/AlcaroIsAFrick/Dab13/blob/master/LICENSE
+
 # Setup (For server hosts)
 Download this repo as a zip. **ADVICE : use github desktop for ability to update at any time**
 
