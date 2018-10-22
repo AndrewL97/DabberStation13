@@ -6,6 +6,7 @@
 // END_INTERNALS
 // BEGIN_FILE_DIR
 #define FILE_DIR .
+#define FILE_DIR "docs"
 #define FILE_DIR "extra images"
 #define FILE_DIR "html_assets"
 #define FILE_DIR "icons"
