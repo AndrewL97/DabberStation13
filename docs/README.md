@@ -18,7 +18,7 @@ To configure your gamemode while ingame, go into the Admin tab in commands and d
 
 ![Gamemode Config](https://raw.githubusercontent.com/AlcaroIsAFrick/Dab13/master/docs/modepic.png)
 
-For any extra questions, you can head over to our discord which can be found here. https://discord.gg/gAuEREJ
+For any extra questions, you can head over to our discord which can be found here. https://discord.gg/rz4wXgq
 
 # Admin Tools / Commands
 Admin tools aren't that big. But you may suggest new ones to me. Currently we have main admin features like banning, kicking, sounds, teleporting. etc
