@@ -59,7 +59,7 @@ atom
 	for(var/xA in 0 to 2)
 		for(var/yA in 0 to 2)
 			var/matrix/M = matrix()
-			M.Translate(xA*1024,yA*1024)
+			M.Translate(xA*480,yA*480)
 			var/obj/screen_alt/spaceParallax/g = new()
 			g.transform = M
 			g.plane = SPACE_PLANE_0
@@ -159,8 +159,8 @@ mob
 		var/yoffset = client.pixel_z + client.pixel_y
 		var/xoffset = client.pixel_x + client.pixel_w
 		var/atom/eye = client.eye
-		var/xAxis = round((((eye.x+(xoffset/32))*mult_1) + offsetX)) % 1024
-		var/yAxis = round((((eye.y+(yoffset/32))*mult_2) + offsetY)) % 1024
+		var/xAxis = round((((eye.x+(xoffset/32))*mult_1) + offsetX)) % 480
+		var/yAxis = round((((eye.y+(yoffset/32))*mult_2) + offsetY)) % 480
 
 		var/can_change_icon = 0
 		if(space_list == space_parallax_list_1)

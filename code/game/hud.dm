@@ -2,23 +2,23 @@
 client
 	verb/Resolution()
 		set hidden = 1
-		var/viewX = input("What resolution in X (pixels), Recommended : 672, Default 608","Input resolution") as num|null
+		var/viewX = input("What resolution in X (pixels), Recommended : 672, Default 608, Max : 732","Input resolution") as num|null
 		if(viewX)
 			viewX = round(viewX/32)
 			if(viewX < 17)
 				viewX = 17
-			if(viewX > 33)
-				viewX = 33
+			if(viewX > 23)
+				viewX = 23
 		else
 			viewX = 17
 
-		var/viewY = input("What resolution in Y (pixels), Recommended : 480, Default 480","Input resolution") as num|null
+		var/viewY = input("What resolution in Y (pixels), Recommended : 480, Default 480, Max : 732","Input resolution") as num|null
 		if(viewY)
 			viewY = round(viewY/32)
 			if(viewY < 15)
 				viewY = 15
-			if(viewY > 33)
-				viewY = 33
+			if(viewY > 23)
+				viewY = 23
 		else
 			viewY = 15
 		view = "[viewX]x[viewY]"

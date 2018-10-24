@@ -44,15 +44,49 @@ mob
 
 				if(T && T.TurfStepSound != null)
 					playsound(src, pick(T.TurfStepSound), 100, 0, 8, 0)
+
+/obj/screen_alt/circle_part
+	icon = '732x732hud.dmi'
+	icon_state = "black"
+	plane = HUD_PLANE_CIRCLE
+	screen_loc = "CENTER+1:-370,CENTER+1:-370"
+	appearance_flags = PIXEL_SCALE | TILE_BOUND
+	var/offs_x = 0
+	var/offs_y = 0
+
 /client
 	//animate_movement = 2
+
 	var/s = 0
 	var/n = 0
 	var/e = 0
 	var/w = 0
 	var/j = 0
 	var/spri = 0
+
+	var/circle_size = 736
+	var/list/circle_huds = null
 	var/mousedown = 0
+	proc/Generate_Circles()
+		circle_huds = list()
+		for(var/x in -1 to 1)
+			for(var/y in -1 to 1)
+				world << "Generating circle [x],[y]."
+				var/obj/screen_alt/circle_part/P = new()
+				P.offs_x = x
+				P.offs_y = y
+				if(x == 0 && y == 0)
+					P.icon_state = "circle"
+				circle_huds += P
+	proc/Edit_Circle()
+		for(var/i in circle_huds)
+			var/matrix/M = matrix()
+			if(i:icon_state != "circle")
+				M.Translate((circle_size*i:offs_x)+(i:offs_x*368),(circle_size*i:offs_y)+(i:offs_y*368))
+			else
+				M.Scale(circle_size/368)
+			M.Translate(-16,-16)
+			i:transform = M
 	verb/KeyDownM(a as text)
 		set instant = 1
 		set hidden = 1
@@ -381,6 +415,16 @@ client/proc/ProcessClient()
 					mob.timer_hud.maptext = {"<div align="right">[(STORM.timer_left > 0) ? "[round(STORM.timer_left/60)]:[(round(STORM.timer_left) % 60) < 10 ? "0[round(STORM.timer_left) % 60]" : round(STORM.timer_left) % 60]" : "0:00"]"} //STORM.timer_left
 				else
 					mob.timer_hud.maptext = {"<div align="right">0:00"}
+
+		if(circle_size < 736)
+			circle_size += 4
+		if(circle_huds)
+			if(!(circle_huds[1] in screen))
+				screen += circle_huds
+			Edit_Circle()
+		else
+			Generate_Circles()
+
 		music_pitch = music_pitch + max(-0.0025,min(0.0025,((music_pitch_new-music_pitch)/100)))
 		amb_sound.volume = vol
 		amb_sound_ext.volume = vol_ext

@@ -23,6 +23,7 @@
 		h.instantiate()
 
 	if (client)
+		client.circle_size = 0
 		if(veh)
 			client.perspective = EYE_PERSPECTIVE
 			client.eye = veh

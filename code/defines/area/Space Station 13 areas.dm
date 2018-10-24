@@ -689,13 +689,13 @@
 	icon_state = "eva"
 
 /area/derelict/ship
-	name = "Sunken Ship"
+	name = "Abandoned Derelict"
 	icon_state = "yellow"
 	parallax_type = 0
 	requires_power = 0
 	CAN_GRIFE = 0
 	song = 'music/sunken.ogg'
-	atmos_simulation_required = 0
+	atmos_simulation_required = 1
 
 /area/ai_monitored/storage/eva
 	name = "EVA Storage"
