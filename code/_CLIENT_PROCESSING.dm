@@ -64,8 +64,8 @@ mob
 	var/j = 0
 	var/spri = 0
 
-	var/circle_size = 736
-	var/target_size = 736
+	var/circle_size = 0
+	var/target_size = 0
 	var/list/circle_huds = null
 	var/mousedown = 0
 	proc/Generate_Circles()
