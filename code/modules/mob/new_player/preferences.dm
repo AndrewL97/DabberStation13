@@ -59,8 +59,6 @@ datum/preferences
 				return 'human.dmi'
 			if("vulpine")
 				return 'icons/mob/vulpine.dmi'
-			if("shark")
-				return 'shark.dmi'
 
 	proc/randomize_name()
 		if (gender == MALE)
@@ -222,7 +220,7 @@ datum/preferences
 			if(tts_extra_pitch < -0.5)
 				tts_extra_pitch = -0.5
 		if (link_tags["species_change"])
-			species = input(user, "Please select a species:", "Character Generation") in list("human","vulpine","shark")
+			species = input(user, "Please select a species:", "Character Generation") in list("human","vulpine")
 
 		if (link_tags["real_name"])
 			var/new_name
@@ -346,7 +344,7 @@ datum/preferences
 			tail_color = new_species_tail_color
 
 		if (link_tags["tail"])
-			var/new_species_tail = input(user, "Please select new tail", "Character Generation")  in list("none","vulptail1","vulptail2","vulptail3","vulptail4","vulptail5","vulptail6","vulptail7","ligger","shark")
+			var/new_species_tail = input(user, "Please select new tail", "Character Generation")  in list("none","vulptail1")
 			tail = new_species_tail
 
 

@@ -197,25 +197,3 @@ obj
 
 client
 	fps = 60
-
-/*/mob/living/carbon/human/kryfrac
-	species = "shark"
-	species_icon = 'shark.dmi'
-	species_color = rgb(40,40,40)
-	gender = FEMALE
-	tail = "shark"
-	desc = "Dances to get rid of her PTSD."
-	name = "Kryfrac"
-	real_name = "Kryfrac"
-	hair_icon_state = "hair_kleeia"
-	h_style = "Kleeia"
-	tail_color = rgb(40,40,40)
-	r_hair = 255
-	g_hair = 20
-	b_hair = 147
-	Life()
-		..()
-		if(src.stat != 2)
-			Disco_Fever() */
-
-//We don't give furfucks any more love.
