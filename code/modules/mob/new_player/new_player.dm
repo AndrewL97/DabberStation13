@@ -1,7 +1,7 @@
 mob
 	verb
 		discord()
-			src << link("https://discord.gg/dMQqThd")
+			src << link("[discordLink]")
 
 mob/new_player
 	anchored = 1

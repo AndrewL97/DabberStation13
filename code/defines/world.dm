@@ -65,7 +65,7 @@ world
 
 /world/proc/update_status()
 	var/s = ""
-	s += "<b>Dab13 : [Station_Name]</b> - <i>[Game_Version]</i> (<a href='https://discord.gg/dMQqThd'>Discord</a>)<br>Features : "
+	s += "<b>Dab13 : [Station_Name]</b> - <i>[Game_Version]</i> (<a href='[discordLink]'>Discord</a>)<br>Features : "
 	var/features = list()
 	features += "[clients.len]/[MAX_PLAYERS] players"
 	features += "dab13 codebase"
