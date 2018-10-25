@@ -50,12 +50,13 @@
 		sunfrac = 0
 		return
 
-	var/p_angle = abs((360+adir)%360 - (360+sun.angle)%360)
-	if(p_angle > 90)			// if facing more than 90deg from sun, zero output
-		sunfrac = 0
-		return
+	if(sun)
+		var/p_angle = abs((360+adir)%360 - (360+sun.angle)%360)
+		if(p_angle > 90)			// if facing more than 90deg from sun, zero output
+			sunfrac = 0
+			return
 
-	sunfrac = cos(p_angle) ** 2
+		sunfrac = cos(p_angle) ** 2
 
 #define SOLARGENRATE 6000
 
