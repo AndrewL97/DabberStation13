@@ -558,7 +558,7 @@ client
 	appearance_flags = PIXEL_SCALE | TILE_BOUND | NO_CLIENT_COLOR
 	plane = HUD_PLANE
 	ammo
-		maptext_width = 128+64
+		maptext_width = 128+32
 		screen_loc = "EAST-8:-16,SOUTH:4"
 		alpha = 170
 	timer
