@@ -158,7 +158,7 @@ vy = v * sin(angle)
 			// Accelerate!
 			velocity += forward * (Acceleration() * tick_lag_original)
 		else
-			velocity *= 0.99 //slowly stop accelerating
+			velocity *= 0.995 //slowly stop accelerating
 		//world << velocity.SquareMagnitude()
 
 		if(velocity.SquareMagnitude() > 1)
@@ -203,7 +203,7 @@ vy = v * sin(angle)
 
 	if ((user in src))
 		turning = (direction & EAST) - (direction & WEST) // 0, 1, or -1.
-		accelerating = direction & NORTH // 0 or 1.
+		accelerating = (direction & NORTH) - (direction & SOUTH) // 0 or 1.
 
 
 

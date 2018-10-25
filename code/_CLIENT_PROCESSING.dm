@@ -71,7 +71,6 @@ mob
 		circle_huds = list()
 		for(var/x in -1 to 1)
 			for(var/y in -1 to 1)
-				world << "Generating circle [x],[y]."
 				var/obj/screen_alt/circle_part/P = new()
 				P.offs_x = x
 				P.offs_y = y
