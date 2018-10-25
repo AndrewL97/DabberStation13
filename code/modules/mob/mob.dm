@@ -1085,8 +1085,7 @@
 
 	..()
 
-	if (join_motd)
-		src << "[join_motd]"
+	src << replacetext("[join_motd]","%discord","[discordLink]")
 
 /client/Del()
 	spawn(0)
