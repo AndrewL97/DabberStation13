@@ -142,6 +142,7 @@ mob
 		..()
 		mousedown = 0
 	proc/GetDirection()
+		set waitfor = FALSE
 		var/obj/item/weapon/gun/G = null
 		if (!( mob.hand ))
 			G = mob.r_hand
@@ -350,6 +351,7 @@ mob
 var/current_radio_song = null
 
 client/proc/ProcessClient()
+	set waitfor = FALSE
 	shake *= -0.95
 	if(shake < 0.5 && shake > -0.5)
 		shake = 0
@@ -360,7 +362,7 @@ client/proc/ProcessClient()
 		if(istype(mob,/mob/living))
 			create_health()
 			if(mob.health <= 20)
-				target_size = 96
+				target_size = 64
 			else
 				target_size = 736
 		if(mouse_position)

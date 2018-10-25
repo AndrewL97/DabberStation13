@@ -33,7 +33,7 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 			ySpeed = ynew
 			onFloor = 0
 			while(!onFloor)
-				sleep(tick_lag_original)
+				sleep(world.tick_lag)
 		Wave1()
 			//Wave 1 : Jump
 			ScreamBullshit("YOURE ALL FUCKING IDIOTS!!!!!!!!!")

@@ -22,9 +22,9 @@ var/list/water_changed = list()
 var/special_processing = list()
 
 #define CPU_WARN 55 //How much CPU should trigger the warning that it's going too high?
-#define CPU_CHECK_MAX 45 //if cpu goes higher than this, some things will do sleep(tick_lag_original) and throttle.
+#define CPU_CHECK_MAX 45 //if cpu goes higher than this, some things will do sleep(world.tick_lag) and throttle.
 #define ATMOS_CPU_FORCE_SLEEP 70 //Force atmos/water to sleep (and throttle) if CPU (tick usage) goes higher than this value to stabilize the CPU.
-#define WHILE_TICK_MAX 70 //Sleep a while loop if tick usage goes higher than this.
+#define WHILE_TICK_MAX 80 //Sleep a while loop if tick usage goes higher than this.
 #define MAIN_TICK_MAX 90 //Sleep if tick usage goes higher than this.
 
 client
@@ -64,6 +64,13 @@ var/atmos_processed = 0
 var/water_processed = 0
 var/water_cycles = 0 //how
 
+proc/Check_Explosion_tick()
+	if(explosion_acts > 10 || world.tick_usage > WHILE_TICK_MAX)
+		sleep(world.tick_lag)
+		explosion_acts = 0
+	else
+		explosion_acts += 1
+
 proc/CHECK_WHILE_TICK()
 	if(world.tick_usage > WHILE_TICK_MAX)
 		sleep(world.tick_lag)
@@ -72,21 +79,21 @@ proc/CHECK_TICK_WATER() //epic optimizer used for our water system.
 	actions_per_tick_water += 1
 	water_processed += 1
 	if(actions_per_tick_water > max_actions_water - ((max(0,min(world.cpu,50))/50)*(max_actions_water/1.5)) || world.tick_usage > ATMOS_CPU_FORCE_SLEEP)
-		sleep(tick_lag_original)
+		sleep(world.tick_lag)
 		actions_per_tick_water = 0
 
 proc/CHECK_TICK_ATMOS() //epic optimizer (ATMOS EDITION)
 	actions_per_tick_atmos += 1
 	atmos_processed += 1
 	if(actions_per_tick_atmos > max_actions_atmos || world.tick_usage > ATMOS_CPU_FORCE_SLEEP )
-		sleep(tick_lag_original)
+		sleep(world.tick_lag)
 		actions_per_tick_atmos = 0
 
 proc/CHECK_TICK() //epic optimizer
 	master_Processed += 1
 	actions_per_tick += 1
 	if(actions_per_tick > max_actions - ((max(0,min(world.cpu,100))/100)*(max_actions/2)*(CPU_warning)) || world.tick_usage > MAIN_TICK_MAX)
-		sleep(tick_lag_original)
+		sleep(world.tick_lag)
 		actions_per_tick = 0
 
 datum/controller/game_controller
@@ -104,7 +111,7 @@ datum/controller/game_controller
 		water_process()
 		CPU_CHECK()
 			if(frm_counter > 200)
-				if(world.cpu > 500) //we are missing alot of stuff already
+				if(world.cpu > 750) //we are missing alot of stuff already
 					if(!(world.port in PORTS_NOT_ALLOWED))
 						spawn()
 							call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"**Game server has rebooted due to high processor usage, (%[world.cpu])**\" } ", "Content-Type: application/json")

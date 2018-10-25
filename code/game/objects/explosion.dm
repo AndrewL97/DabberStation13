@@ -75,12 +75,7 @@ proc/get_dist_alt(atom/A, atom/B)
 	return sqrt((B.x-A.x)**2 + (B.y-A.y)**2)
 
 var/explosion_acts = 0
-proc/Check_Explosion_tick()
-	if(explosion_acts > 6 || world.cpu > CPU_CHECK_MAX)
-		sleep(tick_lag_original)
-		explosion_acts = explosion_acts = 0
-	else
-		explosion_acts = explosion_acts + 1
+
 obj
 	explosion
 		//can_move = 0
