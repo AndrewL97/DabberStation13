@@ -94,14 +94,14 @@
 /turf/simulated/wall/r_wall
 	name = "reinforced wall"
 	icon = 'walls.dmi'
-	icon_state = "rwall0"
+	icon_state = "R0"
 	opacity = 1
 	density = 1
 	var/d_state = 0
 
 
 /turf/simulated/wall
-	icon_state = "metal0"
+	icon_state = "0"
 	name = "wall"
 	icon = 'walls.dmi'
 	opacity = 1

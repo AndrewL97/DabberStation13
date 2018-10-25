@@ -193,10 +193,10 @@ proc/ReplaceTurfWithRWall(turf/G)
 	return S
 
 /turf/simulated/wall
-	var/smooth_shit = "metal"
+	var/smooth_shit = ""
 	var/joinflag = 0
 	r_wall
-		smooth_shit = "rwall"
+		smooth_shit = "R"
 
 /turf/simulated/wall/New()
 	..()

@@ -21,6 +21,7 @@
 
 	New()
 		winset(src, null, "command=\".configure graphics-hwmode on\"")
+		winset(src, "mapwindow.map", "zoom-mode=distort")
 		..()
 	verb
 		github()
