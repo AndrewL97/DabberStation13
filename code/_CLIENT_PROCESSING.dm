@@ -65,6 +65,7 @@ mob
 	var/spri = 0
 
 	var/circle_size = 736
+	var/target_size = 736
 	var/list/circle_huds = null
 	var/mousedown = 0
 	proc/Generate_Circles()
@@ -358,6 +359,10 @@ client/proc/ProcessClient()
 	if(mob)
 		if(istype(mob,/mob/living))
 			create_health()
+			if(mob.health <= 20)
+				target_size = 96
+			else
+				target_size = 736
 		if(mouse_position)
 			if(!(mouse_position.MouseCatcher in screen))
 				screen += mouse_position.MouseCatcher
@@ -415,8 +420,8 @@ client/proc/ProcessClient()
 				else
 					mob.timer_hud.maptext = {"<div align="right">0:00"}
 
-		if(circle_size < 736)
-			circle_size += 4
+		circle_size += max(-4,min(4,((target_size-circle_size))))
+
 		if(circle_huds)
 			if(!(circle_huds[1] in screen))
 				screen += circle_huds
@@ -424,7 +429,7 @@ client/proc/ProcessClient()
 		else
 			Generate_Circles()
 
-		music_pitch = music_pitch + max(-0.0025,min(0.0025,((music_pitch_new-music_pitch)/100)))
+		music_pitch += max(-0.0025,min(0.0025,((music_pitch_new-music_pitch)/100)))
 		amb_sound.volume = vol
 		amb_sound_ext.volume = vol_ext
 		amb_sound_ext.frequency = music_pitch
