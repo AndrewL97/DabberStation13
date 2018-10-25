@@ -51,6 +51,7 @@ mob
 	plane = HUD_PLANE_CIRCLE
 	screen_loc = "CENTER+1:-370,CENTER+1:-370"
 	appearance_flags = PIXEL_SCALE | TILE_BOUND
+	mouse_opacity = 0
 	var/offs_x = 0
 	var/offs_y = 0
 
