@@ -17,6 +17,7 @@
 #define MACHINERY_PLANE 2
 #define PARTICLE_PLANE 5
 #define ITEM_PLANE 2
+#define POINT_PLANE 97
 #define HUD_PLANE_CIRCLE 98
 #define HUD_PLANE 99
 #define HUD_PLANE_2 100

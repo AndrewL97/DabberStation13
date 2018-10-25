@@ -82,7 +82,7 @@ var/list/gamemodes_list=list()
 
 // **** Note in 40.93.4, split into obj/mob/turf point verbs, no area
 
-/atom/verb/point()
+/atom/verb/Point_To()
 	set src in oview()
 
 	if (!usr || !isturf(usr.loc))
@@ -94,13 +94,14 @@ var/list/gamemodes_list=list()
 	if (!tile)
 		return
 
-	var/P = new /obj/decal/point(tile)
-	spawn (20)
-		del(P)
+	new /obj/decal/point(tile)
 
 	usr.visible_message("<b>[usr]</b> points to [src]")
 
-/obj/decal/point/point()
-	set src in oview()
-	set hidden = 1
-	return
+
+/obj/decal/point
+	plane = POINT_PLANE
+	New()
+		..()
+		spawn(20)
+			del src

@@ -273,6 +273,9 @@ mob
 			pixel_z = round(heightZ)+round(pixel_y_2) //Set pixel_z.
 		if(buckled)
 			buckled.pixel_z = round(heightZ)
+		if(c3)
+			c3.alpha = T.water_height > 0 ? 255 : 0
+			c3.screen_loc = "EAST:-4, CENTER-1:[-4+max(1,min(round((min(T.water_height,416)/416)*32)+1,30))]"
 		if(c2)
 			if(T.TurfHeight < -32)
 				c2.icon_state = "heightNOFL"

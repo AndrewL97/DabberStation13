@@ -80,8 +80,8 @@
 
 		if ("clap")
 			if (!src.restrained())
-				message = "<B>[src]</B> claps."
-				m_type = 2
+				Clap()
+
 		if ("flap")
 			if (!src.restrained())
 				message = "<B>[src]</B> flaps his wings."
@@ -256,39 +256,6 @@
 				message = "<B>[src]</B> makes a loud noise."
 				m_type = 2
 
-		if ("moan")
-			message = "<B>[src]</B> moans!"
-			m_type = 2
-
-		if ("johnny")
-			var/M
-			if (param)
-				M = param
-			if (!M)
-				param = null
-			else
-				message = "<B>[src]</B> says, \"[M], please. He had a family.\" [src.name] takes a drag from a cigarette and blows his name out in smoke."
-				m_type = 2
-
-		if ("point")
-			if (!src.restrained())
-				var/mob/M = null
-				if (param)
-					for (var/atom/A as mob|obj|turf|area in view(null, null))
-						if (param == A.name)
-							M = A
-							break
-
-				if (!M)
-					message = "<B>[src]</B> points."
-				else
-					M.point()
-
-				if (M)
-					message = "<B>[src]</B> points to [M]."
-				else
-			m_type = 1
-
 		if ("raise")
 			if (!src.restrained())
 				message = "<B>[src]</B> raises a hand."
@@ -429,12 +396,8 @@
 				message = "<B>[src]</B> makes a very loud noise."
 				m_type = 2
 				playsound(src, 'galvin1.ogg', 100, 1, 3)
-
-		if ("help")
-			src << "blink, blink_r, blush, bow-(none)/mob, burp, choke, chuckle, clap, collapse, cough,\ncry, custom, deathgasp, drool, eyebrow, frown, gasp, giggle, groan, grumble, handshake, hug-(none)/mob, glare-(none)/mob,\ngrin, laugh, look-(none)/mob, moan, mumble, nod, pale, point-atom, raise, salute, shake, shiver, shrug,\nsigh, signal-#1-10, smile, sneeze, sniff, snore, stare-(none)/mob, tremble, twitch, twitch_s, whimper,\nwink, yawn"
-
 		else
-			src << "\blue Unusable emote '[act]'. Say *help for a list."
+			src << "\blue Unusable emote '[act]'."
 
 	if (message)
 		if (m_type & 1)

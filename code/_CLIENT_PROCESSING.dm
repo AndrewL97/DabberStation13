@@ -578,10 +578,13 @@ client
 	screen_loc = "EAST:-4, CENTER-1:-4"
 	heightG
 		icon_state = "height"
+	water
+		icon_state = "water_height"
 
 /mob
 	var/obj/screen_alt/heightCalc/c1 = null
 	var/obj/screen_alt/heightCalc/heightG/c2 = null
+	var/obj/screen_alt/heightCalc/water/c3 = null
 	var/obj/screen_alt/ammo/amm = null
 	var/obj/screen_alt/timer/timer_hud = null
 	var/obj/screen_alt/cpu_u/cpu_us = null
@@ -591,6 +594,8 @@ client
 		mymob.c1 = new
 	if(!mymob.c2)
 		mymob.c2 = new
+	if(!mymob.c3)
+		mymob.c3 = new
 	if(!mymob.amm)
 		mymob.amm = new
 	if(!mymob.timer_hud)
@@ -598,6 +603,7 @@ client
 	if(!mymob.cpu_us)
 		mymob.cpu_us = new
 	mymob.client.screen += mymob.c1
+	mymob.client.screen += mymob.c3
 	mymob.client.screen += mymob.c2
 	mymob.client.screen += mymob.amm
 	mymob.client.screen += mymob.timer_hud
