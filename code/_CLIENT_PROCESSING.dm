@@ -409,11 +409,11 @@ client/proc/ProcessClient()
 			var/obj/item/weapon/gun/G = null
 			G = !( mob.hand ) ? mob.r_hand : mob.l_hand
 			if(istype(G,/obj/item/weapon/gun))
-				mob.amm.maptext = {"<div align="right">[G.ammo]/[G.ammo_max]"}
+				mob.amm.maptext = {"<div align="right">%[max(0,min(100,round(mob.air*4)))] - [G.ammo]/[G.ammo_max]"}
 			else
-				mob.amm.maptext = {"<div align="right">NO GUN"}
+				mob.amm.maptext = {"<div align="right">%[max(0,min(100,round(mob.air*4)))] - NO GUN"}
 		if(mob.cpu_us)
-			mob.cpu_us.maptext = {"<div align="left">%[world.cpu]"}
+			mob.cpu_us.maptext = {"<div align="left">%[world.cpu] - [clients.len]/[MAX_PLAYERS]"}
 		if(mob.timer_hud)
 			if(nuke_enabled)
 				mob.timer_hud.maptext = {"<div align="right">[round(nuke_timer/60)]:[(round(nuke_timer) % 60) < 10 ? "0[round(nuke_timer) % 60]" : round(nuke_timer) % 60]"}
@@ -421,7 +421,7 @@ client/proc/ProcessClient()
 				if(STORM)
 					mob.timer_hud.maptext = {"<div align="right">[(STORM.timer_left > 0) ? "[round(STORM.timer_left/60)]:[(round(STORM.timer_left) % 60) < 10 ? "0[round(STORM.timer_left) % 60]" : round(STORM.timer_left) % 60]" : "0:00"]"} //STORM.timer_left
 				else
-					mob.timer_hud.maptext = {"<div align="right">0:00"}
+					mob.timer_hud.maptext = {"<div align="right">[time2text(world.time,"hh:mm:ss")]"}
 
 		circle_size += max(-4,min(4,((target_size-circle_size))))
 
@@ -558,8 +558,8 @@ client
 	appearance_flags = PIXEL_SCALE | TILE_BOUND | NO_CLIENT_COLOR
 	plane = HUD_PLANE
 	ammo
-		maptext_width = 64
-		screen_loc = "EAST-5:-16,SOUTH:4"
+		maptext_width = 128
+		screen_loc = "EAST-7:-16,SOUTH:4"
 		alpha = 170
 	timer
 		maptext_width = 128
