@@ -59,7 +59,6 @@ datum/preferences
 				return 'human.dmi'
 			if("vulpine")
 				return 'icons/mob/vulpine.dmi'
-
 	proc/randomize_name()
 		if (gender == MALE)
 			real_name = capitalize(pick(first_names_male) + " " + capitalize(pick(last_names)))
@@ -173,7 +172,7 @@ datum/preferences
 		dat += "<a href=\"byond://?src=\ref[user];preferences=1;real_name=input\"><b>Name : [src.real_name]</b></a> "
 		dat += "(<a href=\"byond://?src=\ref[user];preferences=1;real_name=random\">Randomize</A>)<br><br>"
 		dat += "<br>"
-
+		dat += "<font color='red'>No inappropiate stuff allowed.</font><br>"
 		dat += "<b>Gender:</b> <a href=\"byond://?src=\ref[user];preferences=1;gender=input\"><b>[src.gender == MALE ? "Male" : "Female"][species == "human" && gender == FEMALE ? " (catgirl ears enabled)" : ""]</b></a><br>" //this is what you get for PLAYING TG NOOB
 		dat += "<b>Age:</b> <a href='byond://?src=\ref[user];preferences=1;age=input'>[src.age]</a>"
 
@@ -344,7 +343,7 @@ datum/preferences
 			tail_color = new_species_tail_color
 
 		if (link_tags["tail"])
-			var/new_species_tail = input(user, "Please select new tail", "Character Generation")  in list("none","vulptail1")
+			var/new_species_tail = input(user, "Please select new tail", "Character Generation")  in list("none","tail")
 			tail = new_species_tail
 
 
