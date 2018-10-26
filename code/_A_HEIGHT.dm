@@ -70,12 +70,12 @@ turf
 		New()
 			..()
 			spawn(1)
-				var/turf/T = get_step(src,SOUTH)
+				var/turf/T = locate(x,y-1,z)
 				if(T)
 					if(T.TurfHeight < -8)
 						T.underlays += new /image/lattice
 		Del()
-			var/turf/T = get_step(src,SOUTH)
+			var/turf/T = locate(x,y-1,z)
 			if(T)
 				if(T.TurfHeight < -8)
 					T.underlays = null
