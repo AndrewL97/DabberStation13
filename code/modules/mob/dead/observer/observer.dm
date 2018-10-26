@@ -13,13 +13,13 @@
 		src.name = corpse.real_name
 		src.verbs += /mob/dead/observer/proc/reenter_corpse
 
-/mob/proc/ghostize(var/dead = 0)
+/mob/proc/ghostize(var/gibb = 0)
 	set name = "Ghost"
 	set desc = "You cannot be revived as a ghost"
 	if(src.client)
 		var/mob/dead/observer/ghost = new(src)
 		src.client.mob = ghost
-		if(dead > 0)
+		if(gibb == 2)
 			ghost.abandon_mob_proc(1)
 	return
 

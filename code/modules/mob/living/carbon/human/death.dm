@@ -27,7 +27,8 @@
 			if(A.status && prob(90))
 				A.part4.ignite()
 		else
-			abandon_mob_proc(1)
+			if(gibbed == 0)
+				abandon_mob_proc(1)
 
 	var/tod = time2text(world.realtime,"hh:mm:ss") //weasellos time of death patch
 	if(mind)

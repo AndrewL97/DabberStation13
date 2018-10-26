@@ -139,7 +139,7 @@ mob
 		#if defined(GRAVDEBUG)
 		world << "[FONTCOLOR]removing [src] from heightmobs"
 		#endif
-		ghostize(1)
+		ghostize(2)
 		if(danc)
 			del danc
 		if(src in HeightMobs)
