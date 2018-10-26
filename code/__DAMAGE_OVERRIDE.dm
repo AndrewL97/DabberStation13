@@ -25,7 +25,7 @@
 			*/
 			var/turf/T = loc
 			if(istype(T,/turf))
-				if(T.water_height >= 27 && !internal)
+				if(heightZ > -8-heightSize && heightZ+heightSize < T.water_height && !internal)
 					air -= tick_lag_original
 			if(frm_counter % 15 == 1)
 				breathe()
