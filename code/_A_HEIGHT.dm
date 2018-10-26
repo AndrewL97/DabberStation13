@@ -50,7 +50,7 @@ obj
 
 /image/lattice
 	icon = 'structures.dmi'
-	icon_state = "lattice2"
+	icon_state = "ass"
 	appearance_flags = RESET_COLOR
 	layer = 1
 
@@ -69,7 +69,7 @@ turf
 	simulated
 		New()
 			..()
-			spawn(1)
+			spawn(5)
 				var/turf/T = locate(x,y-1,z)
 				if(T)
 					if(T.TurfHeight < -8)
