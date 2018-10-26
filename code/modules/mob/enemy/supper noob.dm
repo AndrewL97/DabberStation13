@@ -21,9 +21,9 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 			spawn()
 				DoingWave = 1
 				CurrentWave = rand(1,4)
-				world << "Starting Wave"
+				//world << "Starting Wave"
 				call(src,"Wave[CurrentWave]")() //Makes a wave happen.
-				world << "Finished Wave [CurrentWave]"
+				//world << "Finished Wave [CurrentWave]"
 				sleep(Cooldown)
 				DoingWave = 0
 	proc
@@ -46,6 +46,7 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 				GamerJump(32)
 				explosion(src, 0, 0, 7, 0,1)
 				GamerJump(64)
+			Cooldown = 30
 		Wave2()
 			Wave4()
 			ScreamBullshit("NIGGERFAGGOT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -54,8 +55,8 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 				G.owner = src
 				G.X_SPEED = cos(i*30)*5
 				G.Y_SPEED = sin(i*30)*5
+			Cooldown = 50
 		Wave3()
-			ScreamBullshit("HOW DARE YOU CALL KRYFRAC A IDIOT IM GONNA FUCKING KILL U")
 			Wave4()
 			Wave2()
 		Wave4()
@@ -63,7 +64,6 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 			var
 				nearest_dist = 50 //search dist
 				mob/nearest_mob = null
-			ScreamBullshit("where are you idiot")
 			for(var/mob/i in Mobs)
 				if(i.type != type) //Yo dont kill my friends!!!!!!!!!!!!!!!!!!!!!!!!!!
 					var/dist = GetDist(src,i)
@@ -71,7 +71,15 @@ proc/GetDist(var/atom/A1, var/atom/A2)
 						nearest_mob = i
 						nearest_dist = dist
 			if(nearest_mob)
-				ScreamBullshit("I FOUND YOU IDIOT IM COMING FOR YOUR MOM!!!!!!!!!!!!!!!!!!")
 				new /obj/Particle/crosshair(nearest_mob.loc)
-				glide_size = 32 / 0.5 * tick_lag_original
-				walk_to(src,nearest_mob,4,0.5,0)
+				dir = get_dir(src,nearest_mob)
+				ScreamBullshit("EPIC GRENADE ATTACK!!!!!!!!!!")
+				var/obj/item/weapon/grenade/explosiongrenade/G = new(loc)
+				G.thrown(src)
+				G.icon_state = "flashbang1"
+				spawn( G.det_time )
+					G.prime()
+				spawn(20)
+					walk_to(src,nearest_mob,4,5,0)
+					glide_size = 32 / 5 * tick_lag_original
+				Cooldown = 60

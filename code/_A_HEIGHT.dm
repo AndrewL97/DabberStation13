@@ -61,6 +61,19 @@ turf
 		TurfCeiling = 0
 		water_height = -999
 	simulated
+		New()
+			..()
+			spawn(1)
+				var/turf/T = get_step(src,SOUTH)
+				if(T)
+					if(T.TurfHeight < -8)
+						T.overlays += image(icon = 'structures.dmi',icon_state = "lattice2",layer = 1)
+		Del()
+			var/turf/T = get_step(src,SOUTH)
+			if(T)
+				if(T.TurfHeight < -8)
+					T.overlays = null
+			..()
 		water_flooded
 			water_height =  99999999
 			TurfCeiling = 0
@@ -82,7 +95,7 @@ turf
 			plating
 				level = 1
 				icon_state = "plating"
-				layer = TURF_LAYER-0.25
+				layer = 1.999
 				var/has_cover = 1
 				New()
 					..()
@@ -153,6 +166,9 @@ mob
 			if(j_pack)
 				if(frm_counter % 5 == 1)
 					var/obj/Particle/Spark/Jetpack/S = new()
+					if(heightZ < 0)
+						S.layer = 1.8
+						S.plane = FLOOR_PLANE
 					S.y_pos = heightZ+rand(0,2)
 					S.x_pos = rand(11,18)
 					S.Particle_Process()
@@ -191,17 +207,13 @@ mob
 			MyShadow.alpha = 0
 			return //We cannot process height, either player is on a vehicle, or player is deleted (null) or what we are stepping on doesn't even have a turf.
 
-		if(client)
-			ySpeed -= T.TurfGravity/(1+client.j+(heightZ<round(T.water_height))) //Adds gravity.
-		else
-			ySpeed -= T.TurfGravity/(1+(heightZ<T.water_height)) //Adds gravity.
 		if(T.TurfCeiling != 0)
 			if(heightZ > T.TurfCeiling)
 				heightZ = T.TurfCeiling //god why does this limit exist
 				ySpeed = 0
 
+		ySpeed -= ( ( (heightZ > -8-heightSize) ? T.TurfGravity : 24/256)/(1+(client ? client.j : 0)+((heightZ > -8-heightSize)*(heightZ<T.water_height)) ) ) //Adds gravity.
 		heightZ = heightZ + ySpeed //Changes height by speed.
-
 		for(var/mob/i in loc)
 			if(i != src)
 				if(i.density)
@@ -227,7 +239,12 @@ mob
 						onFloor = 1
 						ySpeed = 0
 						heightZ = 0
-		if(heightZ < T.TurfHeight) //Don't make players go under the floor. todo fix this bullshit because turfs aren't being picked up correctly
+
+		if(heightZ > -8-heightSize && heightZ < 0 && T.TurfHeight >= 0 && ySpeed > 0)
+			heightZ = -8-heightSize
+			ySpeed = 0
+
+		if(heightZ < T.TurfHeight && heightZ > -8-heightSize) //Don't make players go under the floor. todo fix this bullshit because turfs aren't being picked up correctly
 			heightZ = T.TurfHeight
 			onFloor = 1
 			ySpeed = 0
@@ -248,6 +265,7 @@ mob
 			del src
 		else
 			if(heightZ < 0 && istype(src,/mob/dead))
+				ySpeed = 0
 				heightZ = 0
 
 		if(MyShadow) //Handle shadow transparency.

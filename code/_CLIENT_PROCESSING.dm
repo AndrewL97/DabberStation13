@@ -11,21 +11,22 @@ mob
 		..()
 		//world << "hi this just got called"
 		var/turf/TA = NewLoc //We need to check if we can get here actually.
-
 		var/canStandHere = 1
-		for(var/mob/i in TA.contents)
-			if(i != src)
-				//world << "heightZ >= i.heightZ = <font color='green'>[heightZ >= i.heightZ]</font> - heightZ <= i.heightZ+heightSize = <font color='green'>[heightZ <= i.heightZ+heightSize]</font>"
-				if(heightZ+heightSize > i.heightZ && heightZ < i.heightZ+i.heightSize)
-					//world << "<font color='red'>no you idiot dont stand on the [i]"
-					canStandHere = 0
-		for(var/atom/i in NewLoc)
-			if(!istype(i,/mob))
+		for(var/atom/i in TA)
+			if(istype(i,/mob))
+				if(i != src)
+					//world << "heightZ >= i.heightZ = <font color='green'>[heightZ >= i.heightZ]</font> - heightZ <= i.heightZ+heightSize = <font color='green'>[heightZ <= i.heightZ+heightSize]</font>"
+					if(heightZ+heightSize > i:heightZ && heightZ < i:heightZ+i:heightSize)
+						//world << "<font color='red'>no you idiot dont stand on the [i]"
+						canStandHere = 0
+			else
 				if(i.density)
 					canStandHere = 0
 		if(TA.density)
 			canStandHere = 0
-		if(heightZ < TA.TurfHeight)
+		if(heightZ <= -8-heightSize)
+			canStandHere = 1
+		if(heightZ < TA.TurfHeight && heightZ > -8-heightSize)
 			loc = OldLoc
 		else
 			if(canStandHere) //No dont go through... Dumb...
@@ -436,7 +437,7 @@ client/proc/ProcessClient()
 		amb_sound.volume = vol
 		amb_sound_ext.volume = vol_ext
 		amb_sound_ext.frequency = music_pitch
-		amb_sound_water.volume = istype(T,/turf) ? (mob.heightZ+mob.heightSize<round(T.water_height))*100 : 0
+		amb_sound_water.volume = istype(T,/turf) ? ((mob.heightZ > -8-mob.heightSize)*(mob.heightZ+mob.heightSize<round(T.water_height)))*100 : 0
 		amb_sound.frequency = music_pitch
 		radio_sound.frequency = music_pitch
 		if(amb_sound_area.file)
