@@ -48,6 +48,12 @@ obj
 			return
 		appearance_flags = PIXEL_SCALE | LONG_GLIDE | KEEP_TOGETHER
 
+/image/lattice
+	icon = 'structures.dmi'
+	icon_state = "lattice2"
+	appearance_flags = RESET_COLOR
+	layer = 1
+
 turf
 	var/TurfGravity = 96/256 //Obvious variable names
 	var/TurfStepSound = list('footstep1.ogg','footstep2.ogg','footstep3.ogg','footstep4.ogg')
@@ -67,12 +73,12 @@ turf
 				var/turf/T = get_step(src,SOUTH)
 				if(T)
 					if(T.TurfHeight < -8)
-						T.overlays += image(icon = 'structures.dmi',icon_state = "lattice2",layer = 1)
+						T.underlays += new /image/lattice
 		Del()
 			var/turf/T = get_step(src,SOUTH)
 			if(T)
 				if(T.TurfHeight < -8)
-					T.overlays = null
+					T.underlays = null
 			..()
 		water_flooded
 			water_height =  99999999
