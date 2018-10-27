@@ -15,8 +15,6 @@ datum/controller/game_controller
 				if(!(M in HeightMobs))
 					if(!istype(M,/mob/new_player))
 						HeightMobs += M
-				else
-					M.ProcessDirection() //Process buckled (no delays)
 					M.ProcessHeight() //Process their Y Speed and height.
 					if(M)
 						if(M.client && istype(M,/mob/living/carbon/human))
@@ -180,24 +178,6 @@ mob
 					S.Particle_Process()
 					S.loc = loc
 				ySpeed = ySpeed + (27/256)
-
-	proc/ProcessDirection()
-		if(buckled)
-			buckled.glide_size = glide_size
-			dir = buckled.dir
-			pixel_w = buckled.pixel_x
-			if(dir & EAST)
-				pixel_w = buckled.pixel_x+(buckled.pixel_x_off*-1) //((dir & EAST) ? -1 : 1)
-			if(dir & WEST)
-				pixel_w = buckled.pixel_x+(buckled.pixel_x_off*1)
-			buckled.layer = MOB_LAYER-0.1+((buckled.dir == SOUTH)*0.2)
-			pixel_y_2 = buckled.pixel_y+buckled.pixel_y_off
-
-			loc = buckled.loc
-		else
-			pixel_w = 0
-			pixel_y_2 = 0
-
 	proc/ProcessHeight()
 		if(!MyShadow)
 			MyShadow = new
