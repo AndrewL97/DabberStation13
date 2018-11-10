@@ -12,3 +12,4 @@ config/webhookAdmin.txt
 sound/playervoices/*.wav
 dab13.dyn.rsc
 *.rsc
+*.sfk

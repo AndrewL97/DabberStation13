@@ -225,7 +225,7 @@ datum/controller/game_controller
 					plrs = plrs + 1
 					lastplr = i
 		CPU_CHECK()
-		spawn(tick_lag_original)
+		spawn(world.tick_lag)
 			fast_process()
 	water_process()
 		water_cycles += 1

@@ -11,10 +11,12 @@ datum/controller/game_controller
 	proc
 		do_gravity_loop() //Gravity loop, Call in a loop that runs at world.fps.
 			for(var/mob/M in Mobs)
+				//world << M
 				M.ParallaxMove()
 				if(!(M in HeightMobs))
 					if(!istype(M,/mob/new_player))
 						HeightMobs += M
+				else
 					M.ProcessHeight() //Process their Y Speed and height.
 					if(M)
 						if(M.client && istype(M,/mob/living/carbon/human))
@@ -195,6 +197,7 @@ mob
 
 		if(T.TurfCeiling != 0)
 			if(heightZ > T.TurfCeiling)
+				//world << "Set Height Z Ceiling"
 				heightZ = T.TurfCeiling //god why does this limit exist
 				ySpeed = 0
 
@@ -214,7 +217,7 @@ mob
 							i.specialloss += 15
 							playsound(src, 'hitJump.ogg', 100, 0, 12, 0)
 							ySpeed = 3
-		var/obj/lattice/LAT = locate(/obj/lattice) in T
+		var/obj/lattice/LAT = locate(/obj/lattice) in loc
 		if(LAT)
 			if(ySpeed < 0)
 				if(heightZ < 0 && heightZ > -8)
@@ -226,12 +229,15 @@ mob
 						ySpeed = 0
 						heightZ = 0
 
-		if(heightZ > -8-heightSize && heightZ < 0 && T.TurfHeight >= 0 && ySpeed > 0)
+
+		if(heightZ > -8-heightSize && heightZ < -1 && T.TurfHeight >= 0 && ySpeed > 0)
 			heightZ = -8-heightSize
+			//world << "set height (UNDER)"
 			ySpeed = 0
 
 		if(heightZ < T.TurfHeight && heightZ > -8-heightSize) //Don't make players go under the floor. todo fix this bullshit because turfs aren't being picked up correctly
 			heightZ = T.TurfHeight
+			//world << "set height (FLOOR)"
 			onFloor = 1
 			ySpeed = 0
 
