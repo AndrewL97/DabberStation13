@@ -171,6 +171,12 @@
 	/////////////////////////
 	user.lastattacked = M
 	M.lastattacker = user
+	var/matrix/MAT = matrix()
+	if(user && M)
+		MAT.Translate((M.x - user.x)*6,(M.y - user.y)*6)
+		user.transform = M
+		spawn(world.tick_lag)
+			animate(user,transform = user.Angle, time = 3)
 	//spawn(1800)            // this wont work right
 	//	M.lastattacker = null
 	/////////////////////////

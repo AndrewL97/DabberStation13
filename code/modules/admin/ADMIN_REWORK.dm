@@ -99,6 +99,7 @@ client
 		D.stat = 0
 		D.lying = 0
 		D.canmove = 1
+		D.air = 25
 		message_admins("[key] revived/healed [D].")
 	proc/StationName(StationName as text)
 		set category = "Admin"

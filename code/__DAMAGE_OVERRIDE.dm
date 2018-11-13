@@ -3,6 +3,7 @@
 	var/old_new_health = 100
 	var/old_lying = 0
 	var/air = 25
+	var/matrix/Angle = matrix()
 
 /mob/proc/TakeBruteDamage(damage)
 	if(istype(src,/mob/living/carbon/human))
@@ -29,7 +30,7 @@
 			air = max(0,min(25,air)) //Clamp values
 			if(air < tick_lag_original)
 				oxyloss += 0.5
-				if(frm_counter % 60 == 1)
+				if(frm_counter % 160 == 1)
 					emote("gasp")
 			var/new_health = maxhealth - (oxyloss + toxloss + fireloss + bruteloss + specialloss)
 			if(shield > 0)
@@ -58,18 +59,18 @@
 			var/updatematrix = 0
 			src.rest.icon_state = "rest[src.resting || src.lying]"
 
-			var/matrix/MAT = null
+			var/matrix/Angle = null
 			if((src.lying || src.resting) != src.old_lying)
 				updatematrix = 1
-				MAT = matrix()
+				Angle = matrix()
 				old_lying = lying || resting
 			if ((src.lying || src.resting) && updatematrix)
-				MAT.Turn(90)
-				MAT.Translate(0,-10)
+				Angle.Turn(90)
+				Angle.Translate(0,-10)
 			if(updatematrix)
-				animate(src, transform = MAT, time = 5,easing = SINE_EASING | EASE_OUT)
+				animate(src, transform = Angle, time = 5,easing = SINE_EASING | EASE_OUT)
 				if(MyShadow)
-					animate(MyShadow, transform = MAT, time = 5,easing = SINE_EASING | EASE_OUT)
+					animate(MyShadow, transform = Angle, time = 5,easing = SINE_EASING | EASE_OUT)
 
 			/*
 
