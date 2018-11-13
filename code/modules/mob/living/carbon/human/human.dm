@@ -1138,7 +1138,7 @@
 					//Punches must be animated
 					var/matrix/MAT = matrix()
 					if(src && M)
-						MAT.Translate((src.x - M.x)*6,(src.y - M.y)*6)
+						MAT.Translate((src.x - M.x)*22,(src.y - M.y)*22)
 						M.transform = MAT
 						if(M.MyShadow)
 							M.MyShadow.transform = MAT
