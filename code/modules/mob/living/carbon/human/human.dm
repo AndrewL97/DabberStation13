@@ -1135,6 +1135,14 @@
 					for(var/mob/O in viewers(src, null))
 						O.show_message(text("\red <B>[] has punched []!</B>", M, src), 1)
 
+					//Punches must be animated
+					var/matrix/MAT = matrix()
+					if(src && M)
+						MAT.Translate((src.x - M.x)*6,(src.y - M.y)*6)
+						M.transform = MAT
+						spawn(world.tick_lag)
+							animate(M,transform = M.Angle, time = 3)
+					////////////////////
 					if (def_zone == "head")
 						if ((((src.head && src.head.body_parts_covered & HEAD) || (src.wear_mask && src.wear_mask.body_parts_covered & HEAD)) && prob(99)))
 							if (prob(20))
