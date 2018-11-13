@@ -56,7 +56,7 @@ world
 			call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Server **[name]** has closed/rebooted.\" } ", "Content-Type: application/json")
 		..()
 	Reboot()
-		world << "<font size=4><b><font color='red'>The game is now rebooting. If you get disconnected, rejoin."
+		world << "<font size=4><b><font color='red'>The game is now rebooting. If you get disconnected, please reconnect."
 		..()
 //<@&464594497901166613>
 /proc/discord_relay(var/content,var/webhook_url)
