@@ -4,6 +4,9 @@
 	var/old_lying = 0
 	var/air = 25
 	var/matrix/Angle = matrix()
+	var/current_angle = 0 //I'm Stood. A 90 would mean I'm down.
+	var/current_angle_speed = 0 //Angle speed
+	var/old_angle = 0
 
 /mob/proc/TakeBruteDamage(damage)
 	if(istype(src,/mob/living/carbon/human))
@@ -56,22 +59,33 @@
 				src.shields.icon_state = "shield[round((shield/100)*15)]"
 			old_new_health = new_health
 
-			var/updatematrix = 0
 			src.rest.icon_state = "rest[src.resting || src.lying]"
 
-			var/matrix/Angle = null
 			if((src.lying || src.resting) != src.old_lying)
-				updatematrix = 1
-				Angle = matrix()
 				old_lying = lying || resting
-			if ((src.lying || src.resting) && updatematrix)
-				Angle.Turn(90)
-				Angle.Translate(0,-10)
-			if(updatematrix)
-				animate(src, transform = Angle, time = 5,easing = SINE_EASING | EASE_OUT)
-				if(MyShadow)
-					animate(MyShadow, transform = Angle, time = 5,easing = SINE_EASING | EASE_OUT)
+			if(current_angle_speed > 0)
+				var/check = current_angle > 80 && current_angle < 100 && current_angle_speed < 2
+				current_angle_speed += max(-world.tick_lag,min(world.tick_lag,((check-current_angle_speed)/100)))
+				if(check)
+					current_angle += (90-current_angle)/10
+					if(round(current_angle,2) == 90)
+						current_angle_speed = 0
+						Jump()
+				else
+					current_angle += current_angle_speed
+			if(current_angle < 0 || current_angle > 360)
+				current_angle = round(current_angle) % 360
+			if(round(current_angle) != old_lying*90 && round(current_angle_speed) == 0)
+				current_angle += ((old_lying*90)-current_angle)/10
 
+			if (round(current_angle) != old_angle)
+				Angle = matrix()
+				Angle.Turn(round(current_angle))
+				//Angle.Translate(0,round(current_angle)/90)
+				old_angle = round(current_angle)
+				transform = Angle
+				if(MyShadow)
+					MyShadow.transform = transform
 			/*
 
 			DONT FUCK WITH OTHER SHIT

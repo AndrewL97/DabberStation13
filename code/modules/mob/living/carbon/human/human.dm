@@ -1143,9 +1143,9 @@
 						if(M.MyShadow)
 							M.MyShadow.transform = MAT
 						spawn(world.tick_lag)
-							animate(M,transform = M.Angle, time = 3)
+							animate(M,transform = M.Angle, time = 1)
 							if(M.MyShadow)
-								animate(M.MyShadow, transform = M.Angle, time = 3)
+								animate(M.MyShadow, transform = M.Angle, time = 1)
 					////////////////////
 					affecting.take_damage(damage)
 

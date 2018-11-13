@@ -223,7 +223,8 @@ mob
 	if(istype(src.mob, /mob/living/silicon/ai))
 		return AIMove(n,direct,src.mob)
 
-
+	if((round(mob.current_angle) > 80 && round(mob.current_angle) < 100) || round(mob.current_angle_speed) != 0) //players whose tilted cannot move
+		return
 	if (locate(/obj/item/weapon/grab, locate(/obj/item/weapon/grab, src.mob.grabbed_by.len)))
 		var/list/grabbing = list(  )
 		if (istype(src.mob.l_hand, /obj/item/weapon/grab))
