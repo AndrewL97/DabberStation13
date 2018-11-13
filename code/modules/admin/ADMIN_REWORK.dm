@@ -209,6 +209,8 @@ client
 		set category = "Admin"
 		set name = "(ADMIN) Create Explosion"
 		set desc = "Boom Boom Shake The Room"
+		if(range > 20)
+			range = 20 //fuck off gavin
 		if (!src.holder)
 			src << "Only administrators may use this command."
 			return
