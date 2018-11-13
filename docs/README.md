@@ -16,7 +16,7 @@ Admins are given very basic administration tools, which might be improved in the
 
 To configure your gamemode while ingame, go into the Admin tab in commands and do the Change Gamemode command. where you see this
 
-![Gamemode Config](https://raw.githubusercontent.com/alcaroisafrick2k/DabberStation13/master/docs/modepic.png)
+![Gamemode Config](https://raw.githubusercontent.com/alcaroisafrick2/DabberStation13/master/docs/modepic.png)
 
 # Admin Tools / Commands
 Admin tools aren't that big. But you may suggest new ones to me. Currently we have main admin features like banning, kicking, sounds, teleporting. etc
