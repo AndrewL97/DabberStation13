@@ -102,7 +102,7 @@ turf
 				shading.icon_state = "storm" //easy to handle
 
 var/obj/storm_overlay/STORM = null
-#define TIMER_TOTAL 25
+#define TIMER_TOTAL 120
 #define STORMSPEEDMULTIPLIER 0.25
 #define STORMMOVESPEED 16
 #define STORMMOVESFORSECS 25
