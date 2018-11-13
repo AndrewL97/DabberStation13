@@ -77,7 +77,7 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 
 	if(!(world.port in PORTS_NOT_ALLOWED))
 		spawn()
-			call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Round on [world.name] started, mode is [mode.name]\" } ", "Content-Type: application/json")
+			call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Round on **[world.name]** started, mode is [mode.name]\" } ", "Content-Type: application/json")
 
 	current_state = GAME_STATE_PLAYING
 	spawn(0)
@@ -133,7 +133,7 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 				declare_completion()
 			if(!(world.port in PORTS_NOT_ALLOWED))
 				spawn()
-					call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Round on [world.name] ended. Rebooting.\" } ", "Content-Type: application/json")
+					call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Round on **[world.name]** ended. Rebooting.\" } ", "Content-Type: application/json")
 			spawn(50)
 				mode.ending()
 				world << sound('titlesong.ogg',channel=LOBBY_CHANNEL,volume=100, repeat = 1)

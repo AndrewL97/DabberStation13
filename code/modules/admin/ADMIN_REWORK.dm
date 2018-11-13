@@ -1,4 +1,7 @@
 var/AdministrationTeam = list(
+"GavinTheZavin" = "FUCKING IDIOT",
+"Lezus_Konrad" = "belly",
+"KangoBoom" = "Roleplayer"
 )
 var/sandbox = -1
 var/list/admin_verbs = list(

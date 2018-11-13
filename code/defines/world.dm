@@ -18,7 +18,7 @@ proc/Init_Names()
 	last_names = dd_file2list("config/names/last.txt")
 
 proc/Random_Station_Name()
-	var/list/first = list("Kryfrac","Ikea","Dabber","RETARDS IN SPACE","Alcaro","Free Fire","Javier","Fucktrasen")
+	var/list/first = list("Kryfrac","Galvin","Dabber","RETARDS IN SPACE","Alcaro","Free Fire","Javier","Fucktrasen")
 	var/list/second = list("space colony","orbital station","researchers","station","outpost")
 	Station_Name = "[pick(first)] [pick(second)] [rand(1,999)]"
 	world.name = "Dabber Station 13 - [Station_Name] ([Game_Version])"
@@ -48,12 +48,12 @@ world
 
 		if(!(port in PORTS_NOT_ALLOWED))
 			spawn(2)
-				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Server [name] is up. byond://[internet_address]:[port]\" } ", "Content-Type: application/json")
+				call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Server **[name]** is up. **byond://[internet_address]:[port]**, press CTRL+O in the byond client to put the IP and join!\" } ", "Content-Type: application/json")
 	Del()
 		for(var/datum/credit_card/i in list_dab_cards)
 			i.Save()
 		if(!(port in PORTS_NOT_ALLOWED))
-			call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Server [name] has closed/rebooted.\" } ", "Content-Type: application/json")
+			call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Server **[name]** has closed/rebooted.\" } ", "Content-Type: application/json")
 		..()
 	Reboot()
 		world << "<font size=4><b><font color='red'>The game is now rebooting. If you get disconnected, rejoin."
