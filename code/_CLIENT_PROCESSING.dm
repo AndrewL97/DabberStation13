@@ -571,7 +571,7 @@ client
 	cpu_u
 		screen_loc = "1:4,NORTH:-4"
 		maptext_width = 128
-		maptext_y = 0
+		maptext_y = 4
 		alpha = 100
 
 /obj/screen_alt/heightCalc
