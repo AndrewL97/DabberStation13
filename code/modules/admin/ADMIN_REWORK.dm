@@ -79,10 +79,10 @@ client
 	proc/Fling(mob/D in world)
 		set category = "Admin"
 		set name = "(ADMIN) Fling"
-		D.ySpeed = 6
-		D.glide_size = 32 / 1 * tick_lag_original
+		D.ySpeed = 20
+		//D.glide_size = 32 / 1 * tick_lag_original
 		D.current_angle_speed = 20
-		walk(D,pick(DIAGONALS+CARDINALS),1,0)
+		//walk(D,pick(DIAGONALS+CARDINALS),1,0)
 		message_admins("[key] flinged [D].")
 	proc/Revive(mob/D in world)
 		set category = "Admin"
