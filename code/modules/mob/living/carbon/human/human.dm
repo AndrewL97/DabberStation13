@@ -1140,61 +1140,14 @@
 					if(src && M)
 						MAT.Translate((src.x - M.x)*6,(src.y - M.y)*6)
 						M.transform = MAT
+						if(M.MyShadow)
+							M.MyShadow.transform = MAT
 						spawn(world.tick_lag)
 							animate(M,transform = M.Angle, time = 3)
+							if(M.MyShadow)
+								animate(M.MyShadow, transform = M.Angle, time = 3)
 					////////////////////
-					if (def_zone == "head")
-						if ((((src.head && src.head.body_parts_covered & HEAD) || (src.wear_mask && src.wear_mask.body_parts_covered & HEAD)) && prob(99)))
-							if (prob(20))
-								affecting.take_damage(damage, 0)
-							else
-								src.show_message("\red You have been protected from a hit to the head.")
-							return
-						if (damage > 4.9)
-							if (src.weakened < 10)
-								src.weakened = rand(10, 15)
-							for(var/mob/O in viewers(M, null))
-								O.show_message(text("\red <B>[] has weakened []!</B>", M, src), 1, "\red You hear someone fall.", 2)
-						affecting.take_damage(damage)
-					else
-						if (def_zone == "chest")
-							if ((((src.wear_suit && src.wear_suit.body_parts_covered & UPPER_TORSO) || (src.w_uniform && src.w_uniform.body_parts_covered & LOWER_TORSO)) && prob(85)))
-								src.show_message("\red You have been protected from a hit to the chest.")
-								return
-							if (damage > 4.9)
-								if (prob(50))
-									if (src.weakened < 5)
-										src.weakened = 5
-									playsound(src, 'thudswoosh.ogg', 50, 1, -1)
-									for(var/mob/O in viewers(src, null))
-										O.show_message(text("\red <B>[] has knocked down []!</B>", M, src), 1, "\red You hear someone fall.", 2)
-								else
-									if (src.stunned < 5)
-										src.stunned = 5
-									for(var/mob/O in viewers(src, null))
-										O.show_message(text("\red <B>[] has stunned []!</B>", M, src), 1)
-								if(src.stat != 2)	src.stat = 1
-							affecting.take_damage(damage)
-						else
-							if (def_zone == "groin")
-								if ((((src.wear_suit && src.wear_suit.body_parts_covered & LOWER_TORSO) || (src.w_uniform && src.w_uniform.body_parts_covered & LOWER_TORSO)) && prob(75)))
-									src.show_message("\red You have been protected from a hit to the lower chest.")
-									return
-								if (damage > 4.9)
-									if (prob(50))
-										if (src.weakened < 3)
-											src.weakened = 3
-										for(var/mob/O in viewers(src, null))
-											O.show_message(text("\red <B>[] has knocked down []!</B>", M, src), 1, "\red You hear someone fall.", 2)
-									else
-										if (src.stunned < 3)
-											src.stunned = 3
-										for(var/mob/O in viewers(src, null))
-											O.show_message(text("\red <B>[] has stunned []!</B>", M, src), 1)
-									if(src.stat != 2)	src.stat = 1
-								affecting.take_damage(damage)
-							else
-								affecting.take_damage(damage)
+					affecting.take_damage(damage)
 
 					src.UpdateDamageIcon()
 
