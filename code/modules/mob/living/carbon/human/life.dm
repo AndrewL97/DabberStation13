@@ -329,7 +329,7 @@
 			if(Toxins_pp > safe_toxins_max) // Too much toxins
 				var/ratio = breath.toxins/safe_toxins_max
 				air -= tick_lag_original*7
-				toxloss += min(ratio, 10)	//Limit amount of damage toxin exposure can do per second
+				//toxloss += min(ratio, 10)	//Limit amount of damage toxin exposure can do per second
 				toxins_alert = max(toxins_alert, 1)
 			else
 				toxins_alert = 0
