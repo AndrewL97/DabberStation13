@@ -1,7 +1,7 @@
 # Dabber Station 13 Docs
 Documentation of the server.
 
-License : https://github.com/AlcaroIsAFrick/Dab13/blob/master/LICENSE
+License : https://github.com/alcaroisafrick2/DabberStation13/blob/master/LICENSE
 
 # Setup (For server hosts)
 Download this repo as a zip. **ADVICE : use github desktop for ability to update at any time**
@@ -16,9 +16,7 @@ Admins are given very basic administration tools, which might be improved in the
 
 To configure your gamemode while ingame, go into the Admin tab in commands and do the Change Gamemode command. where you see this
 
-![Gamemode Config](https://raw.githubusercontent.com/AlcaroIsAFrick/Dab13/master/docs/modepic.png)
-
-For any extra questions, you can head over to our discord which can be found here. https://discord.gg/rz4wXgq
+![Gamemode Config](https://raw.githubusercontent.com/alcaroisafrick2k/DabberStation13/master/docs/modepic.png)
 
 # Admin Tools / Commands
 Admin tools aren't that big. But you may suggest new ones to me. Currently we have main admin features like banning, kicking, sounds, teleporting. etc
