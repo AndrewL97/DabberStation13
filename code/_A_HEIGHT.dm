@@ -6,7 +6,7 @@ var/HeightMobs = list() //Which mobs need to be processed?
 var/Mobs = list()
 //#define GRAVDEBUG  //Only define this if you want spammy shit.
 #define FONTCOLOR "<font color='green'>Height Debug : "
-#define SPIN_DIVIDER 4
+#define SPIN_DIVIDER 1.25
 
 datum/controller/game_controller
 	proc
@@ -226,7 +226,7 @@ mob
 						playsound(LAT, 'bang.ogg', 100, 0, 5, 0)
 						del LAT
 					else
-						if(round(current_angle_speed) > 0)
+						if(round(current_angle_speed) > 1)
 							ySpeed = current_angle_speed / SPIN_DIVIDER
 						else
 							onFloor = 1
@@ -242,7 +242,7 @@ mob
 		if(heightZ < T.TurfHeight && heightZ > -8-heightSize) //Don't make players go under the floor. todo fix this bullshit because turfs aren't being picked up correctly
 			heightZ = T.TurfHeight
 			//world << "set height (FLOOR)"
-			if(round(current_angle_speed) > 0)
+			if(round(current_angle_speed) > 1)
 				ySpeed = current_angle_speed / SPIN_DIVIDER
 			else
 				onFloor = 1
