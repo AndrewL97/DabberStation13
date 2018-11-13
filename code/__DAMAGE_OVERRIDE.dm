@@ -23,12 +23,8 @@
 			/*
 			uhhhhhhhhhhhhhhh this is the new shit for health like shield and shit i forgot lol
 			*/
-			var/turf/T = loc
-			if(istype(T,/turf))
-				if(heightZ > -8-heightSize && heightZ+heightSize < T.water_height && !internal)
-					air -= tick_lag_original
-			if(frm_counter % 15 == 1)
-				breathe()
+
+			breathe()
 
 			air = max(0,min(25,air)) //Clamp values
 			if(air < tick_lag_original)
