@@ -291,7 +291,6 @@ mob
 
 				if("walk")
 					src.move_delay += 4
-					//Ass
 
 			src.move_delay += src.mob.movement_delay()
 			if (src.mob.resting || src.mob.lying)
@@ -415,7 +414,8 @@ client/proc/ProcessClient()
 			else
 				mob.amm.maptext = {"<div align="right">%[max(0,min(100,round(mob.air*4)))] AIR"}
 		if(mob.cpu_us)
-			mob.cpu_us.maptext = {"<div align="left">%[world.cpu] - [clients.len]/[MAX_PLAYERS]"}
+			mob.cpu_us.maptext = {"<div align="left">%[world.cpu] - [clients.len]/[MAX_PLAYERS]
+[world.contents.len] instances"}
 		if(mob.timer_hud)
 			if(nuke_enabled)
 				mob.timer_hud.maptext = {"<div align="right">[round(nuke_timer/60)]:[(round(nuke_timer) % 60) < 10 ? "0[round(nuke_timer) % 60]" : round(nuke_timer) % 60]"}
@@ -570,8 +570,8 @@ client
 		alpha = 170
 	cpu_u
 		screen_loc = "1:4,NORTH:-4"
-		maptext_width = 64
-		maptext_y = 17
+		maptext_width = 128
+		maptext_y = 0
 		alpha = 100
 
 /obj/screen_alt/heightCalc
