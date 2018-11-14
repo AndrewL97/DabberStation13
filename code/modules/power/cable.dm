@@ -53,7 +53,7 @@
 	d2 = text2num( copytext( icon_state, dash+1 ) )
 
 	var/turf/T = src.loc			// hide if turf is not intact
-
+	plane = CABLE_PLANE
 	if(level==1) hide(T.intact)
 
 

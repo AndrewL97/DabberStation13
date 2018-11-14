@@ -328,7 +328,7 @@
 
 /obj/cable
 	level = 1
-	plane = CABLE_PLANE
+	plane = WALL_PLANE
 	anchored =1
 	var/netnum = 0
 	name = "power cable"
