@@ -50,8 +50,132 @@ pot ok now repeat that fucking epic ass M E M E
 these LIBERALS????out here building??their own HOUSES?? with 4 WALLS????when they won't even support ONE1??WALL around the
 BORDER????????????????????????????the DemoCRAPS????have ALWAYS been the party????of HATE??????????I wonder????if they're TRIGGERED????????because there's
 TWO2??GENDERS????????????what can you expect from ??????????OBUNGA??????????and the LEFT??!!????Send this to all your
+
 ???????????LIBTARD???????????friends to totally ??TRIGGER??them and spread the WORD????????of CONSERVATISM????????????????????????????????????????????????????????????????????????????????
 
+I have a math fetish. Nothing makes me hornier than calculus and statistics. This makes math class hard for me because I have to sit through the whole class with no way to relieve my urges.
+Instead of porn, I jerk off to my math textbook and my parents have noticed. They wish I would just watch porn like a normal child but I can't get off without thinking about math.
+My girlfriend left me because I would shout mathematical formulas during sex. This came to its worst today when my calc and stats teachers were having a discussion of the calculus of
+the normal curve and I had to excuse myself to the bathroom because I just couldn't handle it. It's ruining my education and my life.
+
+Not TfueToday at 7:59 PM
+Nigger
+
+'
+'
+'
+'
+'
+'
+'
+'
+'
+
+FUCUK!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Not TfueToday at 7:59 PM
+Nigger
+
+Not TfueToday at 7:59 PM
+Nigger
+
+Not TfueToday at 7:59 PM
+Nigger
+
+Not TfueToday at 7:59 PM
+Nigger
+
+Stop.
+You're reminding me of 2016.
+-Nitro
+
+Im gonna say the N word.
+
+THAT’S RACSIST YOU CAN SAY THE N WORD!!!!
+
+Mrs. Obama I’ve done it, I’ve stopped racism.
+
+Thank you Skipper now I am free to roam this earth.
+
+Not if I have anything to say about it, and I do!! I’m gonna say the N word!!!
+
+MRS. OBAMA GET DOWN!
+
+NNNIIIIGGGGAAAAA
+
+Mrs. Obama where are you, are you ok?
+
+She is no longer with us Skipper, and with her death I am finally free to say the N word whenever I want.
+
+Not if I have anything to say about it Trump, and I do. Prepare for my Civil Rights Beam.
+
+*Beam sound effect
+
+*Epic guitar solo
+
+*Screams
+
+Skipper my son, you wouldn’t let me die, would you?
+
+Shut up cracker.
+
+Hey Kowalski who’s that guy in front of us rising out of the water?
+
+It is I Barack Obama.
+
+Mr. Obama what are you doing here?
+
+I have come to exact my revenge on you penguins for allowing my wife to die at the hands of Donald Trump
+
+But Mr. Obama we’ve done everything we could!
+
+I’ve already made up my mind.
+
+Mr. Obama don’t do it! This won’t bring Michelle back!
+
+NNNIIIIGGGAAAAAA
+
+*Screams
+
+*Plane crash
+
+*Explosion
+
+Skippers Log #32 Barack Obama has struck us out of the sky by saying the N word.
+
+It just doesn’t make sense skipper, Obama would never say the N word.
+
+I don’t understand it either Kowalski, but some things you just got to live with. Unless! Donald Trump I’ve should have known it was you!!
+
+Skipper my son I see you have discovered my master plan. Now that I have taken over Obama's body, I have free reign to say the N word whenever and however I please.
+
+So, what you are saying is that you are inside of another man.
+
+Why yes, I suppose you can say that.
+
+But Mr. Trump wouldn’t that make you GAY?!
+
+NO, THIS CAN'T BE
+
+NNNNNNNNNNOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!
+
+Well boys we did it, racism is no more.
+
+Hello Skipper.
+
+Mr. Obama what are you doing here?
+
+I came to thank you for your great service to this country.
+
+No Thanks necessary Mr. Obama.
+
+As a token of my gratitude, I’d like to give you the N word pass.
+
+Mr. Obama it is an honor to call you
+
+MY NIGGA.
+
+And as to you old friend.
 */
 
 /obj/item/weapon/grab/attack(mob/M as mob, mob/user as mob)
