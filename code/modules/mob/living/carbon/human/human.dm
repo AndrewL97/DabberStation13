@@ -1061,10 +1061,6 @@
 		M << "You cannot attack people before the game has started."
 		return
 
-	if (istype(src.loc, /turf) && istype(src.loc.loc, /area/start))
-		M << "No attacking people at spawn, you jackass."
-		return
-
 	if ((M.gloves && M.gloves.elecgen == 1 && M.a_intent == "hurt") /*&& (!istype(src:wear_suit, /obj/item/clothing/suit/judgerobe))*/)
 		if(M.gloves.uses > 0)
 			M.gloves.uses--
