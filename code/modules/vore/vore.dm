@@ -90,95 +90,82 @@ You're reminding me of 2016.
 -Nitro
 
 Im gonna say the N word.
-
 THAT’S RACSIST YOU CAN SAY THE N WORD!!!!
-
 Mrs. Obama I’ve done it, I’ve stopped racism.
-
 Thank you Skipper now I am free to roam this earth.
-
 Not if I have anything to say about it, and I do!! I’m gonna say the N word!!!
-
 MRS. OBAMA GET DOWN!
-
 NNNIIIIGGGGAAAAA
-
+*Explosion*
 Mrs. Obama where are you, are you ok?
-
 She is no longer with us Skipper, and with her death I am finally free to say the N word whenever I want.
-
 Not if I have anything to say about it Trump, and I do. Prepare for my Civil Rights Beam.
-
-*Beam sound effect
-
-*Epic guitar solo
-
-*Screams
-
+*Beam sound effect*
+*Epic guitar solo*
+*Screams*
 Skipper my son, you wouldn’t let me die, would you?
-
 Shut up cracker.
-
 Hey Kowalski who’s that guy in front of us rising out of the water?
-
 It is I Barack Obama.
-
 Mr. Obama what are you doing here?
-
 I have come to exact my revenge on you penguins for allowing my wife to die at the hands of Donald Trump
-
 But Mr. Obama we’ve done everything we could!
-
 I’ve already made up my mind.
-
 Mr. Obama don’t do it! This won’t bring Michelle back!
-
 NNNIIIIGGGAAAAAA
-
-*Screams
-
-*Plane crash
-
-*Explosion
-
+*Screams*
+*Plane crash*
+*Explosion*
 Skippers Log #32 Barack Obama has struck us out of the sky by saying the N word.
-
 It just doesn’t make sense skipper, Obama would never say the N word.
-
 I don’t understand it either Kowalski, but some things you just got to live with. Unless! Donald Trump I’ve should have known it was you!!
-
 Skipper my son I see you have discovered my master plan. Now that I have taken over Obama's body, I have free reign to say the N word whenever and however I please.
-
 So, what you are saying is that you are inside of another man.
-
 Why yes, I suppose you can say that.
-
 But Mr. Trump wouldn’t that make you GAY?!
-
 NO, THIS CAN'T BE
-
 NNNNNNNNNNOOOOOOOOOOOOOOO!!!!!!!!!!!!!!!!!!!
-
 Well boys we did it, racism is no more.
-
 Hello Skipper.
-
 Mr. Obama what are you doing here?
-
 I came to thank you for your great service to this country.
-
 No Thanks necessary Mr. Obama.
-
 As a token of my gratitude, I’d like to give you the N word pass.
-
 Mr. Obama it is an honor to call you
-
 MY NIGGA.
-
 And as to you old friend.
+
+
+This is vore.dm
+
+My comments :
+There's a variety of vore, so I can't speak for everyone, but what I can talk about is the stuff that's probably safest for newcomers.
+
+The vore I'm into is soft as soft can be. It's consensual, people are swallowed whole, are alive, comfortable, and safe in the belly,
+and later they're magically out somehow and I'd prefer to not bother with the details of exactly how that happened.
+
+I like the closeness of it. The idea of trusting someone enough to eat you and know you'd be safe, or of them trusting you enough
+for it gives me warm fuzzies. Plus the 'being in the belly' part just strikes me as a lot like a big weird hug. And I like hugs too!
+
+...The harder vore, with nonconsentual stuff, violence, and death, is not my cup of tea.
+
+
+Can i be in the next reddit post please, I would appreciate it. -alcaroisafrick
 */
 
+#define NORMAL 1
+#define DIGEST 2
+#define NOISY 3
+
+/mob
+	/*
+	Vore variables
+	*/
+	var/list/stomach_contents = list()
+	var/belly_mode = DIGEST
+
 /obj/item/weapon/grab/attack(mob/M as mob, mob/user as mob)
+	//ew
 	if (M == src.affecting)
 		s_click(src.hud1)
 		return
@@ -191,7 +178,30 @@ And as to you old friend.
 			if(!do_mob(user, src.affecting)) return
 			for(var/mob/N in viewers(user, null))
 				if(N.client)
-					N.show_message(text("\red <B>[user] devours [src.affecting]!</B>"), 1)
+					N.show_message(text("\green <B>[user] devours [src.affecting]!</B>"), 1)
 			src.affecting.loc = user
 			attacker.stomach_contents.Add(src.affecting)
 			del(src)
+
+/mob/proc/handle_stomach()
+	for(var/mob/M in stomach_contents)
+		if(M.loc != src)
+			stomach_contents.Remove(M)
+			continue
+		//EWWW!!!!!!!!!!!
+		if(istype(M, /mob/living/carbon) && src.stat != 2)
+			if(air_master.current_cycle%3==1)
+				if(belly_mode == DIGEST)
+					if(!M.nodamage)
+						M.bruteloss += 5
+					src.nutrition += 10
+
+
+/mob/living/carbon/relaymove(var/mob/user, direction)
+	if(user in src.stomach_contents)
+		if(prob(40))
+			for(var/mob/M in hearers(4, src))
+				if(M.client)
+					M.show_message(text("\red You hear something rumbling inside [src]'s stomach..."), 2)
+			user << "\green You struggle inside [src]'s stomach.."
+			playsound(user.loc, 'attackblob.ogg', 50, 1)
