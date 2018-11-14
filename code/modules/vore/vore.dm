@@ -150,7 +150,7 @@ for it gives me warm fuzzies. Plus the 'being in the belly' part just strikes me
 Can i be in the next reddit post please, I would appreciate it. -alcaroisafrick
 */
 
-#define NORMAL 1
+#define HOLD 1
 #define DIGEST 2
 #define NOISY 3
 
@@ -166,33 +166,46 @@ Can i be in the next reddit post please, I would appreciate it. -alcaroisafrick
 	if (M == src.affecting)
 		s_click(src.hud1)
 		return
+
 	if(M == src.assailant)
 		if( iscarbon(src.affecting) )
 			var/mob/living/carbon/attacker = user
+
 			for(var/mob/N in viewers(user, null))
 				if(N.client)
 					N.show_message(text("\red <B>[user] is attempting to devour [src.affecting]!</B>"), 1)
+
 			if(!do_mob(user, src.affecting)) return
+
 			for(var/mob/N in viewers(user, null))
 				if(N.client)
 					N.show_message(text("\green <B>[user] devours [src.affecting]!</B>"), 1)
+
+			var/S = "sound/vore/swallow.ogg" //Just, Don't.
+			playsound(assailant, S, 100, 0, 3, 0)
+			affecting << sound(S)
+
 			src.affecting.loc = user
 			attacker.stomach_contents.Add(src.affecting)
 			del(src)
 
 /mob/proc/handle_stomach()
+	var/DIGESTION_SOUND = "sound/vore/digestion[rand(1,4)].ogg"
 	for(var/mob/M in stomach_contents)
 		if(M.loc != src)
 			stomach_contents.Remove(M)
 			continue
-		//EWWW!!!!!!!!!!!
-		if(istype(M, /mob/living/carbon) && src.stat != 2)
-			if(air_master.current_cycle%3==1)
-				if(belly_mode == DIGEST)
-					if(!M.nodamage)
-						M.bruteloss += 5
-					src.nutrition += 10
+		if(src.stat != 2)
 
+			if(belly_mode == DIGEST)
+				M.toxloss += world.tick_lag //lets just say this makes sense
+				src.nutrition += world.tick_lag
+
+			if((belly_mode == DIGEST || belly_mode == NOISY) && (frm_counter % 720) == 1)
+				M << sound(DIGESTION_SOUND) //this works
+
+	if(((belly_mode == DIGEST && stomach_contents.len > 0) || belly_mode == NOISY) && (frm_counter % 720) == 1) //shitty copypaste sorry
+		playsound(loc,DIGESTION_SOUND,100,0,3,0) //bad idea to make this play globally, some players won't like hearing it, but fuck you anyways
 
 /mob/living/carbon/relaymove(var/mob/user, direction)
 	if(user in src.stomach_contents)
@@ -201,6 +214,6 @@ Can i be in the next reddit post please, I would appreciate it. -alcaroisafrick
 				if(M.client)
 					M.show_message(text("\red You hear something rumbling inside [src]'s stomach..."), 2)
 			user << "\green You struggle inside [src]'s stomach.."
-			var/S = "sound/vore/struggle0[rand(1,5)].ogg"
-			playsound(user.loc, S, 50, 1)
+			var/S = "sound/vore/struggle_0[rand(1,5)].ogg"
+			playsound(user.loc, S, 100, 0, 3, 0)
 			user << sound(S)

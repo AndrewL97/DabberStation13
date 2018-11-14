@@ -39,10 +39,6 @@
 	//Chemicals in the body
 	handle_chemicals_in_body()
 
-
-	//stuff in the stomach
-	handle_stomach()
-
 	//Disabilities
 	handle_disabilities()
 

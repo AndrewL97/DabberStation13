@@ -17,6 +17,7 @@ datum/controller/game_controller
 				if(M)
 					if(istype(M,/mob/living/carbon/human))
 						M:handle_regular_status_updates()
+						M:handle_stomach()
 						if(M.client)
 							M:handle_regular_hud_updates()
 					if(M.ANIMATION_RUNNING)
