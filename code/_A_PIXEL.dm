@@ -56,6 +56,7 @@ atom/movable
 
 			var/bumpedwalls = 0
 			for(var/atom/e in orange(1,src))
+				SLEEP_IF_TOO_MUCH
 				if(e != ignore)
 					if(!istype(e,/mob))
 						if(PixelCollision(e))

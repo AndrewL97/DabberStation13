@@ -39,14 +39,14 @@
 
 // BEGIN_INCLUDE
 #include "code\___MAIN_SHIT.dm"
+#include "code\__A_MASTER.dm"
 #include "code\__ANTI_NIGGER.dm"
-#include "code\__DAMAGE_OVERRIDE.dm"
 #include "code\_A_ANIMATION.dm"
+#include "code\_A_CUSTOM_DAMAGE.dm"
 #include "code\_A_GUN.dm"
 #include "code\_A_HEIGHT.dm"
 #include "code\_A_LAYERING.dm"
 #include "code\_A_LIGHTING.dm"
-#include "code\_A_MASTER.dm"
 #include "code\_A_PARTICLE.dm"
 #include "code\_A_PIXEL.dm"
 #include "code\_A_VEHICLE.dm"

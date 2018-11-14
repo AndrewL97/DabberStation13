@@ -27,6 +27,8 @@ var/special_processing = list()
 #define WHILE_TICK_MAX 80 //Sleep a while loop if tick usage goes higher than this.
 #define MAIN_TICK_MAX 90 //Sleep if tick usage goes higher than this.
 
+#define SLEEP_IF_TOO_MUCH if(world.tick_usage > 90) sleep(world.tick_lag) //Slow down to prevent crashes.
+
 client
 	New()
 		..()
@@ -209,8 +211,10 @@ datum/controller/game_controller
 		if(ticker)
 			ticker.process_timer()
 		for(var/obj/i in special_processing)
+			SLEEP_IF_TOO_MUCH
 			i.special_process()
 		for(var/obj/projectile/G in bullets)
+			SLEEP_IF_TOO_MUCH
 			G.bullet_process()
 		if(lighting_inited)
 			lighting.loop()
@@ -218,6 +222,7 @@ datum/controller/game_controller
 		do_gravity_loop()
 		plrs = 0
 		for(var/client/i in clients)
+			SLEEP_IF_TOO_MUCH
 			i.InactivityLoop()
 			i.ProcessClient()
 			if(!istype(i.mob,/mob/dead))

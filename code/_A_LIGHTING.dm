@@ -19,6 +19,7 @@ Lighting
 	proc
 		loop()
 			for(var/obj/light/l in lights)
+				SLEEP_IF_TOO_MUCH
 				l.loop()
 		init()
 			for(var/z in 1 to world.maxz)
