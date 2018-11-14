@@ -8,8 +8,8 @@
 
 /mob/living/carbon/gib(give_medal)
 	for(var/mob/M in src)
-		if(M in src.stomach_contents)
-			src.stomach_contents.Remove(M)
+		if(M in src.belly_contents)
+			src.belly_contents.Remove(M)
 		M.loc = src.loc
 		for(var/mob/N in viewers(src, null))
 			if(N.client)

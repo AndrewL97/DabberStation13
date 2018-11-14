@@ -147,7 +147,7 @@ for it gives me warm fuzzies. Plus the 'being in the belly' part just strikes me
 ...The harder vore, with nonconsentual stuff, violence, and death, is not my cup of tea.
 
 
-Can i be in the next reddit post please, I would appreciate it. -alcaroisafrick
+Can I be in the next reddit post please, I would appreciate it. -alcaroisafrick
 */
 
 #define HOLD 1
@@ -158,8 +158,21 @@ Can i be in the next reddit post please, I would appreciate it. -alcaroisafrick
 	/*
 	Vore variables
 	*/
-	var/list/stomach_contents = list()
+	var/list/belly_contents = list()
 	var/belly_mode = DIGEST
+
+/client
+	var/sound/amb_sound_vore = sound('stomach_loop.ogg')
+	proc
+		vore_sound_handler()
+			amb_sound_vore.volume = 0
+			if(mob)
+				if(istype(mob.loc,/mob))
+					amb_sound_vore.volume = 100
+					return 1
+				if(mob.belly_contents.len > 0)
+					amb_sound_vore.volume = 50
+					return 1
 
 /obj/item/weapon/grab/attack(mob/M as mob, mob/user as mob)
 	//ew
@@ -186,14 +199,14 @@ Can i be in the next reddit post please, I would appreciate it. -alcaroisafrick
 			affecting << sound(S)
 
 			src.affecting.loc = user
-			attacker.stomach_contents.Add(src.affecting)
+			attacker.belly_contents.Add(src.affecting)
 			del(src)
 
 /mob/proc/handle_stomach()
-	var/DIGESTION_SOUND = "sound/vore/digestion[rand(1,4)].ogg"
-	for(var/mob/M in stomach_contents)
+	var/DIGESTION_SOUND = "sound/vore/digestion[rand(1,4)].ogg" //OMG I WANT TO DIE
+	for(var/mob/M in belly_contents)
 		if(M.loc != src)
-			stomach_contents.Remove(M)
+			belly_contents.Remove(M)
 			continue
 		if(src.stat != 2)
 
@@ -204,16 +217,16 @@ Can i be in the next reddit post please, I would appreciate it. -alcaroisafrick
 			if((belly_mode == DIGEST || belly_mode == NOISY) && (frm_counter % 720) == 1)
 				M << sound(DIGESTION_SOUND) //this works
 
-	if(((belly_mode == DIGEST && stomach_contents.len > 0) || belly_mode == NOISY) && (frm_counter % 720) == 1) //shitty copypaste sorry
+	if(((belly_mode == DIGEST && belly_contents.len > 0) || belly_mode == NOISY) && (frm_counter % 720) == 1) //shitty copypaste sorry
 		playsound(loc,DIGESTION_SOUND,100,0,3,0) //bad idea to make this play globally, some players won't like hearing it, but fuck you anyways
 
 /mob/living/carbon/relaymove(var/mob/user, direction)
-	if(user in src.stomach_contents)
+	if(user in src.belly_contents)
 		if(prob(40))
 			for(var/mob/M in hearers(4, src))
 				if(M.client)
 					M.show_message(text("\red You hear something rumbling inside [src]'s stomach..."), 2)
 			user << "\green You struggle inside [src]'s stomach.."
-			var/S = "sound/vore/struggle_0[rand(1,5)].ogg"
+			var/S = "sound/vore/struggle_0[rand(1,5)].ogg" //tbh I should just globalize this somewhere
 			playsound(user.loc, S, 100, 0, 3, 0)
 			user << sound(S)

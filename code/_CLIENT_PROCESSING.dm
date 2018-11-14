@@ -375,7 +375,7 @@ client/proc/ProcessClient()
 			mouse_position =  new(src)
 		if(!inited_audio_files)
 			var/A_S = 0
-			for(var/sound/i in list(amb_sound,amb_sound_ext,amb_sound_area,radio_sound,amb_sound_water))
+			for(var/sound/i in list(amb_sound,amb_sound_ext,amb_sound_area,radio_sound,amb_sound_water,amb_sound_vore))
 				if(i.status != SOUND_UPDATE)
 					i.status = SOUND_UPDATE
 					i.channel = SOUND_CHANNEL_1+A_S
@@ -441,6 +441,9 @@ client/proc/ProcessClient()
 		amb_sound_ext.frequency = music_pitch
 		amb_sound_water.volume = istype(T,/turf) ? ((mob.heightZ > -8-mob.heightSize)*(mob.heightZ+mob.heightSize<round(T.water_height)))*100 : 0
 		amb_sound.frequency = music_pitch
+
+		vore_sound_handler()
+
 		radio_sound.frequency = music_pitch
 		if(amb_sound_area.file)
 			amb_sound_area.frequency = music_pitch
@@ -449,6 +452,7 @@ client/proc/ProcessClient()
 		src << amb_sound
 		src << amb_sound_ext
 		src << amb_sound_water
+		src << amb_sound_vore
 		if(current_radio_song != old_radio_sound)
 			old_radio_sound = current_radio_song
 			src << sound(null,channel=SOUND_CHANNEL_1+3)
