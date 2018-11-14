@@ -204,13 +204,13 @@
 	var/f_loss = null
 	switch (severity)
 		if (1.0)
-			ySpeed = 8
+			Fling(4)
 			b_loss += 500
 			src.gib(1)
 			return
 
 		if (2.0)
-			ySpeed = 6
+			Fling(3)
 			if (!shielded)
 				b_loss += 60
 
@@ -221,7 +221,7 @@
 				src.ear_deaf += 120
 
 		if(3.0)
-			ySpeed = 4
+			Fling(1.5)
 			b_loss += 30
 			if (prob(50) && !shielded)
 				src.paralysis += 10

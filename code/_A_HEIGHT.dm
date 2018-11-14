@@ -155,10 +155,12 @@ mob
 	verb/ChangeYSpeed(ass as num)
 		ySpeed = ass
 	#endif
-
+	proc/Fling(severity)
+		ySpeed = 5*severity
+		current_angle_speed = 5*severity
 	proc/Jump()
 		var/turf/T = loc
-		if(canmove == 1 && lying == 0 && !src.restrained() && !ANIMATION_RUNNING && istype(T,/turf)) //If on floor/space and not restrained...
+		if(canmove == 1 && old_lying == 0 && !src.restrained() && !ANIMATION_RUNNING && istype(T,/turf) && round(current_angle_speed) != 0) //If on floor/space and not restrained...
 			if(onFloor == 1)
 				ySpeed = (1320/256)/(1+(heightZ<round(T.water_height)))
 				playsound(src, 'jump.ogg', 100, 0, 12, 0)
