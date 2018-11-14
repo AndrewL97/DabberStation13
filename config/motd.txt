@@ -21,3 +21,4 @@ O - GLOBAL CHAT
 T - LOCAL CHAT
 E - Board/Exit vehicle
 M - Use vehicle item
+V - Belly Vore Mode

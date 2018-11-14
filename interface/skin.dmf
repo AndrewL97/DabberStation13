@@ -78,6 +78,9 @@ macro "macro"
 		name = "T"
 		command = "Say"
 	elem 
+		name = "V"
+		command = "Vore-Mode"
+	elem 
 		name = "W"
 		command = "KeyDownM \"north\""
 	elem 

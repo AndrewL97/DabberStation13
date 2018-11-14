@@ -150,19 +150,46 @@ for it gives me warm fuzzies. Plus the 'being in the belly' part just strikes me
 Can I be in the next reddit post please, I would appreciate it. -alcaroisafrick
 */
 
+//Defines
+
 #define HOLD 1
 #define DIGEST 2
 #define NOISY 3
 
+//Global procs
+
+proc
+	get_vore_msg(mode)
+		var/msg = "digest prey"
+		switch(mode)
+			if(HOLD)
+				msg = "hold prey"
+			if(DIGEST)
+				msg = "digest prey"
+			if(NOISY)
+				msg = "make noises"
+
+//Mob code
+
 /mob
-	/*
-	Vore variables
-	*/
 	var/list/belly_contents = list()
-	var/belly_mode = DIGEST
+	var/belly_mode = HOLD
+	verb/Vore_Mode()
+		set category = "Vore"
+		if(istype(src,/mob/living/carbon))
+			belly_mode += 1
+			if(belly_mode > NOISY)
+				belly_mode = HOLD
+			src << "\green You set your belly to [get_vore_msg(belly_mode)]."
+	verb/Regurgitate()
+		set category = "Vore"
+		for(var/atom/A in belly_contents)
+			A.loc = loc
+
+//Client
 
 /client
-	var/sound/amb_sound_vore = sound('stomach_loop.ogg')
+	var/sound/amb_sound_vore = sound('stomach_loop.ogg') //don't listen to this file
 	proc
 		vore_sound_handler()
 			amb_sound_vore.volume = 0
@@ -175,32 +202,34 @@ Can I be in the next reddit post please, I would appreciate it. -alcaroisafrick
 					return 1
 
 /obj/item/weapon/grab/attack(mob/M as mob, mob/user as mob)
-	//ew
 	if (M == src.affecting)
 		s_click(src.hud1)
 		return
 
 	if(M == src.assailant)
 		if( iscarbon(src.affecting) )
+			//This is where it goes from a 0 to a 100.
 			var/mob/living/carbon/attacker = user
 
-			for(var/mob/N in viewers(user, null))
+			/*for(var/mob/N in viewers(user, null))
 				if(N.client)
 					N.show_message(text("\red <B>[user] is attempting to devour [src.affecting]!</B>"), 1)
 
-			if(!do_mob(user, src.affecting)) return
+			if(!do_mob(user, src.affecting)) return*/
 
 			for(var/mob/N in viewers(user, null))
 				if(N.client)
-					N.show_message(text("\green <B>[user] devours [src.affecting]!</B>"), 1)
+					N.show_message("\green <B>[user] shoves [src.affecting] into their mouth, and swallows them whole!</B>", 1)
 
-			var/S = "sound/vore/swallow.ogg" //Just, Don't.
-			playsound(assailant, S, 100, 0, 3, 0)
+			var/S = "sound/vore/swallow.ogg" //grossest sounds ever 2018 you wont believe it
+			playsound(assailant, S, 100, 0, 3, 0) //Slurp!
 			affecting << sound(S)
 
 			src.affecting.loc = user
 			attacker.belly_contents.Add(src.affecting)
 			del(src)
+
+//get all mobs in stomach and then do BS
 
 /mob/proc/handle_stomach()
 	var/DIGESTION_SOUND = "sound/vore/digestion[rand(1,4)].ogg" //OMG I WANT TO DIE
@@ -222,11 +251,13 @@ Can I be in the next reddit post please, I would appreciate it. -alcaroisafrick
 
 /mob/living/carbon/relaymove(var/mob/user, direction)
 	if(user in src.belly_contents)
-		if(prob(40))
-			for(var/mob/M in hearers(4, src))
-				if(M.client)
-					M.show_message(text("\red You hear something rumbling inside [src]'s stomach..."), 2)
-			user << "\green You struggle inside [src]'s stomach.."
-			var/S = "sound/vore/struggle_0[rand(1,5)].ogg" //tbh I should just globalize this somewhere
-			playsound(user.loc, S, 100, 0, 3, 0)
-			user << sound(S)
+		for(var/mob/M in hearers(4, src))
+			if(M.client)
+				M.show_message(text("\red You hear something rumbling inside [src]'s stomach..."), 2)
+		user << "\green You struggle inside [src]'s stomach.."
+		var/S = "sound/vore/struggle_0[rand(1,5)].ogg" //tbh I should just globalize this somewhere
+		playsound(user.loc, S, 100, 0, 3, 0)
+		user << sound(S)
+
+//You read all the file, congratulations! Now you can become the new United States Of America President.
+//~AlcaroIsAFrick
