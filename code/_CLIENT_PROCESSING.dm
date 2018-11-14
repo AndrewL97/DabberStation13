@@ -44,10 +44,10 @@ mob
 				var/turf/T = locate(x,y,z)
 
 				if(T && T.TurfStepSound != null)
-					if(heightZ >= T.water_height)
+					if(heightZ >= round(T.water_height))
 						playsound(src, pick(T.TurfStepSound), 100, 0, 8, 0)
 					else
-						if(heightZ+heightSize >= T.water_height)
+						if(heightZ+heightSize >= round(T.water_height))
 							playsound(src, pick('footstepw1.ogg','footstepw2.ogg','footstepw3.ogg'),100,0,10,0)
 
 /obj/screen_alt/circle_part
