@@ -24,10 +24,9 @@ var/special_processing = list()
 #define CPU_WARN 55 //How much CPU should trigger the warning that it's going too high?
 #define CPU_CHECK_MAX 45 //if cpu goes higher than this, some things will do sleep(world.tick_lag) and throttle.
 #define ATMOS_CPU_FORCE_SLEEP 70 //Force atmos/water to sleep (and throttle) if CPU (tick usage) goes higher than this value to stabilize the CPU.
-#define WHILE_TICK_MAX 80 //Sleep a while loop if tick usage goes higher than this.
-#define MAIN_TICK_MAX 90 //Sleep if tick usage goes higher than this.
-
-#define SLEEP_IF_TOO_MUCH if(world.tick_usage > 90) sleep(world.tick_lag) //Slow down to prevent crashes.
+#define WHILE_TICK_MAX 85 //Sleep a while loop if tick usage goes higher than this.
+#define MAIN_TICK_MAX 85 //Sleep if tick usage goes higher than this.
+#define SLEEP_IF_TOO_MUCH if(world.tick_usage > 85) sleep(world.tick_lag) //Slow down to prevent crashes.
 
 client
 	New()
