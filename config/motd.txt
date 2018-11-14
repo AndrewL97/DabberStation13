@@ -1,13 +1,11 @@
 <font color="#9CFF75">
 <h1>Welcome to Dabber Station 13!</h1>
-This server is running Dabber corp's modified <a href="https://github.com/duncathan/goon-r4407-510">Goonstation R4407</a> code.
-<a href="https://github.com/AlcaroIsAFrick/Dab13">Source Code</a> - <a href="%discord">Discord Invite</a> - <a href="https://www.youtube.com/watch?v=H4Xe6PsX45o">Game Video</a>
+This server is running AlcaroIsAFrick's modified <a href="https://github.com/duncathan/goon-r4407-510">Goonstation R4407</a> code.
+<a href="https://github.com/alcaroisafrick2/DabberStation13">Source Code</a>
 
 Rules :
-0. RP is not required at all, since most of the game is about working and doing your stuff, stories aren't really required. You're allowed to talk about anything in IC/OOC.
-1. No ERP/NSFW content in any type of chat.
-2. The only crime here is not being funny. We all deserve a good laugh sometimes!
-3. If you get banned, you've really annoyed us and don't expect to get unbanned.
+0. gavin please don't spam the explosion command
+1. just don't be unfunny thanks
 
 <font color="#00FFFF">
 <b>Controls :</b>

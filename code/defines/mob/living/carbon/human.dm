@@ -46,4 +46,5 @@
 
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
+	name = "Test Dummy"
 	nodamage = 1
