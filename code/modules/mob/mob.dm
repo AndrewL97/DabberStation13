@@ -337,6 +337,8 @@
 					src.affecting.losebreath = min(src.affecting.losebreath + 1, 3)
 					src.last_suffocate = world.time
 					flick("disarm/killf", S)
+			else
+				src.state += 1
 		else
 	return
 
