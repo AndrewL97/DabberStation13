@@ -58,8 +58,8 @@
 				shield = min(100,max(0,shield)) //Clamp the value
 				src.shields.icon_state = "shield[round((shield/100)*15)]"
 			old_new_health = new_health
-
-			src.rest.icon_state = "rest[src.resting || src.lying]"
+			if(src.rest)
+				src.rest.icon_state = "rest[src.resting || src.lying]"
 
 			if((src.lying || src.resting) != src.old_lying)
 				old_lying = lying || resting
