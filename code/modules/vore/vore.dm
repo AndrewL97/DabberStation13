@@ -168,7 +168,7 @@ Can i be in the next reddit post please, I would appreciate it. -alcaroisafrick
 	if (M == src.affecting)
 		s_click(src.hud1)
 		return
-	if(M == src.assailant && src.state >= 2)
+	if(M == src.assailant)
 		if( iscarbon(src.affecting) )
 			var/mob/living/carbon/attacker = user
 			for(var/mob/N in viewers(user, null))
