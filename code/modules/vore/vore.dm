@@ -168,6 +168,7 @@ proc
 				msg = "digest prey"
 			if(NOISY)
 				msg = "make noises"
+		return msg
 
 //Mob code
 
@@ -183,7 +184,7 @@ proc
 			src << "\green You set your belly to [get_vore_msg(belly_mode)]."
 	verb/Regurgitate()
 		set category = "Vore"
-		for(var/atom/A in belly_contents)
+		for(var/atom/movable/A in belly_contents)
 			A.loc = loc
 
 //Client
