@@ -46,7 +46,6 @@ Lighting
 
 /turf/space/New()
 	alpha = 0
-	init_space()
 
 
 /obj/screen_alt/plane_master_turf3
@@ -68,15 +67,9 @@ turf
 		init_space(force = 0)
 			if(lighting_inited || force)
 				del_lights()
-				create_space()
 		create_shading()
 			if(!shading)
 				shading = new(locate(x,y,z))
-		create_space()
-			if(!shading)
-				shading = new(locate(x,y,z))
-				shading.icon_state = "noAlpha"
-				layer = LIGHT_LAYER
 
 turf
 	var
