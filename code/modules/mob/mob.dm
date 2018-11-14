@@ -350,10 +350,6 @@
 	src.hud1.master = src
 	return
 
-/obj/item/weapon/grab/attack(mob/M as mob, mob/user as mob)
-	if (M == src.affecting)
-		s_click(src.hud1)
-		return
 
 /obj/item/weapon/grab/dropped()
 	del(src)

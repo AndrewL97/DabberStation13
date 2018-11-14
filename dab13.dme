@@ -424,6 +424,7 @@
 #include "code\modules\power\terminal.dm"
 #include "code\modules\power\tracker.dm"
 #include "code\modules\power\turbine.dm"
+#include "code\modules\vore\vore.dm"
 #include "code\WorkInProgress\Cameras.dm"
 #include "code\WorkInProgress\Chemistry-Holder.dm"
 #include "code\WorkInProgress\Chemistry-Machinery.dm"
