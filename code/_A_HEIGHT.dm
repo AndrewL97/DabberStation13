@@ -2,7 +2,6 @@
 Height Processing, Jumping, And all that other fancy stuff.
 */
 
-var/HeightMobs = list() //Which mobs need to be processed?
 var/Mobs = list()
 //#define GRAVDEBUG  //Only define this if you want spammy shit.
 #define FONTCOLOR "<font color='green'>Height Debug : "
@@ -14,19 +13,16 @@ datum/controller/game_controller
 			for(var/mob/M in Mobs)
 				//world << M
 				M.ParallaxMove()
-				if(!(M in HeightMobs))
-					if(!istype(M,/mob/new_player))
-						HeightMobs += M
-				else
-					M.ProcessHeight() //Process their Y Speed and height.
-					if(M)
-						if(M.client && istype(M,/mob/living/carbon/human))
-							M:handle_regular_status_updates()
+				M.ProcessHeight() //Process their Y Speed and height.
+				if(M)
+					if(istype(M,/mob/living/carbon/human))
+						M:handle_regular_status_updates()
+						if(M.client)
 							M:handle_regular_hud_updates()
-						if(M.ANIMATION_RUNNING)
-							M.dir = 2
-							if(M.danc)
-								M.danc.Update_Y()
+					if(M.ANIMATION_RUNNING)
+						M.dir = 2
+						if(M.danc)
+							M.danc.Update_Y()
 		mobs_process()
 			for(var/mob/M in Mobs)
 				CHECK_TICK()
@@ -136,15 +132,9 @@ mob
 	#endif
 
 	Del()
-
-		#if defined(GRAVDEBUG)
-		world << "[FONTCOLOR]removing [src] from heightmobs"
-		#endif
 		ghostize(2)
 		if(danc)
 			del danc
-		if(src in HeightMobs)
-			HeightMobs -= src
 		if(src in Mobs)
 			Mobs -= src
 		if(MyShadow)
