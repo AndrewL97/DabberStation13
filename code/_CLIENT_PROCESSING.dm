@@ -192,6 +192,7 @@ mob
 		return
 	if(src.mob.ANIMATION_RUNNING)
 		return
+	var/old_loc = mob.loc
 	glide_size = mob.glide_size
 
 	if(istype(src.mob, /mob/dead/observer))
@@ -298,7 +299,7 @@ mob
 				if(istype(M,/mob))
 					M.other_mobs = 1
 					spawn(0)
-						step(M,direct)
+						step(M,get_dir(M,old_loc))
 					spawn(1)
 						M.other_mobs = null
 
