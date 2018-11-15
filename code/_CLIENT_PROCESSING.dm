@@ -292,11 +292,9 @@ mob
 				step(src.mob, pick(cardinal))
 			else
 				. = ..()
-			if (locate(/obj/item/weapon/grab, src.mob))
-				var/list/L = src.mob.ret_grab()
-				var/mob/M = null
-				if (istype(L, /list))
-					M = L[1]
+			var/obj/item/weapon/grab/G = locate(/obj/item/weapon/grab) in mob
+			if (G)
+				var/mob/M = G.affecting
 				if(istype(M,/mob))
 					M.other_mobs = 1
 					spawn(0)
