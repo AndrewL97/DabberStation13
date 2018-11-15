@@ -345,7 +345,7 @@ obj
 				var/image/Image = a
 				var/icon/EE = new(Image.icon,Image.icon_state)
 				if(Image.color)
-					EE.Blend(Image.Color,ICON_ADD)
+					EE.Blend(Image.color,ICON_ADD)
 				PlayerIcon.Blend(EE,ICON_OVERLAY,Image.pixel_x+1,Image.pixel_y+1)
 				del EE
 
@@ -355,7 +355,7 @@ obj
 				var/image/Image = a
 				var/icon/EE = new(Image.icon,Image.icon_state)
 				if(Image.color)
-					EE.Blend(Image.Color,ICON_ADD)
+					EE.Blend(Image.color,ICON_ADD)
 				PlayerIcon.Blend(EE,ICON_OVERLAY,Image.pixel_x+1,Image.pixel_y+1)
 				del EE
 			/*
