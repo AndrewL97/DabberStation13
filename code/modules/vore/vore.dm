@@ -204,7 +204,7 @@ proc
 
 /obj/item/weapon/grab/attack(mob/M as mob, mob/user as mob)
 	if(M == src.assailant)
-		if(input(alert(assailant,"Are you sure you want to devour [affecting]?","Vore","Yes","No")) == "Yes")
+		if(alert(assailant,"Are you sure you want to devour [affecting]?","Vore","Yes","No") == "Yes")
 			if( iscarbon(src.affecting) )
 				//This is where it goes from a 0 to a 100.
 				var/mob/living/carbon/attacker = user
