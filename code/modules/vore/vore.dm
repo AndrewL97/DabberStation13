@@ -186,6 +186,7 @@ proc
 		set category = "Vore"
 		for(var/atom/movable/A in belly_contents)
 			A.loc = loc
+			belly_contents -= A
 
 //Client
 
