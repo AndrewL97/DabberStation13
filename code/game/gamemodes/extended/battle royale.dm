@@ -89,7 +89,8 @@ var/dropped = 0
 					used_to_be_in_storm = 1
 					src << 'stormenter.ogg'
 				if(frm_counter % 60 == 1)
-					TakeBruteDamage(2)
+					if(STORM.size != 128)
+						TakeBruteDamage(15)
 			else
 				if(used_to_be_in_storm)
 					used_to_be_in_storm = 0
@@ -104,7 +105,7 @@ turf
 var/obj/storm_overlay/STORM = null
 #define TIMER_TOTAL 1
 #define STORMSPEEDMULTIPLIER 0.125
-#define STORMMOVESPEED 18 //In frames now
+#define STORMMOVESPEED 12 //In frames now
 #define STORMMOVESFORSECS 25
 obj/storm_overlay
 	anchored = 1
@@ -117,7 +118,7 @@ obj/storm_overlay
 	density = 0
 	pixel_x = -2048+16
 	pixel_y = -2048+16
-	var/size = 128
+	var/size = 140
 	var/timer_left = TIMER_TOTAL
 	var/x_increment = 0
 	var/y_increment = 0
@@ -141,9 +142,9 @@ obj/storm_overlay
 			size -= world.tick_lag*STORMSPEEDMULTIPLIER
 			if((frm_counter % STORMMOVESPEED) == 1)
 				glide_size = 32 / (STORMMOVESPEED/6) * tick_lag_original
-				loc = locate(min(299,max(202,x+x_increment)),min(299,max(202,y+y_increment)),z)
-			if(size < 8)
-				size = 8
+				loc = locate(min(289,max(212,x+x_increment)),min(289,max(212,y+y_increment)),z)
+			if(size < 16)
+				size = 16
 			if(timer_left < -STORMMOVESFORSECS)
 				walk(src,0)
 				decrementing = 0
