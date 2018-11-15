@@ -102,9 +102,9 @@ turf
 				shading.icon_state = "storm" //easy to handle
 
 var/obj/storm_overlay/STORM = null
-#define TIMER_TOTAL 60
-#define STORMSPEEDMULTIPLIER 0.5
-#define STORMMOVESPEED 1.6
+#define TIMER_TOTAL 1
+#define STORMSPEEDMULTIPLIER 0.125
+#define STORMMOVESPEED 18 //In frames now
 #define STORMMOVESFORSECS 25
 obj/storm_overlay
 	anchored = 1
@@ -119,6 +119,8 @@ obj/storm_overlay
 	pixel_y = -2048+16
 	var/size = 128
 	var/timer_left = TIMER_TOTAL
+	var/x_increment = 0
+	var/y_increment = 0
 	var/decrementing = 0
 	ex_act()
 		return
@@ -127,16 +129,19 @@ obj/storm_overlay
 		var/matrix/M = matrix()
 		M.Scale(max(0,size/128))
 		transform = M
-		glide_size = 32 / STORMMOVESPEED * tick_lag_original
 	special_process()
 		timer_left -= world.tick_lag/10
 		updatestormsize()
 		if(timer_left < 0 && !decrementing)
 			world << 'storm.ogg'
-			walk_towards(src,locate(rand(202,299),rand(202,299),1),STORMMOVESPEED,0)
+			x_increment = rand(-1,1)
+			y_increment = rand(-1,1)
 			decrementing = 1
 		if(decrementing)
 			size -= world.tick_lag*STORMSPEEDMULTIPLIER
+			if((frm_counter % STORMMOVESPEED) == 1)
+				glide_size = 32 / (STORMMOVESPEED/6) * tick_lag_original
+				loc = locate(min(299,max(202,x+x_increment)),min(299,max(202,y+y_increment)),z)
 			if(size < 8)
 				size = 8
 			if(timer_left < -STORMMOVESFORSECS)
