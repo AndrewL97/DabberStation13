@@ -64,7 +64,7 @@
 			if((src.lying || src.resting) != src.old_lying)
 				old_lying = lying || resting
 			if(current_angle_speed > 0)
-				var/check = current_angle > 80 && current_angle < 100 && current_angle_speed < 2
+				var/check = current_angle > 60 && current_angle < 120 && current_angle_speed < 2.5
 				current_angle_speed += max(-world.tick_lag,min(world.tick_lag,((check-current_angle_speed)/100)))
 				if(check)
 					current_angle += (90-current_angle)/10
