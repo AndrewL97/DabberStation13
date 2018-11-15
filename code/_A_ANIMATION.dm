@@ -344,6 +344,8 @@ obj
 			for(var/a in owner.underlays) //big brain, i could optimize this but I'm too lazy it works though so fuck you -somebody
 				var/image/Image = a
 				var/icon/EE = new(Image.icon,Image.icon_state)
+				if(Image.color)
+					EE.Blend(Image.Color,ICON_ADD)
 				PlayerIcon.Blend(EE,ICON_OVERLAY,Image.pixel_x+1,Image.pixel_y+1)
 				del EE
 
@@ -352,6 +354,8 @@ obj
 			for(var/a in owner.overlays)
 				var/image/Image = a
 				var/icon/EE = new(Image.icon,Image.icon_state)
+				if(Image.color)
+					EE.Blend(Image.Color,ICON_ADD)
 				PlayerIcon.Blend(EE,ICON_OVERLAY,Image.pixel_x+1,Image.pixel_y+1)
 				del EE
 			/*
