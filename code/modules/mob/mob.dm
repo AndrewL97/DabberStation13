@@ -264,10 +264,6 @@
 	return null
 
 /obj/item/weapon/grab/proc/synch()
-	if (src.assailant.r_hand == src)
-		src.hud1.screen_loc = ui_rhand
-	else
-		src.hud1.screen_loc = ui_lhand
 	return
 
 /obj/item/weapon/grab/process()
@@ -278,88 +274,13 @@
 		//SN src = null
 		del(src)
 		return
-	if (src.assailant.client)
-		src.assailant.client.screen -= src.hud1
-		src.assailant.client.screen += src.hud1
 	if (src.assailant.pulling == src.affecting)
 		src.assailant.pulling = null
-	if (src.state <= 2)
-		src.allow_upgrade = 1
-		if ((src.assailant.l_hand && src.assailant.l_hand != src && istype(src.assailant.l_hand, /obj/item/weapon/grab)))
-			var/obj/item/weapon/grab/G = src.assailant.l_hand
-			if (G.affecting != src.affecting)
-				src.allow_upgrade = 0
-		if ((src.assailant.r_hand && src.assailant.r_hand != src && istype(src.assailant.r_hand, /obj/item/weapon/grab)))
-			var/obj/item/weapon/grab/G = src.assailant.r_hand
-			if (G.affecting != src.affecting)
-				src.allow_upgrade = 0
-		if (src.state == 2)
-			var/h = src.affecting.hand
-			src.affecting.hand = 0
-			src.affecting.drop_item()
-			src.affecting.hand = 1
-			src.affecting.drop_item()
-			src.affecting.hand = h
-			for(var/obj/item/weapon/grab/G in src.affecting.grabbed_by)
-				if (G.state == 2)
-					src.allow_upgrade = 0
-				//Foreach goto(341)
-		if (src.allow_upgrade)
-			src.hud1.icon_state = "reinforce"
-		else
-			src.hud1.icon_state = "!reinforce"
-	else
-		if (!( src.affecting.buckled ))
-			src.affecting.loc = src.assailant.loc
-	if ((src.killing && src.state == 3))
-		src.affecting.stunned = max(5, src.affecting.stunned)
-		src.affecting.paralysis = max(3, src.affecting.paralysis)
-		src.affecting.losebreath = min(src.affecting.losebreath + 2, 3)
-	return
-
-/obj/item/weapon/grab/proc/s_click(obj/screen/S as obj)
-	if (src.assailant.next_move > world.time)
-		return
-	if ((!( src.assailant.canmove ) || src.assailant.lying))
-		//SN src = null
-		del(src)
-		return
-	switch(S.id)
-		if(1.0)
-			if (src.state >= 3)
-				if (!( src.killing ))
-					for(var/mob/O in viewers(src.assailant, null))
-						O.show_message(text("\red [] has temporarily tightened his grip on []!", src.assailant, src.affecting), 1)
-						//Foreach goto(97)
-					src.assailant.next_move = world.time + 10
-					src.affecting.stunned = max(2, src.affecting.stunned)
-					src.affecting.paralysis = max(1, src.affecting.paralysis)
-					src.affecting.losebreath = min(src.affecting.losebreath + 1, 3)
-					src.last_suffocate = world.time
-					flick("disarm/killf", S)
-			else
-				src.state += 1
-		else
-	return
-
-
-/obj/item/weapon/grab/New()
-	..()
-	src.hud1 = new /obj/screen/grab( src )
-	src.hud1.icon_state = "reinforce"
-	src.hud1.name = "Reinforce Grab"
-	src.hud1.id = 1
-	src.hud1.master = src
 	return
 
 
 /obj/item/weapon/grab/dropped()
 	del(src)
-	return
-
-/obj/item/weapon/grab/Del()
-	del(src.hud1)
-	..()
 	return
 
 /obj/screen/zone_sel/MouseDown(location, control,params)		//(location, icon_x, icon_y)
@@ -512,10 +433,6 @@
 	overlays = null
 	overlays += image("icon" = 'zone_sel.dmi', "icon_state" = text("[]", selecting))
 
-	return
-
-/obj/screen/grab/Click()
-	src.master:s_click(src)
 	return
 
 /obj/screen/grab/attack_hand()

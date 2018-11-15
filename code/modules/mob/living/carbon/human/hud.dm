@@ -342,23 +342,13 @@ mob
 			if ((!( usr.stat ) && usr.canmove && !( usr.restrained() )))
 				for(var/obj/O in usr.requests)
 					del(O)
-				for(var/obj/item/weapon/grab/G in usr.grabbed_by)
-					if (G.state == 1)
-						del(G)
-					else
-						if (G.state == 2)
-							if (prob(25))
-								for(var/mob/O in viewers(usr, null))
-									O.show_message(text("\red [] has broken free of []'s grip!", usr, G.assailant), 1)
-								del(G)
-						else
-							if (G.state == 3)
-								if (prob(5))
-									for(var/mob/O in viewers(usr, null))
-										O.show_message(text("\red [] has broken free of []'s headlock!", usr, G.assailant), 1)
-									del(G)
 				for(var/mob/O in viewers(usr, null))
 					O.show_message(text("\red <B>[] resists!</B>", usr), 1)
+				for(var/obj/item/weapon/grab/G in usr.grabbed_by)
+					if (prob(25))
+						for(var/mob/O in viewers(usr, null))
+							O.show_message(text("\red [] has broken free of []'s grip!", usr, G.assailant), 1)
+						del(G)
 
 			if(usr:handcuffed && usr:canmove && (usr.last_special <= world.time))
 				usr.next_move = world.time + 100

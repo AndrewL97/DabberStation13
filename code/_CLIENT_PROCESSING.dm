@@ -229,34 +229,7 @@ mob
 
 	if(round(mob.current_angle_speed) != 0) //players whose tilted cannot move
 		return
-	if (locate(/obj/item/weapon/grab, locate(/obj/item/weapon/grab, src.mob.grabbed_by.len)))
-		var/list/grabbing = list(  )
-		if (istype(src.mob.l_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = src.mob.l_hand
-			grabbing += G.affecting
-		if (istype(src.mob.r_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = src.mob.r_hand
-			grabbing += G.affecting
-		for(var/obj/item/weapon/grab/G in src.mob.grabbed_by)
-			if (G.state == 1)
-				if (!( grabbing.Find(G.assailant) ))
-					del(G)
-			else
-				if (G.state == 2)
-					src.move_delay = world.time + 10
-					if (prob(25))
-						mob.visible_message("\red [mob] has broken free of [G.assailant]'s grip!")
-						del(G)
-					else
-						return
-				else
-					if (G.state == 3)
-						src.move_delay = world.time + 10
-						if (prob(5))
-							mob.visible_message("\red [mob] has broken free of [G.assailant]'s headlock!")
-							del(G)
-						else
-							return
+
 
 	if (src.mob.canmove)
 
@@ -315,40 +288,22 @@ mob
 			if(mob.MyShadow)
 				mob.MyShadow.glide_size = mob.glide_size
 
-			if (locate(/obj/item/weapon/grab, src.mob))
-				src.move_delay = max(src.move_delay, world.time + 7)
-
-				var/list/L = src.mob.ret_grab()
-				if (istype(L, /list))
-					if (L.len == 2)
-						L -= src.mob
-						var/mob/M = L[1]
-						if ((get_dist(src.mob, M) <= 1 || M.loc == src.mob.loc))
-							var/turf/T = src.mob.loc
-							. = ..()
-							if (isturf(M.loc))
-								var/diag = get_dir(src.mob, M)
-								if ((diag - 1) & diag)
-								else
-									diag = null
-								if ((get_dist(src.mob, M) > 1 || diag))
-									step(M, get_dir(M.loc, T))
-					else
-						for(var/mob/M in L)
-							M.other_mobs = 1
-						for(var/mob/M in L)
-							spawn( 0 )
-								step(M, direct)
-								return
-							spawn( 1 )
-								M.other_mobs = null
-								return
-
+			if(src.mob.confused)
+				step(src.mob, pick(cardinal))
 			else
-				if(src.mob.confused)
-					step(src.mob, pick(cardinal))
-				else
-					. = ..()
+				. = ..()
+			if (locate(/obj/item/weapon/grab, src.mob))
+				var/list/L = src.mob.ret_grab()
+				var/mob/M = null
+				if (istype(L, /list))
+					M = L[1]
+				if(istype(M,/mob))
+					M.other_mobs = 1
+					spawn(0)
+						step(M,direct)
+					spawn(1)
+						M.other_mobs = null
+
 			src.moving = null
 	if(mob)
 		if(mob.MyShadow)

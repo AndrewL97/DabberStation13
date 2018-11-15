@@ -1101,12 +1101,13 @@
 			else
 				M.r_hand = G
 			G.layer = 20
+			G.plane = HUD_PLANE
 			G.affecting = src
 			src.grabbed_by += G
 			G.synch()
 			playsound(src, 'thudswoosh.ogg', 50, 1, -1)
 			for(var/mob/O in viewers(src, null))
-				O.show_message(text("\red [] has grabbed [] passively!", M, src), 1)
+				O.show_message("\red [M] has grabbed [src]!", 1)
 		else
 			if (M.a_intent == "hurt" && !(M.gloves && M.gloves.elecgen == 1))
 				if (src.w_uniform)

@@ -203,32 +203,29 @@ proc
 					return 1
 
 /obj/item/weapon/grab/attack(mob/M as mob, mob/user as mob)
-	if (M == src.affecting)
-		s_click(src.hud1)
-		return
-
 	if(M == src.assailant)
-		if( iscarbon(src.affecting) )
-			//This is where it goes from a 0 to a 100.
-			var/mob/living/carbon/attacker = user
+		if(input(alert(assailant,"Are you sure you want to devour [affecting]?","Vore","Yes","No")) == "Yes")
+			if( iscarbon(src.affecting) )
+				//This is where it goes from a 0 to a 100.
+				var/mob/living/carbon/attacker = user
 
-			/*for(var/mob/N in viewers(user, null))
-				if(N.client)
-					N.show_message(text("\red <B>[user] is attempting to devour [src.affecting]!</B>"), 1)
+				/*for(var/mob/N in viewers(user, null))
+					if(N.client)
+						N.show_message(text("\red <B>[user] is attempting to devour [src.affecting]!</B>"), 1)
 
-			if(!do_mob(user, src.affecting)) return*/
+				if(!do_mob(user, src.affecting)) return*/
 
-			for(var/mob/N in viewers(user, null))
-				if(N.client)
-					N.show_message("\green <B>[user] shoves [src.affecting] into their mouth, and swallows them whole!</B>", 1)
+				for(var/mob/N in viewers(user, null))
+					if(N.client)
+						N.show_message("\green <B>[user] shoves [src.affecting] into their mouth, and swallows them whole!</B>", 1)
 
-			var/S = "sound/vore/swallow.ogg" //grossest sounds ever 2018 you wont believe it
-			playsound(assailant, S, 100, 0, 3, 0) //Slurp!
-			affecting << sound(S)
+				var/S = "sound/vore/swallow.ogg" //grossest sounds ever 2018 you wont believe it
+				playsound(assailant, S, 100, 0, 3, 0) //Slurp!
+				affecting << sound(S)
 
-			src.affecting.loc = user
-			attacker.belly_contents.Add(src.affecting)
-			del(src)
+				src.affecting.loc = user
+				attacker.belly_contents.Add(src.affecting)
+				del(src)
 
 //get all mobs in stomach and then do BS
 

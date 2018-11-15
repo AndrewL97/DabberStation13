@@ -247,9 +247,8 @@
 
 /proc/do_after(mob/M as mob, time as num)
 	var/turf/T = M.loc
-	var/holding = M.equipped()
 	sleep(time)
-	if ((M.loc == T && M.equipped() == holding && !( M.stat )))
+	if ((M.loc == T && !( M.stat )))
 		return 1
 	else
 		return 0
