@@ -25,7 +25,8 @@ var/list/admin_verbs = list(
 /client/proc/StationName,
 /client/proc/Revive,
 /client/proc/Fling,
-/client/proc/Toggle_Respawn
+/client/proc/Toggle_Respawn,
+/client/proc/Set_FPS
 )
 var/ban_list = list()
 var/list/admin_clients = list()

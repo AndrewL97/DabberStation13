@@ -72,6 +72,10 @@ var
 	roboticsMax = 0
 	hydroponicsMax = 0
 
+world
+	tick_lag = 1/6
+client
+	tick_lag = 1/6
 obj
 	item
 		plane = ITEM_PLANE
@@ -92,7 +96,6 @@ var
 
 var/tick_lag_original = 0
 world
-	fps = 60
 	hub = "Exadv1.spacestation13"
 	hub_password = "kMZy3U5jJHSiBQjr"
 	New()
@@ -196,7 +199,3 @@ obj
 		icon_state = "shadow"
 		ex_act()
 			return
-
-
-client
-	fps = 60
