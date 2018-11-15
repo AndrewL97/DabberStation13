@@ -102,7 +102,7 @@ turf
 				shading.icon_state = "storm" //easy to handle
 
 var/obj/storm_overlay/STORM = null
-#define TIMER_TOTAL 120
+#define TIMER_TOTAL 60
 #define STORMSPEEDMULTIPLIER 0.5
 #define STORMMOVESPEED 1.6
 #define STORMMOVESFORSECS 25
@@ -137,9 +137,8 @@ obj/storm_overlay
 			decrementing = 1
 		if(decrementing)
 			size -= world.tick_lag*STORMSPEEDMULTIPLIER
-			if(size < 16)
-				size = 16
-				timer_left = -STORMMOVESFORSECS-1
+			if(size < 8)
+				size = 8
 			if(timer_left < -STORMMOVESFORSECS)
 				walk(src,0)
 				decrementing = 0
