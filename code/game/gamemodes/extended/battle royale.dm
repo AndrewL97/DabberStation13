@@ -36,7 +36,7 @@ var/client/lastplr = null
 
 /datum/game_mode/battle_royale/check_finished()
 	if(!(world.port in PORTS_NOT_ALLOWED))
-		if(plrs <= 1)
+		if(alive_player_count <= 1)
 			if(lastplr)
 				world << "<b><font size=6><font color='#00FFFF'>[lastplr.key] won!"
 			world << 'victory.ogg'
@@ -45,7 +45,7 @@ var/client/lastplr = null
 			world.fps = 60
 			return 1
 	else
-		if(plrs <= 0)
+		if(alive_player_count <= 0)
 			world << "<b><font size=6><font color='#00FFFF'>Victory Royale!"
 			world << 'victory.ogg'
 			world.fps = 6 //slow mo effect
@@ -156,7 +156,7 @@ obj/storm_overlay
 			if(timer_left < -STORMMOVESFORSECS)
 				walk(src,0)
 				decrementing = 0
-				timer_left = TIMER_TOTAL*(1+(round(plrs/4)))
+				timer_left = TIMER_TOTAL*(1+(round(alive_player_count/4)))
 	New()
 		..()
 		special_processing += src

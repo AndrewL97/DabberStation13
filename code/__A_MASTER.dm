@@ -39,7 +39,7 @@ client
 		..()
 
 
-var/plrs = 1
+var/alive_player_count = 1
 
 obj
 	proc/special_process() //special_processing
@@ -219,14 +219,14 @@ datum/controller/game_controller
 			lighting.loop()
 		particle_process()
 		do_gravity_loop()
-		plrs = 0
+		alive_player_count = 0
 		for(var/client/i in clients)
 			SLEEP_IF_TOO_MUCH
 			i.InactivityLoop()
 			i.ProcessClient()
 			if(!istype(i.mob,/mob/dead))
 				if(i.mob.health > 0)
-					plrs = plrs + 1
+					alive_player_count = alive_player_count + 1
 					lastplr = i
 		CPU_CHECK()
 		spawn(world.tick_lag)

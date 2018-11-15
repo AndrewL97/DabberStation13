@@ -50,7 +50,7 @@
 		return 0
 
 //	log_game("Number of traitors: [num_traitors]")
-	message_admins("Players counted: [plrs]  Number of traitors chosen: [num_traitors]")
+	message_admins("Players counted: [alive_player_count]  Number of traitors chosen: [num_traitors]")
 
 	for(var/j = 0, j < num_traitors, j++)
 		var/datum/mind/traitor = pick(possible_traitors)

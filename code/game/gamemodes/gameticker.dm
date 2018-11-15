@@ -136,7 +136,7 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 					call("ByondPOST.dll", "send_post_request")("[WebhookURL]", " { \"content\" : \"Round on **[world.name]** ended. Rebooting.\" } ", "Content-Type: application/json")
 			spawn(50)
 				mode.ending()
-				world << sound('titlesong.ogg',channel=LOBBY_CHANNEL,volume=100, repeat = 1)
+				world << sound('battletoads.mid',channel=LOBBY_CHANNEL,volume=100, repeat = 1)
 				world << "\blue <B>Restarting in 10 seconds</B>"
 
 				sleep(100)
