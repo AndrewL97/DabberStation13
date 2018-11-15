@@ -110,6 +110,15 @@ client
 		set name = "(ADMIN) Reboot Game"
 		message_admins("Restarting game, started by [key]")
 		world.Reboot()
+	proc/Set_FPS(fpsN as num)
+		set category = "Admin"
+		set name = "(ADMIN) Set Server FPS"
+		if(fpsN)
+			fps = round(fpsN)
+			if(fpsN >= 60)
+				world.tick_lag = tick_lag_original
+			else
+				world.fps = fpsN
 	proc/Gamemode()
 		set category = "Admin"
 		set name = "(ADMIN) Change Gamemode"
