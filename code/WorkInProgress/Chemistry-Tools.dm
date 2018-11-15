@@ -1109,11 +1109,6 @@
 	name = "roburger"
 	desc = "The lettuce is the only organic component. Beep."
 	icon_state = "roburger"
-	New()
-		var/datum/reagents/R = new/datum/reagents(5)
-		reagents = R
-		R.my_atom = src
-		R.add_reagent(/datum/reagent/nanites, 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/monkeymeat
 	name = "meat"

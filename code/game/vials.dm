@@ -24,12 +24,6 @@
 	force = 3.0
 	w_class = 1.0
 
-/obj/item/weapon/vial/green
-	name = "glass vial"
-	icon = 'chemical.dmi'
-	desc = "a glass vial filled with a strange green liquid"
-	icon_state = "vialgreen"
-	item_state = "vialgreen"
 
 /obj/item/weapon/vial/blue
 	name = "glass vial"
@@ -55,51 +49,6 @@
 /obj/item/weapon/vial/proc/drink(user)
 	return
 ///////////////////////////////////////////////////////***
-
-/////////////////////////////////////////////////////green
-/obj/item/weapon/vial/green/drink(user)
-	var/A = src
-	src = null
-	del(A)
-	switch(pick(1,2,3))
-		if(1)
-			spawn(300)
-				user:gib()
-		if(2)
-			user:weakened += 5
-			user:contract_disease(new /datum/disease/gbs)
-		if(3)
-			spawn(200)
-				user:contract_disease(new /datum/disease/gbs)
-/obj/item/weapon/vial/green/shatter()
-	var/A = src
-	var/atom/sourceloc = get_turf(src.loc)
-	src = null
-	del(A)
-	var/obj/overlay/O = new /obj/overlay( sourceloc )
-	var/obj/overlay/O2 = new /obj/overlay( sourceloc )
-	O.name = "green liquid"
-	O.density = 0
-	O.anchored = 1
-	O.icon = 'effects.dmi'
-	O.icon_state = "greenshatter"
-	O2.name = "broken bits of glass"
-	O2.density = 0
-	O2.anchored = 1
-	O2.icon = 'objects.dmi'
-	O2.icon_state = "shards"
-	for(var/mob/living/carbon/human/H in view(5, sourceloc))
-		if(!H.virus) H.contract_disease(new /datum/disease/gbs)
-	var/i
-	for(i=0, i<5, i++)
-		for(var/mob/living/carbon/human/H in view(5, sourceloc))
-			if(!H.virus) H.contract_disease(new /datum/disease/gbs)
-		sleep(20)
-	flick("greenshatter2",O)
-	O.icon_state = "nothing"
-	sleep(5)
-	del(O)
-/////////////////////////////////////////////////////green
 
 /////////////////////////////////////////////////////blue
 /obj/item/weapon/vial/blue/drink(user)

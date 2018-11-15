@@ -45,5 +45,3 @@
 				affected_mob << "\red Your throat feels sore."
 			if(prob(1))
 				affected_mob << "\red Mucous runs down the back of your throat."
-			if(prob(1) && prob(50))
-				affected_mob.contract_disease(new /datum/disease/flu)

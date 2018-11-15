@@ -11,7 +11,6 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 	var/hide_mode = 0
 	var/datum/game_mode/mode = null
 	var/event_time = null
-	var/event = 0
 
 	var/list/datum/mind/minds = list()
 
@@ -22,9 +21,6 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 /datum/controller/gameticker/proc/pregame()
 	current_state = GAME_STATE_SETTING_UP
 	spawn setup()
-
-/datum/game_mode
-	var/events_enabled = 0
 
 
 /datum/game_mode/proc/ending()
@@ -94,11 +90,6 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 		kick_inactive_players = 1
 	if(mode.sandbox_allowed)
 		sandbox = 1
-	if(mode.events_enabled) //src.mob.ghostize()
-		spawn (3000)
-			start_events()
-		spawn ((18000+rand(3000)))
-			event()
 	spawn master_controller.start_processing()
 
 /datum/controller/gameticker

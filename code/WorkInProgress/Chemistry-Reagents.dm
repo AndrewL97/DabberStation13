@@ -842,20 +842,6 @@ datum
 				holder.remove_reagent(src.type, 0.2)
 				return
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		nanites
-			name = "Nanomachines"
-			//DEPRECATED id = "nanites"
-			description = "Microscopic construction robots."
-			reagent_state = LIQUID
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
-				src = null
-				if( (prob(10) && method==TOUCH) || method==INGEST)
-					if(!M.virus)
-						M.virus = new /datum/disease/robotic_transformation
-						M.virus.affected_mob = M
-
 //foam precursor
 
 		fluorosurfactant

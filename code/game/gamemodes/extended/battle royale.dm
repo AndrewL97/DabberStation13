@@ -1,7 +1,6 @@
 /datum/game_mode/battle_royale
 	name = "Dabber Station 13 Battle Royale"
 	config_tag = "fortnite"
-	events_enabled = 0
 	sandbox_allowed = 0
 	do_kick = 1
 
