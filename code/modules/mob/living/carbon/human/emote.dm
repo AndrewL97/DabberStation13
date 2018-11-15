@@ -388,14 +388,9 @@
 					message = "<B>[src]</B> sadly can't find anybody to give daps to, and daps \himself. Shameful."
 
 		if ("scream")
-			if (!muzzled)
-				message = "<B>[src]</B> screams!"
-				m_type = 2
-				playsound(src, 'galvin1.ogg', 100, 1, 3)
-			else
-				message = "<B>[src]</B> makes a very loud noise."
-				m_type = 2
-				playsound(src, 'galvin1.ogg', 100, 1, 3)
+			message = "<B>[src]</B> screams!"
+			m_type = 2
+			playsound(src, "sound/galvin[rand(1,3)].ogg", 100, 1, 3, (gender == FEMALE)/4)
 		else
 			src << "\blue Unusable emote '[act]'."
 

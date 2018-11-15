@@ -137,9 +137,9 @@ var/kick_inactive_players = 0 //do_kick on mode handles.
 			spawn(50)
 				mode.ending()
 				world << sound('battletoads.mid',channel=LOBBY_CHANNEL,volume=100, repeat = 1)
-				world << "\blue <B>Restarting in 10 seconds</B>"
+				world << "\blue <B>Restarting in 30 seconds</B>"
 
-				sleep(100)
+				sleep(300)
 				world.Reboot()
 
 		return 1

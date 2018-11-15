@@ -126,7 +126,7 @@ obj/storm_overlay
 	density = 0
 	pixel_x = -2048+16
 	pixel_y = -2048+16
-	var/size = 140
+	var/size = 128
 	var/timer_left = TIMER_TOTAL
 	var/x_increment = 0
 	var/y_increment = 0
