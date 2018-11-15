@@ -32,10 +32,6 @@
 		else
 	return
 
-/obj/grille/blob_act()
-	src.health--
-	src.healthcheck()
-
 /obj/grille/bullet_act()
 	src.health -= 2
 	healthcheck()

@@ -126,12 +126,6 @@
 /obj/machinery/portable_atmospherics/canister/return_air()
 	return air_contents
 
-/obj/machinery/portable_atmospherics/canister/blob_act()
-	src.health -= 1
-	healthcheck()
-	return
-
-
 /obj/machinery/portable_atmospherics/canister/meteorhit(var/obj/O as obj)
 	src.health = 0
 	healthcheck()

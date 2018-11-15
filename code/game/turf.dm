@@ -264,10 +264,6 @@ proc/ReplaceTurfWithRWall(turf/G)
 		else
 	return
 
-/turf/simulated/wall/blob_act()
-	if(prob(20))
-		dismantle_wall()
-
 /turf/simulated/wall/attack_paw(mob/user as mob)
 	if ((user.mutations & 8))
 		if (prob(40))
@@ -458,9 +454,6 @@ proc/ReplaceTurfWithRWall(turf/G)
 			if (prob(50))
 				src.break_tile()
 				src.hotspot_expose(1000,CELL_VOLUME)
-	return
-
-/turf/simulated/floor/blob_act()
 	return
 
 turf/simulated/floor/proc/update_icon()

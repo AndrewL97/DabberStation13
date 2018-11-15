@@ -113,9 +113,6 @@
 		flick("door_deny", src)
 	return
 
-/obj/machinery/door/blob_act()
-	if(prob(20))
-		del(src)
 
 /obj/machinery/door/ex_act(severity)
 	switch(severity)

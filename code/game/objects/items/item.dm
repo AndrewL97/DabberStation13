@@ -36,9 +36,6 @@
 /obj/item/weapon/dummy/ex_act()
 	return
 
-/obj/item/weapon/dummy/blob_act()
-	return
-
 /obj/item/ex_act(severity)
 	switch(severity)
 		if(1.0)
@@ -54,10 +51,6 @@
 				return
 		else
 	return
-
-/obj/item/blob_act()
-	return
-
 
 /obj/item/verb/move_to_top()
 	set src in oview(1)

@@ -26,12 +26,6 @@ var
 	DIFFMUT = 0
 
 	skipupdate = 0
-	///////////////
-	eventchance = 1 //% per 2 mins
-	event = 0
-	hadevent = 0
-	blobevent = 0
-	///////////////
 
 	diary = null
 	station_name = null

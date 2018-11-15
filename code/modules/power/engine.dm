@@ -29,6 +29,3 @@
 				return
 		else
 	return
-
-/turf/simulated/floor/engine/blob_act()
-	return

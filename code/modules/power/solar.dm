@@ -16,10 +16,6 @@
 	src.healthcheck()
 	return
 
-/obj/machinery/power/solar/blob_act()
-	src.health--
-	src.healthcheck()
-	return
 
 /obj/machinery/power/solar/proc/healthcheck()
 	if (src.health <= 0)
@@ -105,11 +101,6 @@
 			if (prob(25))
 				broken()
 	return
-
-/obj/machinery/power/solar/blob_act()
-	if(prob(50))
-		broken()
-		src.density = 0
 
 /obj/machinery/power/solar_control/New()
 	..()
@@ -299,8 +290,3 @@ var/list/SMESes = list()
 			if (prob(25))
 				broken()
 	return
-
-/obj/machinery/power/solar_control/blob_act()
-	if (prob(50))
-		broken()
-		src.density = 0

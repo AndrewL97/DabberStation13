@@ -62,13 +62,6 @@
 	src.viewalerts = 1
 	src << browse(cssStyleSheetDab13 + dat, "window=robotalerts&can_close=0")
 
-/mob/living/silicon/robot/blob_act()
-	if (src.stat != 2)
-		src.TakeBruteDamage(30)
-		src.updatehealth()
-		return 1
-	return 0
-
 /mob/living/silicon/robot/Stat()
 	..()
 	statpanel("Status")

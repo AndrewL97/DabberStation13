@@ -447,12 +447,6 @@
 	return
 
 
-/obj/machinery/dna_scannernew/blob_act()
-	if(prob(50))
-		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
-		del(src)
-
 /obj/machinery/scan_consolenew/ex_act(severity)
 
 	switch(severity)
@@ -468,10 +462,6 @@
 		else
 	return
 
-/obj/machinery/scan_consolenew/blob_act()
-
-	if(prob(50))
-		del(src)
 
 /obj/machinery/scan_consolenew/power_change()
 	if(stat & BROKEN)

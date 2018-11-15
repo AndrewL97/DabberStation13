@@ -108,11 +108,6 @@ vy = v * sin(angle)
 		A.ex_act(severity)
 	del(src)
 
-/obj/machinery/vehicle/blob_act()
-	for(var/atom/movable/A as mob|obj in src)
-		A.loc = src.loc
-	del(src)
-
 /obj/machinery/vehicle/relaymove(mob/user as mob, direction)
 	if (user.stat)
 		return

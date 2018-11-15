@@ -470,11 +470,6 @@
 	src.explode()
 	return
 
-/obj/machinery/bot/medbot/blob_act()
-	if(prob(25))
-		src.explode()
-	return
-
 /obj/machinery/bot/medbot/proc/explode()
 	src.on = 0
 	for(var/mob/O in hearers(src, null))

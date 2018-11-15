@@ -896,8 +896,6 @@
 /atom/proc/ex_act()
 	return
 
-/atom/proc/blob_act()
-	return
 /obj/item/weapon/mousetrap/examine()
 	set src in oview(12)
 	..()

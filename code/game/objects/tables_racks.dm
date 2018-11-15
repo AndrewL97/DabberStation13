@@ -14,14 +14,6 @@
 		else
 	return
 
-/obj/rack/blob_act()
-	if(prob(50))
-		del(src)
-		return
-	else if(prob(50))
-		src.icon_state = "rackbroken"
-		src.density = 0
-		return
 
 /obj/rack/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(air_group || (height==0)) return 1

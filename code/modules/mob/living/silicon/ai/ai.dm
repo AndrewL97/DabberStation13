@@ -48,12 +48,6 @@
 	user.reset_view(src.current)
 	return 1
 
-/mob/living/silicon/ai/blob_act()
-	if (src.stat != 2)
-		src.TakeBruteDamage(30)
-		src.updatehealth()
-		return 1
-	return 0
 
 /mob/living/silicon/ai/restrained()
 	return 0

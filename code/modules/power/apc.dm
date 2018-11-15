@@ -864,10 +864,6 @@
 				set_broken()
 	return
 
-/obj/machinery/power/apc/blob_act()
-	if (prob(50))
-		set_broken()
-
 
 /obj/machinery/power/apc/proc/set_broken()
 	stat |= BROKEN

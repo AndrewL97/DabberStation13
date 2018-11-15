@@ -20,13 +20,6 @@
 				return
 	return
 
-/obj/window/blob_act()
-	if(prob(50))
-		new /obj/item/weapon/shard( src.loc )
-		if(reinf) new /obj/item/weapon/rods( src.loc)
-		density = 0
-		del(src)
-
 /obj/window/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
 	if(mover)
 		if(!mover.density)

@@ -47,10 +47,6 @@
 		prisonsecuritywarp += src.loc
 		del(src)
 
-	if (name == "blobstart")
-		blobstart += src.loc
-		del(src)
-
 	return 1
 
 /obj/landmark/start/New()

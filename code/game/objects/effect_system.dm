@@ -696,25 +696,13 @@ steam.start() -- spawns the effect
 	ex_act(severity)
 		del(src)
 
-	blob_act()
-		del(src)
-
 
 	attack_paw(var/mob/user)
 		attack_hand(user)
 		return
 
 	attack_hand(var/mob/user)
-		if (user.mutations & 8 || (prob(75 - metal*25)))
-			user << "\blue You smash through the metal foam wall."
-			for(var/mob/O in oviewers(user))
-				if ((O.client && !( O.blinded )))
-					O << "\red [user] smashes through the foamed metal."
-
-			del(src)
-		else
-			user << "\blue You hit the metal foam but bounce off it."
-		return
+		del(src)
 
 
 	attackby(var/obj/item/I, var/mob/user)

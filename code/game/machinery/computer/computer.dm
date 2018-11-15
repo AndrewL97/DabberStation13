@@ -77,13 +77,6 @@ Pod/Blast Doors computer
 		else
 	return
 
-/obj/machinery/computer/blob_act()
-	if (prob(50))
-		for(var/x in src.verbs)
-			src.verbs -= x
-		set_broken()
-		src.density = 0
-
 
 /obj/machinery/computer/power_change()
 	if(!istype(src,/obj/machinery/computer/security/telescreen))

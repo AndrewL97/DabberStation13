@@ -101,12 +101,6 @@
 				del(src)
 
 
-// this should probably use dump_contents()
-/obj/closet/blob_act()
-	if (prob(50))
-		for(var/atom/movable/A as mob|obj in src)
-			A.loc = src.loc
-		del(src)
 
 /obj/closet/meteorhit(obj/O as obj)
 	if (O.icon_state == "flaming")
