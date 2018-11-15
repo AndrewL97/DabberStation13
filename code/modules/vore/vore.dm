@@ -196,6 +196,9 @@ proc
 		vore_sound_handler()
 			amb_sound_vore.volume = 0
 			if(mob)
+				if(mob.belly_mode == NOISY)
+					amb_sound_vore.volume = 100
+					return 1
 				if(istype(mob.loc,/mob))
 					amb_sound_vore.volume = 100
 					return 1

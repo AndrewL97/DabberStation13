@@ -62,8 +62,8 @@
 #define T20C 293.15					// 20degC
 #define TCMB 2.7					// -270.3degC
 
-#define TANK_LEAK_PRESSURE		(2000.*ONE_ATMOSPHERE)	// Tank starts leaking
-#define TANK_RUPTURE_PRESSURE	(3000.*ONE_ATMOSPHERE) // Tank spills all contents into atmosphere
+#define TANK_LEAK_PRESSURE		(3000.*ONE_ATMOSPHERE)	// Tank starts leaking
+#define TANK_RUPTURE_PRESSURE	(3050.*ONE_ATMOSPHERE) // Tank spills all contents into atmosphere
 
 #define TANK_FRAGMENT_PRESSURE	(3100.*ONE_ATMOSPHERE) // Boom 3x3 base explosion
 #define TANK_FRAGMENT_SCALE	    (10.*ONE_ATMOSPHERE) // +1 for each SCALE kPa aboe threshold
