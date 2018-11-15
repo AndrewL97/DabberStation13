@@ -175,6 +175,8 @@ mob
 					S.loc = loc
 				ySpeed = ySpeed + (27/256)
 	proc/ProcessHeight()
+		if(!istype(src,/mob/living/carbon))
+			return
 		if(!MyShadow)
 			MyShadow = new
 			MyShadow.icon = icon
