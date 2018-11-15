@@ -1298,7 +1298,7 @@
 	src.bruteloss = 0
 	src.fireloss = 0
 	for(var/datum/organ/external/O in L)
-		src.bruteloss += O.brute_dam
+		src.TakeBruteDamage(O.brute_dam)
 		src.fireloss += O.burn_dam
 	return
 
@@ -1319,7 +1319,7 @@
 	src.fireloss = 0
 
 	for (var/datum/organ/external/O in L)
-		src.bruteloss += O.brute_dam
+		src.TakeBruteDamage(O.brute_dam)
 		src.fireloss += O.burn_dam
 
 		var/icon/DI = new /icon('dam_human.dmi', O.damage_state)			// the damage icon for whole human

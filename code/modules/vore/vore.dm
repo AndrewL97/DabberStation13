@@ -213,12 +213,6 @@ proc
 				//This is where it goes from a 0 to a 100.
 				var/mob/living/carbon/attacker = user
 
-				/*for(var/mob/N in viewers(user, null))
-					if(N.client)
-						N.show_message(text("\red <B>[user] is attempting to devour [src.affecting]!</B>"), 1)
-
-				if(!do_mob(user, src.affecting)) return*/
-
 				for(var/mob/N in viewers(user, null))
 					if(N.client)
 						N.show_message("\green <B>[user] shoves [src.affecting] into their mouth, and swallows them whole!</B>", 1)

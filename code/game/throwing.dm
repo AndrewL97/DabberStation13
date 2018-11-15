@@ -89,7 +89,7 @@
 		hit_atom.visible_message("\red [hit_atom] has been hit by [src].")
 		var/mob/M = hit_atom
 		if(src.vars.Find("throw2force"))
-			M.bruteloss += src:throw2force
+			M.TakeBruteDamage(src:throw2force)
 
 	else if(isobj(hit_atom))
 		var/obj/O = hit_atom
@@ -101,7 +101,7 @@
 		if(T.density)
 			spawn(2) step(src, turn(src.dir, 180))
 			if(ismob(src) && hasvar(src,"bruteloss"))
-				src:bruteloss += 20
+				src:TakeBruteDamage(20)
 
 /atom/movable/Bump(atom/O)
 	if(src.throw2ing)

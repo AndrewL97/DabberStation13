@@ -23,7 +23,7 @@ WELDINGTOOOL
 		M << "\red You stab yourself in the eye."
 		M.sdisabilities |= 1
 		M.weakened += 4
-		M.bruteloss += 10
+		M.TakeBruteDamage(10)
 
 	src.add_fingerprint(user)
 	if(!(user.zone_sel.selecting == ("eyes" || "head")))
@@ -46,7 +46,7 @@ WELDINGTOOOL
 		var/datum/organ/external/affecting = M.organs["head"]
 		affecting.take_damage(7)
 	else
-		M.bruteloss += 7
+		M.TakeBruteDamage(7)
 	M.eye_blurry += rand(3,4)
 	M.eye_stat += rand(2,4)
 	if (M.eye_stat >= 10)

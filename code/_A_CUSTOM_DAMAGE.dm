@@ -13,6 +13,10 @@
 		bruteloss += damage/(1+(src:wear_suit ? 1 : 0))
 	else
 		bruteloss += damage
+
+/mob/proc/TakeStatDamage(damage)
+	specialloss += damage
+
 /mob/living/carbon/human
 	updatehealth() //this method is not required FUCK YOU
 		return
@@ -24,10 +28,6 @@
 			bruteloss = 0
 			specialloss = 0
 		handle_regular_status_updates()
-			/*
-			uhhhhhhhhhhhhhhh this is the new shit for health like shield and shit i forgot lol
-			*/
-
 			breathe()
 
 			air = max(0,min(25,air)) //Clamp values

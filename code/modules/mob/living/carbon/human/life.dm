@@ -570,13 +570,13 @@
 					if(nutrition > 150)
 						nutrition = 150
 			else
-				bruteloss += tick_lag_original //Starving
+				TakeStatDamage(tick_lag_original) //Starving
 			if(src.thirst > 0)
 				src.thirst -= tick_lag_original/5
 				if(thirst > 150)
 					thirst = 150
 			else
-				bruteloss += tick_lag_original*3 //Dying of thirst
+				TakeStatDamage(tick_lag_original*3) //Dying of thirst
 			if(weight < 30)
 				bruteloss -= weight-30
 			if (src.drowsyness)

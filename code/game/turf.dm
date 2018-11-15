@@ -168,7 +168,7 @@ proc/ReplaceWithEngineFloor(turf/simulated/floor/G)
 					spawn(2) step(M, M.dir)
 					spawn(3) step(M, M.dir)
 					spawn(4) step(M, M.dir)
-					M.bruteloss += 5
+					M.TakeBruteDamage(5)
 					M << "\blue You slipped on the floor!"
 					playsound(src, 'slip.ogg', 50, 1, -3)
 					M.weakened = 10

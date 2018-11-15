@@ -325,7 +325,7 @@ obj
 			if(!to_push.wear_suit)
 				to_push.glide_size = 32 / tick_lag_original * tick_lag_original
 				step(to_push,d)
-				to_push.bruteloss += h/10
+				to_push.TakeBruteDamage(h/10)
 
 /turf/simulated
 	var/list/listofconnections = list()

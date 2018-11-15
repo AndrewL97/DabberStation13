@@ -343,7 +343,7 @@
 	else
 		switch(src.damtype)
 			if("brute")
-				M.bruteloss += power
+				M.TakeBruteDamage(power)
 			if("fire")
 				if (!(M.mutations & 2))
 					M.fireloss += power

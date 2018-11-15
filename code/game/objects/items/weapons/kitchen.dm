@@ -26,7 +26,7 @@ KNIFE
 		M << "\red You stab yourself in the eye."
 		M.sdisabilities |= 1
 		M.weakened += 4
-		M.bruteloss += 10
+		M.TakeBruteDamage(10)
 
 	src.add_fingerprint(user)
 	if(!(user.zone_sel.selecting == ("eyes" || "head")))
@@ -49,7 +49,7 @@ KNIFE
 		var/datum/organ/external/affecting = M.organs["head"]
 		affecting.take_damage(7)
 	else
-		M.bruteloss += 7
+		M.TakeBruteDamage(7)
 	M.eye_blurry += rand(3,4)
 	M.eye_stat += rand(2,4)
 	if (M.eye_stat >= 10)
@@ -76,7 +76,7 @@ KNIFE
 /obj/item/weapon/kitchen/rollingpin/attack(mob/M as mob, mob/user as mob)
 	if ((usr.mutations & 16) && prob(50))
 		usr << "\red The [src] slips out of your hand and hits your head."
-		usr.bruteloss += 10
+		usr.TakeBruteDamage(10)
 		usr.paralysis += 2
 		return
 	if (M.stat < 2 && M.health < 50 && prob(90))
@@ -110,5 +110,5 @@ KNIFE
 /obj/item/weapon/kitchen/utensil/knife/attack(target as mob, mob/user as mob)
 	if ((usr.mutations & 16) && prob(50))
 		usr << "\red You accidentally cut yourself with the [src]."
-		usr.bruteloss += 20
+		usr.TakeBruteDamage(20)
 		return

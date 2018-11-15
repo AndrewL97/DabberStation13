@@ -13,7 +13,7 @@ CIRCULAR SAW
 		M << "\red You stab yourself in the eye."
 		M.sdisabilities |= 1
 		M.weakened += 4
-		M.bruteloss += 10
+		M.TakeBruteDamage(10)
 
 	src.add_fingerprint(user)
 
@@ -45,13 +45,13 @@ CIRCULAR SAW
 					user << "\red You begin to cut open your head with [src]!"
 					if(prob(25))
 						user << "\red You mess up!"
-						M.bruteloss += 15
+						M.TakeBruteDamage(15)
 
 				if(istype(M, /mob/living/carbon/human))
 					var/datum/organ/external/affecting = M.organs["head"]
 					affecting.take_damage(7)
 				else
-					M.bruteloss += 7
+					M.TakeBruteDamage(7)
 
 				M.updatehealth()
 				M:brain_op_stage = 1.0
@@ -71,13 +71,13 @@ CIRCULAR SAW
 					user << "\red You begin to delicately remove the connections to the brain with [src]!"
 					if(prob(25))
 						user << "\red You nick an artery!"
-						M.bruteloss += 75
+						M.TakeBruteDamage(75)
 
 				if(istype(M, /mob/living/carbon/human))
 					var/datum/organ/external/affecting = M.organs["head"]
 					affecting.take_damage(7)
 				else
-					M.bruteloss += 7
+					M.TakeBruteDamage(7)
 
 				M.updatehealth()
 				M:brain_op_stage = 3.0
@@ -105,7 +105,7 @@ CIRCULAR SAW
 		M << "\red You cut out your eyes."
 		M.sdisabilities |= 1
 		M.weakened += 4
-		M.bruteloss += 10
+		M.TakeBruteDamage(10)
 
 	src.add_fingerprint(user)
 
@@ -137,13 +137,13 @@ CIRCULAR SAW
 					user << "\red You begin to saw open your head with [src]!"
 					if(prob(25))
 						user << "\red You mess up!"
-						M.bruteloss += 40
+						M.TakeBruteDamage(40)
 
 				if(istype(M, /mob/living/carbon/human))
 					var/datum/organ/external/affecting = M.organs["head"]
 					affecting.take_damage(7)
 				else
-					M.bruteloss += 7
+					M.TakeBruteDamage(7)
 
 				M.updatehealth()
 				M:brain_op_stage = 2.0

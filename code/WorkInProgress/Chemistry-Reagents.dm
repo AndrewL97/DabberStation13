@@ -365,9 +365,9 @@ datum
 						M << "\red Your face has become disfigured!"
 						M.real_name = "Unknown"
 					else
-						M:bruteloss += 15
+						M:TakeBruteDamage(15)
 				else
-					M:bruteloss += 15
+					M:TakeBruteDamage(15)
 
 			reaction_obj(var/obj/O, var/volume)
 				if(istype(O,/obj/item) && prob(40))
@@ -407,7 +407,7 @@ datum
 						M << "\red Your face has become disfigured!"
 						M.real_name = "Unknown"
 					else
-						M:bruteloss += 15
+						M:TakeBruteDamage(15)
 				else
 					if(istype(M, /mob/living/carbon/human))
 						var/datum/organ/external/affecting = M:organs["head"]
@@ -418,7 +418,7 @@ datum
 						M << "\red Your face has become disfigured!"
 						M.real_name = "Unknown"
 					else
-						M:bruteloss += 15
+						M:TakeBruteDamage(15)
 
 			reaction_obj(var/obj/O, var/volume)
 				if(istype(O,/obj/item))

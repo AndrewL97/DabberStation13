@@ -19,7 +19,7 @@ STUN BATON
 /obj/item/weapon/sword/attack_self(mob/user as mob)
 	if ((user.mutations & 16) && prob(50))
 		user << "\red You accidentally cut yourself with the Sword."
-		user.bruteloss += 5
+		user.TakeBruteDamage(5)
 		user.fireloss +=5
 	src.active = !( src.active )
 	if (src.active)
@@ -152,7 +152,7 @@ STUN BATON
 			var/mob/living/carbon/human/H = usr
 			H.TakeDamage("head", 2 * force, 0)
 		else
-			usr.bruteloss += 2 * force
+			usr.TakeBruteDamage(2 * force)
 		return
 	src.add_fingerprint(user)
 

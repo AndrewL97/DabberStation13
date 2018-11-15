@@ -64,7 +64,7 @@
 
 /mob/living/silicon/robot/blob_act()
 	if (src.stat != 2)
-		src.bruteloss += 30
+		src.TakeBruteDamage(30)
 		src.updatehealth()
 		return 1
 	return 0
@@ -125,7 +125,7 @@
 		M.show_message(text("\red [src] has been hit by [O]"), 1)
 		//Foreach goto(19)
 	if (src.health > 0)
-		src.bruteloss += 30
+		src.TakeBruteDamage(30)
 		if ((O.icon_state == "flaming"))
 			src.fireloss += 40
 		src.updatehealth()
