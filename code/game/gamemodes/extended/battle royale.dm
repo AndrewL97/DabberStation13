@@ -103,8 +103,8 @@ turf
 
 var/obj/storm_overlay/STORM = null
 #define TIMER_TOTAL 120
-#define STORMSPEEDMULTIPLIER 0.25
-#define STORMMOVESPEED 16
+#define STORMSPEEDMULTIPLIER 0.5
+#define STORMMOVESPEED 1.6
 #define STORMMOVESFORSECS 25
 obj/storm_overlay
 	anchored = 1
@@ -139,6 +139,7 @@ obj/storm_overlay
 			size -= world.tick_lag*STORMSPEEDMULTIPLIER
 			if(size < 16)
 				size = 16
+				timer_left = -STORMMOVESFORSECS-1
 			if(timer_left < -STORMMOVESFORSECS)
 				walk(src,0)
 				decrementing = 0

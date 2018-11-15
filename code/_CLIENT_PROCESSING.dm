@@ -299,6 +299,7 @@ mob
 				if(istype(M,/mob))
 					M.other_mobs = 1
 					spawn(0)
+						M.glide_size = mob.glide_size
 						step(M,get_dir(M,old_loc))
 					spawn(1)
 						M.other_mobs = null
