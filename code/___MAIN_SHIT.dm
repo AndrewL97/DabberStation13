@@ -24,6 +24,8 @@
 #define SPACE_PLANE_0 -98
 #define SPACE_PLANE_1 -97
 
+#define FPS_ANIMATE 55 //what FPS should we use animate()
+
 #define MAX_PLAYERS 25 //change this I guess
 
 #define SOUND_CHANNEL_1 1120

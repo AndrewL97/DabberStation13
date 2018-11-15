@@ -279,7 +279,7 @@ mob
 				if(heightZ > 99998)
 					MyShadow.alpha = 0
 
-		if(world.fps < 55)
+		if(world.fps < FPS_ANIMATE)
 			animate(src,pixel_z = round(heightZ)+round(pixel_y_2),time = world.tick_lag) //smooth
 		else
 			pixel_z = round(heightZ)+round(pixel_y_2) //Set pixel_z.

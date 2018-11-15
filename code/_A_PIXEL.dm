@@ -80,6 +80,9 @@ atom/movable
 				real_pixel_x = old_real_x
 				return 0 //Didn't move
 			else
-				pixel_x = real_pixel_x
-				pixel_y = real_pixel_y
+				if(world.fps < FPS_ANIMATE)
+					animate(src,pixel_x = real_pixel_x,pixel_y = real_pixel_y,time = world.tick_lag)
+				else
+					pixel_x = real_pixel_x
+					pixel_y = real_pixel_y
 				return 1 //Did move.
